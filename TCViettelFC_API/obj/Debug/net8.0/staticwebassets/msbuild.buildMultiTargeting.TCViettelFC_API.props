@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\TCViettelFC_API.props" />
+</Project>
