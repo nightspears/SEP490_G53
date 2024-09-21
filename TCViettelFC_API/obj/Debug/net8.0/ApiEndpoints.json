@@ -10,24 +10,19 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TCViettelFC_API.Controllers.WeatherForecastController",
-    "Method": "Get",
-    "RelativePath": "WeatherForecast",
-    "HttpMethod": "GET",
+    "ContainingType": "TCViettelFC_API.Controllers.UserController",
+    "Method": "RegisterAsync",
+    "RelativePath": "register",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
+    "Parameters": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[TCViettelFC_API.WeatherForecast, TCViettelFC_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "registerDto",
+        "Type": "TCViettelFC_API.Dtos.RegisterDto",
+        "IsRequired": true
       }
     ],
-    "EndpointName": "GetWeatherForecast"
+    "ReturnTypes": []
   }
 ]

@@ -61,13 +61,11 @@ public partial class Sep490G53Context : DbContext
     {
         modelBuilder.Entity<Address>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Address__3214EC27F63C1CD8");
+            entity.HasKey(e => e.Id).HasName("PK__Address__3214EC2767583937");
 
             entity.ToTable("Address");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.City)
                 .HasMaxLength(100)
                 .HasColumnName("city");
@@ -85,18 +83,16 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Addresses)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Address__status__3C69FB99");
+                .HasConstraintName("FK__Address__UserID__3C69FB99");
         });
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Category__3214EC2758185E6C");
+            entity.HasKey(e => e.Id).HasName("PK__Category__3214EC274B6F7E74");
 
             entity.ToTable("Category");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CategoryName)
                 .HasMaxLength(255)
                 .HasColumnName("Category_name");
@@ -108,13 +104,11 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<CustomerTicket>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Customer__3214EC271E388A41");
+            entity.HasKey(e => e.Id).HasName("PK__Customer__3214EC27A9D02253");
 
             entity.ToTable("Customer_Ticket");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Email).HasMaxLength(255);
             entity.Property(e => e.FullName).HasMaxLength(255);
             entity.Property(e => e.Phone)
@@ -125,13 +119,11 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Discount>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Discount__3214EC276F237D24");
+            entity.HasKey(e => e.Id).HasName("PK__Discount__3214EC275F233346");
 
             entity.ToTable("Discount");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.DiscountName)
                 .HasMaxLength(255)
                 .HasColumnName("discount_name");
@@ -149,13 +141,11 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Feedback>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Feedback__3214EC27A44C32E9");
+            entity.HasKey(e => e.Id).HasName("PK__Feedback__3214EC270DD43C91");
 
             entity.ToTable("Feedback");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Content).HasColumnName("content");
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
@@ -170,11 +160,9 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Match>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Matches__3214EC27AFAD5A4E");
+            entity.HasKey(e => e.Id).HasName("PK__Matches__3214EC2790582D29");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.IsHome).HasColumnName("Is_home");
             entity.Property(e => e.LogoUrl).HasColumnName("Logo_Url");
             entity.Property(e => e.MatchDate)
@@ -191,11 +179,9 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<News>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__News__3214EC27C19946D9");
+            entity.HasKey(e => e.Id).HasName("PK__News__3214EC27CA80DA7B");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Content).HasColumnName("content");
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
@@ -221,13 +207,11 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<NewsCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__News_Cat__3214EC2729182073");
+            entity.HasKey(e => e.Id).HasName("PK__News_Cat__3214EC27B9BBF044");
 
             entity.ToTable("News_Categories");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CategoryName)
                 .HasMaxLength(255)
                 .HasColumnName("Category_name");
@@ -245,13 +229,11 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<OrderProduct>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_pr__3214EC272F57FA1D");
+            entity.HasKey(e => e.Id).HasName("PK__Order_pr__3214EC27AB0F165F");
 
             entity.ToTable("Order_product");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.AddressId).HasColumnName("AddressID");
             entity.Property(e => e.OrderCode).HasMaxLength(255);
             entity.Property(e => e.OrderDate)
@@ -274,13 +256,11 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<OrderProductDetail>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_pr__3214EC27FDCA341A");
+            entity.HasKey(e => e.Id).HasName("PK__Order_pr__3214EC27C136DF69");
 
             entity.ToTable("Order_product_details");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.OrderProductId).HasColumnName("Order_productId");
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.ProductId).HasColumnName("Product_id");
@@ -297,13 +277,11 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<OrderTicket>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Order_ti__3214EC2747593936");
+            entity.HasKey(e => e.Id).HasName("PK__Order_ti__3214EC2783E2203F");
 
             entity.ToTable("Order_ticket");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
@@ -318,16 +296,14 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.OrderTickets)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Order_tic__statu__619B8048");
+                .HasConstraintName("FK__Order_tic__UserI__619B8048");
         });
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Payments__3214EC27B1447179");
+            entity.HasKey(e => e.Id).HasName("PK__Payments__3214EC2727B5A2D1");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.OrderProductId).HasColumnName("Order_productId");
             entity.Property(e => e.OrderTicketId).HasColumnName("Order_ticketId");
             entity.Property(e => e.PaymentGateway)
@@ -345,13 +321,11 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Product__3214EC2784A289B2");
+            entity.HasKey(e => e.Id).HasName("PK__Product__3214EC27441DB830");
 
             entity.ToTable("Product");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Avartar).HasMaxLength(255);
             entity.Property(e => e.CategoryId).HasColumnName("category_ID");
             entity.Property(e => e.Color)
@@ -377,18 +351,16 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
                 .HasForeignKey(d => d.CategoryId)
-                .HasConstraintName("FK__Product__status__4AB81AF0");
+                .HasConstraintName("FK__Product__categor__4AB81AF0");
         });
 
         modelBuilder.Entity<ProductDiscount>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Product___3214EC276236B37C");
+            entity.HasKey(e => e.Id).HasName("PK__Product___3214EC27866CB246");
 
             entity.ToTable("Product_discount");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.DiscountId).HasColumnName("Discount_id");
             entity.Property(e => e.ProductId).HasColumnName("Product_id");
             entity.Property(e => e.Status).HasColumnName("status");
@@ -404,13 +376,11 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<ProductFile>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Product___3214EC27F736FC72");
+            entity.HasKey(e => e.Id).HasName("PK__Product___3214EC2767AD5EE5");
 
             entity.ToTable("Product_files");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
@@ -430,13 +400,11 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Role__3214EC279261E366");
+            entity.HasKey(e => e.Id).HasName("PK__Role__3214EC27E6A455F3");
 
             entity.ToTable("Role");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.RoleName)
                 .HasMaxLength(255)
@@ -446,11 +414,9 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Shipment>(entity =>
         {
-            entity.HasKey(e => e.ShipmentId).HasName("PK__Shipment__41466E59794B4E28");
+            entity.HasKey(e => e.ShipmentId).HasName("PK__Shipment__41466E5901E1A08C");
 
-            entity.Property(e => e.ShipmentId)
-                .ValueGeneratedNever()
-                .HasColumnName("shipment_id");
+            entity.Property(e => e.ShipmentId).HasColumnName("shipment_id");
             entity.Property(e => e.DeliveryDate)
                 .HasColumnType("datetime")
                 .HasColumnName("delivery_date");
@@ -467,13 +433,11 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ticket__3214EC27C4518F8C");
+            entity.HasKey(e => e.Id).HasName("PK__Ticket__3214EC274F398BAB");
 
             entity.ToTable("Ticket");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.MatchId).HasColumnName("Match_id");
             entity.Property(e => e.OrderTicketId).HasColumnName("Order_ticketID");
             entity.Property(e => e.Price)
@@ -495,11 +459,9 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC0488ADE7");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACC47829AB");
 
-            entity.Property(e => e.UserId)
-                .ValueGeneratedNever()
-                .HasColumnName("UserID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
