@@ -11,6 +11,32 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.UserController",
+    "Method": "GetByUserAsync",
+    "RelativePath": "api/User/getbyuser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.UserController",
+    "Method": "LoginAsync",
+    "RelativePath": "login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDto",
+        "Type": "TCViettelFC_API.Dtos.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.UserController",
     "Method": "RegisterAsync",
     "RelativePath": "register",
     "HttpMethod": "POST",
