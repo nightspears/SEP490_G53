@@ -34,9 +34,9 @@ builder.Services.AddAuthentication().AddJwtBearer(o =>
 
     };
 });
-builder.Services.AddAuthorizationBuilder().AddPolicy("user", p =>
+builder.Services.AddAuthorizationBuilder().AddPolicy("admin", p =>
 {
-    p.RequireClaim("RoleId", "1");
+    p.RequireClaim("RoleId", "2");
 });
 
 var app = builder.Build();

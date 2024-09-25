@@ -1,5 +1,31 @@
 [
   {
+    "ContainingType": "TCViettelFC_API.Controllers.AdminController",
+    "Method": "LoginAsync",
+    "RelativePath": "api/Admin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDto",
+        "Type": "TCViettelFC_API.Dtos.AdminLoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.AdminController",
+    "Method": "GetAsync",
+    "RelativePath": "api/Admin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TCViettelFC_API.Controllers.HelloWorldController",
     "Method": "GetString",
     "RelativePath": "api/HelloWorld",

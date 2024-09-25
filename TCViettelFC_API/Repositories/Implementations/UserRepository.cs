@@ -75,5 +75,34 @@ namespace TCViettelFC_API.Repositories.Implementations
             }
             return "";
         }
+        public async Task<string> AdminLoginAsync(AdminLoginDto loginDto)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.UserName && x.Password == loginDto.Password);
+            if (user != null)
+            {
+                string token = string.Empty;
+                var issuer = _configuration["JwtConfig:Issuer"];
+                var audience = _configuration["JwtConfig:Audience"];
+                var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtConfig:Key"]));
+                var jwtHandler = new JwtSecurityTokenHandler();
+                var tokenDes = new SecurityTokenDescriptor()
+                {
+                    Subject = new ClaimsIdentity(
+                    [
+                            new Claim("UserName", user.UserName),
+                            new Claim("RoleId",user.RoleId.ToString())
+                        ]),
+                    Expires = DateTime.UtcNow.AddHours(6),
+                    Audience = audience,
+                    Issuer = issuer,
+                    SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256)
+
+                };
+                var jwtToken = jwtHandler.CreateToken(tokenDes);
+                token = jwtHandler.WriteToken(jwtToken);
+                return token;
+            }
+            return "";
+        }
     }
 }
