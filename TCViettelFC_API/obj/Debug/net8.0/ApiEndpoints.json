@@ -8,19 +8,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "oldPass",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "newPass",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "ch",
+        "Type": "TCViettelFC_API.Dtos.ChangePassRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

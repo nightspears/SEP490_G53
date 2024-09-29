@@ -18,6 +18,7 @@ builder.Services.AddDbContext<Sep490G53Context>(options => options.UseSqlServer(
 builder.Services.AddScoped<IHelloWorldRepository, HelloWorldRepository>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication().AddJwtBearer(o =>
 {
@@ -34,13 +35,23 @@ builder.Services.AddAuthentication().AddJwtBearer(o =>
 
     };
 });
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMvcClient", builder =>
+    {
+        builder.WithOrigins("https://localhost:7004")  // MVC app origin
+               .AllowCredentials()                   // Allow cookies and credentials
+               .AllowAnyHeader()                     // Allow any headers
+               .AllowAnyMethod();                    // Allow any HTTP methods (GET, POST, etc.)
+    });
+});
 builder.Services.AddAuthorizationBuilder().AddPolicy("admin", p =>
 {
     p.RequireClaim("RoleId", "2");
 });
 
 var app = builder.Build();
-
+app.UseCors();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

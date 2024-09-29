@@ -27,12 +27,13 @@ namespace TCViettelFC_API.Controllers
         {
             return Ok("Authorize");
         }
+        [Authorize(Policy = "admin")]
         [HttpPost("changepass")]
-        public async Task<IActionResult> ChangePassword(int userId, string oldPass, string newPass)
+        public async Task<IActionResult> ChangePassword(ChangePassRequest ch)
         {
-            var result = await _userRepository.AdminChangePasswordAsync(userId, newPass);
-            if (result == 1) return Ok("Change password successfully");
-            return BadRequest("Change password failed");
+            var result = await _userRepository.AdminChangePasswordAsync(ch);
+            if (result != 1) return BadRequest("Change password failed");
+            return Ok("Change password successfully");
         }
     }
 }

@@ -1,6 +1,32 @@
 ﻿@model AdminLoginViewModel
-<form method="post" asp-action="Login">
-    Username: <input type="text" asp-for="UserName" /><br />
-    Password: <input type="text" asp-for="Password" />
-    <input type="submit" value="Login" />
-</form>
+
+    <div class="main-wrapper login-body">
+        <div class="login-wrapper">
+            <div class="container">
+                <div class="loginbox">
+                    <div class="login-left">
+                        <img class="img-fluid" src="assets/img/logo-white.png" alt="Logo">
+                    </div>
+                    <div class="login-right">
+                        <div class="login-right-wrap">
+                            <h1>Login</h1>
+                            <p class="account-subtitle">Access to our dashboard</p>
+
+                            <form asp-action="Login">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" placeholder="Phone Number" asp-for="Phone">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="password" placeholder="Password" asp-for="Password">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block w-100" type="submit">Login</button>
+                                </div>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

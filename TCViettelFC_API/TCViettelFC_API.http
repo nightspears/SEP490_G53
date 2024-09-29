@@ -1,5 +1,5 @@
 @TCViettelFC_API_HostAddress = https://localhost:5000
-@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIxIiwiUm9sZUlkIjoiMiIsIm5iZiI6MTcyNzU4OTI3MywiZXhwIjoxNzI3NjEwODczLCJpYXQiOjE3Mjc1ODkyNzMsImlzcyI6IkZBMjRfU0VQNDkwX0c1MyIsImF1ZCI6IkZBMjRfU0VQNDkwX0c1MyJ9.PTz2tE9rGuKCfzV7aCZotaVkZeT4pcQKVw8Rjvi7cBk
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIxIiwiUm9sZUlkIjoiMiIsIm5iZiI6MTcyNzYwMDA2NSwiZXhwIjoxNzI3NjIxNjY1LCJpYXQiOjE3Mjc2MDAwNjUsImlzcyI6IkZBMjRfU0VQNDkwX0c1MyIsImF1ZCI6IkZBMjRfU0VQNDkwX0c1MyJ9.q7R_Xrj5LrMgG8TnpvcrqVo4sYTAM19V_0RcWgH5OyU
 GET {{TCViettelFC_API_HostAddress}}/weatherforecast/
 Accept: application/json
 
@@ -7,5 +7,9 @@ Accept: application/json
 GET {{TCViettelFC_API_HostAddress}}/api/User/getbyuser/
 Authorization: Bearer {{Token}}
 ###
-GET {{TCViettelFC_API_HostAddress}}/api/Admin/testauthorized
+###
+POST {{TCViettelFC_API_HostAddress}}/api/Admin/changepass
 Authorization: Bearer {{Token}}
+Content-Type: application/x-www-form-urlencoded
+
+newpass=1235

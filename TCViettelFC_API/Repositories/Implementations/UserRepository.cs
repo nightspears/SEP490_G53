@@ -13,10 +13,12 @@ namespace TCViettelFC_API.Repositories.Implementations
     {
         private readonly Sep490G53Context _context;
         private readonly IConfiguration _configuration;
-        public UserRepository(Sep490G53Context context, IConfiguration configuration)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public UserRepository(Sep490G53Context context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _configuration = configuration;
+            _contextAccessor = httpContextAccessor;
         }
         //public bool ExistedUser(string username, string phoneNumber)
         //{
@@ -74,15 +76,16 @@ namespace TCViettelFC_API.Repositories.Implementations
         //    }
         //    return "";
         //}
-        public async Task<int> AdminChangePasswordAsync(int userId, string newPass)
+
+        public async Task<int> AdminChangePasswordAsync(ChangePassRequest ch)
         {
-            var user = await _context.Users.FindAsync(userId);
-            if (user != null && !user.Password.Equals(newPass))
-            {
-                user.Password = newPass;
-            }
+            var userId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+            var user = await _context.Users.FindAsync(int.Parse(userId));
+            if (!user.Password.Equals(ch.OldPass)) return 0;
+            if (user == null || user.Password.Equals(ch.NewPass)) return 0;
             try
             {
+                user.Password = ch.NewPass;
                 await _context.SaveChangesAsync();
                 return 1;
             }

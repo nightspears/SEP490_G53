@@ -14,6 +14,28 @@ namespace TCViettetlFC_Client.Controllers
         }
         public IActionResult Login()
         {
+            var token = Request.Cookies["AuthToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return View();
+            }
+            return RedirectToAction("Home", "Admin");
+        }
+        public IActionResult Home()
+        {
+            var token = Request.Cookies["AuthToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            else
+            {
+                return View();
+            }
+
+        }
+        public IActionResult Profile()
+        {
             return View();
         }
         public IActionResult ChangePassword()
@@ -57,32 +79,38 @@ namespace TCViettetlFC_Client.Controllers
 
                 Response.Cookies.Append("AuthToken", token.token, cookieOptions);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Home", "Admin");
             }
             return View();
 
         }
         [HttpPost]
-        public async Task<IActionResult> ChangePass(ChangePasswordModel adminLoginViewModel)
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel changePasswordModel)
         {
-            var response = await _httpClient.PostAsJsonAsync("admin/login", adminLoginViewModel);
+            var token = Request.Cookies["AuthToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _httpClient.PostAsJsonAsync("admin/changepass", new { OldPass = changePasswordModel.OldPassword, NewPass = changePasswordModel.NewPassword });
             if (response.IsSuccessStatusCode)
             {
-                var token = await JsonSerializer.DeserializeAsync<TokenModel>(await response.Content.ReadAsStreamAsync());
-                var cookieOptions = new CookieOptions
-                {
-                    HttpOnly = true, // Prevent access via JavaScript
-                    Secure = true, // Only send over HTTPS
-                    SameSite = SameSiteMode.Strict, // Strict cookie policy to prevent CSRF
-                    Expires = DateTime.UtcNow.AddHours(1) // Adjust the expiration as necessary
-                };
-
-                Response.Cookies.Append("AuthToken", token.token, cookieOptions);
-
-                return RedirectToAction("Index", "Home");
+                ViewBag.Message = "Password changed successfully";
             }
-            return View();
+            else
+            {
+                ViewBag.Message = "Failed to change password";
+            }
+            return RedirectToAction("Profile");
 
+        }
+        public async Task<IActionResult> Logout()
+        {
+            Response.Cookies.Delete("AuthToken");
+
+            return RedirectToAction("Login", "Admin");
         }
 
     }

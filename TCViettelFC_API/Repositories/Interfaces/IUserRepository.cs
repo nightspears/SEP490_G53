@@ -7,6 +7,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
         //bool ExistedUser(string username, string phoneNumber);
         //Task<AdminLoginResponse> LoginAsync(LoginDto loginDto);
         Task<AdminLoginResponse> AdminLoginAsync(AdminLoginDto loginDto);
-        Task<int> AdminChangePasswordAsync(int userId, string newPass);
+        Task<int> AdminChangePasswordAsync(ChangePassRequest ch);
+
     }
 }
