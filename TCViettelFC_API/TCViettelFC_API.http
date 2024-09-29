@@ -1,5 +1,5 @@
-@TCViettelFC_API_HostAddress = http://localhost:5000
-@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImFkbWluIiwiUm9sZUlkIjoiMiIsIm5iZiI6MTcyNzE2NjkzNiwiZXhwIjoxNzI3MTg4NTM2LCJpYXQiOjE3MjcxNjY5MzYsImlzcyI6IkZBMjRfU0VQNDkwX0c1MyIsImF1ZCI6IkZBMjRfU0VQNDkwX0c1MyJ9.GgOhWIJRJ4hHlWjIbK6Ly_V6m2eWQEjmYSa-rpFKTWA
+@TCViettelFC_API_HostAddress = https://localhost:5000
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOiIxIiwiUm9sZUlkIjoiMiIsIm5iZiI6MTcyNzU4OTI3MywiZXhwIjoxNzI3NjEwODczLCJpYXQiOjE3Mjc1ODkyNzMsImlzcyI6IkZBMjRfU0VQNDkwX0c1MyIsImF1ZCI6IkZBMjRfU0VQNDkwX0c1MyJ9.PTz2tE9rGuKCfzV7aCZotaVkZeT4pcQKVw8Rjvi7cBk
 GET {{TCViettelFC_API_HostAddress}}/weatherforecast/
 Accept: application/json
 
@@ -7,5 +7,5 @@ Accept: application/json
 GET {{TCViettelFC_API_HostAddress}}/api/User/getbyuser/
 Authorization: Bearer {{Token}}
 ###
-GET {{TCViettelFC_API_HostAddress}}/api/Admin
+GET {{TCViettelFC_API_HostAddress}}/api/Admin/testauthorized
 Authorization: Bearer {{Token}}

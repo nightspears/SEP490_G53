@@ -7,7 +7,7 @@ public partial class Shipment
 {
     public int ShipmentId { get; set; }
 
-    public int? OrderProductId { get; set; }
+    public int? OrderId { get; set; }
 
     public DateTime? ShipmentDate { get; set; }
 
@@ -15,5 +15,5 @@ public partial class Shipment
 
     public int? Status { get; set; }
 
-    public virtual OrderProduct? OrderProduct { get; set; }
+    public virtual OrderProduct? Order { get; set; }
 }

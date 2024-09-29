@@ -7,7 +7,7 @@ public partial class OrderProduct
 {
     public int Id { get; set; }
 
-    public int? UserId { get; set; }
+    public int? CustomerId { get; set; }
 
     public string? OrderCode { get; set; }
 
@@ -21,9 +21,11 @@ public partial class OrderProduct
 
     public virtual Address? Address { get; set; }
 
+    public virtual Customer? Customer { get; set; }
+
     public virtual ICollection<OrderProductDetail> OrderProductDetails { get; set; } = new List<OrderProductDetail>();
 
-    public virtual ICollection<Shipment> Shipments { get; set; } = new List<Shipment>();
+    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-    public virtual User? User { get; set; }
+    public virtual ICollection<Shipment> Shipments { get; set; } = new List<Shipment>();
 }

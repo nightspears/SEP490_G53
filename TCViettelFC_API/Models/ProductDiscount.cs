@@ -5,7 +5,7 @@ namespace TCViettelFC_API.Models;
 
 public partial class ProductDiscount
 {
-    public int Id { get; set; }
+    public int ProductDiscountId { get; set; }
 
     public int? ProductId { get; set; }
 

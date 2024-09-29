@@ -1,8 +1,34 @@
 [
   {
     "ContainingType": "TCViettelFC_API.Controllers.AdminController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Admin/changepass",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "oldPass",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "newPass",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.AdminController",
     "Method": "LoginAsync",
-    "RelativePath": "api/Admin",
+    "RelativePath": "api/Admin/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -18,7 +44,7 @@
   {
     "ContainingType": "TCViettelFC_API.Controllers.AdminController",
     "Method": "GetAsync",
-    "RelativePath": "api/Admin",
+    "RelativePath": "api/Admin/testauthorized",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -33,48 +59,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TCViettelFC_API.Controllers.UserController",
-    "Method": "GetByUserAsync",
-    "RelativePath": "api/User/getbyuser",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TCViettelFC_API.Controllers.UserController",
-    "Method": "LoginAsync",
-    "RelativePath": "login",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "loginDto",
-        "Type": "TCViettelFC_API.Dtos.LoginDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TCViettelFC_API.Controllers.UserController",
-    "Method": "RegisterAsync",
-    "RelativePath": "register",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "registerDto",
-        "Type": "TCViettelFC_API.Dtos.RegisterDto",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   }
 ]

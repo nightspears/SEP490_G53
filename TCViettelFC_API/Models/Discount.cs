@@ -5,7 +5,7 @@ namespace TCViettelFC_API.Models;
 
 public partial class Discount
 {
-    public int Id { get; set; }
+    public int DiscountId { get; set; }
 
     public string? DiscountName { get; set; }
 

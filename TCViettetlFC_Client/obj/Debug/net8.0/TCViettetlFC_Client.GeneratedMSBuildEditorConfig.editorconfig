@@ -18,16 +18,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\ResumeProjects\SEP490_G53\TCViettetlFC_Client
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Admin/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Admin/GetAuthorize.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cR2V0QXV0aG9yaXplLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Admin/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW4uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Admin/Login1.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW4xLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Home/Index.cshtml]

@@ -5,13 +5,17 @@ namespace TCViettelFC_API.Models;
 
 public partial class Product
 {
-    public int Id { get; set; }
+    public int ProductId { get; set; }
 
-    public string? Avartar { get; set; }
+    public int? PlayerId { get; set; }
+
+    public int? SeasonId { get; set; }
+
+    public int? CategoryId { get; set; }
 
     public string? ProductName { get; set; }
 
-    public string? Description { get; set; }
+    public string? Avatar { get; set; }
 
     public decimal? Price { get; set; }
 
@@ -21,17 +25,21 @@ public partial class Product
 
     public string? Material { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public string? Description { get; set; }
 
-    public int? CategoryId { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
     public int? Status { get; set; }
 
-    public virtual Category? Category { get; set; }
+    public virtual ProductCategory? Category { get; set; }
 
     public virtual ICollection<OrderProductDetail> OrderProductDetails { get; set; } = new List<OrderProductDetail>();
+
+    public virtual Player? Player { get; set; }
 
     public virtual ICollection<ProductDiscount> ProductDiscounts { get; set; } = new List<ProductDiscount>();
 
     public virtual ICollection<ProductFile> ProductFiles { get; set; } = new List<ProductFile>();
+
+    public virtual Season? Season { get; set; }
 }

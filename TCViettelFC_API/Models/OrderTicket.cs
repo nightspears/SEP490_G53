@@ -9,21 +9,19 @@ public partial class OrderTicket
 
     public int? CustomerId { get; set; }
 
-    public int? UserId { get; set; }
+    public int? TicketId { get; set; }
 
-    public int? TotalTicket { get; set; }
+    public DateTime? OrderDate { get; set; }
 
-    public decimal? TotalPrice { get; set; }
-
-    public DateTime? CreatedAt { get; set; }
+    public decimal? TotalAmount { get; set; }
 
     public int? Status { get; set; }
 
-    public virtual CustomerTicket? Customer { get; set; }
+    public virtual Customer? Customer { get; set; }
+
+    public virtual ICollection<OrderTicketConcession> OrderTicketConcessions { get; set; } = new List<OrderTicketConcession>();
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-    public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
-
-    public virtual User? User { get; set; }
+    public virtual Ticket? Ticket { get; set; }
 }

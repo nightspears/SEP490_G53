@@ -7,7 +7,9 @@ public partial class Feedback
 {
     public int Id { get; set; }
 
-    public int? UserId { get; set; }
+    public int? CreatorId { get; set; }
+
+    public int? ResponderId { get; set; }
 
     public string? Content { get; set; }
 
@@ -15,5 +17,7 @@ public partial class Feedback
 
     public int? Status { get; set; }
 
-    public virtual User? User { get; set; }
+    public virtual Customer? Creator { get; set; }
+
+    public virtual User? Responder { get; set; }
 }

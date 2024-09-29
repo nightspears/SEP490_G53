@@ -7,7 +7,7 @@ public partial class News
 {
     public int Id { get; set; }
 
-    public int? UserId { get; set; }
+    public int? CreatorId { get; set; }
 
     public int? NewsCategoryId { get; set; }
 
@@ -21,7 +21,7 @@ public partial class News
 
     public int? Status { get; set; }
 
-    public virtual NewsCategory? NewsCategory { get; set; }
+    public virtual User? Creator { get; set; }
 
-    public virtual User? User { get; set; }
+    public virtual NewsCategory? NewsCategory { get; set; }
 }

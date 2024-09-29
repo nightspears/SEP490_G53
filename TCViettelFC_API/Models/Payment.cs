@@ -17,5 +17,7 @@ public partial class Payment
 
     public int? Status { get; set; }
 
+    public virtual OrderProduct? OrderProduct { get; set; }
+
     public virtual OrderTicket? OrderTicket { get; set; }
 }
