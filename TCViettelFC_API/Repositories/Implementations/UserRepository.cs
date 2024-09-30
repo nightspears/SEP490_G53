@@ -20,6 +20,31 @@ namespace TCViettelFC_API.Repositories.Implementations
             _configuration = configuration;
             _contextAccessor = httpContextAccessor;
         }
+        public async Task AddUserAsync(UserCreateDto userCreateDto)
+        {
+            var user = new User
+            {
+                FullName = userCreateDto.FullName,
+                Password = userCreateDto.Password,
+                Email = userCreateDto.Email,
+                Phone = userCreateDto.Phone,
+                RoleId = userCreateDto.RoleId,
+                Status = 1,
+                CreatedAt = DateTime.UtcNow
+            };
+            try
+            {
+                await _context.Users.AddAsync(user);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        public bool ExistedUser(string email, string phoneNumber)
+        {
+            return _context.Users.Any(x => x.Email == email || x.Phone == phoneNumber);
+        }
         //public bool ExistedUser(string username, string phoneNumber)
         //{
         //    return _context.Users.Any(x => x.UserName == username || x.Phone == phoneNumber);
@@ -131,6 +156,68 @@ namespace TCViettelFC_API.Repositories.Implementations
                 return res;
             }
             return null;
+        }
+
+        public async Task DeleteUserAsync(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null) throw new KeyNotFoundException("User not found");
+
+            try
+            {
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception
+                throw new Exception("Delete failed", ex);
+            }
+        }
+
+        public async Task<IEnumerable<Role>> GetRoleAsync()
+        {
+            return await _context.Roles
+              .ToListAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetUsersAsync()
+        {
+            return await _context.Users
+              .Include(u => u.Role)
+              .ToListAsync();
+        }
+
+        public async Task<bool> IsValidRoleAsync(int? roleId)
+        {
+            if (roleId == null) return false;
+            return await _context.Roles.AnyAsync(r => r.RoleId == roleId);
+        }
+
+        public async Task UpdateUserAsync(int id, UserUpdateDto userDto)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            // Update user properties
+            user.Email = userDto.Email ?? user.Email;
+            user.Phone = userDto.Phone ?? user.Phone;
+            user.FullName = userDto.FullName ?? user.FullName;
+            user.RoleId = userDto.RoleId ?? user.RoleId;
+            user.Status = userDto.Status ?? user.Status;
+            user.CreatedAt = userDto.CreatedAt ?? user.CreatedAt; // Only update if provided
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error updating user: " + ex.Message);
+            }
         }
     }
 }

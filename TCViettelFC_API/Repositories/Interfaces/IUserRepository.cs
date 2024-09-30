@@ -1,4 +1,5 @@
 ﻿using TCViettelFC_API.Dtos;
+using TCViettelFC_API.Models;
 namespace TCViettelFC_API.Repositories.Interfaces
 {
     public interface IUserRepository
@@ -8,6 +9,16 @@ namespace TCViettelFC_API.Repositories.Interfaces
         //Task<AdminLoginResponse> LoginAsync(LoginDto loginDto);
         Task<AdminLoginResponse> AdminLoginAsync(AdminLoginDto loginDto);
         Task<int> AdminChangePasswordAsync(ChangePassRequest ch);
+
+
+        Task<IEnumerable<User>> GetUsersAsync();
+        Task<IEnumerable<Role>> GetRoleAsync();
+        Task AddUserAsync(UserCreateDto userCreateDto);
+
+        Task UpdateUserAsync(int id, UserUpdateDto userDto);
+        Task DeleteUserAsync(int id);
+        Task<bool> IsValidRoleAsync(int? roleId);
+        bool ExistedUser(string username, string phoneNumber);
 
     }
 }

@@ -1,3 +1,5 @@
+using TCViettelFC_Client.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,6 +11,12 @@ builder.Services.AddHttpClient("ApiClient")
         options.DefaultRequestHeaders.Add("Accept", "application/json");
 
     });
+// Register UserService with the configured HttpClient
+builder.Services.AddHttpClient<UserService>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 var app = builder.Build();
