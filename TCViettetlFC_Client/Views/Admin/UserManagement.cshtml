@@ -1,0 +1,342 @@
+﻿@model TCViettetlFC_Client.Models.UserManagementViewModel
+
+
+@{
+    ViewData["Title"] = "User Management";
+}
+    <div class="main-wrapper">
+
+        <div class="header">
+
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="~/admin_assets/img/logo.png" alt="Logo">
+                </a>
+                <a href="index.html" class="logo logo-small">
+                    <img src="~/admin_assets/img/logo-small.png" alt="Logo" width="30" height="30">
+                </a>
+            </div>
+
+            <a href="javascript:void(0);" id="toggle_btn">
+                <i class="fe fe-text-align-left"></i>
+            </a>
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="Search here">
+                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+
+            <a class="mobile_btn" id="mobile_btn">
+                <i class="fa fa-bars"></i>
+            </a>
+
+
+            <ul class="nav user-menu">
+
+
+
+
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                        <span class="user-img">
+                            <img class="rounded-circle" src="~/admin_assets/img/profiles/avatar-12.jpg"
+                                 width="31" alt="Ryan Taylor">
+                        </span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="user-header">
+                            <div class="avatar avatar-sm">
+                                <img src="~/admin_assets/img/profiles/avatar-12.jpg" alt="User Image"
+                                     class="avatar-img rounded-circle">
+                            </div>
+                            <div class="user-text">
+                                <h6>Allen Davis</h6>
+                                <p class="text-muted mb-0">Administrator</p>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="profile.html">My Profile</a>
+                        <a class="dropdown-item" href="settings.html">Settings</a>
+                        <a class="dropdown-item" href="login.html">Logout</a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">
+                            <span><i class="fe fe-home"></i> Main</span>
+                        </li>
+                        <li>
+                            <a href="/admin/home"><span>Dashboard</span></a>
+                        </li>
+                        <li>
+                            <a href="/admin/usermanagement"><span>UserManagement</span></a>
+                        </li>
+                        <li>
+                            <a href="mentee.html"><span>News</span></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="page-title">AccountManagement</h3>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Transactions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-warning">
+                    @TempData["Message"]
+                </div>
+            }
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Add User Button -->
+                                <button id="addUserBtn" class="btn btn-primary mb-3" onclick="toggleUserForm()">Add User</button>
+
+                                <!-- User Form -->
+
+
+                                <div class="table-responsive">
+                                    <table class="datatable table table-hover table-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>UserId</th>
+                                                <th>UserName</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Role</th>
+                                                <th>Status</th>
+                                                <th>Created At</th>
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @if (Model.Users != null && Model.Users.Any())
+                                            {
+                                            @foreach (var user in Model.Users)
+                                                {
+                                                    <tr>
+                                                        <td>@user.userId</td>
+                                                        <td>@user.fullName</td>
+                                                        <td>@user.email</td>
+                                                        <td>@user.phone</td>
+                                                        <td>@(!string.IsNullOrEmpty(user.roleName) ? user.roleName : "N/A")</td>
+                                                        <td>
+                                                            @if (user.status.HasValue)
+                                                            {
+                                                                @if (user.status.Value == 1)
+                                                                {
+                                                                    <span class="badge badge-pill bg-success">Active</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span class="badge badge-pill bg-danger">Inactive</span>
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge badge-pill bg-secondary">Unknown</span>
+                                                            }
+                                                        </td>
+                                                    <td>@(user.createdAt.HasValue ? user.createdAt.Value.ToString("yyyy-MM-dd") : "N/A")</td>
+                                                    <td class="text-end">
+                                                        <div class="actions">
+                                                            <a href="javascript:void(0)" class="btn btn-sm bg-success-light me-2"
+                                                               onclick="toggleUserForm(@user.userId, '@user.fullName', '@user.email', '@user.phone', @user.roleId)">
+                                                                <i class="fe fe-pencil"></i> Edit
+                                                            </a>
+                                                            <form asp-action="DeleteUser" asp-route-id="@user.userId" method="post" style="display:inline;">
+                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="8" class="text-center">No users available</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="userForm" style="display:none; margin-bottom: 20px;">
+                                    <h5>Add New User</h5>
+                                <!-- Display Validation Summary -->
+                           
+                                <form asp-action="AddUser" method="post">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Full Name</label>
+                                                <input type="text" class="form-control" name="FullName" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="email" class="form-control" name="Email" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Phone</label>
+                                                <input type="text" class="form-control" name="Phone" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" name="Password" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Roles</label>
+                                                <select class="form-control" name="RoleId" required>
+                                                    <option value="">Select a role</option>
+                                                    @foreach (var role in Model.Roles) // Assuming Roles are passed to the view
+                                                    {
+                                                        <option value="@role.RoleId">@role.RoleName</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                </div>
+                            <div id="userEditForm" style="display:none; margin-bottom: 20px;">
+                                <h5>Edit User</h5>
+                                <form asp-action="UpdateUser" method="post">
+                                    <input type="hidden" id="EditingUserId" name="UserId" />
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Full Name</label>
+                                                <input type="text" class="form-control" id="EditingFullName" name="FullName" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="email" class="form-control" id="EditingEmail" name="Email" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Phone</label>
+                                                <input type="text" class="form-control" id="EditingPhone" name="Phone" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Password</label>
+                                                <input type="password" class="form-control" id="EditingPassword" name="Password">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Roles</label>
+                                                <select class="form-control" id="EditingRoleId" name="RoleId" required>
+                                                    <option value="">Select a role</option>
+                                                    @foreach (var role in Model.Roles)
+                                                    {
+                                                        <option value="@role.RoleId">@role.RoleName</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label>Status</label>
+                                                <select class="form-control" id="EditingStatus" name="Status" required>
+                                                    <option value="">Select status</option>
+                                                    <option value="1">Active</option>
+                                                    <option value="0">Inactive</option>
+                                                    <!-- Add more statuses if needed -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Update User</button>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+<script>
+    function toggleUserForm(userId, fullName, email, phone, roleId, status) {
+        // Check if we are editing a user
+        if (userId) {
+            // Fill the editing form with current user data
+            document.getElementById('EditingUserId').value = userId;
+            document.getElementById('EditingFullName').value = fullName;
+            document.getElementById('EditingEmail').value = email;
+            document.getElementById('EditingPhone').value = phone;
+            document.getElementById('EditingRoleId').value = roleId;
+            document.getElementById('EditingStatus').value = status; // Set the status
+
+            // Hide the add user form and show the edit form
+            document.getElementById('userForm').style.display = 'none';
+            document.getElementById('userEditForm').style.display = 'block';
+        } else {
+            // Clear the editing form
+            document.getElementById('EditingUserId').value = '';
+            document.getElementById('EditingFullName').value = '';
+            document.getElementById('EditingEmail').value = '';
+            document.getElementById('EditingPhone').value = '';
+            document.getElementById('EditingRoleId').value = '';
+            document.getElementById('EditingStatus').value = ''; // Clear the status
+
+            // Hide the edit form and show the add user form
+            document.getElementById('userEditForm').style.display = 'none';
+            document.getElementById('userForm').style.display = 'block';
+        }
+    }
+
+</script>
+
+

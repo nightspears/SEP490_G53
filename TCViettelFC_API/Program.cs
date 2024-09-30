@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TCViettelFC_API.Mapper;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Implementations;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -49,7 +50,7 @@ builder.Services.AddAuthorizationBuilder().AddPolicy("admin", p =>
 {
     p.RequireClaim("RoleId", "2");
 });
-
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
 app.UseCors();
 if (app.Environment.IsDevelopment())
