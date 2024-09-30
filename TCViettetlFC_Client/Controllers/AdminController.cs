@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using TCViettelFC_Client.Services;
 using TCViettetlFC_Client.Models;
 
 namespace TCViettetlFC_Client.Controllers
@@ -8,9 +9,12 @@ namespace TCViettetlFC_Client.Controllers
     public class AdminController : Controller
     {
         private readonly HttpClient _httpClient;
-        public AdminController(IHttpClientFactory httpClientFactory)
+        private readonly UserService _userService;
+
+        public AdminController(IHttpClientFactory httpClientFactory, UserService userService)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
+            _userService = userService;
         }
         public IActionResult Login()
         {
@@ -112,6 +116,73 @@ namespace TCViettetlFC_Client.Controllers
 
             return RedirectToAction("Login", "Admin");
         }
+
+        public async Task<IActionResult> UserManagement()
+        {
+            var token = Request.Cookies["AuthToken"];
+            var users = await _userService.GetUsersAsync(token);
+            var roles = await _userService.GetRolesAsync();
+
+            // Assuming you have a ViewModel to hold both users and roles
+            var model = new UserManagementViewModel
+            {
+                Users = (List<UserViewModel>)users,
+                Roles = (List<RoleViewModel>)roles
+            };
+
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddUser(UserCreateDto userCreateDto)
+        {
+            var token = Request.Cookies["AuthToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
+            // Call the service to add the user
+            var resultMessage = await _userService.AddUserAsync(userCreateDto, token);
+
+            // Add a success or error message to TempData
+            TempData["Message"] = resultMessage;
+
+            return RedirectToAction("UserManagement"); // Redirect to the user management page
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(UserUpdateDto userUpdateDto)
+        {
+            var token = Request.Cookies["AuthToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
+            var result = await _userService.UpdateUserAsync(userUpdateDto.UserId, userUpdateDto, token);
+
+          
+                TempData["Message"] = result;
+                return RedirectToAction("UserManagement");
+           
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            var token = Request.Cookies["AuthToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Admin");
+            }
+
+            var resultMessage = await _userService.DeleteUserAsync(id, token);
+
+            // Add a success or error message to TempData
+            TempData["Message"] = resultMessage;
+
+            return RedirectToAction("UserManagement");
+        }
+
 
     }
 }
