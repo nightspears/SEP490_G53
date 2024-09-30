@@ -396,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+TCViettelFC_API/.vs/TCViettelFC_API/FileContentIndex/8838da4b-11c4-40bb-a278-ada663ba4cc2.vsidx
+TCViettetlFC_Client/.vs/TCViettetlFC_Client/DesignTimeBuild/.dtbcache.v2
+TCViettetlFC_Client/obj/Debug/net8.0/TCViettetlFC_Client.AssemblyInfo.cs
+TCViettetlFC_Client/obj/Debug/net8.0/TCViettetlFC_Client.AssemblyInfoInputs.cache
