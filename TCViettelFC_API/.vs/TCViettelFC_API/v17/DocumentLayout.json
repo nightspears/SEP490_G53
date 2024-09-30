@@ -414,7 +414,8 @@
               "RelativeToolTip": "Dtos\\LoginDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-22T07:26:24.557Z"
+              "WhenOpened": "2024-09-22T07:26:24.557Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -438,7 +439,8 @@
               "RelativeToolTip": "Dtos\\AdminLoginResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-28T15:03:48.813Z"
+              "WhenOpened": "2024-09-28T15:03:48.813Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -450,7 +452,8 @@
               "RelativeToolTip": "TCViettelFC_API.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-09-22T08:04:37.753Z"
+              "WhenOpened": "2024-09-22T08:04:37.753Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -462,7 +465,8 @@
               "RelativeToolTip": "Repositories\\Implementations\\UserRepository.cs",
               "ViewState": "AgIAAG4AAAAAAAAAAAAqwIgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T12:52:41.197Z"
+              "WhenOpened": "2024-09-21T12:52:41.197Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -474,7 +478,8 @@
               "RelativeToolTip": "Repositories\\Interfaces\\IUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T12:50:41.525Z"
+              "WhenOpened": "2024-09-21T12:50:41.525Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -499,7 +504,8 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAC8AAAAAAAAAAAAqwDUAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T14:09:53.524Z"
+              "WhenOpened": "2024-09-17T14:09:53.524Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -511,7 +517,8 @@
               "RelativeToolTip": "Dtos\\ChangePassRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-29T08:32:46.915Z"
+              "WhenOpened": "2024-09-29T08:32:46.915Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -523,7 +530,8 @@
               "RelativeToolTip": "Repositories\\Interfaces\\IHelloWorldRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-17T14:07:32.37Z"
+              "WhenOpened": "2024-09-17T14:07:32.37Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
