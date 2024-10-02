@@ -119,6 +119,54 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "LoginAsync",
+    "RelativePath": "api/Customer/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerLoginDto",
+        "Type": "TCViettelFC_API.Dtos.CustomerLoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "RegisterAsync",
+    "RelativePath": "api/Customer/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cusRegReq",
+        "Type": "TCViettelFC_API.Dtos.CustomerRegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "VerifyConfirmationCodeAsync",
+    "RelativePath": "api/Customer/verify",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "TCViettelFC_API.Dtos.VerifyConfirmationCodeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TCViettelFC_API.Controllers.HelloWorldController",
     "Method": "GetString",
     "RelativePath": "api/HelloWorld",
