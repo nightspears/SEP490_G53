@@ -316,3 +316,9 @@ D:\GithubRepo\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.OData.Core.d
 D:\GithubRepo\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.OData.Edm.dll
 D:\GithubRepo\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.OData.ModelBuilder.dll
 D:\GithubRepo\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.Spatial.dll
+D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\AutoMapper.dll
+D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.AspNetCore.OData.dll
+D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.OData.Core.dll
+D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.OData.Edm.dll
+D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.OData.ModelBuilder.dll
+D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.Spatial.dll
