@@ -40,10 +40,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowMvcClient", builder =>
     {
-        builder.WithOrigins("https://localhost:7004")  // MVC app origin
-               .AllowCredentials()                   // Allow cookies and credentials
-               .AllowAnyHeader()                     // Allow any headers
-               .AllowAnyMethod();                    // Allow any HTTP methods (GET, POST, etc.)
+        builder.WithOrigins("https://localhost:7004")
+               .AllowCredentials()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
     });
 });
 builder.Services.AddAuthorizationBuilder().AddPolicy("admin", p =>
@@ -52,7 +52,7 @@ builder.Services.AddAuthorizationBuilder().AddPolicy("admin", p =>
 });
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
-app.UseCors();
+app.UseCors("AllowMvcClient");
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

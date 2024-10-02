@@ -17,13 +17,7 @@ namespace TCViettelFC_API.Controllers
             _userRepository = userRepository;
             _mapper = mapper;
         }
-        [HttpPost("login")]
-        public async Task<IActionResult> LoginAsync(AdminLoginDto loginDto)
-        {
-            var response = await _userRepository.AdminLoginAsync(loginDto);
-            if (response == null) return BadRequest("Login failed");
-            return Ok(response);
-        }
+
         [Authorize(Policy = "admin")]
         [HttpGet("testauthorized")]
         public async Task<IActionResult> GetAsync()
@@ -82,7 +76,7 @@ namespace TCViettelFC_API.Controllers
         {
             try
             {
-               
+
 
                 // Check if RoleId is valid
                 if (!await _userRepository.IsValidRoleAsync(userDto.RoleId))

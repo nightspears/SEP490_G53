@@ -120,7 +120,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             }
 
         }
-        public async Task<AdminLoginResponse> AdminLoginAsync(AdminLoginDto loginDto)
+        public async Task<LoginResponse> LoginAsync(LoginDto loginDto)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Phone == loginDto.Phone && x.Password == loginDto.Password);
             if (user != null)
@@ -145,12 +145,13 @@ namespace TCViettelFC_API.Repositories.Implementations
                 };
                 var jwtToken = jwtHandler.CreateToken(tokenDes);
                 token = jwtHandler.WriteToken(jwtToken);
-                var res = new AdminLoginResponse()
+                var res = new LoginResponse()
                 {
                     Token = token,
                     Email = user.Email,
                     Phone = user.Phone,
                     UserId = user.UserId,
+                    RoleId = user.RoleId,
                     FullName = user.FullName
                 };
                 return res;
