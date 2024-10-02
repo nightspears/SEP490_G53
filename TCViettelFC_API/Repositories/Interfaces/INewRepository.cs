@@ -8,5 +8,8 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<List<GetNewDto>> GetAllNewsAsync();
         Task<GetNewDto?> GetNewsByIdAsync(int id);
         Task<bool> UpdateNewsStatusAsync(int id, int newStatus);
+      
+
+
     }
 }

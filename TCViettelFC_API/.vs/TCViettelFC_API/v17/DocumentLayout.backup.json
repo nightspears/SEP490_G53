@@ -370,8 +370,7 @@
               "RelativeToolTip": "Controllers\\AdminController.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAqwB0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T06:20:34.222Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-01T06:20:34.222Z"
             },
             {
               "$type": "Document",
@@ -383,8 +382,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAADgAAAAAAAAAAAAuwFQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T06:31:45.031Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-01T06:31:45.031Z"
             },
             {
               "$type": "Document",
@@ -396,8 +394,7 @@
               "RelativeToolTip": "Dtos\\GetNewDto.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAIwBUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-01T05:58:31.342Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-01T05:58:31.342Z"
             },
             {
               "$type": "Document",
@@ -407,7 +404,7 @@
               "RelativeDocumentMoniker": "Controllers\\NewController.cs",
               "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\SEP490_G53\\TCViettelFC_API\\Controllers\\NewController.cs",
               "RelativeToolTip": "Controllers\\NewController.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAowCoAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAowDgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-01T05:54:23.542Z",
               "EditorCaption": ""

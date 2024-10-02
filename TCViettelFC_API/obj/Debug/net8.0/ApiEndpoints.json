@@ -99,6 +99,37 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.NewController",
+    "Method": "SearchNews",
+    "RelativePath": "api/New/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "category",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "title",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[TCViettelFC_API.Dtos.GetNewDto, TCViettelFC_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.NewController",
     "Method": "UpdateNewsStatus",
     "RelativePath": "api/New/updatestatus/{id}",
     "HttpMethod": "GET",

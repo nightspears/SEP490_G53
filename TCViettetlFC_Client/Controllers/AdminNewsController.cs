@@ -14,19 +14,28 @@ namespace TCViettetlFC_Client.Controllers
         }
         public async Task<IActionResult> ApproveNew()
         {
-            // Call API to get the list of news
-            var response = await _httpClient.GetAsync("https://localhost:5000/api/New/GetAllNews");
-            if (response.IsSuccessStatusCode)
+            var token = Request.Cookies["AuthToken"];
+            if (string.IsNullOrEmpty(token))
             {
-                var jsonData = await response.Content.ReadAsStringAsync();
-               
-                var newsList = JsonConvert.DeserializeObject<List<GetAllNewViewModel>>(jsonData);
-
-                return View(newsList);
+                return RedirectToAction("Login", "Admin");
             }
+            else
+            {
+                var response = await _httpClient.GetAsync("https://localhost:5000/api/New/GetAllNews");
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonData = await response.Content.ReadAsStringAsync();
 
-            return View("Error");
+                    var newsList = JsonConvert.DeserializeObject<List<GetAllNewViewModel>>(jsonData);
+
+                    return View(newsList);
+                }
+                return View("Error");
+            }
+           
         }
+
+
         [HttpPost]
         public async Task<IActionResult> UpdateStatus(int newsId, int newStatus)
         {
@@ -38,7 +47,7 @@ namespace TCViettetlFC_Client.Controllers
 
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            // Gọi API bằng phương thức GET với tham số newStatus trong query string
+            
             var response = await _httpClient.GetAsync($"https://localhost:5000/api/New/updatestatus/{newsId}?newStatus={newStatus}");
 
             if (response.IsSuccessStatusCode)
@@ -46,10 +55,10 @@ namespace TCViettetlFC_Client.Controllers
                 return RedirectToAction("ApproveNew");
             }
 
-            // Nếu có lỗi từ server, bạn có thể lấy thông báo lỗi chi tiết từ response
             var errorMessage = await response.Content.ReadAsStringAsync();
             return View("Error", errorMessage);
         }
+        
 
     }
 }
