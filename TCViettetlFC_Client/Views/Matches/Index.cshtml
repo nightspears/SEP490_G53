@@ -1,0 +1,233 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutAdmin";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        @* <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">List of Mentor</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
+                        <li class="breadcrumb-item active">Mentor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+ *@
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="datatable table table-hover table-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="0" onchange="CheckAll(this)">
+                                            </div>
+                                        </th>
+                                        <th>Đối thủ</th>
+                                        <th>Tên sân</th>
+                                        <th>Ngày đá</th>
+                                        <th class="text-center">Trạng thái</th>
+                                        <th class="text-center">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edit_invoice_report" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Transactions</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row form-row">
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Invoice Number</label>
+                                <input type="text" class="form-control" value="#INV-0001">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Mentee ID</label>
+                                <input type="text" class="form-control" value="	#01">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Mentee Name</label>
+                                <input type="text" class="form-control" value="Jonathan Doe">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Mentee Image</label>
+                                <input type="file" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Total Amount</label>
+                                <input type="text" class="form-control" value="$200.00">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Created Date</label>
+                                <input type="text" class="form-control" value="29th Oct 2019">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block w-100">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="form-content p-2">
+                    <h4 class="modal-title">Delete</h4>
+                    <input id="idXoa"  type="hidden"/>
+                    <p class="mb-4">Bạn có muốn xóa trận đấu này ?</p>
+                    <button type="button" class="btn btn-primary" id="btnXoa">Delete </button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
+<script src="~/admin_assets/adminjs/matches.js"></script>
+<script src="~/admin_assets/plugins/datatables/jquery.datatables.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        loadData();
+    });
+    function CheckAll(item) {
+        var isChecked = $(item).is(':checked');
+        var checkboxes = $(item).closest('table').find('.form-check-input');
+        checkboxes.prop('checked', isChecked);
+    };
+    $(document).on("click", "#confirmXoa", function () {
+        debugger
+        $("#idXoa").val("");
+        var id = $(this).data("id");
+        $("#idXoa").val(id);
+        debugger
+    });
+    $(document).on("click", "#btnXoa", function () {
+
+        var id = $("#idXoa").val();
+        debugger
+        $.ajax({
+            url: "https://localhost:5000/api/Matches/DeleteMatches/" + id,
+            method: "GET",
+            dataType: "json",
+            success: function (res) {
+                debugger;
+                alert("xóa thành công ")
+            },
+            error: function (res) {
+                alert("xóa thất bại ")
+            }
+        });
+
+    });
+
+   
+
+    function loadData() {
+        debugger;
+        $.ajax({
+            url: "https://localhost:5000/api/Matches/GetMatches",
+            method: "GET",
+            dataType: "json", // Corrected the dataType
+            success: function (res) {
+                debugger; // Pause for debugging
+                var tbody = $("#tbody"); // Select the tbody element
+                tbody.empty(); // Clear the existing tbody content
+
+                $.each(res, function (index, item) {
+                    var html = `
+                    <tr>
+                        <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" data-id="${item.id}">
+                        </div>
+                    </td>
+                <td>
+                    <h2 class="table-avatar">
+                        <a href="profile.html" class="avatar avatar-sm me-2">
+                            <img class="avatar-img rounded-circle"
+                                 src="${item.logoUrl}"
+                                 alt="User Image">
+                        </a>
+                        <a href="profile.html">${item.opponentName}</a>
+                    </h2>
+                </td>
+                <td>${item.stadiumName}</td>
+                <td>${item.matchDate} <br><small></small></td>
+                <td class="text-center">
+                    <div class="status-toggle d-flex justify-content-center">
+                        <input type="checkbox" id="status_${item.id}" class="check" ${item.status = 1 ? 'checked' : ''}>
+                        <label for="status_${item.id}" class="checktoggle">checkbox</label>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="actions">
+                        <a data-bs-toggle="modal" href="#edit_invoice_report" class="btn btn-sm bg-success-light me-2">
+                            <i class="fe fe-pencil"></i> Sửa
+                        </a>
+                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-id="${item.id}" id="confirmXoa" href="#delete_modal">
+                            <i class="fe fe-trash"></i> Xóa
+                        </a>
+                    </div>
+                </td>
+            </tr>`;
+                    debugger
+
+                    tbody.append(html); // Append the generated HTML to tbody
+                });
+
+                debugger; // Pause for further debugging
+            },
+
+
+            error: function (res) {
+                debugger;
+            }
+        });
+    }
+
+
+</script>

@@ -19,8 +19,7 @@ builder.Services.AddDbContext<Sep490G53Context>(options => options.UseSqlServer(
 builder.Services.AddScoped<IHelloWorldRepository, HelloWorldRepository>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication().AddJwtBearer(o =>
@@ -42,10 +41,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowMvcClient", builder =>
     {
-        builder.WithOrigins("https://localhost:7004")
-               .AllowCredentials()
-               .AllowAnyHeader()
-               .AllowAnyMethod();
+        builder.WithOrigins("https://localhost:7004")  // MVC app origin
+               .AllowCredentials()                   // Allow cookies and credentials
+               .AllowAnyHeader()                     // Allow any headers
+               .AllowAnyMethod();                    // Allow any HTTP methods (GET, POST, etc.)
     });
 });
 builder.Services.AddAuthorizationBuilder().AddPolicy("admin", p =>
@@ -54,13 +53,15 @@ builder.Services.AddAuthorizationBuilder().AddPolicy("admin", p =>
 });
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
+
 app.UseCors("AllowMvcClient");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseRouting();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
