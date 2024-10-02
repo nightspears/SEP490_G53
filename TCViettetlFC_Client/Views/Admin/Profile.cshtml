@@ -1,8 +1,7 @@
 ﻿@model ChangePasswordModel
-
-
-
-
+@{
+    ViewData["Title"] = "Profile";
+}
     <div class="main-wrapper">
 
         <div class="header">
@@ -152,7 +151,7 @@
                         </div>
                         <a class="dropdown-item" asp-action="Profile">My Profile</a>
                         <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" asp-action="Logout" asp-controller="Admin">Logout</a>
+                        <a class="dropdown-item" asp-action="Logout" asp-controller="User">Logout</a>
                     </div>
                 </li>
 

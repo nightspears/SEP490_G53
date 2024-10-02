@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
-using System.Text.Json;
 using TCViettelFC_Client.Services;
 using TCViettetlFC_Client.Models;
 
@@ -16,21 +15,13 @@ namespace TCViettetlFC_Client.Controllers
             _httpClient = httpClientFactory.CreateClient("ApiClient");
             _userService = userService;
         }
-        public IActionResult Login()
-        {
-            var token = Request.Cookies["AuthToken"];
-            if (string.IsNullOrEmpty(token))
-            {
-                return View();
-            }
-            return RedirectToAction("Home", "Admin");
-        }
+
         public IActionResult Home()
         {
             var token = Request.Cookies["AuthToken"];
             if (string.IsNullOrEmpty(token))
             {
-                return RedirectToAction("Login", "Admin");
+                return RedirectToAction("Login", "User");
             }
             else
             {
@@ -46,48 +37,8 @@ namespace TCViettetlFC_Client.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> GetAuthorize()
-        {
-            var token = Request.Cookies["AuthToken"];
-            if (string.IsNullOrEmpty(token))
-            {
-                return RedirectToAction("Login", "Admin");
-            }
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _httpClient.GetAsync("admin/testauthorized");
-            if (response.IsSuccessStatusCode)
-            {
-                ViewBag.Authorize = "Authorized";
-            }
-            else
-            {
-                ViewBag.Authorize = "Unauthorized";
-            }
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> Login(AdminLoginViewModel adminLoginViewModel)
-        {
 
-            var response = await _httpClient.PostAsJsonAsync("admin/login", adminLoginViewModel);
-            if (response.IsSuccessStatusCode)
-            {
-                var token = await JsonSerializer.DeserializeAsync<TokenModel>(await response.Content.ReadAsStreamAsync());
-                var cookieOptions = new CookieOptions
-                {
-                    HttpOnly = true, // Prevent access via JavaScript
-                    Secure = true, // Only send over HTTPS
-                    SameSite = SameSiteMode.Strict, // Strict cookie policy to prevent CSRF
-                    Expires = DateTime.UtcNow.AddHours(1) // Adjust the expiration as necessary
-                };
 
-                Response.Cookies.Append("AuthToken", token.token, cookieOptions);
-
-                return RedirectToAction("Home", "Admin");
-            }
-            return View();
-
-        }
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordModel changePasswordModel)
         {
@@ -110,12 +61,7 @@ namespace TCViettetlFC_Client.Controllers
             return RedirectToAction("Profile");
 
         }
-        public async Task<IActionResult> Logout()
-        {
-            Response.Cookies.Delete("AuthToken");
 
-            return RedirectToAction("Login", "Admin");
-        }
 
         public async Task<IActionResult> UserManagement()
         {
@@ -123,7 +69,6 @@ namespace TCViettetlFC_Client.Controllers
             var users = await _userService.GetUsersAsync(token);
             var roles = await _userService.GetRolesAsync();
 
-            // Assuming you have a ViewModel to hold both users and roles
             var model = new UserManagementViewModel
             {
                 Users = (List<UserViewModel>)users,
@@ -141,13 +86,11 @@ namespace TCViettetlFC_Client.Controllers
                 return RedirectToAction("Login", "Admin");
             }
 
-            // Call the service to add the user
             var resultMessage = await _userService.AddUserAsync(userCreateDto, token);
 
-            // Add a success or error message to TempData
             TempData["Message"] = resultMessage;
 
-            return RedirectToAction("UserManagement"); // Redirect to the user management page
+            return RedirectToAction("UserManagement");
         }
         [HttpPost]
         public async Task<IActionResult> UpdateUser(UserUpdateDto userUpdateDto)
@@ -160,10 +103,10 @@ namespace TCViettetlFC_Client.Controllers
 
             var result = await _userService.UpdateUserAsync(userUpdateDto.UserId, userUpdateDto, token);
 
-          
-                TempData["Message"] = result;
-                return RedirectToAction("UserManagement");
-           
+
+            TempData["Message"] = result;
+            return RedirectToAction("UserManagement");
+
         }
 
         [HttpPost]
@@ -177,7 +120,6 @@ namespace TCViettetlFC_Client.Controllers
 
             var resultMessage = await _userService.DeleteUserAsync(id, token);
 
-            // Add a success or error message to TempData
             TempData["Message"] = resultMessage;
 
             return RedirectToAction("UserManagement");
