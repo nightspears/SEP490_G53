@@ -1,0 +1,88 @@
+﻿@model List<TCViettetlFC_Client.Models.GetAllNewViewModel>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    img {
+        max-width: 100px;
+        height: auto;
+    }
+
+    .btn-accept {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .btn-reject {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+</style>
+
+<h1>News Details</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Creator ID</th>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Image</th>
+            <th>Created At</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var news in Model)
+        {
+            <tr>
+                <td>@news.Id</td>
+                <td>@news.CreatorId</td>
+                <td>@news.NewsCategory</td>
+                <td>@news.Title</td>
+                <td>@news.Content</td>
+                <td><img src="@news.Image" alt="News Image" /></td>
+                <td>@news.CreatedAt</td>
+                <td>@(news.Status == 0 ? "Pending" : "Approved")</td>
+                <td>
+                    @if (news.Status == 0)
+                    {
+                        <form asp-action="UpdateStatus" method="post">
+                            <input type="hidden" name="newsId" value="@news.Id" />
+                            <input type="hidden" name="newStatus" value="1" />
+                            <button type="submit" class="btn-accept">Accept</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="UpdateStatus" method="post">
+                            <input type="hidden" name="newsId" value="@news.Id" />
+                            <input type="hidden" name="newStatus" value="0" />
+                            <button type="submit" class="btn-reject">Reject</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
