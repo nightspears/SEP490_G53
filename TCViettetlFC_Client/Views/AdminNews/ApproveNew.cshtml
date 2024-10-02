@@ -1,0 +1,95 @@
+﻿@model List<TCViettetlFC_Client.Models.GetAllNewViewModel>
+
+<div class="p-3">
+
+    <div class="d-flex justify-content-between ">
+        <div style="max-width: 400px">
+            <form class="input-group mb-3">
+                <input type="text" name="searchTerm" class="form-control" placeholder="Tìm kiếm tại đây" aria-label="Search" style="border-radius: 30px;">
+                <div class="input-group-append">
+                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+
+        </div>
+        <div class="ml-3">
+            <select class="form-select" aria-label="Sort options" style="border-radius: 30px;">
+                <option selected>Sắp xếp</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+            </select>
+        </div>
+    </div>
+    <div class="card card-table">
+        <div class="card-header">
+            <h4 class="card-title">Danh sách tin tức</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-center mb-0">
+                    <thead>
+                        <tr class="text-center">
+                            <th>ID</th>
+                            <th>Creator ID</th>
+                            <th>Category</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>Image</th>
+                            <th>Created At</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var news in Model)
+                        {
+                            <tr class="text-center">
+                                <td>@news.Id</td>
+                                <td>@news.CreatorId</td>
+                                <td>@news.NewsCategory</td>
+                                <td>@news.Title</td>
+                                <td>
+                                    @if (news.Content.Length > 20)
+                                    {
+                                        @(@news.Content.Substring(0, 20) + "...")
+                                    }
+                                    else
+                                    {
+                                        @news.Content
+                                    }
+                                </td>
+
+
+                                <td>
+                                    <img src="@news.Image" alt="News Image" style=" max-width: 100px;height: auto;" />
+                                </td>
+                                <td>@news.CreatedAt</td>
+                                <td>@(news.Status == 0 ? "Pending" : "Approved")</td>
+                                <td>
+                                    @if (news.Status == 0)
+                                    {
+                                        <form asp-action="UpdateStatus" method="post">
+                                            <input type="hidden" name="newsId" value="@news.Id" />
+                                            <input type="hidden" name="newStatus" value="1" />
+                                            <button type="submit" class="btn-accept bg-primary">Accept</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form asp-action="UpdateStatus" method="post">
+                                            <input type="hidden" name="newsId" value="@news.Id" />
+                                            <input type="hidden" name="newStatus" value="0" />
+                                            <button type="submit" class="btn-reject bg-danger">Reject</button>
+                                        </form>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
