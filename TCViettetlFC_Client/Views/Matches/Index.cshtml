@@ -29,6 +29,11 @@
                             <table class="datatable table table-hover table-center mb-0">
                                 <thead>
                                     <tr>
+                                        <th>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="0" onchange="CheckAll(this)">
+                                            </div>
+                                        </th>
                                         <th>Đối thủ</th>
                                         <th>Tên sân</th>
                                         <th>Ngày đá</th>
@@ -37,38 +42,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tbody">
-                                   @*  <tr>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm me-2">
-                                                    <img class="avatar-img rounded-circle"
-                                                         src="assets/img/profiles/avatar-18.jpg"
-                                                         alt="User Image">
-                                                </a>
-                                                <a href="profile.html">Vern Campbell</a>
-                                            </h2>
-                                        </td>
-                                        <td>Basic Calculation</td>
-                                        <td>23 Mar 2019 <br><small>02.50 PM</small></td>
-                                        <td class="text-center">
-                                            <div class="status-toggle d-flex justify-content-center">
-                                                <input type="checkbox" id="status_6" class="check" checked>
-                                                <label for="status_6" class="checktoggle">checkbox</label>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="actions">
-                                                <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                   class="btn btn-sm bg-success-light me-2">
-                                                    <i class="fe fe-pencil"></i> Edit
-                                                </a>
-                                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                   href="#delete_modal">
-                                                    <i class="fe fe-trash"></i> Delete
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr> *@
                                     
                                 </tbody>
                             </table>
@@ -143,22 +116,55 @@
             <div class="modal-body">
                 <div class="form-content p-2">
                     <h4 class="modal-title">Delete</h4>
-                    <p class="mb-4">Are you sure want to delete?</p>
-                    <button type="button" class="btn btn-primary">Delete </button>
+                    <input id="idXoa"  type="hidden"/>
+                    <p class="mb-4">Bạn có muốn xóa trận đấu này ?</p>
+                    <button type="button" class="btn btn-primary" id="btnXoa">Delete </button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script src="~/admin_assets/adminjs/matches.js"></script>
 <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
-
+<script src="~/admin_assets/adminjs/matches.js"></script>
+<script src="~/admin_assets/plugins/datatables/jquery.datatables.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
 <script>
     $(document).ready(function () {
         loadData();
     });
+    function CheckAll(item) {
+        var isChecked = $(item).is(':checked');
+        var checkboxes = $(item).closest('table').find('.form-check-input');
+        checkboxes.prop('checked', isChecked);
+    };
+    $(document).on("click", "#confirmXoa", function () {
+        debugger
+        $("#idXoa").val("");
+        var id = $(this).data("id");
+        $("#idXoa").val(id);
+        debugger
+    });
+    $(document).on("click", "#btnXoa", function () {
+
+        var id = $("#idXoa").val();
+        debugger
+        $.ajax({
+            url: "https://localhost:5000/api/Matches/DeleteMatches/" + id,
+            method: "GET",
+            dataType: "json",
+            success: function (res) {
+                debugger;
+                alert("xóa thành công ")
+            },
+            error: function (res) {
+                alert("xóa thất bại ")
+            }
+        });
+
+    });
+
+   
 
     function loadData() {
         debugger;
@@ -174,6 +180,11 @@
                 $.each(res, function (index, item) {
                     var html = `
                     <tr>
+                        <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" data-id="${item.id}">
+                        </div>
+                    </td>
                 <td>
                     <h2 class="table-avatar">
                         <a href="profile.html" class="avatar avatar-sm me-2">
@@ -195,10 +206,10 @@
                 <td class="text-center">
                     <div class="actions">
                         <a data-bs-toggle="modal" href="#edit_invoice_report" class="btn btn-sm bg-success-light me-2">
-                            <i class="fe fe-pencil"></i> Edit
+                            <i class="fe fe-pencil"></i> Sửa
                         </a>
-                        <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal" href="#delete_modal">
-                            <i class="fe fe-trash"></i> Delete
+                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-id="${item.id}" id="confirmXoa" href="#delete_modal">
+                            <i class="fe fe-trash"></i> Xóa
                         </a>
                     </div>
                 </td>
