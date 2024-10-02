@@ -1,0 +1,221 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutAdmin";
+}
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        @* <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">List of Mentor</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
+                        <li class="breadcrumb-item active">Mentor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+ *@
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="datatable table table-hover table-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Đối thủ</th>
+                                        <th>Tên sân</th>
+                                        <th>Ngày đá</th>
+                                        <th class="text-center">Trạng thái</th>
+                                        <th class="text-center">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    <tr>
+                                        <td>
+                                            <h2 class="table-avatar">
+                                                <a href="profile.html" class="avatar avatar-sm me-2">
+                                                    <img class="avatar-img rounded-circle"
+                                                         src="assets/img/profiles/avatar-18.jpg"
+                                                         alt="User Image">
+                                                </a>
+                                                <a href="profile.html">Vern Campbell</a>
+                                            </h2>
+                                        </td>
+                                        <td>Basic Calculation</td>
+                                        <td>23 Mar 2019 <br><small>02.50 PM</small></td>
+                                        <td class="text-center">
+                                            <div class="status-toggle d-flex justify-content-center">
+                                                <input type="checkbox" id="status_6" class="check" checked>
+                                                <label for="status_6" class="checktoggle">checkbox</label>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="actions">
+                                                <a data-bs-toggle="modal" href="#edit_invoice_report"
+                                                   class="btn btn-sm bg-success-light me-2">
+                                                    <i class="fe fe-pencil"></i> Edit
+                                                </a>
+                                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
+                                                   href="#delete_modal">
+                                                    <i class="fe fe-trash"></i> Delete
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edit_invoice_report" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Transactions</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row form-row">
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Invoice Number</label>
+                                <input type="text" class="form-control" value="#INV-0001">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Mentee ID</label>
+                                <input type="text" class="form-control" value="	#01">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Mentee Name</label>
+                                <input type="text" class="form-control" value="Jonathan Doe">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Mentee Image</label>
+                                <input type="file" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Total Amount</label>
+                                <input type="text" class="form-control" value="$200.00">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Created Date</label>
+                                <input type="text" class="form-control" value="29th Oct 2019">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block w-100">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="form-content p-2">
+                    <h4 class="modal-title">Delete</h4>
+                    <p class="mb-4">Are you sure want to delete?</p>
+                    <button type="button" class="btn btn-primary">Delete </button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/admin_assets/adminjs/matches.js"></script>
+<script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        loadData();
+    });
+
+    function loadData() {
+        debugger;
+        $.ajax({
+            url: "https://localhost:5000/api/Matches/GetMatches",
+            method: "GET",
+            dataType: "json", // Corrected the dataType
+            ssuccess: function (res) {
+                debugger
+                var tbody = $("#tbody").empty(); // Clear the existing tbody content
+
+                res.data.forEach(function (item) {
+                    var html = `
+                <tr>
+                    <td>
+                        <h2 class="table-avatar">
+                            <a href="profile.html" class="avatar avatar-sm me-2">
+                                <img class="avatar-img rounded-circle"
+                                     src="${item.logoUrl}"  <!-- Use dynamic image URL -->
+                                     alt="User Image">
+                            </a>
+                            <a href="profile.html">${item.name}</a>  <!-- Use dynamic name -->
+                        </h2>
+                    </td>
+                    <td>Basic Calculation</td> <!-- Assuming this is static -->
+                    <td>${item.date} <br><small>${item.time}</small></td>  <!-- Use dynamic date and time -->
+                    <td class="text-center">
+                        <div class="status-toggle d-flex justify-content-center">
+                            <input type="checkbox" id="status_${item.id}" class="check" ${item.status ? 'checked' : ''}>
+                            <label for="status_${item.id}" class="checktoggle">checkbox</label>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <div class="actions">
+                            <a data-bs-toggle="modal" href="#edit_invoice_report"
+                               class="btn btn-sm bg-success-light me-2">
+                                <i class="fe fe-pencil"></i> Edit
+                            </a>
+                            <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
+                               href="#delete_modal">
+                                <i class="fe fe-trash"></i> Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>`;
+
+                    // Append the generated row to the tbody
+                    tbody.append(html);
+                });
+            },
+            
+            error: function (res) {
+                debugger;
+                console.error("Error fetching data", res); // Handle the error
+            }
+        });
+    }
+
+
+</script>
