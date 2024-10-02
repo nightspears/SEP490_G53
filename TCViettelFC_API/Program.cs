@@ -19,6 +19,8 @@ builder.Services.AddDbContext<Sep490G53Context>(options => options.UseSqlServer(
 builder.Services.AddScoped<IHelloWorldRepository, HelloWorldRepository>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication().AddJwtBearer(o =>
