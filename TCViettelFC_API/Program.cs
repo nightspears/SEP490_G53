@@ -20,6 +20,7 @@ builder.Services.AddScoped<IHelloWorldRepository, HelloWorldRepository>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMatchRepository, MatchRepository>();
+builder.Services.AddScoped<ICloudinarySetting, CloudinarySettings>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication().AddJwtBearer(o =>

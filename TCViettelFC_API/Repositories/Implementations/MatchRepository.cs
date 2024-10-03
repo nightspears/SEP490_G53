@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -13,19 +15,22 @@ namespace TCViettelFC_API.Repositories.Implementations
     {
         private readonly Sep490G53Context _context;
         private readonly IConfiguration _configuration;
-        public MatchRepository(Sep490G53Context context, IConfiguration configuration)
+        private readonly ICloudinarySetting cloudinary;
+        public MatchRepository(Sep490G53Context context, IConfiguration configuration , ICloudinarySetting _cloudinarySetting)
         {
             _context = context;
             _configuration = configuration;
+            cloudinary  = _cloudinarySetting;
         }
         public async Task AddMatchesAsync( MatchesAddDto matchDto)
         {
+            ImageUploadResult res = cloudinary.CloudinaryUpload(matchDto.LogoUrl);
             var Matches = new Match
             {
                 OpponentName = matchDto.OpponentName,
                 StadiumName = matchDto.StadiumName,
                 Status = matchDto.Status,
-                LogoUrl = matchDto.LogoUrl,
+                LogoUrl = res.SecureUrl.ToString(),
                 IsHome = matchDto.IsHome,
                 MatchDate = matchDto.MatchDate,
             };
@@ -42,12 +47,13 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task DeleteMatchesAsync(int id)
         {
             var match = await _context.Matches.FindAsync(id);
-            if (match == null) throw new KeyNotFoundException("Match not found");
+            if (match == null|| match.Status == 0) throw new KeyNotFoundException("Match not found");
 
             try
             {
-                _context.Matches.Remove(match);
+                match.Status = 0;
                 await _context.SaveChangesAsync();
+               
             }
             catch (Exception ex)
             {
@@ -56,11 +62,16 @@ namespace TCViettelFC_API.Repositories.Implementations
             }
         }
 
-
         public async Task<List<Match>> GetMatchesAsync()
         {
             List<Match> matches = new List<Match>();
             matches = await _context.Matches.ToListAsync();
+            return matches;
+        }
+        public async Task<Match> GetMatchesByIdAsync(int id)
+        {
+            Match matches = new Match();
+            matches =  _context.Matches.FirstOrDefault(x => x.Id == id );   
             return matches;
         }
 
@@ -68,7 +79,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task UpdateMatchesAsync(int id, MatchesAddDto matchDto)
         {
             var matches = await _context.Matches.FindAsync(id);
-            if (matches == null)
+            if (matches == null || matches.Status == 0)
             {
                 throw new Exception("User not found");
             }
@@ -77,7 +88,10 @@ namespace TCViettelFC_API.Repositories.Implementations
             matches.OpponentName = matchDto.OpponentName ?? matches.OpponentName;
             matches.StadiumName = matchDto.StadiumName ?? matches.StadiumName;
             matches.MatchDate = matchDto.MatchDate ?? matches.MatchDate;
-            matches.LogoUrl = matchDto.LogoUrl ?? matches.LogoUrl;
+
+           
+            ImageUploadResult res = cloudinary.CloudinaryUpload(matchDto.LogoUrl);  
+            matches.LogoUrl = res.SecureUrl.ToString();
             matches.Status = matchDto.Status ?? matches.Status;
             matches.IsHome = matchDto.IsHome ?? matches.IsHome; 
             try

@@ -7,7 +7,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
    
         Task<List<Match>> GetMatchesAsync();
         Task AddMatchesAsync(MatchesAddDto matchDto);
-
+        Task<Match> GetMatchesByIdAsync(int id);
         Task UpdateMatchesAsync(int id, MatchesAddDto matchDto);
         Task DeleteMatchesAsync(int id);
   
