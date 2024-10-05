@@ -1,4 +1,4 @@
-/*
+﻿/*
 Author       : Dreamguys
 Template Name: Mentoring - Bootstrap Admin Template
 Version      : 1.0
@@ -245,11 +245,21 @@ Version      : 1.0
 	
     // Datatable
 
-    if ($('.datatable').length > 0) {
-        $('.datatable').DataTable({
-            "bFilter": false,
-        });
-    }
+    //if ($('.datatable').length > 0) {
+    //    $('.datatable').DataTable({
+    //        "bFilter": false,
+    //    });
+	//}
+
+	//if ($('.datatable').length > 0) {
+		
+	//		$('.datatable').DataTable({
+	//			"bFilter": false, // Tắt tính năng tìm kiếm nếu không cần
+	//			"paging": true,   // Bật tính năng phân trang
+	//			"ordering": true, // Bật tính năng sắp xếp
+	//			"info": true      // Hiển thị thông tin về bảng (số bản ghi đang xem, tổng số bản ghi, ...)
+	//		});
+	//	}
 	
 	// Sidebar Slimscroll
 

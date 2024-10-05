@@ -33,15 +33,23 @@ namespace TCViettelFC_API.Controllers
             return Ok(match);
 
         }
+        [HttpGet("GetMatchesById")]
+        public async Task<ActionResult> GetMatchesById(int id)
+        {
+            var match = await _matchRepository.GetMatchesByIdAsync(id);
+            
+            return Ok(match);
+
+        }
         [HttpPost("AddMatches")]
-        public async Task<IActionResult> AddMatchesAsync(MatchesAddDto matchDto)
+        public async Task<IActionResult> AddMatchesAsync([FromForm] MatchesAddDto matchDto)
         {
             await _matchRepository.AddMatchesAsync(matchDto);
             return Ok("Thêm trận thành công");
         }
 
         [HttpPut("UpdateMatches/{id}")]
-        public async Task<IActionResult> UpdateMatchAsync(int id, MatchesAddDto matchDto)
+        public async Task<IActionResult> UpdateMatchAsync(int id, [FromForm] MatchesAddDto matchDto)
         {
             try
             {
