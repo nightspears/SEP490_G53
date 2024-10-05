@@ -4,7 +4,7 @@ namespace TCViettelFC_API.Dtos.Matches
     public class MatchesAddDto 
     {
 
-        public IFormFile LogoUrl { get; set; }
+        public IFormFile? LogoUrl { get; set; }
 
         public bool? IsHome { get; set; }
 

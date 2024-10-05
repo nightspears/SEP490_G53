@@ -24,16 +24,26 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
         public async Task AddMatchesAsync( MatchesAddDto matchDto)
         {
-            ImageUploadResult res = cloudinary.CloudinaryUpload(matchDto.LogoUrl);
-            var Matches = new Match
+
+
+            Match Matches = new Match
             {
                 OpponentName = matchDto.OpponentName,
                 StadiumName = matchDto.StadiumName,
                 Status = matchDto.Status,
-                LogoUrl = res.SecureUrl.ToString(),
+               
                 IsHome = matchDto.IsHome,
                 MatchDate = matchDto.MatchDate,
             };
+            if (matchDto.LogoUrl != null && matchDto.LogoUrl.Length > 0 )
+            {
+                ImageUploadResult res = cloudinary.CloudinaryUpload(matchDto.LogoUrl);
+                Matches.LogoUrl = res.SecureUrl.ToString();
+            }
+            else
+            {
+                Matches.LogoUrl = "/image/imagelogo/icon-image-not-found-free-vector.jpg";
+            }
             try
             {
                 await _context.Matches.AddAsync(Matches);
@@ -65,7 +75,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<List<Match>> GetMatchesAsync()
         {
             List<Match> matches = new List<Match>();
-            matches = await _context.Matches.ToListAsync();
+            matches = await _context.Matches.Where(x => x.Id != 0).ToListAsync();
             return matches;
         }
         public async Task<Match> GetMatchesByIdAsync(int id)
@@ -81,7 +91,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             var matches = await _context.Matches.FindAsync(id);
             if (matches == null || matches.Status == 0)
             {
-                throw new Exception("User not found");
+                throw new Exception("Matches not found");
             }
 
             // Update match properties
@@ -89,11 +99,16 @@ namespace TCViettelFC_API.Repositories.Implementations
             matches.StadiumName = matchDto.StadiumName ?? matches.StadiumName;
             matches.MatchDate = matchDto.MatchDate ?? matches.MatchDate;
 
-           
-            ImageUploadResult res = cloudinary.CloudinaryUpload(matchDto.LogoUrl);  
-            matches.LogoUrl = res.SecureUrl.ToString();
+
+            if (matchDto.LogoUrl != null && matchDto.LogoUrl.Length > 0)
+            {
+                ImageUploadResult res = cloudinary.CloudinaryUpload(matchDto.LogoUrl);
+                matches.LogoUrl = res.SecureUrl.ToString();
+            }
             matches.Status = matchDto.Status ?? matches.Status;
             matches.IsHome = matchDto.IsHome ?? matches.IsHome; 
+
+
             try
             {
                 await _context.SaveChangesAsync();
