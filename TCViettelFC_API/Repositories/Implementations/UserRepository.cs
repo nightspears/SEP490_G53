@@ -185,7 +185,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
             return await _context.Users
-              .Include(u => u.Role)
+              .Include(u => u.Role).Where(x => x.RoleId == 1)
               .ToListAsync();
         }
 

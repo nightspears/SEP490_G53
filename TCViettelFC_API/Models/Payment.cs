@@ -19,5 +19,5 @@ public partial class Payment
 
     public virtual OrderProduct? OrderProduct { get; set; }
 
-    public virtual OrderTicket? OrderTicket { get; set; }
+    public virtual TicketOrder? OrderTicket { get; set; }
 }

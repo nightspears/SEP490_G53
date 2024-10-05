@@ -1,3 +1,5 @@
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 using TCViettelFC_Client.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,10 @@ builder.Services.AddHttpClient<UserService>(client =>
     client.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
+builder.Services.AddSingleton<HtmlEncoder>(
+    HtmlEncoder.Create(allowedRanges: new[] {
+        UnicodeRanges.All
+    }));
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 var app = builder.Build();

@@ -4,9 +4,9 @@ namespace TCViettetlFC_Client.Models
 {
     public class UserLoginViewModel
     {
-        [Required(ErrorMessage = "Phone is required")]
+        [Required(ErrorMessage = "Số điện thoại không được để trống")]
         public string Phone { get; set; }
-        [Required(ErrorMessage = "Password is required")]
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }
