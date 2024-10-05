@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using TCViettelFC_API.Mapper;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Implementations;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -44,7 +45,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddDbContext<Sep490G53Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("value")));
-
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped<IHelloWorldRepository, HelloWorldRepository>();
 builder.Services.AddScoped<INewRepository, NewRepository>();
 

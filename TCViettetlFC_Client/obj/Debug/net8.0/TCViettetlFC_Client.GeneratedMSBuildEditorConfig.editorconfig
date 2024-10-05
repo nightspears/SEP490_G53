@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\ResumeProjects\SEP490_G53\TCViettetlFC_Client
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/AdminNews/ApproveNew.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5OZXdzXEFwcHJvdmVOZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Admin/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2hhbmdlUGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

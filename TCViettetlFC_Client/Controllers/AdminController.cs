@@ -71,9 +71,9 @@ namespace TCViettetlFC_Client.Controllers
 
             var model = new UserManagementViewModel
             {
-                Users = (List<UserViewModel>)users,
-                Roles = (List<RoleViewModel>)roles
-            };
+                Users = users.ToList(),
+                Roles = roles.ToList()
+            }; ;
 
             return View(model);
         }
