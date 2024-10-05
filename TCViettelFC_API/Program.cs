@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using TCViettelFC_API.Mapper;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Implementations;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -51,6 +52,7 @@ builder.Services.AddScoped<INewRepository, NewRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddAuthentication().AddJwtBearer(o =>
 {
     o.TokenValidationParameters = new TokenValidationParameters()
