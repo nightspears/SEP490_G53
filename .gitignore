@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+TCViettelFC_API/.vs/TCViettelFC_API/v17/.suo
+TCViettetlFC_Client/.vs/TCViettetlFC_Client/v17/.suo
