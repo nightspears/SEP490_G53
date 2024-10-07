@@ -2,8 +2,6 @@
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using TCViettetlFC_Client.Models;
-using TCViettelFC_Client.Services;
-using TCViettetlFC_Client.Models;
 using TCViettetlFC_Client.Services;
 
 
@@ -12,11 +10,6 @@ namespace TCViettetlFC_Client.Controllers
     public class StaffController : Controller
     {
         private readonly HttpClient _httpClient;
-
-        public StaffController(IHttpClientFactory httpClientFactory)
-        {
-            _httpClient = httpClientFactory.CreateClient("ApiClient");
-        }
 
         private readonly FeedbackService _feedbackService;
 
@@ -40,10 +33,10 @@ namespace TCViettetlFC_Client.Controllers
                 return RedirectToAction("Login", "User");
             }
 
-            var creatorId = Request.Cookies["UserId"]; 
-            var status = 0; 
+            var creatorId = Request.Cookies["UserId"];
+            var status = 0;
             var createdAt = DateTime.Now;
-          
+
             string requestUri = "https://localhost:5000/api/New/GetAllNews";
             var response = await _httpClient.GetAsync(requestUri);
             List<GetAllNewViewModel> newList = new List<GetAllNewViewModel>();
@@ -66,9 +59,9 @@ namespace TCViettetlFC_Client.Controllers
 
             ViewData["NewList"] = newList;
             ViewData["CategoryList"] = categoryList;
-            ViewData["CreatorId"] = creatorId; 
-            ViewData["Status"] = status; 
-            ViewData["CreateAt"] = createdAt; 
+            ViewData["CreatorId"] = creatorId;
+            ViewData["Status"] = status;
+            ViewData["CreateAt"] = createdAt;
 
             return View();
         }
@@ -78,7 +71,7 @@ namespace TCViettetlFC_Client.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+
                 var token = Request.Cookies["AuthToken"];
                 if (!string.IsNullOrEmpty(token))
                 {
@@ -95,7 +88,7 @@ namespace TCViettetlFC_Client.Controllers
 
                 var content = new StringContent(JsonConvert.SerializeObject(model), System.Text.Encoding.UTF8, "application/json");
 
-                
+
                 string requestUri = "https://localhost:5000/api/New/create";
                 var response = await _httpClient.PostAsync(requestUri, content);
 
@@ -103,11 +96,11 @@ namespace TCViettetlFC_Client.Controllers
                 {
                     TempData["Message"] = "Đã thêm tin tức thành công";
                     return RedirectToAction("StaffManagermentNew");
-                    
+
                 }
                 else
                 {
-                    
+
                     TempData["Message"] = "Failed to create new news item.";
                 }
             }
@@ -149,7 +142,7 @@ namespace TCViettetlFC_Client.Controllers
             }
 
             return RedirectToAction("StaffManagermentNew");
-         }
+        }
 
         [HttpPost]
         public async Task<IActionResult> DeleteNew(int id)
