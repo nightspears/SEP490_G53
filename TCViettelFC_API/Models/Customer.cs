@@ -21,7 +21,7 @@ public partial class Customer
 
     public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 
-    public virtual ICollection<OrderTicket> OrderTickets { get; set; } = new List<OrderTicket>();
-
     public virtual ICollection<Profile> Profiles { get; set; } = new List<Profile>();
+
+    public virtual ICollection<TicketOrder> TicketOrders { get; set; } = new List<TicketOrder>();
 }

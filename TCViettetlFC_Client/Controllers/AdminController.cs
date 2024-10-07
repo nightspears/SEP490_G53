@@ -29,10 +29,7 @@ namespace TCViettetlFC_Client.Controllers
             }
 
         }
-        public IActionResult Profile()
-        {
-            return View();
-        }
+
         public IActionResult ChangePassword()
         {
             return View();
@@ -52,13 +49,15 @@ namespace TCViettetlFC_Client.Controllers
             var response = await _httpClient.PostAsJsonAsync("admin/changepass", new { OldPass = changePasswordModel.OldPassword, NewPass = changePasswordModel.NewPassword });
             if (response.IsSuccessStatusCode)
             {
-                ViewBag.Message = "Password changed successfully";
+                TempData["Notification"] = "Đổi mật khẩu thành công";
+                TempData["NotificationType"] = "success";
             }
             else
             {
-                ViewBag.Message = "Failed to change password";
+                TempData["Notification"] = "Đổi mật khẩu thất bại";
+                TempData["NotificationType"] = "error";
             }
-            return RedirectToAction("Profile");
+            return RedirectToAction("ChangePassword");
 
         }
 
@@ -68,12 +67,12 @@ namespace TCViettetlFC_Client.Controllers
             var token = Request.Cookies["AuthToken"];
             var users = await _userService.GetUsersAsync(token);
             var roles = await _userService.GetRolesAsync();
-
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var model = new UserManagementViewModel
             {
-                Users = (List<UserViewModel>)users,
-                Roles = (List<RoleViewModel>)roles
-            };
+                Users = users.ToList(),
+                Roles = roles.ToList()
+            }; ;
 
             return View(model);
         }

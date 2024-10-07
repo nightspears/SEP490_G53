@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Product</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .action a {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Order Product</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mã khách hàng</th>
+                <th>Mã đơn hàng</th>
+                <th>Ngày đặt</th>
+                <th>Tổng giá</th>
+                <th>Id địa chỉ</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>101</td>
+                <td>ORD001</td>
+                <td>2024-10-01</td>
+                <td>$150.00</td>
+                <td>5001</td>
+                <td>Processed</td>
+                <td class="action"><a href="#">Xem chi tiết</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>102</td>
+                <td>ORD002</td>
+                <td>2024-10-03</td>
+                <td>$250.50</td>
+                <td>5002</td>
+                <td>Shipped</td>
+                <td class="action"><a href="#">View Details</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>103</td>
+                <td>ORD003</td>
+                <td>2024-10-05</td>
+                <td>$100.00</td>
+                <td>5003</td>
+                <td>Delivered</td>
+                <td class="action"><a href="#">View Details</a></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>104</td>
+                <td>ORD004</td>
+                <td>2024-10-07</td>
+                <td>$300.00</td>
+                <td>5004</td>
+                <td>Cancelled</td>
+                <td class="action"><a href="#">View Details</a></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>105</td>
+                <td>ORD005</td>
+                <td>2024-10-09</td>
+                <td>$400.00</td>
+                <td>5005</td>
+                <td>Pending</td>
+                <td class="action"><a href="#">View Details</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

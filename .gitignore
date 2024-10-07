@@ -406,3 +406,28 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+TCViettelFC_API/.vs/TCViettelFC_API/v17/.suo
+TCViettetlFC_Client/.vs/TCViettetlFC_Client/v17/.suo
+TCViettelFC_API/.vs/TCViettelFC_API/DesignTimeBuild/.dtbcache.v2
+TCViettelFC_API/.vs/TCViettelFC_API/v17/.futdcache.v2
+TCViettelFC_API/.vs/TCViettelFC_API/v17/.suo
+TCViettelFC_API/.vs/TCViettelFC_API/v17/DocumentLayout.backup.json
+TCViettelFC_API/.vs/TCViettelFC_API/v17/DocumentLayout.json
+TCViettelFC_API/bin/Debug/net8.0/TCViettelFC_API.dll
+TCViettelFC_API/bin/Debug/net8.0/TCViettelFC_API.exe
+TCViettelFC_API/bin/Debug/net8.0/TCViettelFC_API.pdb
+TCViettelFC_API/obj/Debug/net8.0/ApiEndpoints.json
+TCViettelFC_API/obj/Debug/net8.0/apphost.exe
+TCViettelFC_API/obj/Debug/net8.0/ref/TCViettelFC_API.dll
+TCViettelFC_API/obj/Debug/net8.0/refint/TCViettelFC_API.dll
+TCViettelFC_API/obj/Debug/net8.0/TCViettelFC_API.AssemblyInfo.cs
+TCViettelFC_API/obj/Debug/net8.0/TCViettelFC_API.AssemblyInfoInputs.cache
+TCViettelFC_API/obj/Debug/net8.0/TCViettelFC_API.csproj.CoreCompileInputs.cache
+TCViettelFC_API/obj/Debug/net8.0/TCViettelFC_API.dll
+TCViettelFC_API/obj/Debug/net8.0/TCViettelFC_API.pdb
+TCViettetlFC_Client/.vs/TCViettetlFC_Client/v17/.futdcache.v2
+TCViettetlFC_Client/.vs/TCViettetlFC_Client/v17/.suo
+TCViettetlFC_Client/.vs/TCViettetlFC_Client/v17/DocumentLayout.json
+TCViettetlFC_Client/obj/Debug/net8.0/TCViettetlFC_Client.AssemblyInfo.cs
+TCViettetlFC_Client/obj/Debug/net8.0/TCViettetlFC_Client.AssemblyInfoInputs.cache
+TCViettetlFC_Client/obj/Debug/net8.0/TCViettetlFC_Client.GeneratedMSBuildEditorConfig.editorconfig
