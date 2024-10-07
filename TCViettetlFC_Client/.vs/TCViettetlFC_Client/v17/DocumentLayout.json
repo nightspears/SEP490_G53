@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:services\\feedbackservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\admin\\usermanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\admin\\usermanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\services\\baseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:services\\baseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\staff\\feedbackmanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\feedbackmanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\models\\feedbackresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\feedbackresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 81,
+          "SelectedChildIndex": 83,
           "Children": [
             {
               "$type": "Bookmark",
@@ -190,10 +210,6 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:11:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{588470cc-84f8-4a57-9ac4-86bca0625ff4}"
             },
             {
@@ -318,10 +334,6 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:14:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
             },
             {
@@ -346,28 +358,92 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_Layout.cshtml*",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml*",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAACsAAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-05T01:06:00.238Z",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T07:05:26.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-07T07:05:15.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BaseService.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Services\\BaseService.cs",
+              "RelativeDocumentMoniker": "Services\\BaseService.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Services\\BaseService.cs",
+              "RelativeToolTip": "Services\\BaseService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T04:39:10.385Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserManagement.cshtml",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\UserManagement.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\UserManagement.cshtml",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\UserManagement.cshtml",
-              "RelativeToolTip": "Views\\Admin\\UserManagement.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "StaffController.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\StaffController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StaffController.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\StaffController.cs",
+              "RelativeToolTip": "Controllers\\StaffController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwCEAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T04:28:07.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FeedbackService.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Services\\FeedbackService.cs",
+              "RelativeDocumentMoniker": "Services\\FeedbackService.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Services\\FeedbackService.cs*",
+              "RelativeToolTip": "Services\\FeedbackService.cs*",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAwEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T04:25:37.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FeedbackResponse.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\FeedbackResponse.cs",
+              "RelativeDocumentMoniker": "Models\\FeedbackResponse.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\FeedbackResponse.cs",
+              "RelativeToolTip": "Models\\FeedbackResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-06T03:52:36.686Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FeedbackManagement.cshtml",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\FeedbackManagement.cshtml",
+              "RelativeDocumentMoniker": "Views\\Staff\\FeedbackManagement.cshtml",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\FeedbackManagement.cshtml",
+              "RelativeToolTip": "Views\\Staff\\FeedbackManagement.cshtml",
+              "ViewState": "AgIAALkAAAAAAAAAAAAYwNIAAABZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-05T01:05:52.566Z",
+              "WhenOpened": "2024-10-06T03:49:01.912Z",
               "EditorCaption": ""
             }
           ]
@@ -383,10 +459,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:9:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:12:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Bookmark",
@@ -487,10 +559,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:12:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:13:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
             },
             {
               "$type": "Bookmark",

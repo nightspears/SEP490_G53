@@ -167,6 +167,47 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TCViettelFC_API.Controllers.FeedbackController",
+    "Method": "UpdateFeedback",
+    "RelativePath": "api/Feedback/{feedbackId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "feedbackId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateFeedbackDto",
+        "Type": "TCViettelFC_API.Dtos.UpdateFeedbackDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.FeedbackController",
+    "Method": "GetFeedbacks",
+    "RelativePath": "api/Feedback/GetFeedbacks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[TCViettelFC_API.Dtos.FeedbackDto, TCViettelFC_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "TCViettelFC_API.Controllers.HelloWorldController",
     "Method": "GetString",
     "RelativePath": "api/HelloWorld",

@@ -50,6 +50,7 @@ builder.Services.AddScoped<IHelloWorldRepository, HelloWorldRepository>();
 builder.Services.AddScoped<INewRepository, NewRepository>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
