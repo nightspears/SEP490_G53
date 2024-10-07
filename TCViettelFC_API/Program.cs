@@ -1,7 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.OData;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using TCViettelFC_API.Mapper;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Implementations;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -12,6 +16,17 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
+
+builder.Services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand().SetMaxTop(100)
+            .AddRouteComponents("odata", GetEdmModel()));
+
+
+ static IEdmModel GetEdmModel()
+{
+    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+    builder.EntitySet<News>("NewsOdata");
+    return builder.GetEdmModel();
+}
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
@@ -47,7 +62,7 @@ builder.Services.AddDbContext<Sep490G53Context>(options => options.UseSqlServer(
 
 builder.Services.AddScoped<IHelloWorldRepository, HelloWorldRepository>();
 builder.Services.AddScoped<INewRepository, NewRepository>();
-
+builder.Services.AddScoped<ICategoryNewRepository, CategoryNewRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
@@ -76,10 +91,17 @@ builder.Services.AddCors(options =>
                .AllowAnyMethod();                    // Allow any HTTP methods (GET, POST, etc.)
     });
 });
-builder.Services.AddAuthorizationBuilder().AddPolicy("admin", p =>
+builder.Services.AddAuthorization(options =>
 {
-    p.RequireClaim("RoleId", "2");
+    // Policy cho admin
+    options.AddPolicy("admin", policy =>
+        policy.RequireClaim("RoleId", "2"));
+
+    // Policy cho staff
+    options.AddPolicy("staff", policy =>
+        policy.RequireClaim("RoleId", "1")); // Thêm claim cho staff
 });
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 app.UseCors("AllowMvcClient");
@@ -92,7 +114,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseODataBatching();
 app.MapControllers();
 
 app.Run();

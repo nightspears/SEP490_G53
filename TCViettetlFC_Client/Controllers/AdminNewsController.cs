@@ -12,7 +12,7 @@ namespace TCViettetlFC_Client.Controllers
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
         }
-        public async Task<IActionResult> ApproveNew()
+        public async Task<IActionResult> ApproveNew(string searchTerm, int? sortOption)
         {
             var token = Request.Cookies["AuthToken"];
             if (string.IsNullOrEmpty(token))
@@ -21,18 +21,49 @@ namespace TCViettetlFC_Client.Controllers
             }
             else
             {
-                var response = await _httpClient.GetAsync("https://localhost:5000/api/New/GetAllNews");
+                string requestUri = "https://localhost:5000/api/New/GetAllNews";
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    requestUri += $"?$filter=contains(Title,'{searchTerm}')";
+                }
+                else
+                {
+                    requestUri += "?";
+                }
+                switch (sortOption)
+                {
+                    case 0:
+                        requestUri += "?";
+                        break;
+                    case 1:
+                        requestUri += "&$orderby=Title asc";
+                        break;
+                    case 2:
+                        requestUri += "&$orderby=CreatedAt asc";
+                        break;
+                    case 3:
+                        requestUri += "&$orderby=CreatedAt desc";
+                        break;
+                    case 4:
+                        requestUri += "&$filter=Status eq 0";
+                        break;
+                    case 5:
+                        requestUri += "&$filter=Status eq 1";
+                        break;
+
+                }
+                var response = await _httpClient.GetAsync(requestUri);
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonData = await response.Content.ReadAsStringAsync();
-
-                    var newsList = JsonConvert.DeserializeObject<List<GetAllNewViewModel>>(jsonData);
-
-                    return View(newsList);
+                    var newList = JsonConvert.DeserializeObject<List<GetAllNewViewModel>>(jsonData);
+                    return View(newList);
                 }
+
+
                 return View("Error");
             }
-           
+
         }
 
 
@@ -47,7 +78,7 @@ namespace TCViettetlFC_Client.Controllers
 
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            
+
             var response = await _httpClient.GetAsync($"https://localhost:5000/api/New/updatestatus/{newsId}?newStatus={newStatus}");
 
             if (response.IsSuccessStatusCode)
@@ -58,7 +89,7 @@ namespace TCViettetlFC_Client.Controllers
             var errorMessage = await response.Content.ReadAsStringAsync();
             return View("Error", errorMessage);
         }
-        
+
 
     }
 }

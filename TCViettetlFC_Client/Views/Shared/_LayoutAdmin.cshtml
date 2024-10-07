@@ -167,7 +167,7 @@
                     </div>
                     <a class="dropdown-item" href="profile.html">My Profile</a>
                     <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="/user/logout">Logout</a>
                 </div>
             </li>
 
@@ -220,7 +220,7 @@
                         <a href="#"><span>Blog</span> <span class="menu-arrow"></span></a>
                         <ul style="display: none;">
                             <li><a href="blog.html"> Blog </a></li>
-                            <li><a href="blog-details.html"> Blog Details </a></li>
+                                <li><a asp-controller="AdminNews" asp-action="ApproveNew"> Approve New </a></li>
                             <li><a href="add-blog.html"> Add Blog </a></li>
                             <li><a href="edit-blog.html"> Edit Blog </a></li>
                         </ul>
