@@ -42,7 +42,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             }
             else
             {
-                Matches.LogoUrl = "/image/imagelogo/icon-image-not-found-free-vector.jpg";
+                Matches.LogoUrl = "/image/imagelogo/ImageFail.jpg";
             }
             try
             {
@@ -75,7 +75,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<List<Match>> GetMatchesAsync()
         {
             List<Match> matches = new List<Match>();
-            matches = await _context.Matches.Where(x => x.Id != 0).ToListAsync();
+            matches = await _context.Matches.Where(x => x.Status != 0).ToListAsync();
             return matches;
         }
         public async Task<Match> GetMatchesByIdAsync(int id)

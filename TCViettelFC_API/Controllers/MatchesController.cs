@@ -14,12 +14,10 @@ namespace TCViettelFC_API.Controllers
     public class MatchesController : ControllerBase
     {
         private readonly IMatchRepository _matchRepository;
-        private readonly IMapper _mapper;
 
-        public MatchesController(IMatchRepository matchRepository , IMapper mapper)
+        public MatchesController(IMatchRepository matchRepository )
         {
             _matchRepository = matchRepository;
-            _mapper = mapper;
 
         }
         [HttpGet("GetMatches")]
@@ -63,7 +61,7 @@ namespace TCViettelFC_API.Controllers
             }
         }
         [HttpDelete("DeleteMatches/{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteMatch(int id)
         {
             try
             {

@@ -1,0 +1,467 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_LayoutAdmin";
+}
+
+
+<style>
+    .position-relative {
+        position: relative;
+    }
+
+    .change-photo {
+        position: absolute;
+        top: 38%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: none;
+    }
+
+    .image-container:hover .change-photo {
+        display: block; /* Hiện nút khi hover */
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+
+    .change-photo-btn {
+    
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+ 
+
+    select {
+        border: 1px solid #ddd;
+        box-shadow: none;
+        color: #333;
+        font-size: 15px;
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+    }
+
+    .required {
+        color: red;
+    }
+
+    #cardImg {
+        transition: box-shadow 0.3s ease; /* Hiệu ứng chuyển đổi khi hover */
+        border: none; /* Loại bỏ viền nếu muốn */
+        max-height:300px ;
+        max-width : 240px ;
+    }
+
+    #cardImg {
+        transition: all 0.3s ease; /* Hiệu ứng mượt khi thay đổi kích thước và shadow */
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow nhẹ mặc định */
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        padding: 20px;
+    }
+
+        #cardImg:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Bóng lớn hơn khi hover */
+            transform: scale(1.1); /* Phóng to card khi hover */
+        }
+
+        #cardImg img {
+            transition: all 0.3s ease;
+           
+            object-fit: cover;
+            border-radius: 10px; /* Đảm bảo hình ảnh tròn */
+        }
+
+
+
+</style>
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        @* <div class="page-header">
+        <div class="row">
+        <div class="col-sm-12">
+        <h3 class="page-title">List of Mentor</h3>
+        <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
+        <li class="breadcrumb-item active">Mentor</li>
+        </ul>
+        </div>
+        </div>
+        </div>
+        *@
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="actions mb-3">
+                            <a onclick="modalEditOrCreate(0)" class="btn btn-success  me-2">
+                                <i class="fa fa-plus"></i> Thêm mới
+                            </a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="datatable table table-hover table-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" id="0" onchange="CheckAll(this)">
+                                            </div>
+                                        </th>
+                                        <th>Sản phẩm</th>
+                                        <th>Thể loại</th>
+                                        <th>Mùa giải</th>
+                                        <th>Giá</th>
+                                        <th class="text-center">Trạng thái</th>
+                                        <th class="text-center">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="alertBox" style="position: fixed; top: 20px; right: 20px; background-color: orange; color: white; padding: 10px;margin-top: 90px;margin-right :20px; border-radius: 15px; display: none;">
+    <strong><i class='bx bx-error' style="color:red"></i></strong> <span id="alertMessage"></span>
+</div>
+<div id="alertSuccess" style="position: fixed; top: 20px; right: 20px; background-color: lawngreen; color: black; padding: 10px;margin-top: 90px;margin-right :20px; border-radius: 15px; display: none; z-index:99">
+    <strong><i class="bi bi-check-circle" style="color:lawngreen"></i></strong> <span id="alertMessageSuccess" style="font-family: sans-serif;"></span>
+</div>
+
+<div class="modal fade" id="modalEditorCreate" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-xl " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titleModal">Sửa trận đấu</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-md-12 d-flex justify-content-center position-relative image-container">
+                        <div class="card" id="cardImg" style="width: 100%;max-width: 300px;max-height: 300px;height:300px">
+                            <a href="#">
+                                <img id="ImgAvt" class="rounded-5 AvtImg card-img-top" alt="User Image"
+                                     src="~/image/imagelogo/logoviettel.jpg"
+                                     style=" max-width:260px ; height: 100%; max-height:260px; object-fit: cover; width:100%">
+                            </a>
+                        </div>
+                        <i class="fa fa-pencil change-photo" style="font-size:20px"></i>
+                        <input type="file" id="fileInputImg" style="display:none;" accept="image/*">
+                    </div>
+
+
+                    <div class="col-xl-8 col-md-12">
+                        <div class="row form-row mt-3">
+                            <input type="hidden" id="idSanPham" class="form-control" readonly>
+                            <div class="col-12 col-sm-12">
+                                <div class="form-group">
+                                    <label>Tên sản phẩm <span class="required"> *</span></label>
+                                    <input type="text" id="tensp" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Mùa giải <span class="required"> *</span></label>
+                                    <select style="width:100%" id="muaGiai">
+                                       
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label>Thể loại <span class="required"> *</span></label>
+                                    <select style="width:100%" id="theLoai">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Mô tả</label>
+                                    <textarea rows="2" cols="3" id="moTa" class="form-control" placeholder="Nhập mô tả" style="min-height:100px !important"></textarea>
+                                </div>
+                            </div>
+                            @* <div class="col-12 col-sm-6">
+                                <label>Trạng thái</label>
+                                <div class="status-toggle d-flex ">
+                                    <input type="checkbox" id="status" class="check">
+                                    <label for="status" style="height:35px ; width:60px" class="checktoggle">checkbox</label>
+                                </div>
+                            </div> *@
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="row form-row mt-3">
+                    @* <input type="hidden" id="idTran" class="form-control" readonly> *@
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Giá</label>
+                            <input type="text" id="giaSp" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Chất liệu </label>
+                            <input type="text" id="chatlieu" placeholder="Nhập chất liệu sản phẩm" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Kích thước <span class="required"> *</span></label>
+                            <input type="text" id="kichthuoc" placeholder="Nhập cách nhau dấu ' ; ' ( Ví dụ : size 1;size 2;size 3 )  " class="form-control">
+                        </div>
+                    </div>
+                    
+                   @*  <div class="col-12 col-sm-6">
+                        <div class="form-group">
+                            <label>Là sân nhà</label>
+                            <select style="width:100%" id="isHome">
+                                <option value="1">Sân nhà</option>
+                                <option value="2">Sân khách</option>
+                            </select>
+                        </div>
+                    </div> *@
+                    <div class="col-12 col-sm-6">
+                        <label>Trạng thái</label>
+                        <div class="status-toggle d-flex ">
+                            <input type="checkbox" id="status" class="check">
+                            <label for="status" style="height:35px ; width:60px" class="checktoggle">checkbox</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12" >
+                        <label>Ảnh khác</label>
+                        <div class="row ">
+                            <div class="col-md-12 d-flex position-relative image-container">
+                                <div class="change-photo-btn">
+                                    <img class="rounded-circle AvtImg" id="addImgOther" alt="User Image"
+                                         src="~/image/imagelogo/plus.jpg"
+                                         style="width: 50px; height: 50px; object-fit: cover;">
+                                </div>
+                                <div id="previewContainer" class="d-flex flex-wrap"></div>
+                            </div>
+                        </div>
+                        <input type="file" id="fileInput" multiple style="display:none;" accept="image/*">
+                       
+                    </div>
+                </div>
+                <button type="submit" onclick="EditOrCreate()" id="btnNomal" class="btn btn-primary btn-block w-100 mt-4">Lưu</button>
+                <button type="button" id="btnLoading" class="btn btn-primary btn-block w-100 mt-4" style="display:none"><span class="spinner-border spinner-border-sm me-2" role="status"></span>Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="delete_modal" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="form-content p-2">
+                    <h4 class="modal-title">Xác nhận xóa</h4>
+                    <input id="idXoa" type="hidden" />
+                    <p class="mb-4">Bạn có muốn xóa sản phẩm này ?</p>
+                    <button type="button" class="btn btn-primary" id="btnXoa">Xóa </button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
+<script src="~/admin_assets/js/bootstrap.bundle.min.js"></script>
+<script src="~/admin_assets/js/feather.min.js"></script>
+<script src="~/admin_assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/jquery.datatables.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
+<script src="~/admin_assets/js/script.js"></script>
+<script src="~/admin_assets/adminjs/product.js"></script>
+<script>
+    let fileList = []; 
+
+    $('#fileInput').on('change', function (event) {
+        const files = event.target.files;
+        const $previewContainer = $('#previewContainer');
+
+        const existingImages = $previewContainer.find('img').map(function () {
+            return $(this).attr('src');
+        }).get();
+
+        let currentImages = existingImages.length;
+
+        const maxImages = 6;
+        const remainingSlots = maxImages - currentImages;
+
+        if (remainingSlots <= 0) {
+            alert('Bạn chỉ có thể thêm tối đa 6 ảnh.');
+            return;
+        }
+        debugger
+        $.each(Array.from(files).slice(0, remainingSlots), function (index, file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const imageUrl = e.target.result;
+
+                if (existingImages.includes(imageUrl)) {
+                    alert('Ảnh này đã được thêm trước đó.');
+                    return;
+                }
+
+                const $imgWrapper = $('<div>').css({
+                    'border': '2px solid #ccc',
+                    'padding': '5px',
+                    'margin': '5px',
+                    'border-radius': '10px',
+                    'display': 'inline-block',
+                    'position': 'relative'
+                }).attr('data-id', 0);
+
+                const $img = $('<img>').attr('src', imageUrl).css({
+                    'width': '150px',
+                    'height': '150px',
+                    'object-fit': 'cover'
+                }).addClass('rounded-5');
+
+                const $deleteBtn = $('<button>').text('X').css({
+                    'position': 'absolute',
+                    'top': '0',
+                    'right': '0',
+                    'background-color': 'white',
+                    'color': 'black',
+                    'border': 'none',
+                    'border-radius': '50%',
+                    'width': '20px',
+                    'height': '20px',
+                    'cursor': 'pointer'
+                });
+
+                $deleteBtn.on('click', function () {
+                    $imgWrapper.remove(); 
+                    currentImages--;
+
+                    fileList = fileList.filter(f => f !== file);
+
+                    updateFileInput();
+                });
+                $imgWrapper.append($img).append($deleteBtn);
+                $previewContainer.append($imgWrapper);
+                currentImages++;
+
+                fileList.push(file);
+
+                updateFileInput();
+            };
+
+            reader.readAsDataURL(file);
+        });
+    });
+    
+    function updateFileInput() {
+        const dataTransfer = new DataTransfer(); 
+        debugger
+        $.each(fileList, function (index, file) {
+            dataTransfer.items.add(file);
+        });
+
+        $('#fileInput')[0].files = dataTransfer.files;
+    }
+</script>
+@* <script>
+    document.getElementById('fileInput').addEventListener('change', function (event) {
+        const files = event.target.files;
+        const previewContainer = document.getElementById('previewContainer');
+
+        const existingImages = Array.from(previewContainer.querySelectorAll('img')).map(img => img.src);
+
+        let currentImages = existingImages.length;
+
+        const maxImages = 6;
+        const remainingSlots = maxImages - currentImages;
+
+        if (remainingSlots <= 0) {
+            alert('Bạn chỉ có thể thêm tối đa 6 ảnh.');
+            return;
+        }
+
+        Array.from(files).slice(0, remainingSlots).forEach(file => {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const imageUrl = e.target.result;
+
+                if (existingImages.includes(imageUrl)) {
+                    alert('Ảnh này đã được thêm trước đó.');
+                    return; 
+                }
+
+                const imgWrapper = document.createElement('div');
+                imgWrapper.style.border = '2px solid #ccc';
+                imgWrapper.style.padding = '5px';
+                imgWrapper.style.margin = '5px';
+                imgWrapper.style.borderRadius = '10px'; 
+                imgWrapper.style.display = 'inline-block'; 
+                imgWrapper.style.position = 'relative'; 
+
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.style.width = '150px';
+                img.style.height = '150px';
+                img.style.objectFit = 'cover';
+                img.classList.add('rounded-5');
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.innerHTML = 'X';
+                deleteBtn.style.position = 'absolute';
+                deleteBtn.style.top = '0';
+                deleteBtn.style.right = '0';
+                deleteBtn.style.backgroundColor = 'white';
+                deleteBtn.style.color = 'black';
+                deleteBtn.style.border = 'none';
+                deleteBtn.style.borderRadius = '50%';
+                deleteBtn.style.width = '20px';
+                deleteBtn.style.height = '20px';
+                deleteBtn.style.cursor = 'pointer';
+
+                deleteBtn.addEventListener('click', function () {
+                    previewContainer.removeChild(imgWrapper); 
+                    currentImages--; 
+                });
+
+                imgWrapper.appendChild(img);
+                imgWrapper.appendChild(deleteBtn);
+
+                previewContainer.appendChild(imgWrapper);
+
+                currentImages++;
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+</script> *@

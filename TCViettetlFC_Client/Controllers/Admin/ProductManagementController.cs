@@ -2,7 +2,7 @@
 
 namespace TCViettetlFC_Client.Controllers.Admin
 {
-    public class MatchesController : Controller
+    public class ProductManagementController : Controller
     {
         public IActionResult Index()
         {

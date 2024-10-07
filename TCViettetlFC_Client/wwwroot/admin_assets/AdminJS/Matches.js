@@ -1,6 +1,14 @@
 ﻿
 $(document).ready(function () {
     loadData();
+    if (!$.fn.DataTable.isDataTable('.datatable')) {
+        $('.datatable').DataTable({
+            "paging": true,
+            "pageLength": 10,
+            "ordering": true,
+            "info": true
+        });
+    }
 });
 function CheckAll(item) {
     var isChecked = $(item).is(':checked');
@@ -26,7 +34,8 @@ $(document).on("click", "#btnXoa", function () {
         success: function (res) {
             debugger;
             $("#delete_modal").modal("hide");
-            alert("xóa thành công ");
+            $(".modal-backdrop").hide();
+            showAlert("xóa thành công ");
             loadData();
         },
         error: function (res) {
@@ -35,79 +44,83 @@ $(document).on("click", "#btnXoa", function () {
     });
 
 });
+
 function loadData() {
-    debugger;
     $.ajax({
         url: "https://localhost:5000/api/Matches/GetMatches",
         method: "GET",
-        dataType: "json", // Corrected the dataType
+        dataType: "json",
         success: function (res) {
-            debugger; // Pause for debugging
-            var tbody = $("#tbody"); // Select the tbody element
-            tbody.empty(); // Clear the existing tbody content
+           
+            var table = $('.datatable').DataTable();
 
+            table.clear();
             $.each(res, function (index, item) {
                 var tenSan = (item.isHome === true ? 'SVĐ Mỹ Đình' : item.stadiumName);
-                var logoUrl = "";
-                if (item.logoUrl == null || item.logoUrl == "" || item.logoUrl == undefined) {
-                    logoUrl = "/image/imagelogo/icon-image-not-found-free-vector.jpg"
-                } else {
-                    logoUrl = item.logoUrl;
-                }
-                debugger
-                var html = `
-    <tr>
+                var logoUrl = item.logoUrl ? item.logoUrl : "/image/imagelogo/icon-image-not-found-free-vector.jpg";
 
-        <td>
-            <h2 class="table-avatar">
-                <a href="profile.html" class="avatar avatar-sm me-2">
-                    <img class="avatar-img rounded-circle"
-                        src="${logoUrl}"
-                        alt="User Image">
-                </a>
-                <a href="profile.html">${item.opponentName}</a>
-            </h2>
-        </td>
-        <td> ${tenSan}</td>
-        <td>${item.matchDate} <br><small></small></td>
-        <td>${item.isHome === true ? 'Sân nhà' : 'Sân khách'}</td>
-        <td class="text-center">
-            <div class="status-toggle d-flex justify-content-center">
-                <input type="checkbox" id="status_${item.id}" class="check" ${item.status === 1 ? 'checked' : ''}>
-                    <label for="status_${item.id}" class="checktoggle">checkbox</label>
-            </div>
-        </td>
-        <td class="text-center">
-            <div class="actions">
-                <a onclick="modalEditOrCreate(${item.id})" class="btn btn-sm bg-success-light me-2">
-                    <i class="fe fe-pencil"></i> Sửa
-                </a>
-                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-id="${item.id}" id="confirmXoa" href="#delete_modal">
-                    <i class="fe fe-trash"></i> Xóa
-                </a>
-            </div>
-        </td>
-    </tr>`;
-                debugger
+                var rowHtml = `
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" data-id="${item.id}">
+                            </div>
+                        </td>
+                        <td>
+                            <h2 class="table-avatar">
+                                <a href="profile.html" class="avatar avatar-sm me-2">
+                                    <img class="avatar-img rounded-circle"
+                                        src="${logoUrl}"
+                                        alt="User Image">
+                                </a>
+                                <a href="profile.html">${item.opponentName}</a>
+                            </h2>
+                        </td>
+                        <td>${tenSan}</td>
+                        <td>${item.matchDate} <br><small></small></td>
+                        <td>${item.isHome === true ? 'Sân nhà' : 'Sân khách'}</td>
+                        <td class="text-center">
+                            <div class="status-toggle d-flex justify-content-center">
+                                <input type="checkbox" id="status_${item.id}" class="check" ${item.status === 1 ? 'checked' : ''}>
+                                <label for="status_${item.id}" class="checktoggle">checkbox</label>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <div class="actions">
+                                <a onclick="modalEditOrCreate(${item.id})" class="btn btn-sm bg-success-light me-2">
+                                    <i class="fe fe-pencil"></i> Sửa
+                                </a>
+                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-id="${item.id}" id="confirmXoa" href="#delete_modal">
+                                    <i class="fe fe-trash"></i> Xóa
+                                </a>
+                            </div>
+                        </td>
+                    </tr>`;
 
-                tbody.append(html); // Append the generated HTML to tbody
-               
+                table.row.add($(rowHtml)); // Thêm từng dòng mới vào bảng
             });
-            $('.datatable').DataTable({
-                "paging": true,
-                "pageLength": 10, // Giảm số dòng trên mỗi trang để thử nghiệm
-                "ordering": true,
-                "info": true
-            });
-            debugger; // Pause for further debugging
+
+            table.draw();
         },
-
-
         error: function (res) {
-            debugger;
+            console.error("Error loading data", res);
         }
     });
 }
+
+// Khởi tạo DataTable khi trang tải lần đầu
+$(document).ready(function () {
+    if (!$.fn.DataTable.isDataTable('.datatable')) {
+        $('.datatable').DataTable({
+            "paging": true,
+            "pageLength": 10,
+            "ordering": true,
+            "info": true
+        });
+    }
+});
+
+
 // change Image
 $('.change-photo-btn').on('click', function () {
     $('#fileInput').click();
@@ -146,7 +159,7 @@ function modalEditOrCreate(id) {
 
                 var logoUrl = "";
                 if (res.logoUrl == null || res.logoUrl == "" || res.logoUrl == undefined) {
-                    logoUrl = "/image/imagelogo/icon-image-not-found-free-vector.jpg"
+                    logoUrl = "/image/imagelogo/ImageFail.jpg"
                 } else {
                     logoUrl = res.logoUrl;
                 }
@@ -167,7 +180,6 @@ function modalEditOrCreate(id) {
                 }
                 $(".modal-backdrop").hide();
 
-                $(".modal-backdrop").remove();
                 $('#modalEditorCreate').modal("show")
 
             },
@@ -281,7 +293,7 @@ function showAlert(mess) {
     $("#alertSuccess").show();
     setTimeout(function () {
         $("#alertSuccess").hide(); // Hide the notification box with fade-out effect
-    }, 400000); // 4 seconds delay
+    }, 3500); // 4 seconds delay
 }
 
 

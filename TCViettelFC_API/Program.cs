@@ -21,6 +21,9 @@ builder.Services.AddScoped<IHelloWorldRepository, HelloWorldRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 builder.Services.AddScoped<ICloudinarySetting, CloudinarySettings>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication().AddJwtBearer(o =>
@@ -34,7 +37,6 @@ builder.Services.AddAuthentication().AddJwtBearer(o =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true
-
 
     };
 });
