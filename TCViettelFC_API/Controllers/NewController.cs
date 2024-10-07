@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Implementations;
@@ -17,16 +18,13 @@ namespace TCViettelFC_API.Controllers
         {
             _newRepository = newRepository;
         }
-
+        [EnableQuery]
         [HttpGet("GetAllNews")]
-        public async Task<ActionResult<List<GetNewDto>>> GetAllNews()
+        public IQueryable<GetNewDto> GetAllNews()
         {
-            var newsList = await _newRepository.GetAllNewsAsync();
-            if (newsList == null || newsList.Count == 0)
-            {
-                return NotFound("No news found.");
-            }
-            return Ok(newsList);
+            var newsList = _newRepository.GetAllNewsAsQueryable();
+            
+            return newsList;
         }
         // API get new by id
         [HttpGet("getnewsbyid/{id}")]
@@ -52,7 +50,43 @@ namespace TCViettelFC_API.Controllers
 
             return Ok(new { message = "News status updated successfully" });
         }
-        
+
+
+        [Authorize(Policy = "staff")]
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateNews([FromBody] CreateNewDto newDto)
+        {
+            var newId = await _newRepository.CreateNewsAsync(newDto);
+            return Ok(new { message = "News created successfully", id = newId });
+        }
+
+        // Update an existing news article
+        [Authorize(Policy = "staff")]
+        [HttpPost("update/{id}")]
+        public async Task<IActionResult> UpdateNews(int id, [FromBody] UpdateNewDto newDto)
+        {
+            var result = await _newRepository.UpdateNewsAsync(id, newDto);
+            if (!result)
+            {
+                return NotFound(new { message = "News not found" });
+            }
+
+            return Ok(new { message = "News updated successfully" });
+        }
+
+        // Delete a news article
+        [Authorize(Policy = "staff")]
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> DeleteNews(int id)
+        {
+            var result = await _newRepository.DeleteNewsAsync(id);
+            if (!result)
+            {
+                return NotFound(new { message = "News not found" });
+            }
+
+            return Ok(new { message = "News deleted successfully" });
+        }
 
     }
 }

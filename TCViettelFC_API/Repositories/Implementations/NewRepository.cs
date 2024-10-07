@@ -17,6 +17,24 @@ namespace TCViettelFC_API.Repositories.Implementations
             _configuration = configuration;
             _contextAccessor = httpContextAccessor;
         }
+        public IQueryable<GetNewDto> GetAllNewsAsQueryable() 
+        { 
+            var news  =  _context.News.Include(x=> x.Creator).Include(x => x.NewsCategory).Select(n => new GetNewDto
+            {
+                Id = n.Id,
+                CreatorId = n.CreatorId,
+                NewsCategory = n.NewsCategory.CategoryName,
+                Title = n.Title,
+                Content = n.Content,
+                Image = n.Image,
+                CreatedAt = n.CreatedAt,
+                Status = n.Status
+
+            }).AsQueryable();
+
+            return news;
+
+        }
         public async Task<List<GetNewDto>> GetAllNewsAsync()
             {
                 var news = await _context.News.Include(x => x.Creator).Include(x => x.NewsCategory)
@@ -69,7 +87,54 @@ namespace TCViettelFC_API.Repositories.Implementations
             await _context.SaveChangesAsync();
             return true;
         }
-       
 
+        public async Task<int> CreateNewsAsync(CreateNewDto newDto)
+        {
+            var news = new News
+            {
+                CreatorId = newDto.CreatorId,
+                NewsCategoryId = newDto.NewsCategoryId,
+                Title = newDto.Title,
+                Content = newDto.Content,
+                Image = newDto.Image,
+                CreatedAt = DateTime.UtcNow,
+                Status = newDto.Status
+            };
+
+            _context.News.Add(news);
+            await _context.SaveChangesAsync();
+
+            return news.Id;
+        }
+
+        public async Task<bool> UpdateNewsAsync(int id, UpdateNewDto newDto)
+        {
+            var news = await _context.News.FirstOrDefaultAsync(n => n.Id == id);
+            if (news == null)
+            {
+                return false;
+            }
+            news.CreatorId = newDto.CreatorId;
+            news.NewsCategoryId = newDto.NewsCategoryId;
+            news.Title = newDto.Title;
+            news.Content = newDto.Content;
+            news.Image = newDto.Image;
+            news.CreatedAt = DateTime.Now;
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> DeleteNewsAsync(int id)
+        {
+            var news = await _context.News.FirstOrDefaultAsync(n => n.Id == id);
+            if (news == null)
+            {
+                return false;
+            }
+            _context.News.Remove(news);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

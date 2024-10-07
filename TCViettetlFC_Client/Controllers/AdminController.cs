@@ -67,7 +67,7 @@ namespace TCViettetlFC_Client.Controllers
             var token = Request.Cookies["AuthToken"];
             var users = await _userService.GetUsersAsync(token);
             var roles = await _userService.GetRolesAsync();
-
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var model = new UserManagementViewModel
             {
                 Users = users.ToList(),
