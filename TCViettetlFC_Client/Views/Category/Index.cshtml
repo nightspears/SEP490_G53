@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = "_LayoutAdmin";
 }
 
@@ -75,10 +74,8 @@
                                                 <input class="form-check-input" type="checkbox" value="" id="0" onchange="CheckAll(this)">
                                             </div>
                                         </th>
-                                        <th>Đối thủ</th>
-                                        <th>Tên sân</th>
-                                        <th>Ngày đá</th>
-                                        <th>Là sân nhà</th>
+                                        <th>Tên danh mục</th>
+                                        <th>Ngày tạo</th>
                                         <th class="text-center">Trạng thái</th>
                                         <th class="text-center">Thao tác</th>
                                     </tr>
@@ -104,87 +101,22 @@
     <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="titleModal">Sửa trận đấu</h5>
+                <h5 class="modal-title" id="titleModal">Sửa danh mục sản phẩm</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="row justify-content-center">
-                    <div class="col-md-5 d-flex justify-content-center position-relative image-container">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mb-3 d-flex  justify-content-center position-relative image-container">
-                                <a href="#">
-                                    <img class="rounded-circle AvtImg" alt="User Image"
-                                         src="~/image/imagelogo/logoviettel.jpg"
-                                         style="width: 150px; height: 150px; object-fit: cover;">
-                                </a>
-                            </div>
-                            <div class="col-md-12  d-flex  justify-content-center position-relative image-container">
-                                <strong style="font-size:20px">Viettel FC</strong>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2 d-flex justify-content-center position-relative image-container">
-                        <a href="#">
-                            <img class="rounded-circle AvtImg" alt="User Image" id="ImgDoiNha"
-                                 src="~/image/imagelogo/pngtree-thunder-vs-letter-png-image_6018901.png"
-                                 style="width: 150px; height: 150px; object-fit: cover;">
-                        </a>
-                    </div>
-                    <div class="col-md-5 d-flex justify-content-center position-relative image-container">
-                        <div class="row justify-content-center">
-                            <div class="col-md-12 mb-3 d-flex  justify-content-center position-relative image-container">
-                             
-                                <a href="#">
-                                    <img class="rounded-circle AvtImg" id="ImgAvt" alt="User Image"
-                                         src="~/image/imagelogo/plus.jpg"
-                                         style="width: 150px; height: 150px; object-fit: cover;">
-                                </a>
-                            </div>
-                            <div class="col-md-12  d-flex  justify-content-center position-relative image-container">
-                                <strong style="font-size:20px" id="tenCLB"></strong>
-                            </div>
-                        </div>
-                        <i class="fa fa-pencil change-photo-btn" style="font-size:20px"></i>
-                        <input type="file" id="fileInput" style="display:none;" accept="image/*">
-
-                    </div>
-                </div>
-
-
+            <div class="modal-body">     
 
                 <div class="row form-row mt-3">
-                    <input type="hidden" id="idTran" class="form-control" readonly>
-                    <div class="col-12 col-sm-6">
+                    <input type="hidden" id="idCate" class="form-control" readonly>
+                    <div class="col-12 col-sm-12">
                         <div class="form-group">
-                            <label>Tên đối thủ <span class="required"> *</span></label>
-                            <input type="text" id="TenDoiThu" class="form-control">
+                            <label>Tên danh mục sản phẩm <span class="required"> *</span></label>
+                            <input type="text" id="tenDanhMuc" class="form-control">
                         </div>
                     </div>
-
-                    <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                            <label>Tên sân <span class="required"> *</span></label>
-                            <input type="text" id="tenSan" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                            <label>Ngày đá <span class="required"> *</span></label>
-                            <input type="datetime-local" id="ngayDa" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                            <label>Là sân nhà</label>
-                            <select style="width:100%" id="isHome">
-                                <option value="1">Sân nhà</option>
-                                <option value="2">Sân khách</option>
-                            </select>
-                        </div>
-                    </div>
+                   
                     <div class="col-12 col-sm-6">
                         <label>Trạng thái</label>
                         <div class="status-toggle d-flex ">
@@ -225,4 +157,4 @@
 <script src="~/admin_assets/plugins/datatables/jquery.datatables.min.js"></script>
 <script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
 <script src="~/admin_assets/js/script.js"></script>
-<script src="~/admin_assets/adminjs/matches.js"></script>
+<script src="~/admin_assets/adminjs/category.js"></script>
