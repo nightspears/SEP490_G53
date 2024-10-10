@@ -74,8 +74,9 @@
                                                 <input class="form-check-input" type="checkbox" value="" id="0" onchange="CheckAll(this)">
                                             </div>
                                         </th>
-                                        <th>Tên danh mục</th>
-                                        <th>Ngày tạo</th>
+                                        <th>Tên mùa giải</th>
+                                        <th>Ngày bắt đầu</th>
+                                        <th>Ngày kết thúc</th>
                                         <th class="text-center">Trạng thái</th>
                                         <th class="text-center">Thao tác</th>
                                     </tr>
@@ -106,17 +107,29 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">     
+            <div class="modal-body">
 
                 <div class="row form-row mt-3">
-                    <input type="hidden" id="idCate" class="form-control" readonly>
+                    <input type="hidden" id="idSeason" class="form-control" readonly>
                     <div class="col-12 col-sm-12">
                         <div class="form-group">
-                            <label>Tên danh mục sản phẩm <span class="required"> *</span></label>
-                            <input type="text" id="tenDanhMuc" class="form-control">
+                            <label>Tên mùa giải <span class="required"> *</span></label>
+                            <input type="text" id="tenMuaGiai" class="form-control">
                         </div>
                     </div>
-                   
+                    <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                            <label>Ngày bắt đầu <span class="required"> *</span></label>
+                            <input type="datetime-local" id="startdate" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12">
+                        <div class="form-group">
+                            <label>Ngày kết thúc <span class="required"> *</span></label>
+                            <input type="datetime-local" id="endDate" class="form-control">
+                        </div>
+                    </div>
+
                     <div class="col-12 col-sm-6">
                         <label>Trạng thái</label>
                         <div class="status-toggle d-flex ">
@@ -141,7 +154,7 @@
                 <div class="form-content p-2">
                     <h4 class="modal-title">Xác nhận xóa</h4>
                     <input id="idXoa" type="hidden" />
-                    <p class="mb-4">Bạn có muốn xóa danh mục này ?</p>
+                    <p class="mb-4">Bạn có muốn xóa trận đấu này ?</p>
                     <button type="button" class="btn btn-primary" id="btnXoa">Xóa </button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
                 </div>
@@ -157,4 +170,4 @@
 <script src="~/admin_assets/plugins/datatables/jquery.datatables.min.js"></script>
 <script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
 <script src="~/admin_assets/js/script.js"></script>
-<script src="~/admin_assets/adminjs/category.js"></script>
+<script src="~/admin_assets/adminjs/season.js"></script>

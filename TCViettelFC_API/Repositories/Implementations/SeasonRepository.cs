@@ -7,8 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using TCViettelFC_API.Dtos.Category;
-using TCViettelFC_API.Dtos.Matches;
+using TCViettelFC_API.Dtos.Season;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
 
@@ -23,36 +22,35 @@ namespace TCViettelFC_API.Repositories.Implementations
             _context = context;
 
         }
-        public async Task AddSeasonAsync(CategoryDto category)
+        public async Task AddSeasonAsync(SeasonDto seasonDto)
         {
 
-            ProductCategory cate = new ProductCategory();
+            Season season = new Season();
             {
-                cate.CategoryName = category.CategoryName;
-                cate.CreatedAt = DateTime.Now;
-                cate.Status = category.Status;
+                season.SeasonName = seasonDto.SeasonName;
+                season.StartYear = seasonDto.StartYear;
+                season.EndYear = seasonDto.EndYear;
+                season.Status = seasonDto.Status;   
             };
-
           
-
             try
             {
-                await _context.ProductCategories.AddAsync(cate);
+                await _context.Seasons.AddAsync(season);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception("Matches not found");
+                throw new Exception("Season not found");
             }
         }
-        public async Task DeleteCateAsync(int id)
+        public async Task DeleteSeasonAsync(int id)
         {
-            var cate = await _context.ProductCategories.FindAsync(id);
-            if (cate == null|| cate.Status == 0) throw new KeyNotFoundException("Category not found");
+            var season = await _context.Seasons.FindAsync(id);
+            if (season == null|| season.Status == 0) throw new KeyNotFoundException("Season not found");
 
             try
             {
-                cate.Status = 0;
+                season.Status = 0;
                 await _context.SaveChangesAsync();
                
             }
@@ -64,45 +62,55 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
       
 
-        public async Task<List<ProductCategory>> GetCateAsync()
+        public async Task<List<SeasonResponse>> GetSeasonAsync()
         {
-            List<ProductCategory> cate = new List<ProductCategory>();
-            cate = await _context.ProductCategories.Where(x => x.CategoryId != 0).ToListAsync();
-
-            return cate;
-        }
-        public async Task<ProductCategory> GetCateByIdAsync(int id)
-        {
-            ProductCategory category = new ProductCategory();
-            category =  _context.ProductCategories.FirstOrDefault(x => x.CategoryId == id );   
-            if (category == null)
+            List<SeasonResponse> seasons = new List<SeasonResponse>();
+            seasons = await _context.Seasons.Where(x => x.Status != 0).Select(x => new SeasonResponse
             {
-                throw new Exception("Matches not found");
+                SeasonId = x.SeasonId,
+                EndYear = x.EndYear,
+                Status = x.Status,  
+                SeasonName = x.SeasonName,
+                StartYear = x.StartYear,
+            }).ToListAsync();
+
+            return seasons;
+        }
+        public async Task<Season> GetSeasonByIdAsync(int id)
+        {
+            Season seasons = new Season();
+            seasons = await _context.Seasons.FirstOrDefaultAsync(x => x.SeasonId == id && x.Status == 1);
+              
+            if (seasons == null)
+            {
+                throw new Exception("Season not found");
             }
             else
             {
-                return category;
+                return seasons;
             }
         }
-        public async Task UpdateCateAsync(int id, CategoryDto category)
+        public async Task UpdateSeasonAsync(int id, SeasonDto seasonDto)
         {
             try
             {
-                var cate = await _context.ProductCategories.FindAsync(id);
-                if (cate == null || cate.Status == 0)
+                var season = await _context.Seasons.FindAsync(id);
+                if (season == null || season.Status == 0)
                 {
-                    throw new Exception("Matches not found");
+                    throw new Exception("Season not found");
                 }
 
-                // Update category properties
-                cate.CategoryName = category.CategoryName ?? cate.CategoryName;
-                cate.Status = category.Status ?? cate.Status;
+                // Update Season properties
+                season.SeasonName = seasonDto.SeasonName ?? season.SeasonName;
+                season.Status = seasonDto.Status ?? season.Status;
+                season.StartYear = seasonDto.StartYear ?? season.StartYear;
+                season.EndYear = seasonDto.EndYear ?? season.EndYear;
 
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception("Error updating category: " + ex.Message);
+                throw new Exception("Error updating Season: " + ex.Message);
             }
         }
     }
