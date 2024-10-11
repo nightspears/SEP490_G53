@@ -1,0 +1,62 @@
+﻿@model TicketOrdersViewModel
+@{
+    ViewData["Title"] = "Ticket orders management";
+    Layout = "_LayoutAdmin";
+    var ticketorders=ViewBag.Orders as List<TicketOrdersViewModel>;
+}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">Quản lý đơn hàng vé</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="datatable table table-hover table-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Ngày đặt hàng</th>
+                                        <th>Tổng giá</th>
+                                        <th>Email khách hàng</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var order in ticketorders)
+                                    {
+                                        <tr>
+                                            <td>@order.id</td>
+                                            <td>@order.orderDate</td>
+                                            <td>@order.totalAmount</td>
+                                            <td>@order.customerEmail</td>
+                                            <td><a asp-action="TicketOrderDetail" asp-route-id="@order.id">Chi tiết</a></td>
+                                        </tr>
+                                    }
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
+<script src="~/admin_assets/js/bootstrap.bundle.min.js"></script>
+<script src="~/admin_assets/js/feather.min.js"></script>
+<script src="~/admin_assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/jquery.datatables.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
+<script src="~/admin_assets/js/script.js"></script>
+<script src="~/admin_assets/adminjs/matches.js"></script>
+

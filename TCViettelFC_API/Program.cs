@@ -21,7 +21,7 @@ builder.Services.AddControllers().AddOData(option => option.Select().Filter().Co
             .AddRouteComponents("odata", GetEdmModel()));
 
 
- static IEdmModel GetEdmModel()
+static IEdmModel GetEdmModel()
 {
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<News>("NewsOdata");
@@ -65,7 +65,10 @@ builder.Services.AddScoped<INewRepository, NewRepository>();
 builder.Services.AddScoped<ICategoryNewRepository, CategoryNewRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<IMatchRepository, MatchRepository>();
+builder.Services.AddScoped<ICloudinarySetting, CloudinarySettings>();
 builder.Services.AddAuthorization();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddAuthentication().AddJwtBearer(o =>
@@ -87,10 +90,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowMvcClient", builder =>
     {
-        builder.WithOrigins("https://localhost:7004")  // MVC app origin
-               .AllowCredentials()                   // Allow cookies and credentials
-               .AllowAnyHeader()                     // Allow any headers
-               .AllowAnyMethod();                    // Allow any HTTP methods (GET, POST, etc.)
+        builder.WithOrigins("https://localhost:7004")
+               .AllowCredentials()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
     });
 });
 builder.Services.AddAuthorization(options =>
@@ -101,7 +104,7 @@ builder.Services.AddAuthorization(options =>
 
     // Policy cho staff
     options.AddPolicy("staff", policy =>
-        policy.RequireClaim("RoleId", "1")); // Thêm claim cho staff
+        policy.RequireClaim("RoleId", "1"));
 });
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 

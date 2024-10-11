@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using TCViettelFC_Client.ApiServices;
 using TCViettetlFC_Client.Models;
 using TCViettetlFC_Client.Services;
 
@@ -12,17 +13,56 @@ namespace TCViettetlFC_Client.Controllers
         private readonly HttpClient _httpClient;
 
         private readonly FeedbackService _feedbackService;
+        private readonly IApiHelper _apiHelper;
 
-        public StaffController(IHttpClientFactory httpClientFactory, FeedbackService feedbackService)
+        public StaffController(IHttpClientFactory httpClientFactory, FeedbackService feedbackService, IApiHelper apiHelper)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
             _feedbackService = feedbackService;
+            _apiHelper = apiHelper;
         }
+        private async Task<List<TicketOrdersViewModel>> GetAllTicketOrders(string token)
 
-
+        {
+            return await _apiHelper.GetApiResponseAsync<List<TicketOrdersViewModel>>("order/getticketorders", token);
+        }
+        private async Task<List<OrderedTicketDto>> GetOrderedTicket(int id, string token)
+        {
+            return await _apiHelper.GetApiResponseAsync<List<OrderedTicketDto>>($"order/getorderedticket/{id}", token);
+        }
+        private async Task<List<OrderedSuppItemDto>> GetOrderedSupp(int id, string token)
+        {
+            return await _apiHelper.GetApiResponseAsync<List<OrderedSuppItemDto>>($"order/getorderedsupp/{id}", token);
+        }
+        public async Task<IActionResult> TicketOrders()
+        {
+            var token = Request.Cookies["AuthToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "User");
+            }
+            ViewBag.Orders = await GetAllTicketOrders(token);
+            return View();
+        }
         public IActionResult Home()
         {
             return View();
+        }
+        public async Task<IActionResult> TicketOrderDetail(int id)
+        {
+            var token = Request.Cookies["AuthToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "User");
+            }
+            var sup = await GetOrderedSupp(id, token);
+            var ticket = await GetOrderedTicket(id, token);
+            var viewModel = new TicketOrderDetailModel
+            {
+                Sup = sup,
+                Ticket = ticket
+            };
+            return View(viewModel);
         }
 
         public async Task<IActionResult> StaffManagermentNew()
