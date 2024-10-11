@@ -27,7 +27,7 @@ $(document).on("click", "#btnXoa", function () {
 
     var id = $("#idXoa").val();
     debugger
-    var url = "https://localhost:5000/api/Matches/DeleteMatches/" + id;
+    var url = "https://localhost:5000/api/Discount/DeleteDiscount/" + id;
     $.ajax({
         url: url,
         method: "Delete",
@@ -35,7 +35,7 @@ $(document).on("click", "#btnXoa", function () {
             debugger;
             $("#delete_modal").modal("hide");
             $(".modal-backdrop").hide();
-            showAlert("xóa thành công ");
+            showAlert("Xóa thành công ");
             loadData();
         },
         error: function (res) {
@@ -45,11 +45,11 @@ $(document).on("click", "#btnXoa", function () {
 
 });
 
-function loadData() {
+function loadData()  {
     debugger
 
     $.ajax({
-        url: "https://localhost:5000/api/Matches/GetMatches",
+        url: "https://localhost:5000/api/Discount/GetDiscount",
         method: "GET",
         dataType: "json",
         success: function (res) {
@@ -58,41 +58,32 @@ function loadData() {
 
             table.clear();
             $.each(res, function (index, item) {
-                var tenSan = (item.isHome === true ? 'SVĐ Mỹ Đình' : item.stadiumName);
-                var logoUrl = item.logoUrl ? item.logoUrl : "/image/imagelogo/icon-image-not-found-free-vector.jpg";
 
                 var rowHtml = `
                     <tr>
                         <td>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" data-id="${item.id}">
+                                <input class="form-check-input" type="checkbox" value="" data-id="${item.discountId}">
                             </div>
                         </td>
-                        <td>
-                            <h2 class="table-avatar">
-                                <a href="profile.html" class="avatar avatar-sm me-2">
-                                    <img class="avatar-img rounded-circle"
-                                        src="${logoUrl}"
-                                        alt="User Image">
-                                </a>
-                                <a href="profile.html">${item.opponentName}</a>
-                            </h2>
-                        </td>
-                        <td>${tenSan}</td>
-                        <td>${item.matchDate} <br><small></small></td>
-                        <td>${item.isHome === true ? 'Sân nhà' : 'Sân khách'}</td>
+                        <td>${item.discountName}</td>
+                        <td>${item.discountPercent}</td>
+                        <td>${item.validFrom}</td>
+
+                        <td>${item.validUntil}</td>
+
                         <td class="text-center">
                             <div class="status-toggle d-flex justify-content-center">
-                                <input type="checkbox" id="status_${item.id}" class="check" ${item.status === 1 ? 'checked' : ''}>
-                                <label for="status_${item.id}" class="checktoggle">checkbox</label>
+                                <input type="checkbox" id="status_${item.discountId}" class="check" ${item.status === 1 ? 'checked' : ''}>
+                                <label for="status_${item.discountId}" class="checktoggle">checkbox</label>
                             </div>
                         </td>
                         <td class="text-center">
                             <div class="actions">
-                                <a onclick="modalEditOrCreate(${item.id})" class="btn btn-sm bg-success-light me-2">
+                                <a onclick="modalEditOrCreate(${item.discountId})" class="btn btn-sm bg-success-light me-2">
                                     <i class="fe fe-pencil"></i> Sửa
                                 </a>
-                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-id="${item.id}" id="confirmXoa" href="#delete_modal">
+                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-id="${item.discountId}" id="confirmXoa" href="#delete_modal">
                                     <i class="fe fe-trash"></i> Xóa
                                 </a>
                             </div>
@@ -123,57 +114,40 @@ $(document).ready(function () {
 });
 
 
-// change Image
-$('.change-photo-btn').on('click', function () {
-    $('#fileInput').click();
-});
 
-$('#fileInput').on('change', function (event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            $('#ImgAvt').attr('src', e.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-});
 
 function modalEditOrCreate(id) {
     debugger
     $('#btnNomal').show();
     $('#btnLoading').hide();
 
-    $('#idTran').val("");
-    $('#TenDoiThu').val("");
-    $('#tenSan').val("");
-    $('#ngayDa').val("");
+    $('#idDiscount').val("");
+    $('#maGiamGia').val("");
+    $('#percent').val("");
+
+    $('#startDate').val("");
+
+    $('#endDate').val("");
+
     $('#status').prop('checked', false);
 
     if (id != 0 && id != undefined) {
-        $("#titleModal").text("Cập nhật trận đấu")
+        $("#titleModal").text("Cập nhật mã giảm giá")
 
-        var url = "https://localhost:5000/api/Matches/GetMatchesById?id=" + id;
+        var url = "https://localhost:5000/api/Discount/GetDiscountById?id=" + id;
         $.ajax({
             url: url,
             method: "get",
             success: function (res) {
 
-                var logoUrl = "";
-                if (res.logoUrl == null || res.logoUrl == "" || res.logoUrl == undefined) {
-                    logoUrl = "/image/imagelogo/ImageFail.jpg"
-                } else {
-                    logoUrl = res.logoUrl;
-                }
+              
+                $('#idDiscount').val(res.discountId);
+                $('#maGiamGia').val(res.discountName);
+                $('#percent').val(res.discountPercent);
+                $('#startDate').val(res.validFrom);
+                $('#endDate').val(res.validUntil);
 
-                $('#idTran').val(res.id);
-                $("#ImgAvt").attr("src", logoUrl);
-                $('#TenDoiThu').val(res.opponentName);
-                $('#tenSan').val(res.stadiumName);
-                $("#tenCLB").text(res.opponentName)
-                $('#ngayDa').val(res.matchDate);
                 debugger
-                res.isHome == true ? $('#isHome').val(1) : $('#isHome').val(2);
                 if (res.status == 1) {
                     $('#status').prop('checked', true);
                 } else {
@@ -193,11 +167,9 @@ function modalEditOrCreate(id) {
     }
     else {
 
-        $("#titleModal").text("Thêm trận đấu")
+        $("#titleModal").text("Thêm mã giảm giá")
 
-        $("#ImgAvt").attr("src", "/image/imagelogo/plus.jpg")
-        $("#tenCLB").text("Tên đối thủ")
-        $('#idTran').hide()
+        $('#idDiscount').hide()
       
         $(".modal-backdrop").remove();
         $('#modalEditorCreate').modal("show")
@@ -209,31 +181,28 @@ function modalEditOrCreate(id) {
 function EditOrCreate() {
     $('#btnNomal').hide();
     $('#btnLoading').show();
-    var id = $('#idTran').val();
+    var id = $('#idDiscount').val();
 
     var formData = new FormData();
-    var inputElement = $('#fileInput');
-    var files = inputElement.prop('files');
-    if (files.length > 0) {
-        var file = files[0];
-        formData.append('LogoUrl', file);
-    }
 
-    formData.append('OpponentName', $('#TenDoiThu').val());
-    formData.append('StadiumName', $('#tenSan').val());
-    formData.append('MatchDate', $('#ngayDa').val());
+    formData.append('DiscountName', $('#maGiamGia').val());
+    formData.append('DiscountPercent', $('#percent').val());
+
+    formData.append('ValidFrom', $('#startDate').val());
+
+    formData.append('ValidUntil', $('#endDate').val());
+
+
     if ($('#status').prop('checked')) {
         formData.append('Status', 1);
     } else {
         formData.append('Status', 2);
     }
 
-    formData.append('IsHome', $('#isHome').val() === '1');
-
 
     if (id != 0 && id != undefined) {
         $.ajax({
-            url: 'https://localhost:5000/api/Matches/UpdateMatches/' + id,
+            url: 'https://localhost:5000/api/Discount/UpdateDiscount/' + id,
             type: 'Put',
             data: formData,
             contentType: false, // Không thiết lập Content-Type
@@ -250,7 +219,7 @@ function EditOrCreate() {
 
     } else {
         $.ajax({
-            url: 'https://localhost:5000/api/Matches/AddMatches',
+            url: 'https://localhost:5000/api/Discount/AddDiscount',
             type: 'post',
             data: formData,
             contentType: false, // Không thiết lập Content-Type
@@ -286,7 +255,6 @@ function validation() {
 
 
 }
-
 
 
 function showAlert(mess) {

@@ -27,7 +27,7 @@ $(document).on("click", "#btnXoa", function () {
 
     var id = $("#idXoa").val();
     debugger
-    var url = "https://localhost:5000/api/Matches/DeleteMatches/" + id;
+    var url = "https://localhost:5000/api/Season/DeleteSeason/" + id;
     $.ajax({
         url: url,
         method: "Delete",
@@ -35,7 +35,7 @@ $(document).on("click", "#btnXoa", function () {
             debugger;
             $("#delete_modal").modal("hide");
             $(".modal-backdrop").hide();
-            showAlert("xóa thành công ");
+            showAlert("Xóa thành công ");
             loadData();
         },
         error: function (res) {
@@ -49,7 +49,7 @@ function loadData() {
     debugger
 
     $.ajax({
-        url: "https://localhost:5000/api/Matches/GetMatches",
+        url: "https://localhost:5000/api/Season/GetSeason",
         method: "GET",
         dataType: "json",
         success: function (res) {
@@ -58,41 +58,29 @@ function loadData() {
 
             table.clear();
             $.each(res, function (index, item) {
-                var tenSan = (item.isHome === true ? 'SVĐ Mỹ Đình' : item.stadiumName);
-                var logoUrl = item.logoUrl ? item.logoUrl : "/image/imagelogo/icon-image-not-found-free-vector.jpg";
 
                 var rowHtml = `
                     <tr>
                         <td>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" data-id="${item.id}">
+                                <input class="form-check-input" type="checkbox" value="" data-id="${item.seasonId}">
                             </div>
                         </td>
-                        <td>
-                            <h2 class="table-avatar">
-                                <a href="profile.html" class="avatar avatar-sm me-2">
-                                    <img class="avatar-img rounded-circle"
-                                        src="${logoUrl}"
-                                        alt="User Image">
-                                </a>
-                                <a href="profile.html">${item.opponentName}</a>
-                            </h2>
-                        </td>
-                        <td>${tenSan}</td>
-                        <td>${item.matchDate} <br><small></small></td>
-                        <td>${item.isHome === true ? 'Sân nhà' : 'Sân khách'}</td>
+                        <td>${item.seasonName}</td>
+                        <td>${item.startYear} <br><small></small></td>
+                         <td>${item.endYear} <br><small></small></td>
                         <td class="text-center">
                             <div class="status-toggle d-flex justify-content-center">
-                                <input type="checkbox" id="status_${item.id}" class="check" ${item.status === 1 ? 'checked' : ''}>
-                                <label for="status_${item.id}" class="checktoggle">checkbox</label>
+                                <input type="checkbox" id="status_${item.seasonId}" class="check" ${item.status === 1 ? 'checked' : ''}>
+                                <label for="status_${item.seasonId}" class="checktoggle">checkbox</label>
                             </div>
                         </td>
                         <td class="text-center">
                             <div class="actions">
-                                <a onclick="modalEditOrCreate(${item.id})" class="btn btn-sm bg-success-light me-2">
+                                <a onclick="modalEditOrCreate(${item.seasonId})" class="btn btn-sm bg-success-light me-2">
                                     <i class="fe fe-pencil"></i> Sửa
                                 </a>
-                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-id="${item.id}" id="confirmXoa" href="#delete_modal">
+                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-id="${item.seasonId}" id="confirmXoa" href="#delete_modal">
                                     <i class="fe fe-trash"></i> Xóa
                                 </a>
                             </div>
@@ -124,56 +112,47 @@ $(document).ready(function () {
 
 
 // change Image
-$('.change-photo-btn').on('click', function () {
-    $('#fileInput').click();
-});
+//$('.change-photo-btn').on('click', function () {
+//    $('#fileInput').click();
+//});
 
-$('#fileInput').on('change', function (event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            $('#ImgAvt').attr('src', e.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-});
+//$('#fileInput').on('change', function (event) {
+//    const file = event.target.files[0];
+//    if (file) {
+//        const reader = new FileReader();
+//        reader.onload = function (e) {
+//            $('#ImgAvt').attr('src', e.target.result);
+//        };
+//        reader.readAsDataURL(file);
+//    }
+//});
 
 function modalEditOrCreate(id) {
     debugger
     $('#btnNomal').show();
     $('#btnLoading').hide();
 
-    $('#idTran').val("");
-    $('#TenDoiThu').val("");
-    $('#tenSan').val("");
-    $('#ngayDa').val("");
+    $('#idSeason').val("");
+    $('#tenMuaGiai').val("");
+    $('#startdate').val("");
+    $('#endDate').val("");
     $('#status').prop('checked', false);
 
     if (id != 0 && id != undefined) {
-        $("#titleModal").text("Cập nhật trận đấu")
+        $("#titleModal").text("Cập nhật mùa giải")
 
-        var url = "https://localhost:5000/api/Matches/GetMatchesById?id=" + id;
+        var url = "https://localhost:5000/api/Season/GetSeasonById?id=" + id;
         $.ajax({
             url: url,
             method: "get",
             success: function (res) {
 
-                var logoUrl = "";
-                if (res.logoUrl == null || res.logoUrl == "" || res.logoUrl == undefined) {
-                    logoUrl = "/image/imagelogo/ImageFail.jpg"
-                } else {
-                    logoUrl = res.logoUrl;
-                }
+              
+                $('#idSeason').val(res.seasonId);
+                $('#tenMuaGiai').val(res.seasonName);
+                $('#startdate').val(res.startYear);
+                $('#endDate').val(res.endYear);
 
-                $('#idTran').val(res.id);
-                $("#ImgAvt").attr("src", logoUrl);
-                $('#TenDoiThu').val(res.opponentName);
-                $('#tenSan').val(res.stadiumName);
-                $("#tenCLB").text(res.opponentName)
-                $('#ngayDa').val(res.matchDate);
-                debugger
-                res.isHome == true ? $('#isHome').val(1) : $('#isHome').val(2);
                 if (res.status == 1) {
                     $('#status').prop('checked', true);
                 } else {
@@ -193,11 +172,9 @@ function modalEditOrCreate(id) {
     }
     else {
 
-        $("#titleModal").text("Thêm trận đấu")
+        $("#titleModal").text("Thêm mùa giải")
 
-        $("#ImgAvt").attr("src", "/image/imagelogo/plus.jpg")
-        $("#tenCLB").text("Tên đối thủ")
-        $('#idTran').hide()
+        $('#idSeason').hide()
       
         $(".modal-backdrop").remove();
         $('#modalEditorCreate').modal("show")
@@ -209,31 +186,24 @@ function modalEditOrCreate(id) {
 function EditOrCreate() {
     $('#btnNomal').hide();
     $('#btnLoading').show();
-    var id = $('#idTran').val();
+    var id = $('#idSeason').val();
 
     var formData = new FormData();
-    var inputElement = $('#fileInput');
-    var files = inputElement.prop('files');
-    if (files.length > 0) {
-        var file = files[0];
-        formData.append('LogoUrl', file);
-    }
 
-    formData.append('OpponentName', $('#TenDoiThu').val());
-    formData.append('StadiumName', $('#tenSan').val());
-    formData.append('MatchDate', $('#ngayDa').val());
+    formData.append('SeasonName', $('#tenMuaGiai').val());
+
+    formData.append('StartYear', $('#startdate').val());
+    formData.append('EndYear', $('#endDate').val());
     if ($('#status').prop('checked')) {
         formData.append('Status', 1);
     } else {
         formData.append('Status', 2);
     }
 
-    formData.append('IsHome', $('#isHome').val() === '1');
-
 
     if (id != 0 && id != undefined) {
         $.ajax({
-            url: 'https://localhost:5000/api/Matches/UpdateMatches/' + id,
+            url: 'https://localhost:5000/api/Season/UpdateSeason/' + id,
             type: 'Put',
             data: formData,
             contentType: false, // Không thiết lập Content-Type
@@ -250,7 +220,7 @@ function EditOrCreate() {
 
     } else {
         $.ajax({
-            url: 'https://localhost:5000/api/Matches/AddMatches',
+            url: 'https://localhost:5000/api/Season/AddSeason',
             type: 'post',
             data: formData,
             contentType: false, // Không thiết lập Content-Type
@@ -283,12 +253,7 @@ function validation() {
         check = false;
     }
 
-
-
 }
-
-
-
 function showAlert(mess) {
 
     $("#alertMessageSuccess").text(mess);
