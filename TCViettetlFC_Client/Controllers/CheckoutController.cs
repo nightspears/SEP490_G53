@@ -29,6 +29,7 @@ namespace TCViettetlFC_Client.Controllers
                     Address = model.Address,
                     City = model.City,
                     District = model.District,
+                    Ward = model.Ward,
                     Notes = model.Notes, 
                     SelectedShipping = model.SelectedShipping
                 };
