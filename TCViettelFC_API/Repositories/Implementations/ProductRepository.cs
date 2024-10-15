@@ -65,6 +65,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                             ProductFile ProductFile = new ProductFile();
                             {
                                 ProductFile.FileName = f.File.FileName;
+                               //  sửa lại db trường filepath cho đọ dài lên 255
                                 if (f.File != null && f.File.Length > 0)
                                 {
                                     ImageUploadResult res = _cloudinary.CloudinaryUpload(f.File);
@@ -132,6 +133,24 @@ namespace TCViettelFC_API.Repositories.Implementations
 
             return product;
         }
+
+        public async Task<List<ProductResponse>> GetSanPhamAsync()
+        {
+            List<ProductResponse> product = new List<ProductResponse>();
+            product = (from pro in _context.Products
+                       where pro.Status == 1 
+                       select new ProductResponse
+                       {
+                           ProductName = pro.ProductName,
+                           Image = pro.Avatar,
+                           Price = pro.Price,
+                           ProductId = pro.ProductId,
+                           Status = pro.Status,
+                       }).ToList();
+
+
+            return product;
+        }
         public async Task<JsonResult> GetProductByIdAsync(int id)
         {
             var product = (from pro in _context.Products
@@ -154,6 +173,42 @@ namespace TCViettelFC_API.Repositories.Implementations
                                Description = pro.Description
 
                            }).FirstOrDefault(x => x.ProductId == id && x.Status != 0);
+
+
+            var proFile = _context.ProductFiles.Where(x => x.Status == 1 && x.ProductId == id).ToList();
+
+            var data = new
+            {
+                Product = product,
+                PFile = proFile
+            };
+
+            return new JsonResult(data);
+
+        }
+
+        public async Task<JsonResult> GetSanPhamByIdAsync(int id)
+        {
+            var product = (from pro in _context.Products
+                           join cate in _context.ProductCategories on pro.CategoryId equals cate.CategoryId into category
+                           from cate in category.DefaultIfEmpty()
+                           join season in _context.Seasons on pro.SeasonId equals season.SeasonId into seasons
+                           from season in seasons.DefaultIfEmpty()
+                           where (pro.Status == 1 && cate.Status == 1 && season.Status == 1)
+                           select new ProductResponse
+                           {
+                               ProductName = pro.ProductName,
+                               CategoryId = cate.CategoryId,
+                               SeasonId = season.SeasonId,
+                               Image = pro.Avatar,
+                               Price = pro.Price,
+                               ProductId = pro.ProductId,
+                               Status = pro.Status,
+                               Size = pro.Size,
+                               Material = pro.Material,
+                               Description = pro.Description
+
+                           }).FirstOrDefault(x => x.ProductId == id && x.Status == 1);
 
 
             var proFile = _context.ProductFiles.Where(x => x.Status == 1 && x.ProductId == id).ToList();
