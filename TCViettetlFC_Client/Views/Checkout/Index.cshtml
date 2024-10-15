@@ -174,7 +174,9 @@
     </li>
     <li class="d-flex justify-content-between fw-bold">
         <span>Tổng cộng</span>
-        <span id="totalAmount">970.000đ</span>
+                            <span id="totalAmountDisplay">970.000đ</span>
+                            <!-- Hidden input to store the total amount -->
+                            <input type="hidden" name="TotalAmount" id="totalAmount" value="970000" />
     </li>
 </ul>
                     <button class="btn btn-primary w-100">ĐẶT HÀNG</button>
@@ -368,7 +370,10 @@
                 const newTotal = initialTotal + shippingFee;
 
                 // Update the total amount display
-                document.getElementById('totalAmount').textContent = `${newTotal.toLocaleString('vi-VN')}đ`;
+                document.getElementById('totalAmountDisplay').textContent = `${newTotal.toLocaleString('vi-VN')}đ`;
+
+                // Update the hidden input value to send with the form
+                document.getElementById('totalAmount').value = newTotal;
             });
         });
     } else {
