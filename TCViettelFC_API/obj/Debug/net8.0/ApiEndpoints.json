@@ -199,6 +199,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TCViettelFC_API.Controllers.AreaController",
+    "Method": "GetAreaById",
+    "RelativePath": "api/Area/getareabyid/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TCViettelFC_API.Controllers.CategoryController",
     "Method": "AddCateAsync",
     "RelativePath": "api/Category/AddCate",
@@ -365,6 +381,16 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "GetCustomerProfile",
+    "RelativePath": "api/Customer/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
     "Method": "RegisterAsync",
     "RelativePath": "api/Customer/register",
     "HttpMethod": "POST",
@@ -374,6 +400,22 @@
       {
         "Name": "cusRegReq",
         "Type": "TCViettelFC_API.Dtos.CustomerRegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "UpdateProfile",
+    "RelativePath": "api/Customer/updateprofile",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "profile",
+        "Type": "TCViettelFC_API.Dtos.ProfileDto",
         "IsRequired": true
       }
     ],

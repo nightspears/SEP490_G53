@@ -5,6 +5,7 @@ using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using TCViettelFC_API.Installers;
 using TCViettelFC_API.Mapper;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Implementations;
@@ -111,6 +112,7 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("RoleId", "1"));
 });
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.InstallerServicesInAssembly(builder.Configuration);
 
 var app = builder.Build();
 

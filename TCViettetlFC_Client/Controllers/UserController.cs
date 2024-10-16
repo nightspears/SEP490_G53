@@ -33,6 +33,7 @@ namespace TCViettetlFC_Client.Controllers
         {
             Response.Cookies.Delete("AuthToken");
             Response.Cookies.Delete("UserRole");
+            Response.Cookies.Delete("UserId");
 
             return RedirectToAction("Login", "User");
         }
@@ -61,7 +62,6 @@ namespace TCViettetlFC_Client.Controllers
                     };
 
                     Response.Cookies.Append("AuthToken", token.token, cookieOptions);
-                    Response.Cookies.Append("UserRole", token.roleId.ToString(), cookieOptions);
                     Response.Cookies.Append("UserId", token.userId.ToString(), cookieOptions);
 
                     if (token.roleId == 2)
