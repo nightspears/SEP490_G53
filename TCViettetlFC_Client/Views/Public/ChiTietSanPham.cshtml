@@ -8,6 +8,7 @@
     }
 </style>
 
+
 <div class=innerbannerwrap>
     <div class=content></div>
     <div class=innerbanner><h2 class=bannerHeadline>product <span>details</span></h2></div>
@@ -30,9 +31,9 @@
                             foreach (var f in Model.pFile)
                             {
                                 index++;
-                                <div class=product-image id="product_@index" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important">
-                                    <img src="@f.FilePath" alt="@f.FileName">
-                                </div>
+                                    <div class=product-image id="product_@index" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important">
+                                        <img src="@f.FilePath" alt="@f.FileName">
+                                    </div>
                             }
                         }
                        
@@ -55,7 +56,7 @@
                             <ul class="product-details-slider clearfix" id="lstImgsmall">
                                 <li class=active>
                                     <a href=#product_1>
-                                        <img src="@Model.Product.Image"
+                                        <img src="@Model.Product.Image" style="max-width:58% !important"
                                              alt=image>
                                     </a>
                                 </li>
@@ -64,7 +65,7 @@
                                     foreach (var f in Model.pFile)
                                     {
                                         num++;
-                                        <li><a href=#product_@num><img src="@f.FilePath" alt="@f.FileName"></a></li>
+                                            <li><a href=#product_@num><img src="@f.FilePath" alt="@f.FileName" style="max-width:58% !important"></a></li>
                                     }
                                 }
                                @*  <li><a href=#product02><img src=images/product/shoe02.jpg alt=image></a></li>
@@ -81,10 +82,13 @@
                     <div class="rate-product clearfix">
                         <div class=rate-item style="width:80% !important;padding-bottom:20px">
                             <h4 style="color:#979da0 ;">Giá</h4>
-                            <div id="giaSP" class="price"> @Model.Product.Price VNĐ<span>42% off</span></div>
+                            <div style="display:flex">
+                                <div id="giaSP" class="price" data-price="@Model.Product.Price"> @Model.Product.Price </div> <span>42% off</span>
+
+                            </div>
                         </div>
                         <div class=item-size>
-                            <h6>Kích thước</h6>
+                            <h4 style="color:#979da0 ;"> Kích thước</h4>
                             <ul id="lstSize">
                                 @if (!string.IsNullOrEmpty(Model.Product.Size))
                                 {
@@ -101,17 +105,18 @@
                             </ul>
                         </div>
                     </div>
-                    <a href=# class="btn-addcart addToCart">Thêm giỏ hàng</a> <a href=# class=btn-blackLight>
+                    <a href=# class="btn-addcart" onclick="AddToCart(@ViewBag.Id)">Thêm giỏ hàng</a>
+                    <a href=# class=btn-blackLight>
                        Mua ngay
                     </a>
 
                     <div class=product-list>
                         <h5>Mô tả</h5>
-                       <p id="moTa">@Model.Product.Description</p>
+                       <p id="moTa" style="font-size:19px;margin-top:15px">@Model.Product.Description</p>
                     </div>
                 </div>
             </div>
-            <div class=shop-feedback>
+           @*  <div class=shop-feedback>
                 <h5>
                     customer feedback <a class=feedbackCust>
                         <i class="fa fa-caret-down"></i>
@@ -145,7 +150,7 @@
                     <button type=submit class=btn-blackLight id=send>submit</button>
                     <div class=form-message></div>
                 </form>
-            </div>
+            </div> *@
         </div>
     </div>
 </section>
@@ -156,6 +161,31 @@
         $(".size").css("border", "1px solid #979da0");
         $(this).css("border", "1px solid red");
     });
+    $(document).ready(function () {
+        format();
+
+    });
+    function format() {
+        debugger
+        function formatCurrency(value) {
+            return parseInt(value).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        }
+
+        const prices = document.querySelectorAll('.price');
+
+        prices.forEach(function (priceElement) {
+            const priceValue = priceElement.getAttribute('data-price');
+            if (priceValue) {
+                priceElement.innerText = formatCurrency(priceValue); 
+            }
+        });
+
+    }
+
+
+
+
+
 </script>
 @* 
 <script src="~/home_assets/js/detailsanpham.js"></script> *@

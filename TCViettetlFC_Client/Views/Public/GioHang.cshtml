@@ -1,0 +1,239 @@
+﻿@{
+    Layout = "_layoutCommon";
+}
+
+
+<style>
+    .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: #333;
+        min-width: 750px;
+        overflow: auto
+    }
+
+        .cart-table th, .cart-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-table th {
+            background-color: #f2f2f2;
+            color: #555;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .cart-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+    .item-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .ImgProduct {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        margin-right: 10px;
+        border-radius: 8px;
+    }
+
+    .quantity {
+        align-items: center;
+        gap: 10px;
+    }
+
+    .quantity-btn {
+        padding: 5px 10px;
+        background-color: #fff;
+        color: black;
+        font-size: 18px;
+        border: 1px solid black;
+        ;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .quantity-btn:hover {
+            background-color: #e55b5b;
+        }
+
+    .quantity-input {
+        width: 40px;
+        text-align: center;
+        font-size: 18px;
+        border: 1px solid #ddd;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: #fff;
+        color: #333;
+        font-weight: bold;
+        outline: none;
+        border: none;
+    }
+
+    h5 {
+        font-size: 19px;
+    }
+
+        h5 span {
+            font-weight: normal
+        }
+    /* Custom scrollbar for WebKit browsers (Chrome, Safari, etc.) */
+    .table-responsive::-webkit-scrollbar {
+        height: 6px; /* Height of horizontal scrollbar */
+    }
+
+    .table-responsive::-webkit-scrollbar-thumb {
+        background-color: #888; /* Color of the scrollbar thumb */
+        border-radius: 10px; /* Make the scrollbar thumb rounder */
+    }
+
+    .table-responsive::-webkit-scrollbar-track {
+        background-color: #f1f1f1; /* Background of the scrollbar track */
+    }
+
+    /* Optional: Hover effect to highlight the scrollbar */
+    .table-responsive::-webkit-scrollbar-thumb:hover {
+        background-color: #555; /* Darker color on hover */
+    }
+
+</style>
+
+<link href="~/home_assets/css/giohang.css" rel="stylesheet" />
+<div class=innerbannerwrap>
+    <div class=content></div>
+    <div class=innerbanner><h2 class=bannerHeadline>Giỏ <span>hàng</span></h2></div>
+</div>
+<div style="padding-top:70px">
+    <h2 style="padding-bottom:50px" class="heading small">Quần áo đá bóng chính hãng <span>Viettel Shop</span></h2>
+
+</div>
+<div class="container my-5 mt-5" style="padding:50px 0">
+    <div class="d-flex">
+        <div class="col-md-8 d-flex flex-wrap mb-4" id="lstSanPham">
+            <div class="table-responsive" style=" box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="0" onchange="CheckAll(this)">
+                                </div>
+                            </th>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                            <th>Tổng</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                </div>
+                            </td>
+                            <td>
+                                <img src="https://res.cloudinary.com/dftapnvrp/image/upload/v1728317537/v4tmaooc5wapgrn2zzk9.webp" alt="Product 1" class="ImgProduct">
+                                <span>Product 1</span>
+                            </td>
+                            <td class="quantity">
+                                <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                                <input type="text"  value="2" class="quantity-input" min="1">
+                                <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                            </td>
+                            <td>100.000 VNĐ</td>
+                            <td>200.000 VNĐ</td>
+                            <td class="text-center">
+                                <button class="btn btn-danger w-100" style="margin-top :10px">Xóa</button>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" data-id="${item.id}">
+                                </div>
+                            </td>
+                            <td>
+                                <img src="https://res.cloudinary.com/dftapnvrp/image/upload/v1728317537/v4tmaooc5wapgrn2zzk9.webp" alt="Product 2" class="ImgProduct">
+                                <span>Product 2</span>
+                            </td>
+                            <td class="quantity">
+                                <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                                <input type="text" value="2" class="quantity-input" readonly>
+                                <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                            </td>
+                            <td>150.000 VNĐ</td>
+                            <td>150.000 VNĐ</td>
+                            <td>
+                                <button class="btn btn-danger w-100" style="margin-top :10px">Xóa</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+        <!-- Left Column: Filters Section -->
+
+        <div class="col-md-4">
+            <div class="filter-section" style=" box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;">
+                <h5>Tổng : <span id="" style="font-size:18px;color:orangered">100.000 VNĐ</span> </h5>
+                <h5>Phí VAT (10%) : <span style="font-size:18px;color:orangered">10.000 VNĐ</span></h5>
+                <h5>Tổng hóa đơn : <span style="font-size:18px;color:orangered">110.000 VNĐ</span></h5>
+                <button class="btn btn-success w-100" style="margin-top :10px">Thanh toán</button>
+            </div>
+        </div>
+        <div class="col-md-12" style="margin-top: 20px;">
+            <div class="d-flex justify-content-between">
+                <h4 class="col-md-6">Sản phẩm liên quan</h4>
+                <a class="col-md-6 text-right " style="font-size:17px;color:#b81e20" href="#">Xem tất cả >></a>
+            </div>
+        </div>
+
+
+        <div class="col-md-12" style="margin-top:20px">
+            <div class="col-md-3 col-sm-4 col-12 mb-4">
+                <div class="card position-relative">
+                    <a href="#">
+                        <img src="https://product.hstatic.net/1000312752/product/atssc01-2__1__20655fc4113c41fc9da1c9fcc33f99fb.jpg" class="card-img-top product-img" alt="Sản phẩm 1">
+                    </a>
+                    <div class="discount-badge">-33%</div>
+                    <div class="card-body mt-3">
+                        <a href="">
+                            <h5 class="product-title text-center">Sản phẩm 1 abcxyuaaaaaaaaaaaaaaaaaa</h5>
+                            <p class="product-price text-center">$300 <del style="color:#333">$450 </del></p>
+                        </a>
+
+                        <div class="d-flex" style="float:right ;margin :0 10px 10px 0">
+                            <button class="btn btn-outline-warning text-center">
+                                <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function CheckAll(item) {
+        var isChecked = $(item).is(':checked');
+        var checkboxes = $(item).closest('table').find('.form-check-input');
+        checkboxes.prop('checked', isChecked);
+    };
+</script>

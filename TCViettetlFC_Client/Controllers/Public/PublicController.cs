@@ -47,5 +47,11 @@ namespace TCViettetlFC_Client.Controllers.Common
           
             return View(newList);
         }
+
+
+        public IActionResult GioHang()
+        {
+            return View();
+        }
     }
 }
