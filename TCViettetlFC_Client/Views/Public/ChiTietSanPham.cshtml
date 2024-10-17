@@ -1,0 +1,279 @@
+﻿@model ApiResponse
+@{
+    Layout = "_layoutCommon";
+}
+<style>
+    .size{
+        cursor:pointer
+    }
+</style>
+
+<div class=innerbannerwrap>
+    <div class=content></div>
+    <div class=innerbanner><h2 class=bannerHeadline>product <span>details</span></h2></div>
+</div>
+<section class=shopDpage>
+    <div class=container>
+        <div class=row>
+            <h2 style="padding-bottom:50px" class="heading small">Quần áo đá bóng chính hãng <span>Viettel Shop</span></h2>
+            <input type="hidden" style="display:none" id="idProduct" value="@ViewBag.Id" />
+
+            <div class=shop-wrap>
+                <div class=product-image-wrap>
+                    <div class= "p_wrap"  id="lstImgBig">
+                        <div class="product-image active" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important" id=product_1>
+                            <img src= "@Model.Product.Image"
+                                 alt=image>
+                        </div>
+                        @{
+                            var index = 1;
+                            foreach (var f in Model.pFile)
+                            {
+                                index++;
+                                <div class=product-image id="product_@index" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important">
+                                    <img src="@f.FilePath" alt="@f.FileName">
+                                </div>
+                            }
+                        }
+                       
+                       @*  <div class=product-image id=product02>
+                            <img src=images/product/shoesBig02.png alt=image>
+                        </div>
+                        <div class=product-image id=product03>
+                            <img src=images/product/shoesBig03.png alt=image>
+                        </div>
+                        <div class=product-image id=product04>
+                            <img src=images/product/shoesBig04.png alt=image>
+                        </div>
+                        <div class=product-image id=product05>
+                            <img src=images/product/shoesBig05.png alt=image>
+                        </div> *@
+                    </div>
+                    <div class=wrap-slide>
+                        <div>
+                            <a class=prvProduct></a> <a class=nxtProduct></a>
+                            <ul class="product-details-slider clearfix" id="lstImgsmall">
+                                <li class=active>
+                                    <a href=#product_1>
+                                        <img src="@Model.Product.Image"
+                                             alt=image>
+                                    </a>
+                                </li>
+                                @{
+                                    var num = 1;
+                                    foreach (var f in Model.pFile)
+                                    {
+                                        num++;
+                                        <li><a href=#product_@num><img src="@f.FilePath" alt="@f.FileName"></a></li>
+                                    }
+                                }
+                               @*  <li><a href=#product02><img src=images/product/shoe02.jpg alt=image></a></li>
+                                <li><a href=#product03><img src=images/product/shoe03.jpg alt=image></a></li>
+                                <li><a href=#product04><img src=images/product/shoe04.jpg alt=image></a></li>
+                                <li><a href=#product05><img src=images/product/shoes05.png alt=image></a></li> *@
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class=product-content>
+                    <h4 id="TenSP" style="padding-left:15px ;margin-bottom:0 !important;">@Model.Product.ProductName</h4>
+                    
+                    <div class="rate-product clearfix">
+                        <div class=rate-item style="width:80% !important;padding-bottom:20px">
+                            <h4 style="color:#979da0 ;">Giá</h4>
+                            <div id="giaSP" class="price"> @Model.Product.Price VNĐ<span>42% off</span></div>
+                        </div>
+                        <div class=item-size>
+                            <h6>Kích thước</h6>
+                            <ul id="lstSize">
+                                @if (!string.IsNullOrEmpty(Model.Product.Size))
+                                {
+                                    var lstSize = Model.Product.Size.Split(';');
+                                    foreach (var size in lstSize)
+                                    {
+                                        <li class="size" data-size="@size">@size</li>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>Sản phẩm này không có kích thước.</p>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <a href=# class="btn-addcart addToCart">Thêm giỏ hàng</a> <a href=# class=btn-blackLight>
+                       Mua ngay
+                    </a>
+
+                    <div class=product-list>
+                        <h5>Mô tả</h5>
+                       <p id="moTa">@Model.Product.Description</p>
+                    </div>
+                </div>
+            </div>
+            <div class=shop-feedback>
+                <h5>
+                    customer feedback <a class=feedbackCust>
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </h5>
+
+                <form data-parsley-validate="" name=contact class="feedbackContact formcontact clearfix">
+                    <div class=form-group>
+                        <input type=text class=form-control name=name placeholder=Name required=""
+                               data-parsley-required-message="please insert Name">
+                    </div>
+                    <div class=form-group>
+                        <input type=text class=form-control name=phone placeholder=Phone
+                               required="" data-parsley-required-message="please insert Phone No">
+                    </div>
+                    <div class=form-group>
+                        <input type=text class=form-control name=subject placeholder=subject
+                               required="" data-parsley-required-message="please insert subject">
+                    </div>
+                    <div class=form-group>
+                        <input type=email class=form-control name=email placeholder=Email
+                               required="" data-parsley-required-message="please insert Email">
+                    </div>
+                    <div class=form-group1>
+                        <textarea class="form-control textas" name=comment placeholder=Message
+                                  required="" data-parsley-minlength=20
+                                  data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.."
+                                  data-parsley-validation-threshold=10
+                                  data-parsley-maxlength=100></textarea>
+                    </div>
+                    <button type=submit class=btn-blackLight id=send>submit</button>
+                    <div class=form-message></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on("click", ".size", function () {
+        $(".size").css("border", "1px solid #979da0");
+        $(this).css("border", "1px solid red");
+    });
+</script>
+@* 
+<script src="~/home_assets/js/detailsanpham.js"></script> *@
+@* 
+<script>
+    $(document).ready(function () {
+        loadData();
+        debugger
+
+    });
+
+    function loadData() {
+        var id = $('#idProduct').val();
+
+        var url = 'https://localhost:5000/api/Product/GetProductById?id=' + id;
+        debugger
+        $.ajax({
+            url: url,
+            method: "GET",
+
+            success: function (res) {
+                var p = res.product;
+                var lstFile = res.pFile;
+                debugger;
+                $('#TenSP').text(p.productName);
+                $('#giaSP').text(p.price + ' VNĐ');
+                $('#moTa').text(p.description);
+
+                var sizes = p.size;
+                var sizeArray = sizes.split(";");
+                var lstSize = $('#lstSize').empty();
+                $.each(sizeArray, function (index, item) {
+                    var li = `<li class="size" data-size="${item}">${item}</li>`;
+                    lstSize.append(li);
+                });
+                var lstImgBig = $('#lstImgBig').empty();
+                var BigImgActive = ` <div class="product-image active" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important" id=product01>
+                                    <img src= "${p.image}"
+                                         alt= "${p.productName}">
+                                  </div>` ;
+                lstImgBig.append(BigImgActive);
+
+                $.each(lstFile, function (index, item) {
+                    var num = index + 2;
+                    debugger;
+                    var img = ` <div class=product-image id="product0${num}">
+                                    <img src="${item.filePath}" alt=image>
+                            </div>`;
+                    lstImgBig.append(img);
+                });
+
+
+                var lstImgSmall = $('#lstImgsmall').empty();
+                var SmallImgActive = `<li class="active">
+                                        <a href="#product01">
+                                            <img src= "${p.image}" alt= "${p.productName}">
+                                        </a>
+                                    </li>` ;
+                lstImgSmall.append(SmallImgActive);
+
+                $.each(lstFile, function (index, item) {
+                    var num = index + 2;
+                    debugger;
+                    var LiImg = `<li>
+                                   <a href=#product0${num}>
+                                         <img src="${item.filePath}" alt=image>
+                                  </a>
+                               </li>`;
+                    lstImgSmall.append(LiImg);
+                });
+                $('#lstImgBig').slick('unslick'); // First, unslick the current slider to reset it
+                $('#lstImgBig').slick(); // Reinitialize it
+
+                $('#lstImgsmall').slick('unslick'); // If you are using slick on both lists, do the same here
+                $('#lstImgsmall').slick();
+
+
+
+                debugger
+            },
+            error: function (res) {
+                debugger
+            }
+        });
+    }
+
+    $(document).on("click", ".size", function () {
+        $(".size").css("border", "1px solid #979da0");
+        $(this).css("border", "1px solid red");
+    });
+
+    $(document).ready(function () {
+        // Khởi tạo slick slider
+      
+    });
+    function loadSlide() {
+
+        $('.product-details-slider').slick({
+            slidesToShow: 4, // Số lượng ảnh nhỏ hiển thị
+            slidesToScroll: 1,
+            arrows: true, // Hiển thị nút next/prev
+            prevArrow: '.prvProduct',
+            nextArrow: '.nxtProduct'
+        });
+
+        // Sự kiện click vào ảnh nhỏ
+        $('.product-details-slider li a').click(function (event) {
+            event.preventDefault(); // Ngăn load lại trang
+            var target = $(this).attr('href'); // Lấy id của sản phẩm được click
+            var newImg = $(this).find('img').attr('src'); // Lấy src của ảnh nhỏ
+
+            // Cập nhật ảnh lớn
+            $('#lstImgBig .product-image img').attr('src', newImg);
+
+            // Đặt lại active cho ảnh nhỏ
+            $('.product-details-slider li').removeClass('active');
+            $(this).parent('li').addClass('active');
+        });
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> *@
