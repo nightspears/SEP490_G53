@@ -21,7 +21,7 @@ namespace TCViettelFC_API.Controllers
 
         }
         [HttpGet("GetProduct")]
-        public async Task<ActionResult<List<ProductCategory>>> GetCategory()
+        public async Task<ActionResult<List<ProductCategory>>> GetProduct()
         {
             try
             {
@@ -33,6 +33,22 @@ namespace TCViettelFC_API.Controllers
                 return BadRequest("Đã xảy ra lỗi trong quá trình thực thi");
             }
            
+
+        }
+
+        [HttpGet("GetSanPham")]
+        public async Task<ActionResult<List<ProductCategory>>> GetSanPham()
+        {
+            try
+            {
+                var product = await _product.GetSanPhamAsync();
+                return Ok(product);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Đã xảy ra lỗi trong quá trình thực thi");
+            }
+
 
         }
         [HttpGet("GetProductById")]
@@ -50,6 +66,24 @@ namespace TCViettelFC_API.Controllers
                 throw new Exception("Lỗi trong quá trình thực thi.");
             }
           
+
+        }
+
+        [HttpGet("GetSanPhamById")]
+        public async Task<JsonResult> GetSanPhamById(int id)
+        {
+
+            try
+            {
+                var data = await _product.GetProductByIdAsync(id);
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi trong quá trình thực thi.");
+            }
+
 
         }
         [HttpPost("AddProduct")]

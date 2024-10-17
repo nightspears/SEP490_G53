@@ -34,7 +34,7 @@ function loadData() {
               /*  var tenSan = (item.isHome === true ? 'SVĐ Mỹ Đình' : item.stadiumName);*/
                 var Avatar = "";
                 if (item.image == null || item.image == "" || item.image == undefined) {
-                    Avatar = "/image/imagelogo/icon-image-not-found-free-vector.jpg"
+                    Avatar = "/image/imagelogo/ImageFail.jpg"
                 } else {
                     Avatar = item.image;
                 }
