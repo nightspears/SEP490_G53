@@ -55,19 +55,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\taote\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\TCViettetlFC_Client.csproj",
+      "projectUniqueName": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\TCViettetlFC_Client.csproj",
       "projectName": "TCViettetlFC_Client",
-      "projectPath": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\TCViettetlFC_Client.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\obj\\",
+      "projectPath": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\TCViettetlFC_Client.csproj",
+      "packagesPath": "C:\\Users\\taote\\.nuget\\packages\\",
+      "outputPath": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\taote\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -1,0 +1,387 @@
+﻿@model TCViettetlFC_Client.Models.CheckoutModel
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        #shipment-rate {
+            display: flex; /* Use flexbox for the main container */
+            flex-wrap: wrap; /* Allow items to wrap onto the next line if necessary */
+            margin-top: 20px; /* Space above the shipment rates */
+        }
+
+        .shipment-rate-item {
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 8px; /* Rounded corners */
+            padding: 10px; /* Inner padding */
+            margin-right: 15px; /* Space between items */
+            margin-bottom: 10px; /* Space below the items */
+            display: flex; /* Use flexbox for the item layout */
+            align-items: center; /* Center items vertically */
+            width: 150px; /* Fixed width for each item */
+        }
+
+        .shipment-rate-label {
+            display: flex; /* Flexbox for label layout */
+            flex-direction: column; /* Stack elements vertically */
+            flex-grow: 1; /* Allow label to grow */
+        }
+
+        input[type="radio"] {
+            margin-bottom: 5px; /* Space between radio button and content */
+        }
+
+        .card {
+            border: none; /* Remove default card border */
+            padding: 0; /* Remove padding for card */
+            text-align: center; /* Center text in the card */
+        }
+
+        .card-title {
+            font-weight: bold; /* Make the title bold */
+            margin: 0; /* Remove margin */
+            font-size: 0.9em; /* Smaller font size */
+        }
+
+        .carrier-logo {
+            display: block; /* Ensure the image behaves as a block */
+            margin: 5px auto; /* Center the image */
+            max-width: 80px; /* Limit image width */
+            max-height: 40px; /* Limit image height */
+        }
+
+        .expected-delivery {
+            font-size: 0.8em; /* Smaller font */
+            color: #555; /* Gray color for the expected delivery text */
+            margin: 0; /* Remove margin */
+        }
+
+        .total-fee {
+            font-size: 1em; /* Adjust font size */
+            color: #28a745; /* Green color for the total fee */
+        }
+
+
+    </style>
+</head>
+<body>
+    <form asp-action="SubmitCheckout" method="post">
+        <div class="container my-5">
+            <div class="row">
+                <!-- Shipping Information -->
+                <div class="col-md-7">
+                    <h5>Thông tin nhận hàng</h5>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="Email" value="@Model.Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Họ và tên</label>
+                        <input type="text" class="form-control" id="fullName" name="FullName" value="@Model.FullName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Số điện thoại (tùy chọn)</label>
+                        <input type="text" class="form-control" id="phone" name="Phone" value="@Model.Phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Địa chỉ (tùy chọn)</label>
+                        <input type="text" class="form-control" id="address" name="Address" value="@Model.Address">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="city">Thành phố</label>
+                        <select id="city" class="form-control" name="City" required>
+                            <option selected disabled>Chọn thành phố</option>
+                            <!-- Cities will be populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="district">Quận/Huyện</label>
+                        <select id="district" class="form-control" name="District" required>
+                            <option selected disabled>Chọn quận huyện</option>
+                            <!-- Districts will be populated dynamically -->
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="ward">Phường/Xã</label>
+                        <select id="ward" class="form-control" name="Ward" required>
+                            <option selected disabled>Chọn phường/xã</option>
+                            <!-- Wards will be populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Ghi chú (tùy chọn)</label>
+                        <textarea class="form-control" id="notes" name="Notes" rows="3">@Model.Notes</textarea>
+                    </div>
+                </div>
+                <!-- Order Summary and Payment Options -->
+                <div class="col-md-5">
+                    <h5>Vận chuyển</h5>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="shipping" id="shipping1" checked>
+                        <label class="form-check-label" for="shipping1">
+                            Đơn Vị Vận Chuyển sẽ thu
+                        </label>
+                        <div id="shipment-rate"></div>
+
+                    </div>
+                    <div id="shipment-rate"></div> <!-- Container for shipment rates -->
+                    <h5>Thanh toán</h5>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="payment" id="payment1" value="ZaloPay">
+                        <label class="form-check-label" for="payment1">Thanh toán qua ZaloPay</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="payment" id="payment2" value="ATM">
+                        <label class="form-check-label" for="payment2">Thanh toán online qua ATM/VISA/MASTERCARD</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="payment" id="payment3" value="MoMo">
+                        <label class="form-check-label" for="payment3">Thanh toán qua Ví điện tử MoMo</label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="payment" id="payment4" value="BankTransfer">
+                        <label class="form-check-label" for="payment4">Chuyển khoản qua ngân hàng</label>
+                    </div>
+
+                    <h5>Đơn hàng (1 sản phẩm)</h5>
+                    <div class="border p-3 mb-3">
+                        <div class="d-flex align-items-center">
+                            <img src="https://via.placeholder.com/50" alt="Product Image" class="me-3">
+                            <div>
+                                <p class="mb-0">Áo Thi Đấu Bóng Đá CLB Sông Lam Nghệ An 2023/2024 Grand Sport Trắng</p>
+                                <span>970.000đ</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Nhập mã giảm giá">
+                        <button class="btn btn-secondary mt-2">Áp dụng</button>
+                    </div>
+               
+<ul>
+    <li class="d-flex justify-content-between">
+        <span>Phí vận chuyển</span>
+        <span id="shippingFee">0đ</span>
+    </li>
+    <li class="d-flex justify-content-between fw-bold">
+        <span>Tổng cộng</span>
+                            <span id="totalAmountDisplay">970.000đ</span>
+                            <!-- Hidden input to store the total amount -->
+                            <input type="hidden" name="TotalAmount" id="totalAmount" value="970000" />
+    </li>
+</ul>
+                    <button class="btn btn-primary w-100">ĐẶT HÀNG</button>
+                    <a href="#" class="d-block text-center mt-2">Quay về giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchCities();
+            document.getElementById('city').addEventListener('change', function () {
+                const selectedCityCode = this.value;
+                fetchDistricts(selectedCityCode);
+            });
+            document.getElementById('district').addEventListener('change', function () {
+                const selectedCityId = document.getElementById('city').value;
+                const selectedDistrictId = this.value;
+                if (selectedCityId && selectedDistrictId) {
+                    fetchShipmentRate(selectedCityId, selectedDistrictId);
+                    fetchWards(selectedDistrictId);
+                }
+            });
+        });
+
+        function fetchCities() {
+            console.log("Fetching cities...");
+            fetch('https://sandbox.goship.io/api/v2/cities', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw' // Replace with your API key
+                }
+            })
+                .then(response => {
+                    console.log("Response status for cities:", response.status);
+                    if (!response.ok) throw new Error('Error fetching cities');
+                    return response.json();
+                })
+                .then(responseData => {
+                    console.log("Cities response data:", responseData);
+                    if (!Array.isArray(responseData.data)) {
+                        console.error("Expected an array of cities but got:", responseData.data);
+                        return; // Early exit if data is not an array
+                    }
+                    const citySelect = document.getElementById('city');
+                    citySelect.innerHTML = '<option selected disabled>Chọn thành phố</option>';
+                    responseData.data.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city.id; // Using 'id' from the response
+                        option.textContent = city.name;
+                        citySelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching cities:', error));
+        }
+
+        function fetchDistricts(cityCode) {
+            console.log("Fetching districts for city code:", cityCode);
+            fetch(`https://sandbox.goship.io/api/v2/cities/${cityCode}/districts`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw' // Replace with your API key
+                }
+            })
+                .then(response => {
+                    console.log("Response status for districts:", response.status);
+                    if (!response.ok) throw new Error('Error fetching districts');
+                    return response.json();
+                })
+                .then(responseData => {
+                    console.log("Districts response data:", responseData);
+                    const districtSelect = document.getElementById('district');
+                    districtSelect.innerHTML = '<option selected disabled>Chọn quận huyện</option>';
+                    responseData.data.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district.id; // Using 'id' from the response
+                        option.textContent = district.name;
+                        districtSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching districts:', error));
+        }
+        function fetchWards(districtCode) {
+            console.log("Fetching wards for district code:", districtCode);
+            fetch(`https://sandbox.goship.io/api/v2/districts/${districtCode}/wards`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw' // Replace with your API key
+                }
+            })
+                .then(response => {
+                    console.log("Response status for wards:", response.status);
+                    if (!response.ok) throw new Error('Error fetching wards');
+                    return response.json();
+                })
+                .then(responseData => {
+                    console.log("Wards response data:", responseData);
+                    const wardSelect = document.getElementById('ward'); // Assuming you have a select element for wards
+                    wardSelect.innerHTML = '<option selected disabled>Chọn phường/xã</option>'; // Reset options
+                    responseData.data.forEach(ward => {
+                        const option = document.createElement('option');
+                        option.value = ward.id; // Using 'id' from the response
+                        option.textContent = ward.name; // Using 'name' from the response
+                        wardSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching wards:', error));
+        }
+
+        function fetchShipmentRate(cityId, districtId) {
+            console.log("Fetching shipment rate for city ID:", cityId, "and district ID:", districtId);
+            // Define the shipment data
+            const shipmentData = {
+                shipment: {
+                    address_from: {
+                        district: 100100,
+                        city: 100000
+                    },
+                    address_to: {
+                        district: districtId,
+                        city: cityId
+                    },
+                    parcel: {
+                        cod: 500000, // Change this value as necessary
+                        amount: 500000, // Change this value as necessary
+                        width: 10, // Change this value as necessary
+                        height: 10, // Change this value as necessary
+                        length: 10, // Change this value as necessary
+                        weight: 750 // Change this value as necessary
+                    }
+                }
+            };
+
+            // Make the POST request to fetch the shipment rates
+            fetch('https://sandbox.goship.io/api/v2/rates', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw', // Replace with your API key
+                    'Content-Type': 'application/json'
+
+                },
+                body: JSON.stringify(shipmentData)
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Error fetching shipment rate');
+                    return response.json();
+                })
+                .then(responseData => {
+                    console.log("Shipment rate response data:", responseData);
+                    displayShipmentRates(responseData.data);
+                })
+                .catch(error => console.error('Error fetching shipment rate:', error));
+        }
+
+       function displayShipmentRates(rates) {
+    const rateDisplay = document.getElementById('shipment-rate');
+    rateDisplay.innerHTML = ''; // Clear previous rates
+
+    if (rates && rates.length > 0) {
+        rates.forEach((rate, index) => {
+            const rateDiv = document.createElement('div');
+            rateDiv.className = 'shipment-rate-item'; // Class for styling
+            rateDiv.innerHTML = `
+                <label class="shipment-rate-label">
+                    <input type="radio" name="SelectedShipping" class="shipment-option" data-fee="${rate.total_fee}" value="${rate.id}" required>
+                    <div class="card">
+                        <h4 class="card-title">${rate.carrier_name} (${rate.service})</h4>
+                        <img src="${rate.carrier_logo}" alt="${rate.carrier_short_name}" class="carrier-logo" />
+                        <p class="expected-delivery">Expected Delivery: ${rate.expected}</p>
+                        <strong class="total-fee">${rate.total_fee}đ</strong>
+                    </div>
+                </label>
+            `;
+            rateDisplay.appendChild(rateDiv);
+        });
+
+        // Add event listeners to the newly created radio buttons
+        document.querySelectorAll('.shipment-option').forEach(option => {
+            option.addEventListener('change', function () {
+                // Retrieve the selected shipping fee
+                const shippingFee = parseInt(this.getAttribute('data-fee'));
+
+                // Update the shipping fee display
+                document.getElementById('shippingFee').textContent = `${shippingFee.toLocaleString('vi-VN')}đ`;
+
+                // Calculate the new total
+                const initialTotal = 970000; // Replace with your actual initial total
+                const newTotal = initialTotal + shippingFee;
+
+                // Update the total amount display
+                document.getElementById('totalAmountDisplay').textContent = `${newTotal.toLocaleString('vi-VN')}đ`;
+
+                // Update the hidden input value to send with the form
+                document.getElementById('totalAmount').value = newTotal;
+            });
+        });
+    } else {
+        rateDisplay.innerHTML = '<p>No shipment rates available</p>';
+    }
+}
+
+
+    </script>
+</body>
+</html>
