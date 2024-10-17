@@ -19,5 +19,7 @@ public partial class Match
 
     public int? Status { get; set; }
 
-    public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+    public virtual ICollection<MatchAreaTicket> MatchAreaTickets { get; set; } = new List<MatchAreaTicket>();
+
+    public virtual ICollection<OrderedTicket> OrderedTickets { get; set; } = new List<OrderedTicket>();
 }

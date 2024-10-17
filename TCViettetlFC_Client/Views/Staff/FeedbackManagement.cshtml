@@ -1,0 +1,227 @@
+﻿@model IEnumerable<TCViettetlFC_Client.Models.FeedbackResponse>
+
+<div class="main-wrapper">
+
+    <div class="header">
+
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <img src="~/admin_assets/img/logo.png" alt="Logo">
+            </a>
+            <a href="index.html" class="logo logo-small">
+                <img src="~/admin_assets/img/logo-small.png" alt="Logo" width="30" height="30">
+            </a>
+        </div>
+
+        <a href="javascript:void(0);" id="toggle_btn">
+            <i class="fe fe-text-align-left"></i>
+        </a>
+        <div class="top-nav-search">
+            <form>
+                <input type="text" class="form-control" placeholder="Search here">
+                <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+
+        <a class="mobile_btn" id="mobile_btn">
+            <i class="fa fa-bars"></i>
+        </a>
+
+
+        <ul class="nav user-menu">
+
+            <li class="nav-item dropdown noti-dropdown">
+                <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                    <i class="fe fe-bell" style="color: black;"></i> <span class="badge badge-pill"> @Model.Count()</span>
+                </a>
+                <div class="dropdown-menu notifications">
+                    <div class="topnav-dropdown-header">
+                        <span class="notification-title">Notifications</span>
+                        <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                    </div>
+                    <div class="noti-content">
+                        <ul class="notification-list">
+                             @foreach (var notification in Model)
+                    {
+                            <li class="notification-message">
+                                <a href="#">
+                                    <div class="media d-flex">
+                                        <span class="avatar avatar-sm flex-shrink-0">
+                                            <img class="avatar-img rounded-circle" alt="User Image" src="~/admin_assets/img/user/user.jpg">
+                                        </span>
+                                        <div class="media-body flex-grow-1">
+                                                <p class="noti-details"><span class="noti-title">@notification.Email</span> having a feedback <span class="noti-title">@notification.Content</span></p>
+                                                <p class="noti-time"><span class="notification-time">@notification.CreatedAt</span></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="topnav-dropdown-footer">
+                        <a href="#">View all Notifications</a>
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="nav-item dropdown has-arrow">
+                <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                    <span class="user-img"><img class="rounded-circle" src="~/admin_assets//img/profiles/avatar-01.jpg" width="31" alt="Ryan Taylor"></span>
+                </a>
+                <div class="dropdown-menu">
+                    <div class="user-header">
+                        <div class="avatar avatar-sm">
+                            <img src="assets/img/profiles/avatar-01.jpg" alt="User Image" class="avatar-img rounded-circle">
+                        </div>
+                        <div class="user-text">
+                            <h6>Ryan Taylor</h6>
+                            <p class="text-muted mb-0">Administrator</p>
+                        </div>
+                    </div>
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+                    <a class="dropdown-item" href="settings.html">Settings</a>
+                    <a class="dropdown-item" href="login.html">Logout</a>
+                </div>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-inner slimscroll">
+            <div id="sidebar-menu" class="sidebar-menu">
+                <ul>
+                    <li class="menu-title">
+                        <span><i class="fe fe-home"></i> Main</span>
+                    </li>
+                    <li>
+                        <a href="index.html"><span>Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="mentor.html"><span>Mentor</span></a>
+                    </li>
+                    <li>
+                        <a href="mentee.html"><span>Mentee</span></a>
+                    </li>
+                
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-title">Categories</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Categories</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="datatable table table-hover table-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Customer Email</th>
+                                            <th>Customer Phone</th>
+                                            <th>Date</th>
+                                            <th class="text-center">Reviews</th>
+                                            <th class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var feedback in Model)
+                                        {
+                                            <tr>
+                                                <td>@feedback.Id</td>
+                                                <td>
+                                                    <h2 class="table-avatar">
+                                                        <a href="#">@feedback.Email</a>
+                                                    </h2>
+                                                </td>
+                                                <td>
+                                                    <h2 class="table-avatar">
+                                                        <a href="#">@feedback.Phone</a>
+                                                    </h2>
+                                                </td>
+                                                <td>@feedback.CreatedAt?.ToString("dd MMM yyyy")</td>
+                                                <td class="text-center">@feedback.Content</td>
+                                                <td class="text-end">
+                                                    <div class="actions">
+                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light"
+                                                           onclick="showFeedbackDetails('@feedback.Email', '@feedback.CreatedAt?.ToString("dd MMM yyyy")', '@feedback.Content', @feedback.Id)">
+                                                            <i class="far fa-eye"></i> View
+                                                        </a>
+                                                        @if (feedback.Status == 1)
+                                                        {
+                                                            <span class="badge bg-success">Approved</span>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+                                <!-- Inline Detail Section -->
+                                <div id="feedbackDetails" class="card mt-3" style="display:none;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Feedback Detail</h5>
+                                        <div class="form-group">
+                                            <label>Customer Email:</label>
+                                            <p id="detailEmail"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Date:</label>
+                                            <p id="detailDate"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Review:</label>
+                                            <p id="detailContent"></p>
+                                        </div>
+
+                                        <!-- Approve button -->
+                                        <form id="approveForm" method="post" action="@Url.Action("ApproveFeedback", "Staff")" style="display:inline;">
+                                            <input type="hidden" id="approveFeedbackId" name="feedbackId" value="" />
+                                            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to approve this feedback?');">Approve</button>
+                                        </form>
+
+                                        <button type="button" class="btn btn-secondary" onclick="hideFeedbackDetails()">Close</button>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function showFeedbackDetails(email, date, content, id) {
+                                        // Set the content
+                                        document.getElementById('detailEmail').textContent = email;
+                                        document.getElementById('detailDate').textContent = date;
+                                        document.getElementById('detailContent').textContent = content;
+
+                                        // Set the feedback ID for approval
+                                        document.getElementById('approveFeedbackId').value = id;
+
+                                        // Show the details section
+                                        document.getElementById('feedbackDetails').style.display = 'block';
+                                    }
+
+                                    function hideFeedbackDetails() {
+                                        document.getElementById('feedbackDetails').style.display = 'none';
+                                    }
+                                </script>

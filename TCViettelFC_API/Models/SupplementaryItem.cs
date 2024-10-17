@@ -13,5 +13,5 @@ public partial class SupplementaryItem
 
     public int? Status { get; set; }
 
-    public virtual ICollection<OrderTicketConcession> OrderTicketConcessions { get; set; } = new List<OrderTicketConcession>();
+    public virtual ICollection<OrderedSuppItem> OrderedSuppItems { get; set; } = new List<OrderedSuppItem>();
 }

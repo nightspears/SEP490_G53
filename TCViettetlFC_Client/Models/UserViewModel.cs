@@ -25,20 +25,21 @@ namespace TCViettetlFC_Client.Models
     // Use this DTO for Add (POST), excluding UserId
     public class UserCreateDto
     {
-        [Required(ErrorMessage = "Full Name is required.")]
+        [Required(ErrorMessage = "Tên đầy đủ không được để trống")]
         public string FullName { get; set; }
 
-        [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress(ErrorMessage = "Invalid email format.")]
+        [Required(ErrorMessage = "Email không được để trống")]
+        [EmailAddress(ErrorMessage = "Email không đúng định dạng")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Phone is required.")]
+        [Required(ErrorMessage = "Số điện thoại không được để trống")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Số điện thoại phải bao gồm 10 chữ số.")]
         public string Phone { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Role is required.")]
+        [Required(ErrorMessage = "Vai trò không được để trống")]
         public int RoleId { get; set; }
     }
     public class UserUpdateDto
