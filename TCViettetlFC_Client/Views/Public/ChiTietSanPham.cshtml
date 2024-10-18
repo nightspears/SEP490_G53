@@ -12,51 +12,39 @@
     <div class=content></div>
     <div class=innerbanner><h2 class=bannerHeadline>product <span>details</span></h2></div>
 </div>
-<section class=shopDpage>
-    <div class=container>
-        <div class=row>
-            <h2 style="padding-bottom:50px" class="heading small">Quần áo đá bóng chính hãng <span>Viettel Shop</span></h2>
+<section class="shopDpage">
+    <div class="container">
+        <div class="row">
+            <h2 style="padding-bottom:50px" class="heading small">
+                Quần áo đá bóng chính hãng <span>Viettel Shop</span>
+            </h2>
             <input type="hidden" style="display:none" id="idProduct" value="@ViewBag.Id" />
 
-            <div class=shop-wrap>
-                <div class=product-image-wrap>
-                    <div class= "p_wrap"  id="lstImgBig">
-                        <div class="product-image active" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important" id=product_1>
-                            <img src= "@Model.Product.Image"
-                                 alt=image>
+            <div class="shop-wrap">
+                <div class="product-image-wrap">
+                    <div class="p_wrap" id="lstImgBig">
+                        <div class="product-image active" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" id="product_1">
+                            <img src="@Model.Product.Image" alt="image">
                         </div>
                         @{
                             var index = 1;
                             foreach (var f in Model.pFile)
                             {
                                 index++;
-                                <div class=product-image id="product_@index" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important">
+                                <div class="product-image" id="product_@index" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                     <img src="@f.FilePath" alt="@f.FileName">
                                 </div>
                             }
                         }
-                       
-                       @*  <div class=product-image id=product02>
-                            <img src=images/product/shoesBig02.png alt=image>
-                        </div>
-                        <div class=product-image id=product03>
-                            <img src=images/product/shoesBig03.png alt=image>
-                        </div>
-                        <div class=product-image id=product04>
-                            <img src=images/product/shoesBig04.png alt=image>
-                        </div>
-                        <div class=product-image id=product05>
-                            <img src=images/product/shoesBig05.png alt=image>
-                        </div> *@
                     </div>
-                    <div class=wrap-slide>
+                    <div class="wrap-slide">
                         <div>
-                            <a class=prvProduct></a> <a class=nxtProduct></a>
+                            <a class="prvProduct"></a>
+                            <a class="nxtProduct"></a>
                             <ul class="product-details-slider clearfix" id="lstImgsmall">
-                                <li class=active>
-                                    <a href=#product_1>
-                                        <img src="@Model.Product.Image"
-                                             alt=image>
+                                <li class="active">
+                                    <a href="#product_1">
+                                        <img src="@Model.Product.Image" alt="image">
                                     </a>
                                 </li>
                                 @{
@@ -64,26 +52,28 @@
                                     foreach (var f in Model.pFile)
                                     {
                                         num++;
-                                        <li><a href=#product_@num><img src="@f.FilePath" alt="@f.FileName"></a></li>
+                                        <li>
+                                            <a href="#product_@num"><img src="@f.FilePath" alt="@f.FileName"></a>
+                                        </li>
                                     }
                                 }
-                               @*  <li><a href=#product02><img src=images/product/shoe02.jpg alt=image></a></li>
-                                <li><a href=#product03><img src=images/product/shoe03.jpg alt=image></a></li>
-                                <li><a href=#product04><img src=images/product/shoe04.jpg alt=image></a></li>
-                                <li><a href=#product05><img src=images/product/shoes05.png alt=image></a></li> *@
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class=product-content>
-                    <h4 id="TenSP" style="padding-left:15px ;margin-bottom:0 !important;">@Model.Product.ProductName</h4>
-                    
+                <div class="product-content">
+                    <h4 id="TenSP" style="padding-left:15px; margin-bottom:0 !important;">
+                        @Model.Product.ProductName
+                    </h4>
+
                     <div class="rate-product clearfix">
-                        <div class=rate-item style="width:80% !important;padding-bottom:20px">
-                            <h4 style="color:#979da0 ;">Giá</h4>
-                            <div id="giaSP" class="price"> @Model.Product.Price VNĐ<span>42% off</span></div>
+                        <div class="rate-item" style="width:80% !important; padding-bottom:20px;">
+                            <h4 style="color:#979da0;">Giá</h4>
+                            <div id="giaSP" class="price">
+                                @Model.Product.Price VNĐ<span>42% off</span>
+                            </div>
                         </div>
-                        <div class=item-size>
+                        <div class="item-size">
                             <h6>Kích thước</h6>
                             <ul id="lstSize">
                                 @if (!string.IsNullOrEmpty(Model.Product.Size))
@@ -91,7 +81,7 @@
                                     var lstSize = Model.Product.Size.Split(';');
                                     foreach (var size in lstSize)
                                     {
-                                        <li class="size" data-size="@size">@size</li>
+                                        <li class="size" data-size="@size" onclick="selectSize('@size')">@size</li>
                                     }
                                 }
                                 else
@@ -101,54 +91,86 @@
                             </ul>
                         </div>
                     </div>
-                    <a href=# class="btn-addcart addToCart">Thêm giỏ hàng</a> <a href=# class=btn-blackLight>
-                       Mua ngay
-                    </a>
+                    <form id="checkoutForm" method="post" action="/checkout">
+                        <input type="hidden" name="productId" value="@Model.Product.ProductId" />
+                        <input type="hidden" name="productName" value="@Model.Product.ProductName" />
+                        <input type="hidden" name="price" value="@Model.Product.Price" />
+                        <input type="hidden" name="image" value="@Model.Product.Image" />
+                        <input type="hidden" name="selectedSize" id="selectedSize" />
 
-                    <div class=product-list>
+                        <a href="#" class="btn-addcart addToCart" onclick="addToCart()">Thêm giỏ hàng</a>
+                        <button type="button" class="btn-blackLight" onclick="submitCheckout()">Mua ngay</button>
+                    </form>
+                    <script>
+                        // Function to select the size
+                        function selectSize(size) {
+                            document.getElementById('selectedSize').value = size;
+
+                            // Update selected size visually
+                            document.querySelectorAll('.size').forEach(item => {
+                                item.classList.remove('selected');
+                            });
+                            document.querySelector(`[data-size="${size}"]`).classList.add('selected');
+                        }
+
+                        // Function to submit the form
+                        function submitCheckout() {
+                            const selectedSize = document.getElementById('selectedSize').value;
+                            if (!selectedSize) {
+                                alert('Vui lòng chọn kích thước trước khi mua.');
+                                return;
+                            }
+                            document.getElementById('checkoutForm').submit();
+                        }
+
+                        // Function to add to cart
+                        function addToCart() {
+                            const selectedSize = document.getElementById('selectedSize').value;
+                            if (!selectedSize) {
+                                alert('Vui lòng chọn kích thước trước khi thêm vào giỏ hàng.');
+                                return;
+                            }
+                            alert('Sản phẩm đã được thêm vào giỏ hàng.');
+                            // You can add further actions here for adding to cart, like making an AJAX call.
+                        }
+                    </script>
+                    <div class="product-list">
                         <h5>Mô tả</h5>
-                       <p id="moTa">@Model.Product.Description</p>
+                        <p id="moTa">@Model.Product.Description</p>
                     </div>
                 </div>
             </div>
-            <div class=shop-feedback>
+            <div class="shop-feedback">
                 <h5>
-                    customer feedback <a class=feedbackCust>
+                    Customer Feedback <a class="feedbackCust">
                         <i class="fa fa-caret-down"></i>
                     </a>
                 </h5>
 
-                <form data-parsley-validate="" name=contact class="feedbackContact formcontact clearfix">
-                    <div class=form-group>
-                        <input type=text class=form-control name=name placeholder=Name required=""
-                               data-parsley-required-message="please insert Name">
+                <form data-parsley-validate="" name="contact" class="feedbackContact formcontact clearfix">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Name" required="" data-parsley-required-message="Please insert Name">
                     </div>
-                    <div class=form-group>
-                        <input type=text class=form-control name=phone placeholder=Phone
-                               required="" data-parsley-required-message="please insert Phone No">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="phone" placeholder="Phone" required="" data-parsley-required-message="Please insert Phone No">
                     </div>
-                    <div class=form-group>
-                        <input type=text class=form-control name=subject placeholder=subject
-                               required="" data-parsley-required-message="please insert subject">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="subject" placeholder="Subject" required="" data-parsley-required-message="Please insert Subject">
                     </div>
-                    <div class=form-group>
-                        <input type=email class=form-control name=email placeholder=Email
-                               required="" data-parsley-required-message="please insert Email">
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required="" data-parsley-required-message="Please insert Email">
                     </div>
-                    <div class=form-group1>
-                        <textarea class="form-control textas" name=comment placeholder=Message
-                                  required="" data-parsley-minlength=20
-                                  data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.."
-                                  data-parsley-validation-threshold=10
-                                  data-parsley-maxlength=100></textarea>
+                    <div class="form-group1">
+                        <textarea class="form-control textas" name="comment" placeholder="Message" required="" data-parsley-minlength="20" data-parsley-minlength-message="Come on! You need to enter at least a 20 character comment.." data-parsley-validation-threshold="10" data-parsley-maxlength="100"></textarea>
                     </div>
-                    <button type=submit class=btn-blackLight id=send>submit</button>
-                    <div class=form-message></div>
+                    <button type="submit" class="btn-blackLight" id="send">Submit</button>
+                    <div class="form-message"></div>
                 </form>
             </div>
         </div>
     </div>
 </section>
+
 
 <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
 <script>
@@ -157,6 +179,7 @@
         $(this).css("border", "1px solid red");
     });
 </script>
+
 @* 
 <script src="~/home_assets/js/detailsanpham.js"></script> *@
 @* 

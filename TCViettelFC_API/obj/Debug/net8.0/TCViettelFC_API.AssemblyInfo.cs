@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TCViettelFC_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb5d7f5899290abe7c9354fa28650f899a8b253a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78afd726c750943c7c5a6a7e3799781ba19f7f96")]
 [assembly: System.Reflection.AssemblyProductAttribute("TCViettelFC_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TCViettelFC_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

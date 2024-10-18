@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\public\\chitietsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\public\\chitietsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\checkout\\paymentcallback.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\checkout\\paymentcallback.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\productmanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\productmanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\controllers\\admin\\productmanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\admin\\productmanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,6 +21,22 @@
     {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\models\\checkoutmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\checkoutmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\checkout\\paymentcallback.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\checkout\\paymentcallback.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\controllers\\public\\publiccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\public\\publiccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 80,
+          "SelectedChildIndex": 84,
           "Children": [
             {
               "$type": "Bookmark",
@@ -262,10 +282,6 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:34:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
             },
             {
@@ -347,54 +363,114 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PaymentCallBack.cshtml",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\PaymentCallBack.cshtml",
-              "RelativeDocumentMoniker": "Views\\Checkout\\PaymentCallBack.cshtml",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\PaymentCallBack.cshtml",
-              "RelativeToolTip": "Views\\Checkout\\PaymentCallBack.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-15T02:32:14.905Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Checkout\\Index.cshtml",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\Index.cshtml",
-              "RelativeToolTip": "Views\\Checkout\\Index.cshtml",
-              "ViewState": "AgIAAAsBAAAAAAAAAAAAAHcBAABIAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\ProductManagement\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\ProductManagement\\Index.cshtml",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\ProductManagement\\Index.cshtml",
+              "RelativeToolTip": "Views\\ProductManagement\\Index.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-15T02:31:21.283Z",
+              "WhenOpened": "2024-10-17T06:28:39.286Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CheckoutController.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CheckoutController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CheckoutController.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CheckoutController.cs",
-              "RelativeToolTip": "Controllers\\CheckoutController.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwDAAAAARAAAAAAAAAA==",
+              "Title": "ProductManagementController.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\Admin\\ProductManagementController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Admin\\ProductManagementController.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\Admin\\ProductManagementController.cs",
+              "RelativeToolTip": "Controllers\\Admin\\ProductManagementController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T02:29:47.718Z",
+              "WhenOpened": "2024-10-17T06:28:28.133Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
+              "Title": "PaymentCallBack.cshtml",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\PaymentCallBack.cshtml",
+              "RelativeDocumentMoniker": "Views\\Checkout\\PaymentCallBack.cshtml",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\PaymentCallBack.cshtml",
+              "RelativeToolTip": "Views\\Checkout\\PaymentCallBack.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-17T03:12:51.791Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-17T03:12:15.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "CheckoutModel.cs",
               "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\CheckoutModel.cs",
               "RelativeDocumentMoniker": "Models\\CheckoutModel.cs",
               "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\CheckoutModel.cs",
               "RelativeToolTip": "Models\\CheckoutModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-15T02:29:38.244Z",
+              "WhenOpened": "2024-10-17T02:13:33.777Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CheckoutController.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CheckoutController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CheckoutController.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CheckoutController.cs",
+              "RelativeToolTip": "Controllers\\CheckoutController.cs",
+              "ViewState": "AgIAAFMAAAAAAAAAAAAIwEEAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T02:10:12.128Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChiTietSanPham.cshtml",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Public\\ChiTietSanPham.cshtml",
+              "RelativeDocumentMoniker": "Views\\Public\\ChiTietSanPham.cshtml",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Public\\ChiTietSanPham.cshtml",
+              "RelativeToolTip": "Views\\Public\\ChiTietSanPham.cshtml",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAAAHcAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-17T02:04:22.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Checkout\\Index.cshtml",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\Index.cshtml",
+              "RelativeToolTip": "Views\\Checkout\\Index.cshtml",
+              "ViewState": "AgIAAI8AAAAAAAAAAAAAAJ0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-17T01:41:05.686Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PublicController.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\Public\\PublicController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Public\\PublicController.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\Public\\PublicController.cs",
+              "RelativeToolTip": "Controllers\\Public\\PublicController.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwB0AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-17T01:40:10.545Z"
             }
           ]
         },

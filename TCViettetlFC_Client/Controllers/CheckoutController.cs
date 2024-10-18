@@ -18,9 +18,20 @@ namespace TCViettetlFC_Client.Controllers
             }
 
             // GET: Checkout
-            public IActionResult Index()
+            public IActionResult Index(int productId, string productName, decimal price, string selectedSize,string image)
             {
-                return View(new CheckoutModel());
+                // Create a new instance of the CheckoutModel with the passed product details
+                var model = new CheckoutModel
+                {
+                    ProductId = productId,
+                    ProductName = productName,
+                    Price = price,
+                    SelectedSize = selectedSize,
+                    ProductImage = image
+                };
+
+                // Pass the model to the checkout view
+                return View(model);
             }
 
             [HttpPost]
@@ -52,10 +63,7 @@ namespace TCViettetlFC_Client.Controllers
                 return View("Index", model);
             }
 
-            public IActionResult Summary(CheckoutModel model)
-            {
-                return View(model);
-            }
+    
 
             public IActionResult PaymentCallBack()
             {

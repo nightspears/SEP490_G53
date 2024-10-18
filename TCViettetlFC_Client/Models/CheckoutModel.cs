@@ -2,6 +2,14 @@
 {
     public class CheckoutModel
     {
+
+        public int ProductId { get; set; }
+        public string ?ProductName { get; set; }
+        public decimal Price { get; set; }
+        public string ?SelectedSize { get; set; }
+        public string ?ProductImage { get; set; }
+
+
         public string Email { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; }
