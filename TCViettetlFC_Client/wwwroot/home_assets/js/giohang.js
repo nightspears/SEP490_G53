@@ -1,5 +1,24 @@
 ﻿
 
+const key = "keyCartSep490G53keyCartSep490G53";
+//const encryptedCart = encryptData(cartItems, key);
+//localStorage.setItem("cart", encryptedCart);
+
+//const storedCart = localStorage.getItem("cart");
+//const decryptedCart = decryptData(storedCart, key);
+
+
+
+// Mã hóa giỏ hàng
+
+
+
+
+
+
+
+
+
 
 function format() {
     debugger
@@ -19,39 +38,4 @@ function format() {
         }
     });
 
-}
-
-
-
-function encryptData(data, key) {
-    return CryptoJS.AES.encrypt(JSON.stringify(data), key).toString();
-}
-//Giai mã hóa giỏ hàng 
-
-function decryptData(encryptedData, key) {
-    const bytes = CryptoJS.AES.decrypt(encryptedData, key);
-    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-}
-function saveCartToLocalStorage(cartItems) {
-    const cartJson = JSON.stringify(cartItems);
-    localStorage.setItem("cart", cartJson);
-}
-
-function getCartFromLocalStorage() {
-    const cartJson = localStorage.getItem("cart");
-    if (cartJson) {
-        return JSON.parse(cartJson);
-    }
-    return [];
-}
-
-
-function AddToCart(id) {
-
-    
-}
-
-
-function selectSize(size) { 
-    $("#selectedSize")
 }

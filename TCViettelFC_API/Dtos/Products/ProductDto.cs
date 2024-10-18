@@ -47,5 +47,29 @@ namespace TCViettelFC_API.Dtos.Product
         public string? Image { get; set; }
 
     }
-  
+
+    public class ProductCart {
+
+        public int ProductId { get; set; }
+
+        public int? CategoryId { get; set; }
+
+        public string? ProductName { get; set; }
+
+        public string? Avatar { get; set; }
+
+        public decimal? Price { get; set; }
+
+        public string? Size { get; set; }
+
+        public string? Material { get; set; }
+
+        public string? Description { get; set; }
+        public int? Quantity{ get; set; }
+
+    }
+
+
+
+
 }
