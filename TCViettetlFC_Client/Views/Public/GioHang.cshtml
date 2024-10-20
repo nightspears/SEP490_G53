@@ -105,6 +105,39 @@
         background-color: #555; /* Darker color on hover */
     }
 
+    .product-info {
+        display: flex;
+        flex-direction: column; /* Sắp xếp các span theo chiều dọc */
+        justify-content: center; /* Để căn giữa các span theo chiều dọc */
+        padding-left: 10px; /* Tạo khoảng cách giữa ảnh và thông tin sản phẩm */
+    }
+
+    .ImgProduct {
+        max-width: 100px; /* Điều chỉnh kích thước ảnh */
+        height: auto;
+    }
+
+    .product-name {
+        white-space: nowrap; /* Ngăn không cho nội dung xuống dòng */
+        overflow: hidden; /* Ẩn nội dung tràn ra ngoài */
+        text-overflow: ellipsis; /* Hiển thị dấu "..." khi nội dung quá dài */
+        display: block; /* Để nó hoạt động chính xác trên thẻ span */
+        max-width: 200px; /* Đặt chiều rộng tối đa cho sản phẩm */
+    }
+
+   
+
+    .product-info {
+        display: block;
+        word-wrap: break-word;
+    }
+
+    .ImgProduct {
+        max-width: 100px;
+        height: auto;
+    }
+
+
 </style>
 
 <link href="~/home_assets/css/giohang.css" rel="stylesheet" />
@@ -119,7 +152,7 @@
 <div class="container my-5 mt-5" style="padding:50px 0">
     <div class="d-flex">
         <div class="col-md-8 d-flex flex-wrap mb-4" id="lstSanPham">
-            <div class="table-responsive" style=" box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;">
+            <div class="table-responsive" style=" box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;">
                 <table class="cart-table">
                     <thead>
                         <tr>
@@ -135,22 +168,32 @@
                             <th>Thao tác</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-
+                    <tbody id="bodyData">
+@*                         <tr>
                             <td>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="">
                                 </div>
                             </td>
                             <td>
-                                <img src="https://res.cloudinary.com/dftapnvrp/image/upload/v1728317537/v4tmaooc5wapgrn2zzk9.webp" alt="Product 1" class="ImgProduct">
-                                <span>Product 1</span>
+                                <div style="display:flex">
+                                    <img src="https://res.cloudinary.com/dftapnvrp/image/upload/v1728317537/v4tmaooc5wapgrn2zzk9.webp" alt="Product 1" class="ImgProduct">
+                                    <div class="product-info" style="margin-top: 2px; cursor: pointer;">
+                                        <span class="product-name" title="Áo đá bóng mùa 2024-2025 mới nhất">Áo đá bóng mùa 2024-2025 mới nhất</span>
+                                        <span>XL</span>
+                                    </div>
+                                </div>
+                               
                             </td>
+
+
                             <td class="quantity">
-                                <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
-                                <input type="text"  value="2" class="quantity-input" min="1">
-                                <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                                <div style="display:flex">
+                                    <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                                    <input type="text" value="2" class="quantity-input" min="1">
+                                    <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                                </div>
+                      
                             </td>
                             <td>100.000 VNĐ</td>
                             <td>200.000 VNĐ</td>
@@ -162,24 +205,36 @@
                         <tr>
                             <td>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" data-id="${item.id}">
+                                    <input class="form-check-input" type="checkbox" value="">
                                 </div>
                             </td>
                             <td>
-                                <img src="https://res.cloudinary.com/dftapnvrp/image/upload/v1728317537/v4tmaooc5wapgrn2zzk9.webp" alt="Product 2" class="ImgProduct">
-                                <span>Product 2</span>
+                                <div style="display:flex">
+                                    <img src="https://res.cloudinary.com/dftapnvrp/image/upload/v1728317537/v4tmaooc5wapgrn2zzk9.webp" alt="Product 1" class="ImgProduct">
+                                    <div class="product-info" style="margin-top: 2px; cursor: pointer;">
+                                        <span class="product-name" title="Áo đá bóng mùa 2024-2025 mới nhất">Áo đá bóng mùa 2024-2025 mới nhất</span>
+                                        <span>L</span>
+                                    </div>
+                                </div>
+
                             </td>
+
+
                             <td class="quantity">
-                                <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
-                                <input type="text" value="2" class="quantity-input" readonly>
-                                <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                                <div style="display:flex">
+                                    <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                                    <input type="text" value="2" class="quantity-input" min="1">
+                                    <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                                </div>
+
                             </td>
                             <td>150.000 VNĐ</td>
-                            <td>150.000 VNĐ</td>
-                            <td>
+                            <td>200.000 VNĐ</td>
+                            <td class="text-center">
                                 <button class="btn btn-danger w-100" style="margin-top :10px">Xóa</button>
+
                             </td>
-                        </tr>
+                        </tr> *@
                     </tbody>
                 </table>
             </div>
@@ -191,16 +246,16 @@
 
         <div class="col-md-4">
             <div class="filter-section" style=" box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;">
-                <h5>Tổng : <span id="" style="font-size:18px;color:orangered">100.000 VNĐ</span> </h5>
-                <h5>Phí VAT (10%) : <span style="font-size:18px;color:orangered">10.000 VNĐ</span></h5>
-                <h5>Tổng hóa đơn : <span style="font-size:18px;color:orangered">110.000 VNĐ</span></h5>
+                <h5>Tổng : <span id="totalPrice" class="price" style="font-size:18px;color:orangered">0 ₫</span> </h5>
+                <h5>Phí VAT (10%) : <span id="VAT_Price" class="price" style="font-size:18px;color:orangered">0 ₫</span></h5>
+                <h5>Tổng hóa đơn : <span id="totalBill" class="price" style="font-size:18px;color:orangered">0 ₫</span></h5>
                 <button class="btn btn-success w-100" style="margin-top :10px">Thanh toán</button>
             </div>
         </div>
         <div class="col-md-12" style="margin-top: 20px;">
             <div class="d-flex justify-content-between">
-                <h4 class="col-md-6">Sản phẩm liên quan</h4>
-                <a class="col-md-6 text-right " style="font-size:17px;color:#b81e20" href="#">Xem tất cả >></a>
+                <h4 class="col-sm-6">Sản phẩm liên quan</h4>
+                <a class="col-sm-6 text-right " style="font-size:17px;color:#b81e20" href="#">Xem tất cả >></a>
             </div>
         </div>
 
@@ -215,10 +270,10 @@
                     <div class="card-body mt-3">
                         <a href="">
                             <h5 class="product-title text-center">Sản phẩm 1 abcxyuaaaaaaaaaaaaaaaaaa</h5>
-                            <p class="product-price text-center">$300 <del style="color:#333">$450 </del></p>
+                            <p class="product-price text-center">250.000 VNĐ <del style="color:#333">450.000 VNĐ </del></p>
                         </a>
 
-                        <div class="d-flex" style="float:right ;margin :0 10px 10px 0">
+                        <div class="d-flex" style="float:right ;margin :20px 20px 20px 0">
                             <button class="btn btn-outline-warning text-center">
                                 <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;"></i>
                             </button>
@@ -229,7 +284,8 @@
         </div>
     </div>
 </div>
-
+<script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
+<script src="~/home_assets/js/giohang.js"></script>
 <script>
     function CheckAll(item) {
         var isChecked = $(item).is(':checked');

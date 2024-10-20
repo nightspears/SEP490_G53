@@ -1,57 +1,119 @@
 ﻿
+$(document).on("click", ".size", function () {
+    $(".size").css("border", "1px solid #979da0");
+    $(this).css("border", "1px solid red");
+    var a = $(this).data('size');
+    $("#sizeSp").val(a);
+});
+$(document).ready(function () {
+    format();
 
-
+});
 function format() {
     debugger
-    // Hàm định dạng tiền tệ Việt Nam
     function formatCurrency(value) {
         return parseInt(value).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
 
-    // Lấy tất cả các phần tử có class 'price'
     const prices = document.querySelectorAll('.price');
 
-    // Lặp qua từng phần tử và định dạng giá trị dựa trên thuộc tính 'data-price'
     prices.forEach(function (priceElement) {
         const priceValue = priceElement.getAttribute('data-price');
         if (priceValue) {
-            priceElement.innerText = formatCurrency(priceValue);  // Định dạng và hiển thị lại giá trị
+            priceElement.innerText = formatCurrency(priceValue);
         }
     });
 
 }
 
 
+function saveCartToLocalStorage(cartItems, expirationInMinutes) {
+    const now = new Date();
+    const expirationTime = now.getTime() + expirationInMinutes * 60000; 
 
-function encryptData(data, key) {
-    return CryptoJS.AES.encrypt(JSON.stringify(data), key).toString();
-}
-//Giai mã hóa giỏ hàng 
+    const cartData = {
+        items: cartItems,
+        expiration: expirationTime
+    };
 
-function decryptData(encryptedData, key) {
-    const bytes = CryptoJS.AES.decrypt(encryptedData, key);
-    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    const cartJson = JSON.stringify(cartData);
+    localStorage.setItem("cartProduct", cartJson);
 }
-function saveCartToLocalStorage(cartItems) {
-    const cartJson = JSON.stringify(cartItems);
-    localStorage.setItem("cart", cartJson);
-}
+
 
 function getCartFromLocalStorage() {
-    const cartJson = localStorage.getItem("cart");
+    const cartJson = localStorage.getItem("cartProduct");
+
     if (cartJson) {
-        return JSON.parse(cartJson);
+        const cartData = JSON.parse(cartJson);
+        const now = new Date().getTime();
+
+        // Kiểm tra thời gian hết hạn
+        if (now < cartData.expiration) {
+            return cartData.items; 
+        } else {
+            localStorage.removeItem("cartProduct");
+            return [];
+        }
     }
+
     return [];
 }
 
 
 function AddToCart(id) {
+    debugger
+    if (validateAddCart()) {
+        var productId = id;
+        var size = $("#sizeSp").val();
+        var Avartar = $("#imgAvatar").attr("src");
+        var Price = $("#giaSP").data("price");
+        var TenSP = $("#TenSP").text();
+        var playerId = $("#shirtNumber").val();
+        if (playerId != null && playerId != 0 && playerId != undefined) {
+            var InfoAo = $("#shirtNumber option:selected").text();
+        } else {
+            var InfoAo = "";
+        }
+        
+        var soLuong = 1;
+        debugger
+        var cartItems = getCartFromLocalStorage();
 
-    
+        var existingProduct = cartItems.find(function (item) {
+            return item.productId === productId && item.size === size;
+        });
+
+        if (existingProduct) {
+            existingProduct.quantity += 1;
+        }
+        else {
+            var Product = {
+                productId: productId,
+                size: size,
+                avartar: Avartar,
+                price: Price,
+                nameProduct: TenSP,
+                quantity: soLuong,
+                shirtNumber: playerId,
+                TenInAo: InfoAo
+
+            };
+            cartItems.push(Product);
+        }
+        saveCartToLocalStorage(cartItems,60*24*7);
+        alert("thêm thành công")
+    }
 }
 
 
-function selectSize(size) { 
-    $("#selectedSize")
+function validateAddCart() { 
+    var check = true;
+    if ($("#sizeSp").val() == null || $("#sizeSp").val().trim() == "" || $("#sizeSp").val() == undefined) {
+        check = false
+        alert("Vui lòng chọn kích thước.");
+    }
+
+    return check;
+
 }

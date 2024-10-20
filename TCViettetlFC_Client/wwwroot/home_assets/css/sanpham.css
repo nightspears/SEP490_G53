@@ -4,8 +4,8 @@
     transition: transform 0.2s ease-in-out !important;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    height: 330px;
-    max-height: 330px;
+    height: 390px;
+    max-height: 400px;
     position: relative;
 }
 }
@@ -39,6 +39,7 @@
     padding: 20px !important;
     background-color: #f8f9fa !important;
     border-radius: 10px !important;
+    margin-bottom:35px;
 }
 
     .filter-section h5 {

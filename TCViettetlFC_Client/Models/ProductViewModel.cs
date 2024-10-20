@@ -6,10 +6,7 @@
         public string? CategoryName { get; set; }
         public string? SeasonName { get; set; }
         public string? Image { get; set; }
-        public int? PlayerId { get; set; }
-
         public int? SeasonId { get; set; }
-
         public int? CategoryId { get; set; }
 
         public string? ProductName { get; set; }
@@ -25,6 +22,8 @@
         public string? Material { get; set; }
 
         public string? Description { get; set; }
+
+        public int? discoutPercent { get; set; }
 
         public int? Status { get; set; }
         public List<FileResponse>? DataFile { get; set; }
@@ -52,10 +51,31 @@
         public int? Status { get; set; }
 
     }
+    public class Player {
+
+        public int PlayerId { get; set; }
+
+        public string? FullName { get; set; }
+
+        public int? ShirtNumber { get; set; }
+
+        public int? SeasonId { get; set; }
+
+        public string? Position { get; set; }
+
+        public DateTime? JoinDate { get; set; }
+
+        public DateTime? OutDate { get; set; }
+
+        public string? Description { get; set; }
+
+        public int? Status { get; set; }
+    }
 
     public class ApiResponse
     {
-        public List<ProductFileViewModel> pFile { get; set; }  
+        public List<ProductFileViewModel> pFile { get; set; }
+        public List<Player> players { get; set; }
 
         public ProductViewModel Product { get; set; }  
     }
