@@ -1,0 +1,77 @@
+﻿@{
+    Layout = "_layoutCommon";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="~/home_assets/css/sanpham.css" rel="stylesheet" />
+<style>
+    /* Custom CSS */
+
+
+</style>
+<div class=innerbannerwrap>
+    <div class=content></div>
+    <div class=innerbanner><h2 class=bannerHeadline style="font-size:65px">Sản <span>phẩm</span></h2></div>
+</div>
+<div style="padding-top:70px">
+    <h2 style="padding-bottom:50px" class="heading small">Quần áo đá bóng chính hãng <span>Viettel Shop</span></h2>
+
+</div>
+
+<div class="container my-5 mt-5" style="padding:50px 0">
+    <div class="d-flex">
+        <!-- Left Column: Filters Section -->
+        <div class="col-md-3" style="margin-bottom:20px">
+            <div class="filter-section">
+                <h5>Bộ lọc sản phẩm</h5>
+                <div class="mb-3">
+                    <label for="search" class="form-label">Tìm kiếm</label>
+                    <input type="text" id="search" class="form-control" placeholder="Tìm kiếm sản phẩm...">
+                </div>
+                <div class="mb-3" style="padding:10px 0">
+                    <label for="category" class="form-label">Danh mục</label>
+                    <select id="category" class="form-select" style="border: 1px solid #ccc; height: 34px;width: 150px;border-radius: 4px;box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);color: #555555;">
+                        <option selected>Tất cả</option>
+                        <option>Điện thoại</option>
+                        <option>Laptop</option>
+                        <option>Phụ kiện</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="price-range" class="form-label">Khoảng giá</label>
+                    <input type="range" id="price-range" class="form-range" min="0" max="1000">
+                </div>
+                <button class="btn btn-primary w-100" style="margin-top :10px">Áp dụng</button>
+            </div>
+        </div>
+
+        <!-- Right Column: Product Section -->
+        <div class="col-md-9 d-flex flex-wrap" id="lstSanPham">
+        @*     <div class="col-md-4 col-sm-6 col-12 mb-4">
+                <div class="card position-relative">
+                    <a href="#">
+                        <img src="https://product.hstatic.net/1000312752/product/atssc01-2__1__20655fc4113c41fc9da1c9fcc33f99fb.jpg" class="card-img-top product-img" alt="Sản phẩm 1">
+                    </a>
+                    <div class="discount-badge">-33%</div>
+                    <div class="card-body mt-3">
+                        <a href="">
+                            <h5 class="product-title text-center">Sản phẩm 1 abcxyuaaaaaaaaaaaaaaaaaa</h5>
+                            <p class="product-price text-center">$300 <del style="color:#333">$450 </del></p>
+                        </a>
+
+                        <div class="d-flex" style="float:right ;margin :0 10px 10px 0">
+                            <button class="btn btn-outline-warning text-center">
+                                <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> *@
+
+
+        </div>
+    </div>
+</div>
+
+<script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
+
+<script src="~/home_assets/js/sanpham.js"></script>
