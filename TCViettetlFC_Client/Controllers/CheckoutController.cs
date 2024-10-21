@@ -17,22 +17,30 @@ namespace TCViettetlFC_Client.Controllers
                 _vnpayService = vnpayService;
             }
 
-            // GET: Checkout
-            public IActionResult Index(int productId, string productName, decimal price, string selectedSize,string image)
+            public IActionResult Index(string data)
             {
-                // Create a new instance of the CheckoutModel with the passed product details
-                var model = new CheckoutModel
+                var checkoutModel = new CheckoutModel();
+                checkoutModel.checkoutItems = new List<CheckoutCartModel>();
+                decimal totalPrice = 0;
+
+                if (!string.IsNullOrEmpty(data))
                 {
-                    ProductId = productId,
-                    ProductName = productName,
-                    Price = price,
-                    SelectedSize = selectedSize,
-                    ProductImage = image
-                };
+                    // Deserialize the JSON data to a list of CheckoutCartModel
+                    checkoutModel.checkoutItems = JsonConvert.DeserializeObject<List<CheckoutCartModel>>(data);
+
+                    // Calculate the total price based on the deserialized items
+                    // Calculate the total price and convert it to an integer
+                    checkoutModel.TotalAmount = (int)checkoutModel.checkoutItems.Sum(item => item.Price * item.Quantity);
+
+                }
+
+          
 
                 // Pass the model to the checkout view
-                return View(model);
+                return View(checkoutModel);
             }
+
+
 
             [HttpPost]
             public IActionResult SubmitCheckout(CheckoutModel model)

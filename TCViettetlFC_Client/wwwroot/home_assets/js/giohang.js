@@ -224,3 +224,28 @@ function getTotalPrice() {
        
     })
 }
+
+var lstCheckout = [];
+function checkOut() {
+    var cartItems = getCartFromLocalStorage();
+    lstChecked.forEach(function (checkedItem) {
+        var existingProduct = cartItems.find(function (item) {
+            return item.productId === checkedItem.ProID && item.size === checkedItem.Size;
+        });
+
+        if (existingProduct) {
+            lstCheckout.push(existingProduct);
+        }
+    });
+
+    // Send data to the checkout page
+    if (lstCheckout.length > 0) {
+        // Serialize the checkout data
+        var checkoutData = JSON.stringify(lstCheckout);
+
+        // Redirect to the checkout page with data in query parameter
+        window.location.href = '/Checkout?data=' + encodeURIComponent(checkoutData);
+    } else {
+        alert('No items selected for checkout.');
+    }
+}

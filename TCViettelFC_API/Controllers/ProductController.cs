@@ -21,7 +21,7 @@ namespace TCViettelFC_API.Controllers
 
         }
         [HttpGet("GetProduct")]
-        public async Task<ActionResult<List<ProductCategory>>> GetProduct()
+        public async Task<ActionResult<List<ProductResponse>>> GetProduct()
         {
             try
             {
@@ -38,7 +38,7 @@ namespace TCViettelFC_API.Controllers
         }
 
         [HttpGet("GetSanPham")]
-        public async Task<ActionResult<List<ProductCategory>>> GetSanPham()
+        public async Task<ActionResult<List<ProductResponse>>> GetSanPham()
         {
             try
             {

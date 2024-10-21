@@ -84,7 +84,7 @@
                             <ul class="product-details-slider clearfix" id="lstImgsmall">
                                 <li class="active" style="height: 100px !important;width: 100px !important;">
                                     <a href=#product_1>
-                                        <img src="@Model.Product.Image" style="max-width:58% !important"
+                                        <img id="productImage" src="@Model.Product.Image" style="max-width:58% !important"
                                              alt=image>
                                     </a>
                                 </li>
@@ -170,9 +170,41 @@
                       
                     </div>
                         <a class="btn-addcart" onclick="AddToCart(@ViewBag.Id)">Thêm giỏ hàng</a>
-                        <a class=btn-blackLight>
-                            Mua ngay
-                        </a>
+
+                    <a class="btn-blackLight" onclick="buyNow()">Mua ngay</a>
+
+                    <script>
+                        function buyNow() {
+                            const productId = document.getElementById('idProduct').value;
+                            const size = document.getElementById('sizeSp').value || 'Default size';
+                            const quantity = 1; // Assuming default quantity is 1, you can modify as needed
+                            const price = parseFloat(document.getElementById('giaSP').dataset.price);
+                            const shirtNumber = document.getElementById('shirtNumber').value || 'No number';
+                            const productName = document.getElementById('TenSP').textContent; // Assuming you have an element with the product name
+                            const productImage = document.getElementById('productImage').src; // Assuming you have an <img> element for the product image
+
+                            const checkoutItem = {
+                                ProductId: productId,
+                                Size: size,
+                                Quantity: quantity,
+                                Price: price,
+                                playerId: shirtNumber,
+                                nameProduct: productName,
+                                Avartar: productImage
+                            };
+
+                            // Convert the item to a JSON string
+                            const data = JSON.stringify([checkoutItem]);
+
+                            // Encode the data for the URL
+                            const encodedData = encodeURIComponent(data);
+
+                            // Redirect to the Index action with the JSON data as a query string
+                            window.location.href = `/Checkout/Index?data=${encodedData}`;
+                        }
+                    </script>
+
+
                   
                     <div class=product-list>
                         <h5>Mô tả</h5>

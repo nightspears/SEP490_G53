@@ -199,6 +199,60 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TCViettelFC_API.Controllers.CartController",
+    "Method": "addToCart",
+    "RelativePath": "api/Cart/addToCart",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "quantity",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CartController",
+    "Method": "UpdateCart",
+    "RelativePath": "api/Cart/updateCart",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "quantity",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "TCViettelFC_API.Controllers.CategoryController",
     "Method": "AddCateAsync",
     "RelativePath": "api/Category/AddCate",
@@ -415,7 +469,7 @@
       },
       {
         "Name": "DiscountPercent",
-        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -553,7 +607,7 @@
       },
       {
         "Name": "DiscountPercent",
-        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -1105,11 +1159,6 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "PlayerId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
         "Name": "SeasonId",
         "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
@@ -1208,7 +1257,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[TCViettelFC_API.Models.ProductCategory, TCViettelFC_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[TCViettelFC_API.Dtos.Product.ProductResponse, TCViettelFC_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "application/json;odata.metadata=minimal;odata.streaming=true",
           "application/json;odata.metadata=minimal;odata.streaming=false",
@@ -1284,7 +1333,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.List\u00601[[TCViettelFC_API.Models.ProductCategory, TCViettelFC_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.List\u00601[[TCViettelFC_API.Dtos.Product.ProductResponse, TCViettelFC_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "application/json;odata.metadata=minimal;odata.streaming=true",
           "application/json;odata.metadata=minimal;odata.streaming=false",
@@ -1362,11 +1411,6 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
-      },
-      {
-        "Name": "PlayerId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
       },
       {
         "Name": "SeasonId",

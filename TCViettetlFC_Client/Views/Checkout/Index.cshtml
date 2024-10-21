@@ -151,26 +151,37 @@
                         <input class="form-check-input" type="radio" name="payment" id="payment4" value="BankTransfer">
                         <label class="form-check-label" for="payment4">Chuyển khoản qua ngân hàng</label>
                     </div>
-                    <input type="hidden" name="ProductId" value="@Model.ProductId" />
-    <input type="hidden" name="ProductName" value="@Model.ProductName" />
-    <input type="hidden" name="Price" value="@Model.Price" />
-    <input type="hidden" name="SelectedSize" value="@Model.SelectedSize" />
-    <input type="hidden" name="ProductImage" value="@Model.ProductImage" />
-                    <h5>Đơn hàng (1 sản phẩm)</h5>
-<div class="border p-3 mb-3">
-    <div class="d-flex align-items-center">
-      <img src="@(!string.IsNullOrEmpty(Model.ProductImage) ? Model.ProductImage : "https://via.placeholder.com/50")" 
-     alt="@Model.ProductName" 
-     class="me-3" 
-     style="width: 50px; height: 50px;">
-        <div>
-            <p class="mb-0">Tên Sản Phẩm : @Model.ProductName</p>
-            <p class="mb-0">Kích Cỡ : @Model.SelectedSize</p>
-            <span>Giá  @Model.Price.ToString("N0")đ</span>
-        </div>
-    </div>
-</div>
-                    <div class="mb-3">
+                    <h5>Order Details (@Model.checkoutItems.Count() sản phẩm)</h5>
+                    <div class="border p-3 mb-3">
+                        @foreach (var item in Model.checkoutItems)
+                        {
+                            <div class="d-flex align-items-center">
+                                <img src="@(!string.IsNullOrEmpty(item.Avartar) ? item.Avartar : "https://via.placeholder.com/50")"
+                                     alt="@item.nameProduct"
+                                     class="me-3"
+                                     style="width: 50px; height: 50px;">
+                                <div>
+                                    <p class="mb-0">Tên Sản Phẩm: @item.nameProduct</p>
+                                    <p class="mb-0">Mã Code In Số Áo : @item.playerId</p>
+                                    <p class="mb-0">Kích Cỡ: @item.size</p>
+                                    <p class="mb-0">Số lượng: @item.Quantity</p>
+                                    <span>Đơn Giá: @item.Price.ToString("N0")đ</span>
+                                    @{
+                                        var totalPrice = (item.Price * item.Quantity).ToString("N0");
+                                    }
+                                    <span>Tổng: @totalPrice đ</span
+                                    <!-- Hidden inputs for each item to send with the form -->
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].ProductId" value="@item.ProductId" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].nameProduct" value="@item.nameProduct" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].Price" value="@item.Price" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].size" value="@item.size" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].Avartar" value="@item.Avartar" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].Quantity" value="@item.Quantity" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].playerId" value="@item.playerId" />
+                                </div>
+                            </div>
+                        }
+                    </div>            <div class="mb-3">
                         <input type="text" class="form-control" placeholder="Nhập mã giảm giá">
                         <button class="btn btn-secondary mt-2">Áp dụng</button>
                     </div>
@@ -183,9 +194,9 @@
     <li class="d-flex justify-content-between fw-bold">
         <span>Tổng cộng</span>
 
-                            <span id="totalAmountDisplay">@Model.Price</span>
+                            <span id="totalAmountDisplay">@Model.TotalAmount.ToString("N0")đ</span>
                             <!-- Hidden input to store the total amount -->
-                            <input type="hidden" name="TotalAmount" id="totalAmount" value=@Model.Price />
+                            <input type="hidden" name="TotalAmount" id="totalAmount" value= @Model.TotalAmount />
     </li>
 </ul>
                     <button class="btn btn-primary w-100">ĐẶT HÀNG</button>
@@ -376,7 +387,7 @@
 
 
                 // Calculate the new total
-                const initialTotal = @Model.Price ; // Replace with your actual initial total
+                const initialTotal = @Model.TotalAmount ; // Replace with your actual initial total
                 const newTotal = initialTotal + shippingFee;
 
                 // Update the total amount display

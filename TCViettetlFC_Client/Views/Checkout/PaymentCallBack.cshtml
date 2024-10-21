@@ -8,10 +8,36 @@
     </div>
 
     <h3>Order Details</h3>
-    <p>ProductID: @Model.CheckoutModel.ProductId</p>
-    <p>ProductName: @Model.CheckoutModel.ProductName</p>
-    <p>ProductPrice: @Model.CheckoutModel.Price</p>
-    <p>Email: @Model.CheckoutModel.Email</p>
+
+
+    <h3>Checkout Items</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Size</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model.CheckoutModel.checkoutItems)
+            {
+                <tr>
+                    <td>@item.nameProduct</td>
+                    <td>@item.size</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price.ToString("N0")</td>
+                    @{
+                        var totalPrice = (item.Price * item.Quantity).ToString("N0");
+                    }
+                    <td>  Tổng: @totalPrice đ </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
     <p>Email: @Model.CheckoutModel.Email</p>
     <p>Full Name: @Model.CheckoutModel.FullName</p>
     <p>Phone: @Model.CheckoutModel.Phone</p>
