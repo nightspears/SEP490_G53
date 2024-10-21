@@ -548,7 +548,7 @@
               "RelativeDocumentMoniker": "Controllers\\AreaController.cs",
               "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Controllers\\AreaController.cs",
               "RelativeToolTip": "Controllers\\AreaController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-16T08:29:23.419Z",
               "EditorCaption": ""
@@ -563,8 +563,7 @@
               "RelativeToolTip": "Models\\Area.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAmwBEAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T08:25:53.799Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T08:25:53.799Z"
             },
             {
               "$type": "Document",
@@ -576,8 +575,7 @@
               "RelativeToolTip": "Dtos\\AreaDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T08:25:48.806Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T08:25:48.806Z"
             },
             {
               "$type": "Document",
@@ -589,8 +587,7 @@
               "RelativeToolTip": "Repositories\\Interfaces\\IAreaRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T08:24:30.849Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T08:24:30.849Z"
             },
             {
               "$type": "Document",
@@ -602,8 +599,7 @@
               "RelativeToolTip": "Repositories\\Implementations\\AreaRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-16T08:24:12.504Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-16T08:24:12.504Z"
             },
             {
               "$type": "Document",
@@ -639,8 +635,7 @@
               "RelativeToolTip": "Controllers\\CustomerController.cs",
               "ViewState": "AgIAADMAAAAAAAAAAAA1wDQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T07:09:36.74Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T07:09:36.74Z"
             },
             {
               "$type": "Document",
@@ -664,8 +659,7 @@
               "RelativeToolTip": "Installers\\SystemInstaller.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-14T05:32:50.931Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-14T05:32:50.931Z"
             },
             {
               "$type": "Document",
