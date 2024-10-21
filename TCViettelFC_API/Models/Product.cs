@@ -7,7 +7,7 @@ public partial class Product
 {
     public int ProductId { get; set; }
 
-    public int? PlayerId { get; set; }
+    public int? DiscountId { get; set; }
 
     public int? SeasonId { get; set; }
 
@@ -33,11 +33,9 @@ public partial class Product
 
     public virtual ProductCategory? Category { get; set; }
 
+    public virtual Discount? Discount { get; set; }
+
     public virtual ICollection<OrderProductDetail> OrderProductDetails { get; set; } = new List<OrderProductDetail>();
-
-    public virtual Player? Player { get; set; }
-
-    public virtual ICollection<ProductDiscount> ProductDiscounts { get; set; } = new List<ProductDiscount>();
 
     public virtual ICollection<ProductFile> ProductFiles { get; set; } = new List<ProductFile>();
 

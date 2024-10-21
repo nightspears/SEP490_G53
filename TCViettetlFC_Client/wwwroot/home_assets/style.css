@@ -1563,12 +1563,12 @@ pre {
       width: 1250px; } }
 @media (min-width: 1600px) {
     .container {
-        width: 1650px;
+        width: 1500px;
     }
 }
 @media (min-width: 2000px) {
     .container {
-        width: 2050px;
+        width: 1550px;
     }
 }
 /*.container-fluid {
@@ -9378,7 +9378,6 @@ a.blacklrnmore {
 .product-image {
   text-align: center;
   display: none;
-  padding: 70px 0;
   background-image: url("images/product/backgroundd.jpg");
   background-size: cover;
   background-position: top center;
@@ -9454,8 +9453,8 @@ a.blacklrnmore {
       .product-content01 li:last-of-type i {
         padding: 15px 0; } }
 
-.rate-product {
-  padding: 50px 0 60px; }
+/*.rate-product {
+  margin-bottom: 20px; }*/
 
 .rate-item, .item-size {
   position: relative;

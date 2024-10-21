@@ -26,6 +26,7 @@ namespace TCViettelFC_API.Controllers
             try
             {
                 var product = await _product.GetProductAsync();
+
                 return Ok(product);
             }
             catch (Exception ex)
@@ -75,7 +76,7 @@ namespace TCViettelFC_API.Controllers
 
             try
             {
-                var data = await _product.GetProductByIdAsync(id);
+                var data = await _product.GetSanPhamByIdAsync(id);
                 return data;
 
             }

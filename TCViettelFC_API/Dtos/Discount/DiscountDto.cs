@@ -6,7 +6,7 @@
 
         public string? DiscountName { get; set; }
 
-        public decimal? DiscountPercent { get; set; }
+        public int? DiscountPercent { get; set; }
 
         public DateTime? ValidFrom { get; set; }
 

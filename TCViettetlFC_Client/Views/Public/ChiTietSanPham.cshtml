@@ -6,12 +6,41 @@
     .size{
         cursor:pointer
     }
+
+    .rate-item h4 {
+        color: #979da0;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .rate-item select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        color: #333;
+        font-size: 14px;
+    }
+
+        .rate-item select option {
+            padding: 8px;
+            background-color: #fff;
+            color: #333;
+        }
+
+    .rate-item div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
 </style>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
 <div class=innerbannerwrap>
     <div class=content></div>
-    <div class=innerbanner><h2 class=bannerHeadline>product <span>details</span></h2></div>
+    <div class=innerbanner><h2 class=bannerHeadline style="font-size:65px">Chi tiết <span>sản phẩm</span></h2></div>
 </div>
 <section class=shopDpage>
     <div class=container>
@@ -23,17 +52,16 @@
                 <div class=product-image-wrap>
                     <div class= "p_wrap"  id="lstImgBig">
                         <div class="product-image active" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important" id=product_1>
-                            <img src= "@Model.Product.Image"
-                                 alt=image>
+                            <img src= "@Model.Product.Image" alt=image id="imgAvatar">
                         </div>
                         @{
                             var index = 1;
                             foreach (var f in Model.pFile)
                             {
                                 index++;
-                                    <div class=product-image id="product_@index" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important">
-                                        <img src="@f.FilePath" alt="@f.FileName">
-                                    </div>
+                                 <div class=product-image id="product_@index" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important">
+                                     <img src="@f.FilePath" alt="@f.FileName">
+                                 </div>
                             }
                         }
                        
@@ -54,7 +82,7 @@
                         <div>
                             <a class=prvProduct></a> <a class=nxtProduct></a>
                             <ul class="product-details-slider clearfix" id="lstImgsmall">
-                                <li class=active>
+                                <li class="active" style="height: 100px !important;width: 100px !important;">
                                     <a href=#product_1>
                                         <img src="@Model.Product.Image" style="max-width:58% !important"
                                              alt=image>
@@ -65,7 +93,7 @@
                                     foreach (var f in Model.pFile)
                                     {
                                         num++;
-                                            <li><a href=#product_@num><img src="@f.FilePath" alt="@f.FileName" style="max-width:58% !important"></a></li>
+                                        <li style="height: 100px !important; width: 100px !important;"><a href=#product_@num><img src="@f.FilePath" alt="@f.FileName" style="max-width:58% !important"></a></li>
                                     }
                                 }
                                @*  <li><a href=#product02><img src=images/product/shoe02.jpg alt=image></a></li>
@@ -77,19 +105,32 @@
                     </div>
                 </div>
                 <div class=product-content>
-                    <h4 id="TenSP" style="padding-left:15px ;margin-bottom:0 !important;">@Model.Product.ProductName</h4>
+                    <h4 id="TenSP" style="padding-left:15px ;margin-bottom:20px !important;">@Model.Product.ProductName</h4>
                     
                     <div class="rate-product clearfix">
-                        <div class=rate-item style="width:80% !important;padding-bottom:20px">
-                            <h4 style="color:#979da0 ;">Giá</h4>
+                        <div class=rate-item style="width:100% !important;padding-bottom:20px">
+                            <h4 style="color:black ;text-align:left">Giá</h4>
                             <div style="display:flex">
-                                <div id="giaSP" class="price" data-price="@Model.Product.Price"> @Model.Product.Price </div> <span>42% off</span>
+                              
+                                
+                                @if (Model.Product.discoutPercent != null && Model.Product.discoutPercent != 0)
+                                {
+                                    var price = Model.Product.Price - (Model.Product.Price * Model.Product.discoutPercent / 100);
+                                    <div id="giaSP" class="price" style="font-size:28px" data-price="@price">@price</div>
+                                    <del style="margin-left:10px;color:black ; font-weight:100 !important;font-size:26px" class="price" data-price="@Model.Product.Price">@Model.Product.Price</del>
+                                    <span style="margin-left:10px;font-size:13px"> @Model.Product.discoutPercent% off</span>
+                                }
+                                else
+                                {
+                                    var price = Model.Product.Price ;
+                                    <div id="giaSP" class="price" data-price="@Model.Product.Price">@price</div>
+                                }
 
                             </div>
                         </div>
                         <div class=item-size>
-                            <h4 style="color:#979da0 ;"> Kích thước</h4>
-                            <ul id="lstSize">
+                            <h4 style="color:black ;font-size: 16px ;text-align:left"> Kích thước</h4>
+                            <ul id="lstSize" style="text-align:left">
                                 @if (!string.IsNullOrEmpty(Model.Product.Size))
                                 {
                                     var lstSize = Model.Product.Size.Split(';');
@@ -103,17 +144,43 @@
                                     <p>Sản phẩm này không có kích thước.</p>
                                 }
                             </ul>
+                            <input type="text" value=""  id="sizeSp" style="display:none"/>
                         </div>
-                    </div>
-                    <a href=# class="btn-addcart" onclick="AddToCart(@ViewBag.Id)">Thêm giỏ hàng</a>
-                    <a href=# class=btn-blackLight>
-                       Mua ngay
-                    </a>
+                        <div class=rate-item style="width:60% !important;padding-top:20px">
+                            <h4 style="color:black ;text-align:left">In số áo (nếu cần)</h4>
+                            <div style="display:flex">
+                                <select id="shirtNumber">
+                                    <option value="0">-- Chọn số áo --</option>
+                                    <option value="0" >Không in</option>
+                                    @foreach (var p in Model.players)
+                                    {
+                                        <option value="@p.PlayerId">@p.FullName - số @p.ShirtNumber</option>
 
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class=rate-item style="width:80% !important;padding-top:20px">
+                            <h4 style="color:black ;text-align:left">Chất liệu</h4>
+                            <div style="display:flex">
+                                <div id="chatlieu" style="font-size:18px ;color:#979da0 ;">@Model.Product.Material</div>
+                            </div>
+                        </div>
+
+                      
+                    </div>
+                        <a class="btn-addcart" onclick="AddToCart(@ViewBag.Id)">Thêm giỏ hàng</a>
+                        <a class=btn-blackLight>
+                            Mua ngay
+                        </a>
+                  
                     <div class=product-list>
                         <h5>Mô tả</h5>
-                       <p id="moTa" style="font-size:19px;margin-top:15px">@Model.Product.Description</p>
+                        <p id="moTa" style="font-size:19px;margin-top:15px">@Model.Product.Description</p>
+                        <img src="~/image/imagelogo/tablesize.webp" />
                     </div>
+
+                  
                 </div>
             </div>
            @*  <div class=shop-feedback>
@@ -156,154 +223,6 @@
 </section>
 
 <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).on("click", ".size", function () {
-        $(".size").css("border", "1px solid #979da0");
-        $(this).css("border", "1px solid red");
-    });
-    $(document).ready(function () {
-        format();
 
-    });
-    function format() {
-        debugger
-        function formatCurrency(value) {
-            return parseInt(value).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-        }
+<script src="~/home_assets/js/detailsanpham.js"></script>
 
-        const prices = document.querySelectorAll('.price');
-
-        prices.forEach(function (priceElement) {
-            const priceValue = priceElement.getAttribute('data-price');
-            if (priceValue) {
-                priceElement.innerText = formatCurrency(priceValue); 
-            }
-        });
-
-    }
-
-
-
-
-
-</script>
-@* 
-<script src="~/home_assets/js/detailsanpham.js"></script> *@
-@* 
-<script>
-    $(document).ready(function () {
-        loadData();
-        debugger
-
-    });
-
-    function loadData() {
-        var id = $('#idProduct').val();
-
-        var url = 'https://localhost:5000/api/Product/GetProductById?id=' + id;
-        debugger
-        $.ajax({
-            url: url,
-            method: "GET",
-
-            success: function (res) {
-                var p = res.product;
-                var lstFile = res.pFile;
-                debugger;
-                $('#TenSP').text(p.productName);
-                $('#giaSP').text(p.price + ' VNĐ');
-                $('#moTa').text(p.description);
-
-                var sizes = p.size;
-                var sizeArray = sizes.split(";");
-                var lstSize = $('#lstSize').empty();
-                $.each(sizeArray, function (index, item) {
-                    var li = `<li class="size" data-size="${item}">${item}</li>`;
-                    lstSize.append(li);
-                });
-                var lstImgBig = $('#lstImgBig').empty();
-                var BigImgActive = ` <div class="product-image active" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important" id=product01>
-                                    <img src= "${p.image}"
-                                         alt= "${p.productName}">
-                                  </div>` ;
-                lstImgBig.append(BigImgActive);
-
-                $.each(lstFile, function (index, item) {
-                    var num = index + 2;
-                    debugger;
-                    var img = ` <div class=product-image id="product0${num}">
-                                    <img src="${item.filePath}" alt=image>
-                            </div>`;
-                    lstImgBig.append(img);
-                });
-
-
-                var lstImgSmall = $('#lstImgsmall').empty();
-                var SmallImgActive = `<li class="active">
-                                        <a href="#product01">
-                                            <img src= "${p.image}" alt= "${p.productName}">
-                                        </a>
-                                    </li>` ;
-                lstImgSmall.append(SmallImgActive);
-
-                $.each(lstFile, function (index, item) {
-                    var num = index + 2;
-                    debugger;
-                    var LiImg = `<li>
-                                   <a href=#product0${num}>
-                                         <img src="${item.filePath}" alt=image>
-                                  </a>
-                               </li>`;
-                    lstImgSmall.append(LiImg);
-                });
-                $('#lstImgBig').slick('unslick'); // First, unslick the current slider to reset it
-                $('#lstImgBig').slick(); // Reinitialize it
-
-                $('#lstImgsmall').slick('unslick'); // If you are using slick on both lists, do the same here
-                $('#lstImgsmall').slick();
-
-
-
-                debugger
-            },
-            error: function (res) {
-                debugger
-            }
-        });
-    }
-
-    $(document).on("click", ".size", function () {
-        $(".size").css("border", "1px solid #979da0");
-        $(this).css("border", "1px solid red");
-    });
-
-    $(document).ready(function () {
-        // Khởi tạo slick slider
-      
-    });
-    function loadSlide() {
-
-        $('.product-details-slider').slick({
-            slidesToShow: 4, // Số lượng ảnh nhỏ hiển thị
-            slidesToScroll: 1,
-            arrows: true, // Hiển thị nút next/prev
-            prevArrow: '.prvProduct',
-            nextArrow: '.nxtProduct'
-        });
-
-        // Sự kiện click vào ảnh nhỏ
-        $('.product-details-slider li a').click(function (event) {
-            event.preventDefault(); // Ngăn load lại trang
-            var target = $(this).attr('href'); // Lấy id của sản phẩm được click
-            var newImg = $(this).find('img').attr('src'); // Lấy src của ảnh nhỏ
-
-            // Cập nhật ảnh lớn
-            $('#lstImgBig .product-image img').attr('src', newImg);
-
-            // Đặt lại active cho ảnh nhỏ
-            $('.product-details-slider li').removeClass('active');
-            $(this).parent('li').addClass('active');
-        });
-    }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> *@
