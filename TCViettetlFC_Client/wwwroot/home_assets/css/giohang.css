@@ -6,9 +6,10 @@
     margin-bottom: 20px;
     height: 390px;
     max-height: 400px;
+    padding-top:20px ;
     position: relative;
 }
-}
+
 
     .card:hover {
         transform: scale(1.05) !important;
@@ -39,7 +40,6 @@
     padding: 20px !important;
     background-color: #f8f9fa !important;
     border-radius: 10px !important;
-    margin-bottom:35px;
 }
 
     .filter-section h5 {

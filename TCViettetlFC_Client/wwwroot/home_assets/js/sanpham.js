@@ -13,25 +13,39 @@
                 } else {
                     Avatar = item.image;
                 }
-                var price = (item.price - (item.price * 0 / 100));
+                var price = 0;
+                debugger
+                var discout = "";
+                var priceText = "";
+                if (item.discoutPercent != null && item.discoutPercent != "" && item.discout != 0) {
+                    price = (item.price - (item.price * item.discoutPercent / 100));
+                    debugger
+                    discout = `<div class="discount-badge">-${item.discoutPercent}%</div> `;
+
+                    priceText = `<span class="price" data-price="${price}">${price}</span> 
+                                 <del class="price" style="color:#333" data-price="${item.price}"></del>`;
+                } else {
+                    price = item.price;
+                    priceText = `<span class="price" data-price="${price}">${price}</span> `;
+                }
                 var html = `<div class="col-md-4 col-sm-6 col-12 mb-4">
                     <div class="card position-relative">
                         <a href="/public/ChiTietSanPham/${item.productId}">
                             <img src="${Avatar}" class="card-img-top product-img" alt="Sản phẩm 1">
                         </a>
-                        <div class="discount-badge">-33%</div>
+                       ${discout}
                         <div class="card-body mt-3">
                             <a href="/public/ChiTietSanPham/${item.productId}">
                                     <h5 class="product-title  text-center">${item.productName}</h5>
                                      <p class="product-price text-center" >
-                                     <span class="price" data-price="${price}">${price}</span> 
-                                     <del class="price" style="color:#333" data-price="${item.price}"></del>
+                                     ${priceText}
+ 
                                    </p>
                             </a>
 
-                            <div class="d-flex" style="float:right ;margin :0 10px 10px 0">
+                            <div class="d-flex" style="float:right ;margin :40px 20px 20px 0">
                                 <button class="btn btn-outline-warning text-center">
-                                    <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;"></i>
+                                    <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;" onclick="AddToCart(${item.productId})"></i>
                                 </button>
                             </div>
                         </div>
@@ -73,4 +87,59 @@ function format() {
         }
     });
 
+}
+
+
+function saveCartToLocalStorage(cartItems) {
+    debugger
+    const cartJson = JSON.stringify(cartItems);
+    localStorage.setItem("cartProduct", cartJson);
+}
+
+
+function getCartFromLocalStorage() {
+    const CartJson = localStorage.getItem("cartProduct");
+    if (CartJson) {
+        return JSON.parse(CartJson);
+    }
+    debugger
+    return [];
+}
+
+
+function AddToCart(id) {
+    debugger
+    if (validateAddCart()) {
+        var productId = id;
+        var size = $("#sizeSp").val();
+        var Avartar = $("#imgAvatar").attr("src");
+        var Price = $("#giaSP").data("price");
+        var TenSP = $("#TenSP").text();
+        var soLuong = 1;
+
+        var cartItems = getCartFromLocalStorage();
+
+        var existingProduct = cartItems.find(function (item) {
+            return item.productId === productId && item.size === size;
+        });
+
+        if (existingProduct) {
+            existingProduct.quantity += 1;
+        }
+        else {
+            var Product = {
+                productId: productId,
+                size: size,
+                avartar: Avartar,
+                price: Price,
+                nameProduct: TenSP,
+                quantity: soLuong,
+            };
+            cartItems.push(Product);
+        }
+        debugger
+        saveCartToLocalStorage(cartItems);
+        debugger
+        alert("thêm thành công")
+    }
 }

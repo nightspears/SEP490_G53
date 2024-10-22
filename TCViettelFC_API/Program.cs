@@ -65,6 +65,15 @@ builder.Services.AddScoped<INewRepository, NewRepository>();
 builder.Services.AddScoped<ICategoryNewRepository, CategoryNewRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IMatchRepository, MatchRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICloudinarySetting, CloudinarySettings>();
+builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
+builder.Services.AddScoped<IDiscountRepository, DiscoutRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
 builder.Services.AddAutoMapper(typeof(MappingProfile));

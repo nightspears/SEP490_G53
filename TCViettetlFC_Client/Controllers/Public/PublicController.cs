@@ -34,7 +34,7 @@ namespace TCViettetlFC_Client.Controllers.Common
         {
             ViewBag.Id = id;
 
-            string requestUri = "https://localhost:5000/api/Product/GetProductById?id="+id;
+            string requestUri = "https://localhost:5000/api/Product/GetSanPhamById?id=" + id;
             var response = await _httpClient.GetAsync(requestUri);
 
            ApiResponse newList = new ApiResponse();
@@ -46,6 +46,12 @@ namespace TCViettetlFC_Client.Controllers.Common
             }
           
             return View(newList);
+        }
+
+
+        public IActionResult GioHang()
+        {
+            return View();
         }
     }
 }

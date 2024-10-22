@@ -26,6 +26,7 @@ namespace TCViettelFC_API.Controllers
             try
             {
                 var product = await _product.GetProductAsync();
+
                 return Ok(product);
             }
             catch (Exception ex)
@@ -50,6 +51,24 @@ namespace TCViettelFC_API.Controllers
                 throw new Exception("Lỗi trong quá trình thực thi.");
             }
           
+
+        }
+
+        [HttpGet("GetSanPhamById")]
+        public async Task<JsonResult> GetSanPhamById(int id)
+        {
+
+            try
+            {
+                var data = await _product.GetSanPhamByIdAsync(id);
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi trong quá trình thực thi.");
+            }
+
 
         }
         [HttpPost("AddProduct")]
