@@ -141,7 +141,15 @@ namespace TCViettelFC_API.Controllers
             return data;
 
         }
-        
+
+        [HttpPost("SanPhamLienQuan")]
+        public async Task<JsonResult> SanPhamLienQuan([FromBody] List<int> lstID)
+        {
+                var data = await _product.GetLienQuanProductAsync(lstID);
+                return data;
+
+        }
+
 
     }
 }

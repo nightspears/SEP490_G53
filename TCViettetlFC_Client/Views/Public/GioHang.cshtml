@@ -169,74 +169,12 @@
                         </tr>
                     </thead>
                     <tbody id="bodyData">
-@*                         <tr>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                </div>
-                            </td>
-                            <td>
-                                <div style="display:flex">
-                                    <img src="https://res.cloudinary.com/dftapnvrp/image/upload/v1728317537/v4tmaooc5wapgrn2zzk9.webp" alt="Product 1" class="ImgProduct">
-                                    <div class="product-info" style="margin-top: 2px; cursor: pointer;">
-                                        <span class="product-name" title="Áo đá bóng mùa 2024-2025 mới nhất">Áo đá bóng mùa 2024-2025 mới nhất</span>
-                                        <span>XL</span>
-                                    </div>
-                                </div>
-                               
-                            </td>
 
-
-                            <td class="quantity">
-                                <div style="display:flex">
-                                    <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
-                                    <input type="text" value="2" class="quantity-input" min="1">
-                                    <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
-                                </div>
-                      
-                            </td>
-                            <td>100.000 VNĐ</td>
-                            <td>200.000 VNĐ</td>
-                            <td class="text-center">
-                                <button class="btn btn-danger w-100" style="margin-top :10px">Xóa</button>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="">
-                                </div>
-                            </td>
-                            <td>
-                                <div style="display:flex">
-                                    <img src="https://res.cloudinary.com/dftapnvrp/image/upload/v1728317537/v4tmaooc5wapgrn2zzk9.webp" alt="Product 1" class="ImgProduct">
-                                    <div class="product-info" style="margin-top: 2px; cursor: pointer;">
-                                        <span class="product-name" title="Áo đá bóng mùa 2024-2025 mới nhất">Áo đá bóng mùa 2024-2025 mới nhất</span>
-                                        <span>L</span>
-                                    </div>
-                                </div>
-
-                            </td>
-
-
-                            <td class="quantity">
-                                <div style="display:flex">
-                                    <button class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
-                                    <input type="text" value="2" class="quantity-input" min="1">
-                                    <button class="quantity-btn" onclick="increaseQuantity(this)">+</button>
-                                </div>
-
-                            </td>
-                            <td>150.000 VNĐ</td>
-                            <td>200.000 VNĐ</td>
-                            <td class="text-center">
-                                <button class="btn btn-danger w-100" style="margin-top :10px">Xóa</button>
-
-                            </td>
-                        </tr> *@
                     </tbody>
                 </table>
+                <div id="noDataMessage" style="display: none; text-align: center;">
+                    <img src="https://img.freepik.com/premium-vector/no-data-concept-illustration_86047-488.jpg?w=2000" alt="No products" style="width: 250px;">
+                </div>
             </div>
 
 
@@ -247,40 +185,21 @@
         <div class="col-md-4">
             <div class="filter-section" style=" box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;">
                 <h5>Tổng : <span id="totalPrice" class="price" style="font-size:18px;color:orangered">0 ₫</span> </h5>
-                <h5>Phí VAT (10%) : <span id="VAT_Price" class="price" style="font-size:18px;color:orangered">0 ₫</span></h5>
+                <h5>Phí VAT (5%) : <span id="VAT_Price" class="price" style="font-size:18px;color:orangered">0 ₫</span></h5>
                 <h5>Tổng hóa đơn : <span id="totalBill" class="price" style="font-size:18px;color:orangered">0 ₫</span></h5>
                 <button onclick="checkOut()" class="btn btn-success w-100" style="margin-top: 10px">Thanh toán</button>
             </div>
         </div>
-        <div class="col-md-12" style="margin-top: 20px;">
-            <div class="d-flex justify-content-between">
-                <h4 class="col-sm-6">Sản phẩm liên quan</h4>
-                <a class="col-sm-6 text-right " style="font-size:17px;color:#b81e20" href="#">Xem tất cả >></a>
+        <div class="col-sm-12" style="margin-top: 20px;">
+            <div style="display: table; width: 100%;">
+                <h4 style="display: table-cell; text-align: left; margin: 0;">Sản phẩm liên quan</h4>
+                <a style="display: table-cell; text-align: right; font-size: 17px; color: #b81e20;" href="/public/sanpham">Xem tất cả >></a>
             </div>
         </div>
 
 
-        <div class="col-md-12" style="margin-top:20px">
-            <div class="col-md-3 col-sm-4 col-12 mb-4">
-                <div class="card position-relative">
-                    <a href="#">
-                        <img src="https://product.hstatic.net/1000312752/product/atssc01-2__1__20655fc4113c41fc9da1c9fcc33f99fb.jpg" class="card-img-top product-img" alt="Sản phẩm 1">
-                    </a>
-                    <div class="discount-badge">-33%</div>
-                    <div class="card-body mt-3">
-                        <a href="">
-                            <h5 class="product-title text-center">Sản phẩm 1 abcxyuaaaaaaaaaaaaaaaaaa</h5>
-                            <p class="product-price text-center">250.000 VNĐ <del style="color:#333">450.000 VNĐ </del></p>
-                        </a>
-
-                        <div class="d-flex" style="float:right ;margin :20px 20px 20px 0">
-                            <button class="btn btn-outline-warning text-center">
-                                <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-12" style="margin-top:20px" id="lstLienQuan">
+           
         </div>
     </div>
 </div>

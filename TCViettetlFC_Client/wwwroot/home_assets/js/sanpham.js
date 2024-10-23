@@ -14,7 +14,7 @@
                     Avatar = item.image;
                 }
                 var price = 0;
-                debugger
+                
                 var discout = "";
                 var priceText = "";
                 if (item.discoutPercent != null && item.discoutPercent != "" && item.discout != 0) {

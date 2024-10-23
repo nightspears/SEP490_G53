@@ -37,15 +37,15 @@ namespace TCViettetlFC_Client.Controllers.Common
             string requestUri = "https://localhost:5000/api/Product/GetSanPhamById?id=" + id;
             var response = await _httpClient.GetAsync(requestUri);
 
-           ApiResponse newList = new ApiResponse();
+           ApiResponse ListData = new ApiResponse();
 
             if (response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();
-                newList = JsonConvert.DeserializeObject<ApiResponse>(jsonData);
+                ListData = JsonConvert.DeserializeObject<ApiResponse>(jsonData);
             }
           
-            return View(newList);
+            return View(ListData);
         }
 
 
