@@ -6593,7 +6593,7 @@ h6 {
 .header-main .sub-menu {
   list-style-type: none;
   position: absolute;
-  background: #dd2c2f;
+  background: #fff;
   top: 100%;
   height: auto;
   max-height: 0;
@@ -6608,9 +6608,23 @@ h6 {
   -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
           transform: translateX(-50%); }
+
+    .header-main .sub-menu li a:hover {
+        color: white !important;
+    }
+    .header-main .sub-menu li a {
+        color: black !important;
+    }
   .header-main .sub-menu li {
     width: 100%;
     position: relative; }
+    .header-main .sub-menu li:hover a {
+        color: white !important;
+    }
+    .header-main .sub-menu li:hover {
+        background: #dd2c2f;
+ 
+    }
     @media screen and (min-width: 992px) {
       .header-main .sub-menu li {
         padding: 5px 0; } }
@@ -9495,13 +9509,14 @@ a.blacklrnmore {
   margin: 10px 0; }
   .item-size ul li {
     display: inline-block;
-    height: 35px;
-    width: 35px;
+    height: 55px;
+    width: 55px;
     border: 1px solid #979da0;
     margin-right: 5px;
+    margin-bottom:5px;
     text-align: center;
     border-radius: 4px;
-    padding: 8px 0;
+    padding: 15px 0;
     font-family: "Open Sans", sans-serif;
     font-size: 14px;
     color: #979da0;

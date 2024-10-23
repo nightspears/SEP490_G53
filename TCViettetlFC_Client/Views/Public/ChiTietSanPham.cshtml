@@ -34,6 +34,73 @@
         justify-content: flex-start;
         align-items: center;
     }
+
+    .card {
+        border-radius: 10px;
+        border: none !important;
+        transition: transform 0.2s ease-in-out !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+        margin-bottom: 20px;
+        height: 390px;
+        max-height: 400px;
+        position: relative;
+    }
+
+    }
+
+    .card:hover {
+        transform: scale(1.05) !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .product-img {
+        height: 200px !important;
+        object-fit: cover !important;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        width: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    .product-title {
+        white-space: nowrap; /* Không xuống dòng */
+        overflow: hidden; /* Ẩn phần nội dung thừa */
+        text-overflow: ellipsis; /* Thêm dấu '...' khi nội dung bị cắt */
+        max-width: 350px; /* Chiều rộng tối đa của phần tử */
+        padding-left: 10px
+    }
+
+    .discount-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #eb3636;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 50px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .product-title {
+        white-space: nowrap; /* Không xuống dòng */
+        overflow: hidden; /* Ẩn phần nội dung thừa */
+        text-overflow: ellipsis; /* Thêm dấu '...' khi nội dung bị cắt */
+        max-width: 350px; /* Chiều rộng tối đa của phần tử */
+        padding-left: 10px;
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        color: #333 !important;
+    }
+
+    .product-price {
+        color: red !important;
+        font-size: 20px !important;
+    }
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
@@ -174,15 +241,13 @@
                             Mua ngay
                         </a>
                   
-                    <div class=product-list>
-                        <h5>Mô tả</h5>
-                        <p id="moTa" style="font-size:19px;margin-top:15px">@Model.Product.Description</p>
-                        <img src="~/image/imagelogo/tablesize.webp" />
-                    </div>
+                 
 
                   
                 </div>
             </div>
+            
+
            @*  <div class=shop-feedback>
                 <h5>
                     customer feedback <a class=feedbackCust>
@@ -218,6 +283,67 @@
                     <div class=form-message></div>
                 </form>
             </div> *@
+        </div>
+        <div class= "product-list col-md-12" >
+            <h5 style="font-size:35px">Mô tả</h5>
+            <p id="moTa" style="font-size:19px;margin-top:15px">@Model.Product.Description</p>
+            <img src="~/image/imagelogo/tablesize.webp" />
+        </div>
+        <div class="col-sm-12" style="margin-top: 20px;">
+            <div style="display: table; width: 100%;">
+                <h4 style="display: table-cell; text-align: left; margin: 0;">Sản phẩm liên quan</h4>
+                <a style="display: table-cell; text-align: right; font-size: 17px; color: #b81e20;" href="/public/sanpham">Xem tất cả >></a>
+            </div>
+        </div>
+
+
+        <div class="col-md-12" style="margin-top:20px">
+            @if(Model.LienQuan.Count > 0)
+            {
+                foreach (var p in Model.LienQuan)
+                {
+                    <div class="col-md-4 col-sm-6 col-lg-3 mb-4">
+                        <div class="card position-relative">
+                            <a href="/public/ChiTietSanPham/@p.ProductId">
+                                <img src="@p.Image" class="card-img-top product-img" alt="@p.ProductName">
+                            </a> 
+                            @if (p.discoutPercent != null && p.discoutPercent != 0)
+                            {
+                                <div class="discount-badge">-@p.discoutPercent%</div>
+                            }
+                            <div class="card-body mt-3">
+                                <a href="/public/ChiTietSanPham/@p.ProductId">
+                                    <h5 class="product-title text-center">@p.ProductName</h5>
+
+                                    @if (p.discoutPercent != null && p.discoutPercent != 0)
+                                    {
+                                        var price = p.Price  - ( p.Price * p.discoutPercent/100);
+                                        <p class="product-price price text-center" data-price="@price">
+                                            @price
+                                            <del class="price" data-price="@p.Price" style="color:#333"></del>
+                                        </p>
+                                    }
+                                    else 
+                                    {
+                                      
+                                        <p class="product-price price text-center" data-price="@p.Price">
+                                            @p.Price
+                                        </p>
+                                    }
+                                   
+                                </a>
+
+                                <div class="d-flex" style="float:right ;margin :40px 20px 20px 0">
+                                    <button class=" text-center" style="padding: 11px 20px 7px 20px; border:none; border-radius:5px">
+                                        <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;" onclick="AddToCart(${item.productId})"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+           
         </div>
     </div>
 </section>

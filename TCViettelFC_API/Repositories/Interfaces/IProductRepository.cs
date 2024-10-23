@@ -16,6 +16,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<JsonResult> GetDataJsonAsync();
         Task<List<ProductResponse>> GetSanPhamAsync();
         Task<JsonResult> GetSanPhamByIdAsync(int id);
+        Task<JsonResult> GetLienQuanProductAsync(List<int> lstID);
 
 
     }

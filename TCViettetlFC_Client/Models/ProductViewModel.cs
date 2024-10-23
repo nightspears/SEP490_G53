@@ -77,6 +77,9 @@
         public List<ProductFileViewModel> pFile { get; set; }
         public List<Player> players { get; set; }
 
-        public ProductViewModel Product { get; set; }  
+        public ProductViewModel Product { get; set; }
+        public List< ProductViewModel> LienQuan { get; set; }
+
+        
     }
 }
