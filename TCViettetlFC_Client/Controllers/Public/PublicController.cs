@@ -47,11 +47,28 @@ namespace TCViettetlFC_Client.Controllers.Common
           
             return View(newList);
         }
+        
 
 
         public IActionResult GioHang()
         {
             return View();
+        }
+        // xem tin tuc
+        public async Task<IActionResult> News()
+        {
+            string requestUri = "https://localhost:5000/api/New/GetAllNews";
+            var response = await _httpClient.GetAsync(requestUri);
+
+            List<AddNewViewModel> newsList = new();
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonData = await response.Content.ReadAsStringAsync();
+                newsList = JsonConvert.DeserializeObject<List<AddNewViewModel>>(jsonData);
+            }
+
+            return View(newsList);
         }
     }
 }

@@ -60,7 +60,7 @@ namespace TCViettelFC_API.Controllers
 
             try
             {
-                var data = await _product.GetSanPhamByIdAsync(id);
+                var data = await _product.GetProductByIdAsync(id);
                 return data;
 
             }
