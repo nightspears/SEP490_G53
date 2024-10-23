@@ -17,8 +17,6 @@ public partial class OrderProduct
 
     public int? AddressId { get; set; }
 
-    public int? PlayerId { get; set; }
-
     public int? Status { get; set; }
 
     public virtual Address? Address { get; set; }
@@ -28,8 +26,6 @@ public partial class OrderProduct
     public virtual ICollection<OrderProductDetail> OrderProductDetails { get; set; } = new List<OrderProductDetail>();
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
-
-    public virtual Player? Player { get; set; }
 
     public virtual ICollection<Shipment> Shipments { get; set; } = new List<Shipment>();
 }

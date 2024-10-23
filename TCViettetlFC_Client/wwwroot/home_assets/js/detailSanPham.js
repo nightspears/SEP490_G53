@@ -79,7 +79,7 @@ function AddToCart(id) {
         var soLuong = 1;
         debugger
         var cartItems = getCartFromLocalStorage();
-
+        debugger
         var existingProduct = cartItems.find(function (item) {
             return item.productId === productId && item.size === size;
         });

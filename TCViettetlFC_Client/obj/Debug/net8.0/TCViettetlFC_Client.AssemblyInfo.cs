@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TCViettetlFC_Client")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48d05164d6a3dad11e8d359f68842bd48d12e91f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+51d4f8be490963df4a14956d1e115fa5db28c687")]
 [assembly: System.Reflection.AssemblyProductAttribute("TCViettetlFC_Client")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TCViettetlFC_Client")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

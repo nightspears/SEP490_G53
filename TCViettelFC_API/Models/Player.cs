@@ -23,7 +23,7 @@ public partial class Player
 
     public int? Status { get; set; }
 
-    public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+    public virtual ICollection<OrderProductDetail> OrderProductDetails { get; set; } = new List<OrderProductDetail>();
 
     public virtual Season? Season { get; set; }
 }

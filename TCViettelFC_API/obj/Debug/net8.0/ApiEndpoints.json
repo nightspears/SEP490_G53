@@ -402,6 +402,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TCViettelFC_API.Controllers.CheckoutController",
+    "Method": "CreateOrder",
+    "RelativePath": "api/Checkout/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "TCViettelFC_API.Dtos.CheckOut.CreateOrderRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
     "Method": "LoginAsync",
     "RelativePath": "api/Customer/login",

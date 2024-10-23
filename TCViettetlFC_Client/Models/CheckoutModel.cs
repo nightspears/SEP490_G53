@@ -27,6 +27,7 @@
         public string Avartar { get; set; }
         public int Quantity { get; set; }
         public int playerId { get; set; }
+        public int shirtNumber { get; set; }
 
     }
 }
