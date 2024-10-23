@@ -7,13 +7,17 @@ namespace TCViettelFC_Client.ApiServices
     public class ApiHelper : IApiHelper
     {
         private readonly HttpClient _httpClient;
-        public ApiHelper(IHttpClientFactory httpClientFactory)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly string? token;
+        public ApiHelper(IHttpClientFactory httpClientFactory, IHttpContextAccessor httpContextAccessor)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
-        }
-        public async Task<T> GetApiResponseAsync<T>(string endpoint, string token)
-        {
+            _httpContextAccessor = httpContextAccessor;
+            token = _httpContextAccessor.HttpContext!.Request.Cookies["AuthToken"];
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        }
+        public async Task<T> GetApiResponseAsync<T>(string endpoint)
+        {
             var response = await _httpClient.GetAsync(endpoint);
             if (response.IsSuccessStatusCode)
             {
