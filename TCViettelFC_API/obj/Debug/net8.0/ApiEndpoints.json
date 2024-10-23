@@ -407,6 +407,16 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "SendTicketViaMailAsync",
+    "RelativePath": "api/Customer/sendmailticket",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
     "Method": "UpdateProfile",
     "RelativePath": "api/Customer/updateprofile",
     "HttpMethod": "PUT",
@@ -432,6 +442,22 @@
       {
         "Name": "request",
         "Type": "TCViettelFC_API.Dtos.VerifyConfirmationCodeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "VerifyTicketAsync",
+    "RelativePath": "api/Customer/verifyticket/{ticketId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ticketId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

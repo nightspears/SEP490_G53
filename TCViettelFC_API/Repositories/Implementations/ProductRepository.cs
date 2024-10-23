@@ -1,14 +1,5 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using TCViettelFC_API.Dtos.Category;
-using TCViettelFC_API.Dtos.Matches;
 using TCViettelFC_API.Dtos.Product;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -36,7 +27,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                     Product product = new Product();
                     {
                         product.ProductName = pro.ProductName;
-                        product.PlayerId = pro.PlayerId;
+                        //product.PlayerId = pro.PlayerId;
                         product.SeasonId = pro.SeasonId;
                         product.CategoryId = pro.CategoryId;
                         product.Description = pro.Description;
@@ -82,8 +73,8 @@ namespace TCViettelFC_API.Repositories.Implementations
                             }
                         }
                     }
-                    
-                  
+
+
                     dbContextTransaction.Commit();
                 }
                 catch (Exception ex)
@@ -149,7 +140,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                                Price = pro.Price,
                                ProductId = pro.ProductId,
                                Status = pro.Status,
-                               Size = pro.Size ,
+                               Size = pro.Size,
                                Material = pro.Material,
                                Description = pro.Description
 
@@ -181,7 +172,7 @@ namespace TCViettelFC_API.Repositories.Implementations
 
                     // Update product properties
                     product.ProductName = pro.ProductName ?? product.ProductName;
-                    product.PlayerId = pro.PlayerId ?? product.PlayerId;
+                    //  product.PlayerId = pro.PlayerId ?? product.PlayerId;
                     product.SeasonId = pro.SeasonId ?? product.SeasonId;
                     product.CategoryId = pro.CategoryId ?? product.CategoryId;
                     product.Description = pro.Description ?? product.Description;
@@ -256,7 +247,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                                            .ToList();
             //lấy mùa giải
             List<Season> season = _context.Seasons
-                                           .Where(x => x.Status ==1 )
+                                           .Where(x => x.Status == 1)
                                            .ToList();
             var data = new
             {

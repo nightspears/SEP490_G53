@@ -1,14 +1,5 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 using TCViettelFC_API.Dtos.Discount;
-using TCViettelFC_API.Dtos.Season;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
 
@@ -29,13 +20,13 @@ namespace TCViettelFC_API.Repositories.Implementations
             Discount discount = new Discount();
             {
                 discount.DiscountName = _discount.DiscountName;
-                discount.DiscountPercent = _discount.DiscountPercent;
+                // discount.DiscountPercent = _discount.DiscountPercent;
                 discount.Status = _discount.Status;
                 discount.ValidFrom = _discount.ValidFrom;
                 discount.ValidUntil = _discount.ValidUntil;
-                  
+
             };
-          
+
             try
             {
                 await _context.Discounts.AddAsync(discount);
@@ -49,13 +40,13 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task DeleteDiscountAsync(int id)
         {
             var discount = await _context.Discounts.FindAsync(id);
-            if (discount == null|| discount.Status == 0) throw new KeyNotFoundException("Discount not found");
+            if (discount == null || discount.Status == 0) throw new KeyNotFoundException("Discount not found");
 
             try
             {
                 discount.Status = 0;
                 await _context.SaveChangesAsync();
-               
+
             }
             catch (Exception ex)
             {
@@ -63,7 +54,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 throw new Exception("Delete failed", ex);
             }
         }
-      
+
 
         public async Task<List<Discount>> GetDiscountAsync()
         {
@@ -74,16 +65,17 @@ namespace TCViettelFC_API.Repositories.Implementations
 
                 return discounts;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 throw new Exception(ex.Message);
             }
-           
+
         }
         public async Task<Discount> GetDiscountByIdAsync(int id)
         {
             Discount discount = new Discount();
             discount = await _context.Discounts.FirstOrDefaultAsync(x => x.DiscountId == id && x.Status == 1);
-              
+
             if (discount == null)
             {
                 throw new Exception("Discount not found");
@@ -105,10 +97,10 @@ namespace TCViettelFC_API.Repositories.Implementations
 
                 // Update Season properties
                 discount.DiscountName = discountDto.DiscountName ?? discount.DiscountName;
-                discount.Status = discountDto.Status ?? discount.Status ;
+                discount.Status = discountDto.Status ?? discount.Status;
                 discount.ValidFrom = discountDto.ValidFrom ?? discount.ValidFrom;
                 discount.ValidUntil = discountDto.ValidUntil ?? discount.ValidUntil;
-                discount.DiscountPercent = discountDto.DiscountPercent ?? discount.DiscountPercent;
+                //discount.DiscountPercent = discountDto.DiscountPercent ?? discount.DiscountPercent;
 
                 await _context.SaveChangesAsync();
             }

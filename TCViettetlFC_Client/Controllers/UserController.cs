@@ -77,6 +77,10 @@ namespace TCViettetlFC_Client.Controllers
                     {
                         return RedirectToAction("Home", "Staff");
                     }
+                    else if (token.roleId == 3)
+                    {
+                        return RedirectToAction("Home", "Entry");
+                    }
                     else
                     {
                         return RedirectToAction("Login");

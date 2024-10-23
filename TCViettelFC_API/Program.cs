@@ -110,6 +110,8 @@ builder.Services.AddAuthorization(options =>
     // Policy cho staff
     options.AddPolicy("staff", policy =>
         policy.RequireClaim("RoleId", "1"));
+    options.AddPolicy("entry", policy =>
+      policy.RequireClaim("RoleId", "3"));
 });
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.InstallerServicesInAssembly(builder.Configuration);

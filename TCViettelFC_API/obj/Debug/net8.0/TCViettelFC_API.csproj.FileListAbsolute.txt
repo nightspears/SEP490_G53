@@ -322,3 +322,4 @@ D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.OData.Co
 D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.OData.Edm.dll
 D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.OData.ModelBuilder.dll
 D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\Microsoft.Spatial.dll
+D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\QRCoder.dll
