@@ -12,67 +12,262 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        #shipment-rate {
-            display: flex; /* Use flexbox for the main container */
-            flex-wrap: wrap; /* Allow items to wrap onto the next line if necessary */
-            margin-top: 20px; /* Space above the shipment rates */
-        }
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
 
-        .shipment-rate-item {
-            border: 1px solid #ccc; /* Light gray border */
-            border-radius: 8px; /* Rounded corners */
-            padding: 10px; /* Inner padding */
-            margin-right: 15px; /* Space between items */
-            margin-bottom: 10px; /* Space below the items */
-            display: flex; /* Use flexbox for the item layout */
-            align-items: center; /* Center items vertically */
-            width: 150px; /* Fixed width for each item */
-        }
+.container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+}
 
-        .shipment-rate-label {
-            display: flex; /* Flexbox for label layout */
-            flex-direction: column; /* Stack elements vertically */
-            flex-grow: 1; /* Allow label to grow */
-        }
+/* Header Styles */
 
-        input[type="radio"] {
-            margin-bottom: 5px; /* Space between radio button and content */
-        }
 
-        .card {
-            border: none; /* Remove default card border */
-            padding: 0; /* Remove padding for card */
-            text-align: center; /* Center text in the card */
-        }
+.header .logo {
+    max-width: 200px; /* Adjusted size for better visibility */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 15px; /* More space below the logo */
+    transition: transform 0.3s ease; /* Smooth scaling effect */
+}
 
-        .card-title {
-            font-weight: bold; /* Make the title bold */
-            margin: 0; /* Remove margin */
-            font-size: 0.9em; /* Smaller font size */
-        }
+.header .logo:hover {
+    transform: scale(1.05); /* Scale up on hover */
+}
 
-        .carrier-logo {
-            display: block; /* Ensure the image behaves as a block */
-            margin: 5px auto; /* Center the image */
-            max-width: 80px; /* Limit image width */
-            max-height: 40px; /* Limit image height */
-        }
 
-        .expected-delivery {
-            font-size: 0.8em; /* Smaller font */
-            color: #555; /* Gray color for the expected delivery text */
-            margin: 0; /* Remove margin */
-        }
 
-        .total-fee {
-            font-size: 1em; /* Adjust font size */
-            color: #28a745; /* Green color for the total fee */
-        }
+
+/* Form Styles */
+h5 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Button Styles */
+.btn-primary, .btn-secondary {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    padding: 8px 12px; /* Specific padding for secondary buttons */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+}
+
+/* List Styles */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+li {
+    padding: 10px 0;
+}
+
+/* Responsive Styles */
+@@media (max-width: 768px) {
+    .col-md-7, .col-md-5 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .container {
+        padding: 15px;
+    }
+}
+
+/* Scrollable Border Container */
+.border {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 400px; /* Set a maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Flexbox Styles */
+.d-flex.align-items-center {
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.d-flex.align-items-center:last-child {
+    border-bottom: none; /* Remove border for the last item */
+}
+
+.d-flex.align-items-center:hover {
+    background-color: #f9f9f9; /* Hover effect */
+}
+
+/* Image Styles */
+img {
+    border-radius: 4px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.d-flex .me-3 {
+    margin-right: 15px;
+}
+
+.d-flex div {
+    display: flex;
+    flex-direction: column;
+}
+
+.d-flex div p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.d-flex div span {
+    font-weight: bold;
+    color: #007bff; /* Primary blue color for emphasis */
+}
+
+/* Responsive Adjustments */
+@@media (max-width: 576px) {
+    .d-flex.align-items-center {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .d-flex .me-3 {
+        margin-bottom: 10px;
+    }
+
+    .d-flex div span {
+        margin-top: 5px;
+    }
+}
+
+/* Container for shipment rates */
+#shipment-rate {
+    margin-top: 15px; /* Reduced top margin */
+}
+
+/* Individual shipment rate item */
+.shipment-rate-item {
+    margin-bottom: 10px; /* Reduced bottom margin */
+}
+
+/* Shipment rate label */
+.shipment-rate-label {
+    display: block; /* Block display for entire area */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Card styling */
+.card {
+    background-color: #f9f9f9; /* Light background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 6px; /* Slightly rounded corners */
+    padding: 10px; /* Reduced inner spacing */
+    transition: transform 0.2s, box-shadow 0.2s; /* Animation for hover effect */
+    position: relative; /* Position for pseudo-elements */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-4px); /* Slight lift on hover */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Card title styling */
+.card-title {
+    font-size: 1rem; /* Reduced font size */
+    margin: 0 0 8px; /* Reduced margin */
+}
+
+/* Carrier logo styling */
+.carrier-logo {
+    max-width: 60px; /* Smaller max width for logos */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 8px; /* Space below logo */
+}
+
+/* Expected delivery text */
+.expected-delivery {
+    font-size: 0.85rem; /* Smaller font size */
+    color: #666; /* Grey color */
+    margin: 4px 0; /* Reduced margin */
+}
+
+/* Total fee styling */
+.total-fee {
+    font-size: 1rem; /* Reduced font size */
+    color: #28a745; /* Green color */
+    font-weight: bold; /* Bold text */
+    position: absolute; /* Position within card */
+    bottom: 8px; /* Align to bottom */
+    right: 10px; /* Align to right */
+}
+
+/* Radio input styling */
+.shipment-option {
+    display: none; /* Hide default radio button */
+}
+
+/* Radio input checked styling */
+.shipment-option:checked + .card {
+    border-color: #007bff; /* Highlight border on selection */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Highlight shadow on selection */
+}
+
+
 
 
     </style>
 </head>
+
 <body>
+  <header class="header">
+    <div class=" text-center">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/The_Cong-Viettel_FC_logo.svg/1200px-The_Cong-Viettel_FC_logo.svg.png" alt="TC-VIETTELFC Logo" class="logo">
+    </div>
+</header>
+
     <form asp-action="SubmitCheckout" method="post">
         <div class="container my-5">
             <div class="row">
@@ -134,35 +329,54 @@
 
                     </div>
                     <div id="shipment-rate"></div> <!-- Container for shipment rates -->
-                    <h5>Thanh toán</h5>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="payment" id="payment1" value="ZaloPay">
-                        <label class="form-check-label" for="payment1">Thanh toán qua ZaloPay</label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="payment" id="payment2" value="ATM">
-                        <label class="form-check-label" for="payment2">Thanh toán online qua ATM/VISA/MASTERCARD</label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="payment" id="payment3" value="MoMo">
-                        <label class="form-check-label" for="payment3">Thanh toán qua Ví điện tử MoMo</label>
-                    </div>
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="radio" name="payment" id="payment4" value="BankTransfer">
-                        <label class="form-check-label" for="payment4">Chuyển khoản qua ngân hàng</label>
-                    </div>
-
-                    <h5>Đơn hàng (1 sản phẩm)</h5>
+                      <h5>Thanh toán</h5>
+                      <div class="form-check mb-2">
+                          <input class="form-check-input" type="radio" name="payment" id="payment1" value="ZaloPay">
+                          <label class="form-check-label" for="payment1">Thanh toán qua ZaloPay</label>
+                      </div>
+                      <div class="form-check mb-2">
+                          <input class="form-check-input" type="radio" name="payment" id="payment2" value="ATM">
+                          <label class="form-check-label" for="payment2">Thanh toán online qua ATM/VISA/MASTERCARD</label>
+                      </div>
+                      <div class="form-check mb-2">
+                          <input class="form-check-input" type="radio" name="payment" id="payment3" value="MoMo">
+                          <label class="form-check-label" for="payment3">Thanh toán qua Ví điện tử MoMo</label>
+                      </div>
+                      <div class="form-check mb-3">
+                          <input class="form-check-input" type="radio" name="payment" id="payment4" value="BankTransfer">
+                          <label class="form-check-label" for="payment4">Chuyển khoản qua ngân hàng</label>
+                      </div>
+                    <h5>Order Details (@Model.checkoutItems.Count() sản phẩm)</h5>
                     <div class="border p-3 mb-3">
-                        <div class="d-flex align-items-center">
-                            <img src="https://via.placeholder.com/50" alt="Product Image" class="me-3">
-                            <div>
-                                <p class="mb-0">Áo Thi Đấu Bóng Đá CLB Sông Lam Nghệ An 2023/2024 Grand Sport Trắng</p>
-                                <span>970.000đ</span>
+                        @foreach (var item in Model.checkoutItems)
+                        {
+                            <div class="d-flex align-items-center">
+                                <img src="@(!string.IsNullOrEmpty(item.Avartar) ? item.Avartar : "https://via.placeholder.com/50")"
+                                     alt="@item.nameProduct"
+                                     class="me-3"
+                                     style="width: 50px; height: 50px;">
+                                <div>
+                                    <p class="mb-0">Tên Sản Phẩm: @item.nameProduct</p>
+                                    <p class="mb-0"> Mã Code In Số Áo : @(item.playerId > item.shirtNumber ? item.playerId : item.shirtNumber)</p>
+                                    <p class="mb-0">Kích Cỡ: @item.size</p>
+                                    <p class="mb-0">Số lượng: @item.Quantity</p>
+                                    <span>Đơn Giá: @item.Price.ToString("N0")đ</span>
+                                    @{
+                                        var totalPrice = (item.Price * item.Quantity).ToString("N0");
+                                    }
+                                    <span>Tổng: @totalPrice đ</span
+                                    <!-- Hidden inputs for each item to send with the form -->
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].ProductId" value="@item.ProductId" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].nameProduct" value="@item.nameProduct" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].Price" value="@item.Price" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].size" value="@item.size" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].Avartar" value="@item.Avartar" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].Quantity" value="@item.Quantity" />
+                              <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].playerId" value="@(item.playerId > item.shirtNumber ? item.playerId : item.shirtNumber)" />
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
+                        }
+                    </div>            <div class="mb-3">
                         <input type="text" class="form-control" placeholder="Nhập mã giảm giá">
                         <button class="btn btn-secondary mt-2">Áp dụng</button>
                     </div>
@@ -174,9 +388,10 @@
     </li>
     <li class="d-flex justify-content-between fw-bold">
         <span>Tổng cộng</span>
-                            <span id="totalAmountDisplay">970.000đ</span>
+
+                            <span id="totalAmountDisplay">@Model.TotalAmount.ToString("N0")đ</span>
                             <!-- Hidden input to store the total amount -->
-                            <input type="hidden" name="TotalAmount" id="totalAmount" value="970000" />
+                            <input type="hidden" name="TotalAmount" id="totalAmount" value= @Model.TotalAmount />
     </li>
 </ul>
                     <button class="btn btn-primary w-100">ĐẶT HÀNG</button>
@@ -365,8 +580,9 @@
                 // Update the shipping fee display
                 document.getElementById('shippingFee').textContent = `${shippingFee.toLocaleString('vi-VN')}đ`;
 
+
                 // Calculate the new total
-                const initialTotal = 970000; // Replace with your actual initial total
+                const initialTotal = @Model.TotalAmount ; // Replace with your actual initial total
                 const newTotal = initialTotal + shippingFee;
 
                 // Update the total amount display

@@ -1,11 +1,16 @@
 ﻿function loadData() {
+    debugger
+    console.error('11');
     $.ajax({
+        
         url: "https://localhost:5000/api/Product/GetSanPham",
         method: "GET",
         dataType: "json",
         success: function (res) {
+            console.error('1');
             debugger;
             var container = $('#lstSanPham').empty();
+            console.error('2');
             $.each(res, function (index, item) {
                 var Avatar = "";
                 if (item.image == null || item.image == "" || item.image == undefined) {
@@ -14,7 +19,7 @@
                     Avatar = item.image;
                 }
                 var price = 0;
-                debugger
+                
                 var discout = "";
                 var priceText = "";
                 if (item.discoutPercent != null && item.discoutPercent != "" && item.discout != 0) {
@@ -58,9 +63,15 @@
 
         },
         error: function (res) {
+            console.error('Error fetching products:', res); // Log the error
+            debugger;
         }
+
     });
 }
+
+
+
 $(document).ready(function () {
     loadData();
     debugger

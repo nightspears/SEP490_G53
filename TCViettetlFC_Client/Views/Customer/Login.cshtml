@@ -30,6 +30,10 @@
                                 <a class="forgot-link" asp-action="Forgot">Quên mật khẩu?</a>
                             </div>
                             <button class="btn btn-primary login-btn" type="submit">Đăng nhập</button>
+                            @if (ViewBag.Error != null)
+                            {
+                                <h4 style="color:red;">@ViewBag.Error</h4>
+                            }
                             <div class="text-center dont-have">Không có tài khoản? <a asp-action="Register">Đăng ký</a></div>
                         </form>
                     </div>

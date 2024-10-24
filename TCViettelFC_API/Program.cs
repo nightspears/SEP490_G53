@@ -5,6 +5,7 @@ using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using TCViettelFC_API.Installers;
 using TCViettelFC_API.Mapper;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Implementations;
@@ -73,6 +74,7 @@ builder.Services.AddScoped<ICloudinarySetting, CloudinarySettings>();
 builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
 builder.Services.AddScoped<IDiscountRepository, DiscoutRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICheckoutRepository, CheckoutRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
@@ -110,9 +112,12 @@ builder.Services.AddAuthorization(options =>
 
     // Policy cho staff
     options.AddPolicy("staff", policy =>
-        policy.RequireClaim("RoleId", "1")); // Thêm claim cho staff
+        policy.RequireClaim("RoleId", "1"));
+    options.AddPolicy("entry", policy =>
+      policy.RequireClaim("RoleId", "3"));
 });
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.InstallerServicesInAssembly(builder.Configuration);
 
 var app = builder.Build();
 app.UseCors("AllowMvcClient");

@@ -18,11 +18,57 @@ namespace TCViettetlFC_Client.Controllers
             _httpClient = httpClientFactory.CreateClient("ApiClient");
             _feedbackService = feedbackService;
         }
+        private async Task<List<TicketOrdersViewModel>> GetAllTicketOrders()
 
-
+        {
+            return await _apiHelper.GetApiResponseAsync<List<TicketOrdersViewModel>>("order/getticketorders");
+        }
+        private async Task<List<OrderedTicketDto>> GetOrderedTicket(int id)
+        {
+            return await _apiHelper.GetApiResponseAsync<List<OrderedTicketDto>>($"order/getorderedticket/{id}");
+        }
+        private async Task<List<OrderedSuppItemDto>> GetOrderedSupp(int id)
+        {
+            return await _apiHelper.GetApiResponseAsync<List<OrderedSuppItemDto>>($"order/getorderedsupp/{id}");
+        }
+        public async Task<IActionResult> TicketOrders()
+        {
+            var token = Request.Cookies["AuthToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "User");
+            }
+            ViewBag.Orders = await GetAllTicketOrders();
+            return View();
+        }
         public IActionResult Home()
         {
+            var token = Request.Cookies["AuthToken"]; // Change this to AuthToken
+            var roleId = Request.Cookies["RoleId"]; // Keep this for role verification
+
+            // Check if token is missing or if roleId doesn't match
+            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(roleId) || roleId != "1")
+            {
+                return RedirectToAction("Login", "User");
+            }
             return View();
+        }
+
+        public async Task<IActionResult> TicketOrderDetail(int id)
+        {
+            var token = Request.Cookies["AuthToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "User");
+            }
+            var sup = await GetOrderedSupp(id);
+            var ticket = await GetOrderedTicket(id);
+            var viewModel = new TicketOrderDetailModel
+            {
+                Sup = sup,
+                Ticket = ticket
+            };
+            return View(viewModel);
         }
 
         public async Task<IActionResult> StaffManagermentNew()

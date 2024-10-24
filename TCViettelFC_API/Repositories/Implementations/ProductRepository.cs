@@ -131,7 +131,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                            SeasonName = season.SeasonName,
                            Image = pro.Avatar,
                            Price = pro.Price,
-                           discoutPercent = dis.DiscountPercent ,
+                           discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
                            ProductId = pro.ProductId,
                            Status = pro.Status,
                        }).ToList();
@@ -141,17 +141,19 @@ namespace TCViettelFC_API.Repositories.Implementations
 
         public async Task<List<ProductResponse>> GetSanPhamAsync()
         {
+            _context.Database.ExecuteSqlRaw("EXEC UpdateDiscountStatus");
+
             List<ProductResponse> product = new List<ProductResponse>();
             product = (from pro in _context.Products
                        join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
                        from dis in discout.DefaultIfEmpty()
-                       where pro.Status == 1 && dis.Status == 1
+                       where pro.Status == 1 
                        select new ProductResponse
                        {
                            ProductName = pro.ProductName,
                            Image = pro.Avatar,
                            Price = pro.Price,
-                           discoutPercent= dis.DiscountPercent ,
+                           discoutPercent= dis!= null && dis.Status == 1 ? dis.DiscountPercent : null ,
                            ProductId = pro.ProductId,
                            Status = pro.Status,
                        }).ToList();
@@ -178,7 +180,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                                Price = pro.Price,
                                ProductId = pro.ProductId,
                                Status = pro.Status,
-                               discoutPercent = dis.DiscountPercent,
+                               discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
                                Size = pro.Size ,
                                Material = pro.Material,
                                Description = pro.Description
@@ -217,7 +219,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                                Price = pro.Price,
                                ProductId = pro.ProductId,
                                Status = pro.Status,
-                               discoutPercent = dis.DiscountPercent,
+                               discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
                                Size = pro.Size,
                                Material = pro.Material,
                                Description = pro.Description
@@ -227,11 +229,28 @@ namespace TCViettelFC_API.Repositories.Implementations
 
             var proFile = _context.ProductFiles.Where(x => x.Status == 1 && x.ProductId == id).ToList();
             var player = _context.Players.Where(p => p.Status == 1 && p.SeasonId == product.SeasonId).ToList();
+
+            var lstLienQuan = _context.Products.Include(p => p.Discount)
+                .Where(x => x.CategoryId == product.CategoryId && x.ProductId != id && x.Status == 1)
+                .Select( v => new ProductResponse
+            {
+                    ProductName = v.ProductName,
+                    Image = v.Avatar,
+                    Price = v.Price,
+                    ProductId = v.ProductId,
+                    Status = v.Status,
+                    discoutPercent = v.Discount != null && v.Discount.Status == 1 ? v.Discount.DiscountPercent : null,
+                    Size = v.Size,
+                    Material = v.Material,
+                    Description = v.Description
+                }).Take(12).ToList();
+
             var data = new
             {
                 Product = product,
                 PFile = proFile,
                 players = player,
+                LienQuan = lstLienQuan,
             };
 
             return new JsonResult(data);
@@ -324,6 +343,46 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 Cate = cate,
                 Season = season
+            };
+
+            return new JsonResult(data);
+        }
+
+        public async Task<JsonResult> GetLienQuanProductAsync(List<int> lstID)
+        {
+            List<ProductResponse> products = new List<ProductResponse>();
+
+            if (lstID.Count > 0) {
+                 products = _context.Products.Include(z => z.Discount).Where(x => !lstID.Contains(x.ProductId) && x.Status == 1).Select(x => new ProductResponse
+                 {
+                     ProductId = x.ProductId,
+                     ProductName = x.ProductName,
+                     Price = x.Price,
+                     discoutPercent = x.Discount != null && x.Discount.Status ==1 ? x.Discount.DiscountPercent : null ,
+                     Size = x.Size,
+                     Image = x.Avatar,
+                     Status = x.Status,
+
+                 }).ToList();
+            }
+            else
+            {
+                products = _context.Products.Include(z => z.Discount).Where(x => x.Status == 1).Select(x => new ProductResponse
+                {
+                    ProductId = x.ProductId,
+                    ProductName = x.ProductName,
+                    Price = x.Price,
+                    discoutPercent = x.Discount != null && x.Discount.Status == 1 ? x.Discount.DiscountPercent : null,
+                    Size = x.Size,
+                    Image = x.Avatar,
+                    Status = x.Status,
+
+                }).ToList();
+            }
+           
+            var data = new
+            {
+                Products = products,
             };
 
             return new JsonResult(data);
