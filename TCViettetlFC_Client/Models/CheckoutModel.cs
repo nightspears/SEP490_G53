@@ -9,9 +9,12 @@
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
-        public string City { get; set; }
-        public string District { get; set; }
-        public string Ward { get; set; }
+        public string CityId { get; set; }
+        public string CityName { get; set; }
+        public string DistrictId { get; set; }
+        public string DistrictName { get; set; }
+        public string WardId { get; set; }
+        public string WardName { get; set; }
         public string ?Notes { get; set; }
         public int TotalAmount { get; set; }
         public string SelectedShipping { get; set; }

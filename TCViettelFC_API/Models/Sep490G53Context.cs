@@ -21,6 +21,8 @@ public partial class Sep490G53Context : DbContext
 
     public virtual DbSet<Customer> Customers { get; set; }
 
+    public virtual DbSet<CustomersAccount> CustomersAccounts { get; set; }
+
     public virtual DbSet<Discount> Discounts { get; set; }
 
     public virtual DbSet<Feedback> Feedbacks { get; set; }
@@ -42,6 +44,8 @@ public partial class Sep490G53Context : DbContext
     public virtual DbSet<OrderedTicket> OrderedTickets { get; set; }
 
     public virtual DbSet<Payment> Payments { get; set; }
+
+    public virtual DbSet<PersonalAddress> PersonalAddresses { get; set; }
 
     public virtual DbSet<Player> Players { get; set; }
 
@@ -66,7 +70,7 @@ public partial class Sep490G53Context : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-{
+    {
         var config = new ConfigurationBuilder()
           .AddJsonFile("appsettings.json")
           .Build();
@@ -88,15 +92,24 @@ public partial class Sep490G53Context : DbContext
             entity.Property(e => e.City)
                 .HasMaxLength(100)
                 .HasColumnName("city");
+            entity.Property(e => e.CityName)
+                .HasMaxLength(100)
+                .HasColumnName("city_name");
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
             entity.Property(e => e.DetailedAddress).HasColumnName("detailed_address");
             entity.Property(e => e.District)
                 .HasMaxLength(100)
                 .HasColumnName("district");
+            entity.Property(e => e.DistrictName)
+                .HasMaxLength(100)
+                .HasColumnName("district_name");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.Ward)
                 .HasMaxLength(100)
                 .HasColumnName("ward");
+            entity.Property(e => e.WardName)
+                .HasMaxLength(100)
+                .HasColumnName("ward_name");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Addresses)
                 .HasForeignKey(d => d.CustomerId)
@@ -130,6 +143,30 @@ public partial class Sep490G53Context : DbContext
             entity.HasKey(e => e.CustomerId).HasName("PK__Customer__CD65CB851BEBD72A");
 
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
+            entity.Property(e => e.AccountId).HasColumnName("account_id");
+            entity.Property(e => e.Email)
+                .HasMaxLength(255)
+                .HasColumnName("email");
+            entity.Property(e => e.FullName)
+                .HasMaxLength(255)
+                .HasColumnName("full_name");
+            entity.Property(e => e.Phone)
+                .HasMaxLength(20)
+                .HasColumnName("phone");
+            entity.Property(e => e.Status).HasColumnName("status");
+
+            entity.HasOne(d => d.Account).WithMany(p => p.Customers)
+                .HasForeignKey(d => d.AccountId)
+                .HasConstraintName("FK_Customers_Customers_Account");
+        });
+
+        modelBuilder.Entity<CustomersAccount>(entity =>
+        {
+            entity.HasKey(e => e.CustomerId);
+
+            entity.ToTable("Customers_Account");
+
+            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .HasColumnName("email");
@@ -137,7 +174,7 @@ public partial class Sep490G53Context : DbContext
                 .HasMaxLength(256)
                 .HasColumnName("password");
             entity.Property(e => e.Phone)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .HasColumnName("phone");
             entity.Property(e => e.Status).HasColumnName("status");
         });
@@ -288,6 +325,7 @@ public partial class Sep490G53Context : DbContext
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.AddressId).HasColumnName("address_id");
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
+            entity.Property(e => e.Note).HasColumnName("note");
             entity.Property(e => e.OrderCode)
                 .HasMaxLength(255)
                 .HasColumnName("order_code");
@@ -414,6 +452,40 @@ public partial class Sep490G53Context : DbContext
             entity.HasOne(d => d.OrderTicket).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.OrderTicketId)
                 .HasConstraintName("FK__Payments__order___04E4BC85");
+        });
+
+        modelBuilder.Entity<PersonalAddress>(entity =>
+        {
+            entity.HasKey(e => e.AddressId);
+
+            entity.ToTable("Personal_Address");
+
+            entity.Property(e => e.AddressId).HasColumnName("address_id");
+            entity.Property(e => e.City)
+                .HasMaxLength(100)
+                .HasColumnName("city");
+            entity.Property(e => e.CityName)
+                .HasMaxLength(100)
+                .HasColumnName("city_name");
+            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
+            entity.Property(e => e.DetailedAddress).HasColumnName("detailed_address");
+            entity.Property(e => e.District)
+                .HasMaxLength(100)
+                .HasColumnName("district");
+            entity.Property(e => e.DistrictName)
+                .HasMaxLength(100)
+                .HasColumnName("district_name");
+            entity.Property(e => e.Status).HasColumnName("status");
+            entity.Property(e => e.Ward)
+                .HasMaxLength(100)
+                .HasColumnName("ward");
+            entity.Property(e => e.WardName)
+                .HasMaxLength(100)
+                .HasColumnName("ward_name");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.PersonalAddresses)
+                .HasForeignKey(d => d.CustomerId)
+                .HasConstraintName("FK_Personal_Address_Customers_Account");
         });
 
         modelBuilder.Entity<Player>(entity =>
@@ -558,7 +630,7 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Profiles)
                 .HasForeignKey(d => d.CustomerId)
-                .HasConstraintName("FK__profile__custome__440B1D61");
+                .HasConstraintName("FK_profile_Customers_Account");
         });
 
         modelBuilder.Entity<Role>(entity =>

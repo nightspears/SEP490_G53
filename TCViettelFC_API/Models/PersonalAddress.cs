@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TCViettelFC_API.Models;
 
-public partial class Address
+public partial class PersonalAddress
 {
     public int AddressId { get; set; }
 
@@ -25,7 +25,5 @@ public partial class Address
 
     public int? Status { get; set; }
 
-    public virtual Customer? Customer { get; set; }
-
-    public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+    public virtual CustomersAccount? Customer { get; set; }
 }
