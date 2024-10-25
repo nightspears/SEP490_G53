@@ -1,6 +1,13 @@
-﻿function loadData(id) {
+﻿function loadData(id, url) {
+    var link = "";
+    if (url.trim() == "" || url == null) {
+        link = "https://localhost:5000/api/Product/GetSanPham";
+    } else {
+        link = url;
+    }
+
     $.ajax({
-        url: "https://localhost:5000/api/Product/GetSanPham",
+        url: link,
         data: {cid:id},
         method: "GET",
         dataType: "json",
@@ -97,12 +104,14 @@ function loadCategory() {
 
 function showProductByCate(id) {
     debugger
-    loadData(id);
+    $("#idCategory").val(id);
+    $('.filter-checkbox').prop('checked', false);
+    loadData(id ,"");
 
 }
 
 $(document).ready(function () {
-    loadData(0);
+    loadData(0,"");
     loadCategory();
     addActive();
 });
@@ -184,3 +193,46 @@ function AddToCart(id) {
         alert("thêm thành công")
     }
 }
+
+
+function toggleFilter() {
+    let filters = [];
+    let sortOption = '';
+    var txtSearch = $("#search").val().trim();
+    var cateID = $("#idCategory").val();
+    if (cateID == undefined || cateID == null) {
+        cateID = 0;
+    }
+   
+    var url = "https://localhost:5000/api/Product/GetSanPham?cid=" + cateID;
+    if (txtSearch) {
+        url += "&$filter=contains(ProductName, '" + encodeURIComponent(txtSearch) + "')";
+    }
+    $('.filter-checkbox:checked').each(function () {
+        let filterValue = $(this).val();
+        filters.push(`(${filterValue.trim()})`); 
+    });
+    if (filters.length > 0) {
+        if (txtSearch) {
+            let filterQuery = filters.join(' or ');
+            url += `and (${filterQuery})`;
+        } else {
+            let filterQuery = filters.join(' or ');
+            url += `&$filter=${filterQuery}`;
+        }
+       
+    }
+
+    $('input.SortProduct:checked').each(function () {
+        sortOption = $(this).val(); 
+    });
+
+    if (sortOption) {
+        url += sortOption; 
+    }
+
+    debugger
+    loadData(cateID, url);
+
+}
+

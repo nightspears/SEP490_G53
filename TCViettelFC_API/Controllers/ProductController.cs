@@ -43,7 +43,7 @@ namespace TCViettelFC_API.Controllers
         {
             try
             {
-                var product = await _product.GetSanPhamAsync(cid);
+				List<ProductResponse> product = await _product.GetSanPhamAsync(cid);
                 return Ok(product);
             }
             catch (Exception ex)
