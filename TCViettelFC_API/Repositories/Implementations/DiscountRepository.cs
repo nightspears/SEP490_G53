@@ -20,7 +20,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             Discount discount = new Discount();
             {
                 discount.DiscountName = _discount.DiscountName;
-                // discount.DiscountPercent = _discount.DiscountPercent;
+                discount.DiscountPercent = _discount.DiscountPercent;
                 discount.Status = _discount.Status;
                 discount.ValidFrom = _discount.ValidFrom;
                 discount.ValidUntil = _discount.ValidUntil;
@@ -100,7 +100,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 discount.Status = discountDto.Status ?? discount.Status;
                 discount.ValidFrom = discountDto.ValidFrom ?? discount.ValidFrom;
                 discount.ValidUntil = discountDto.ValidUntil ?? discount.ValidUntil;
-                //discount.DiscountPercent = discountDto.DiscountPercent ?? discount.DiscountPercent;
+                discount.DiscountPercent = discountDto.DiscountPercent ?? discount.DiscountPercent;
 
                 await _context.SaveChangesAsync();
             }

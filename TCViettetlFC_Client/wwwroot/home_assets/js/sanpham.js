@@ -1,16 +1,12 @@
-﻿function loadData() {
-    debugger
-    console.error('11');
+﻿function loadData(id) {
     $.ajax({
-        
         url: "https://localhost:5000/api/Product/GetSanPham",
+        data: {cid:id},
         method: "GET",
         dataType: "json",
         success: function (res) {
-            console.error('1');
-            debugger;
+            debugger
             var container = $('#lstSanPham').empty();
-            console.error('2');
             $.each(res, function (index, item) {
                 var Avatar = "";
                 if (item.image == null || item.image == "" || item.image == undefined) {
@@ -63,38 +59,72 @@
 
         },
         error: function (res) {
-            console.error('Error fetching products:', res); // Log the error
             debugger;
         }
 
     });
 }
+function loadCategory() {
+    debugger
+    $.ajax({
+        url: "https://localhost:5000/api/Category/GetCategory",
+        method: "GET",
+        dataType: "json",
+        success: function (res) {
+            debugger
+            var lstCate = $("#lstCate").empty();
+            var tatca = `<li class="category_product active"  onclick="showProductByCate(0)" >
+                                <a >Tất cả</a>
+                            </li>`;
+
+            lstCate.append(tatca);
+            $.each(res, function (index, item) {
+
+                var html = `<li class="category_product" onclick="showProductByCate(${item.categoryId})" data-cid="${item.categoryId}">
+                                <a data-cid="${item.categoryId}">${item.categoryName}</a>
+                            </li>`;
+
+                lstCate.append(html);
+            });
+           
+        },
+        error: function (res) {
+            console.error("Error loading data", res);
+        }
+    });
+}
 
 
+function showProductByCate(id) {
+    debugger
+    loadData(id);
+
+}
 
 $(document).ready(function () {
-    loadData();
-    debugger
-
-   
-
+    loadData(0);
+    loadCategory();
+    addActive();
 });
 
+function addActive() {
+    $(document).on('click', '.category_product', function () {
+        $('.category_product').removeClass('active');
+        $(this).addClass('active');
+    });
+}
 function format() {
     debugger
-    // Hàm định dạng tiền tệ Việt Nam
     function formatCurrency(value) {
         return parseInt(value).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
 
-    // Lấy tất cả các phần tử có class 'price'
     const prices = document.querySelectorAll('.price');
 
-    // Lặp qua từng phần tử và định dạng giá trị dựa trên thuộc tính 'data-price'
     prices.forEach(function (priceElement) {
         const priceValue = priceElement.getAttribute('data-price');
         if (priceValue) {
-            priceElement.innerText = formatCurrency(priceValue);  // Định dạng và hiển thị lại giá trị
+            priceElement.innerText = formatCurrency(priceValue);  
         }
     });
 

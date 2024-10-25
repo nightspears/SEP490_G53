@@ -14,7 +14,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task UpdateProductAsync(int id, ProductDto pro);
         Task DeleteProductAsync(int id);
         Task<JsonResult> GetDataJsonAsync();
-        Task<List<ProductResponse>> GetSanPhamAsync();
+        Task<List<ProductResponse>> GetSanPhamAsync(int id);
         Task<JsonResult> GetSanPhamByIdAsync(int id);
         Task<JsonResult> GetLienQuanProductAsync(List<int> lstID);
 
