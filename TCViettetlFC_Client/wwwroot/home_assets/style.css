@@ -6556,17 +6556,18 @@ h6 {
         transition: color 0.4s ease-in-out; }
 
 .header-main .header-lower {
-  background: rgba(0, 0, 0, 0.9);
-  position: absolute;
-  width: 100%;
-  transition: background, -webkit-transform 0.7s ease-in-out;
-  transition: background, transform 0.7s ease-in-out;
-  padding: 30px 0 20px;
-  top: 40px;
-  z-index: 9;
-  -webkit-transform: translateY(0);
-      -ms-transform: translateY(0);
-          transform: translateY(0); }
+    background: #e34343;
+    position: absolute;
+    width: 100%;
+    transition: background, -webkit-transform 0.7s ease-in-out;
+    transition: background, transform 0.7s ease-in-out;
+    padding: 30px 0 20px;
+    top: 40px;
+    z-index: 9;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+}
   .header-main .header-lower.nav-down {
     position: fixed;
     top: 0;

@@ -106,6 +106,7 @@ function showProductByCate(id) {
     debugger
     $("#idCategory").val(id);
     $('.filter-checkbox').prop('checked', false);
+    $('.SortProduct').prop('checked', false);
     loadData(id ,"");
 
 }
@@ -210,7 +211,7 @@ function toggleFilter() {
     }
     $('.filter-checkbox:checked').each(function () {
         let filterValue = $(this).val();
-        filters.push(`(${filterValue.trim()})`); 
+        filters.push(`${filterValue.trim()}`); 
     });
     if (filters.length > 0) {
         if (txtSearch) {
@@ -218,13 +219,20 @@ function toggleFilter() {
             url += `and (${filterQuery})`;
         } else {
             let filterQuery = filters.join(' or ');
-            url += `&$filter=${filterQuery}`;
+            url += `&$filter=(${filterQuery})`;
         }
        
     }
 
     $('input.SortProduct:checked').each(function () {
-        sortOption = $(this).val(); 
+
+        if ($('#sort-hangMoi').is(':checked')) {
+            debugger
+            sortOption = ` and (discoutPercent ne null)`
+        } else {
+            sortOption = $(this).val(); 
+
+        }
     });
 
     if (sortOption) {
