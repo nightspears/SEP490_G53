@@ -103,9 +103,9 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                             },
                             Address = new AddressDTO
                             {
-                                City = checkoutModel.City,
-                                District = checkoutModel.District,
-                                Ward = checkoutModel.Ward,
+                                City = checkoutModel.CityId,
+                                District = checkoutModel.DistrictId,
+                                Ward = checkoutModel.WardId,
                                 DetailedAddress = checkoutModel.Address
                             },
                             OrderProduct = new OrderProductDTO
