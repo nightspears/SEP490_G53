@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 using TCViettetlFC_Client.Models;
 
 namespace TCViettetlFC_Client.Controllers
@@ -11,6 +12,7 @@ namespace TCViettetlFC_Client.Controllers
         public AreaController(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
+
         }
         public async Task<IActionResult> Index()
         {
@@ -28,5 +30,8 @@ namespace TCViettetlFC_Client.Controllers
             ViewData["CustomerId"] = customerId;
             return View();
         }
+
+        
+
     }
 }

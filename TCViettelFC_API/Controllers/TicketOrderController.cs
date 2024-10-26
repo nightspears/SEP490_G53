@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TCViettelFC_API.Dtos.TiketOrder;
+using TCViettelFC_API.Dtos.OrderTicket;
 using TCViettelFC_API.Repositories.Interfaces;
 
 namespace TCViettelFC_API.Controllers
@@ -8,40 +8,30 @@ namespace TCViettelFC_API.Controllers
     [Route("api/[controller]")]
     public class TicketOrderController : Controller
     {
-        private readonly ITiketOrderRepository _repository;
-        public TicketOrderController(ITiketOrderRepository repository)
+        private readonly ITicketOrderRepository _ticketOrderRepository;
+
+        public TicketOrderController(ITicketOrderRepository ticketOrderRepository )
         {
-            _repository = repository;
+            _ticketOrderRepository = ticketOrderRepository;
         }
-        [HttpPost("add-to-cart")]
-        public IActionResult AddTicketsToCart([FromBody] TicketOrderCreateDto ticketOrder)
+        [HttpPost]
+        public async Task<IActionResult> AddOrderedTicket([FromBody] TicketOrderDto ticketOrderDto, int? customerId = null)
         {
-            if (ticketOrder == null || ticketOrder.Tickets.Count == 0)
+            if (ticketOrderDto == null)
             {
-                return BadRequest("No tickets specified.");
+                return BadRequest("Order data is null.");
             }
 
-            var order = _repository.CreateOrUpdateOrder(ticketOrder.CustomerId);
-
-            foreach (var ticket in ticketOrder.Tickets)
+            try
             {
-                if (!_repository.CheckTicketAvailabilityAndUpdate(ticket.MatchId, ticket.AreaId, ticket.Quantity))
-                {
-                    return BadRequest($"Not enough tickets available for match {ticket.MatchId} in area {ticket.AreaId}.");
-                }
-                _repository.AddTicketToOrder(order.Id, ticket);
+                await _ticketOrderRepository.AddOderedTicket(ticketOrderDto, customerId);
+                return Ok("Order added successfully.");
             }
-
-            // Thêm mặt hàng bổ sung nếu có
-            foreach (var item in ticketOrder.SupplementaryItems)  // Giả sử bạn đã thêm một danh sách các mặt hàng bổ sung trong DTO
+            catch (Exception ex)
             {
-                _repository.AddSupplementaryItemToOrder(order.Id, item);
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
-
-            _repository.SaveChanges();
-
-            return Ok(new { orderId = order.Id });
         }
+
     }
 }
-
