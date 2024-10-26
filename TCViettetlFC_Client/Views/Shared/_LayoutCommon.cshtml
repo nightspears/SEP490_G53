@@ -7,6 +7,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>ViettelFc</title>
+    
+    <link href="~/admin_assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/admin_assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/admin_assets/plugins/datatables/datatables.min.css" rel="stylesheet" />
     <link rel="shortcut icon" href=~/home_assets/favicon.ico>
     <link href="~/home_assets/style.css" rel="stylesheet" />
     <script src="~/home_assets/js/vendor/modernizr.js"></script>
@@ -20,11 +24,18 @@
                 <div class=container>
                     <div class=row>
                         <ul>
-                            <li><a href="#">Signup/login</a></li>
+                            <li><a href="/Customer/Login">Signup/login</a></li>
                             <li>
                                 <a href=/public/giohang>
                                     <i class="fa fa-shopping-cart"></i> <span>
                                         cart(<span class=cartitems>0</span>)
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href=/public/giohang>
+                                    <i class="fa fa-shopping-cart"></i> <span>
+                                        giỏ hàng vé(<span class=cartitems>0</span>)
                                     </span>
                                 </a>
                             </li>
@@ -33,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="header-lower clearfix">
+            <div class="header-lower clearfix d-flex">
                 <div class=container>
                     <div class=row>
                         <h1 class=logo><a href="/index"><img src="~/image/imagelogo/logonobackgroud.png" alt=image style="height:173px ; width:140px"></a></h1>
@@ -48,7 +59,7 @@
                                         </button>
                                     </div>
                                     <div class=nav-menu>
-                                        <ul class="nav navbar-nav menu-bar">
+                                        <ul class="nav navbar-nav menu-bar d-flex">
                                             <li>
                                                 <a href="/">
                                                     Home <span></span> <span></span> <span></span>
@@ -76,7 +87,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href=bookTicket.html>
+                                                <a href=/Area/Index>
                                                     Đặt vé <span></span> <span></span>
                                                     <span></span> <span></span>
                                                 </a>

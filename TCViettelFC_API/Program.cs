@@ -75,6 +75,8 @@ builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
 builder.Services.AddScoped<IDiscountRepository, DiscoutRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<ICheckoutRepository, CheckoutRepository>();
+builder.Services.AddScoped<ISupplementaryItemRepository, SupplementaryItemRepository>();
+builder.Services.AddScoped<ITicketOrderRepository, TicketOrderRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
