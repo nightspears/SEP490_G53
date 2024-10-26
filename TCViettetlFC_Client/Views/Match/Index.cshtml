@@ -1,0 +1,74 @@
+﻿@model List<TCViettetlFC_Client.Models.MatchViewModel>
+
+@{
+    ViewBag.Title = "Matches";
+    Layout = "_LayoutCommon";
+}
+
+<style>
+    .ticket{
+        display:flex;
+    }
+    .ticket-item {
+        
+        align-items: center;
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin: 10px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+    }
+
+        .ticket-item img {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+
+    .ticket-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .ticket-info h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .ticket-info p {
+            margin: 5px 0;
+        }
+
+    .buy-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+</style>
+
+<div style="padding-top: 453px;">
+    @foreach (var match in Model)
+    {
+        <div class=" ticket-item">
+            <input hidden readonly type="text" name="name" value="@match.Id" />
+            <div class="ticket">
+                <img src="@match.LogoUrl" alt="Logo đội bóng">
+                <div class="ticket-info">
+                    <h2>Trận đấu giữa: Viettel FC - @match.OpponentName</h2>
+                    <p>Ngày thi đấu: @match.MatchDate</p>
+                    <p>Địa điểm: @match.StadiumName</p>
+                    <p>Trạng thái: @(match.Status == 1 ? "Đang mở bán" : "Đã kết thúc")</p>
+
+                </div>
+            </div>
+
+            @if (match.Status == 1)
+            {
+                <a href="@Url.Action("Index", "Area", new { matchId = match.Id})" class="buy-button">Mua vé</a>
+            }
+
+        </div>
+    }
+</div>
