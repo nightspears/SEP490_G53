@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using TCViettelFC_API.Dtos.Category;
@@ -36,7 +38,6 @@ namespace TCViettelFC_API.Repositories.Implementations
                     Product product = new Product();
                     {
                         product.ProductName = pro.ProductName;
-                        product.PlayerId = pro.PlayerId;
                         product.SeasonId = pro.SeasonId;
                         product.CategoryId = pro.CategoryId;
                         product.Description = pro.Description;
@@ -65,6 +66,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                             ProductFile ProductFile = new ProductFile();
                             {
                                 ProductFile.FileName = f.File.FileName;
+                               //  sửa lại db trường filepath cho đọ dài lên 255
                                 if (f.File != null && f.File.Length > 0)
                                 {
                                     ImageUploadResult res = _cloudinary.CloudinaryUpload(f.File);
@@ -111,12 +113,17 @@ namespace TCViettelFC_API.Repositories.Implementations
 
         public async Task<List<ProductResponse>> GetProductAsync()
         {
+
+            _context.Database.ExecuteSqlRaw("EXEC UpdateDiscountStatus");
+
             List<ProductResponse> product = new List<ProductResponse>();
             product = (from pro in _context.Products
                        join cate in _context.ProductCategories on pro.CategoryId equals cate.CategoryId into category
                        from cate in category.DefaultIfEmpty()
                        join season in _context.Seasons on pro.SeasonId equals season.SeasonId into seasons
                        from season in seasons.DefaultIfEmpty()
+                       join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
+                       from dis in discout.DefaultIfEmpty()
                        where (pro.Status != 0 && cate.Status != 0 && season.Status != 0)
                        select new ProductResponse
                        {
@@ -125,6 +132,29 @@ namespace TCViettelFC_API.Repositories.Implementations
                            SeasonName = season.SeasonName,
                            Image = pro.Avatar,
                            Price = pro.Price,
+                           discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
+                           ProductId = pro.ProductId,
+                           Status = pro.Status,
+                       }).ToList();
+
+            return product;
+        }
+
+        public async Task<List<ProductResponse>> GetSanPhamAsync()
+        {
+            _context.Database.ExecuteSqlRaw("EXEC UpdateDiscountStatus");
+
+            List<ProductResponse> product = new List<ProductResponse>();
+            product = (from pro in _context.Products
+                       join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
+                       from dis in discout.DefaultIfEmpty()
+                       where pro.Status == 1 
+                       select new ProductResponse
+                       {
+                           ProductName = pro.ProductName,
+                           Image = pro.Avatar,
+                           Price = pro.Price,
+                           discoutPercent= dis!= null && dis.Status == 1 ? dis.DiscountPercent : null ,
                            ProductId = pro.ProductId,
                            Status = pro.Status,
                        }).ToList();
@@ -139,6 +169,8 @@ namespace TCViettelFC_API.Repositories.Implementations
                            from cate in category.DefaultIfEmpty()
                            join season in _context.Seasons on pro.SeasonId equals season.SeasonId into seasons
                            from season in seasons.DefaultIfEmpty()
+                           join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
+                           from dis in discout.DefaultIfEmpty()
                            where (pro.Status != 0 && cate.Status != 0 && season.Status != 0)
                            select new ProductResponse
                            {
@@ -149,6 +181,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                                Price = pro.Price,
                                ProductId = pro.ProductId,
                                Status = pro.Status,
+                               discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
                                Size = pro.Size ,
                                Material = pro.Material,
                                Description = pro.Description
@@ -162,6 +195,63 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 Product = product,
                 PFile = proFile
+            };
+
+            return new JsonResult(data);
+
+        }
+
+        public async Task<JsonResult> GetSanPhamByIdAsync(int id)
+        {
+            var product = (from pro in _context.Products
+                           join cate in _context.ProductCategories on pro.CategoryId equals cate.CategoryId into category
+                           from cate in category.DefaultIfEmpty()
+                           join season in _context.Seasons on pro.SeasonId equals season.SeasonId into seasons
+                           from season in seasons.DefaultIfEmpty()
+                           join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
+                           from dis in discout.DefaultIfEmpty()
+                           where (pro.Status == 1 && cate.Status == 1 && season.Status == 1)
+                           select new ProductResponse
+                           {
+                               ProductName = pro.ProductName,
+                               CategoryId = cate.CategoryId,
+                               SeasonId = season.SeasonId,
+                               Image = pro.Avatar,
+                               Price = pro.Price,
+                               ProductId = pro.ProductId,
+                               Status = pro.Status,
+                               discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
+                               Size = pro.Size,
+                               Material = pro.Material,
+                               Description = pro.Description
+
+                           }).FirstOrDefault(x => x.ProductId == id && x.Status == 1);
+
+
+            var proFile = _context.ProductFiles.Where(x => x.Status == 1 && x.ProductId == id).ToList();
+            var player = _context.Players.Where(p => p.Status == 1 && p.SeasonId == product.SeasonId).ToList();
+
+            var lstLienQuan = _context.Products.Include(p => p.Discount)
+                .Where(x => x.CategoryId == product.CategoryId && x.ProductId != id && x.Status == 1)
+                .Select( v => new ProductResponse
+            {
+                    ProductName = v.ProductName,
+                    Image = v.Avatar,
+                    Price = v.Price,
+                    ProductId = v.ProductId,
+                    Status = v.Status,
+                    discoutPercent = v.Discount != null && v.Discount.Status == 1 ? v.Discount.DiscountPercent : null,
+                    Size = v.Size,
+                    Material = v.Material,
+                    Description = v.Description
+                }).Take(12).ToList();
+
+            var data = new
+            {
+                Product = product,
+                PFile = proFile,
+                players = player,
+                LienQuan = lstLienQuan,
             };
 
             return new JsonResult(data);
@@ -181,7 +271,6 @@ namespace TCViettelFC_API.Repositories.Implementations
 
                     // Update product properties
                     product.ProductName = pro.ProductName ?? product.ProductName;
-                    product.PlayerId = pro.PlayerId ?? product.PlayerId;
                     product.SeasonId = pro.SeasonId ?? product.SeasonId;
                     product.CategoryId = pro.CategoryId ?? product.CategoryId;
                     product.Description = pro.Description ?? product.Description;
@@ -247,22 +336,54 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<JsonResult> GetDataJsonAsync()
         {
             //lấy cate 
-            List<ProductCategory> cate = _context.ProductCategories
-                                                       .Where(x => x.Status == 1)
-                                                       .ToList();
-            //lấy player
-            List<Player> players = _context.Players
-                                           .Where(x => x.Status == 1)
-                                           .ToList();
+            List<ProductCategory> cate = _context.ProductCategories.Where(x => x.Status == 1).ToList();
+         
             //lấy mùa giải
-            List<Season> season = _context.Seasons
-                                           .Where(x => x.Status ==1 )
-                                           .ToList();
+            List<Season> season = _context.Seasons.Where(x => x.Status ==1 ).ToList();
             var data = new
             {
                 Cate = cate,
-                Player = players,
                 Season = season
+            };
+
+            return new JsonResult(data);
+        }
+
+        public async Task<JsonResult> GetLienQuanProductAsync(List<int> lstID)
+        {
+            List<ProductResponse> products = new List<ProductResponse>();
+
+            if (lstID.Count > 0) {
+                 products = _context.Products.Include(z => z.Discount).Where(x => !lstID.Contains(x.ProductId) && x.Status == 1).Select(x => new ProductResponse
+                 {
+                     ProductId = x.ProductId,
+                     ProductName = x.ProductName,
+                     Price = x.Price,
+                     discoutPercent = x.Discount != null && x.Discount.Status ==1 ? x.Discount.DiscountPercent : null ,
+                     Size = x.Size,
+                     Image = x.Avatar,
+                     Status = x.Status,
+
+                 }).ToList();
+            }
+            else
+            {
+                products = _context.Products.Include(z => z.Discount).Where(x => x.Status == 1).Select(x => new ProductResponse
+                {
+                    ProductId = x.ProductId,
+                    ProductName = x.ProductName,
+                    Price = x.Price,
+                    discoutPercent = x.Discount != null && x.Discount.Status == 1 ? x.Discount.DiscountPercent : null,
+                    Size = x.Size,
+                    Image = x.Avatar,
+                    Status = x.Status,
+
+                }).ToList();
+            }
+           
+            var data = new
+            {
+                Products = products,
             };
 
             return new JsonResult(data);

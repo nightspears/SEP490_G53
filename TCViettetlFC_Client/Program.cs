@@ -3,6 +3,7 @@ using System.Text.Unicode;
 using TCViettelFC_Client.ApiServices;
 using TCViettelFC_Client.Services;
 using TCViettetlFC_Client.Services;
+using TCViettetlFC_Client.VNPayHelper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,8 +34,15 @@ builder.Services.AddHttpClient<FeedbackService>(client =>
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
+builder.Services.AddHttpClient<CheckOutService>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IApiHelper, ApiHelper>();
+builder.Services.AddSingleton<IVnPayService, VnPayService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

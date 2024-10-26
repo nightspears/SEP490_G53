@@ -46,8 +46,17 @@ namespace TCViettetlFC_Client.Controllers
         }
         public IActionResult Home()
         {
+            var token = Request.Cookies["AuthToken"]; // Change this to AuthToken
+            var roleId = Request.Cookies["RoleId"]; // Keep this for role verification
+
+            // Check if token is missing or if roleId doesn't match
+            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(roleId) || roleId != "1")
+            {
+                return RedirectToAction("Login", "User");
+            }
             return View();
         }
+
         public async Task<IActionResult> TicketOrderDetail(int id)
         {
             var token = Request.Cookies["AuthToken"];

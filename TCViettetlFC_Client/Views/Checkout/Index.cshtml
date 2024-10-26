@@ -1,0 +1,638 @@
+﻿@model TCViettetlFC_Client.Models.CheckoutModel
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+/* Header Styles */
+
+
+.header .logo {
+    max-width: 200px; /* Adjusted size for better visibility */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 15px; /* More space below the logo */
+    transition: transform 0.3s ease; /* Smooth scaling effect */
+}
+
+.header .logo:hover {
+    transform: scale(1.05); /* Scale up on hover */
+}
+
+
+
+
+/* Form Styles */
+h5 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Button Styles */
+.btn-primary, .btn-secondary {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    padding: 8px 12px; /* Specific padding for secondary buttons */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+}
+
+/* List Styles */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+li {
+    padding: 10px 0;
+}
+
+/* Responsive Styles */
+@@media (max-width: 768px) {
+    .col-md-7, .col-md-5 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .container {
+        padding: 15px;
+    }
+}
+
+/* Scrollable Border Container */
+.border {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-height: 400px; /* Set a maximum height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Flexbox Styles */
+.d-flex.align-items-center {
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.d-flex.align-items-center:last-child {
+    border-bottom: none; /* Remove border for the last item */
+}
+
+.d-flex.align-items-center:hover {
+    background-color: #f9f9f9; /* Hover effect */
+}
+
+/* Image Styles */
+img {
+    border-radius: 4px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.d-flex .me-3 {
+    margin-right: 15px;
+}
+
+.d-flex div {
+    display: flex;
+    flex-direction: column;
+}
+
+.d-flex div p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.d-flex div span {
+    font-weight: bold;
+    color: #007bff; /* Primary blue color for emphasis */
+}
+
+/* Responsive Adjustments */
+@@media (max-width: 576px) {
+    .d-flex.align-items-center {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .d-flex .me-3 {
+        margin-bottom: 10px;
+    }
+
+    .d-flex div span {
+        margin-top: 5px;
+    }
+}
+
+/* Container for shipment rates */
+#shipment-rate {
+    margin-top: 15px; /* Reduced top margin */
+}
+
+/* Individual shipment rate item */
+.shipment-rate-item {
+    margin-bottom: 10px; /* Reduced bottom margin */
+}
+
+/* Shipment rate label */
+.shipment-rate-label {
+    display: block; /* Block display for entire area */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Card styling */
+.card {
+    background-color: #f9f9f9; /* Light background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 6px; /* Slightly rounded corners */
+    padding: 10px; /* Reduced inner spacing */
+    transition: transform 0.2s, box-shadow 0.2s; /* Animation for hover effect */
+    position: relative; /* Position for pseudo-elements */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-4px); /* Slight lift on hover */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Card title styling */
+.card-title {
+    font-size: 1rem; /* Reduced font size */
+    margin: 0 0 8px; /* Reduced margin */
+}
+
+/* Carrier logo styling */
+.carrier-logo {
+    max-width: 60px; /* Smaller max width for logos */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 8px; /* Space below logo */
+}
+
+/* Expected delivery text */
+.expected-delivery {
+    font-size: 0.85rem; /* Smaller font size */
+    color: #666; /* Grey color */
+    margin: 4px 0; /* Reduced margin */
+}
+
+/* Total fee styling */
+.total-fee {
+    font-size: 1rem; /* Reduced font size */
+    color: #28a745; /* Green color */
+    font-weight: bold; /* Bold text */
+    position: absolute; /* Position within card */
+    bottom: 8px; /* Align to bottom */
+    right: 10px; /* Align to right */
+}
+
+/* Radio input styling */
+.shipment-option {
+    display: none; /* Hide default radio button */
+}
+
+/* Radio input checked styling */
+.shipment-option:checked + .card {
+    border-color: #007bff; /* Highlight border on selection */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Highlight shadow on selection */
+}
+
+
+
+
+    </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class=" text-center">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/The_Cong-Viettel_FC_logo.svg/1200px-The_Cong-Viettel_FC_logo.svg.png" alt="TC-VIETTELFC Logo" class="logo">
+    </div>
+</header>
+
+    <form asp-action="SubmitCheckout" method="post">
+        <div class="container my-5">
+            <div class="row">
+                <!-- Shipping Information -->
+                <div class="col-md-7">
+                    <h5>Thông tin nhận hàng</h5>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="Email" value="@Model.Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Họ và tên</label>
+                        <input type="text" class="form-control" id="fullName" name="FullName" value="@Model.FullName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Số điện thoại (tùy chọn)</label>
+                        <input type="text" class="form-control" id="phone" name="Phone" value="@Model.Phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Địa chỉ (tùy chọn)</label>
+                        <input type="text" class="form-control" id="address" name="Address" value="@Model.Address">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label  for="city">Thành phố</label>
+                        <select id="city" class="form-control" name="City" required>
+                            <option selected disabled>Chọn thành phố</option>
+                            <!-- Cities will be populated dynamically -->
+                        </select>
+                    </div>
+
+                    <input type="hidden" id="cityId" name="CityId">
+                    <input type="hidden" id="cityName" name="CityName">
+                    
+                    <div class="form-group mb-3">
+                        <label for="district">Quận/Huyện</label>
+                        <select id="district" class="form-control" name="District" required>
+                            <option selected disabled>Chọn quận huyện</option>
+                            <!-- Districts will be populated dynamically -->
+                        </select>
+                    </div>
+                        <input type="hidden" id="districtId" name="DistrictId">
+                       <input type="hidden" id="districtName" name="DistrictName">
+                    
+                       <div class="form-group mb-3">
+                        <label for="ward">Phường/Xã</label>
+                        <select id="ward" class="form-control" name="Ward" required>
+                            <option selected disabled>Chọn phường/xã</option>
+                            <!-- Wards will be populated dynamically -->
+                        </select>
+                    </div>
+
+                     <input type="hidden" id="wardId" name="WardId">
+                       <input type="hidden" id="wardName" name="WardName">
+                    <div class="mb-3">
+                        <label for="notes" class="form-label">Ghi chú (tùy chọn)</label>
+                        <textarea class="form-control" id="notes" name="Notes" rows="3">@Model.Notes</textarea>
+                    </div>
+                </div>
+                <!-- Order Summary and Payment Options -->
+                <div class="col-md-5">
+                    <h5>Vận chuyển</h5>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="shipping" id="shipping1" checked>
+                        <label class="form-check-label" for="shipping1">
+                            Đơn Vị Vận Chuyển sẽ thu
+                        </label>
+                        <div id="shipment-rate"></div>
+
+                    </div>
+                    <div id="shipment-rate"></div> <!-- Container for shipment rates -->
+                      <h5>Thanh toán</h5>
+                     <div class="bg-transparent outline-none border position-relative rounded d-flex align-items-center gap-3 px-3 py-1 w-100 fw-bold border-success my-3">
+    <img src="https://cdn.nextix.cloud/nextix/38/logo_vnpay_30fdda7b24.svg" alt="VNPAY Payment Method" loading="lazy" width="40" height="40" class="position-relative rounded-2" style="object-fit: scale-down; aspect-ratio: 1 / 1; width: 40px; height: 40px;">
+    VNPAY
+    <i class="bi bi-check-circle-fill position-absolute text-success fs-4" style="top: -10px; right: -6px;"></i>
+</div>
+
+                    <h5>Order Details (@Model.checkoutItems.Count() sản phẩm)</h5>
+                    <div class="border p-3 mb-3">
+                        @foreach (var item in Model.checkoutItems)
+                        {
+                            <div class="d-flex align-items-center">
+                                <img src="@(!string.IsNullOrEmpty(item.Avartar) ? item.Avartar : "https://via.placeholder.com/50")"
+                                     alt="@item.nameProduct"
+                                     class="me-3"
+                                     style="width: 50px; height: 50px;">
+                                <div>
+                                    <p class="mb-0">Tên Sản Phẩm: @item.nameProduct</p>
+                                    <p class="mb-0"> Mã Code In Số Áo : @(item.playerId > item.shirtNumber ? item.playerId : item.shirtNumber)</p>
+                                    <p class="mb-0">Kích Cỡ: @item.size</p>
+                                    <p class="mb-0">Số lượng: @item.Quantity</p>
+                                    <span>Đơn Giá: @item.Price.ToString("N0")đ</span>
+                                    @{
+                                        var totalPrice = (item.Price * item.Quantity).ToString("N0");
+                                    }
+                                    <span>Tổng: @totalPrice đ</span
+                                    <!-- Hidden inputs for each item to send with the form -->
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].ProductId" value="@item.ProductId" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].nameProduct" value="@item.nameProduct" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].Price" value="@item.Price" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].size" value="@item.size" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].Avartar" value="@item.Avartar" />
+                                    <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].Quantity" value="@item.Quantity" />
+                              <input type="hidden" name="checkoutItems[@Model.checkoutItems.IndexOf(item)].playerId" value="@(item.playerId > item.shirtNumber ? item.playerId : item.shirtNumber)" />
+                                </div>
+                            </div>
+                        }
+                    </div>            <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Nhập mã giảm giá">
+                        <button class="btn btn-secondary mt-2">Áp dụng</button>
+                    </div>
+               
+<ul>
+    <li class="d-flex justify-content-between">
+        <span>Phí vận chuyển</span>
+        <span id="shippingFee">0đ</span>
+    </li>
+    <li class="d-flex justify-content-between fw-bold">
+        <span>Tổng cộng</span>
+
+                            <span id="totalAmountDisplay">@Model.TotalAmount.ToString("N0")đ</span>
+                            <!-- Hidden input to store the total amount -->
+                            <input type="hidden" name="TotalAmount" id="totalAmount" value= @Model.TotalAmount />
+    </li>
+</ul>
+                    <button class="btn btn-primary w-100">ĐẶT HÀNG</button>
+                    <a href="#" class="d-block text-center mt-2">Quay về giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+    </form>
+ <script>
+    window.onload = function() {
+        const labelElement = document.querySelector('label[for="district"]');
+        if (labelElement) {
+            labelElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    };
+</script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchCities();
+            document.getElementById('city').addEventListener('change', function () {
+                const selectedCityCode = this.value;
+                fetchDistricts(selectedCityCode);
+            });
+            document.getElementById('district').addEventListener('change', function () {
+                const selectedCityId = document.getElementById('city').value;
+                const selectedDistrictId = this.value;
+                if (selectedCityId && selectedDistrictId) {
+                    fetchShipmentRate(selectedCityId, selectedDistrictId);
+                    fetchWards(selectedDistrictId);
+                }
+            });
+        });
+
+        function fetchCities() {
+            console.log("Fetching cities...");
+            fetch('https://sandbox.goship.io/api/v2/cities', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw' // Replace with your API key
+                }
+            })
+                .then(response => {
+                    console.log("Response status for cities:", response.status);
+                    if (!response.ok) throw new Error('Error fetching cities');
+                    return response.json();
+                })
+                .then(responseData => {
+                    console.log("Cities response data:", responseData);
+                    if (!Array.isArray(responseData.data)) {
+                        console.error("Expected an array of cities but got:", responseData.data);
+                        return; // Early exit if data is not an array
+                    }
+                    const citySelect = document.getElementById('city');
+                    citySelect.innerHTML = '<option selected disabled>Chọn thành phố</option>';
+                    responseData.data.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city.id; // Using 'id' from the response
+                        option.textContent = city.name;
+                        citySelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching cities:', error));
+        }
+
+        document.getElementById('city').addEventListener('change', function() {
+    const selectedCityId = this.value; // Get selected city ID
+    const selectedCityName = this.options[this.selectedIndex].text; // Get selected city name
+
+    // Set values to hidden input fields
+    document.getElementById('cityId').value = selectedCityId;
+    document.getElementById('cityName').value = selectedCityName;
+
+});
+
+        function fetchDistricts(cityCode) {
+            console.log("Fetching districts for city code:", cityCode);
+            fetch(`https://sandbox.goship.io/api/v2/cities/${cityCode}/districts`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw' // Replace with your API key
+                }
+            })
+                .then(response => {
+                    console.log("Response status for districts:", response.status);
+                    if (!response.ok) throw new Error('Error fetching districts');
+                    return response.json();
+                })
+                .then(responseData => {
+                    console.log("Districts response data:", responseData);
+                    const districtSelect = document.getElementById('district');
+                    districtSelect.innerHTML = '<option selected disabled>Chọn quận huyện</option>';
+                    responseData.data.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district.id; // Using 'id' from the response
+                        option.textContent = district.name;
+                        districtSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching districts:', error));
+        }
+
+         document.getElementById('district').addEventListener('change', function() {
+    const selectedDistrictId = this.value; // Get selected city ID
+    const selectedDistrictName = this.options[this.selectedIndex].text; // Get selected city name
+
+    // Set values to hidden input fields
+    document.getElementById('districtId').value = selectedDistrictId;
+    document.getElementById('districtName').value = selectedDistrictName;
+    });
+
+        function fetchWards(districtCode) {
+            console.log("Fetching wards for district code:", districtCode);
+            fetch(`https://sandbox.goship.io/api/v2/districts/${districtCode}/wards`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw' // Replace with your API key
+                }
+            })
+                .then(response => {
+                    console.log("Response status for wards:", response.status);
+                    if (!response.ok) throw new Error('Error fetching wards');
+                    return response.json();
+                })
+                .then(responseData => {
+                    console.log("Wards response data:", responseData);
+                    const wardSelect = document.getElementById('ward'); // Assuming you have a select element for wards
+                    wardSelect.innerHTML = '<option selected disabled>Chọn phường/xã</option>'; // Reset options
+                    responseData.data.forEach(ward => {
+                        const option = document.createElement('option');
+                        option.value = ward.id; // Using 'id' from the response
+                        option.textContent = ward.name; // Using 'name' from the response
+                        wardSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching wards:', error));
+        }
+
+
+             document.getElementById('ward').addEventListener('change', function() {
+    const selectedWardId = this.value; // Get selected city ID
+    const selectedWardName = this.options[this.selectedIndex].text; // Get selected city name
+
+    // Set values to hidden input fields
+    document.getElementById('wardId').value = selectedWardId;
+    document.getElementById('wardName').value = selectedWardName;
+});
+        function fetchShipmentRate(cityId, districtId) {
+            console.log("Fetching shipment rate for city ID:", cityId, "and district ID:", districtId);
+            // Define the shipment data
+            const shipmentData = {
+                shipment: {
+                    address_from: {
+                        district: 100100,
+                        city: 100000
+                    },
+                    address_to: {
+                        district: districtId,
+                        city: cityId
+                    },
+                    parcel: {
+                        cod: 500000, // Change this value as necessary
+                        amount: 500000, // Change this value as necessary
+                        width: 10, // Change this value as necessary
+                        height: 10, // Change this value as necessary
+                        length: 10, // Change this value as necessary
+                        weight: 750 // Change this value as necessary
+                    }
+                }
+            };
+
+            // Make the POST request to fetch the shipment rates
+            fetch('https://sandbox.goship.io/api/v2/rates', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw', // Replace with your API key
+                    'Content-Type': 'application/json'
+
+                },
+                body: JSON.stringify(shipmentData)
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('Error fetching shipment rate');
+                    return response.json();
+                })
+                .then(responseData => {
+                    console.log("Shipment rate response data:", responseData);
+                    displayShipmentRates(responseData.data);
+                })
+                .catch(error => console.error('Error fetching shipment rate:', error));
+        }
+
+       function displayShipmentRates(rates) {
+    const rateDisplay = document.getElementById('shipment-rate');
+    rateDisplay.innerHTML = ''; // Clear previous rates
+
+    if (rates && rates.length > 0) {
+        rates.forEach((rate, index) => {
+            const rateDiv = document.createElement('div');
+            rateDiv.className = 'shipment-rate-item'; // Class for styling
+            rateDiv.innerHTML = `
+                <label class="shipment-rate-label">
+                    <input type="radio" name="SelectedShipping" class="shipment-option" data-fee="${rate.total_fee}" value="${rate.id}" required>
+                    <div class="card">
+                        <h4 class="card-title">${rate.carrier_name} (${rate.service})</h4>
+                        <img src="${rate.carrier_logo}" alt="${rate.carrier_short_name}" class="carrier-logo" />
+                        <p class="expected-delivery">Expected Delivery: ${rate.expected}</p>
+                     <strong class="total-fee">${rate.total_fee.toLocaleString('en-US')}đ</strong>
+                    </div>
+                </label>
+            `;
+            rateDisplay.appendChild(rateDiv);
+        });
+
+        // Add event listeners to the newly created radio buttons
+        document.querySelectorAll('.shipment-option').forEach(option => {
+            option.addEventListener('change', function () {
+                // Retrieve the selected shipping fee
+                const shippingFee = parseInt(this.getAttribute('data-fee'));
+
+                // Update the shipping fee display
+                document.getElementById('shippingFee').textContent = `${shippingFee.toLocaleString('vi-VN')}đ`;
+
+
+                // Calculate the new total
+                const initialTotal = @Model.TotalAmount ; // Replace with your actual initial total
+                const newTotal = initialTotal + shippingFee;
+
+                // Update the total amount display
+                document.getElementById('totalAmountDisplay').textContent = `${newTotal.toLocaleString('vi-VN')}đ`;
+
+                // Update the hidden input value to send with the form
+                document.getElementById('totalAmount').value = newTotal;
+            });
+        });
+    } else {
+        rateDisplay.innerHTML = '<p>No shipment rates available</p>';
+    }
+}
+
+
+    </script>
+</body>
+</html>

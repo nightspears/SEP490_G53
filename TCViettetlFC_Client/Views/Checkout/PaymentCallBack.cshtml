@@ -1,0 +1,61 @@
+﻿@model TCViettetlFC_Client.VNPayHelper.PaymentSuccessViewModel
+
+<div class="container">
+    <h2>Payment Callback</h2>
+
+    <div class="alert alert-success">
+        Thank you, @Model.CheckoutModel.FullName! Your payment was successful.
+    </div>
+
+    <h3>Order Details</h3>
+
+
+    <h3>Checkout Items</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Size</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model.CheckoutModel.checkoutItems)
+            {
+                <tr>
+                    <td>@item.nameProduct</td>
+                    <td>@item.size</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price.ToString("N0")</td>
+                    @{
+                        var totalPrice = (item.Price * item.Quantity).ToString("N0");
+                    }
+                    <td>  Tổng: @totalPrice đ </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>Email: @Model.CheckoutModel.Email</p>
+    <p>Full Name: @Model.CheckoutModel.FullName</p>
+    <p>Phone: @Model.CheckoutModel.Phone</p>
+    <p>Address: @Model.CheckoutModel.Address</p>
+    <p>City: @Model.CheckoutModel.CityId</p>
+    <p>CityName: @Model.CheckoutModel.CityName</p>
+    <p>District: @Model.CheckoutModel.DistrictId</p>
+    <p>DistrictName: @Model.CheckoutModel.DistrictName</p>
+    <p>Ward: @Model.CheckoutModel.WardId</p>
+    <p>WardName: @Model.CheckoutModel.WardName</p>
+    <p>Notes: @Model.CheckoutModel.Notes</p>
+    <p>TotalAmount: @Model.CheckoutModel.TotalAmount</p>
+    <p>Shipping Method: @Model.CheckoutModel.SelectedShipping</p>
+
+    <h3>Payment Details</h3>
+    <p>Order ID: @Model.VnPayResponse.OrderId</p>
+    <p>Transaction ID: @Model.VnPayResponse.TransactionId</p>
+    <p>Payment Method: @Model.VnPayResponse.PaymentMethod</p>
+    <p>Respone Code: @Model.VnPayResponse.VnPayResponseCode</p>
+    <p>Status: Successful</p>
+</div>

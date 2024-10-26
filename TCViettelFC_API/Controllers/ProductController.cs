@@ -21,11 +21,12 @@ namespace TCViettelFC_API.Controllers
 
         }
         [HttpGet("GetProduct")]
-        public async Task<ActionResult<List<ProductCategory>>> GetCategory()
+        public async Task<ActionResult<List<ProductResponse>>> GetProduct()
         {
             try
             {
                 var product = await _product.GetProductAsync();
+
                 return Ok(product);
             }
             catch (Exception ex)
@@ -33,6 +34,22 @@ namespace TCViettelFC_API.Controllers
                 return BadRequest("Đã xảy ra lỗi trong quá trình thực thi");
             }
            
+
+        }
+
+        [HttpGet("GetSanPham")]
+        public async Task<ActionResult<List<ProductResponse>>> GetSanPham()
+        {
+            try
+            {
+                var product = await _product.GetSanPhamAsync();
+                return Ok(product);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Đã xảy ra lỗi trong quá trình thực thi");
+            }
+
 
         }
         [HttpGet("GetProductById")]
@@ -50,6 +67,24 @@ namespace TCViettelFC_API.Controllers
                 throw new Exception("Lỗi trong quá trình thực thi.");
             }
           
+
+        }
+
+        [HttpGet("GetSanPhamById")]
+        public async Task<JsonResult> GetSanPhamById(int id)
+        {
+
+            try
+            {
+                var data = await _product.GetSanPhamByIdAsync(id);
+                return data;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi trong quá trình thực thi.");
+            }
+
 
         }
         [HttpPost("AddProduct")]
@@ -106,7 +141,15 @@ namespace TCViettelFC_API.Controllers
             return data;
 
         }
-        
+
+        [HttpPost("SanPhamLienQuan")]
+        public async Task<JsonResult> SanPhamLienQuan([FromBody] List<int> lstID)
+        {
+                var data = await _product.GetLienQuanProductAsync(lstID);
+                return data;
+
+        }
+
 
     }
 }

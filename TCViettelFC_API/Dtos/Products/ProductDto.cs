@@ -7,8 +7,6 @@ namespace TCViettelFC_API.Dtos.Product
 
         //public int ProductId { get; set; }
 
-        public int? PlayerId { get; set; }
-
         public int? SeasonId { get; set; }
 
         public int? CategoryId { get; set; }
@@ -44,8 +42,33 @@ namespace TCViettelFC_API.Dtos.Product
         public int ProductId { get; set; }
         public string? CategoryName{ get; set; }
         public string? SeasonName { get; set; }
+        public int? discoutPercent { get; set; }
         public string? Image { get; set; }
 
     }
-  
+
+    public class ProductCart {
+
+        public int ProductId { get; set; }
+
+        public int? CategoryId { get; set; }
+
+        public string? ProductName { get; set; }
+
+        public string? Avatar { get; set; }
+
+        public decimal? Price { get; set; }
+
+        public string? Size { get; set; }
+
+        public string? Material { get; set; }
+
+        public string? Description { get; set; }
+        public int? Quantity{ get; set; }
+
+    }
+
+
+
+
 }

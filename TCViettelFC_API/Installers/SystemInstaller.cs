@@ -10,6 +10,8 @@ namespace TCViettelFC_API.Installers
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IAreaRepository, AreaRepository>();
+            services.AddScoped<ITicketUtilRepository, TicketUtilRepository>();
+            services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
 
 
 

@@ -73,8 +73,9 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICloudinarySetting, CloudinarySettings>();
 builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
 builder.Services.AddScoped<IDiscountRepository, DiscoutRepository>();
-builder.Services.AddScoped<ITiketOrderRepository, TiketOrderRepository>();
-builder.Services.AddScoped<ISupplementaryItemRepository, SupplementaryItemRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICheckoutRepository, CheckoutRepository>();
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -112,6 +113,8 @@ builder.Services.AddAuthorization(options =>
     // Policy cho staff
     options.AddPolicy("staff", policy =>
         policy.RequireClaim("RoleId", "1"));
+    options.AddPolicy("entry", policy =>
+      policy.RequireClaim("RoleId", "3"));
 });
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.InstallerServicesInAssembly(builder.Configuration);

@@ -14,7 +14,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         private readonly Sep490G53Context _context;
         private readonly IConfiguration _configuration;
         private readonly IEmailService _emailService;
-        private static readonly Dictionary<string, (Customer Customer, string Code, DateTime Expiry)> _pendingRegistrations = new();
+        private static readonly Dictionary<string, (CustomersAccount Customer, string Code, DateTime Expiry)> _pendingRegistrations = new();
         private readonly IHttpContextAccessor _contextAccessor;
 
         public CustomerRepository(Sep490G53Context context, IConfiguration configuration, IEmailService emailService, IHttpContextAccessor contextAccessor)
@@ -27,7 +27,7 @@ namespace TCViettelFC_API.Repositories.Implementations
 
         public async Task<int> RegisterAsync(CustomerRegisterRequest cusRegReq)
         {
-            var existedCus = await _context.Customers.FirstOrDefaultAsync(x => x.Email == cusRegReq.Email);
+            var existedCus = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.Email == cusRegReq.Email);
             if (existedCus != null) return 0;
             try
             {
@@ -35,7 +35,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 var subject = "Confirmation Code";
                 var message = $"Your confirmation code is: {confirmationCode}";
                 await _emailService.SendEmailAsync(cusRegReq.Email, subject, message);
-                var temporaryCustomer = new Customer()
+                var temporaryCustomer = new CustomersAccount()
                 {
                     Email = cusRegReq.Email,
                     Password = cusRegReq.Password,
@@ -63,7 +63,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 var (customer, confirmationCode, expiry) = storedData;
                 if (confirmationCode == code && expiry > DateTime.UtcNow)
                 {
-                    await _context.Customers.AddAsync(customer);
+                    await _context.CustomersAccounts.AddAsync(customer);
                     await _context.SaveChangesAsync();
                     var profile = new Profile()
                     {
@@ -80,7 +80,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
         public async Task<CustomerLoginResponse> LoginAsync(CustomerLoginDto dto)
         {
-            var customer = await _context.Customers
+            var customer = await _context.CustomersAccounts
                 .FirstOrDefaultAsync(x => x.Email == dto.Email && x.Password == dto.Password);
             if (customer == null) return null;
 
