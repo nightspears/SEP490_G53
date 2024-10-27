@@ -364,7 +364,7 @@
               "RelativeDocumentMoniker": "Repositories\\Implementations\\CustomerRepository.cs",
               "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Repositories\\Implementations\\CustomerRepository.cs",
               "RelativeToolTip": "Repositories\\Implementations\\CustomerRepository.cs",
-              "ViewState": "AgIAAH4AAAAAAAAAAAD4v0EAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAcwEEAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-25T09:03:52.524Z",
               "EditorCaption": ""
@@ -379,8 +379,7 @@
               "RelativeToolTip": "Models\\PersonalAddress.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T03:22:35.01Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T03:22:35.01Z"
             },
             {
               "$type": "Document",
@@ -392,8 +391,7 @@
               "RelativeToolTip": "Models\\Sep490G53Context.cs",
               "ViewState": "AgIAAFEAAAAAAAAAAAAYwFAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T03:07:09.308Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T03:07:09.308Z"
             },
             {
               "$type": "Document",
@@ -405,8 +403,7 @@
               "RelativeToolTip": "Models\\Address.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T03:06:58.539Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T03:06:58.539Z"
             },
             {
               "$type": "Document",
@@ -418,8 +415,7 @@
               "RelativeToolTip": "Models\\OrderProduct.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T03:06:55.683Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-25T03:06:55.683Z"
             },
             {
               "$type": "Document",
@@ -525,10 +521,6 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:15:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:14:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
@@ -574,6 +566,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:15:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             }
           ]
         },

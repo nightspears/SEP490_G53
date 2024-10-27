@@ -286,6 +286,34 @@ img {
                         <label for="phone" class="form-label">Số điện thoại (tùy chọn)</label>
                         <input type="text" class="form-control" id="phone" name="Phone" value="@Model.Phone">
                     </div>
+
+                    <div class="mb-3">
+                    <label for="savedAddresses" class="form-label">Địa chỉ đã lưu</label>
+                    <select id="savedAddresses" class="form-control" name="SavedAddressId">
+                        <option selected disabled>Chọn địa chỉ đã lưu</option>
+                        <option value="1" 
+                                data-city-id="700000" 
+                                data-city-name="Hồ Chí Minh" 
+                                data-district-id="700600" 
+                                data-district-name="Quận 6" 
+                                data-ward-id="9176" 
+                                data-ward-name="Phường7"
+                                data-address=" 123 Phố Huế, Phường 7, Quận 6, Hồ Chí Minh">
+                            123 Phố Huế, Phường 7, Quận 6, Hồ Chí Minh
+                        </option>
+                        <option value="2" 
+                                data-city-id="220000" 
+                                data-city-name=" Bắc Ninh" 
+                                data-district-id="220100" 
+                                data-district-name="Thành Phố Bắc Ninh" 
+                                data-ward-id="1502" 
+                                data-ward-name="Phường Nam Sơn"
+                                data-address="456 Đường Nguyễn Huệ, Phường Nam Sơn, Thành Phố Bắc Ninh, Bắc Ninh">
+                        456 Đường Nguyễn Huệ, Phường Nam Sơn, Thành Phố Bắc Ninh, Bắc Ninh
+                        </option>
+                 
+                    </select>
+                </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Địa chỉ (tùy chọn)</label>
                         <input type="text" class="form-control" id="address" name="Address" value="@Model.Address">
@@ -410,21 +438,65 @@ img {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            fetchCities();
-            document.getElementById('city').addEventListener('change', function () {
-                const selectedCityCode = this.value;
-                fetchDistricts(selectedCityCode);
-            });
-            document.getElementById('district').addEventListener('change', function () {
-                const selectedCityId = document.getElementById('city').value;
-                const selectedDistrictId = this.value;
-                if (selectedCityId && selectedDistrictId) {
-                    fetchShipmentRate(selectedCityId, selectedDistrictId);
-                    fetchWards(selectedDistrictId);
-                }
-            });
-        });
+  document.addEventListener('DOMContentLoaded', function () {
+    fetchCities();
+    document.getElementById('city').addEventListener('change', function () {
+        const selectedCityCode = this.value;
+        fetchDistricts(selectedCityCode);
+        
+        // Deselect saved address when city is changed
+        document.getElementById('savedAddresses').selectedIndex = 0; // Reset to the first option
+    });
+    document.getElementById('district').addEventListener('change', function () {
+        const selectedCityId = document.getElementById('city').value;
+        const selectedDistrictId = this.value;
+        if (selectedCityId && selectedDistrictId) {
+            fetchShipmentRate(selectedCityId, selectedDistrictId);
+            fetchWards(selectedDistrictId);
+        }
+    });
+
+    // Event listener for saved addresses
+    document.getElementById('savedAddresses').addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+
+        // Update form fields with data from the selected option
+        document.getElementById('address').value = selectedOption.getAttribute('data-address');
+        document.getElementById('cityId').value = selectedOption.getAttribute('data-city-id');
+        document.getElementById('cityName').value = selectedOption.getAttribute('data-city-name');
+        document.getElementById('districtId').value = selectedOption.getAttribute('data-district-id');
+        document.getElementById('districtName').value = selectedOption.getAttribute('data-district-name');
+        document.getElementById('wardId').value = selectedOption.getAttribute('data-ward-id');
+        document.getElementById('wardName').value = selectedOption.getAttribute('data-ward-name');
+
+        // Automatically select the city and trigger district loading
+        const citySelect = document.getElementById('city');
+        citySelect.value = selectedOption.getAttribute('data-city-id');
+
+        // Trigger district loading after a slight delay to ensure city is set
+        setTimeout(() => {
+            citySelect.dispatchEvent(new Event('change'));
+
+            // Once districts are loaded, select the district and load wards
+            setTimeout(() => {
+                const districtSelect = document.getElementById('district');
+                districtSelect.value = selectedOption.getAttribute('data-district-id');
+                districtSelect.dispatchEvent(new Event('change'));
+
+                // Once wards are loaded, set the ward value
+                setTimeout(() => {
+                    const wardSelect = document.getElementById('ward');
+                    wardSelect.value = selectedOption.getAttribute('data-ward-id');
+                }, 500); // Adjust delay if necessary
+            }, 500); // Adjust delay if necessary
+        }, 500); // Adjust delay if necessary
+    });
+
+    // Deselect saved address when ward is changed
+    document.getElementById('ward').addEventListener('change', function () {
+        document.getElementById('savedAddresses').selectedIndex = 0; // Reset to the first option
+    });
+});
 
         function fetchCities() {
             console.log("Fetching cities...");

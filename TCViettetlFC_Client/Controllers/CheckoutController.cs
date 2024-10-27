@@ -58,7 +58,7 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                         CreatedDate = DateTime.Now,
                         Decription = "Payment for order test",
                         FullName = model.FullName, // Replace with actual customer data
-                        OrderId = 222 // You may need to generate the OrderId dynamically
+                        OrderId = 1 // You may need to generate the OrderId dynamically
                     };
 
                     // Redirect to VnPay payment page

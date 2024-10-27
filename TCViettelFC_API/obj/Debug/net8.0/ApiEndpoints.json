@@ -1414,7 +1414,13 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "cid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[TCViettelFC_API.Dtos.Product.ProductResponse, TCViettelFC_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",

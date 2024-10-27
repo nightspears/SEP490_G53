@@ -9,14 +9,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\models\\checkoutmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\checkoutmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\checkout\\paymentcallback.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\checkout\\paymentcallback.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 81,
+          "SelectedChildIndex": 79,
           "Children": [
             {
               "$type": "Bookmark",
@@ -350,31 +342,8 @@
               "RelativeToolTip": "Models\\CheckoutModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwBAAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T02:25:24.871Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PaymentCallBack.cshtml",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\PaymentCallBack.cshtml",
-              "RelativeDocumentMoniker": "Views\\Checkout\\PaymentCallBack.cshtml",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\PaymentCallBack.cshtml",
-              "RelativeToolTip": "Views\\Checkout\\PaymentCallBack.cshtml",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwDEAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-24T06:48:09.359Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CheckoutController.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CheckoutController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CheckoutController.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CheckoutController.cs",
-              "RelativeToolTip": "Controllers\\CheckoutController.cs",
-              "ViewState": "AgIAAFIAAAAAAAAAAAAawGsAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T09:29:35.382Z"
+              "WhenOpened": "2024-10-25T02:25:24.871Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -384,7 +353,7 @@
               "RelativeDocumentMoniker": "Views\\Checkout\\Index.cshtml",
               "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\Index.cshtml",
               "RelativeToolTip": "Views\\Checkout\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAECAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAAYCAAAAAAAAAAAQwL0BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-23T09:27:14.449Z",
               "EditorCaption": ""
@@ -457,10 +426,6 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:15:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:14:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
@@ -506,6 +471,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:15:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             }
           ]
         },
