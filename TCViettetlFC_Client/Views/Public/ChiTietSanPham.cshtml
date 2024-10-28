@@ -3,107 +3,8 @@
 @{
     Layout = "_layoutCommon";
 }
-<style>
-    .size{
-        cursor:pointer
-    }
 
-    .rate-item h4 {
-        color: #979da0;
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
-
-    .rate-item select {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        color: #333;
-        font-size: 14px;
-    }
-
-        .rate-item select option {
-            padding: 8px;
-            background-color: #fff;
-            color: #333;
-        }
-
-    .rate-item div {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .card {
-        border-radius: 10px;
-        border: none !important;
-        transition: transform 0.2s ease-in-out !important;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
-        margin-bottom: 20px;
-        height: 390px;
-        max-height: 400px;
-        position: relative;
-    }
-
-    }
-
-    .card:hover {
-        transform: scale(1.05) !important;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
-    }
-
-    .product-img {
-        height: 200px !important;
-        object-fit: cover !important;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        width: auto;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        object-fit: cover;
-        margin-bottom: 10px;
-    }
-
-    .product-title {
-        white-space: nowrap; /* Không xuống dòng */
-        overflow: hidden; /* Ẩn phần nội dung thừa */
-        text-overflow: ellipsis; /* Thêm dấu '...' khi nội dung bị cắt */
-        max-width: 350px; /* Chiều rộng tối đa của phần tử */
-        padding-left: 10px
-    }
-
-    .discount-badge {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: #eb3636;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 50px;
-        font-size: 14px;
-        font-weight: bold;
-    }
-
-    .product-title {
-        white-space: nowrap; /* Không xuống dòng */
-        overflow: hidden; /* Ẩn phần nội dung thừa */
-        text-overflow: ellipsis; /* Thêm dấu '...' khi nội dung bị cắt */
-        max-width: 350px; /* Chiều rộng tối đa của phần tử */
-        padding-left: 10px;
-        font-size: 18px !important;
-        font-weight: 500 !important;
-        color: #333 !important;
-    }
-
-    .product-price {
-        color: red !important;
-        font-size: 20px !important;
-    }
-</style>
-
+<link href="~/home_assets/css/detailsanpham.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 
 <div class=innerbannerwrap>
@@ -217,8 +118,8 @@
                         <div class=rate-item style="width:60% !important;padding-top:20px">
                             <h4 style="color:black ;text-align:left">In số áo (nếu cần)</h4>
                             <div style="display:flex">
-                                <select id="shirtNumber">
-                                    <option value="0">-- Chọn số áo --</option>
+                                <select id="shirtNumber" onchange="ChonSoAo()">
+                                    <option value="-1">-- Chọn số áo --</option>
                                     <option value="0" >Không in</option>
                                     @foreach (var p in Model.players)
                                     {
@@ -228,6 +129,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class=rate-item style="width:80% !important;padding-top:20px">
+                            <div style="display:flex">
+                                <input onchange="customAo()" id="customAo" type="checkbox" style="width:25px ; height:50px ;line-height:50px" /> <h5 style="margin-left:15px ;color:black ; font-size:19px">Bạn có muốn tự thiết kế áo </h5>
+                            </div>
+                        </div>
+
                         <div class=rate-item style="width:80% !important;padding-top:20px">
                             <h4 style="color:black ;text-align:left">Chất liệu</h4>
                             <div style="display:flex">
@@ -240,7 +147,28 @@
                         <a class="btn-addcart" onclick="AddToCart(@ViewBag.Id)">Thêm giỏ hàng</a>
 
                     <a class="btn-blackLight" onclick="buyNow()">Mua ngay</a>
+                   @*  <script>
+                        document.getElementById("openModalBtn").onclick = function () {
+                            document.getElementById("previewModal").style.display = "flex";
+                        }
 
+                        // Function to close the modal
+                        function closeModal() {
+                            document.getElementById("previewModal").style.display = "none";
+                        }
+
+                        // Function to update text overlays
+                        function updateText(elementId, text) {
+                            document.getElementById(elementId).textContent = text;
+                        }
+
+                        // Close modal if clicked outside of modal content
+                        window.onclick = function (event) {
+                            if (event.target == document.getElementById("previewModal")) {
+                                closeModal();
+                            }
+                        }
+                    </script> *@
                     <script>
                         function buyNow() {
                             const productId = document.getElementById('idProduct').value;
@@ -379,6 +307,31 @@
            
         </div>
     </div>
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Ảnh mẫu</h3>
+
+            <!-- Image and text overlay -->
+            <div class="image-container">
+                <img src="https://product.hstatic.net/1000312752/product/atls185-1__2__3c5ed488e17f4abe98ac13d13b51feab.jpg" alt="Shirt Image">
+                <div class="text-overlay" id="shirtNameOverlay">Tên cầu thủ</div>
+                <div class="text-overlay" id="shirtNumberOverlay">10</div>
+            </div>
+            <!-- Inputs for shirt name and number -->
+            <div class="col-sm-6">
+                <input type="text" style="height:45px !important" placeholder="Nhập tên cầu thủ" class="form-control" id="nameAoCustom" onchange="updateText('shirtNameOverlay', this.value)">
+            </div>
+
+            <div class="col-sm-6">
+                <input type="text" style="height:45px !important" placeholder="Nhập số áo" class="form-control" id="SoAoCustom" onchange="updateText('shirtNumberOverlay', this.value)">
+            </div>
+            <div style="margin-left:15px ; margin-top:55px ; margin-right:10px">
+                <p style="color:red"><strong>Ghi chú: </strong> Ảnh mẫu có thể không cùng màu sắc và kiểu dáng sản phẩm .</p>
+            </div>
+        </div>
+    </div>
+
 </section>
 
 <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>

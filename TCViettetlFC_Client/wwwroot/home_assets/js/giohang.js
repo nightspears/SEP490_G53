@@ -43,7 +43,10 @@ function loadData() {
 
         var total = parseFloat(item.price) * item.quantity;
         var teninao = "";
+
+
         if (item.TenInAo.trim() == "" || item.TenInAo.trim() == null) {
+            
             teninao = "Không in tên"
         } else {
             teninao = item.TenInAo;
