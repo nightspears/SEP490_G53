@@ -51,10 +51,10 @@ function loadData() {
         } else {
             teninao = item.TenInAo;
         }
-        var html = ` <tr>
+        var html = ` <tr style="height:110px">
                             <td>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" data-pid="${item.productId}" data-size="${item.size}" >
+                                    <input class="form-check-input" type="checkbox" data-pid="${item.Item_id}" >
                                 </div>
                             </td>
                             <td>
@@ -74,18 +74,18 @@ function loadData() {
                             </td>
                             <td class="quantity">
                                 <div style="display:flex">
-                                   <button class="quantity-btn" onclick="updateCart(${item.productId}, '${item.size}', ${-1})">-</button>
+                                   <button class="quantity-btn" onclick="updateCart(${item.Item_id}, ${-1})">-</button>
 
-                                    <input type="text" id="quantity_${item.productId}_${item.size}" value="${item.quantity}" class="quantity-input" min="1">
-                                    <button class="quantity-btn" onclick="updateCart(${item.productId}, '${item.size}', ${1})">+</button>
+                                    <input type="text" id="quantity_${item.Item_id}" value="${item.quantity}" class="quantity-input" min="1">
+                                    <button class="quantity-btn" onclick="updateCart(${item.Item_id},${1})">+</button>
 
                                 </div>
                       
                             </td>
                             <td class="price" data-price="${item.price}">${item.price}</td>
-                            <td class="price" id="priceTotal_${item.productId}_${item.size}" data-price="${total}">${total}</td>
+                            <td class="price" id="priceTotal_${item.Item_id}" data-price="${total}">${total}</td>
                             <td class="text-center">
-                                <button class="btn btn-danger w-100 btnDeleteCart" data-id="${item.productId}" data-size="${item.size}" style="margin - top : 10px">Xóa</button>
+                                <button class="btn btn-danger w-100 btnDeleteCart" data-id="${item.Item_id}"  style="margin - top : 10px">Xóa</button>
                             </td>
                         </tr>`;
 
@@ -104,8 +104,8 @@ function loadData() {
 $(document).on("click", ".btnDeleteCart", function () {
 
     var pid = $(this).data("id");
-    var size = $(this).data("size");
-    removeProductByIdAndSize(pid, size);
+    
+    removeProductByIdAndSize(pid);
     loadData();
     format();
 
@@ -122,18 +122,18 @@ function removeProductByIdAndSize(id, size) {
     if (!products) {
         return;
     }
-    products = products.filter(product => !(product.productId === id && product.size === size));
+    products = products.filter(product => !(product.Item_id === id ));
     saveCartToLocalStorage(products, 60 * 24 * 7)
 
 }
 
 
-function updateCart(productId, size, quantity) {
+function updateCart(itemID, quantity) {
 
     var cartItems = getCartFromLocalStorage();
 
     var existingProduct = cartItems.find(function (item) {
-        return item.productId === productId && item.size === size;
+        return item.Item_id === itemID;
     });
 
     if (existingProduct) {
@@ -143,13 +143,13 @@ function updateCart(productId, size, quantity) {
         }
 
         var a = existingProduct.quantity;
-        $(`#quantity_${productId}_${size}`).val(a);
+        $(`#quantity_${itemID}`).val(a);
 
 
     }
     saveCartToLocalStorage(cartItems, 60 * 24 * 7);
-    $(`#priceTotal_${productId}_${size}`).text(parseInt(existingProduct.quantity) * parseFloat(existingProduct.price));
-    $(`#priceTotal_${productId}_${size}`).attr("data-price", parseInt(existingProduct.quantity) * parseFloat(existingProduct.price));
+    $(`#priceTotal_${itemID}`).text(parseInt(existingProduct.quantity) * parseFloat(existingProduct.price));
+    $(`#priceTotal_${itemID}`).attr("data-price", parseInt(existingProduct.quantity) * parseFloat(existingProduct.price));
     lstChecked = [];
     getTotalPrice();
     fillprice();
@@ -205,7 +205,7 @@ function fillprice() {
     lstChecked.forEach(function (checkedItem) {
 
         var existingProduct = cartItems.find(function (item) {
-            return item.productId === checkedItem.ProID && item.size === checkedItem.Size;
+            return item.Item_id === checkedItem.Item_id ;
         });
 
         if (existingProduct) {
@@ -229,12 +229,9 @@ function fillprice() {
 function getTotalPrice() {
     $(".form-check-input:checked").each(function () {
         var id = $(this).data('pid');
-        var size = $(this).data('size');
-
         if (id != null && id != undefined && id != 0) {
             var pro = {
-                ProID: id,
-                Size: size
+                Item_id: id
             }
             lstChecked.push(pro)
         }
@@ -247,7 +244,7 @@ function checkOut() {
     var cartItems = getCartFromLocalStorage();
     lstChecked.forEach(function (checkedItem) {
         var existingProduct = cartItems.find(function (item) {
-            return item.productId === checkedItem.ProID && item.size === checkedItem.Size;
+            return item.Item_id === checkedItem.Item_id ;
         });
 
         if (existingProduct) {
