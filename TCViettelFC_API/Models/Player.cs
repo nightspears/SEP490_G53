@@ -21,6 +21,8 @@ public partial class Player
 
     public string? Description { get; set; }
 
+    public string? BackShirtImage { get; set; }
+
     public int? Status { get; set; }
 
     public virtual ICollection<OrderProductDetail> OrderProductDetails { get; set; } = new List<OrderProductDetail>();

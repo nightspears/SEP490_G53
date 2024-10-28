@@ -70,7 +70,7 @@ public partial class Sep490G53Context : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
+{
         var config = new ConfigurationBuilder()
           .AddJsonFile("appsettings.json")
           .Build();
@@ -80,6 +80,7 @@ public partial class Sep490G53Context : DbContext
             optionsBuilder.UseSqlServer(config.GetConnectionString("value"));
         }
     }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Address>(entity =>
@@ -353,6 +354,12 @@ public partial class Sep490G53Context : DbContext
             entity.ToTable("Order_Product_Details");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CustomShirtName)
+                .HasMaxLength(255)
+                .HasColumnName("custom_shirt_name");
+            entity.Property(e => e.CustomShirtNumber)
+                .HasMaxLength(255)
+                .HasColumnName("custom_shirt_number");
             entity.Property(e => e.OrderProductId).HasColumnName("order_product_id");
             entity.Property(e => e.PlayerId).HasColumnName("player_id");
             entity.Property(e => e.Price)
@@ -493,6 +500,9 @@ public partial class Sep490G53Context : DbContext
             entity.HasKey(e => e.PlayerId).HasName("PK__Players__44DA120C0E2EFD39");
 
             entity.Property(e => e.PlayerId).HasColumnName("player_id");
+            entity.Property(e => e.BackShirtImage)
+                .HasMaxLength(255)
+                .HasColumnName("back_shirt_image");
             entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.FullName)
                 .HasMaxLength(255)

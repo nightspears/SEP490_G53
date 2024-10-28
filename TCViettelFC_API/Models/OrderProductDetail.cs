@@ -13,6 +13,10 @@ public partial class OrderProductDetail
 
     public int? PlayerId { get; set; }
 
+    public string? CustomShirtNumber { get; set; }
+
+    public string? CustomShirtName { get; set; }
+
     public string? Size { get; set; }
 
     public int? Quantity { get; set; }

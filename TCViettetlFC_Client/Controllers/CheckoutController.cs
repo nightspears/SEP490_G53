@@ -98,14 +98,19 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                         {
                             Customer = new CustomerDTO
                             {
+                                AccountId=checkoutModel.AccountId,
                                 Email = checkoutModel.Email, // Add actual email field if exists
-                                Phone = checkoutModel.Phone // Add actual phone field if exists
+                                Phone = checkoutModel.Phone,// Add actual phone field if exists
+                                FullName = checkoutModel.FullName
                             },
                             Address = new AddressDTO
                             {
                                 City = checkoutModel.CityId,
+                                CityName = checkoutModel.CityName,
                                 District = checkoutModel.DistrictId,
+                                DistrictName = checkoutModel.DistrictName,
                                 Ward = checkoutModel.WardId,
+                                WardName = checkoutModel.WardName,
                                 DetailedAddress = checkoutModel.Address
                             },
                             OrderProduct = new OrderProductDTO
@@ -117,7 +122,9 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                             OrderProductDetails = checkoutModel.checkoutItems.Select(item => new OrderProductDetailDTO
                             {
                                 ProductId = item.ProductId,
-                                PlayerId = item.playerId == 0 ? null : item.playerId,
+                                PlayerId = item.shirtNumber <= 0 ? null : item.shirtNumber,
+                                CustomShirtNumber = item.SoAo,
+                                CustomShirtName = item.TenCauThu,
                                 Size = item.size,
                                 Quantity = item.Quantity,
                                 Price = item.Price

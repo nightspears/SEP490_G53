@@ -6,6 +6,7 @@
         public List<CheckoutCartModel> checkoutItems { get; set; } = new List<CheckoutCartModel>();
 
         public string Email { get; set; }
+        public int? AccountId { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string Address { get; set; }
@@ -29,8 +30,11 @@
         public string size { get; set; }
         public string Avartar { get; set; }
         public int Quantity { get; set; }
-        public int playerId { get; set; }
         public int shirtNumber { get; set; }
+        public string ?SoAo { get; set; }
+        public string ?TenCauThu { get; set; }
+
+
 
     }
 }
