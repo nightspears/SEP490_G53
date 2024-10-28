@@ -51,6 +51,12 @@ function loadData() {
         } else {
             teninao = item.TenInAo;
         }
+        var sizeTen = "";
+        if (item.shirtNumber != null) {
+            sizeTen = ` <span  title="${item.size} - ${teninao}" >${item.size} - ${teninao} </span> <span></span>`;
+        } else {
+            sizeTen = ` <span  title="${item.size}" >${item.size}</span> <span></span>`
+        }
         var html = ` <tr style="height:110px">
                             <td>
                                 <div class="form-check">
@@ -65,7 +71,7 @@ function loadData() {
                                     <div class="product-info" style="margin-top: 2px; cursor: pointer;">
                                        
                                         <span class="product-name" title="${item.nameProduct}">${item.nameProduct}</span>
-                                        <span  title="${item.size} - ${teninao}" >${item.size} - ${teninao} </span> <span></span>
+                                        ${sizeTen} 
                                      
                                        
                                     </div>

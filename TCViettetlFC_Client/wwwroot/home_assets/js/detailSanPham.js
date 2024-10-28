@@ -70,6 +70,9 @@ function AddToCart(id) {
         var Price = $("#giaSP").data("price");
         var TenSP = $("#TenSP").text();
         var playerId = $("#shirtNumber").val();
+        if (playerId == undefined) {
+            playerId = null;
+        }
         var SoAo = null;
         var tencauthu = "";
 
@@ -169,12 +172,11 @@ function validateAddCart() {
     return check;
 
 }
-
 function ChonSoAo() {
     var soao = $("#shirtNumber").val();
-    if (soao != 0 || soao != -1) {
+    if (soao != 0 && soao != -1) {
         $("#customAo").prop("checked", false)
-    }
+    } 
 }
 
 function customAo() {
