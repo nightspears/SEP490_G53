@@ -70,6 +70,9 @@ function AddToCart(id) {
         var Price = $("#giaSP").data("price");
         var TenSP = $("#TenSP").text();
         var playerId = $("#shirtNumber").val();
+        if (playerId == undefined) {
+            playerId = null;
+        }
         var SoAo = null;
         var tencauthu = "";
 
@@ -80,7 +83,7 @@ function AddToCart(id) {
             if (playerId == -1 && $("#customAo").is(":checked")) {
                 tencauthu = $("#nameAoCustom").val();
                 SoAo = $("#SoAoCustom").val();
-                var InfoAo = tencauthu + "-" + SoAo;
+                var InfoAo = tencauthu + " - số " + SoAo;
                 debugger
             } else {
                 var InfoAo = "";
@@ -90,38 +93,60 @@ function AddToCart(id) {
 
         var soLuong = 1;
         var cartItems = getCartFromLocalStorage();
-        var existingProduct = cartItems.find(function (item) {
-            return item.productId === productId && item.size === size;
-        });
-
-        if (existingProduct && $("#customAo").is(":checked") == false && ($("#shirtNumber").val() == -1 || $("#shirtNumber").val() == 0)) {
-
-            existingProduct.quantity += 1;
-        }else
-        {
-                var Product = {
-                productId: productId,
-                size: size,
-                avartar: Avartar,
-                price: Price,
-                nameProduct: TenSP,
-                quantity: soLuong,
-                shirtNumber: playerId,
-                TenInAo: InfoAo,
-                SoAo: SoAo,
-                TenCauThu: tencauthu
-
-            };
-            cartItems.push(Product);
-        }
+        var item_id = cartItems.length > 0 ? Math.max(...cartItems.map(item => item.Item_id)) + 1 : 1;
+        debugger
         var existing = cartItems.find(function (item) {
             return item.productId === productId && item.size === size && item.shirtNumber === playerId;
         });
-
-        if ($("#shirtNumber").val() > 0 && existing) {
-              existing.quantity += 1;
-           
+        if ($("#shirtNumber").val() > 0) {
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                var Product = {
+                    Item_id: item_id ,
+                    productId: productId,
+                    size: size,
+                    avartar: Avartar,
+                    price: Price,
+                    nameProduct: TenSP,
+                    quantity: soLuong,
+                    shirtNumber: playerId,
+                    TenInAo: InfoAo,
+                    SoAo: SoAo,
+                    TenCauThu: tencauthu
+                };
+                cartItems.push(Product);
+            }
         }
+        else {
+            var existingProduct = cartItems.find(function (item) {
+
+                return item.productId === productId && item.size === size;
+            });
+
+            if (existingProduct && $("#customAo").is(":checked") == false && ($("#shirtNumber").val() == -1 || $("#shirtNumber").val() == 0)) {
+
+                existingProduct.quantity += 1;
+            } else {
+                var Product = {
+                    Item_id: item_id,
+                    productId: productId,
+                    size: size,
+                    avartar: Avartar,
+                    price: Price,
+                    nameProduct: TenSP,
+                    quantity: soLuong,
+                    shirtNumber: playerId,
+                    TenInAo: InfoAo,
+                    SoAo: SoAo,
+                    TenCauThu: tencauthu
+
+                };
+                cartItems.push(Product);
+            }
+        }
+
+       
         saveCartToLocalStorage(cartItems, 60 * 24 * 7);
         alert("thêm thành công")
     }
@@ -147,12 +172,11 @@ function validateAddCart() {
     return check;
 
 }
-
 function ChonSoAo() {
     var soao = $("#shirtNumber").val();
-    if (soao != 0 || soao != -1) {
+    if (soao != 0 && soao != -1) {
         $("#customAo").prop("checked", false)
-    }
+    } 
 }
 
 function customAo() {
