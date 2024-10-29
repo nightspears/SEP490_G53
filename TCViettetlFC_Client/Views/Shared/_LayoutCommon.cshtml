@@ -82,14 +82,14 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a >
-                                                    Cửa hàng
+                                                <a href=/public/sanpham>
+                                                    Cửa hàng <span></span> <span></span> <span></span>
+                                                    <span></span>
                                                 </a>
-                                                <ul class=sub-menu  style="background-color:white !important">
-                                                    <li><a style="color:black" class="ProductCate" >Áo đá bóng</a></li>
-                                                    <li><a style="color:black" class="ProductCate" >Phụ kiện thể thao</a></li>
-                                                    <li><a style="color:black" class="ProductCate" >Giày đá bóng</a></li>
-                                                </ul>
+                                                <a >
+                                                   
+                                                </a>
+                                              
 
                                             </li>
                                             <li>
@@ -289,8 +289,42 @@
             </div>
         </footer>
     </div>
+    <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
     <script src="~/home_assets/js/vendor/vendor.js"></script>
     <script src="~/home_assets/js/main.js"></script>
+   @*  <script>
+        function loadCategoryMenu() {
+            $.ajax({
+                url: "https://localhost:5000/api/Category/GetCategory",
+                method: "GET",
+                dataType: "json",
+                success: function (res) {
+                    var menu_category = $("#menu_category").empty();
+                    var textFirt = `<li class="category_product_menu" onclick="showProductByCate(0)" >
+                                                  <a style="color:black" class="ProductCate">Tất cả</a>
+                                            </li>`;
+                    menu_category.append(textFirt);
+                    $.each(res, function (index, item) {
+
+                        var html = `<li class="category_product_menu" onclick="showProductByCate(${item.categoryId})" data-cid="${item.categoryId}">
+                                          <a style="color:black" class="ProductCate" data-cid="${item.categoryId}">${item.categoryName}</a>
+                                    </li>`;
+                        menu_category.append(html);
+                    });
+
+
+                },
+                error: function (res) {
+                    console.error("Error loading data", res);
+                }
+            });
+        }
+      
+
+        $(document).ready(function () {
+            loadCategoryMenu();
+        });
+    </script> *@
 </body>
 
 </html>

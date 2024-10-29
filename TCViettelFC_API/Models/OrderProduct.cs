@@ -17,6 +17,8 @@ public partial class OrderProduct
 
     public int? AddressId { get; set; }
 
+    public string? Note { get; set; }
+
     public int? Status { get; set; }
 
     public virtual Address? Address { get; set; }
