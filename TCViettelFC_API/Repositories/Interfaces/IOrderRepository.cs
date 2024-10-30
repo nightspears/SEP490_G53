@@ -7,5 +7,9 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<IEnumerable<TicketOrdersDto>> GetAllTicketOrders();
         Task<IEnumerable<OrderedSuppItemDto>> GetOrderedSuppItemByTicketOrderId(int id);
         Task<IEnumerable<OrderedTicketDto>> GetOrderedTicketByTicketOrderId(int id);
+
+        Task<IEnumerable<OrderProductDto>> GetAllOrderProductsAsync();
+
+        Task<OrderDetailDto> GetOrderDetailsByOrderIdAsync(int orderId);
     }
 }

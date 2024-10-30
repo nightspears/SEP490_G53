@@ -31,6 +31,22 @@ namespace TCViettelFC_API.Controllers
         {
             return Ok(await _orderRepository.GetOrderedSuppItemByTicketOrderId(id));
         }
+        [HttpGet("getproductorders")]
+        public async Task<IActionResult> GetAllOrderProducts()
+        {
+            var orders = await _orderRepository.GetAllOrderProductsAsync();
+            return Ok(orders);
+        }
+        [HttpGet("getorderdetails/{orderId}")]
+        public async Task<IActionResult> GetOrderDetails(int orderId)
+        {
+            var orderDetail = await _orderRepository.GetOrderDetailsByOrderIdAsync(orderId);
+            if (orderDetail == null)
+            {
+                return NotFound($"Order details for order ID {orderId} not found.");
+            }
+            return Ok(orderDetail);
+        }
 
     }
 }

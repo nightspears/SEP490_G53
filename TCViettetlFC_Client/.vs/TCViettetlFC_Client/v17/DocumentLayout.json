@@ -3,32 +3,12 @@
   "WorkspaceRootPath": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\wwwroot\\home_assets\\js\\giohang.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:wwwroot\\home_assets\\js\\giohang.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\public\\chitietsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\public\\chitietsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\models\\checkoutmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\checkoutmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\wwwroot\\home_assets\\js\\detailsanpham.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:wwwroot\\home_assets\\js\\detailsanpham.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\models\\createorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\createorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\staff\\orderproductdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\orderproductdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 79,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -347,103 +327,12 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ChiTietSanPham.cshtml",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Public\\ChiTietSanPham.cshtml",
-              "RelativeDocumentMoniker": "Views\\Public\\ChiTietSanPham.cshtml",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Public\\ChiTietSanPham.cshtml",
-              "RelativeToolTip": "Views\\Public\\ChiTietSanPham.cshtml",
-              "ViewState": "AgIAAKQAAAAAAAAAAAAAALgAAABVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-29T01:46:48.063Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "giohang.js",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\wwwroot\\home_assets\\js\\giohang.js",
-              "RelativeDocumentMoniker": "wwwroot\\home_assets\\js\\giohang.js",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\wwwroot\\home_assets\\js\\giohang.js",
-              "RelativeToolTip": "wwwroot\\home_assets\\js\\giohang.js",
-              "ViewState": "AgIAADsAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-10-29T01:37:57.97Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CheckoutController.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CheckoutController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CheckoutController.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CheckoutController.cs",
-              "RelativeToolTip": "Controllers\\CheckoutController.cs",
-              "ViewState": "AgIAAFkAAAAAAAAAAAAIwCMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-28T03:11:48.118Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "detailSanPham.js",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\wwwroot\\home_assets\\js\\detailSanPham.js",
-              "RelativeDocumentMoniker": "wwwroot\\home_assets\\js\\detailSanPham.js",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\wwwroot\\home_assets\\js\\detailSanPham.js",
-              "RelativeToolTip": "wwwroot\\home_assets\\js\\detailSanPham.js",
-              "ViewState": "AgIAADwAAAAAAAAAAAAmwFMAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-10-28T03:11:13.045Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CreateOrderRequest.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\CreateOrderRequest.cs",
-              "RelativeDocumentMoniker": "Models\\CreateOrderRequest.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\CreateOrderRequest.cs",
-              "RelativeToolTip": "Models\\CreateOrderRequest.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAAACcAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-28T03:10:11.995Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CheckoutModel.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\CheckoutModel.cs",
-              "RelativeDocumentMoniker": "Models\\CheckoutModel.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\CheckoutModel.cs",
-              "RelativeToolTip": "Models\\CheckoutModel.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAA5wCIAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T02:25:24.871Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Checkout\\Index.cshtml",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\Index.cshtml",
-              "RelativeToolTip": "Views\\Checkout\\Index.cshtml",
-              "ViewState": "AgIAAOEAAAAAAAAAAAAAAAgBAABNAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-23T09:27:14.449Z",
-              "EditorCaption": ""
             }
           ]
         },
         {
           "DockedWidth": 55,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 29,
           "Children": [
             {
               "$type": "Bookmark",
@@ -556,6 +445,32 @@
             {
               "$type": "Bookmark",
               "Name": "ST:16:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OrderProductDetail.cshtml",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderProductDetail.cshtml",
+              "RelativeDocumentMoniker": "Views\\Staff\\OrderProductDetail.cshtml",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderProductDetail.cshtml",
+              "RelativeToolTip": "Views\\Staff\\OrderProductDetail.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-30T08:53:36.117Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "StaffController.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\StaffController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StaffController.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\StaffController.cs",
+              "RelativeToolTip": "Controllers\\StaffController.cs",
+              "ViewState": "AgIAAAgBAAAAAAAAAAAAACIBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T08:29:32.334Z",
+              "EditorCaption": ""
             }
           ]
         },

@@ -1,0 +1,75 @@
+﻿@using TCViettetlFC_Client.Models
+
+<div class="container mt-4">
+    <h2 class="text-center">Order Details</h2>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Order Information</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Order ID:</strong> @Model.Id</p>
+            <p><strong>Order Code:</strong> @Model.OrderCode</p>
+            <p><strong>Order Date:</strong> @Model.OrderDate?.ToString("g")</p>
+            <p><strong>Total Price:</strong> @Model.TotalPrice.ToString("C")</p>
+            <p><strong>Note:</strong> @Model.Note</p>
+            <p><strong>Status:</strong> @Model.Status</p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Customer Information</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Full Name:</strong> @Model.CustomerFullName</p>
+            <p><strong>Email:</strong> @Model.CustomerEmail</p>
+            <p><strong>Phone:</strong> @Model.CustomerPhone</p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Address Information</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>City:</strong> @Model.Address.CityName</p>
+            <p><strong>District:</strong> @Model.Address.DistrictName</p>
+            <p><strong>Ward:</strong> @Model.Address.WardName</p>
+            <p><strong>Detailed Address:</strong> @Model.Address.DetailedAddress</p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Products</h5>
+        </div>
+        <div class="card-body">
+            @foreach (var product in Model.Products)
+            {
+                <div class="border-bottom mb-3 pb-2">
+                    <h6>@product.Product.ProductName</h6>
+                    <img src="@product.Product.Avatar" alt="Avatar" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" />
+                    <p><strong>Quantity:</strong> @product.Quantity</p>
+                    <p><strong>Price:</strong> @product.Price.ToString("C")</p>
+                    <p><strong>Player Name:</strong> @product.Player.FullName</p>
+                    <p><strong>Player Shirt Number:</strong> @product.Player.ShirtNumber</p>
+                    <p><strong>Custom Shirt Name:</strong> @product.CustomShirtName</p>
+                    <p><strong>Custom Shirt Number:</strong> @product.CustomShirtNumber</p>
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Payment Information</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Total Amount:</strong> @Model.Payment.TotalAmount.ToString("C")</p>
+            <p><strong>Payment Gateway:</strong> @Model.Payment.PaymentGateway</p>
+            <p><strong>Status:</strong> @Model.Payment.Status</p>
+        </div>
+    </div>
+</div>

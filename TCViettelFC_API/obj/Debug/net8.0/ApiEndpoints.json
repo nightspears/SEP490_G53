@@ -1194,6 +1194,22 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.OrderController",
+    "Method": "GetOrderDetails",
+    "RelativePath": "api/Order/getorderdetails/{orderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.OrderController",
     "Method": "GetOrderedSuppByOrderId",
     "RelativePath": "api/Order/getorderedsupp/{id}",
     "HttpMethod": "GET",
@@ -1222,6 +1238,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.OrderController",
+    "Method": "GetAllOrderProducts",
+    "RelativePath": "api/Order/getproductorders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

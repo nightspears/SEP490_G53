@@ -150,7 +150,8 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                     }
                     catch(Exception ex)
                     {
-                        throw ex;
+                        Console.WriteLine($"An error occurred: {ex.Message}");
+                        throw;
                     }
                 }
                 else if (response.VnPayResponseCode == "24") // VnPay response code for "Transaction cancelled by user"

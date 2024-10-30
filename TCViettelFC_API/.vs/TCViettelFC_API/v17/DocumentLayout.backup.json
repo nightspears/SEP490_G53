@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\githubrepo\\sep490_g53\\tcviettelfc_api\\dtos\\checkout\\createorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:dtos\\checkout\\createorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\githubrepo\\sep490_g53\\tcviettelfc_api\\repositories\\interfaces\\iorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:repositories\\interfaces\\iorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\githubrepo\\sep490_g53\\tcviettelfc_api\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\githubrepo\\sep490_g53\\tcviettelfc_api\\repositories\\implementations\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:repositories\\implementations\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\githubrepo\\sep490_g53\\tcviettelfc_api\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\githubrepo\\sep490_g53\\tcviettelfc_api\\dtos\\order\\orderproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:dtos\\order\\orderproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\githubrepo\\sep490_g53\\tcviettelfc_api\\models\\orderproductdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:models\\orderproductdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\githubrepo\\sep490_g53\\tcviettelfc_api\\models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:models\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\githubrepo\\sep490_g53\\tcviettelfc_api\\models\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:models\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\githubrepo\\sep490_g53\\tcviettelfc_api\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 81,
+          "SelectedChildIndex": 79,
           "Children": [
             {
               "$type": "Bookmark",
@@ -342,63 +342,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Customer.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Models\\Customer.cs",
-              "RelativeDocumentMoniker": "Models\\Customer.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Models\\Customer.cs",
-              "RelativeToolTip": "Models\\Customer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-28T04:07:50.548Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "OrderProductDetail.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Models\\OrderProductDetail.cs",
-              "RelativeDocumentMoniker": "Models\\OrderProductDetail.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Models\\OrderProductDetail.cs",
-              "RelativeToolTip": "Models\\OrderProductDetail.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAACAAAAAAAAAA==",
+              "Title": "Player.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Models\\Player.cs",
+              "RelativeDocumentMoniker": "Models\\Player.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Models\\Player.cs",
+              "RelativeToolTip": "Models\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-28T03:07:57.289Z"
+              "WhenOpened": "2024-10-30T04:04:32.476Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Address.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Models\\Address.cs",
-              "RelativeDocumentMoniker": "Models\\Address.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Models\\Address.cs",
-              "RelativeToolTip": "Models\\Address.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "Controllers\\OrderController.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "Controllers\\OrderController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwDAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-25T03:06:58.539Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CheckoutController.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Controllers\\CheckoutController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CheckoutController.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Controllers\\CheckoutController.cs",
-              "RelativeToolTip": "Controllers\\CheckoutController.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAYwBcAAABSAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T06:57:26.456Z"
+              "WhenOpened": "2024-10-30T03:39:30.47Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CreateOrderRequest.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Dtos\\CheckOut\\CreateOrderRequest.cs",
-              "RelativeDocumentMoniker": "Dtos\\CheckOut\\CreateOrderRequest.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Dtos\\CheckOut\\CreateOrderRequest.cs",
-              "RelativeToolTip": "Dtos\\CheckOut\\CreateOrderRequest.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA0AAAAEAAAAAAAAAA==",
+              "Title": "IOrderRepository.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Repositories\\Interfaces\\IOrderRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Interfaces\\IOrderRepository.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Repositories\\Interfaces\\IOrderRepository.cs",
+              "RelativeToolTip": "Repositories\\Interfaces\\IOrderRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T03:29:43.014Z",
+              "WhenOpened": "2024-10-30T03:42:11.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderProductDto.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Dtos\\Order\\OrderProductDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Order\\OrderProductDto.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Dtos\\Order\\OrderProductDto.cs",
+              "RelativeToolTip": "Dtos\\Order\\OrderProductDto.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAwwGQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T03:39:59.482Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OrderRepository.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Repositories\\Implementations\\OrderRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Implementations\\OrderRepository.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Repositories\\Implementations\\OrderRepository.cs",
+              "RelativeToolTip": "Repositories\\Implementations\\OrderRepository.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAAAKQAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T03:16:14.842Z",
               "EditorCaption": ""
             }
           ]
