@@ -160,14 +160,18 @@ namespace TCViettelFC_API.Repositories.Implementations
                         customerId = newCustomer.CustomerId;
                     }
 
+                   
                     // Create ticket order using the customerId (whether newly created or passed in)
                     var ticketOrder = new TicketOrder
                     {
                         OrderDate = ticketOrdersDto.OrderDate,
-                        TotalAmount = ticketOrdersDto.TotalAmount,
-                        CustomerId = customerId.Value
+                        TotalAmount = ticketOrdersDto.TotalAmount
                     };
-
+                    var cus = new Customer()
+                    {
+                        AccountId = customerId.Value
+                    };
+                    ticketOrder.Customer = cus;
                     _context.TicketOrders.Add(ticketOrder);
                     await _context.SaveChangesAsync();
                     var orderId = ticketOrder.Id;
@@ -241,15 +245,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             }
         }
 
-
-
-
-
-
-
     }
-
-
 
 }
 
