@@ -61,13 +61,6 @@ namespace TCViettelFC_API.Controllers
             }
             return BadRequest("Failed to update profile");
         }
-        [HttpPost("sendmailticket")]
-        public async Task<IActionResult> SendTicketViaMailAsync()
-        {
-            var result = await _ticketUtilRepository.SendTicketViaEmailAsync([1, 2]);
-            if (result == 1) return Ok();
-            return BadRequest();
-        }
         [Authorize(Policy = "entry")]
         [HttpGet("verifyticket/{ticketId}")]
         public async Task<IActionResult> VerifyTicketAsync(int ticketId)

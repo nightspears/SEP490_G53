@@ -32,24 +32,20 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
         public async Task<int> VerifyTicketAsync(OrderedTicket ticket)
         {
-            if (ticket.Status == 1)
+            if (ticket.Status == 0)
             {
-                ticket.Status = 0;
+                ticket.Status = 1;
                 await _context.SaveChangesAsync();
                 return 1;
             }
             return 0;
         }
-        public async Task<int> SendTicketViaEmailAsync(List<int> ticketIds)
+        public async Task<int> SendTicketViaEmailAsync(List<int> ticketIds, string email)
         {
-
-            //var email = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "CustomerEmail")?.Value;
-            //if (string.IsNullOrEmpty(email))
-            //{
-            //    throw new Exception("Email address not found.");
-            //}
-
-            // Prepare HTML structure with a placeholder for tickets
+            if (string.IsNullOrEmpty(email))
+            {
+                return 0;
+            }
             string htmlHeader = @"
     <!DOCTYPE html>
     <html lang='en'>
@@ -151,10 +147,8 @@ width:300px;
     </body>
     </html>";
 
-            // Initialize the full HTML body
             string htmlBody = htmlHeader;
             QRCodeGenerator qr = new QRCodeGenerator();
-            // Loop over all ordered tickets
             foreach (var ticketId in ticketIds)
             {
                 var ticket = await _context.OrderedTickets.Include(x => x.Match).Include(x => x.Area).FirstOrDefaultAsync(x => x.Id == ticketId);  // Assuming this function gets the OrderedTicket by id
@@ -207,21 +201,11 @@ width:300px;
      </div>
  </div>
      </div>";
-
-                // Append the ticket HTML to the body
                 htmlBody += ticketHtml;
             }
-
-            // Finalize the body by adding the footer
             htmlBody += htmlFooter;
-
-            // Send the email using SmtpClient
-
-
             await _emailService.SendEmailAsync("starvsevil03@gmail.com", "Thông tin vé", htmlBody);  // Send email
-
-
-            return 1; // Success
+            return 1;
         }
         private async Task<string> UploadQrCodeImageToServerAsync(byte[] qrCodeImage, int ticketId)
         {

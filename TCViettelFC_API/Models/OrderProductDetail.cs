@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TCViettelFC_API.Models;
+﻿namespace TCViettelFC_API.Models;
 
 public partial class OrderProductDetail
 {
@@ -12,6 +9,10 @@ public partial class OrderProductDetail
     public int? ProductId { get; set; }
 
     public int? PlayerId { get; set; }
+
+    public string? CustomShirtNumber { get; set; }
+
+    public string? CustomShirtName { get; set; }
 
     public string? Size { get; set; }
 
