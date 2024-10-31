@@ -115,6 +115,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 Id = orderProduct.Id,
                 OrderCode = orderProduct.OrderCode,
                 OrderDate = orderProduct.OrderDate,
+                ShipmentFee = orderProduct.ShipmentFee,
                 TotalPrice = orderProduct.TotalPrice,
                 Note = orderProduct.Note,
                 Status = orderProduct.Status,

@@ -72,8 +72,8 @@ public partial class Sep490G53Context : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
         var config = new ConfigurationBuilder()
-          .AddJsonFile("appsettings.json")
-          .Build();
+              .AddJsonFile("appsettings.json")
+              .Build();
 
         if (!optionsBuilder.IsConfigured)
         {
@@ -333,6 +333,9 @@ public partial class Sep490G53Context : DbContext
             entity.Property(e => e.OrderDate)
                 .HasColumnType("datetime")
                 .HasColumnName("order_date");
+            entity.Property(e => e.ShipmentFee)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("shipment_fee");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.TotalPrice)
                 .HasColumnType("decimal(10, 2)")

@@ -26,6 +26,7 @@ namespace TCViettelFC_API.Dtos.Order
         public int Id { get; set; }
         public string? OrderCode { get; set; }
         public DateTime? OrderDate { get; set; }
+        public decimal? ShipmentFee { get; set; }
         public decimal? TotalPrice { get; set; }
         public string? Note { get; set; }
         public int? Status { get; set; }

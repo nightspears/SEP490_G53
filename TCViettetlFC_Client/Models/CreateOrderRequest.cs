@@ -32,6 +32,7 @@
     {
         public string OrderCode { get; set; }
         public DateTime OrderDate { get; set; }
+        public decimal ShipmentFee { get; set; }
         public decimal TotalPrice { get; set; }
     }
 

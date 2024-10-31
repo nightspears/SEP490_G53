@@ -370,6 +370,7 @@ Layout = null;
                         <span id="totalAmountDisplay">@Model.TotalAmount.ToString("N0")đ</span>
                         <!-- Hidden input to store the total amount -->
                         <input type="hidden" name="TotalAmount" id="totalAmount" value= @Model.TotalAmount />
+                         <input type="hidden" name="ShipmentFee" id="shipmentFeeInput" value="0" />
                      </li>
                   </ul>
                   <button class="btn btn-primary w-100">ĐẶT HÀNG</button>
@@ -636,7 +637,7 @@ Layout = null;
          
                        // Update the shipping fee display
                        document.getElementById('shippingFee').textContent = `${shippingFee.toLocaleString('vi-VN')}đ`;
-         
+           document.getElementById('shipmentFeeInput').value = shippingFee; 
          
                        // Calculate the new total
                        const initialTotal = @Model.TotalAmount ; // Replace with your actual initial total

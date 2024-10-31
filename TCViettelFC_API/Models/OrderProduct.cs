@@ -13,6 +13,8 @@ public partial class OrderProduct
 
     public DateTime? OrderDate { get; set; }
 
+    public decimal? ShipmentFee { get; set; }
+
     public decimal? TotalPrice { get; set; }
 
     public int? AddressId { get; set; }

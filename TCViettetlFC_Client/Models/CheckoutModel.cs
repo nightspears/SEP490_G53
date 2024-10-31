@@ -18,6 +18,7 @@
         public string WardName { get; set; }
         public string ?Notes { get; set; }
         public int TotalAmount { get; set; }
+        public int ShipmentFee { get; set; }
         public string SelectedShipping { get; set; }
     }
   

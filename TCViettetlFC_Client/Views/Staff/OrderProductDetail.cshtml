@@ -1,75 +1,298 @@
-﻿@using TCViettetlFC_Client.Models
+﻿@model TCViettetlFC_Client.Models.OrderDetailDto
 
-<div class="container mt-4">
-    <h2 class="text-center">Order Details</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5 class="mb-0">Order Information</h5>
-        </div>
-        <div class="card-body">
-            <p><strong>Order ID:</strong> @Model.Id</p>
-            <p><strong>Order Code:</strong> @Model.OrderCode</p>
-            <p><strong>Order Date:</strong> @Model.OrderDate?.ToString("g")</p>
-            <p><strong>Total Price:</strong> @Model.TotalPrice.ToString("C")</p>
-            <p><strong>Note:</strong> @Model.Note</p>
-            <p><strong>Status:</strong> @Model.Status</p>
-        </div>
-    </div>
+<!-- Mirrored from mentoring.dreamguystech.com/html/template/admin/invoice.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:34:11 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Mentoring - Invoice</title>
 
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5 class="mb-0">Customer Information</h5>
-        </div>
-        <div class="card-body">
-            <p><strong>Full Name:</strong> @Model.CustomerFullName</p>
-            <p><strong>Email:</strong> @Model.CustomerEmail</p>
-            <p><strong>Phone:</strong> @Model.CustomerPhone</p>
-        </div>
-    </div>
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/favicon.png">
 
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5 class="mb-0">Address Information</h5>
-        </div>
-        <div class="card-body">
-            <p><strong>City:</strong> @Model.Address.CityName</p>
-            <p><strong>District:</strong> @Model.Address.DistrictName</p>
-            <p><strong>Ward:</strong> @Model.Address.WardName</p>
-            <p><strong>Detailed Address:</strong> @Model.Address.DetailedAddress</p>
-        </div>
-    </div>
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
 
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5 class="mb-0">Products</h5>
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/assets/css/feathericon.min.css">
+
+    <link rel="stylesheet" href="~/assets/css/style.css">
+</head>
+<body>
+
+    <div class="main-wrapper">
+
+        <div class="header">
+
+            <div class="header-left">
+                <a href="index.html" class="logo">
+                    <img src="~/assets/img/logo.png" alt="Logo">
+                </a>
+                <a href="index.html" class="logo logo-small">
+                    <img src="~/assets/img/logo-small.png" alt="Logo" width="30" height="30">
+                </a>
+            </div>
+
+            <a href="javascript:void(0);" id="toggle_btn">
+                <i class="fe fe-text-align-left"></i>
+            </a>
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="Search here">
+                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+
+            <a class="mobile_btn" id="mobile_btn">
+                <i class="fa fa-bars"></i>
+            </a>
+
+
+            <ul class="nav user-menu">
+
+                <li class="nav-item dropdown noti-dropdown">
+                    <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                        <i class="fe fe-bell"></i> <span class="badge badge-pill">3</span>
+                    </a>
+                    <div class="dropdown-menu notifications">
+                        <div class="topnav-dropdown-header">
+                            <span class="notification-title">Notifications</span>
+                            <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                        </div>
+                        <div class="noti-content">
+                            <ul class="notification-list">
+                                <li class="notification-message">
+                                    <a href="#">
+                                        <div class="media d-flex">
+                                            <span class="avatar avatar-sm flex-shrink-0">
+                                                <img class="avatar-img rounded-circle" alt="User Image" src="assets/img/user/user.jpg">
+                                            </span>
+                                            <div class="media-body flex-grow-1">
+                                                <p class="noti-details"><span class="noti-title">Jonathan Doe</span> Schedule <span class="noti-title">his appointment</span></p>
+                                                <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                        <div class="topnav-dropdown-footer">
+                            <a href="#">View all Notifications</a>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                        <span class="user-img"><img class="rounded-circle" src="~/assets/img/profiles/avatar-12.jpg" width="31" alt="Ryan Taylor"></span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="user-header">
+                            <div class="avatar avatar-sm">
+                                <img src="~/assets/img/profiles/avatar-12.jpg" alt="User Image" class="avatar-img rounded-circle">
+                            </div>
+                            <div class="user-text">
+                                <h6>Allen Davis</h6>
+                                <p class="text-muted mb-0">Administrator</p>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="profile.html">My Profile</a>
+                        <a class="dropdown-item" href="settings.html">Settings</a>
+                        <a class="dropdown-item" href="login.html">Logout</a>
+                    </div>
+                </li>
+
+            </ul>
+
         </div>
-        <div class="card-body">
-            @foreach (var product in Model.Products)
-            {
-                <div class="border-bottom mb-3 pb-2">
-                    <h6>@product.Product.ProductName</h6>
-                    <img src="@product.Product.Avatar" alt="Avatar" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" />
-                    <p><strong>Quantity:</strong> @product.Quantity</p>
-                    <p><strong>Price:</strong> @product.Price.ToString("C")</p>
-                    <p><strong>Player Name:</strong> @product.Player.FullName</p>
-                    <p><strong>Player Shirt Number:</strong> @product.Player.ShirtNumber</p>
-                    <p><strong>Custom Shirt Name:</strong> @product.CustomShirtName</p>
-                    <p><strong>Custom Shirt Number:</strong> @product.CustomShirtNumber</p>
+
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">
+                            <span><i class="fe fe-home"></i> Main</span>
+                        </li>
+                        <li>
+                            <a href="index.html"><span>Dashboard</span></a>
+                        </li>
+                     
+                    </ul>
                 </div>
+            </div>
+        </div>
+
+
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+
+                <div class="invoice-container">
+                    <div class="row">
+                        <div class="col-sm-6 m-b-20">
+                            <img alt="Logo" class="inv-logo img-fluid" src="~/assets/img/logo.png">
+                        </div>
+                        <div class="col-sm-6 m-b-20">
+                            <div class="invoice-details">
+                                <h3 class="text-uppercase">OrderId :  @Model.Id</h3>
+                                <ul class="list-unstyled mb-0">
+                                    <li>Date: <span> @Model.OrderDate?.ToString("g")</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 m-b-20">
+                            <ul class="list-unstyled mb-0">
+                                <li>TC-ViettelFC</li>
+                                <li>Hà Nội</li>
+                                <li>Thạch Hòa, Thạch Thất</li>
+                                <li>GST No:</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-7 col-xl-8 m-b-20">
+                            <h6>Đơn hàng đến </h6>
+                            <ul class="list-unstyled mb-0">
+                                <li><h5 class="mb-0"><strong> @Model.CustomerFullName</strong></h5></li>
+                                <li> @Model.Address.DetailedAddress</li>
+                                <li>@Model.Address.DistrictName, @Model.Address.WardName</li>
+                                <li>@Model.Address.CityName</li>
+                                <li>@Model.CustomerPhone</li>
+                                <li><a href="#"><span class="__cf_email__" data-cfemail="e3808b82918f868d8691868687a3869b828e938f86cd808c8e"> @Model.CustomerEmail</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6 col-lg-5 col-xl-4 m-b-20">
+                            <h6>Payment Details</h6>
+                            <ul class="list-unstyled invoice-payment-details mb-0">
+                                <li>
+                                    <h5>Tổng tiền đã thanh toán: <span class="text-end">@Convert.ToDecimal(Model.Payment.TotalAmount).ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")) VND</span></h5>
+                                </li>
+
+                                <li>Phương thức thanh toán : <span> VNPAY</span></li>                           
+                                <li>Mã hóa đơn thanh toán: <span> @Model.Payment.PaymentGateway</span></li>                           
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>ITEM</th>
+                                    <th class="d-none d-sm-table-cell">Tên Cầu Thủ </th>
+                                    <th class="d-none d-sm-table-cell">Số Áo Cầu Thủ</th>
+                                    <th class="d-none d-sm-table-cell">Tên In Áo Custom</th>
+                                    <th class="d-none d-sm-table-cell">Số Áo Custom</th>
+                                    <th class="text-nowrap">UNIT COST</th>
+                                    <th>QTY</th>
+                                    <th>TOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                  @foreach (var product in Model.Products)
+            {
+                                <tr>
+                                        <td>@product.Product.ProductId</td>
+                                        <td>
+                                            @product.Product.ProductName
+                                            <br />
+                                            <img src="@product.Product.Avatar" alt="Avatar" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" />
+                                        </td>
+                                        <td>  @product.Player.FullName</td>
+                                        <td>  @product.Player.ShirtNumber</td>
+                                        <td>  @product.CustomShirtName</td>
+                                        <td>@product.CustomShirtNumber</td>
+                                        <td> @Convert.ToDecimal(product.Price).ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")) VND</td>
+                                        <td>@product.Quantity</td>
+                                        @{
+                                            var totalPrice = product.Quantity * product.Price;
+                                            var formattedPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:N0}", totalPrice);
+                                        }
+
+                                        <td>@formattedPrice VND</td>
+
+
+                                </tr>
             }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <div class="row invoice-payment">
+                            <div class="col-sm-7">
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="m-b-20">
+                                    <h6>Tông tiền:</h6>
+                                    <div class="table-responsive no-border">
+                                        <table class="table mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Tổng Tiền Hàng Hóa:</th>
+                                                    <td class="text-end">
+                                                        @{
+                                                            var formattedTotalPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:N0}", Model.TotalPrice-Model.ShipmentFee);
+                                                        }
+                                                        @formattedTotalPrice VND
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Phí Vận Chuyển:</th>
+                                                    <td class="text-end">
+                                                        @{
+                                                            var formattedShipmentFee = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:N0}", Model.ShipmentFee);
+                                                        }
+                                                        @formattedShipmentFee VND
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Tổng Tiền:</th>
+                                                    <td class="text-end text-primary">
+                                                        <h5>
+                                                            @{
+                                                                var formattedTotal = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:N0}", Model.TotalPrice);
+                                                            }
+                                                            @formattedTotal VND
+                                                        </h5>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="invoice-info">
+                            <h5>Other information</h5>
+                            <p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
     </div>
 
 
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5 class="mb-0">Payment Information</h5>
-        </div>
-        <div class="card-body">
-            <p><strong>Total Amount:</strong> @Model.Payment.TotalAmount.ToString("C")</p>
-            <p><strong>Payment Gateway:</strong> @Model.Payment.PaymentGateway</p>
-            <p><strong>Status:</strong> @Model.Payment.Status</p>
-        </div>
-    </div>
-</div>
+    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="~/assets/js/jquery-3.6.0.min.js"></script>
+
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/assets/js/feather.min.js"></script>
+
+    <script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script src="~/assets/js/script.js"></script>
+</body>
+
+<!-- Mirrored from mentoring.dreamguystech.com/html/template/admin/invoice.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:34:11 GMT -->
+</html>

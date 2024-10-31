@@ -60,6 +60,7 @@ namespace TCViettelFC_API.Controllers
                     CustomerId = customer.CustomerId,
                     OrderCode = request.OrderProduct.OrderCode,
                     OrderDate = request.OrderProduct.OrderDate,
+                    ShipmentFee = request.OrderProduct.ShipmentFee,
                     TotalPrice = request.OrderProduct.TotalPrice,
                     AddressId = address.AddressId,
                 };

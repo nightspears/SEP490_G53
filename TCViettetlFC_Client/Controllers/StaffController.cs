@@ -280,6 +280,8 @@ namespace TCViettetlFC_Client.Controllers
 
         public async Task<IActionResult> OrderProductDetail(int id)
         {
+
+
            
             var orderDetail = await _orderService.GetOrderDetailsAsync(id /*, token*/);
 

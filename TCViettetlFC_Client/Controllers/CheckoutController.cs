@@ -117,6 +117,7 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                             {
                                 OrderCode = checkoutModel.SelectedShipping, // Use the actual order code
                                 OrderDate = DateTime.Now,
+                                ShipmentFee = checkoutModel.ShipmentFee,
                                 TotalPrice = checkoutModel.TotalAmount
                             },
                             OrderProductDetails = checkoutModel.checkoutItems.Select(item => new OrderProductDetailDTO
