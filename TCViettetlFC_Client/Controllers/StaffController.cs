@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Text;
 using TCViettelFC_Client.ApiServices;
+using TCViettelFC_Client.Models;
 using TCViettetlFC_Client.Models;
 using TCViettetlFC_Client.Services;
 
@@ -293,5 +295,9 @@ namespace TCViettetlFC_Client.Controllers
 
             return View(orderDetail); // Pass OrderDetailDto to the view
         }
+
+
+       
+
     }
 }

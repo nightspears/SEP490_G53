@@ -269,10 +269,125 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="invoice-info">
-                            <h5>Other information</h5>
-                            <p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed dictum ligula, cursus blandit risus. Maecenas eget metus non tellus dignissim aliquam ut a ex. Maecenas sed vehicula dui, ac suscipit lacus. Sed finibus leo vitae lorem interdum, eu scelerisque tellus fermentum. Curabitur sit amet lacinia lorem. Nullam finibus pellentesque libero.</p>
+
+                        <div id="responseMessage" class="mt-3"></div>
+
+                        <div class="container my-4">
+                            <div class="invoice-info">
+                                <h5>Gửi đơn hàng qua bên vận chuyển</h5>
+                            </div>
+
+                            <form  onsubmit="return createShipment(event)">
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="rate" class="form-label">Rate</label>
+                                        <input type="text" class="form-control" id="rate" name="Rate" required placeholder=" Mã code vận chuyển" value="@Model.OrderCode">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="order_id" class="form-label">Order ID</label>
+                                        <input type="text" class="form-control" id="order_id" name="OrderId" required placeholder="Mã đơn hàng" value="@Model.Id">
+                                    </div>
+                                </div>
+
+                                <h5>Địa chỉ gửi</h5>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="address_from_name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="address_from_name" name="AddressFrom.Name" required placeholder="Tên người gửi" value="Thể Công Viettel-FC">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="address_from_phone" class="form-label">Phone</label>
+                                        <input type="text" class="form-control" id="address_from_phone" name="AddressFrom.Phone" required placeholder="Số điện thoại người gửi" value="0393680245">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address_from_street" class="form-label">Street</label>
+                                    <input type="text" class="form-control" id="address_from_street" name="AddressFrom.Street" required placeholder="Địa chỉ người gửi" value="Đại Học FPT">
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="address_from_ward" class="form-label">Ward</label>
+                                        <input type="text" class="form-control" id="address_from_ward" name="AddressFrom.Ward" value="426">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="address_from_district" class="form-label">District</label>
+                                        <input type="text" class="form-control" id="address_from_district" name="AddressFrom.District" value="101900">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="address_from_city" class="form-label">City</label>
+                                        <input type="text" class="form-control" id="address_from_city" name="AddressFrom.City" value="100000">
+                                    </div>
+                                </div>
+
+                                <h5>Địa chỉ nhận</h5>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="address_to_name" class="form-label">Name</label>
+                                        <input type="text" class="form-control" id="address_to_name" name="AddressTo.Name" required placeholder="Tên người nhận" value="@Model.CustomerFullName">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="address_to_phone" class="form-label">Phone</label>
+                                        <input type="text" class="form-control" id="address_to_phone" name="AddressTo.Phone" required placeholder="Số điện thoại người nhận" value="@Model.CustomerPhone">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="address_to_street" class="form-label">Street</label>
+                                    <input type="text" class="form-control" id="address_to_street" name="AddressTo.Street" required placeholder="Địa chỉ người nhận" value="@Model.Address.DetailedAddress">
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="address_to_ward" class="form-label">Ward</label>
+                                        <input type="text" class="form-control" id="address_to_ward" name="AddressTo.Ward" required placeholder="0" value="@Model.Address.Ward">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="address_to_district" class="form-label">District</label>
+                                        <input type="text" class="form-control" id="address_to_district" name="AddressTo.District" required placeholder="100300" value="@Model.Address.District">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="address_to_city" class="form-label">City</label>
+                                        <input type="text" class="form-control" id="address_to_city" name="AddressTo.City" required placeholder="100000" value="@Model.Address.City">
+                                    </div>
+                                </div>
+
+                                <h5>Thông tin kiện hàng</h5>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="cod" class="form-label">COD Amount</label>
+                                        <input type="number" class="form-control" id="cod" name="Parcel.Cod" required placeholder="500000" value="0">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="amount" class="form-label">Amount</label>
+                                        <input type="number" class="form-control" id="amount" name="Parcel.Amount" required placeholder="500000" value="0">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="weight" class="form-label">Weight (g)</label>
+                                        <input type="text" class="form-control" id="weight" name="Parcel.Weight" required placeholder="220">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="width" class="form-label">Width (cm)</label>
+                                        <input type="text" class="form-control" id="width" name="Parcel.Width" required placeholder="15">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="height" class="form-label">Height (cm)</label>
+                                        <input type="text" class="form-control" id="height" name="Parcel.Height" required placeholder="15">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="length" class="form-label">Length (cm)</label>
+                                        <input type="text" class="form-control" id="length" name="Parcel.Length" required placeholder="15">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="metadata" class="form-label">Metadata</label>
+                                    <textarea class="form-control" id="metadata" name="Parcel.Metadata" rows="2" placeholder="Hàng dễ vỡ, vui lòng nhẹ tay."></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Gửi</button>
+                            </form>
                         </div>
+
                     </div>
                 </div>
 
@@ -280,6 +395,98 @@
         </div>
 
     </div>
+    <script>
+        async function createShipment(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Gather form data
+            const formData = new FormData(event.target);
+            const shipmentData = {
+                shipment: {
+                    rate: formData.get("Rate"),
+                    order_id: formData.get("OrderId"),
+                    address_from: {
+                        name: formData.get("AddressFrom.Name"),
+                        phone: formData.get("AddressFrom.Phone"),
+                        street: formData.get("AddressFrom.Street"),
+                        ward: formData.get("AddressFrom.Ward"),
+                        district: formData.get("AddressFrom.District"),
+                        city: formData.get("AddressFrom.City")
+                    },
+                    address_to: {
+                        name: formData.get("AddressTo.Name"),
+                        phone: formData.get("AddressTo.Phone"),
+                        street: formData.get("AddressTo.Street"),
+                        ward: formData.get("AddressTo.Ward"),
+                        district: formData.get("AddressTo.District"),
+                        city: formData.get("AddressTo.City")
+                    },
+                    parcel: {
+                        cod: parseFloat(formData.get("Parcel.Cod")),
+                        amount: parseFloat(formData.get("Parcel.Amount")),
+                        weight: formData.get("Parcel.Weight"),
+                        width: formData.get("Parcel.Width"),
+                        height: formData.get("Parcel.Height"),
+                        length: formData.get("Parcel.Length"),
+                        metadata: formData.get("Parcel.Metadata")
+                    }
+                }
+            };
+
+            // Prepare the request options
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw', // Replace with your access token
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(shipmentData)
+            };
+
+            // Make the API call
+            try {
+                const response = await fetch('https://sandbox.goship.io/api/v2/shipments', options);
+                const result = await response.json();
+
+                // Handle the response
+                if (response.ok) {
+                    alert('Shipment created successfully!');
+                    // Display relevant shipment information
+                    console.log(result); // This logs the complete response to the console
+
+                    // Example: Display tracking number or other details
+                    const code = result.code; // Adjust this based on your response structure
+                    const status = result.status; // Adjust this based on your response structure
+                    const trackingship = result.id; // Adjust this based on your response structure
+                    const shipment_status = result.shipment_status; // Adjust this based on your response structure
+                    const shipment_status_txt = result.shipment_status_txt; // Adjust this based on your response structure
+                    const cod = result.cod; // Adjust this based on your response structure
+                    const fee = result.fee; // Adjust this based on your response structure
+                    const carrier = result.carrier; // Adjust this based on your response structure
+                    const created_at = result.created_at; // Adjust this based on your response structure
+                    document.getElementById('responseMessage').innerHTML = `
+                        <p>Shipment created successfully!</p>
+                                                        <p>code: ${code}</p>
+                                                                <p>status: ${status}</p>
+                                                        <p>shipment_status: ${shipment_status}</p>
+                                                                        <p>trackingship: ${trackingship}</p>
+                                                        <p>shipment_status_txt: ${shipment_status_txt}</p>
+                                                        <p>codr: ${cod}</p>
+                                                        <p>fee: ${fee}</p>
+                                                        <p>carrier: ${carrier}</p>
+                                                                <p>created_at: ${created_at}</p>
+                    `;
+                } else {
+                    alert(`Error: ${result.message || 'Something went wrong'}`);
+                    console.error('Error response:', result);
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                alert('Failed to create shipment. Please try again later.');
+            }
+        }
+
+    </script>
 
 
     <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
