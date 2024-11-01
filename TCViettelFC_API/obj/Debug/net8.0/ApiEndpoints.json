@@ -1194,6 +1194,27 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.OrderController",
+    "Method": "UpdateOrderStatus",
+    "RelativePath": "api/Order/{orderId}/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newStatus",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.OrderController",
     "Method": "GetOrderDetails",
     "RelativePath": "api/Order/getorderdetails/{orderId}",
     "HttpMethod": "GET",
@@ -1258,6 +1279,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.OrderController",
+    "Method": "UpsertShipment",
+    "RelativePath": "api/Order/shipment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "shipmentDto",
+        "Type": "TCViettelFC_API.Dtos.ShipmentDto",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

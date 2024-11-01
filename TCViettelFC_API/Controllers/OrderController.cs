@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Repositories.Interfaces;
 
 namespace TCViettelFC_API.Controllers
@@ -46,6 +47,38 @@ namespace TCViettelFC_API.Controllers
                 return NotFound($"Order details for order ID {orderId} not found.");
             }
             return Ok(orderDetail);
+        }
+
+
+        // Endpoint to update the order status
+        [HttpPut("{orderId}/status")]
+        public async Task<IActionResult> UpdateOrderStatus(int orderId, [FromBody] int newStatus)
+        {
+            var result = await _orderRepository.UpdateOrderStatusAsync(orderId, newStatus);
+
+            if (!result)
+            {
+                return NotFound(new { Message = "Order not found" });
+            }
+
+            return Ok(new { Message = "Order status updated successfully" });
+        }
+        [HttpPost("shipment")]
+        public async Task<IActionResult> UpsertShipment([FromBody] ShipmentDto shipmentDto)
+        {
+            if (shipmentDto.OrderId == null)
+            {
+                return BadRequest(new { Message = "OrderId is required" });
+            }
+
+            bool result = await _orderRepository.UpsertShipmentAsync(shipmentDto);
+
+            if (result)
+            {
+                return Ok(new { Message = "Shipment added or updated successfully" });
+            }
+
+            return StatusCode(500, new { Message = "An error occurred while processing the shipment" });
         }
 
     }

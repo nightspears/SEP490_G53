@@ -361,6 +361,10 @@ Layout = null;
                      <button class="btn btn-secondary mt-2">Áp dụng</button>
                   </div>
                   <ul>
+                         <li class="d-flex justify-content-between">
+                        <span>Tổng giá đơn hàng</span>
+                        <span>@Model.TotalAmount.ToString("N0")đ</span>
+                     </li>
                      <li class="d-flex justify-content-between">
                         <span>Phí vận chuyển</span>
                         <span id="shippingFee">0đ</span>

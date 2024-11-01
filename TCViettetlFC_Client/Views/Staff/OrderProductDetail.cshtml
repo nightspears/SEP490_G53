@@ -133,7 +133,7 @@
                 <div class="invoice-container">
                     <div class="row">
                         <div class="col-sm-6 m-b-20">
-                            <img alt="Logo" class="inv-logo img-fluid" src="~/assets/img/logo.png">
+                            <img alt="Logo" class="inv-logo img-fluid" src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/The_Cong-Viettel_FC_logo.svg/1200px-The_Cong-Viettel_FC_logo.svg.png">
                         </div>
                         <div class="col-sm-6 m-b-20">
                             <div class="invoice-details">
@@ -178,50 +178,39 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>ITEM</th>
-                                    <th class="d-none d-sm-table-cell">Tên Cầu Thủ </th>
-                                    <th class="d-none d-sm-table-cell">Số Áo Cầu Thủ</th>
-                                    <th class="d-none d-sm-table-cell">Tên In Áo Custom</th>
-                                    <th class="d-none d-sm-table-cell">Số Áo Custom</th>
-                                    <th class="text-nowrap">UNIT COST</th>
-                                    <th>QTY</th>
-                                    <th>TOTAL</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                  @foreach (var product in Model.Products)
-            {
-                                <tr>
-                                        <td>@product.Product.ProductId</td>
-                                        <td>
-                                            @product.Product.ProductName
-                                            <br />
-                                            <img src="@product.Product.Avatar" alt="Avatar" class="img-fluid rounded-circle" style="width: 50px; height: 50px;" />
-                                        </td>
-                                        <td>  @product.Player.FullName</td>
-                                        <td>  @product.Player.ShirtNumber</td>
-                                        <td>  @product.CustomShirtName</td>
-                                        <td>@product.CustomShirtNumber</td>
-                                        <td> @Convert.ToDecimal(product.Price).ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")) VND</td>
-                                        <td>@product.Quantity</td>
-                                        @{
-                                            var totalPrice = product.Quantity * product.Price;
-                                            var formattedPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:N0}", totalPrice);
-                                        }
+                    <div class="container">
+                        <div class="row">
+                            @foreach (var product in Model.Products)
+                            {
+                                <div class="col-md-6 col-lg-4 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@product.Product.ProductName</h5>
+                                            <div class="d-flex align-items-center mb-3">
+                                                <img src="@product.Product.Avatar" alt="Avatar" class="img-fluid rounded-circle me-3" style="width: 50px; height: 50px;" />
+                                                <span class="fw-bold">Product Id:@product.Product.ProductId</span>
+                                            </div>
+                                            <p class="mb-1"><strong>Tên Cầu Thủ:</strong> @product.Player.FullName</p>
+                                            <p class="mb-1"><strong>Số Áo Cầu Thủ:</strong> @product.Player.ShirtNumber</p>
+                                            <p class="mb-1"><strong>Tên In Áo Custom:</strong> @product.CustomShirtName</p>
+                                            <p class="mb-1"><strong>Số Áo Custom:</strong> @product.CustomShirtNumber</p>
+                                            <p class="mb-1"><strong>Unit Cost:</strong> @Convert.ToDecimal(product.Price).ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")) VND</p>
+                                            <p class="mb-1"><strong>Quantity:</strong> @product.Quantity</p>
 
-                                        <td>@formattedPrice VND</td>
+                                            @* Calculate the total price for this product *@
+                                            @{
+                                                var totalPrice = product.Quantity * product.Price;
+                                                var formattedPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:N0}", totalPrice);
+                                            }
 
-
-                                </tr>
-            }
-                            </tbody>
-                        </table>
+                                            <p class="mb-1"><strong>Total:</strong> @formattedPrice VND</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
                     </div>
+
                     <div>
                         <div class="row invoice-payment">
                             <div class="col-sm-7">
@@ -422,6 +411,7 @@
                         city: formData.get("AddressTo.City")
                     },
                     parcel: {
+                        name: "Giày dép, Quần áo",
                         cod: parseFloat(formData.get("Parcel.Cod")),
                         amount: parseFloat(formData.get("Parcel.Amount")),
                         weight: formData.get("Parcel.Weight"),
@@ -429,53 +419,55 @@
                         height: formData.get("Parcel.Height"),
                         length: formData.get("Parcel.Length"),
                         metadata: formData.get("Parcel.Metadata")
-                    }
+                    },
+                    payer: 1,
+                    quantity: 1
                 }
             };
 
-            // Prepare the request options
             const options = {
                 method: 'POST',
                 headers: {
-                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw', // Replace with your access token
+                    'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw', // Replace with your access token securely
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(shipmentData)
             };
 
-            // Make the API call
             try {
+                // Step 1: Create the shipment via GoShip API
                 const response = await fetch('https://sandbox.goship.io/api/v2/shipments', options);
                 const result = await response.json();
 
-                // Handle the response
                 if (response.ok) {
                     alert('Shipment created successfully!');
-                    // Display relevant shipment information
-                    console.log(result); // This logs the complete response to the console
+                    console.log(result);
 
-                    // Example: Display tracking number or other details
-                    const code = result.code; // Adjust this based on your response structure
-                    const status = result.status; // Adjust this based on your response structure
-                    const trackingship = result.id; // Adjust this based on your response structure
-                    const shipment_status = result.shipment_status; // Adjust this based on your response structure
-                    const shipment_status_txt = result.shipment_status_txt; // Adjust this based on your response structure
-                    const cod = result.cod; // Adjust this based on your response structure
-                    const fee = result.fee; // Adjust this based on your response structure
-                    const carrier = result.carrier; // Adjust this based on your response structure
-                    const created_at = result.created_at; // Adjust this based on your response structure
+                    // Display relevant shipment information
                     document.getElementById('responseMessage').innerHTML = `
-                        <p>Shipment created successfully!</p>
-                                                        <p>code: ${code}</p>
-                                                                <p>status: ${status}</p>
-                                                        <p>shipment_status: ${shipment_status}</p>
-                                                                        <p>trackingship: ${trackingship}</p>
-                                                        <p>shipment_status_txt: ${shipment_status_txt}</p>
-                                                        <p>codr: ${cod}</p>
-                                                        <p>fee: ${fee}</p>
-                                                        <p>carrier: ${carrier}</p>
-                                                                <p>created_at: ${created_at}</p>
-                    `;
+                            <p>Shipment created successfully!</p>
+                            <p>Code: ${result.code}</p>
+                            <p>Status: ${result.status}</p>
+                            <p>Shipment Status: ${result.shipment_status}</p>
+                            <p>Tracking ID: ${result.id}</p>
+                            <p>Carrier: ${result.carrier}</p>
+                            <p>COD: ${result.cod}</p>
+                            <p>Fee: ${result.fee}</p>
+                            <p>Created At: ${result.created_at}</p>
+                        `;
+
+                    // Step 2: Update the order status
+                    await updateOrderStatus(formData.get("OrderId"), 1);
+                    debugger
+                    // Step 3: Prepare shipment data for local DB insertion
+                    const localShipmentData = {
+                        orderId: formData.get("OrderId"), // Ensure this returns the correct value
+                        shipmentTrackingCode: result.id // Assuming result.code is the tracking code
+                    };
+
+                    // Step 4: Insert new shipment data into local DB
+                    await upsertShipment(localShipmentData);
+
                 } else {
                     alert(`Error: ${result.message || 'Something went wrong'}`);
                     console.error('Error response:', result);
@@ -486,7 +478,51 @@
             }
         }
 
+        async function updateOrderStatus(orderId, newStatus) {
+            try {
+                const response = await fetch(`https://localhost:5000/api/Order/${orderId}/status`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newStatus) // Send newStatus as plain integer
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    console.log('Order status updated successfully:', result);
+                } else {
+                    console.error('Error updating order status:', result);
+                }
+            } catch (error) {
+                console.error('Error updating order status:', error);
+            }
+        }
+
+        async function upsertShipment(shipmentData) {
+            try {
+                debugger
+                const response = await fetch('https://localhost:5000/api/Order/shipment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(shipmentData) // Ensure this matches the ShipmentDto structure
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    console.log('Shipment added/updated successfully:', result);
+                } else {
+                    console.error('Error creating/updating shipment:', result);
+                    // You can also log the response status for better debugging
+                    console.error('Response status:', response.status);
+                }
+            } catch (error) {
+                console.error('Error creating/updating shipment:', error);
+            }
+        }
+
     </script>
+
 
 
     <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>

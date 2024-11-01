@@ -690,7 +690,7 @@ public partial class Sep490G53Context : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("shipment_date");
             entity.Property(e => e.ShipmentTrackingCode)
-                .HasMaxLength(255)
+                .HasMaxLength(50)
                 .IsFixedLength()
                 .HasColumnName("shipment_tracking_code");
             entity.Property(e => e.Status).HasColumnName("status");

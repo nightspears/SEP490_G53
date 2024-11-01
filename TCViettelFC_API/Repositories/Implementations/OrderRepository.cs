@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Dtos.Order;
 using TCViettelFC_API.Dtos.Product;
 using TCViettelFC_API.Models;
@@ -170,6 +171,55 @@ namespace TCViettelFC_API.Repositories.Implementations
             };
 
             return orderDetailDto;
+        }
+
+        // Method to update the status of an order by orderId
+        public async Task<bool> UpdateOrderStatusAsync(int orderId, int newStatus)
+        {
+            var order = await _context.OrderProducts.FindAsync(orderId);
+            if (order == null)
+            {
+                return false; // Order not found
+            }
+
+            order.Status = newStatus;
+            _context.OrderProducts.Update(order);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+
+        public async Task<bool> UpsertShipmentAsync(ShipmentDto shipmentDto)
+        {
+            var existingShipment = await _context.Shipments
+                .FirstOrDefaultAsync(s => s.OrderId == shipmentDto.OrderId);
+
+            if (existingShipment != null)
+            {
+                // Update existing shipment details
+                existingShipment.ShipmentTrackingCode = shipmentDto.ShipmentTrackingCode;
+                existingShipment.ShipmentDate = shipmentDto.ShipmentDate;
+                existingShipment.DeliveryDate = shipmentDto.DeliveryDate;
+                existingShipment.Status = shipmentDto.Status;
+                _context.Shipments.Update(existingShipment);
+            }
+            else
+            {
+                // Map DTO to Shipment entity for new entry
+                var newShipment = new Shipment
+                {
+                    OrderId = shipmentDto.OrderId,
+                    ShipmentTrackingCode = shipmentDto.ShipmentTrackingCode,
+                    ShipmentDate = shipmentDto.ShipmentDate,
+                    DeliveryDate = shipmentDto.DeliveryDate,
+                    Status = shipmentDto.Status
+                };
+                await _context.Shipments.AddAsync(newShipment);
+            }
+
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
