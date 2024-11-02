@@ -7,28 +7,16 @@
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\ordershipmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\staff\\orderproductdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\orderproductdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\views\\staff\\orderproductmanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\orderproductmanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\models\\shipmentresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\shipmentresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\services\\goshipservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:services\\goshipservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\githubrepo\\sep490_g53\\tcviettetlfc_client\\models\\orderproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\orderproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 217,
-          "SelectedChildIndex": 82,
+          "SelectedChildIndex": 79,
           "Children": [
             {
               "$type": "Bookmark",
@@ -206,10 +194,6 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:16:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{588470cc-84f8-4a57-9ac4-86bca0625ff4}"
             },
             {
@@ -351,67 +335,39 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Checkout\\Index.cshtml",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\Index.cshtml",
-              "RelativeToolTip": "Views\\Checkout\\Index.cshtml",
-              "ViewState": "AgIAAGEBAAAAAAAAAAAAAHUBAABYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-02T04:26:00.341Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "OrderProductDetail.cshtml",
               "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderProductDetail.cshtml",
               "RelativeDocumentMoniker": "Views\\Staff\\OrderProductDetail.cshtml",
               "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderProductDetail.cshtml",
               "RelativeToolTip": "Views\\Staff\\OrderProductDetail.cshtml",
-              "ViewState": "AgIAANsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAK4AAAAAAAAAAAAAwNQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-02T04:25:43.529Z",
+              "WhenOpened": "2024-11-02T07:54:45.415Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ShipmentResponse.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\ShipmentResponse.cs",
-              "RelativeDocumentMoniker": "Models\\ShipmentResponse.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\ShipmentResponse.cs",
-              "RelativeToolTip": "Models\\ShipmentResponse.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAA7wBoAAAAWAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "OrderProductDto.cs",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\OrderProductDto.cs",
+              "RelativeDocumentMoniker": "Models\\OrderProductDto.cs",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Models\\OrderProductDto.cs",
+              "RelativeToolTip": "Models\\OrderProductDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T03:20:16.379Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-02T07:48:11.469Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABkAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T03:18:43.346Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GoShipService.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Services\\GoShipService.cs",
-              "RelativeDocumentMoniker": "Services\\GoShipService.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Services\\GoShipService.cs",
-              "RelativeToolTip": "Services\\GoShipService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwCQAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T03:18:23.106Z",
-              "EditorCaption": ""
+              "DocumentIndex": 2,
+              "Title": "OrderProductManagement.cshtml",
+              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderProductManagement.cshtml",
+              "RelativeDocumentMoniker": "Views\\Staff\\OrderProductManagement.cshtml",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderProductManagement.cshtml",
+              "RelativeToolTip": "Views\\Staff\\OrderProductManagement.cshtml",
+              "ViewState": "AgIAAB0BAAAAAAAAAAAQwCYBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-02T07:43:36.291Z"
             },
             {
               "$type": "Document",
@@ -419,24 +375,11 @@
               "Title": "OrderShipmentDetail.cshtml",
               "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderShipmentDetail.cshtml",
               "RelativeDocumentMoniker": "Views\\Staff\\OrderShipmentDetail.cshtml",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderShipmentDetail.cshtml",
-              "RelativeToolTip": "Views\\Staff\\OrderShipmentDetail.cshtml",
-              "ViewState": "AgIAAHwAAAAAAAAAAAAAAIsAAAAAAAAAAAAAAA==",
+              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderShipmentDetail.cshtml*",
+              "RelativeToolTip": "Views\\Staff\\OrderShipmentDetail.cshtml*",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-02T03:08:17.263Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "StaffController.cs",
-              "DocumentMoniker": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\StaffController.cs",
-              "RelativeDocumentMoniker": "Controllers\\StaffController.cs",
-              "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\StaffController.cs",
-              "RelativeToolTip": "Controllers\\StaffController.cs",
-              "ViewState": "AgIAACEBAAAAAAAAAAAuwDkBAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T03:07:00.313Z",
               "EditorCaption": ""
             }
           ]
@@ -556,6 +499,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:16:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:17:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             }
           ]
         },

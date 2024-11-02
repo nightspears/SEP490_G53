@@ -348,7 +348,7 @@
               "RelativeDocumentMoniker": "Controllers\\OrderController.cs",
               "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Controllers\\OrderController.cs",
               "RelativeToolTip": "Controllers\\OrderController.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAFkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAFUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-02T02:35:20.193Z",
               "EditorCaption": ""
@@ -363,8 +363,7 @@
               "RelativeToolTip": "Repositories\\Interfaces\\IOrderRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T02:35:01.406Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-02T02:35:01.406Z"
             },
             {
               "$type": "Document",
@@ -376,8 +375,7 @@
               "RelativeToolTip": "Mapper\\MappingProfile.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAABeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T02:10:24.798Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-02T02:10:24.798Z"
             },
             {
               "$type": "Document",
@@ -389,8 +387,7 @@
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T02:02:22.358Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-02T02:02:22.358Z"
             },
             {
               "$type": "Document",
@@ -402,8 +399,7 @@
               "RelativeToolTip": "Dtos\\Order\\OrderProductDto.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAA5wBoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T01:58:10.64Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-02T01:58:10.64Z"
             },
             {
               "$type": "Document",
@@ -415,8 +411,7 @@
               "RelativeToolTip": "Repositories\\Implementations\\OrderRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-01T01:50:26.557Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-01T01:50:26.557Z"
             }
           ]
         },

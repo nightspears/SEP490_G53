@@ -271,10 +271,26 @@
                                                     <td>@order.orderDate?.ToString("yyyy-MM-dd")</td>
                                                     <td>@order.totalPrice?.ToString("N0")đ</td>
                                                     <td>
-                                                        @order.staffFullName <br />
-                                                        ID: @order.staffId <br />
-                                                        Phone: @order.staffPhone <br />
-                                                        Email: @order.staffEmail
+                                                        @if (!string.IsNullOrWhiteSpace(order.staffFullName))
+                                                        {
+                                                            @order.staffFullName <br />
+                                                        }
+                                                        @if (order.staffId.HasValue) // Check if staffId is not null
+                                                        {
+                                                            <span>ID: @order.staffId.Value</span>
+
+                                                            <br />
+                                                        }
+                                                        @if (!string.IsNullOrWhiteSpace(order.staffPhone))
+                                                        {
+                                                            <span>Phone: @order.staffPhone</span>
+
+                                                            <br />
+                                                        }
+                                                        @if (!string.IsNullOrWhiteSpace(order.staffEmail))
+                                                        {
+                                                            <span>Email: @order.staffEmail</span>
+                                                        }
                                                     </td>
 
                                                     <td class="text-center">
@@ -288,9 +304,12 @@
                                                             <a href="/staff/orderproductdetail?id=@order.id" class="btn btn-sm bg-success-light mb-2">
                                                                 <i class="fe fe-pencil"></i> Xử lí đơn
                                                             </a>
-                                                            <a href="/staff/OrderShipmentDetail?trackingcode= @order.shipmentTrackingCode" class="btn btn-sm bg-info-light">
-                                                                <i class="far fa-eye"></i> Thông tin vận chuyển
-                                                            </a>
+                                                            @if (!string.IsNullOrEmpty(order.shipmentTrackingCode))
+                                                            {
+                                                                <a href="/staff/OrderShipmentDetail?trackingcode=@order.shipmentTrackingCode" class="btn btn-sm bg-info-light">
+                                                                    <i class="far fa-eye"></i> Thông tin vận chuyển
+                                                                </a>
+                                                            }
                                                         </div>
                                                     </td>
 

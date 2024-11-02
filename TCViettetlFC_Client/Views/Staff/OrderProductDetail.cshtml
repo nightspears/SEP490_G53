@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="~/assets/css/feathericon.min.css">
 
     <link rel="stylesheet" href="~/assets/css/style.css">
+ 
 </head>
 <body>
 
@@ -190,10 +191,26 @@
                                                 <img src="@product.Product.Avatar" alt="Avatar" class="img-fluid rounded-circle me-3" style="width: 50px; height: 50px;" />
                                                 <span class="fw-bold">Product Id:@product.Product.ProductId</span>
                                             </div>
-                                            <p class="mb-1"><strong>Tên Cầu Thủ:</strong> @product.Player.FullName</p>
-                                            <p class="mb-1"><strong>Số Áo Cầu Thủ:</strong> @product.Player.ShirtNumber</p>
-                                            <p class="mb-1"><strong>Tên In Áo Custom:</strong> @product.CustomShirtName</p>
-                                            <p class="mb-1"><strong>Số Áo Custom:</strong> @product.CustomShirtNumber</p>
+                                            @if (product.Player != null && !string.IsNullOrEmpty(product.Player.FullName))
+                                            {
+                                                <p class="mb-1"><strong>Tên Cầu Thủ:</strong> @product.Player.FullName</p>
+                                            }
+
+                                            @if (product.Player != null && product.Player.ShirtNumber != null)
+                                            {
+                                                <p class="mb-1"><strong>Số Áo Cầu Thủ:</strong> @product.Player.ShirtNumber</p>
+                                            }
+
+                                            @if (!string.IsNullOrEmpty(product.CustomShirtName))
+                                            {
+                                                <p class="mb-1"><strong>Tên In Áo Custom:</strong> @product.CustomShirtName</p>
+                                            }
+
+                                            @if (product.CustomShirtNumber != null)
+                                            {
+                                                <p class="mb-1"><strong>Số Áo Custom:</strong> @product.CustomShirtNumber</p>
+                                            }
+
                                             <p class="mb-1"><strong>Unit Cost:</strong> @Convert.ToDecimal(product.Price).ToString("N0", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")) VND</p>
                                             <p class="mb-1"><strong>Quantity:</strong> @product.Quantity</p>
 
@@ -261,121 +278,144 @@
 
                         <div id="responseMessage" class="mt-3"></div>
 
-                        <div class="container my-4">
-                            <div class="invoice-info">
-                                <h5>Gửi đơn hàng qua bên vận chuyển</h5>
-                            </div>
+                     <div class="container my-4">
+    <div class="invoice-info mb-4">
+        <h5 class="text-center" onclick="toggleForm()" style="cursor: pointer;">
+            Gửi đơn hàng qua bên vận chuyển 
+            <span class="small text-muted">(Bấm để gửi/chỉnh sửa đơn hàng)</span> <!-- Indication for user -->
+            <i class="bi bi-caret-down" id="toggleIcon"></i> <!-- Bootstrap Icons for toggle indication -->
+        </h5>
+        <hr />
+    </div>
 
-                            <form  onsubmit="return createShipment(event)">
+    <form id="shipmentForm" onsubmit="return createShipment(event)" class="shadow p-4 bg-light rounded" style="display: none;">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="rate" class="form-label">Rate</label>
+                <input type="text" class="form-control" id="rate" name="Rate" required placeholder="Mã code vận chuyển" value="@Model.OrderCode">
+            </div>
+            <div class="col-md-6">
+                <label for="order_id" class="form-label">Order ID</label>
+                <input type="text" class="form-control" id="order_id" name="OrderId" required placeholder="Mã đơn hàng" value="@Model.Id">
+            </div>
+        </div>
 
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="rate" class="form-label">Rate</label>
-                                        <input type="text" class="form-control" id="rate" name="Rate" required placeholder=" Mã code vận chuyển" value="@Model.OrderCode">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="order_id" class="form-label">Order ID</label>
-                                        <input type="text" class="form-control" id="order_id" name="OrderId" required placeholder="Mã đơn hàng" value="@Model.Id">
-                                    </div>
-                                </div>
+        <h5 class="mt-4">Địa chỉ gửi</h5>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="address_from_name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="address_from_name" name="AddressFrom.Name" required placeholder="Tên người gửi" value="Thể Công Viettel-FC">
+            </div>
+            <div class="col-md-6">
+                <label for="address_from_phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="address_from_phone" name="AddressFrom.Phone" required placeholder="Số điện thoại người gửi" value="0393680245">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="address_from_street" class="form-label">Street</label>
+            <input type="text" class="form-control" id="address_from_street" name="AddressFrom.Street" required placeholder="Địa chỉ người gửi" value="Đại Học FPT">
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="address_from_ward" class="form-label">Ward</label>
+                <input type="text" class="form-control" id="address_from_ward" name="AddressFrom.Ward" value="426">
+            </div>
+            <div class="col-md-4">
+                <label for="address_from_district" class="form-label">District</label>
+                <input type="text" class="form-control" id="address_from_district" name="AddressFrom.District" value="101900">
+            </div>
+            <div class="col-md-4">
+                <label for="address_from_city" class="form-label">City</label>
+                <input type="text" class="form-control" id="address_from_city" name="AddressFrom.City" value="100000">
+            </div>
+        </div>
 
-                                <h5>Địa chỉ gửi</h5>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="address_from_name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="address_from_name" name="AddressFrom.Name" required placeholder="Tên người gửi" value="Thể Công Viettel-FC">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="address_from_phone" class="form-label">Phone</label>
-                                        <input type="text" class="form-control" id="address_from_phone" name="AddressFrom.Phone" required placeholder="Số điện thoại người gửi" value="0393680245">
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address_from_street" class="form-label">Street</label>
-                                    <input type="text" class="form-control" id="address_from_street" name="AddressFrom.Street" required placeholder="Địa chỉ người gửi" value="Đại Học FPT">
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <label for="address_from_ward" class="form-label">Ward</label>
-                                        <input type="text" class="form-control" id="address_from_ward" name="AddressFrom.Ward" value="426">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="address_from_district" class="form-label">District</label>
-                                        <input type="text" class="form-control" id="address_from_district" name="AddressFrom.District" value="101900">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="address_from_city" class="form-label">City</label>
-                                        <input type="text" class="form-control" id="address_from_city" name="AddressFrom.City" value="100000">
-                                    </div>
-                                </div>
+        <h5 class="mt-4">Địa chỉ nhận</h5>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="address_to_name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="address_to_name" name="AddressTo.Name" required placeholder="Tên người nhận" value="@Model.CustomerFullName">
+            </div>
+            <div class="col-md-6">
+                <label for="address_to_phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="address_to_phone" name="AddressTo.Phone" required placeholder="Số điện thoại người nhận" value="@Model.CustomerPhone">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="address_to_street" class="form-label">Street</label>
+            <input type="text" class="form-control" id="address_to_street" name="AddressTo.Street" required placeholder="Địa chỉ người nhận" value="@Model.Address.DetailedAddress">
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="address_to_ward" class="form-label">Ward</label>
+                <input type="text" class="form-control" id="address_to_ward" name="AddressTo.Ward" required placeholder="0" value="@Model.Address.Ward">
+            </div>
+            <div class="col-md-4">
+                <label for="address_to_district" class="form-label">District</label>
+                <input type="text" class="form-control" id="address_to_district" name="AddressTo.District" required placeholder="100300" value="@Model.Address.District">
+            </div>
+            <div class="col-md-4">
+                <label for="address_to_city" class="form-label">City</label>
+                <input type="text" class="form-control" id="address_to_city" name="AddressTo.City" required placeholder="100000" value="@Model.Address.City">
+            </div>
+        </div>
 
-                                <h5>Địa chỉ nhận</h5>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="address_to_name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="address_to_name" name="AddressTo.Name" required placeholder="Tên người nhận" value="@Model.CustomerFullName">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="address_to_phone" class="form-label">Phone</label>
-                                        <input type="text" class="form-control" id="address_to_phone" name="AddressTo.Phone" required placeholder="Số điện thoại người nhận" value="@Model.CustomerPhone">
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="address_to_street" class="form-label">Street</label>
-                                    <input type="text" class="form-control" id="address_to_street" name="AddressTo.Street" required placeholder="Địa chỉ người nhận" value="@Model.Address.DetailedAddress">
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <label for="address_to_ward" class="form-label">Ward</label>
-                                        <input type="text" class="form-control" id="address_to_ward" name="AddressTo.Ward" required placeholder="0" value="@Model.Address.Ward">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="address_to_district" class="form-label">District</label>
-                                        <input type="text" class="form-control" id="address_to_district" name="AddressTo.District" required placeholder="100300" value="@Model.Address.District">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="address_to_city" class="form-label">City</label>
-                                        <input type="text" class="form-control" id="address_to_city" name="AddressTo.City" required placeholder="100000" value="@Model.Address.City">
-                                    </div>
-                                </div>
+        <h5 class="mt-4">Thông tin kiện hàng</h5>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="cod" class="form-label">COD Amount</label>
+                <input type="number" class="form-control" id="cod" name="Parcel.Cod" required placeholder="500000" value="0">
+            </div>
+            <div class="col-md-4">
+                <label for="amount" class="form-label">Amount</label>
+                <input type="number" class="form-control" id="amount" name="Parcel.Amount" required placeholder="500000" value="0">
+            </div>
+            <div class="col-md-4">
+                <label for="weight" class="form-label">Weight (g)</label>
+                <input type="text" class="form-control" id="weight" name="Parcel.Weight" required placeholder="220">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="width" class="form-label">Width (cm)</label>
+                <input type="text" class="form-control" id="width" name="Parcel.Width" required placeholder="15">
+            </div>
+            <div class="col-md-4">
+                <label for="height" class="form-label">Height (cm)</label>
+                <input type="text" class="form-control" id="height" name="Parcel.Height" required placeholder="15">
+            </div>
+            <div class="col-md-4">
+                <label for="length" class="form-label">Length (cm)</label>
+                <input type="text" class="form-control" id="length" name="Parcel.Length" required placeholder="15">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="metadata" class="form-label">Ghi chú</label>
+            <textarea class="form-control" id="metadata" name="Parcel.Metadata" rows="2" placeholder="Hàng dễ vỡ, vui lòng nhẹ tay."></textarea>
+        </div>
 
-                                <h5>Thông tin kiện hàng</h5>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <label for="cod" class="form-label">COD Amount</label>
-                                        <input type="number" class="form-control" id="cod" name="Parcel.Cod" required placeholder="500000" value="0">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="amount" class="form-label">Amount</label>
-                                        <input type="number" class="form-control" id="amount" name="Parcel.Amount" required placeholder="500000" value="0">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="weight" class="form-label">Weight (g)</label>
-                                        <input type="text" class="form-control" id="weight" name="Parcel.Weight" required placeholder="220">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <label for="width" class="form-label">Width (cm)</label>
-                                        <input type="text" class="form-control" id="width" name="Parcel.Width" required placeholder="15">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="height" class="form-label">Height (cm)</label>
-                                        <input type="text" class="form-control" id="height" name="Parcel.Height" required placeholder="15">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="length" class="form-label">Length (cm)</label>
-                                        <input type="text" class="form-control" id="length" name="Parcel.Length" required placeholder="15">
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="metadata" class="form-label">Ghi chú</label>
-                                    <textarea class="form-control" id="metadata" name="Parcel.Metadata" rows="2" placeholder="Hàng dễ vỡ, vui lòng nhẹ tay."></textarea>
-                                </div>
+        <button type="submit" class="btn btn-primary">Gửi</button>
+    </form>
+</div>
+   <div id="responseMessage" class="mt-3"></div>
+<script>
+    function toggleForm() {
+        const form = document.getElementById('shipmentForm');
+        const icon = document.getElementById('toggleIcon');
+        
+        if (form.style.display === "none") {
+            form.style.display = "block";
+            icon.classList.remove("bi-caret-down");
+            icon.classList.add("bi-caret-up");
+        } else {
+            form.style.display = "none";
+            icon.classList.remove("bi-caret-up");
+            icon.classList.add("bi-caret-down");
+        }
+    }
+</script>
 
-                                <button type="submit" class="btn btn-primary">Gửi</button>
-                            </form>
-                        </div>
+
 
                     </div>
                 </div>
@@ -443,19 +483,7 @@
                     alert('Shipment created successfully!');
                     console.log(result);
 
-                    // Display relevant shipment information
-                    document.getElementById('responseMessage').innerHTML = `
-                            <p>Shipment created successfully!</p>
-                            <p>Code: ${result.code}</p>
-                            <p>Status: ${result.status}</p>
-                            <p>Shipment Status: ${result.shipment_status}</p>
-                            <p>Tracking ID: ${result.id}</p>
-                            <p>Carrier: ${result.carrier}</p>
-                            <p>COD: ${result.cod}</p>
-                            <p>Fee: ${result.fee}</p>
-                            <p>Created At: ${result.created_at}</p>
-                        `;
-
+                  
                     // Step 2: Update the order status
                     await updateOrderStatus(formData.get("OrderId"),1,1);
                     debugger
@@ -467,7 +495,26 @@
 
                     // Step 4: Insert new shipment data into local DB
                     await upsertShipment(localShipmentData);
-
+                      // Display relevant shipment information
+                   document.getElementById('responseMessage').innerHTML = `
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Shipment Created Successfully!</h4>
+      <ul class="list-unstyled">
+          <li><strong>Code:</strong> ${result.code}</li>
+          <li><strong>Status:</strong> ${result.status}</li>
+          <li><strong>Shipment Status:</strong> ${result.shipment_status}</li>
+          <li><strong>Tracking ID:</strong> ${result.id}</li>
+          <li><strong>Carrier:</strong> ${result.carrier}</li>
+          <li><strong>COD:</strong> ${result.cod}</li>
+          <li><strong>Fee:</strong> ${result.fee}</li>
+          <li><strong>Created At:</strong> ${result.created_at}</li>
+      </ul>
+      <hr>
+      <p class="mb-0">Thank you for using our shipping service!</p>
+    </div>
+  `;
+          const responseMessageElement = document.getElementById('responseMessage');
+            responseMessageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
                     alert(`Error: ${result.message || 'Something went wrong'}`);
                     console.error('Error response:', result);
