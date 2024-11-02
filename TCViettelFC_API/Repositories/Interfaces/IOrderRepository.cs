@@ -15,7 +15,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<OrderDetailDto> GetOrderDetailsByOrderIdAsync(int orderId);
 
         // New method to update the order status
-        Task<bool> UpdateOrderStatusAsync(int orderId, int newStatus);
+        Task<bool> UpdateOrderStatusAsync(int orderId, int newStatus,int staffid);
         Task<bool> UpsertShipmentAsync(ShipmentDto shipmentDto);
     }
 }

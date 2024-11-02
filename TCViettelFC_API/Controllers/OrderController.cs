@@ -49,12 +49,16 @@ namespace TCViettelFC_API.Controllers
             return Ok(orderDetail);
         }
 
-
+        public class UpdateOrderStatusRequest
+        {
+            public int NewStatus { get; set; }
+            public int StaffId { get; set; }
+        }
         // Endpoint to update the order status
         [HttpPut("{orderId}/status")]
-        public async Task<IActionResult> UpdateOrderStatus(int orderId, [FromBody] int newStatus)
+        public async Task<IActionResult> UpdateOrderStatus(int orderId, [FromBody] UpdateOrderStatusRequest request)
         {
-            var result = await _orderRepository.UpdateOrderStatusAsync(orderId, newStatus);
+            var result = await _orderRepository.UpdateOrderStatusAsync(orderId, request.NewStatus, request.StaffId);
 
             if (!result)
             {

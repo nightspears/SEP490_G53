@@ -14,6 +14,14 @@
         public string? email { get; set; }
         public string? phone { get; set; }
         public string? fullName { get; set; }
+
+        public int? staffId { get; set; }
+        public string? staffEmail { get; set; }
+        public string? staffPhone { get; set; }
+        public string? staffFullName { get; set; }
+
+
+        public string? shipmentTrackingCode { get; set; }
     }
 
 

@@ -82,9 +82,19 @@ namespace TCViettelFC_API.Repositories.Implementations
                     AddressId = op.AddressId,
                     Note = op.Note,
                     Status = op.Status,
-                    Email = op.Customer.Email,  // Including Email
-                    Phone = op.Customer.Phone,
-                    FullName = op.Customer.FullName// Including Phone
+                    // Customer details (with null-checks)
+                    Email = op.Customer != null ? op.Customer.Email : null,
+                    Phone = op.Customer != null ? op.Customer.Phone : null,
+                    FullName = op.Customer != null ? op.Customer.FullName : null,
+
+                    // Staff details (with null-checks)
+                    StaffId = op.Staff != null ? op.Staff.UserId : (int?)null,
+                    StaffFullName = op.Staff != null ? op.Staff.FullName : null,
+                    StaffEmail = op.Staff != null ? op.Staff.Email : null,
+                    StaffPhone = op.Staff != null ? op.Staff.Phone : null,
+
+                    // Shipment details (taking the first shipment if available)
+                    ShipmentTrackingCode = op.Shipments.FirstOrDefault() != null ? op.Shipments.First().ShipmentTrackingCode : null,
                 })
                 .ToListAsync();
         }
@@ -174,7 +184,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
 
         // Method to update the status of an order by orderId
-        public async Task<bool> UpdateOrderStatusAsync(int orderId, int newStatus)
+        public async Task<bool> UpdateOrderStatusAsync(int orderId, int newStatus,int staffid)
         {
             var order = await _context.OrderProducts.FindAsync(orderId);
             if (order == null)
@@ -183,6 +193,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             }
 
             order.Status = newStatus;
+            order.StaffId = staffid;
             _context.OrderProducts.Update(order);
             await _context.SaveChangesAsync();
 

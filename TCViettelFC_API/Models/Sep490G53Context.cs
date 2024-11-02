@@ -70,15 +70,16 @@ public partial class Sep490G53Context : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-{
+    {
         var config = new ConfigurationBuilder()
-              .AddJsonFile("appsettings.json")
-              .Build();
+          .AddJsonFile("appsettings.json")
+          .Build();
 
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseSqlServer(config.GetConnectionString("value"));
         }
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -336,6 +337,7 @@ public partial class Sep490G53Context : DbContext
             entity.Property(e => e.ShipmentFee)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("shipment_fee");
+            entity.Property(e => e.StaffId).HasColumnName("staff_id");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.TotalPrice)
                 .HasColumnType("decimal(10, 2)")
@@ -348,6 +350,10 @@ public partial class Sep490G53Context : DbContext
             entity.HasOne(d => d.Customer).WithMany(p => p.OrderProducts)
                 .HasForeignKey(d => d.CustomerId)
                 .HasConstraintName("FK__Order_Pro__custo__6B24EA82");
+
+            entity.HasOne(d => d.Staff).WithMany(p => p.OrderProducts)
+                .HasForeignKey(d => d.StaffId)
+                .HasConstraintName("FK_Order_Product_Users");
         });
 
         modelBuilder.Entity<OrderProductDetail>(entity =>
@@ -691,7 +697,6 @@ public partial class Sep490G53Context : DbContext
                 .HasColumnName("shipment_date");
             entity.Property(e => e.ShipmentTrackingCode)
                 .HasMaxLength(50)
-                .IsFixedLength()
                 .HasColumnName("shipment_tracking_code");
             entity.Property(e => e.Status).HasColumnName("status");
 

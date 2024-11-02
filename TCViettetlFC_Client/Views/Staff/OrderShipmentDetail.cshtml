@@ -1,0 +1,139 @@
+﻿@model TCViettetlFC_Client.Models.ShipmentData
+
+@{
+    ViewData["Title"] = "Shipment Details";
+}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+    body {
+        background-color: #f3f4f6; /* Light gray background */
+    }
+
+    .shipment-header {
+        background-color: #4CAF50; /* Dark green */
+        color: white;
+        padding: 15px;
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    .shipment-card {
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+        .shipment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+    .icon-large {
+        font-size: 1.5rem;
+        color: #4CAF50; /* Match with header */
+    }
+
+    .address {
+        background-color: #ffffff; /* White */
+        border-radius: 0.5rem;
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .shipment-history {
+        max-height: 300px;
+        overflow-y: auto;
+        background-color: #ffffff; /* White */
+        border-radius: 0.5rem;
+        padding: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .list-group-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent; /* Keep list items transparent */
+        border: none; /* Remove borders */
+    }
+
+    .badge-custom {
+        background-color: #28a745; /* Green */
+        font-weight: bold;
+    }
+
+    h4 {
+        color: #343a40; /* Dark gray */
+    }
+</style>
+
+<div class="container mt-4">
+    <h2 class="text-center text-dark mb-4">Shipment Details</h2>
+
+    <div class="card shipment-card">
+        <div class="shipment-header">
+            <h3 class="card-title">Order ID: @Model.order_id</h3>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h4 class="text-success"><i class="fas fa-truck icon-large"></i> Carrier</h4>
+                    <p class="font-weight-bold">@Model.carrier_name</p>
+                    <img src="@Model.carrier_logo" alt="@Model.carrier_name Logo" class="img-fluid mb-3" style="max-height: 100px;" />
+                    <p><strong>Service:</strong> @Model.service_name</p>
+                    <p><strong>Delivery Fee:</strong> @Model.delivery_fee.ToString("N0")đ</p>
+                    <p><strong>Total Fee:</strong> @Model.total_fee.ToString("N0")đ</p>
+                    <span class="badge badge-custom">@Model.status_text</span>
+                    <p class="text-muted">@Model.status_desc</p>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="text-success"><i class="fas fa-box icon-large"></i> Parcel Details</h4>
+                    <p><strong>Parcel Name:</strong> @Model.Parcel.name</p>
+                    <p><strong>Weight:</strong> @Model.Parcel.weight kg</p>
+                    <p><strong>Dimensions:</strong> @Model.Parcel.length x @Model.Parcel.width x @Model.Parcel.height cm</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6 address">
+            <h4 class="text-success"><i class="fas fa-paper-plane icon-large"></i> From Address</h4>
+            <address>
+                <p><strong>Name:</strong> @Model.address_from.name</p>
+                <p><strong>Phone:</strong> @Model.address_from.phone</p>
+                <p><strong>Email:</strong> @Model.address_from.email</p>
+                <p><strong>Address:</strong> @Model.address_from.street, @Model.address_from.district, @Model.address_from.city</p>
+            </address>
+        </div>
+        <div class="col-md-6 address">
+            <h4 class="text-success"><i class="fas fa-map-marker-alt icon-large"></i> To Address</h4>
+            <address>
+                <p><strong>Name:</strong> @Model.address_to.name</p>
+                <p><strong>Phone:</strong> @Model.address_to.phone</p>
+                <p><strong>Email:</strong> @Model.address_to.email</p>
+                <p><strong>Address:</strong> @Model.address_to.street, @Model.address_to.district, @Model.address_to.city</p>
+            </address>
+        </div>
+    </div>
+
+    <h4 class="text-success"><i class="fas fa-history icon-large"></i> Shipment History</h4>
+    <div class="shipment-history">
+        <ul class="list-group">
+            @foreach (var history in Model.history)
+            {
+                <li class="list-group-item">
+                    <strong>@history.status_text</strong>
+                    <span class="text-muted">@history.updated_at.ToString("g")</span>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -1206,8 +1206,8 @@
         "IsRequired": true
       },
       {
-        "Name": "newStatus",
-        "Type": "System.Int32",
+        "Name": "request",
+        "Type": "TCViettelFC_API.Controllers.OrderController\u002BUpdateOrderStatusRequest",
         "IsRequired": true
       }
     ],

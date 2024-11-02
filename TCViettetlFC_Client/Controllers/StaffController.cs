@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 using TCViettelFC_Client.ApiServices;
-using TCViettelFC_Client.Models;
 using TCViettetlFC_Client.Models;
 using TCViettetlFC_Client.Services;
 
@@ -17,13 +16,14 @@ namespace TCViettetlFC_Client.Controllers
         private readonly FeedbackService _feedbackService;
         private readonly OrderService _orderService;
         private readonly IApiHelper _apiHelper;
-
-        public StaffController(IHttpClientFactory httpClientFactory, FeedbackService feedbackService, IApiHelper apiHelper, OrderService orderService)
+        private readonly GoShipService _goShipService;
+        public StaffController(IHttpClientFactory httpClientFactory, FeedbackService feedbackService, IApiHelper apiHelper, OrderService orderService, GoShipService goShipService)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
             _feedbackService = feedbackService;
             _apiHelper = apiHelper;
             _orderService = orderService;
+            _goShipService = goShipService;
         }
         private async Task<List<TicketOrdersViewModel>> GetAllTicketOrders()
 
@@ -296,8 +296,26 @@ namespace TCViettetlFC_Client.Controllers
             return View(orderDetail); // Pass OrderDetailDto to the view
         }
 
+        public async Task<IActionResult> OrderShipmentDetail(string trackingCode)
+        {
+            if (string.IsNullOrEmpty(trackingCode))
+            {
+                return BadRequest("Tracking code is required.");
+            }
 
-       
+            var shipmentResponse = await _goShipService.GetShipmentAsync(trackingCode);
+
+            if (shipmentResponse == null || shipmentResponse.data == null || shipmentResponse.data.Count == 0)
+            {
+                return NotFound("Shipment not found.");
+            }
+
+            // Assuming you want to display the first shipment data
+            var shipmentData = shipmentResponse.data.FirstOrDefault();
+
+            return View(shipmentData);
+        }
+
 
     }
 }

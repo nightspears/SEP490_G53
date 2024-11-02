@@ -18,6 +18,7 @@ namespace TCViettetlFC_Client.Services
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
+             
                 return JsonSerializer.Deserialize<IEnumerable<OrderProductDto>>(content);
             }
             else

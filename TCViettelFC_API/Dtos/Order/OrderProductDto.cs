@@ -18,6 +18,15 @@ namespace TCViettelFC_API.Dtos.Order
         public string? Email { get; set; }  
         public string? Phone { get; set; }
         public string? FullName { get; set; }
+
+
+        public int? StaffId { get; set; }
+        public string? StaffEmail { get; set; }
+        public string? StaffPhone { get; set; }
+        public string? StaffFullName { get; set; }
+
+      
+        public string? ShipmentTrackingCode { get; set; }
     }
 
 

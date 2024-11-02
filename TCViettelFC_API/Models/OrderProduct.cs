@@ -21,6 +21,8 @@ public partial class OrderProduct
 
     public string? Note { get; set; }
 
+    public int? StaffId { get; set; }
+
     public int? Status { get; set; }
 
     public virtual Address? Address { get; set; }
@@ -32,4 +34,6 @@ public partial class OrderProduct
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
     public virtual ICollection<Shipment> Shipments { get; set; } = new List<Shipment>();
+
+    public virtual User? Staff { get; set; }
 }
