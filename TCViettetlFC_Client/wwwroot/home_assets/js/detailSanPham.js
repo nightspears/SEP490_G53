@@ -154,13 +154,13 @@ function AddToCart(id) {
 
 
 function validateAddCart() {
+    debugger
     var check = true;
     if ($("#sizeSp").val() == null || $("#sizeSp").val().trim() == "" || $("#sizeSp").val() == undefined) {
         check = false
         alert("Vui lòng chọn kích thước.");
     }
-    if ($("#customAo").is(":checked")) {
-
+    if ($("#customAo").is(":checked") == true) {
         if ($("#nameAoCustom").val() == "" && $("#SoAoCustom").val() == "") {
             check = false;
             alert("Vui lòng nhập thông tin áo nếu bạn muốn tự thiết kế .");
@@ -173,8 +173,9 @@ function validateAddCart() {
 
 }
 function ChonSoAo() {
+    debugger
     var soao = $("#shirtNumber").val();
-    if (soao != 0 && soao != -1) {
+    if (soao != -1) {
         $("#customAo").prop("checked", false)
     } 
 }
