@@ -43,12 +43,13 @@ namespace TCViettetlFC_Client.Controllers
                 {
                     HttpOnly = true,
                     Secure = true,
-                    SameSite = SameSiteMode.Strict,
+                    SameSite = SameSiteMode.Lax,
                     Expires = DateTime.UtcNow.AddHours(1)
                 };
 
                 Response.Cookies.Append("AuthToken", response.token, cookieOptions);
                 Response.Cookies.Append("CustomerId", response.customerId.ToString(), cookieOptions);
+                Response.Cookies.Append("CustomerEmail", response.email.ToString(), cookieOptions);
                 return RedirectToAction("Home");
             }
             else
