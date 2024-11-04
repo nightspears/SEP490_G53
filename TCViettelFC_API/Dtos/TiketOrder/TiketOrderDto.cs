@@ -22,6 +22,4 @@
         public int Quantity { get; set; }
         public decimal Price { get; set; }  // Giá có thể được đặt trước hoặc tính toán trong repository
     }
-
-    
 }

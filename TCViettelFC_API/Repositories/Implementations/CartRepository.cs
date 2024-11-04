@@ -77,15 +77,6 @@ namespace TCViettelFC_API.Repositories.Implementations
             }
         }
 
-        //public void AddTicketToCard(int customerId, int quantityTicket = 1)
-        //{
-        //    try
-        //    {
-        //        var httpContext = _contextAccessor.HttpContext;
-        //        string cartTicketCookie = httpContext.Request.Cookies["CartTicket"];
-        //        List<TicketCart> cartItem;
-        //    }
-        //}
         public void AddProductToCart(int productId, int quantity = 1)
         {
 
@@ -190,5 +181,10 @@ namespace TCViettelFC_API.Repositories.Implementations
              
             }
         }
+
+
+
+
+
     }
 }
