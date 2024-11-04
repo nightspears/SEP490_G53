@@ -63,6 +63,7 @@ builder.Services.AddDbContext<Sep490G53Context>(options => options.UseSqlServer(
 
 builder.Services.AddScoped<IHelloWorldRepository, HelloWorldRepository>();
 builder.Services.AddScoped<INewRepository, NewRepository>();
+builder.Services.AddScoped<ITicketOrderRepository, TicketOrderRepository>();
 builder.Services.AddScoped<ICategoryNewRepository, CategoryNewRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();

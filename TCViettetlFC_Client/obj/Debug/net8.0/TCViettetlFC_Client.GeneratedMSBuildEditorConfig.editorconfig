@@ -34,6 +34,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlck1hbmFnZW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Area/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJlYVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/CartTicket/CartTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFRpY2tldFxDYXJ0VGlja2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Category/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -88,6 +96,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/MatchManagement/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hNYW5hZ2VtZW50XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Match/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/ProductManagement/Index.cshtml]
