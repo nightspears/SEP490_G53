@@ -24,6 +24,12 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 try
                 {
+                    // Create ticket order using the customerId (whether newly created or passed in)
+                    var ticketOrder = new TicketOrder
+                    {
+                        OrderDate = ticketOrdersDto.OrderDate,
+                        TotalAmount = ticketOrdersDto.TotalAmount
+                    };
                     if (customerId == null)
                     {
                         if (ticketOrdersDto.AddCustomerDto == null ||
@@ -46,24 +52,22 @@ namespace TCViettelFC_API.Repositories.Implementations
                         await _context.SaveChangesAsync();
                         customerId = newCustomer.CustomerId;
                         obj.CustomerEmail = newCustomer.Email;
+                        ticketOrder.Customer = newCustomer;
                     }
                     else
                     {
                         var customer = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.CustomerId == customerId);
                         obj.CustomerEmail = customer.Email;
+                        var cus = new Customer()
+                        {
+                            AccountId = customerId.Value
+                        };
+                        ticketOrder.Customer = cus;
                     }
 
-                    // Create ticket order using the customerId (whether newly created or passed in)
-                    var ticketOrder = new TicketOrder
-                    {
-                        OrderDate = ticketOrdersDto.OrderDate,
-                        TotalAmount = ticketOrdersDto.TotalAmount
-                    };
-                    var cus = new Customer()
-                    {
-                        AccountId = customerId.Value
-                    };
-                    ticketOrder.Customer = cus;
+
+
+
 
                     _context.TicketOrders.Add(ticketOrder);
                     await _context.SaveChangesAsync();
