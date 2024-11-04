@@ -204,7 +204,7 @@ width:300px;
                 htmlBody += ticketHtml;
             }
             htmlBody += htmlFooter;
-            await _emailService.SendEmailAsync("starvsevil03@gmail.com", "Thông tin vé", htmlBody);  // Send email
+            await _emailService.SendEmailAsync(email, "Thông tin vé", htmlBody);
             return 1;
         }
         private async Task<string> UploadQrCodeImageToServerAsync(byte[] qrCodeImage, int ticketId)
