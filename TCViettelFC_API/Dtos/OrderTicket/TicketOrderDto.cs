@@ -50,4 +50,10 @@
 
         public int? Status { get; set; }
     }
+
+    public class TicketCart
+    {
+        public TicketOrderDto? Order { get; set; }
+       
+    }
 }
