@@ -552,86 +552,55 @@
             document.querySelector('form#ticketForm').addEventListener('submit', async (event) => {
                 event.preventDefault();
 
-                // Thu thập dữ liệu từ các ô nhập liệu của form
-                const email = document.getElementById('email')?.value || '';
-                const phone = document.getElementById('phone')?.value || '';
-                const fullName = document.getElementById('fullName')?.value || '';
-                const customerId = document.getElementById('cusId').value || null;
-                const matchId = parseInt(document.getElementById('matchId').value);
-                const areaId = parseInt(document.getElementById('areaId').value);
-                const price = parseFloat(document.getElementById('price').value);
-                const status = document.getElementById('status').value === "Available" ? 1 : 0;
-                const quantity = parseInt(document.getElementById('quantity').value);
-                const orderDate = new Date().toISOString();
-                const totalAmount = parseFloat(document.getElementById('totalPrice').value) || 0;
-
-                // Thu thập các mục bổ sung đã chọn
-                const orderedSuppItems = [];
-                document.querySelectorAll('input[name="supplementary[]"]:checked').forEach((item) => {
-                    const itemId = parseInt(item.value);
-                    const quantity = parseInt(document.querySelector(`input[name="quantity_${itemId}"]`).value);
-                    const price = parseFloat(item.getAttribute('data-price'));
-
-                    orderedSuppItems.push({ itemId, quantity, price });
-                });
-
-                // Tạo danh sách vé đặt mua theo số lượng đã chỉ định
-                const orderedTickets = Array.from({ length: quantity }, () => ({
-                    matchId,
-                    areaId,
-                    price,
-                    status
-                }));
-
-                // Chuẩn bị payload cho yêu cầu API
-                const payload = {
-                    addCustomerDto: customerId ? null : { email, phone, fullName, status: 0 },
-                    orderDate,
-                    totalAmount,
-                    customerId: customerId ? parseInt(customerId) : null,
-                    orderedTickets,
-                    orderedSuppItems
+                const formData = {
+                    addCustomerDto: {
+                        email: document.getElementById('email')?.value || '',
+                        phone: document.getElementById('phone')?.value || '',
+                        fullName: document.getElementById('fullName')?.value || '',
+                        status: 0
+                    },
+                    orderDate: new Date().toISOString(),
+                    totalAmount: parseFloat(document.getElementById('totalPrice').value) || 0,
+                    customerId: document.getElementById('cusId').value ? parseInt(document.getElementById('cusId').value) : null,
+                    orderedTickets: Array.from({ length: parseInt(document.getElementById('quantity').value) }).map(() => ({
+                        matchId: parseInt(document.getElementById('matchId').value),
+                        areaId: parseInt(document.getElementById('areaId').value),
+                        price: parseFloat(document.getElementById('price').value),
+                        status: document.getElementById('status').value === "Còn vé" ? 1 : 0,
+                        orderId: 0 // OrderId là 0 cho vé mới
+                    })),
+                    orderedSuppItems: Array.from(document.querySelectorAll('input[name="supplementary[]"]:checked')).map(item => ({
+                        orderId: 0, // OrderId là 0 cho mục bổ sung mới
+                        itemId: parseInt(item.value),
+                        quantity: parseInt(document.querySelector(`input[name="quantity_${item.value}"]`).value),
+                        price: parseFloat(item.getAttribute('data-price'))
+                    }))
                 };
 
-                // Xây dựng URL API tùy theo giá trị của customerId
-                const url = customerId ? `https://localhost:5000/api/TicketOrder?customerId=${customerId}` : `https://localhost:5000/api/TicketOrder`;
-
                 try {
-                    // Gửi yêu cầu API
-                    const response = await fetch(url, {
-                        method: "POST",
+                    const response = await fetch('/Area/SubmitTicketOrder', {
+                        method: 'POST',
                         headers: {
-                            "Content-Type": "application/json"
+                            'Content-Type': 'application/json'
                         },
-                        credentials: "include",
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify(formData)
                     });
 
-                    // Kiểm tra nếu phản hồi không thành công
-                    if (!response.ok) {
-                        const errorData = await response.json().catch(() => ({}));
-                        console.error("Chi tiết lỗi từ API:", errorData);
-                        throw new Error(errorData.message || "Đặt vé không thành công.");
+                    const result = await response.json();
+                    if (result.success) {
+                        
+                        document.getElementById('successPopup').style.display = 'flex';
+                        setTimeout(() => document.getElementById('successPopup').style.display = 'none', 3000);
+                    } else {
+                        alert("Đặt vé không thành công. Vui lòng thử lại.");
                     }
-
-                    // Phân tích và hiển thị kết quả nếu thành công
-                    const result = await response.json().catch(() => "Đặt vé thành công"); // Thông báo mặc định nếu không phân tích được JSON
-                    console.log("Đặt vé thành công:", result);
-
-                    // Hiển thị thông báo thành công nếu đặt vé thành công
-                    document.getElementById('successPopup').style.display = 'flex';
-
-                    // Ẩn thông báo sau 3 giây
-                    setTimeout(() => {
-                        document.getElementById('successPopup').style.display = 'none';
-                    }, 3000);
-
                 } catch (error) {
-                    // Xử lý và ghi lại các lỗi xảy ra trong quá trình gọi API
                     console.error("Lỗi:", error);
                     alert("Đã xảy ra lỗi trong quá trình đặt vé. Vui lòng thử lại.");
                 }
             });
+
+            
         </script>
         <script>
             document.getElementById('addToCartBtn').addEventListener('click', function () {
