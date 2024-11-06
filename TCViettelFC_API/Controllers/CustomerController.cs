@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Repositories.Interfaces;
 
@@ -61,15 +60,6 @@ namespace TCViettelFC_API.Controllers
             }
             return BadRequest("Failed to update profile");
         }
-        [Authorize(Policy = "entry")]
-        [HttpGet("verifyticket/{ticketId}")]
-        public async Task<IActionResult> VerifyTicketAsync(int ticketId)
-        {
-            var ticket = await _ticketUtilRepository.GetOrderedTicketByIdAsync(ticketId);
-            if (ticket == null) return NotFound("Ticket not found");
-            var result = await _ticketUtilRepository.VerifyTicketAsync(ticket);
-            if (result == 1) return Ok("Ticket verified successfully");
-            return BadRequest("Ticket not valid");
-        }
+
     }
 }

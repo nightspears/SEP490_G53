@@ -24,7 +24,7 @@ namespace TCViettetlFC_Client.Controllers
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                var response = await httpClient.GetAsync($"https://localhost:5000/api/customer/verifyticket/{ticketId}");
+                var response = await httpClient.GetAsync($"https://localhost:5000/api/entry/verifyticket/{ticketId}");
                 if (response.IsSuccessStatusCode)
                 {
                     ViewBag.Result = "Valid";
@@ -32,6 +32,27 @@ namespace TCViettetlFC_Client.Controllers
                 else
                 {
                     ViewBag.Result = "Invalid";
+                }
+
+            }
+            return View();
+        }
+        [HttpGet("verifyitem/{orderId}")]
+        public async Task<IActionResult> VerifyItem(int orderId)
+        {
+            var token = Request.Cookies["AuthToken"];
+
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var response = await httpClient.GetAsync($"https://localhost:5000/api/entry/verifysupitem/{orderId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    ViewBag.Result = await response.Content.ReadAsStringAsync();
+                }
+                else
+                {
+                    ViewBag.Result = await response.Content.ReadAsStringAsync();
                 }
 
             }

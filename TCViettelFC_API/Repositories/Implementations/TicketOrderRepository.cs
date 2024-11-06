@@ -24,11 +24,12 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 try
                 {
-                    // Create ticket order using the customerId (whether newly created or passed in)
                     var ticketOrder = new TicketOrder
                     {
                         OrderDate = ticketOrdersDto.OrderDate,
-                        TotalAmount = ticketOrdersDto.TotalAmount
+                        TotalAmount = ticketOrdersDto.TotalAmount,
+
+
                     };
                     if (customerId == null)
                     {
@@ -48,11 +49,12 @@ namespace TCViettelFC_API.Repositories.Implementations
                             Status = ticketOrdersDto.AddCustomerDto.Status ?? 0
                         };
 
-                        _context.Customers.Add(newCustomer);
-                        await _context.SaveChangesAsync();
-                        customerId = newCustomer.CustomerId;
+
+
                         obj.CustomerEmail = newCustomer.Email;
                         ticketOrder.Customer = newCustomer;
+
+
                     }
                     else
                     {
@@ -65,7 +67,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                         ticketOrder.Customer = cus;
                     }
 
-
+                    // Create ticket order using the customerId (whether newly created or passed in)
 
 
 
@@ -103,7 +105,9 @@ namespace TCViettelFC_API.Repositories.Implementations
                                 OrderId = orderId,
                                 ItemId = orderedSuppItemDto.ItemId,
                                 Quantity = orderedSuppItemDto.Quantity,
-                                Price = orderedSuppItemDto.Price
+                                Price = orderedSuppItemDto.Price,
+                                Status = 0
+
                             });
                         }
                     }
@@ -146,10 +150,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             }
         }
 
-        public async Task<List<int>> GetOrderedTicketsIdByOrderId(int orderId)
-        {
-            return await _context.OrderedTickets.Where(x => x.OrderId == orderId).Select(x => x.Id).ToListAsync();
-        }
+
 
 
 

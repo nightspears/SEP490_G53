@@ -468,3 +468,4 @@ E:\SEP490-G53\SEP490_G53\TCViettelFC_API\obj\Debug\net8.0\refint\TCViettelFC_API
 E:\SEP490-G53\SEP490_G53\TCViettelFC_API\obj\Debug\net8.0\TCViettelFC_API.pdb
 E:\SEP490-G53\SEP490_G53\TCViettelFC_API\obj\Debug\net8.0\TCViettelFC_API.genruntimeconfig.cache
 E:\SEP490-G53\SEP490_G53\TCViettelFC_API\obj\Debug\net8.0\ref\TCViettelFC_API.dll
+D:\ResumeProjects\SEP490_G53\TCViettelFC_API\bin\Debug\net8.0\QRCoder.dll
