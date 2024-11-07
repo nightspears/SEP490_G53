@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|e:\\sep490-g53\\sep490_g53\\tcviettetlfc_client\\views\\checkoutticket\\checkout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\checkoutticket\\checkout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|e:\\sep490-g53\\sep490_g53\\tcviettetlfc_client\\views\\area\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\area\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -11,8 +15,12 @@
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\areacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|e:\\sep490-g53\\sep490_g53\\tcviettetlfc_client\\models\\supplementaryiteamviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\supplementaryiteamviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|e:\\sep490-g53\\sep490_g53\\tcviettetlfc_client\\models\\ticketorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\ticketorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|e:\\sep490-g53\\sep490_g53\\tcviettetlfc_client\\controllers\\checkoutticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\checkoutticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 77,
+          "SelectedChildIndex": 81,
           "Children": [
             {
               "$type": "Bookmark",
@@ -333,45 +341,73 @@
               "Name": "ST:4:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Views\\Area\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Area\\Index.cshtml",
               "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Views\\Area\\Index.cshtml",
               "RelativeToolTip": "Views\\Area\\Index.cshtml",
-              "ViewState": "AgIAAMcAAAAAAAAAAAAAANAAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAO0CAAAAAAAAAAAAAA8DAABvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-23T20:39:56.84Z",
+              "WhenOpened": "2024-11-07T20:58:11.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TicketOrderRequest.cs",
+              "DocumentMoniker": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Models\\TicketOrderRequest.cs",
+              "RelativeDocumentMoniker": "Models\\TicketOrderRequest.cs",
+              "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Models\\TicketOrderRequest.cs",
+              "RelativeToolTip": "Models\\TicketOrderRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T20:19:40.111Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "SupplementaryIteamViewModel.cs",
-              "DocumentMoniker": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Models\\SupplementaryIteamViewModel.cs",
-              "RelativeDocumentMoniker": "Models\\SupplementaryIteamViewModel.cs",
-              "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Models\\SupplementaryIteamViewModel.cs",
-              "RelativeToolTip": "Models\\SupplementaryIteamViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T20:17:23.035Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "AreaController.cs",
               "DocumentMoniker": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\AreaController.cs",
               "RelativeDocumentMoniker": "Controllers\\AreaController.cs",
               "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\AreaController.cs",
               "RelativeToolTip": "Controllers\\AreaController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowCEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T18:55:04.088Z"
+              "WhenOpened": "2024-11-07T15:59:02.057Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:4:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Checkout.cshtml",
+              "DocumentMoniker": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Views\\CheckoutTicket\\Checkout.cshtml",
+              "RelativeDocumentMoniker": "Views\\CheckoutTicket\\Checkout.cshtml",
+              "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Views\\CheckoutTicket\\Checkout.cshtml",
+              "RelativeToolTip": "Views\\CheckoutTicket\\Checkout.cshtml",
+              "ViewState": "AgIAAAwBAAAAAAAAAAAAADYBAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-07T14:02:50.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CheckoutTicketController.cs",
+              "DocumentMoniker": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CheckoutTicketController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CheckoutTicketController.cs",
+              "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CheckoutTicketController.cs",
+              "RelativeToolTip": "Controllers\\CheckoutTicketController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T14:02:20.887Z",
+              "EditorCaption": ""
             }
           ]
         },

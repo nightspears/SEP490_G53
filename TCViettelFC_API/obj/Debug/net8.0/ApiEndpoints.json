@@ -477,16 +477,6 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
-    "Method": "SendTicketViaMailAsync",
-    "RelativePath": "api/Customer/sendmailticket",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
     "Method": "UpdateProfile",
     "RelativePath": "api/Customer/updateprofile",
     "HttpMethod": "PUT",
@@ -1815,16 +1805,21 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.TicketOrderController",
-    "Method": "AddTicketsToCart",
-    "RelativePath": "api/TicketOrder/add-to-cart",
+    "Method": "AddOrderedTicket",
+    "RelativePath": "api/TicketOrder",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ticketOrder",
-        "Type": "TCViettelFC_API.Dtos.TiketOrder.TicketOrderCreateDto",
+        "Name": "ticketOrderDto",
+        "Type": "TCViettelFC_API.Dtos.OrderTicket.TicketOrderDto",
         "IsRequired": true
+      },
+      {
+        "Name": "customerId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

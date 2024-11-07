@@ -42,6 +42,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/CheckoutTicket/Checkout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRUaWNrZXRcQ2hlY2tvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/Checkout/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/Checkout/PaymentCallBack.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcUGF5bWVudENhbGxCYWNrLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/Customer/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -66,6 +78,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzY291bnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/Entry/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cnlcSG9tZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/Entry/VerifyTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cnlcVmVyaWZ5VGlja2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -84,6 +104,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/ProductManagement/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdE1hbmFnZW1lbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/Public/ChiTietSanPham.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljXENoaVRpZXRTYW5QaGFtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/Public/GioHang.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljXEdpb0hhbmcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/Public/SanPham.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljXFNhblBoYW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/SEP490-G53/SEP490_G53/TCViettetlFC_Client/Views/Season/Index.cshtml]
