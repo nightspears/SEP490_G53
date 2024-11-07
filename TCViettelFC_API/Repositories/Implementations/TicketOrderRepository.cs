@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TCViettelFC_API.Dtos;
+using TCViettelFC_API.Dtos.CheckOut;
 using TCViettelFC_API.Dtos.OrderTicket;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -109,6 +110,19 @@ namespace TCViettelFC_API.Repositories.Implementations
                     }
 
                     await _context.SaveChangesAsync();
+                    if (ticketOrdersDto.PaymentDto != null)
+                    {
+                        var payment = new Payment
+                        {
+                            OrderTicketId = orderId,
+                            TotalAmount = ticketOrdersDto.PaymentDto.TotalAmount,
+                            PaymentGateway = ticketOrdersDto.PaymentDto.PaymentGateway,
+                            Status = ticketOrdersDto.PaymentDto.Status ?? 0 // Default to pending if not provided
+                        };
+
+                        _context.Payments.Add(payment);
+                        await _context.SaveChangesAsync();
+                    }
 
                     // Update seats for ordered tickets
                     foreach (var orderedTicket in ticketOrder.OrderedTickets)
@@ -150,16 +164,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             return await _context.OrderedTickets.Where(x => x.OrderId == orderId).Select(x => x.Id).ToListAsync();
         }
-
-
-
-
-
-
     }
-
-
-
 
 }
 
