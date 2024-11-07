@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using TCViettelFC_Client.ApiServices;
 using TCViettetlFC_Client.Models;
 using TCViettetlFC_Client.Services;
 
@@ -12,11 +13,13 @@ namespace TCViettetlFC_Client.Controllers
         private readonly HttpClient _httpClient;
 
         private readonly FeedbackService _feedbackService;
+        private readonly IApiHelper _apiHelper;
 
-        public StaffController(IHttpClientFactory httpClientFactory, FeedbackService feedbackService)
+        public StaffController(IHttpClientFactory httpClientFactory, FeedbackService feedbackService, IApiHelper apiHelper)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
             _feedbackService = feedbackService;
+            _apiHelper = apiHelper;
         }
         private async Task<List<TicketOrdersViewModel>> GetAllTicketOrders()
 

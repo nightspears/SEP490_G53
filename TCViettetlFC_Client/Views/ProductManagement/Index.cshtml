@@ -1,4 +1,4 @@
-﻿@*
+﻿﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -31,14 +31,13 @@
 
 
     .change-photo-btn {
-    
         border: none;
         color: white;
         border-radius: 5px;
         cursor: pointer;
     }
 
- 
+
 
     select {
         border: 1px solid #ddd;
@@ -57,8 +56,8 @@
     #cardImg {
         transition: box-shadow 0.3s ease; /* Hiệu ứng chuyển đổi khi hover */
         border: none; /* Loại bỏ viền nếu muốn */
-        max-height:300px ;
-        max-width : 240px ;
+        max-height: 300px;
+        max-width: 240px;
     }
 
     #cardImg {
@@ -78,12 +77,9 @@
 
         #cardImg img {
             transition: all 0.3s ease;
-           
             object-fit: cover;
             border-radius: 10px; /* Đảm bảo hình ảnh tròn */
         }
-
-
 
 </style>
 <div class="page-wrapper">
@@ -182,7 +178,6 @@
                                 <div class="form-group">
                                     <label>Mùa giải <span class="required"> *</span></label>
                                     <select style="width:100%" id="muaGiai">
-                                       
                                     </select>
                                 </div>
                             </div>
@@ -190,11 +185,10 @@
                                 <div class="form-group">
                                     <label>Thể loại <span class="required"> *</span></label>
                                     <select style="width:100%" id="theLoai">
-                                        
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Mô tả</label>
@@ -202,11 +196,11 @@
                                 </div>
                             </div>
                             @* <div class="col-12 col-sm-6">
-                                <label>Trạng thái</label>
-                                <div class="status-toggle d-flex ">
-                                    <input type="checkbox" id="status" class="check">
-                                    <label for="status" style="height:35px ; width:60px" class="checktoggle">checkbox</label>
-                                </div>
+                            <label>Trạng thái</label>
+                            <div class="status-toggle d-flex ">
+                            <input type="checkbox" id="status" class="check">
+                            <label for="status" style="height:35px ; width:60px" class="checktoggle">checkbox</label>
+                            </div>
                             </div> *@
                         </div>
 
@@ -236,15 +230,15 @@
                             <input type="text" id="kichthuoc" placeholder="Nhập cách nhau dấu ' ; ' ( Ví dụ : size 1;size 2;size 3 )  " class="form-control">
                         </div>
                     </div>
-                    
-                   @*  <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                            <label>Là sân nhà</label>
-                            <select style="width:100%" id="isHome">
-                                <option value="1">Sân nhà</option>
-                                <option value="2">Sân khách</option>
-                            </select>
-                        </div>
+
+                    @*  <div class="col-12 col-sm-6">
+                    <div class="form-group">
+                    <label>Là sân nhà</label>
+                    <select style="width:100%" id="isHome">
+                    <option value="1">Sân nhà</option>
+                    <option value="2">Sân khách</option>
+                    </select>
+                    </div>
                     </div> *@
                     <div class="col-12 col-sm-6">
                         <label>Trạng thái</label>
@@ -254,7 +248,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-sm-12" >
+                    <div class="col-12 col-sm-12">
                         <label>Ảnh khác</label>
                         <div class="row ">
                             <div class="col-md-12 d-flex position-relative image-container">
@@ -267,7 +261,7 @@
                             </div>
                         </div>
                         <input type="file" id="fileInput" multiple style="display:none;" accept="image/*">
-                       
+
                     </div>
                 </div>
                 <button type="submit" onclick="EditOrCreate()" id="btnNomal" class="btn btn-primary btn-block w-100 mt-4">Lưu</button>
@@ -302,8 +296,8 @@
 <script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
 <script src="~/admin_assets/js/script.js"></script>
 <script src="~/admin_assets/adminjs/product.js"></script>
-<script>
-    let fileList = []; 
+@* <script>
+    let fileList = [];
 
     $('#fileInput').on('change', function (event) {
         const files = event.target.files;
@@ -363,7 +357,7 @@
                 });
 
                 $deleteBtn.on('click', function () {
-                    $imgWrapper.remove(); 
+                    $imgWrapper.remove();
                     currentImages--;
 
                     fileList = fileList.filter(f => f !== file);
@@ -382,9 +376,9 @@
             reader.readAsDataURL(file);
         });
     });
-    
+
     function updateFileInput() {
-        const dataTransfer = new DataTransfer(); 
+        const dataTransfer = new DataTransfer();
         debugger
         $.each(fileList, function (index, file) {
             dataTransfer.items.add(file);
@@ -392,7 +386,7 @@
 
         $('#fileInput')[0].files = dataTransfer.files;
     }
-</script>
+</script> *@
 @* <script>
     document.getElementById('fileInput').addEventListener('change', function (event) {
         const files = event.target.files;
@@ -418,16 +412,16 @@
 
                 if (existingImages.includes(imageUrl)) {
                     alert('Ảnh này đã được thêm trước đó.');
-                    return; 
+                    return;
                 }
 
                 const imgWrapper = document.createElement('div');
                 imgWrapper.style.border = '2px solid #ccc';
                 imgWrapper.style.padding = '5px';
                 imgWrapper.style.margin = '5px';
-                imgWrapper.style.borderRadius = '10px'; 
-                imgWrapper.style.display = 'inline-block'; 
-                imgWrapper.style.position = 'relative'; 
+                imgWrapper.style.borderRadius = '10px';
+                imgWrapper.style.display = 'inline-block';
+                imgWrapper.style.position = 'relative';
 
                 const img = document.createElement('img');
                 img.src = imageUrl;
@@ -450,8 +444,8 @@
                 deleteBtn.style.cursor = 'pointer';
 
                 deleteBtn.addEventListener('click', function () {
-                    previewContainer.removeChild(imgWrapper); 
-                    currentImages--; 
+                    previewContainer.removeChild(imgWrapper);
+                    currentImages--;
                 });
 
                 imgWrapper.appendChild(img);

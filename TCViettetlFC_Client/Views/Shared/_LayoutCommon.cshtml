@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from mentoring.dreamguystech.com/html/template/admin/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:33:22 GMT -->
@@ -86,10 +87,10 @@
                                                     Cửa hàng <span></span> <span></span> <span></span>
                                                     <span></span>
                                                 </a>
-                                                <a >
-                                                   
+                                                <a>
+
                                                 </a>
-                                              
+
 
                                             </li>
                                             <li>
@@ -292,42 +293,39 @@
     <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
     <script src="~/home_assets/js/vendor/vendor.js"></script>
     <script src="~/home_assets/js/main.js"></script>
-   @*  <script>
-        function loadCategoryMenu() {
-            $.ajax({
-                url: "https://localhost:5000/api/Category/GetCategory",
-                method: "GET",
-                dataType: "json",
-                success: function (res) {
-                    var menu_category = $("#menu_category").empty();
-                    var textFirt = `<li class="category_product_menu" onclick="showProductByCate(0)" >
-                                                  <a style="color:black" class="ProductCate">Tất cả</a>
-                                            </li>`;
-                    menu_category.append(textFirt);
-                    $.each(res, function (index, item) {
+    @*  <script>
+    function loadCategoryMenu() {
+    $.ajax({
+    url: "https://localhost:5000/api/Category/GetCategory",
+    method: "GET",
+    dataType: "json",
+    success: function (res) {
+    var menu_category = $("#menu_category").empty();
+    var textFirt = `<li class="category_product_menu" onclick="showProductByCate(0)" >
+    <a style="color:black" class="ProductCate">Tất cả</a>
+    </li>`;
+    menu_category.append(textFirt);
+    $.each(res, function (index, item) {
 
-                        var html = `<li class="category_product_menu" onclick="showProductByCate(${item.categoryId})" data-cid="${item.categoryId}">
-                                          <a style="color:black" class="ProductCate" data-cid="${item.categoryId}">${item.categoryName}</a>
-                                    </li>`;
-                        menu_category.append(html);
-                    });
+    var html = `<li class="category_product_menu" onclick="showProductByCate(${item.categoryId})" data-cid="${item.categoryId}">
+    <a style="color:black" class="ProductCate" data-cid="${item.categoryId}">${item.categoryName}</a>
+    </li>`;
+    menu_category.append(html);
+    });
 
 
-                },
-                error: function (res) {
-                    console.error("Error loading data", res);
-                }
-            });
-        }
-      
+    },
+    error: function (res) {
+    console.error("Error loading data", res);
+    }
+    });
+    }
 
-        $(document).ready(function () {
-            loadCategoryMenu();
-        });
+
+    $(document).ready(function () {
+    loadCategoryMenu();
+    });
     </script> *@
 </body>
 
 </html>
-
-
-
