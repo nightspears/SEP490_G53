@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TCViettelFC_API.Dtos;
+using TCViettelFC_API.Dtos.CheckOut;
 using TCViettelFC_API.Dtos.OrderTicket;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -24,6 +25,12 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 try
                 {
+                    // Create ticket order using the customerId (whether newly created or passed in)
+                    var ticketOrder = new TicketOrder
+                    {
+                        OrderDate = ticketOrdersDto.OrderDate,
+                        TotalAmount = ticketOrdersDto.TotalAmount
+                    };
                     if (customerId == null)
                     {
                         if (ticketOrdersDto.AddCustomerDto == null ||
@@ -46,24 +53,22 @@ namespace TCViettelFC_API.Repositories.Implementations
                         await _context.SaveChangesAsync();
                         customerId = newCustomer.CustomerId;
                         obj.CustomerEmail = newCustomer.Email;
+                        ticketOrder.Customer = newCustomer;
                     }
                     else
                     {
                         var customer = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.CustomerId == customerId);
                         obj.CustomerEmail = customer.Email;
+                        var cus = new Customer()
+                        {
+                            AccountId = customerId.Value
+                        };
+                        ticketOrder.Customer = cus;
                     }
 
-                    // Create ticket order using the customerId (whether newly created or passed in)
-                    var ticketOrder = new TicketOrder
-                    {
-                        OrderDate = ticketOrdersDto.OrderDate,
-                        TotalAmount = ticketOrdersDto.TotalAmount
-                    };
-                    var cus = new Customer()
-                    {
-                        AccountId = customerId.Value
-                    };
-                    ticketOrder.Customer = cus;
+
+
+
 
                     _context.TicketOrders.Add(ticketOrder);
                     await _context.SaveChangesAsync();
@@ -105,6 +110,19 @@ namespace TCViettelFC_API.Repositories.Implementations
                     }
 
                     await _context.SaveChangesAsync();
+                    if (ticketOrdersDto.PaymentDto != null)
+                    {
+                        var payment = new Payment
+                        {
+                            OrderTicketId = orderId,
+                            TotalAmount = ticketOrdersDto.PaymentDto.TotalAmount,
+                            PaymentGateway = ticketOrdersDto.PaymentDto.PaymentGateway,
+                            Status = ticketOrdersDto.PaymentDto.Status ?? 0 // Default to pending if not provided
+                        };
+
+                        _context.Payments.Add(payment);
+                        await _context.SaveChangesAsync();
+                    }
 
                     // Update seats for ordered tickets
                     foreach (var orderedTicket in ticketOrder.OrderedTickets)
@@ -146,16 +164,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             return await _context.OrderedTickets.Where(x => x.OrderId == orderId).Select(x => x.Id).ToListAsync();
         }
-
-
-
-
-
-
     }
-
-
-
 
 }
 
