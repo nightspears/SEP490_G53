@@ -3,7 +3,7 @@
 *@
 @{
     var customerId = ViewData["CustomerId"];
-    Layout = "_LayoutCommon";
+    Layout = "_LayoutCommonTicket";
 }
 
 <style>
@@ -218,21 +218,10 @@
             <div class="payment-method bg-white mt-4 p-3">
                 <h4>Chọn hình thức thanh toán</h4>
                 <div class="form-group pt-3">
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="qrCode" name="paymentMethod" class="custom-control-input" required>
-                        <label class="custom-control-label" for="qrCode">Thanh toán bằng mã QRCode</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="atm" name="paymentMethod" class="custom-control-input" required>
-                        <label class="custom-control-label" for="atm">Thanh toán thẻ ATM nội địa</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="international" name="paymentMethod" class="custom-control-input" required>
-                        <label class="custom-control-label" for="international">Thanh toán thẻ quốc tế (Visa, Master, JCB)</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" id="ticketCounter" name="paymentMethod" class="custom-control-input" required>
-                        <label class="custom-control-label" for="ticketCounter">Thanh toán tại quầy bán vé</label>
+                    <div class="bg-transparent outline-none border position-relative rounded d-flex align-items-center gap-3 px-3 py-1 w-100 fw-bold border-success my-3">
+                        <img src="https://cdn.nextix.cloud/nextix/38/logo_vnpay_30fdda7b24.svg" alt="VNPAY Payment Method" loading="lazy" width="40" height="40" class="position-relative rounded-2" style="object-fit: scale-down; aspect-ratio: 1 / 1; width: 40px; height: 40px;">
+                        VNPAY
+                        <i class="bi bi-check-circle-fill position-absolute text-success fs-4" style="top: -10px; right: -6px;"></i>
                     </div>
                 </div>
             </div>
@@ -446,112 +435,72 @@
 </script>
 
 <script>
-    document.querySelector('.purchase-button').addEventListener('click', async () => {
-       
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-       
-        if (cart.length == 0) {
-            alert('Bạn không có vé để thanh toán');
-            return;
-        }
-        else {
-            
-            const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
-            if (selectedCheckboxes.length === 0) {
-                alert('Vui lòng chọn vé để thanh toán.');
-                return; 
-            }
-            const customerId = document.getElementById('customerId') ? document.getElementById('customerId').value : null;
-            const isGuest = !customerId;
-            if (isGuest) {
-                const fullName = document.getElementById('fullName').value;
-                const phone = document.getElementById('phone').value;
-                const email = document.getElementById('email').value;
+   document.querySelector('.purchase-button').addEventListener('click', async () => {
+       const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-                
-                if (!fullName || !phone || !email) {
-                    alert('Vui lòng nhập đầy đủ thông tin: Họ tên, Số điện thoại và Email.');
-                    return; 
-                }
-            }
+       if (cart.length === 0) {
+           alert('Bạn không có vé để thanh toán');
+           return;
+       }
 
-            // Lấy thông tin khách hàng từ form 
-            const addCustomerDto = isGuest
-                ? {
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    fullName: document.getElementById('fullName').value,
-                    status: 0,
-                }
-                : null;
-
-            // Dữ liệu đơn hàng 
+const totalAmountText = document.querySelector('.total-amount').textContent;
+const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''), 10); // Remove any non-numeric characters, parse as integer
+ // Multiply by 100 if in cents
 
 
-            const orderedTickets = cart.map((ticket) => ({
-                matchId: ticket.matchId,
-                areaId: ticket.areaId,
-                price: ticket.price,
-                status: 1, // Coi như đặt vé thành công
-                orderId: 0,
-            }));
+       const requestData = {
+           addCustomerDto: {
+               email: document.getElementById('email')?.value,
+               phone: document.getElementById('phone')?.value,
+               fullName: document.getElementById('fullName')?.value,
+               status: 0
+           },
+           orderDate: new Date().toISOString(),
+           totalAmount,
+           customerId: document.getElementById('customerId') ? parseInt(document.getElementById('customerId').value) : null,
+           orderedTickets: cart.map(ticket => ({
+               matchId: ticket.matchId,
+               areaId: ticket.areaId,
+               price: ticket.price,
+               status: 1,
+               orderId: 0
+           })),
+           orderedSuppItems: cart.flatMap(ticket => ticket.supplementaryItems || []).map(item => ({
+               orderId: 0,
+               itemId: item.itemId,
+               quantity: item.itemQuantity,
+               price: item.itemPrice
+           })),
+           paymentDto: {
+               orderTicketId: 0,
+               orderProductId: null,
+               totalAmount,
+               paymentGateway: 'VNPAY',
+               status: 1
+           }
+       };
 
-            const orderedSuppItems = cart.flatMap((ticket) => ticket.supplementaryItems || []).map((item) => ({
-                orderId: 0,
-                itemId: item.itemId,
-                quantity: item.itemQuantity,
-                price: item.itemPrice,
-            }));
-
-            const totalAmountText = document.querySelector('.total-amount').textContent;
-            const normalizedAmount = totalAmountText.replace(/[^\d,]/g, '').replace(',', '.');
-            const totalAmount = parseFloat(normalizedAmount);
-
-            const requestData = {
-                addCustomerDto,
-                orderDate: new Date().toISOString(),
-                totalAmount,
-                customerId: customerId ? parseInt(customerId) : null,
-                orderedTickets,
-                orderedSuppItems,
-                paymentDto: {
-                    orderTicketId: 0, // Sẽ được đặt lại sau khi tạo order
-                    orderProductId: null,
-                    totalAmount,
-                    paymentGateway: 'VNPAY',
-                    status: 1,
-                },
-            };
-
-            try {
-                const response = await fetch('/CheckoutTicket/SubmitTicketOrder', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(requestData),
-                });
-
-                const result = await response.json();
-                if (result.success) {
-                    document.getElementById('popup').style.display = 'flex';
-                    
-                    localStorage.removeItem('cart'); // Xóa giỏ hàng sau khi đặt mua thành công
-                    setTimeout(() => {
-                        document.getElementById('popup').style.display = 'none';
-                        window.location.href = '/CheckoutTicket/Checkout'; 
-                    }, 2000);
-                } else {
-                    alert('Đặt vé không thành công. Vui lòng thử lại.');
-                }
-            } catch (error) {
-                console.error('Lỗi khi gửi yêu cầu đặt vé:', error);
-                alert('Đã xảy ra lỗi. Vui lòng thử lại.');
-            }
-        }
-        
+     try {
+    const response = await fetch('/CheckoutTicket/SubmitTicketOrder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestData)
     });
+
+    const result = await response.json();
+    if (result.success) {
+        // Redirect to the payment URL
+        window.location.href = result.paymentUrl;
+    } else {
+        alert(result.message || 'Đặt vé không thành công. Vui lòng thử lại.');
+    }
+} catch (error) {
+    console.error('Lỗi khi gửi yêu cầu đặt vé:', error);
+    alert('Đã xảy ra lỗi. Vui lòng thử lại.');
+}
+   });
 </script>
+
 
 
 <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>

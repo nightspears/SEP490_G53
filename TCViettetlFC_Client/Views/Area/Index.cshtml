@@ -2,7 +2,7 @@
     var matchId = Context.Request.Query["matchId"];
     var customerId = ViewData["CustomerId"];
     var supplementaryItems = ViewData["NewList"] as List<SupplementaryIteamViewModel>;
-    Layout = "_LayoutCommon";
+    Layout = "_LayoutCommonTicket";
 }
 <style>
     /* Overlay for background dimming */
@@ -201,7 +201,7 @@
     display: block; /* Mỗi span trên một dòng */
     margin: 5px 0; /* Khoảng cách giữa các dòng */
 }
-}
+
 </style>
 <div>
     <div class=innerbannerwrap>
@@ -216,7 +216,7 @@
                 <div class="">
                     <div class="cartHeader clearfix">
                         <h1 class=logo>
-                            <a href=index-2.html><img src=images/logo.png alt=image></a>
+                            <a href=index-2.html><img src=~/home_assets/images/logo.png alt=image></a>
                         </h1>
 
                         <div class=orderId>

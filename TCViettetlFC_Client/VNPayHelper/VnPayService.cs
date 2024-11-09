@@ -8,7 +8,7 @@
         {
             _config = config;
         }
-        public string CreatePaymentUrl(HttpContext context, VNPaymentRequestModel vnpmodel)
+        public string CreatePaymentUrl(HttpContext context, VNPaymentRequestModel vnpmodel,bool useSecondaryCallback = false)
         {
             var tick = DateTime.Now.Ticks.ToString();
             var vnpay = new VnPayLibrary();
@@ -22,7 +22,8 @@
             vnpay.AddRequestData("vnp_Locale", _config["VnPay:Locale"]);
             vnpay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang:" + vnpmodel.OrderId);
             vnpay.AddRequestData("vnp_OrderType", "order"); //default value: other
-            vnpay.AddRequestData("vnp_ReturnUrl", _config["VnPay:PaymentBackReturnUrl"]);
+            string returnUrl = useSecondaryCallback ? _config["VnPay:SecondaryReturnUrl"] : _config["VnPay:PaymentBackReturnUrl"];
+            vnpay.AddRequestData("vnp_ReturnUrl", returnUrl);
             vnpay.AddRequestData("vnp_TxnRef", tick);
 
             var paymentUrl = vnpay.CreateRequestUrl(_config["VnPay:Url"], _config["VnPay:HashSecret"]);

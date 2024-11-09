@@ -38,12 +38,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJlYVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/CartTicket/CartTicket.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFRpY2tldFxDYXJ0VGlja2V0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Category/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/CheckoutTicket/Checkout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRUaWNrZXRcQ2hlY2tvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/CheckoutTicket/TicketPaymentCallback.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRUaWNrZXRcVGlja2V0UGF5bWVudENhbGxiYWNrLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Checkout/Index.cshtml]
@@ -185,3 +189,7 @@ build_metadata.AdditionalFiles.CssScope = b-0pdoblycip
 [D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Shared/_LayoutCommon.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRDb21tb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-0tx1nla85r
+
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Shared/_LayoutCommonTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRDb21tb25UaWNrZXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-creoa0yffq

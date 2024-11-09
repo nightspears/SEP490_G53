@@ -14,7 +14,7 @@
         public List<OrderedSuppItemDto> OrderedSuppItems { get; set; } = new List<OrderedSuppItemDto>();
 
         // Payment details
-        public PaymentDto? PaymentDto { get; set; }
+        public PaymentTicketDto? PaymentDto { get; set; }
 
     }
     public class OrderedTicketDto
@@ -52,7 +52,7 @@
         public int? Status { get; set; }
     }
 
-    public class PaymentDto
+    public class PaymentTicketDto
     {
         public int? OrderTicketId { get; set; }
         public int? OrderProductId { get; set; }
