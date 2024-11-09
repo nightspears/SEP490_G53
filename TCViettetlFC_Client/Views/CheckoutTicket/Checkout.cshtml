@@ -535,11 +535,18 @@
                 const result = await response.json();
                 if (result.success) {
                     document.getElementById('popup').style.display = 'flex';
+
                     
-                    localStorage.removeItem('cart'); // Xóa giỏ hàng sau khi đặt mua thành công
+                    const remainingItems = cart.filter((_, index) => {
+                        return !document.querySelectorAll('.item-checkbox')[index].checked;
+                    });
+
+                    // Cập nhật lại giỏ hàng trong localStorage
+                    localStorage.setItem('cart', JSON.stringify(remainingItems));
+
                     setTimeout(() => {
                         document.getElementById('popup').style.display = 'none';
-                        window.location.href = '/CheckoutTicket/Checkout'; 
+                        window.location.href = '/CheckoutTicket/Checkout';
                     }, 2000);
                 } else {
                     alert('Đặt vé không thành công. Vui lòng thử lại.');
