@@ -490,6 +490,12 @@ const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''), 10); // Remo
     const result = await response.json();
     if (result.success) {
         // Redirect to the payment URL
+                const remainingItems = cart.filter((_, index) => {
+                    return document.querySelectorAll('.item-checkbox')[index].checked;
+                });
+                debugger
+                // Cập nhật lại giỏ hàng trong localStorage
+                localStorage.setItem('checkedItems', JSON.stringify(remainingItems));
         window.location.href = result.paymentUrl;
     } else {
         alert(result.message || 'Đặt vé không thành công. Vui lòng thử lại.');

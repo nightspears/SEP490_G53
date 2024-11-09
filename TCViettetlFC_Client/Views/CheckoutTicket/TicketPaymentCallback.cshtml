@@ -1,12 +1,29 @@
 ﻿@model TCViettetlFC_Client.Controllers.CheckoutTicketController.PaymentResultViewModel
 <script>
     window.addEventListener('DOMContentLoaded', () => {
-        // Check if the cart should be cleared after successful payment
-        const clearCart = '@TempData["clearCart"]' === 'True';  // Convert TempData to JS boolean
+        // Retrieve cart and checked items from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const checkedItems = JSON.parse(localStorage.getItem('checkedItems')) || [];
 
-        if (clearCart) {
-            // Clear the cart from localStorage
-            localStorage.removeItem('cart');
+        // Check if there are checked items
+        if (checkedItems.length > 0) {
+            // Filter out items from the cart that have the same matchId and areaId as those in checkedItems
+            const remainingItems = cart.filter(cartItem =>
+                !checkedItems.some(checkedItem =>
+                    checkedItem.matchId === cartItem.matchId &&
+                    checkedItem.areaId === cartItem.areaId&&
+                    checkedItem.expirationTime === cartItem.expirationTime
+                )
+            );
+
+            // Update the cart in localStorage with the remaining items
+            localStorage.setItem('cart', JSON.stringify(remainingItems));
+
+            // Optionally, remove the checked items list if no longer needed
+            localStorage.removeItem('checkedItems');
+
+            // Optionally, display a confirmation or status message to the user
+            alert("Your order was successfully placed. Your cart has been updated.");
         }
     });
 </script>
