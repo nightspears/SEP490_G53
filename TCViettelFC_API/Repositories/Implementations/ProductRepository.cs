@@ -215,7 +215,8 @@ namespace TCViettelFC_API.Repositories.Implementations
             var data = new
             {
                 Product = product,
-                PFile = proFile
+                PFile = proFile,
+              
             };
 
             return new JsonResult(data);
@@ -360,11 +361,14 @@ namespace TCViettelFC_API.Repositories.Implementations
             List<ProductCategory> cate = _context.ProductCategories.Where(x => x.Status == 1).ToList();
          
             //lấy mùa giải
-            List<Season> season = _context.Seasons.Where(x => x.Status ==1 ).ToList();
+            List<Season> season = _context.Seasons.Where(x => x.Status == 1 ).ToList();
+            List<Discount> Discount = _context.Discounts.Where(x => x.Status == 1).ToList();
+
             var data = new
             {
                 Cate = cate,
-                Season = season
+                Season = season,
+                Dis = Discount
             };
 
             return new JsonResult(data);
