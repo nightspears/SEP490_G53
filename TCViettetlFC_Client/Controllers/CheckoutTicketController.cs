@@ -98,6 +98,7 @@ namespace TCViettetlFC_Client.Controllers
 
                     if (response.IsSuccessStatusCode)
                     {
+                        TempData["clearCart"] = true;
                         viewModel.Message = "Đặt vé thành công!";
                         viewModel.IsSuccess = true;
                         return View(viewModel);

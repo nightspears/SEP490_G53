@@ -1,5 +1,15 @@
 ﻿@model TCViettetlFC_Client.Controllers.CheckoutTicketController.PaymentResultViewModel
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        // Check if the cart should be cleared after successful payment
+        const clearCart = '@TempData["clearCart"]' === 'True';  // Convert TempData to JS boolean
 
+        if (clearCart) {
+            // Clear the cart from localStorage
+            localStorage.removeItem('cart');
+        }
+    });
+</script>
 <style>
     body {
         font-family: 'Arial', sans-serif;
