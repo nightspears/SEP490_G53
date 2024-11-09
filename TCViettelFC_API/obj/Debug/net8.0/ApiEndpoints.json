@@ -215,6 +215,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TCViettelFC_API.Controllers.AreaController",
+    "Method": "GetMatchAreaTicketsByMatchId",
+    "RelativePath": "api/Area/getmatchareaticketsbymatchid/{matchId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "matchId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TCViettelFC_API.Controllers.CartController",
     "Method": "addToCart",
     "RelativePath": "api/Cart/addToCart",
