@@ -435,84 +435,50 @@
 </script>
 
 <script>
-    document.querySelector('.purchase-button').addEventListener('click', async () => {
+   document.querySelector('.purchase-button').addEventListener('click', async () => {
+       const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+       if (cart.length === 0) {
+           alert('Bạn không có vé để thanh toán');
+           return;
+       }
 
-        if (cart.length == 0) {
-            alert('Bạn không có vé để thanh toán');
-            return;
-        }
-        else {
-
-            const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
-            if (selectedCheckboxes.length === 0) {
-                alert('Vui lòng chọn vé để thanh toán.');
-                return;
-            }
-            const customerId = document.getElementById('customerId') ? document.getElementById('customerId').value : null;
-            const isGuest = !customerId;
-            if (isGuest) {
-                const fullName = document.getElementById('fullName').value;
-                const phone = document.getElementById('phone').value;
-                const email = document.getElementById('email').value;
+const totalAmountText = document.querySelector('.total-amount').textContent;
+const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''), 10); // Remove any non-numeric characters, parse as integer
+ // Multiply by 100 if in cents
 
 
-                if (!fullName || !phone || !email) {
-                    alert('Vui lòng nhập đầy đủ thông tin: Họ tên, Số điện thoại và Email.');
-                    return;
-                }
-            }
-
-            // Lấy thông tin khách hàng từ form
-            const addCustomerDto = isGuest
-                ? {
-                    email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value,
-                    fullName: document.getElementById('fullName').value,
-                    status: 0,
-                }
-                : null;
-
-            // Dữ liệu đơn hàng
-
-
-            const orderedTickets = cart.map((ticket) => ({
-                matchId: ticket.matchId,
-                areaId: ticket.areaId,
-                price: ticket.price,
-                status: 1, // Coi như đặt vé thành công
-                orderId: 0,
-            }));
-
-            const orderedSuppItems = cart.flatMap((ticket) => ticket.supplementaryItems || []).map((item) => ({
-                orderId: 0,
-                itemId: item.itemId,
-                quantity: item.itemQuantity,
-                price: item.itemPrice,
-            }));
-
-            // const totalAmountText = document.querySelector('.total-amount').textContent;
-            // const normalizedAmount = totalAmountText.replace(/[^\d,]/g, '').replace(',', '.');
-            // const totalAmount = parseFloat(normalizedAmount);
-            const totalAmountText = document.querySelector('.total-amount').textContent;
-            const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''), 10);
-
-            const requestData = {
-                addCustomerDto,
-                orderDate: new Date().toISOString(),
-                totalAmount,
-                customerId: customerId ? parseInt(customerId) : null,
-                orderedTickets,
-                orderedSuppItems,
-                paymentDto: {
-                    orderTicketId: 0, // Sẽ được đặt lại sau khi tạo order
-                    orderProductId: null,
-                    totalAmount,
-                    paymentGateway: 'VNPAY',
-                    status: 1,
-                },
-            };
+       const requestData = {
+           addCustomerDto: {
+               email: document.getElementById('email')?.value,
+               phone: document.getElementById('phone')?.value,
+               fullName: document.getElementById('fullName')?.value,
+               status: 0
+           },
+           orderDate: new Date().toISOString(),
+           totalAmount,
+           customerId: document.getElementById('customerId') ? parseInt(document.getElementById('customerId').value) : null,
+           orderedTickets: cart.map(ticket => ({
+               matchId: ticket.matchId,
+               areaId: ticket.areaId,
+               price: ticket.price,
+               status: 1,
+               orderId: 0
+           })),
+           orderedSuppItems: cart.flatMap(ticket => ticket.supplementaryItems || []).map(item => ({
+               orderId: 0,
+               itemId: item.itemId,
+               quantity: item.itemQuantity,
+               price: item.itemPrice
+           })),
+           paymentDto: {
+               orderTicketId: 0,
+               orderProductId: null,
+               totalAmount,
+               paymentGateway: 'VNPAY',
+               status: 1
+           }
+       };
 
      try {
     const response = await fetch('/CheckoutTicket/SubmitTicketOrder', {

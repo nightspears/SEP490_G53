@@ -852,7 +852,6 @@
                 const status = document.getElementById('status').value;
                 const quantity = parseInt(document.getElementById('quantity').value);
 
-                const cartItemId = `item-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
                 // Thời gian hết hạn (10 phút từ lúc thêm vào giỏ hàng)
                 const expirationTime = Date.now() + 10 * 60 * 1000; // 10 phút = 600,000 ms
 
@@ -881,7 +880,6 @@
 
                 // Tạo đối tượng vé với thời gian hết hạn, matchDetails và supplementaryItems
                 const ticket = {
-                    cartItemId,
                     matchId,
                     areaId,
                     stands,

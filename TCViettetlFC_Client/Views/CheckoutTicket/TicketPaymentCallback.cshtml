@@ -10,10 +10,8 @@
             // Filter out items from the cart that have the same matchId and areaId as those in checkedItems
             const remainingItems = cart.filter(cartItem =>
                 !checkedItems.some(checkedItem =>
-                    checkedItem.cartItemId === cartItem.cartItemId &&
                     checkedItem.matchId === cartItem.matchId &&
                     checkedItem.areaId === cartItem.areaId&&
-                    
                     checkedItem.expirationTime === cartItem.expirationTime
                 )
             );
