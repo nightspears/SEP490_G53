@@ -406,6 +406,7 @@ public partial class Sep490G53Context : DbContext
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("price");
             entity.Property(e => e.Quantity).HasColumnName("quantity");
+            entity.Property(e => e.Status).HasColumnName("status");
 
             entity.HasOne(d => d.Item).WithMany(p => p.OrderedSuppItems)
                 .HasForeignKey(d => d.ItemId)

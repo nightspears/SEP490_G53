@@ -1,4 +1,7 @@
-﻿namespace TCViettelFC_API.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace TCViettelFC_API.Models;
 
 public partial class OrderProductDetail
 {

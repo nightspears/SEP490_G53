@@ -24,6 +24,13 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 try
                 {
+                    var ticketOrder = new TicketOrder
+                    {
+                        OrderDate = ticketOrdersDto.OrderDate,
+                        TotalAmount = ticketOrdersDto.TotalAmount,
+
+
+                    };
                     if (customerId == null)
                     {
                         if (ticketOrdersDto.AddCustomerDto == null ||
@@ -42,28 +49,27 @@ namespace TCViettelFC_API.Repositories.Implementations
                             Status = ticketOrdersDto.AddCustomerDto.Status ?? 0
                         };
 
-                        _context.Customers.Add(newCustomer);
-                        await _context.SaveChangesAsync();
-                        customerId = newCustomer.CustomerId;
+
+
                         obj.CustomerEmail = newCustomer.Email;
+                        ticketOrder.Customer = newCustomer;
+
+
                     }
                     else
                     {
                         var customer = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.CustomerId == customerId);
                         obj.CustomerEmail = customer.Email;
+                        var cus = new Customer()
+                        {
+                            AccountId = customerId.Value
+                        };
+                        ticketOrder.Customer = cus;
                     }
 
                     // Create ticket order using the customerId (whether newly created or passed in)
-                    var ticketOrder = new TicketOrder
-                    {
-                        OrderDate = ticketOrdersDto.OrderDate,
-                        TotalAmount = ticketOrdersDto.TotalAmount
-                    };
-                    var cus = new Customer()
-                    {
-                        AccountId = customerId.Value
-                    };
-                    ticketOrder.Customer = cus;
+
+
 
                     _context.TicketOrders.Add(ticketOrder);
                     await _context.SaveChangesAsync();
@@ -99,7 +105,9 @@ namespace TCViettelFC_API.Repositories.Implementations
                                 OrderId = orderId,
                                 ItemId = orderedSuppItemDto.ItemId,
                                 Quantity = orderedSuppItemDto.Quantity,
-                                Price = orderedSuppItemDto.Price
+                                Price = orderedSuppItemDto.Price,
+                                Status = 0
+
                             });
                         }
                     }
@@ -142,10 +150,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             }
         }
 
-        public async Task<List<int>> GetOrderedTicketsIdByOrderId(int orderId)
-        {
-            return await _context.OrderedTickets.Where(x => x.OrderId == orderId).Select(x => x.Id).ToListAsync();
-        }
+
 
 
 
