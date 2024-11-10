@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using TCViettelFC_API.Dtos.Category;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using TCViettelFC_API.Dtos.Product;
-using TCViettelFC_API.Models;
-using TCViettelFC_API.Repositories.Implementations;
 using TCViettelFC_API.Repositories.Interfaces;
 
 namespace TCViettelFC_API.Controllers
@@ -21,7 +18,7 @@ namespace TCViettelFC_API.Controllers
 
         }
         [HttpGet("GetProduct")]
-        public async Task<ActionResult<List<ProductCategory>>> GetCategory()
+        public async Task<ActionResult<List<ProductResponse>>> GetProduct()
         {
             try
             {
@@ -33,7 +30,23 @@ namespace TCViettelFC_API.Controllers
             {
                 return BadRequest("Đã xảy ra lỗi trong quá trình thực thi");
             }
-           
+
+
+        }
+        [EnableQuery]
+        [HttpGet("GetSanPham")]
+        public async Task<ActionResult<List<ProductResponse>>> GetSanPham(int cid)
+        {
+            try
+            {
+                List<ProductResponse> product = await _product.GetSanPhamAsync(cid);
+                return Ok(product);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Đã xảy ra lỗi trong quá trình thực thi");
+            }
+
 
         }
         [HttpGet("GetProductById")]
@@ -50,7 +63,7 @@ namespace TCViettelFC_API.Controllers
             {
                 throw new Exception("Lỗi trong quá trình thực thi.");
             }
-          
+
 
         }
 
@@ -60,7 +73,7 @@ namespace TCViettelFC_API.Controllers
 
             try
             {
-                var data = await _product.GetProductByIdAsync(id);
+                var data = await _product.GetSanPhamByIdAsync(id);
                 return data;
 
             }
@@ -79,11 +92,11 @@ namespace TCViettelFC_API.Controllers
                 await _product.AddProductAsync(product);
                 return Ok("Thêm product thành công");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest("Lỗi thêm sản phẩm");
             }
-           
+
         }
 
         [HttpPut("UpdateProduct/{id}")]
@@ -129,8 +142,8 @@ namespace TCViettelFC_API.Controllers
         [HttpPost("SanPhamLienQuan")]
         public async Task<JsonResult> SanPhamLienQuan([FromBody] List<int> lstID)
         {
-                var data = await _product.GetLienQuanProductAsync(lstID);
-                return data;
+            var data = await _product.GetLienQuanProductAsync(lstID);
+            return data;
 
         }
 
