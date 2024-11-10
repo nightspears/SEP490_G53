@@ -62,7 +62,7 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                     };
 
                     // Redirect to VnPay payment page
-                    var paymentUrl = _vnpayService.CreatePaymentUrl(HttpContext, vnPayModel);
+                    var paymentUrl = _vnpayService.CreatePaymentUrl(HttpContext, vnPayModel,false);
                     if (!string.IsNullOrEmpty(paymentUrl))
                     {
                         return Redirect(paymentUrl);

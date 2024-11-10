@@ -19,5 +19,13 @@ namespace TCViettelFC_API.Controllers
             if (result == null) return NotFound("Không tìm thấy khu vực với id này");
             return Ok(result);
         }
+
+        [HttpGet("getmatchareaticketsbymatchid/{matchId}")]
+        public async Task<IActionResult> GetMatchAreaTicketsByMatchId(int matchId)
+        {
+            var tickets = await _areaRepository.GetMatchAreaTicketsByMatchIdAsync(matchId);
+            if (tickets == null || tickets.Count == 0) return NotFound("Không tìm thấy vé khu vực cho trận đấu này");
+            return Ok(tickets);
+        }
     }
 }
