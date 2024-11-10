@@ -67,7 +67,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<List<ProductCategory>> GetCateAsync()
         {
             List<ProductCategory> cate = new List<ProductCategory>();
-            cate = await _context.ProductCategories.Where(x => x.Status != 0).ToListAsync();
+            cate = await _context.ProductCategories.Where(x => x.CategoryId != 0).ToListAsync();
 
             return cate;
         }

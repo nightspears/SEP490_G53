@@ -66,7 +66,6 @@ namespace TCViettelFC_API.Repositories.Implementations
                             ProductFile ProductFile = new ProductFile();
                             {
                                 ProductFile.FileName = f.File.FileName;
-                               //  sửa lại db trường filepath cho đọ dài lên 255
                                 if (f.File != null && f.File.Length > 0)
                                 {
                                     ImageUploadResult res = _cloudinary.CloudinaryUpload(f.File);
