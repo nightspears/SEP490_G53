@@ -61,7 +61,7 @@ builder.Services.AddSwaggerGen(
 );
 
 builder.Services.AddDbContext<Sep490G53Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("value")));
-
+builder.Services.AddScoped<ISupplementaryItemRepository, SupplementaryItemRepository>();
 builder.Services.AddScoped<IHelloWorldRepository, HelloWorldRepository>();
 builder.Services.AddScoped<INewRepository, NewRepository>();
 builder.Services.AddScoped<ITicketOrderRepository, TicketOrderRepository>();
