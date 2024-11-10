@@ -179,7 +179,9 @@
                             const size = document.getElementById('sizeSp').value || 'Default size';
                             const quantity = 1; // Assuming default quantity is 1, you can modify as needed
                             const price = parseFloat(document.getElementById('giaSP').dataset.price);
-                            const shirtNumber = document.getElementById('shirtNumber').value || 'No number';
+                            const shirtNumber = document.getElementById('shirtNumber').value ;
+                            const TenCauThu = document.getElementById('nameAoCustom').value ;
+                            const SoAo = document.getElementById('SoAoCustom').value ;
                             const productName = document.getElementById('TenSP').textContent; // Assuming you have an element with the product name
                             const productImage = document.getElementById('productImage').src; // Assuming you have an <img> element for the product image
 
@@ -188,7 +190,9 @@
                                 Size: size,
                                 Quantity: quantity,
                                 Price: price,
-                                playerId: shirtNumber,
+                                shirtNumber: shirtNumber,
+                                TenCauThu: TenCauThu,
+                                SoAo: SoAo,
                                 nameProduct: productName,
                                 Avartar: productImage
                             };

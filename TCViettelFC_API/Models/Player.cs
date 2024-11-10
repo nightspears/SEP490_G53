@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TCViettelFC_API.Models;
+﻿namespace TCViettelFC_API.Models;
 
 public partial class Player
 {
@@ -20,6 +17,8 @@ public partial class Player
     public DateTime? OutDate { get; set; }
 
     public string? Description { get; set; }
+
+    public string? BackShirtImage { get; set; }
 
     public int? Status { get; set; }
 

@@ -38,6 +38,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlck1hbmFnZW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Area/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJlYVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/CartTicket/CartTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFRpY2tldFxDYXJ0VGlja2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Category/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -102,6 +110,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hNYW5hZ2VtZW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Match/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/ProductManagement/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdE1hbmFnZW1lbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -136,6 +148,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcSG9tZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/OrderProductDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcT3JkZXJQcm9kdWN0RGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/OrderProductManagement.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcT3JkZXJQcm9kdWN0TWFuYWdlbWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/OrderShipmentDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcT3JkZXJTaGlwbWVudERldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/StaffManagermentNew.cshtml]

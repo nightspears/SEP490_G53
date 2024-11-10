@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TCViettelFC_API.Models;
+﻿namespace TCViettelFC_API.Models;
 
 public partial class OrderProduct
 {
@@ -13,11 +10,15 @@ public partial class OrderProduct
 
     public DateTime? OrderDate { get; set; }
 
+    public decimal? ShipmentFee { get; set; }
+
     public decimal? TotalPrice { get; set; }
 
     public int? AddressId { get; set; }
 
     public string? Note { get; set; }
+
+    public int? StaffId { get; set; }
 
     public int? Status { get; set; }
 
@@ -30,4 +31,6 @@ public partial class OrderProduct
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
     public virtual ICollection<Shipment> Shipments { get; set; } = new List<Shipment>();
+
+    public virtual User? Staff { get; set; }
 }

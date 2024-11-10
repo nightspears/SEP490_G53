@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TCViettelFC_API.Models;
+﻿namespace TCViettelFC_API.Models;
 
 public partial class User
 {
@@ -26,6 +23,8 @@ public partial class User
     public virtual ICollection<News> News { get; set; } = new List<News>();
 
     public virtual ICollection<NewsCategory> NewsCategories { get; set; } = new List<NewsCategory>();
+
+    public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 
     public virtual Role? Role { get; set; }
 }

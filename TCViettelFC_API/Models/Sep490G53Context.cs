@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace TCViettelFC_API.Models;
 
@@ -72,14 +70,16 @@ public partial class Sep490G53Context : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var config = new ConfigurationBuilder()
-          .AddJsonFile("appsettings.json")
-          .Build();
+                    .AddJsonFile("appsettings.json")
+                    .Build();
 
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseSqlServer(config.GetConnectionString("value"));
         }
+
     }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Address>(entity =>
@@ -118,7 +118,7 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Area>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__areas__3213E83FCBFB1B16");
+            entity.HasKey(e => e.Id).HasName("PK__areas__3213E83F9EE2EE0D");
 
             entity.ToTable("areas");
 
@@ -201,7 +201,7 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Feedback>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Feedback__3214EC270790CFD2");
+            entity.HasKey(e => e.Id).HasName("PK__Feedback__3214EC2721AA33B7");
 
             entity.ToTable("Feedback");
 
@@ -221,12 +221,12 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.Responder).WithMany(p => p.Feedbacks)
                 .HasForeignKey(d => d.ResponderId)
-                .HasConstraintName("FK__Feedback__respon__5165187F");
+                .HasConstraintName("FK__Feedback__respon__74AE54BC");
         });
 
         modelBuilder.Entity<Match>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Matches__3213E83F41A0443D");
+            entity.HasKey(e => e.Id).HasName("PK__Matches__3213E83FEBB7C1C5");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.IsHome).HasColumnName("is_home");
@@ -245,7 +245,7 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<MatchAreaTicket>(entity =>
         {
-            entity.HasKey(e => new { e.MatchId, e.AreaId }).HasName("PK__Match_Ar__34FA1D759EB49A54");
+            entity.HasKey(e => new { e.MatchId, e.AreaId }).HasName("PK__Match_Ar__34FA1D75069590F1");
 
             entity.ToTable("Match_Area_Tickets");
 
@@ -256,17 +256,17 @@ public partial class Sep490G53Context : DbContext
             entity.HasOne(d => d.Area).WithMany(p => p.MatchAreaTickets)
                 .HasForeignKey(d => d.AreaId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Match_Are__area___74AE54BC");
+                .HasConstraintName("FK__Match_Are__area___75A278F5");
 
             entity.HasOne(d => d.Match).WithMany(p => p.MatchAreaTickets)
                 .HasForeignKey(d => d.MatchId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Match_Are__match__73BA3083");
+                .HasConstraintName("FK__Match_Are__match__76969D2E");
         });
 
         modelBuilder.Entity<News>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__News__3213E83FF0CB112F");
+            entity.HasKey(e => e.Id).HasName("PK__News__3213E83F8E6AECD3");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Content).HasColumnName("content");
@@ -286,16 +286,16 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.Creator).WithMany(p => p.News)
                 .HasForeignKey(d => d.CreatorId)
-                .HasConstraintName("FK__News__creator_id__4BAC3F29");
+                .HasConstraintName("FK__News__creator_id__778AC167");
 
             entity.HasOne(d => d.NewsCategory).WithMany(p => p.News)
                 .HasForeignKey(d => d.NewsCategoryId)
-                .HasConstraintName("FK__News__news_categ__4CA06362");
+                .HasConstraintName("FK__News__news_categ__787EE5A0");
         });
 
         modelBuilder.Entity<NewsCategory>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__News_Cat__3213E83F3EB930FB");
+            entity.HasKey(e => e.Id).HasName("PK__News_Cat__3213E83FE1FA1C34");
 
             entity.ToTable("News_Categories");
 
@@ -313,7 +313,7 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.Creator).WithMany(p => p.NewsCategories)
                 .HasForeignKey(d => d.CreatorId)
-                .HasConstraintName("FK__News_Cate__creat__47DBAE45");
+                .HasConstraintName("FK__News_Cate__creat__797309D9");
         });
 
         modelBuilder.Entity<OrderProduct>(entity =>
@@ -332,6 +332,10 @@ public partial class Sep490G53Context : DbContext
             entity.Property(e => e.OrderDate)
                 .HasColumnType("datetime")
                 .HasColumnName("order_date");
+            entity.Property(e => e.ShipmentFee)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("shipment_fee");
+            entity.Property(e => e.StaffId).HasColumnName("staff_id");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.TotalPrice)
                 .HasColumnType("decimal(10, 2)")
@@ -344,6 +348,10 @@ public partial class Sep490G53Context : DbContext
             entity.HasOne(d => d.Customer).WithMany(p => p.OrderProducts)
                 .HasForeignKey(d => d.CustomerId)
                 .HasConstraintName("FK__Order_Pro__custo__6B24EA82");
+
+            entity.HasOne(d => d.Staff).WithMany(p => p.OrderProducts)
+                .HasForeignKey(d => d.StaffId)
+                .HasConstraintName("FK_Order_Product_Users");
         });
 
         modelBuilder.Entity<OrderProductDetail>(entity =>
@@ -353,6 +361,12 @@ public partial class Sep490G53Context : DbContext
             entity.ToTable("Order_Product_Details");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CustomShirtName)
+                .HasMaxLength(255)
+                .HasColumnName("custom_shirt_name");
+            entity.Property(e => e.CustomShirtNumber)
+                .HasMaxLength(255)
+                .HasColumnName("custom_shirt_number");
             entity.Property(e => e.OrderProductId).HasColumnName("order_product_id");
             entity.Property(e => e.PlayerId).HasColumnName("player_id");
             entity.Property(e => e.Price)
@@ -381,7 +395,7 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<OrderedSuppItem>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ordered___3213E83F67A811DA");
+            entity.HasKey(e => e.Id).HasName("PK__Ordered___3213E83FE8417DA8");
 
             entity.ToTable("Ordered_supp_item");
 
@@ -395,16 +409,16 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.Item).WithMany(p => p.OrderedSuppItems)
                 .HasForeignKey(d => d.ItemId)
-                .HasConstraintName("FK__Ordered_s__item___01142BA1");
+                .HasConstraintName("FK__Ordered_s__item___7F2BE32F");
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderedSuppItems)
                 .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("FK__Ordered_s__order__02084FDA");
+                .HasConstraintName("FK__Ordered_s__order__00200768");
         });
 
         modelBuilder.Entity<OrderedTicket>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ordered___3213E83FBE03B041");
+            entity.HasKey(e => e.Id).HasName("PK__Ordered___3213E83F6AA20823");
 
             entity.ToTable("Ordered_ticket");
 
@@ -419,20 +433,20 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.Area).WithMany(p => p.OrderedTickets)
                 .HasForeignKey(d => d.AreaId)
-                .HasConstraintName("FK__Ordered_t__area___7C4F7684");
+                .HasConstraintName("FK__Ordered_t__area___01142BA1");
 
             entity.HasOne(d => d.Match).WithMany(p => p.OrderedTickets)
                 .HasForeignKey(d => d.MatchId)
-                .HasConstraintName("FK__Ordered_t__match__7B5B524B");
+                .HasConstraintName("FK__Ordered_t__match__02084FDA");
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderedTickets)
                 .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("FK__Ordered_t__order__7A672E12");
+                .HasConstraintName("FK__Ordered_t__order__02FC7413");
         });
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83F12CDFE47");
+            entity.HasKey(e => e.Id).HasName("PK__Payments__3213E83FF39AF2DA");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.OrderProductId).HasColumnName("order_product_id");
@@ -451,7 +465,7 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.OrderTicket).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.OrderTicketId)
-                .HasConstraintName("FK__Payments__order___04E4BC85");
+                .HasConstraintName("FK__Payments__order___03F0984C");
         });
 
         modelBuilder.Entity<PersonalAddress>(entity =>
@@ -493,6 +507,9 @@ public partial class Sep490G53Context : DbContext
             entity.HasKey(e => e.PlayerId).HasName("PK__Players__44DA120C0E2EFD39");
 
             entity.Property(e => e.PlayerId).HasColumnName("player_id");
+            entity.Property(e => e.BackShirtImage)
+                .HasMaxLength(255)
+                .HasColumnName("back_shirt_image");
             entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.FullName)
                 .HasMaxLength(255)
@@ -517,7 +534,7 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Product__47027DF5D5FB8F15");
+            entity.HasKey(e => e.ProductId).HasName("PK__Product__47027DF594ED7A5D");
 
             entity.ToTable("Product");
 
@@ -552,7 +569,7 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
                 .HasForeignKey(d => d.CategoryId)
-                .HasConstraintName("FK__Product__categor__6383C8BA");
+                .HasConstraintName("FK__Product__categor__07C12930");
 
             entity.HasOne(d => d.Discount).WithMany(p => p.Products)
                 .HasForeignKey(d => d.DiscountId)
@@ -560,12 +577,12 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.Season).WithMany(p => p.Products)
                 .HasForeignKey(d => d.SeasonId)
-                .HasConstraintName("FK__Product__season___6477ECF3");
+                .HasConstraintName("FK__Product__season___09A971A2");
         });
 
         modelBuilder.Entity<ProductCategory>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__product___D54EE9B4C988CF71");
+            entity.HasKey(e => e.CategoryId).HasName("PK__product___D54EE9B4542EAE49");
 
             entity.ToTable("product_category");
 
@@ -582,7 +599,7 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<ProductFile>(entity =>
         {
-            entity.HasKey(e => e.FileId).HasName("PK__Product___07D884C67364BC94");
+            entity.HasKey(e => e.FileId).HasName("PK__Product___07D884C64A27E809");
 
             entity.ToTable("Product_file");
 
@@ -602,12 +619,12 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.Product).WithMany(p => p.ProductFiles)
                 .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("FK__Product_f__produ__68487DD7");
+                .HasConstraintName("FK__Product_f__produ__0A9D95DB");
         });
 
         modelBuilder.Entity<Profile>(entity =>
         {
-            entity.HasKey(e => e.ProfileId).HasName("PK__profile__AEBB701F08F59FD1");
+            entity.HasKey(e => e.ProfileId).HasName("PK__profile__AEBB701F7917825A");
 
             entity.ToTable("profile");
 
@@ -635,7 +652,7 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Role__760965CCDDF787BE");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__760965CC7726B6C2");
 
             entity.ToTable("Role");
 
@@ -649,7 +666,7 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<Season>(entity =>
         {
-            entity.HasKey(e => e.SeasonId).HasName("PK__Seasons__0A99E331AB3AA34C");
+            entity.HasKey(e => e.SeasonId).HasName("PK__Seasons__0A99E331F45152A1");
 
             entity.Property(e => e.SeasonId).HasColumnName("season_id");
             entity.Property(e => e.EndYear)
@@ -677,8 +694,7 @@ public partial class Sep490G53Context : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("shipment_date");
             entity.Property(e => e.ShipmentTrackingCode)
-                .HasMaxLength(255)
-                .IsFixedLength()
+                .HasMaxLength(50)
                 .HasColumnName("shipment_tracking_code");
             entity.Property(e => e.Status).HasColumnName("status");
 
@@ -689,7 +705,7 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<SupplementaryItem>(entity =>
         {
-            entity.HasKey(e => e.ItemId).HasName("PK__Suppleme__52020FDD07C9FDD2");
+            entity.HasKey(e => e.ItemId).HasName("PK__Suppleme__52020FDD1C60B729");
 
             entity.ToTable("Supplementary_Items");
 
@@ -705,7 +721,7 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<TicketOrder>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83F54D498C8");
+            entity.HasKey(e => e.Id).HasName("PK__Ticket_O__3213E83F6A82517F");
 
             entity.ToTable("Ticket_Orders");
 
@@ -725,9 +741,9 @@ public partial class Sep490G53Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__B9BE370F4945AB46");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__B9BE370F1EEB173B");
 
-            entity.HasIndex(e => e.Email, "UQ__Users__AB6E61649ADF4554").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__AB6E61646137E83E").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.CreatedAt)
@@ -752,7 +768,7 @@ public partial class Sep490G53Context : DbContext
 
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
-                .HasConstraintName("FK__Users__role_id__3B75D760");
+                .HasConstraintName("FK__Users__role_id__0E6E26BF");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TCViettelFC_API.Models;
+﻿namespace TCViettelFC_API.Models;
 
 public partial class Shipment
 {

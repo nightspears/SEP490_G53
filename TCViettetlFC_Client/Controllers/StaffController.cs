@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using System.Text;
 using TCViettelFC_Client.ApiServices;
 using TCViettetlFC_Client.Models;
 using TCViettetlFC_Client.Services;
@@ -13,13 +14,16 @@ namespace TCViettetlFC_Client.Controllers
         private readonly HttpClient _httpClient;
 
         private readonly FeedbackService _feedbackService;
+        private readonly OrderService _orderService;
         private readonly IApiHelper _apiHelper;
-
-        public StaffController(IHttpClientFactory httpClientFactory, FeedbackService feedbackService, IApiHelper apiHelper)
+        private readonly GoShipService _goShipService;
+        public StaffController(IHttpClientFactory httpClientFactory, FeedbackService feedbackService, IApiHelper apiHelper, OrderService orderService, GoShipService goShipService)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
             _feedbackService = feedbackService;
             _apiHelper = apiHelper;
+            _orderService = orderService;
+            _goShipService = goShipService;
         }
         private async Task<List<TicketOrdersViewModel>> GetAllTicketOrders()
 
@@ -258,6 +262,60 @@ namespace TCViettetlFC_Client.Controllers
             // Implement logic to retrieve the responder ID (e.g., from User.Identity)
             return 1; // Temporary hardcoded value for demonstration
         }
+
+
+        public async Task<IActionResult> OrderProductManagement()
+        {
+            IEnumerable<OrderProductDto> orders;
+            try
+            {
+                orders = await _orderService.GetAllOrderProductsAsync();
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Failed to retrieve orders.";
+                return RedirectToAction("ErrorPage");
+            }
+            return View(orders);
+        }
+
+
+        public async Task<IActionResult> OrderProductDetail(int id)
+        {
+
+
+           
+            var orderDetail = await _orderService.GetOrderDetailsAsync(id /*, token*/);
+
+            if (orderDetail == null)
+            {
+                TempData["ErrorMessage"] = "Order not found.";
+                return RedirectToAction("OrderProductManagement");
+            }
+
+            return View(orderDetail); // Pass OrderDetailDto to the view
+        }
+
+        public async Task<IActionResult> OrderShipmentDetail(string trackingCode)
+        {
+            if (string.IsNullOrEmpty(trackingCode))
+            {
+                return BadRequest("Tracking code is required.");
+            }
+
+            var shipmentResponse = await _goShipService.GetShipmentAsync(trackingCode);
+
+            if (shipmentResponse == null || shipmentResponse.data == null || shipmentResponse.data.Count == 0)
+            {
+                return NotFound("Shipment not found.");
+            }
+
+            // Assuming you want to display the first shipment data
+            var shipmentData = shipmentResponse.data.FirstOrDefault();
+
+            return View(shipmentData);
+        }
+
 
     }
 }
