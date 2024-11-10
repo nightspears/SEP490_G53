@@ -435,76 +435,80 @@
 </script>
 
 <script>
-   document.querySelector('.purchase-button').addEventListener('click', async () => {
-       const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    document.querySelector('.purchase-button').addEventListener('click', async () => {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-       if (cart.length === 0) {
-           alert('Bạn không có vé để thanh toán');
-           return;
-       }
+        if (cart.length === 0) {
+            alert('Bạn không có vé để thanh toán');
+            return;
+        }
 
-const totalAmountText = document.querySelector('.total-amount').textContent;
-const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''), 10); // Remove any non-numeric characters, parse as integer
- // Multiply by 100 if in cents
+        // Filter only the checked items from the cart
+        const checkedItems = cart.filter((_, index) => {
+            return document.querySelectorAll('.item-checkbox')[index].checked;
+        });
 
+        if (checkedItems.length === 0) {
+            alert('Vui lòng chọn ít nhất một vé để thanh toán.');
+            return;
+        }
 
-       const requestData = {
-           addCustomerDto: {
-               email: document.getElementById('email')?.value,
-               phone: document.getElementById('phone')?.value,
-               fullName: document.getElementById('fullName')?.value,
-               status: 0
-           },
-           orderDate: new Date().toISOString(),
-           totalAmount,
-           customerId: document.getElementById('customerId') ? parseInt(document.getElementById('customerId').value) : null,
-           orderedTickets: cart.map(ticket => ({
-               matchId: ticket.matchId,
-               areaId: ticket.areaId,
-               price: ticket.price,
-               status: 1,
-               orderId: 0
-           })),
-           orderedSuppItems: cart.flatMap(ticket => ticket.supplementaryItems || []).map(item => ({
-               orderId: 0,
-               itemId: item.itemId,
-               quantity: item.itemQuantity,
-               price: item.itemPrice
-           })),
-           paymentDto: {
-               orderTicketId: 0,
-               orderProductId: null,
-               totalAmount,
-               paymentGateway: 'VNPAY',
-               status: 1
-           }
-       };
+        const totalAmountText = document.querySelector('.total-amount').textContent;
+        const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''), 10);
 
-     try {
-    const response = await fetch('/CheckoutTicket/SubmitTicketOrder', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestData)
+        const requestData = {
+            addCustomerDto: {
+                email: document.getElementById('email')?.value,
+                phone: document.getElementById('phone')?.value,
+                fullName: document.getElementById('fullName')?.value,
+                status: 0
+            },
+            orderDate: new Date().toISOString(),
+            totalAmount,
+            customerId: document.getElementById('customerId') ? parseInt(document.getElementById('customerId').value) : null,
+            orderedTickets: checkedItems.map(ticket => ({
+                matchId: ticket.matchId,
+                areaId: ticket.areaId,
+                price: ticket.price,
+                status: 1,
+                orderId: 0
+            })),
+            orderedSuppItems: checkedItems.flatMap(ticket => ticket.supplementaryItems || []).map(item => ({
+                orderId: 0,
+                itemId: item.itemId,
+                quantity: item.itemQuantity,
+                price: item.itemPrice
+            })),
+            paymentDto: {
+                orderTicketId: 0,
+                orderProductId: null,
+                totalAmount,
+                paymentGateway: 'VNPAY',
+                status: 1
+            }
+        };
+
+        try {
+            const response = await fetch('/CheckoutTicket/SubmitTicketOrder', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestData)
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                // Redirect to the payment URL
+                localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
+                window.location.href = result.paymentUrl;
+            } else {
+                alert(result.message || 'Đặt vé không thành công. Vui lòng thử lại.');
+            }
+        } catch (error) {
+            console.error('Lỗi khi gửi yêu cầu đặt vé:', error);
+            alert('Đã xảy ra lỗi. Vui lòng thử lại.');
+        }
     });
 
-    const result = await response.json();
-    if (result.success) {
-        // Redirect to the payment URL
-                const remainingItems = cart.filter((_, index) => {
-                    return document.querySelectorAll('.item-checkbox')[index].checked;
-                });
-                debugger
-                // Cập nhật lại giỏ hàng trong localStorage
-                localStorage.setItem('checkedItems', JSON.stringify(remainingItems));
-        window.location.href = result.paymentUrl;
-    } else {
-        alert(result.message || 'Đặt vé không thành công. Vui lòng thử lại.');
-    }
-} catch (error) {
-    console.error('Lỗi khi gửi yêu cầu đặt vé:', error);
-    alert('Đã xảy ra lỗi. Vui lòng thử lại.');
-}
-   });
 </script>
 
 
