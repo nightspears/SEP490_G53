@@ -610,7 +610,7 @@ public partial class Sep490G53Context : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.FileName)
-                .HasMaxLength(255)
+                .HasMaxLength(50)
                 .HasColumnName("file_name");
             entity.Property(e => e.FilePath)
                 .HasMaxLength(255)
