@@ -1,0 +1,182 @@
+﻿@model TCViettetlFC_Client.Models.ShipmentData
+
+@{
+    ViewData["Title"] = "Chi tiết Vận chuyển";
+}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+
+    .shipment-header {
+        background-color: #ffffff; /* White background */
+        color: #343a40; /* Dark text color */
+        padding: 30px 15px; /* Increased padding for spacing */
+        border-radius: 0.5rem 0.5rem 0 0; /* Rounded top corners */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for a touch of depth */
+        border-bottom: 2px solid #e0e0e0; /* Light bottom border for separation */
+    }
+
+        .shipment-header h3 {
+            font-size: 2rem; /* Increase header size */
+            margin-bottom: 0.5rem; /* Space below the title */
+        }
+
+        .shipment-header h4 {
+            font-size: 1.5rem; /* Subheader size */
+            margin-bottom: 0.2rem; /* Space below the subheader */
+        }
+
+    .text-success {
+        font-weight: bold; /* Make the order IDs bold */
+        color: #28a745; /* Bootstrap success color for emphasis */
+    }
+
+    .shipment-divider {
+        border: none; /* Remove default border */
+        height: 1px; /* Set the height of the line */
+        background-color: #e0e0e0; /* Light gray color for a subtle look */
+        margin: 10px 0; /* Space above and below the line */
+    }
+
+    body {
+        background-color: #f3f4f6;
+    }
+
+    .shipment-header {
+
+        color: white;
+        padding: 15px;
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    .shipment-card {
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    .icon-large {
+        font-size: 1.5rem;
+        color: #4CAF50;
+    }
+
+    .address, .shipment-history {
+        background-color: #ffffff;
+        border-radius: 0.5rem;
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .list-group-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+    }
+
+    .badge-custom {
+        background-color: #28a745;
+        font-weight: bold;
+    }
+
+    .back-button {
+        margin: 10px 0;
+        color: #4CAF50;
+    }
+
+    h4 {
+        color: #343a40;
+    }
+
+
+</style>
+<button class="btn btn-light back-button" onclick="history.back()">
+    <i class="fas fa-arrow-left"></i> Quay lại
+</button>
+<div class="container mt-4">
+
+
+
+    <div class="card shipment-card">
+        <div class="shipment-header text-center">
+            <h3 class="text-dark">Chi tiết Vận Chuyển</h3>
+            <h4 class="text-dark">Mã Số Đơn Hàng: <span class="text-success">@Model.order_id</span></h4>
+            <h4 class="text-dark">Mã Vận Đơn: <span class="text-success">@Model.id</span></h4>
+        </div>
+        <hr class="my-2 shipment-divider">
+
+
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h4 class="text-success"><i class="fas fa-truck icon-large"></i> Nhà Vận Chuyển</h4>
+                    <p class="font-weight-bold">@Model.carrier_name</p>
+                    <img src="@Model.carrier_logo" alt="Logo của @Model.carrier_name" class="img-fluid mb-3" style="max-height: 100px;" />
+                    <p><strong>Dịch Vụ:</strong> @Model.service_name</p>
+                    <p><strong>Phí Dịch Vụ:</strong> @Model.service_fee.ToString("N0")đ</p>
+                    <p><strong>Phí Giao Hàng:</strong> @Model.delivery_fee.ToString("N0")đ</p>
+                    <p><strong>Tổng Phí:</strong> @Model.total_fee.ToString("N0")đ</p>
+                    <p><strong>Ước Tính Thời Gian Giao Hàng :</strong> @Model.expected_delivery_date</p>
+                    <span class="badge badge-custom">@Model.status_text</span>
+                    <p class="text-muted">@Model.status_desc</p>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="text-success"><i class="fas fa-box icon-large"></i> Thông Tin Kiện Hàng</h4>
+                    <p><strong>Tên Kiện Hàng:</strong> @Model.Parcel.name</p>
+                    <p><strong>Trọng Lượng:</strong> @Model.Parcel.weight kg</p>
+                    <p><strong>Kích Thước:</strong> @Model.Parcel.length x @Model.Parcel.width x @Model.Parcel.height cm</p>
+                    <p><strong>Trọng Lượng Tính Phí:</strong> @Model.Parcel.cweight kg</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6 address">
+            <h4 class="text-success"><i class="fas fa-paper-plane icon-large"></i> Địa Chỉ Gửi</h4>
+            <address>
+                <p><strong>Họ Tên:</strong> @Model.address_from.name</p>
+                <p><strong>Số Điện Thoại:</strong> @Model.address_from.phone</p>
+                <p><strong>Email:</strong> @Model.address_from.email</p>
+                <p><strong>Đường:</strong> @Model.address_from.street</p>
+                <p><strong>Quận/Huyện:</strong> @Model.address_from.district (@Model.address_from.district_code)</p>
+                <p><strong>Thành Phố:</strong> @Model.address_from.city (@Model.address_from.city_code)</p>
+                <p><strong>Phường/Xã:</strong> @Model.address_from.ward (@Model.address_from.ward_code)</p>
+            </address>
+        </div>
+        <div class="col-md-6 address">
+            <h4 class="text-success"><i class="fas fa-map-marker-alt icon-large"></i> Địa Chỉ Nhận</h4>
+            <address>
+                <p><strong>Họ Tên:</strong> @Model.address_to.name</p>
+                <p><strong>Số Điện Thoại:</strong> @Model.address_to.phone</p>
+                <p><strong>Email:</strong> @Model.address_to.email</p>
+                <p><strong>Đường:</strong> @Model.address_to.street</p>
+                <p><strong>Quận/Huyện:</strong> @Model.address_to.district (@Model.address_to.district_code)</p>
+                <p><strong>Thành Phố:</strong> @Model.address_to.city (@Model.address_to.city_code)</p>
+                <p><strong>Phường/Xã:</strong> @Model.address_to.ward (@Model.address_to.ward_code)</p>
+            </address>
+        </div>
+    </div>
+
+    <h4 class="text-success"><i class="fas fa-history icon-large"></i> Lịch Sử Vận Chuyển</h4>
+    <div class="shipment-history">
+        <ul class="list-group">
+            @foreach (var history in Model.history)
+            {
+                <li class="list-group-item">
+                    <strong>@history.status_text</strong>
+                    <span >@history.status_desc</span>
+
+                    <span class="text-muted">@history.updated_at.ToString("g")</span>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

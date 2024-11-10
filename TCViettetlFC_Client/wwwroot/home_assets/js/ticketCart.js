@@ -109,51 +109,53 @@ function checkOutSelectedTickets() {
     const customerId = document.getElementById('cusId').value;
     const orderDate = new Date().toISOString();
 
-    const orderedTickets = selectedTickets.map(ticket => ({
-        matchId: ticket.matchId,
-        areaId: ticket.areaId,
-        price: ticket.price,
-        status: 0,
-        orderId: 0
-    }));
-
-    const orderedSuppItems = selectedTickets.flatMap(ticket =>
-        (ticket.supplementaryItems || []).map(item => ({
-            orderId: 0,
-            itemId: item.itemId,
-            quantity: item.itemQuantity,
-            price: item.itemPrice
-        }))
-    );
-
     const payload = {
-        addCustomerDto: null,
-        orderDate: orderDate,
-        totalAmount: totalBill,
-        customerId: customerId,
-        orderedTickets: orderedTickets,
-        orderedSuppItems: orderedSuppItems
+        CustomerId: customerId,
+        OrderDate: orderDate,
+        TotalAmount: totalBill,
+        OrderedTickets: selectedTickets.map(ticket => ({
+            MatchId: ticket.matchId,
+            AreaId: ticket.areaId,
+            Price: ticket.price,
+            Status: 0,
+            OrderId: 0
+        })),
+        OrderedSuppItems: selectedTickets.flatMap(ticket =>
+            (ticket.supplementaryItems || []).map(item => ({
+                OrderId: 0,
+                ItemId: item.itemId,
+                Quantity: item.itemQuantity,
+                Price: item.itemPrice
+            }))
+        )
     };
 
-    $.ajax({
-        url: `https://localhost:5000/api/TicketOrder?customerId=${customerId}`,
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(payload),
-        success: function (response) {
-            alert("Thanh toán thành công! Đơn hàng của bạn đã được xử lý.");
-
-            const tickets = JSON.parse(localStorage.getItem('cart')) || [];
-            const remainingTickets = tickets.filter((_, index) => !selectedIndexes.includes(index));
-
-            localStorage.setItem('cart', JSON.stringify(remainingTickets));
-            displayTickets();
+    // Send the payload to the controller
+    fetch('/CartTicket/Checkout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
         },
-        error: function (xhr, status, error) {
+        body: JSON.stringify(payload)
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                // Update cart after successful checkout
+                const tickets = JSON.parse(localStorage.getItem('cart')) || [];
+                const remainingTickets = tickets.filter((_, index) => !selectedIndexes.includes(index));
+                localStorage.setItem('cart', JSON.stringify(remainingTickets));
+                displayTickets();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
             console.error("Lỗi khi thanh toán:", error);
             alert("Có lỗi xảy ra trong quá trình thanh toán. Vui lòng thử lại.");
-        }
-    });
+        });
 }
+
 
 document.addEventListener('DOMContentLoaded', displayTickets);

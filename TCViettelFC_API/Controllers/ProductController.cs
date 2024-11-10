@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using TCViettelFC_API.Dtos.Category;
 using TCViettelFC_API.Dtos.Product;
 using TCViettelFC_API.Models;
@@ -36,13 +37,13 @@ namespace TCViettelFC_API.Controllers
            
 
         }
-
-        [HttpGet("GetSanPham")]
-        public async Task<ActionResult<List<ProductResponse>>> GetSanPham()
+		[EnableQuery]
+		[HttpGet("GetSanPham")]
+        public async Task<ActionResult<List<ProductResponse>>> GetSanPham(int cid)
         {
             try
             {
-                var product = await _product.GetSanPhamAsync();
+				List<ProductResponse> product = await _product.GetSanPhamAsync(cid);
                 return Ok(product);
             }
             catch (Exception ex)

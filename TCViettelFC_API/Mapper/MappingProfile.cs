@@ -1,6 +1,7 @@
 ﻿using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Models;
 using AutoMapper;
+using TCViettelFC_API.Dtos.Order;
 namespace TCViettelFC_API.Mapper
 {
     public class MappingProfile : AutoMapper.Profile

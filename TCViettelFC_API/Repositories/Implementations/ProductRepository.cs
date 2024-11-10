@@ -140,27 +140,48 @@ namespace TCViettelFC_API.Repositories.Implementations
             return product;
         }
 
-        public async Task<List<ProductResponse>> GetSanPhamAsync()
+        public async Task<List<ProductResponse>> GetSanPhamAsync(int cid)
         {
             _context.Database.ExecuteSqlRaw("EXEC UpdateDiscountStatus");
-
-            List<ProductResponse> product = new List<ProductResponse>();
-            product = (from pro in _context.Products
-                       join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
-                       from dis in discout.DefaultIfEmpty()
-                       where pro.Status == 1 
-                       select new ProductResponse
-                       {
-                           ProductName = pro.ProductName,
-                           Image = pro.Avatar,
-                           Price = pro.Price,
-                           discoutPercent= dis!= null && dis.Status == 1 ? dis.DiscountPercent : null ,
-                           ProductId = pro.ProductId,
-                           Status = pro.Status,
-                       }).ToList();
+			List<ProductResponse> product = new List<ProductResponse>();
 
 
-            return product;
+			if (cid == 0)
+            {
+                product = (from pro in _context.Products
+                           join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
+                           from dis in discout.DefaultIfEmpty()
+                           where pro.Status == 1
+                           select new ProductResponse
+                           {
+                               ProductName = pro.ProductName,
+                               Image = pro.Avatar,
+                               Price = pro.Price,
+                               discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
+                               ProductId = pro.ProductId,
+                               Status = pro.Status,
+                           }).ToList();
+
+                return product;
+            }
+            else
+            {
+
+				product = (from pro in _context.Products
+						   join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
+						   from dis in discout.DefaultIfEmpty()
+						   where pro.Status == 1 &&  pro.CategoryId == cid
+						   select new ProductResponse
+						   {
+							   ProductName = pro.ProductName,
+							   Image = pro.Avatar,
+							   Price = pro.Price,
+							   discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
+							   ProductId = pro.ProductId,
+							   Status = pro.Status,
+						   }).ToList();
+				return product;
+			}
         }
         public async Task<JsonResult> GetProductByIdAsync(int id)
         {
@@ -194,7 +215,8 @@ namespace TCViettelFC_API.Repositories.Implementations
             var data = new
             {
                 Product = product,
-                PFile = proFile
+                PFile = proFile,
+              
             };
 
             return new JsonResult(data);
@@ -339,11 +361,14 @@ namespace TCViettelFC_API.Repositories.Implementations
             List<ProductCategory> cate = _context.ProductCategories.Where(x => x.Status == 1).ToList();
          
             //lấy mùa giải
-            List<Season> season = _context.Seasons.Where(x => x.Status ==1 ).ToList();
+            List<Season> season = _context.Seasons.Where(x => x.Status == 1 ).ToList();
+            List<Discount> Discount = _context.Discounts.Where(x => x.Status == 1).ToList();
+
             var data = new
             {
                 Cate = cate,
-                Season = season
+                Season = season,
+                Dis = Discount
             };
 
             return new JsonResult(data);

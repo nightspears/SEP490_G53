@@ -358,6 +358,7 @@ function fillDataModal() {
         method: "GET",
         success: function (res) {
             debugger
+            // fill data vào mùa giải
             $('#muaGiai').empty();
             $('#muaGiai').append($('<option>', {
                 value: 0,
@@ -369,6 +370,7 @@ function fillDataModal() {
                     text: season.seasonName
                 }));
             });
+            // fill data vào thể loại
 
             $('#theLoai').empty();
             $('#theLoai').append($('<option>', {
@@ -379,6 +381,22 @@ function fillDataModal() {
                 $('#theLoai').append($('<option>', {
                     value: cate.categoryId,
                     text: cate.categoryName
+                }));
+            });
+
+
+            // fill data vào mã giảm giá
+
+            $('#maGiamGia').empty();
+            $('#maGiamGia').append($('<option>', {
+                value: 0,
+                text: "-- Chọn mã giảm giá --"
+            }));
+            debugger
+            $.each(res.dis, function (i, d) {
+                $('#maGiamGia').append($('<option>', {
+                    value: d.discountId,
+                    text: d.discountName + " - " + d.discountPercent +"%"
                 }));
             });
 

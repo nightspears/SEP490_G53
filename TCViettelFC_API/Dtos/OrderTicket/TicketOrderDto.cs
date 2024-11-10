@@ -13,7 +13,8 @@
 
         public List<OrderedSuppItemDto> OrderedSuppItems { get; set; } = new List<OrderedSuppItemDto>();
 
-      
+        // Payment details
+        public PaymentTicketDto? PaymentDto { get; set; }
 
     }
     public class OrderedTicketDto
@@ -49,5 +50,14 @@
         public string? FullName { get; set; }
 
         public int? Status { get; set; }
+    }
+
+    public class PaymentTicketDto
+    {
+        public int? OrderTicketId { get; set; }
+        public int? OrderProductId { get; set; }
+        public decimal? TotalAmount { get; set; }
+        public string? PaymentGateway { get; set; } // e.g., "Credit Card", "PayPal"
+        public int? Status { get; set; } // e.g., 0 for "Pending", 1 for "Completed"
     }
 }

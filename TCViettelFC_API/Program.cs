@@ -64,6 +64,7 @@ builder.Services.AddDbContext<Sep490G53Context>(options => options.UseSqlServer(
 
 builder.Services.AddScoped<IHelloWorldRepository, HelloWorldRepository>();
 builder.Services.AddScoped<INewRepository, NewRepository>();
+builder.Services.AddScoped<ITicketOrderRepository, TicketOrderRepository>();
 builder.Services.AddScoped<ICategoryNewRepository, CategoryNewRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
@@ -76,8 +77,6 @@ builder.Services.AddScoped<ISeasonRepository, SeasonRepository>();
 builder.Services.AddScoped<IDiscountRepository, DiscoutRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<ICheckoutRepository, CheckoutRepository>();
-builder.Services.AddScoped<ISupplementaryItemRepository, SupplementaryItemRepository>();
-builder.Services.AddScoped<ITicketOrderRepository, TicketOrderRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddAuthorization();

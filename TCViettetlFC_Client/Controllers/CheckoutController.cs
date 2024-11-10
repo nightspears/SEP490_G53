@@ -58,11 +58,11 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                         CreatedDate = DateTime.Now,
                         Decription = "Payment for order test",
                         FullName = model.FullName, // Replace with actual customer data
-                        OrderId = 222 // You may need to generate the OrderId dynamically
+                        OrderId = 1 // You may need to generate the OrderId dynamically
                     };
 
                     // Redirect to VnPay payment page
-                    var paymentUrl = _vnpayService.CreatePaymentUrl(HttpContext, vnPayModel);
+                    var paymentUrl = _vnpayService.CreatePaymentUrl(HttpContext, vnPayModel,false);
                     if (!string.IsNullOrEmpty(paymentUrl))
                     {
                         return Redirect(paymentUrl);
@@ -98,26 +98,34 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                         {
                             Customer = new CustomerDTO
                             {
+                                AccountId=checkoutModel.AccountId,
                                 Email = checkoutModel.Email, // Add actual email field if exists
-                                Phone = checkoutModel.Phone // Add actual phone field if exists
+                                Phone = checkoutModel.Phone,// Add actual phone field if exists
+                                FullName = checkoutModel.FullName
                             },
                             Address = new AddressDTO
                             {
                                 City = checkoutModel.CityId,
+                                CityName = checkoutModel.CityName,
                                 District = checkoutModel.DistrictId,
+                                DistrictName = checkoutModel.DistrictName,
                                 Ward = checkoutModel.WardId,
+                                WardName = checkoutModel.WardName,
                                 DetailedAddress = checkoutModel.Address
                             },
                             OrderProduct = new OrderProductDTO
                             {
                                 OrderCode = checkoutModel.SelectedShipping, // Use the actual order code
                                 OrderDate = DateTime.Now,
+                                ShipmentFee = checkoutModel.ShipmentFee,
                                 TotalPrice = checkoutModel.TotalAmount
                             },
                             OrderProductDetails = checkoutModel.checkoutItems.Select(item => new OrderProductDetailDTO
                             {
                                 ProductId = item.ProductId,
-                                PlayerId = item.playerId == 0 ? null : item.playerId,
+                                PlayerId = item.shirtNumber <= 0 ? null : item.shirtNumber,
+                                CustomShirtNumber = item.SoAo,
+                                CustomShirtName = item.TenCauThu,
                                 Size = item.size,
                                 Quantity = item.Quantity,
                                 Price = item.Price
@@ -143,7 +151,8 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                     }
                     catch(Exception ex)
                     {
-                        throw ex;
+                        Console.WriteLine($"An error occurred: {ex.Message}");
+                        throw;
                     }
                 }
                 else if (response.VnPayResponseCode == "24") // VnPay response code for "Transaction cancelled by user"

@@ -7,6 +7,7 @@
     /* Custom CSS */
     .category ul li{
         height:50px ;
+		line-height:50px;
     }
 
     .category ul li:hover {
@@ -19,8 +20,16 @@
            color:white ;
         }
 
+	.category_product.active {
+		background-color: #e86565;
+		border-radius: 10px;
+	}
+
+	.category_product.active a{
+		color:white ;
+	}
     .category ul li a{
-       font-size:20px ;
+       font-size:19px ;
        color:black;
        margin-left:10px;
     }
@@ -61,23 +70,15 @@
             <div class="filter-section">
                 <div class="mb-3">
                     <label for="search" class="form-label" style="font-size:25px;font-weight:600">Tìm kiếm</label>
-                    <input type="text" id="search" class="form-control" placeholder="Tìm kiếm sản phẩm...">
+					<input type="text" onchange="toggleFilter(this)" id="search" class="form-control" placeholder="Tìm kiếm tên sản phẩm...">
                 </div>
 
                 
                 <div class="mb-3" style="padding:10px 0">
                     <label for="category" class="form-label" style="font-size:25px;font-weight:600">Danh mục</label>
                     <div class="category">
-                        <ul>
-                            <li>
-                                <a>Áo đá bóng</a>
-                            </li>
-                            <li>
-                                <a>Giaỳ đá bóng</a>
-                            </li>
-                            <li>
-                                <a>Phụ kiện thể thao</a>
-                            </li>
+                        <ul id="lstCate">
+                           
                         </ul>
                        
                     </div>
@@ -89,11 +90,12 @@
 							Giá sản phẩm
 						</div>
 						<div class="aside-content filter-group">
+							<input type="hidden" style="display :none" id="idCategory" value="0"  />
 							<ul>
 								<li class="filter-item filter-item--check-box filter-item--green">
 									<span>
 										<label for="filter-duoi-100-000d">
-											<input type="checkbox" id="filter-duoi-100-000d" onchange="toggleFilter(this);" data-group="Khoảng giá" data-field="price_min" data-text="Dưới 100.000đ" value="(<100000)" data-operator="OR">
+											<input type="checkbox" class="filter-checkbox" id="filter-duoi-100-000d" onchange="toggleFilter(this);" data-text="Dưới 100.000đ" value="Price lt 100000" data-operator="OR">
 											<i class="fa"></i>
 											Giá dưới 100.000đ
 										</label>
@@ -102,7 +104,7 @@
 								<li class="filter-item filter-item--check-box filter-item--green">
 									<span>
 										<label for="filter-100-000d-200-000d">
-											<input type="checkbox" id="filter-100-000d-200-000d" onchange="toggleFilter(this)" data-group="Khoảng giá" data-field="price_min" data-text="100.000đ - 200.000đ" value="(>=100000 AND <=200000)" data-operator="OR">
+											<input type="checkbox" class="filter-checkbox" id="filter-100-000d-200-000d" onchange="toggleFilter(this)"  data-text="100.000đ - 200.000đ" value="Price ge 100000 and Price le 200000" data-operator="OR">
 											<i class="fa"></i>
 											100.000đ - 200.000đ
 										</label>
@@ -111,7 +113,7 @@
 								<li class="filter-item filter-item--check-box filter-item--green">
 									<span>
 										<label for="filter-200-000d-300-000d">
-											<input type="checkbox" id="filter-200-000d-300-000d" onchange="toggleFilter(this)" data-group="Khoảng giá" data-field="price_min" data-text="200.000đ - 300.000đ" value="(>=200000 AND <=300000)" data-operator="OR">
+											<input type="checkbox" class="filter-checkbox" id="filter-200-000d-300-000d" onchange="toggleFilter(this)"  data-text="200.000đ - 300.000đ" value="Price ge 200000 and Price le 300000" data-operator="OR">
 											<i class="fa"></i>
 											200.000đ - 300.000đ
 										</label>
@@ -121,7 +123,7 @@
 								<li class="filter-item filter-item--check-box filter-item--green">
 									<span>
 										<label for="filter-300-000d-500-000d">
-											<input type="checkbox" id="filter-300-000d-500-000d" onchange="toggleFilter(this)" data-group="Khoảng giá" data-field="price_min" data-text="300.000đ - 500.000đ" value="(>=300000 AND <=500000)" data-operator="OR">
+											<input type="checkbox" class="filter-checkbox" id="filter-300-000d-500-000d" onchange="toggleFilter(this)"  data-text="300.000đ - 500.000đ" value="Price ge 300000 and Price le 500000" data-operator="OR">
 											<i class="fa"></i>
 											300.000đ - 500.000đ
 										</label>
@@ -131,7 +133,7 @@
 								<li class="filter-item filter-item--check-box filter-item--green">
 									<span>
 										<label for="filter-500-000d-1-000-000d">
-											<input type="checkbox" id="filter-500-000d-1-000-000d" onchange="toggleFilter(this)" data-group="Khoảng giá" data-field="price_min" data-text="500.000đ - 1.000.000đ" value="(>=500000 AND <=1000000)" data-operator="OR">
+											<input type="checkbox" class="filter-checkbox" id="filter-500-000d-1-000-000d" onchange="toggleFilter(this)"  data-text="500.000đ - 1.000.000đ" value="Price ge 500000 and Price le 1000000" data-operator="OR">
 											<i class="fa"></i>
 											500.000đ - 1.000.000đ
 										</label>
@@ -140,7 +142,7 @@
 								<li class="filter-item filter-item--check-box filter-item--green">
 									<span>
 										<label for="filter-tren1-000-000d">
-											<input type="checkbox" id="filter-tren1-000-000d" onchange="toggleFilter(this)" data-group="Khoảng giá" data-field="price_min" data-text="Trên 1.000.000đ" value="(>1000000)" data-operator="OR">
+											<input type="checkbox" class="filter-checkbox" id="filter-tren1-000-000d" onchange="toggleFilter(this)"  data-text="Trên 1.000.000đ" value="Price gt 1000000" data-operator="OR">
 											<i class="fa"></i>
 											Giá trên 1.000.000đ
 										</label>
@@ -163,16 +165,15 @@
 								<li class="filter-item filter-item--check-box filter-item--green">
 									<span>
 										<label for="sort-hangMoi">
-											<input type="radio" id="sort-hangMoi" class="SortProduct" name="sortOption">
-
-											Hàng mới
+											<input type="radio" id="sort-hangMoi" onchange="toggleFilter(this)" class="SortProduct" value="&$filter=discoutPercent ne null" name="sortOption">
+											Hàng giảm giá
 										</label>
 									</span>
 								</li>
 								<li class="filter-item filter-item--check-box filter-item--green">
 									<span>
 										<label for="sort-TenAZ">
-											<input type="radio" id="sort-TenAZ" class="SortProduct" name="sortOption">
+											<input type="radio" id="sort-TenAZ" onchange="toggleFilter(this)" class="SortProduct" value="&$orderby=ProductName asc" name="sortOption">
 											Tên A-Z
 										</label>
 									</span>
@@ -180,7 +181,7 @@
 								<li class="filter-item filter-item--check-box filter-item--green">
 									<span>
 										<label for="sort-TenZA">
-											<input type="radio" id="sort-TenAZ" class="SortProduct" name="sortOption">
+											<input type="radio" id="sort-TenAZ" onchange="toggleFilter(this)" class="SortProduct" value="&$orderby=ProductName desc" name="sortOption">
 										
 											Tên Z-A
 										</label>
@@ -189,7 +190,7 @@
 								<li class="filter-item filter-item--check-box filter-item--green">
 									<span>
 										<label for="sort-giaThapCao">
-											<input type="radio" id="sort-giaThapCao" class="SortProduct" name="sortOption">
+											<input type="radio" id="sort-giaThapCao" onchange="toggleFilter(this)" class="SortProduct" value="&$orderby=Price asc" name="sortOption">
 											
 											Giá thấp đến cao
 										</label>
@@ -198,20 +199,17 @@
 								<li class="filter-item filter-item--check-box filter-item--green">
 									<span>
 										<label for="sort-giaCaoThap">
-											<input type="radio" id="sort-giaCaoThap" class="SortProduct" name="sortOption">
+											<input type="radio" id="sort-giaCaoThap" onchange="toggleFilter(this)" class="SortProduct" value="&$orderby=Price desc" name="sortOption">
 											
 											Giá cao đến thấp
 										</label>
 									</span>
 								</li>
-								
 							
-
 							</ul>
 						</div>
 					</aside>
 				</div>
-                <button class="btn btn-primary w-100" style="margin-top :10px">Áp dụng</button>
             </div>
         </div>
 
@@ -219,6 +217,10 @@
         <div class="col-md-9 d-flex flex-wrap" id="lstSanPham">
 
         </div>
+
+
+
+
     </div>
 </div>
 
