@@ -1,16 +1,6 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net;
-using System.Security.Claims;
-using System.Text;
-using TCViettelFC_API.Dtos.Category;
-using TCViettelFC_API.Dtos.Matches;
 using TCViettelFC_API.Dtos.Product;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -66,7 +56,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                             ProductFile ProductFile = new ProductFile();
                             {
                                 ProductFile.FileName = f.File.FileName;
-                               //  sửa lại db trường filepath cho đọ dài lên 255
+                                //  sửa lại db trường filepath cho đọ dài lên 255
                                 if (f.File != null && f.File.Length > 0)
                                 {
                                     ImageUploadResult res = _cloudinary.CloudinaryUpload(f.File);
@@ -84,8 +74,8 @@ namespace TCViettelFC_API.Repositories.Implementations
                             }
                         }
                     }
-                    
-                  
+
+
                     dbContextTransaction.Commit();
                 }
                 catch (Exception ex)
@@ -143,10 +133,10 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<List<ProductResponse>> GetSanPhamAsync(int cid)
         {
             _context.Database.ExecuteSqlRaw("EXEC UpdateDiscountStatus");
-			List<ProductResponse> product = new List<ProductResponse>();
+            List<ProductResponse> product = new List<ProductResponse>();
 
 
-			if (cid == 0)
+            if (cid == 0)
             {
                 product = (from pro in _context.Products
                            join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
@@ -167,21 +157,21 @@ namespace TCViettelFC_API.Repositories.Implementations
             else
             {
 
-				product = (from pro in _context.Products
-						   join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
-						   from dis in discout.DefaultIfEmpty()
-						   where pro.Status == 1 &&  pro.CategoryId == cid
-						   select new ProductResponse
-						   {
-							   ProductName = pro.ProductName,
-							   Image = pro.Avatar,
-							   Price = pro.Price,
-							   discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
-							   ProductId = pro.ProductId,
-							   Status = pro.Status,
-						   }).ToList();
-				return product;
-			}
+                product = (from pro in _context.Products
+                           join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
+                           from dis in discout.DefaultIfEmpty()
+                           where pro.Status == 1 && pro.CategoryId == cid
+                           select new ProductResponse
+                           {
+                               ProductName = pro.ProductName,
+                               Image = pro.Avatar,
+                               Price = pro.Price,
+                               discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
+                               ProductId = pro.ProductId,
+                               Status = pro.Status,
+                           }).ToList();
+                return product;
+            }
         }
         public async Task<JsonResult> GetProductByIdAsync(int id)
         {
@@ -203,7 +193,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                                ProductId = pro.ProductId,
                                Status = pro.Status,
                                discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
-                               Size = pro.Size ,
+                               Size = pro.Size,
                                Material = pro.Material,
                                Description = pro.Description
 
@@ -216,7 +206,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 Product = product,
                 PFile = proFile,
-              
+
             };
 
             return new JsonResult(data);
@@ -255,8 +245,8 @@ namespace TCViettelFC_API.Repositories.Implementations
 
             var lstLienQuan = _context.Products.Include(p => p.Discount)
                 .Where(x => x.CategoryId == product.CategoryId && x.ProductId != id && x.Status == 1)
-                .Select( v => new ProductResponse
-            {
+                .Select(v => new ProductResponse
+                {
                     ProductName = v.ProductName,
                     Image = v.Avatar,
                     Price = v.Price,
@@ -359,9 +349,9 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             //lấy cate 
             List<ProductCategory> cate = _context.ProductCategories.Where(x => x.Status == 1).ToList();
-         
+
             //lấy mùa giải
-            List<Season> season = _context.Seasons.Where(x => x.Status == 1 ).ToList();
+            List<Season> season = _context.Seasons.Where(x => x.Status == 1).ToList();
             List<Discount> Discount = _context.Discounts.Where(x => x.Status == 1).ToList();
 
             var data = new
@@ -378,18 +368,19 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             List<ProductResponse> products = new List<ProductResponse>();
 
-            if (lstID.Count > 0) {
-                 products = _context.Products.Include(z => z.Discount).Where(x => !lstID.Contains(x.ProductId) && x.Status == 1).Select(x => new ProductResponse
-                 {
-                     ProductId = x.ProductId,
-                     ProductName = x.ProductName,
-                     Price = x.Price,
-                     discoutPercent = x.Discount != null && x.Discount.Status ==1 ? x.Discount.DiscountPercent : null ,
-                     Size = x.Size,
-                     Image = x.Avatar,
-                     Status = x.Status,
+            if (lstID.Count > 0)
+            {
+                products = _context.Products.Include(z => z.Discount).Where(x => !lstID.Contains(x.ProductId) && x.Status == 1).Select(x => new ProductResponse
+                {
+                    ProductId = x.ProductId,
+                    ProductName = x.ProductName,
+                    Price = x.Price,
+                    discoutPercent = x.Discount != null && x.Discount.Status == 1 ? x.Discount.DiscountPercent : null,
+                    Size = x.Size,
+                    Image = x.Avatar,
+                    Status = x.Status,
 
-                 }).ToList();
+                }).ToList();
             }
             else
             {
@@ -405,7 +396,7 @@ namespace TCViettelFC_API.Repositories.Implementations
 
                 }).ToList();
             }
-           
+
             var data = new
             {
                 Products = products,

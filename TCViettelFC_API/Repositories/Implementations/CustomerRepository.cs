@@ -95,6 +95,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 Subject = new ClaimsIdentity(new[]
                 {
                 new Claim("CustomerId", customer.CustomerId.ToString()),
+                new Claim("CustomerEmail", customer.Email.ToString()),
             }),
                 Expires = DateTime.UtcNow.AddHours(6),
                 Audience = audience,

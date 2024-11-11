@@ -46,14 +46,12 @@ $(document).on("click", "#btnXoa", function () {
 });
 
 function loadData() {
-    debugger
-
     $.ajax({
         url: "https://localhost:5000/api/Matches/GetMatches",
         method: "GET",
         dataType: "json",
         success: function (res) {
-            debugger
+           
             var table = $('.datatable').DataTable();
 
             table.clear();
@@ -195,7 +193,7 @@ function modalEditOrCreate(id) {
 
         $("#titleModal").text("Thêm trận đấu")
 
-        $("#ImgAvt").attr("src", "/image/imagelogo/plus.jpg")
+        $("#ImgAvt").attr("src", "/image/imagelogo/oip.jpg")
         $("#tenCLB").text("Tên đối thủ")
         $('#idTran').hide()
       

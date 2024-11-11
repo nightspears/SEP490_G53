@@ -15,6 +15,8 @@ public partial class OrderedSuppItem
 
     public decimal? Price { get; set; }
 
+    public int? Status { get; set; }
+
     public virtual SupplementaryItem? Item { get; set; }
 
     public virtual TicketOrder? Order { get; set; }
