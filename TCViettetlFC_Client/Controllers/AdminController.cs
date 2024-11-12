@@ -15,18 +15,48 @@ namespace TCViettetlFC_Client.Controllers
             _httpClient = httpClientFactory.CreateClient("ApiClient");
             _userService = userService;
         }
-
-        public IActionResult Home()
+        private async Task<string> GetTotalCustomerAsync()
         {
-            var token = Request.Cookies["AuthToken"]; // Change this to AuthToken
-            var roleId = Request.Cookies["RoleId"]; // Keep this for role verification
+            var response = await _httpClient.GetAsync("admin/totalcustomer");
+            var content = await response.Content.ReadAsStringAsync();
+            return content;
+        }
 
-            // Check if token is missing or if roleId doesn't match
+        private async Task<string> GetTotalTicketRevenueAsync()
+        {
+            var response = await _httpClient.GetAsync("admin/totalticketrevenue");
+            var content = await response.Content.ReadAsStringAsync();
+            return content;
+        }
+
+        private async Task<string> GetTotalProductRevenueAsync()
+        {
+            var response = await _httpClient.GetAsync("admin/totalproductrevenue");
+            var content = await response.Content.ReadAsStringAsync();
+            return content;
+        }
+
+        private async Task<string> GetTotalSoldTicketsAsync()
+        {
+            var response = await _httpClient.GetAsync("admin/totalsoldtickets");
+            var content = await response.Content.ReadAsStringAsync();
+            return content;
+        }
+        public async Task<IActionResult> Home()
+        {
+            var token = Request.Cookies["AuthToken"];
+            var roleId = Request.Cookies["RoleId"];
             if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(roleId) || roleId != "2")
             {
                 return RedirectToAction("Login", "User");
             }
+            ViewBag.TotalCustomer = await GetTotalCustomerAsync();
+            ViewBag.TotalTicketRevenue = await GetTotalTicketRevenueAsync();
+            ViewBag.TotalProductRevenue = await GetTotalProductRevenueAsync();
+            ViewBag.TotalSoldTickets = await GetTotalSoldTicketsAsync();
+
             return View();
+
 
         }
 

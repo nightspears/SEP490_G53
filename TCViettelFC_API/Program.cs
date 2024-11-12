@@ -21,7 +21,7 @@ builder.Services.AddControllers().AddOData(option => option.Select().Filter().Co
             .AddRouteComponents("odata", GetEdmModel()));
 
 
- static IEdmModel GetEdmModel()
+static IEdmModel GetEdmModel()
 {
     ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
     builder.EntitySet<News>("NewsOdata");
@@ -115,6 +115,7 @@ builder.Services.AddAuthorization(options =>
     // Policy cho staff
     options.AddPolicy("staff", policy =>
         policy.RequireClaim("RoleId", "1"));
+
     options.AddPolicy("entry", policy =>
       policy.RequireClaim("RoleId", "3"));
 });

@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using TCViettelFC_Client.ApiServices;
@@ -9,13 +10,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddHttpClient("ApiClient")
-    .ConfigureHttpClient(options =>
-    {
-        options.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
-        options.DefaultRequestHeaders.Add("Accept", "application/json");
+builder.Services.AddHttpClient("ApiClient", (serviceProvider, options) =>
+{
+    options.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
+    var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+    var token = httpContextAccessor.HttpContext?.Request.Cookies["AuthToken"];
 
-    });
+    if (!string.IsNullOrEmpty(token))
+    {
+        options.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+    }
+});
 // Register UserService with the configured HttpClient
 builder.Services.AddHttpClient<UserService>(client =>
 {

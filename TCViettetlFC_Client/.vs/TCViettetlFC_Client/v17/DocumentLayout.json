@@ -3,20 +3,36 @@
   "WorkspaceRootPath": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\area\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\area\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\admin\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\admin\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\areacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\areacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\supplementaryiteamviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\supplementaryiteamviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\supplementaryiteamviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\supplementaryiteamviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\apiservices\\apihelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:apiservices\\apihelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\area\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\area\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\areacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\areacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\entrycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -362,20 +378,72 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
+              "Title": "ApiHelper.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\ApiServices\\ApiHelper.cs",
+              "RelativeDocumentMoniker": "ApiServices\\ApiHelper.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\ApiServices\\ApiHelper.cs",
+              "RelativeToolTip": "ApiServices\\ApiHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-12T16:41:09.425Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-12T16:27:25.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Controllers\\AdminController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-12T16:17:23.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Home.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\Home.cshtml",
+              "RelativeDocumentMoniker": "Views\\Admin\\Home.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\Home.cshtml",
+              "RelativeToolTip": "Views\\Admin\\Home.cshtml",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAEUAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-12T13:32:03.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-08T05:49:09.55Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "VerifyItem.cshtml",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\VerifyItem.cshtml",
               "RelativeDocumentMoniker": "Views\\Entry\\VerifyItem.cshtml",
@@ -387,7 +455,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "EntryController.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\EntryController.cs",
               "RelativeDocumentMoniker": "Controllers\\EntryController.cs",
@@ -399,20 +467,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Area\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Area\\Index.cshtml",
               "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Area\\Index.cshtml",
               "RelativeToolTip": "Views\\Area\\Index.cshtml",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAAAE4AAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAAAE4AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-23T20:39:56.84Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "SupplementaryIteamViewModel.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\SupplementaryIteamViewModel.cs",
               "RelativeDocumentMoniker": "Models\\SupplementaryIteamViewModel.cs",
@@ -420,11 +488,12 @@
               "RelativeToolTip": "Models\\SupplementaryIteamViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T20:17:23.035Z"
+              "WhenOpened": "2024-10-23T20:17:23.035Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "AreaController.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\AreaController.cs",
               "RelativeDocumentMoniker": "Controllers\\AreaController.cs",
@@ -432,8 +501,7 @@
               "RelativeToolTip": "Controllers\\AreaController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T18:55:04.088Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-23T18:55:04.088Z"
             }
           ]
         },

@@ -11,11 +11,13 @@ namespace TCViettelFC_API.Controllers
     public class AdminController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+        private readonly IAdminDashboardRepository _adRepo;
         private readonly IMapper _mapper;
-        public AdminController(IUserRepository userRepository, IMapper mapper)
+        public AdminController(IUserRepository userRepository, IMapper mapper, IAdminDashboardRepository adRepo)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _adRepo = adRepo;
         }
 
         [Authorize(Policy = "admin")]
@@ -108,6 +110,38 @@ namespace TCViettelFC_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Delete failed: " + ex.Message);
             }
         }
+        [Authorize(Policy = "admin")]
+        [HttpGet("totalcustomer")]
+        public async Task<IActionResult> GetTotalCustomer()
+        {
+            var result = await _adRepo.GetTotalCustomer();
+            return Ok(result);
+        }
+        [Authorize(Policy = "admin")]
+        [HttpGet("totalticketrevenue")]
+        public async Task<IActionResult> GetTotalTicketRevenue()
+        {
+            var result = await _adRepo.GetTotalTicketRevenue();
+            return Ok(result);
+        }
+
+        [Authorize(Policy = "admin")]
+        [HttpGet("totalproductrevenue")]
+        public async Task<IActionResult> GetTotalProductRevenue()
+        {
+            var result = await _adRepo.GetTotalProductRevenue();
+            return Ok(result);
+        }
+
+        [Authorize(Policy = "admin")]
+        [HttpGet("totalsoldtickets")]
+        public async Task<IActionResult> GetTotalSoldTickets()
+        {
+            var result = await _adRepo.GetTotalSoldTickets();
+            return Ok(result);
+        }
+
+
 
     }
 }
