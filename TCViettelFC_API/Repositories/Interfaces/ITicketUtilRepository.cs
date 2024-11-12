@@ -1,4 +1,5 @@
 ﻿using TCViettelFC_API.Dtos;
+using TCViettelFC_API.Dtos.CheckOut;
 using TCViettelFC_API.Models;
 
 namespace TCViettelFC_API.Repositories.Interfaces
@@ -11,7 +12,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<List<OrderedSuppItem>> GetOrderedSuppByOrderId(int orderId);
         Task<OrderedTicket> GetOrderedTicketByIdAsync(int orderId);
         Task<List<VerifySupDto>> VerifyItemAsync(List<OrderedSuppItem> item);
-
+        Task SendOrderConfirmationEmailAsync(CreateOrderRequest request);
 
     }
 }

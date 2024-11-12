@@ -20,7 +20,7 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
         }
 
         public IActionResult Index(string data)
-            {
+           {
                 var checkoutModel = new CheckoutModel();
                 checkoutModel.checkoutItems = new List<CheckoutCartModel>();
                 decimal totalPrice = 0;
@@ -128,7 +128,9 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                                 CustomShirtName = item.TenCauThu,
                                 Size = item.size,
                                 Quantity = item.Quantity,
-                                Price = item.Price
+                                Price = item.Price,
+                                ProductName = item.nameProduct,
+                                Avatar = item.Avartar
                             }).ToList(),
                             Payment = new PaymentDTO
                             {
@@ -142,11 +144,8 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
 
                         // Handle the result (e.g., log it, show success message, etc.)
                         // Redirect or display a view accordingly
-                        return View("PaymentCallBack", new PaymentSuccessViewModel
-                        {
-                            CheckoutModel = checkoutModel,
-                            VnPayResponse = response,
-                        });
+                        return View("PaymentCallBack", model: result);
+                       
 
                     }
                     catch(Exception ex)

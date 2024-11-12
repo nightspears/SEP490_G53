@@ -176,12 +176,14 @@
                     <script>
                         function buyNow() {
                             const productId = document.getElementById('idProduct').value;
-                            const size = document.getElementById('sizeSp').value || 'Default size';
+                            const size = document.getElementById('sizeSp').value || 'X';
                             const quantity = 1; // Assuming default quantity is 1, you can modify as needed
                             const price = parseFloat(document.getElementById('giaSP').dataset.price);
-                            const shirtNumber = document.getElementById('shirtNumber').value ;
-                            const TenCauThu = document.getElementById('nameAoCustom').value ;
-                            const SoAo = document.getElementById('SoAoCustom').value ;
+
+                            // Use optional chaining and default values for nullable fields
+                            const shirtNumber = document.getElementById('shirtNumber')?.value || null;
+                            const TenCauThu = document.getElementById('nameAoCustom')?.value || null;
+                            const SoAo = document.getElementById('SoAoCustom')?.value || null;
                             const productName = document.getElementById('TenSP').textContent; // Assuming you have an element with the product name
                             const productImage = document.getElementById('productImage').src; // Assuming you have an <img> element for the product image
 

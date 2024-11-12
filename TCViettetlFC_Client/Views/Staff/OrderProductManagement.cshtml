@@ -331,6 +331,16 @@
 
 
 
+    <script>
+        window.addEventListener("pageshow", function (event) {
+            var historyTraversal = event.persisted ||
+                (typeof window.performance != "undefined" &&
+                    window.performance.navigation.type === 2);
+            if (historyTraversal) {
+                // Handle page restore.
+                window.location.reload();
+            }
+        });</script>
     <script src="~/assets/js/jquery-3.6.0.min.js"></script>
 
     <script src="~/assets/js/bootstrap.bundle.min.js"></script>

@@ -3,9 +3,14 @@ using CloudinaryDotNet.Actions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using QRCoder;
+using System.Net.Mail;
+using System.Net;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
+using TCViettelFC_API.Dtos.CheckOut;
+using static System.Net.Mime.MediaTypeNames;
+using System.Globalization;
 
 namespace TCViettelFC_API.Repositories.Implementations
 {
@@ -166,6 +171,226 @@ width:300px;
             }
             return res;
 
+        }
+        public async Task SendOrderConfirmationEmailAsync(CreateOrderRequest request)
+        {
+            // Extract relevant details from the request
+            string customerName = request.Customer.FullName ?? "Customer";
+            string customerEmail = request.Customer.Email;
+            string customerPhone = request.Customer.Phone ?? "N/A";
+            string orderCode = request.OrderProduct.OrderCode;
+            DateTime orderDate = request.OrderProduct.OrderDate;
+            decimal totalAmount = request.Payment.TotalAmount;
+            decimal shipmentFee = request.OrderProduct.ShipmentFee ?? 0;
+
+            string shippingAddress = $"{request.Address.DetailedAddress}, " +
+                                      $"{request.Address.WardName}, {request.Address.DistrictName}, " +
+                                      $"{request.Address.CityName}";
+
+            // Generate product details in HTML format
+            string productDetails = "<ul style='list-style-type:none; padding: 0; margin: 0;'>";
+            foreach (var detail in request.OrderProductDetails)
+            {
+                decimal productTotalPrice = detail.Price * detail.Quantity;
+                string formattedPrice = detail.Price.ToString("C0", new CultureInfo("vi-VN"));
+                string formattedTotalPrice = productTotalPrice.ToString("C0", new CultureInfo("vi-VN"));
+
+                productDetails += $@"
+<li style='padding-bottom: 10px; display: flex; align-items: center;'>
+  <img src='{(!string.IsNullOrEmpty(detail.Avatar) ? detail.Avatar : "https://via.placeholder.com/50")}' 
+       alt='{detail.ProductName}' 
+       style='width: 50px; height: 50px; margin-right: 10px;'>
+  <div>
+    <p class='mb-0'>Tên Sản Phẩm: {detail.ProductName}</p>";
+
+                if (detail.PlayerId > 0)
+                {
+                    productDetails += $"<p class='mb-0'>Mã Code In Số Áo: {detail.PlayerId}</p>";
+                }
+
+                if (!string.IsNullOrEmpty(detail.CustomShirtNumber) && !string.IsNullOrEmpty(detail.CustomShirtName))
+                {
+                    productDetails += $@"
+<p class='mb-0'>Customer In Số Áo: {detail.CustomShirtName}</p>
+<p class='mb-0'>Customer In Tên Áo: {detail.CustomShirtNumber}</p>";
+                }
+
+                productDetails += $@"
+<p class='mb-0'>Kích Cỡ: {detail.Size}</p>
+<p class='mb-0'>Số lượng: {detail.Quantity}</p>
+<span>Đơn Giá: {formattedPrice}</span><br>                         
+<span>Tổng: {formattedPrice} x {detail.Quantity} = {formattedTotalPrice}</span>
+  </div>
+</li>";
+            }
+            productDetails += "</ul>";
+
+            // Format monetary values as VND
+            string formattedTotalAmount = totalAmount.ToString("C0", new CultureInfo("vi-VN"));
+            string formattedShipmentFee = shipmentFee.ToString("C0", new CultureInfo("vi-VN"));
+
+            // Begin constructing the email HTML body
+            string htmlBody = $@"
+<html>
+    <head>
+        <style>
+            body {{
+                font-family: 'Arial', sans-serif;
+                color: #333;
+                line-height: 1.6;
+                font-size: 16px;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }}
+            .container {{
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                border: 1px solid #ddd;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }}
+            .header {{
+                text-align: center;
+                background-color: #4CAF50;
+                color: #fff;
+                padding: 15px;
+                font-size: 18px;
+                font-weight: bold;
+                border-radius: 8px 8px 0 0;
+            }}
+            .section {{
+                margin-top: 20px;
+                font-size: 14px;
+            }}
+            .section td {{
+                padding: 8px;
+                vertical-align: top;
+            }}
+            .order-summary, .payment-info {{
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                margin-bottom: 20px;
+            }}
+            .total {{
+                font-weight: bold;
+                font-size: 18px;
+                color: #4CAF50;
+                padding: 10px;
+                background-color: #f1f1f1;
+                text-align: right;
+            }}
+            a {{
+                color: #4CAF50;
+                text-decoration: none;
+            }}
+            .footer {{
+                margin-top: 30px;
+                text-align: center;
+                font-size: 14px;
+                color: #777;
+            }}
+            @media only screen and (max-width: 600px) {{
+                body {{ font-size: 14px; }}
+                .container {{ padding: 10px; }}
+                .header {{ font-size: 16px; padding: 12px; }}
+                .section td {{ display: block; width: 100%; padding: 5px 0; }}
+                .order-summary, .payment-info {{ padding: 10px; }}
+                .total {{ font-size: 16px; }}
+                .footer {{ font-size: 12px; padding-top: 10px; }}
+            }}
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header'>
+                <p>Đơn hàng xác nhận</p>
+            </div>
+            
+            <p>Xin chào {customerName},</p>
+            <p>Cảm ơn Anh/chị đã đặt hàng tại Shop TCVIETTELFC!</p>
+            <p>Đơn hàng của Anh/chị đã được tiếp nhận, chúng tôi sẽ nhanh chóng liên hệ với Anh/chị.</p>
+
+            <div class='section'>
+                <table>
+                    <tr>
+                        <td><strong>Thông tin mua hàng</strong></td>
+                        <td><strong>Địa chỉ nhận hàng</strong></td>
+                    </tr>
+                    <tr>
+                        <td>{customerName}<br>{customerEmail}<br>{customerPhone}</td>
+                        <td>{shippingAddress}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class='section'>
+                <table>
+                    <tr>
+                        <td><strong>Phương thức thanh toán</strong></td>
+                        <td><strong>Phương thức vận chuyển</strong></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Thanh toán qua VNPAY<br>
+                            STK: 1019873492<br>
+                            NH: SHB (Sài Gòn - Hà Nội)<br>
+                            Chủ TK: Công ty TC_VIETTELFC
+                        </td>
+                        <td>Đơn Vị Vận Chuyển sẽ thu</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class='order-summary'>
+                <table>
+                    <tr>
+                        <td><strong>Thông tin đơn hàng</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Mã đơn hàng: {orderCode}</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày đặt hàng: {orderDate:dd/MM/yyyy}</td>
+                    </tr>
+                </table>
+            </div>
+
+            {productDetails}
+
+            <div class='order-summary'>
+                <table>
+                    <tr>
+                        <td><strong>Tổng tiền hàng hóa</strong></td>
+                        <td><strong>Phí vận chuyển</strong></td>
+                        <td><strong>Thành tiền</strong></td>
+                    </tr>
+                    <tr>
+                         <td>{(totalAmount - shipmentFee).ToString("C0", new CultureInfo("vi-VN"))}</td>
+                        <td>{formattedShipmentFee}</td>
+                        <td class='total'>{formattedTotalAmount}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <p>Nếu Anh/chị có bất kỳ câu hỏi nào, xin liên hệ với chúng tôi tại <a href='mailto:nguyenquyduong291103@gmail.com'>Shop@TC_Viettel.com</a></p>
+
+            <p>Trân trọng,<br>Ban quản trị cửa hàng Shop TC_Viettel</p>
+        </div>
+
+        <div class='footer'>
+            <p>Shop TC_Viettel FC</p>
+            <p>Cảm ơn bạn đã tin tưởng mua sắm tại cửa hàng chúng tôi.</p>
+        </div>
+    </body>
+</html>";
+
+            // Send the email using the _emailService
+            await _emailService.SendEmailAsync(customerEmail, "Xác nhận đơn hàng - Shop TCVIETTELFC", htmlBody);
         }
         public async Task<int> SendTicketViaEmailAsync(int orderId, string email)
         {

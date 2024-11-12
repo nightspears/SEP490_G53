@@ -1,61 +1,137 @@
-﻿@model TCViettetlFC_Client.VNPayHelper.PaymentSuccessViewModel
+﻿@model string
 
-<div class="container">
-    <h2>Payment Callback</h2>
 
-    <div class="alert alert-success">
-        Thank you, @Model.CheckoutModel.FullName! Your payment was successful.
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f7fc;
+        color: #333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh; /* Ensure the body takes full viewport height */
+        margin: 0;
+        padding: 0 20px;
+    }
+
+    .payment-container {
+        max-width: 480px;
+        width: 100%;
+        padding: 40px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        border: 1px solid #e6e6e6;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .payment-details {
+        font-size: 16px;
+        color: #495057;
+        background-color: #f8f9fa; /* Slightly lighter gray */
+        padding: 25px;
+        border-radius: 8px;
+        line-height: 1.6;
+        margin: 25px 0;
+        text-align: center;
+        max-width: 100%; /* Ensure the content is fully within the container */
+    }
+
+    .payment-icon {
+        font-size: 80px;
+        margin-bottom: 25px;
+    }
+
+    .payment-icon.success {
+        color: #28a745;
+    }
+
+    .payment-icon.failed {
+        color: #dc3545;
+    }
+
+    .payment-title {
+        font-size: 28px;
+        font-weight: 600;
+        margin: 20px 0;
+        color: #333;
+    }
+
+
+
+    .btn-custom {
+        display: inline-block;
+        font-size: 16px;
+        padding: 12px 25px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        margin-top: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+    }
+
+    .btn-failure {
+        background-color: #dc3545;
+    }
+
+    .btn-failure:hover {
+        background-color: #c82333;
+        transform: translateY(-2px);
+    }
+
+    @@media (max-width: 600px) {
+        .payment-container {
+            padding: 20px;
+        }
+
+        .payment-title {
+            font-size: 24px;
+        }
+
+        .payment-details {
+            font-size: 14px;
+        }
+
+        .btn-custom {
+            font-size: 14px;
+            padding: 10px 20px;
+        }
+    }
+</style>
+
+<body>
+    <div class="payment-container">
+        @if (Model.Contains("Error"))
+        {
+            <i class="fa fa-times-circle payment-icon failed" aria-hidden="true"></i>
+            <h2 class="payment-title">Thanh Toán Thất Bại</h2>
+            <div class="payment-details">
+                @Model <!-- Display the error message -->
+            </div>
+            <a href="/Home/Index" class="btn-custom btn-failure">Try Again</a>
+        }
+        else
+        {
+            <i class="fa fa-check-circle payment-icon success" aria-hidden="true"></i>
+            <h2 class="payment-title">Đơn Hàng Đã Được Thanh Toán Thành Công !</h2>
+            <div class="payment-details">
+                Cảm ơn bạn đã sử dụng dịch vụ, chúng tôi sẽ gửi email đến bạn thông tin đơn hàng
+            </div>
+            <a href="/Home/Index" class="btn-custom btn-success">Return to Home</a>
+        }
     </div>
-
-    <h3>Order Details</h3>
-
-
-    <h3>Checkout Items</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Product Name</th>
-                <th>Size</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in @Model.CheckoutModel.checkoutItems)
-            {
-                <tr>
-                    <td>@item.nameProduct</td>
-                    <td>@item.size</td>
-                    <td>@item.Quantity</td>
-                    <td>@item.Price.ToString("N0")</td>
-                    @{
-                        var totalPrice = (item.Price * item.Quantity).ToString("N0");
-                    }
-                    <td>  Tổng: @totalPrice đ </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <p>Email: @Model.CheckoutModel.Email</p>
-    <p>Full Name: @Model.CheckoutModel.FullName</p>
-    <p>Phone: @Model.CheckoutModel.Phone</p>
-    <p>Address: @Model.CheckoutModel.Address</p>
-    <p>City: @Model.CheckoutModel.CityId</p>
-    <p>CityName: @Model.CheckoutModel.CityName</p>
-    <p>District: @Model.CheckoutModel.DistrictId</p>
-    <p>DistrictName: @Model.CheckoutModel.DistrictName</p>
-    <p>Ward: @Model.CheckoutModel.WardId</p>
-    <p>WardName: @Model.CheckoutModel.WardName</p>
-    <p>Notes: @Model.CheckoutModel.Notes</p>
-    <p>TotalAmount: @Model.CheckoutModel.TotalAmount</p>
-    <p>Shipping Method: @Model.CheckoutModel.SelectedShipping</p>
-
-    <h3>Payment Details</h3>
-    <p>Order ID: @Model.VnPayResponse.OrderId</p>
-    <p>Transaction ID: @Model.VnPayResponse.TransactionId</p>
-    <p>Payment Method: @Model.VnPayResponse.PaymentMethod</p>
-    <p>Respone Code: @Model.VnPayResponse.VnPayResponseCode</p>
-    <p>Status: Successful</p>
-</div>
+</body>

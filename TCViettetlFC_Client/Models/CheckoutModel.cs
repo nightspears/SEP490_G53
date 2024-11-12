@@ -31,7 +31,7 @@
         public string size { get; set; }
         public string Avartar { get; set; }
         public int Quantity { get; set; }
-        public int shirtNumber { get; set; }
+        public int ?shirtNumber { get; set; }
         public string ?SoAo { get; set; }
         public string ?TenCauThu { get; set; }
 
