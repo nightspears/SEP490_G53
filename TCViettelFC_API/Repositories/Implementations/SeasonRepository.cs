@@ -62,17 +62,10 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
       
 
-        public async Task<List<SeasonResponse>> GetSeasonAsync()
+        public async Task<List<Season>> GetSeasonAsync()
         {
-            List<SeasonResponse> seasons = new List<SeasonResponse>();
-            seasons = await _context.Seasons.Where(x => x.Status != 0).Select(x => new SeasonResponse
-            {
-                SeasonId = x.SeasonId,
-                EndYear = x.EndYear,
-                Status = x.Status,  
-                SeasonName = x.SeasonName,
-                StartYear = x.StartYear,
-            }).ToListAsync();
+            List<Season> seasons = new List<Season>();
+            seasons = await _context.Seasons.Where(x => x.Status != 0).ToListAsync();
 
             return seasons;
         }

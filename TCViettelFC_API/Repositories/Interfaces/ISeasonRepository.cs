@@ -7,7 +7,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
 {
     public interface ISeasonRepository
     {
-        Task<List<SeasonResponse>> GetSeasonAsync();
+        Task<List<Season>> GetSeasonAsync();
 
         Task AddSeasonAsync(SeasonDto season);
         Task<Season> GetSeasonByIdAsync(int id);

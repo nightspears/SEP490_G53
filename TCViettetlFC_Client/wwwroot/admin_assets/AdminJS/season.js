@@ -67,8 +67,8 @@ function loadData() {
                             </div>
                         </td>
                         <td>${item.seasonName}</td>
-                        <td>${item.startYear} <br><small></small></td>
-                         <td>${item.endYear} <br><small></small></td>
+                        <td>${item.startFormatted} <br><small></small></td>
+                         <td>${item.endFormatted} <br><small></small></td>
                         <td class="text-center">
                             <div class="status-toggle d-flex justify-content-center">
                                 <input type="checkbox" id="status_${item.seasonId}" class="check" ${item.status === 1 ? 'checked' : ''}>
