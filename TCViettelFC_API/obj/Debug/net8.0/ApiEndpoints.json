@@ -215,6 +215,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TCViettelFC_API.Controllers.AreaController",
+    "Method": "GetMatchAreaTicketsByMatchId",
+    "RelativePath": "api/Area/getmatchareaticketsbymatchid/{matchId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "matchId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TCViettelFC_API.Controllers.CartController",
     "Method": "addToCart",
     "RelativePath": "api/Cart/addToCart",
@@ -277,19 +293,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "CategoryName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "CreatedAt",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Status",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
+        "Name": "category",
+        "Type": "TCViettelFC_API.Dtos.Category.CategoryDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -400,19 +406,9 @@
         "IsRequired": true
       },
       {
-        "Name": "CategoryName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "CreatedAt",
-        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Status",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
+        "Name": "category",
+        "Type": "TCViettelFC_API.Dtos.Category.CategoryDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -1200,6 +1196,43 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.OrderController",
+    "Method": "UpdateOrderStatus",
+    "RelativePath": "api/Order/{orderId}/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "TCViettelFC_API.Controllers.OrderController\u002BUpdateOrderStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.OrderController",
+    "Method": "GetOrderDetails",
+    "RelativePath": "api/Order/getorderdetails/{orderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.OrderController",
     "Method": "GetOrderedSuppByOrderId",
     "RelativePath": "api/Order/getorderedsupp/{id}",
     "HttpMethod": "GET",
@@ -1232,12 +1265,38 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.OrderController",
+    "Method": "GetAllOrderProducts",
+    "RelativePath": "api/Order/getproductorders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.OrderController",
     "Method": "GetAllTicketOrders",
     "RelativePath": "api/Order/getticketorders",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.OrderController",
+    "Method": "UpsertShipment",
+    "RelativePath": "api/Order/shipment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "shipmentDto",
+        "Type": "TCViettelFC_API.Dtos.ShipmentDto",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -1420,7 +1479,13 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "cid",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[TCViettelFC_API.Dtos.Product.ProductResponse, TCViettelFC_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
