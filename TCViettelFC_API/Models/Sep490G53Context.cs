@@ -77,6 +77,7 @@ public partial class Sep490G53Context : DbContext
         {
             optionsBuilder.UseSqlServer(config.GetConnectionString("value"));
         }
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -331,6 +332,10 @@ public partial class Sep490G53Context : DbContext
             entity.Property(e => e.OrderDate)
                 .HasColumnType("datetime")
                 .HasColumnName("order_date");
+            entity.Property(e => e.ShipmentFee)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("shipment_fee");
+            entity.Property(e => e.StaffId).HasColumnName("staff_id");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.TotalPrice)
                 .HasColumnType("decimal(10, 2)")
@@ -343,6 +348,10 @@ public partial class Sep490G53Context : DbContext
             entity.HasOne(d => d.Customer).WithMany(p => p.OrderProducts)
                 .HasForeignKey(d => d.CustomerId)
                 .HasConstraintName("FK__Order_Pro__custo__6B24EA82");
+
+            entity.HasOne(d => d.Staff).WithMany(p => p.OrderProducts)
+                .HasForeignKey(d => d.StaffId)
+                .HasConstraintName("FK_Order_Product_Users");
         });
 
         modelBuilder.Entity<OrderProductDetail>(entity =>
@@ -397,6 +406,7 @@ public partial class Sep490G53Context : DbContext
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("price");
             entity.Property(e => e.Quantity).HasColumnName("quantity");
+            entity.Property(e => e.Status).HasColumnName("status");
 
             entity.HasOne(d => d.Item).WithMany(p => p.OrderedSuppItems)
                 .HasForeignKey(d => d.ItemId)
@@ -600,7 +610,7 @@ public partial class Sep490G53Context : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.FileName)
-                .HasMaxLength(255)
+                .HasMaxLength(50)
                 .HasColumnName("file_name");
             entity.Property(e => e.FilePath)
                 .HasMaxLength(255)
@@ -685,8 +695,7 @@ public partial class Sep490G53Context : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("shipment_date");
             entity.Property(e => e.ShipmentTrackingCode)
-                .HasMaxLength(255)
-                .IsFixedLength()
+                .HasMaxLength(50)
                 .HasColumnName("shipment_tracking_code");
             entity.Property(e => e.Status).HasColumnName("status");
 

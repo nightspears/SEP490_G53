@@ -7505,24 +7505,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\quanr\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\TCViettelFC_API.csproj",
+      "projectUniqueName": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\TCViettelFC_API.csproj",
       "projectName": "TCViettelFC_API",
-      "projectPath": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\TCViettelFC_API.csproj",
-      "packagesPath": "C:\\Users\\quanr\\.nuget\\packages\\",
-      "outputPath": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\obj\\",
+      "projectPath": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\TCViettelFC_API.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\quanr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

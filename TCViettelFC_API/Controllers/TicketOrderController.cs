@@ -28,9 +28,7 @@ namespace TCViettelFC_API.Controllers
             {
                 var obj = await _ticketOrderRepository.AddOderedTicket(ticketOrderDto, customerId);
                 if (obj == null) return Conflict("Error add order");
-                var list = await _ticketOrderRepository.GetOrderedTicketsIdByOrderId(obj.OrderId);
-                if (list.Count <= 0) return Conflict("No ticket was ordered");
-                var result = await _ticketUtilRepository.SendTicketViaEmailAsync(list, obj.CustomerEmail);
+                var result = await _ticketUtilRepository.SendTicketViaEmailAsync(obj.OrderId, obj.CustomerEmail);
                 if (result == 1)
                     return Ok("Order added successfully.");
                 return Conflict("Mail send error");

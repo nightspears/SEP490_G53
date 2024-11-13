@@ -14,4 +14,11 @@
 
         public int? Status { get; set; }
     }
+
+    public class MatchAreaTicketDto
+    {
+        public int MatchId { get; set; }
+        public int AreaId { get; set; }
+        public int? AvailableSeats { get; set; }
+    }
 }

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from mentoring.dreamguystech.com/html/template/admin/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:33:22 GMT -->
@@ -7,35 +8,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>ViettelFc</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="~/admin_assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/admin_assets/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/admin_assets/plugins/datatables/datatables.min.css" rel="stylesheet" />
     <link rel="shortcut icon" href=~/home_assets/favicon.ico>
     <link href="~/home_assets/style.css" rel="stylesheet" />
     <script src="~/home_assets/js/vendor/modernizr.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
-<body style="background-color: rgb(221 227 233);">
+<body>
     <div class=wrapper>
-        @* <header class=header-main>
+        <header class=header-main>
             <div class=header-upper>
                 <div class=container>
                     <div class=row>
                         <ul>
-                            <li><a href="/Customer/Login">Signup/login</a></li>
+                            <li><a href="#">Signup/login</a></li>
                             <li>
                                 <a href=/public/giohang>
                                     <i class="fa fa-shopping-cart"></i> <span>
                                         cart(<span class=cartitems>0</span>)
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href=/public/giohang>
-                                    <i class="fa fa-shopping-cart"></i> <span>
-                                        giỏ hàng vé(<span class=cartitems>0</span>)
                                     </span>
                                 </a>
                             </li>
@@ -44,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <div class="header-lower clearfix d-flex">
+            <div class="header-lower clearfix">
                 <div class=container>
                     <div class=row>
                         <h1 class=logo><a href="/index"><img src="~/image/imagelogo/logonobackgroud.png" alt=image style="height:173px ; width:140px"></a></h1>
@@ -59,7 +49,7 @@
                                         </button>
                                     </div>
                                     <div class=nav-menu>
-                                        <ul class="nav navbar-nav menu-bar d-flex">
+                                        <ul class="nav navbar-nav menu-bar">
                                             <li>
                                                 <a href="/">
                                                     Home <span></span> <span></span> <span></span>
@@ -87,20 +77,20 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href=/Area/Index>
+                                                <a href="/match/index">
                                                     Đặt vé <span></span> <span></span>
                                                     <span></span> <span></span>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a >
-                                                    Cửa hàng
+                                                <a href=/public/sanpham>
+                                                    Cửa hàng <span></span> <span></span> <span></span>
+                                                    <span></span>
                                                 </a>
-                                                <ul class=sub-menu  style="background-color:white !important">
-                                                    <li><a style="color:black" class="ProductCate" >Áo đá bóng</a></li>
-                                                    <li><a style="color:black" class="ProductCate" >Phụ kiện thể thao</a></li>
-                                                    <li><a style="color:black" class="ProductCate" >Giày đá bóng</a></li>
-                                                </ul>
+                                                <a>
+
+                                                </a>
+
 
                                             </li>
                                             <li>
@@ -133,11 +123,11 @@
                         </a> <a href=https://www.behance.net/ class=behance>
                         <i class="fas fas-behance"></i>
                         </a>
-                        </div> 
+                        </div> *@
                     </div>
                 </div>
             </div>
-        </header> *@
+        </header>
         @RenderBody()
         <footer class=footer-type01>
             <div class=container>
@@ -300,11 +290,42 @@
             </div>
         </footer>
     </div>
+    <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
     <script src="~/home_assets/js/vendor/vendor.js"></script>
     <script src="~/home_assets/js/main.js"></script>
+    @*  <script>
+    function loadCategoryMenu() {
+    $.ajax({
+    url: "https://localhost:5000/api/Category/GetCategory",
+    method: "GET",
+    dataType: "json",
+    success: function (res) {
+    var menu_category = $("#menu_category").empty();
+    var textFirt = `<li class="category_product_menu" onclick="showProductByCate(0)" >
+    <a style="color:black" class="ProductCate">Tất cả</a>
+    </li>`;
+    menu_category.append(textFirt);
+    $.each(res, function (index, item) {
+
+    var html = `<li class="category_product_menu" onclick="showProductByCate(${item.categoryId})" data-cid="${item.categoryId}">
+    <a style="color:black" class="ProductCate" data-cid="${item.categoryId}">${item.categoryName}</a>
+    </li>`;
+    menu_category.append(html);
+    });
+
+
+    },
+    error: function (res) {
+    console.error("Error loading data", res);
+    }
+    });
+    }
+
+
+    $(document).ready(function () {
+    loadCategoryMenu();
+    });
+    </script> *@
 </body>
 
 </html>
-
-
-

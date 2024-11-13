@@ -1,26 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\",
+  "WorkspaceRootPath": "E:\\MerFullCode\\SEP490_G53\\TCViettelFC_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|e:\\sep490-g53\\sep490_g53\\tcviettelfc_api\\dtos\\orderticket\\ticketorderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:dtos\\orderticket\\ticketorderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|e:\\sep490-g53\\sep490_g53\\tcviettelfc_api\\controllers\\ticketordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:controllers\\ticketordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|e:\\sep490-g53\\sep490_g53\\tcviettelfc_api\\repositories\\implementations\\ticketorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:repositories\\implementations\\ticketorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|e:\\sep490-g53\\sep490_g53\\tcviettelfc_api\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|e:\\sep490-g53\\sep490_g53\\tcviettelfc_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -347,65 +330,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TicketOrderDto.cs",
-              "DocumentMoniker": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\Dtos\\OrderTicket\\TicketOrderDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\OrderTicket\\TicketOrderDto.cs",
-              "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\Dtos\\OrderTicket\\TicketOrderDto.cs",
-              "RelativeToolTip": "Dtos\\OrderTicket\\TicketOrderDto.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAwwA8AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T19:53:18.974Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Payment.cs",
-              "DocumentMoniker": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\Models\\Payment.cs",
-              "RelativeDocumentMoniker": "Models\\Payment.cs",
-              "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\Models\\Payment.cs",
-              "RelativeToolTip": "Models\\Payment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T19:54:15.929Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TicketOrderRepository.cs",
-              "DocumentMoniker": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\Repositories\\Implementations\\TicketOrderRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\Implementations\\TicketOrderRepository.cs",
-              "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\Repositories\\Implementations\\TicketOrderRepository.cs",
-              "RelativeToolTip": "Repositories\\Implementations\\TicketOrderRepository.cs",
-              "ViewState": "AgIAAHoAAAAAAAAAAAAnwKAAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-04T16:23:18.158Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAQwEsAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T22:26:24.818Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TicketOrderController.cs",
-              "DocumentMoniker": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\Controllers\\TicketOrderController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TicketOrderController.cs",
-              "ToolTip": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\Controllers\\TicketOrderController.cs",
-              "RelativeToolTip": "Controllers\\TicketOrderController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAmwCkAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-23T22:20:25.352Z",
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AgIAAJ8WAAAAAAAAAAAIwLQWAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2024-11-13T08:51:28.698Z",
               "EditorCaption": ""
             }
           ]

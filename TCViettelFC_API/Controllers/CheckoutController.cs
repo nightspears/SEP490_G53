@@ -27,27 +27,28 @@ namespace TCViettelFC_API.Controllers
             try
             {
                 // 1. Create Customer if not exists
-                var customer = await _context.Customers
-                    .FirstOrDefaultAsync(c => c.Email == request.Customer.Email);
-
-                if (customer == null)
-                {
-                    customer = new Customer
+              
+                  var  customer = new Customer
                     {
+                        AccountId = request.Customer.AccountId,
                         Email = request.Customer.Email,
                         Phone = request.Customer.Phone,
+                        FullName= request.Customer.FullName,
                     };
                     _context.Customers.Add(customer);
                     await _context.SaveChangesAsync();
-                }
+                
 
                 // 2. Create Address
                 var address = new Address
                 {
                     CustomerId = customer.CustomerId,
                     City = request.Address.City,
+                    CityName = request.Address.CityName,
                     District = request.Address.District,
+                    DistrictName = request.Address.DistrictName,
                     Ward = request.Address.Ward,
+                    WardName = request.Address.WardName,
                     DetailedAddress = request.Address.DetailedAddress,
                 };
                 _context.Addresses.Add(address);
@@ -59,6 +60,7 @@ namespace TCViettelFC_API.Controllers
                     CustomerId = customer.CustomerId,
                     OrderCode = request.OrderProduct.OrderCode,
                     OrderDate = request.OrderProduct.OrderDate,
+                    ShipmentFee = request.OrderProduct.ShipmentFee,
                     TotalPrice = request.OrderProduct.TotalPrice,
                     AddressId = address.AddressId,
                 };
@@ -73,6 +75,8 @@ namespace TCViettelFC_API.Controllers
                         OrderProductId = orderProduct.Id,
                         ProductId = detail.ProductId,
                         PlayerId = detail.PlayerId,
+                        CustomShirtNumber = detail.CustomShirtNumber,
+                        CustomShirtName = detail.CustomShirtName,
                         Size = detail.Size,
                         Quantity = detail.Quantity,
                         Price = detail.Price,

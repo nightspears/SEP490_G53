@@ -1,0 +1,196 @@
+﻿.size {
+    cursor: pointer
+}
+
+.rate-item h4 {
+    color: #979da0;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.rate-item select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 14px;
+}
+
+    .rate-item select option {
+        padding: 8px;
+        background-color: #fff;
+        color: #333;
+    }
+
+.rate-item div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.card {
+    border-radius: 10px;
+    border: none !important;
+    transition: transform 0.2s ease-in-out !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    margin-bottom: 20px;
+    height: 390px;
+    max-height: 400px;
+    position: relative;
+}
+
+}
+
+.card:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.product-img {
+    height: 200px !important;
+    object-fit: cover !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.product-title {
+    white-space: nowrap; /* Không xuống dòng */
+    overflow: hidden; /* Ẩn phần nội dung thừa */
+    text-overflow: ellipsis; /* Thêm dấu '...' khi nội dung bị cắt */
+    max-width: 350px; /* Chiều rộng tối đa của phần tử */
+    padding-left: 10px
+}
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #eb3636;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.product-title {
+    white-space: nowrap; /* Không xuống dòng */
+    overflow: hidden; /* Ẩn phần nội dung thừa */
+    text-overflow: ellipsis; /* Thêm dấu '...' khi nội dung bị cắt */
+    max-width: 350px; /* Chiều rộng tối đa của phần tử */
+    padding-left: 10px;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    color: #333 !important;
+}
+
+.product-price {
+    color: red !important;
+    font-size: 20px !important;
+}
+
+
+
+/* Button styling */
+#openModalBtn {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Modal styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+}
+
+/* Close button style */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Image container styling */
+.image-container {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+
+    .image-container img {
+        width: 100%;
+    }
+
+/* Overlay for name and number */
+.text-overlay {
+    position: absolute;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#shirtNameOverlay {
+    top: 27%; /* Adjust to position over the upper area of the shirt */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.9em;
+    font-family: 'Roboto', sans-serif;
+}
+
+#shirtNumberOverlay {
+    top: 30%; /* Adjust to position in the center or lower area */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8em;
+    font-family: 'Montserrat', sans-serif;
+}
+@media (max-width: 425px) {
+    #shirtNameOverlay {
+        font-size: 15px; /* Adjust font size for smaller screens */
+    }
+
+    #shirtNumberOverlay {
+        font-size: 55px; /* Adjust font size for smaller screens */
+    }
+}
+
+@media (min-width: 426px) {
+    #shirtNameOverlay {
+        font-size: 21px; /* Adjust font size for smaller screens */
+    }
+
+    #shirtNumberOverlay {
+        font-size: 100px; /* Adjust font size for smaller screens */
+    }
+}

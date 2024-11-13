@@ -1,4 +1,5 @@
-﻿using TCViettelFC_API.Dtos;
+﻿using Microsoft.EntityFrameworkCore;
+using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
 
@@ -25,6 +26,19 @@ namespace TCViettelFC_API.Repositories.Implementations
                 Status = area.Status,
             };
             return result;
+        }
+
+        public async Task<List<MatchAreaTicketDto>> GetMatchAreaTicketsByMatchIdAsync(int matchId)
+        {
+            return await _context.MatchAreaTickets
+                .Where(mat => mat.MatchId == matchId)
+                .Select(mat => new MatchAreaTicketDto
+                {
+                    MatchId = mat.MatchId,
+                    AreaId = mat.AreaId,
+                    AvailableSeats = mat.AvailableSeats
+                })
+                .ToListAsync();
         }
     }
 }

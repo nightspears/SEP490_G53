@@ -2,14 +2,14 @@
 {
     public class TicketOrderRequest
     {
-        public AddCustomerDto addCustomerDto { get; set; }
+        public AddCustomerDto? addCustomerDto { get; set; }
         public DateTime orderDate { get; set; }
         public decimal totalAmount { get; set; }
         public int? customerId { get; set; }
         public List<OrderedTicket> orderedTickets { get; set; }
         public List<OrderedSupplementaryItem> orderedSuppItems { get; set; }
         // Payment details
-        public PaymentDto? paymentDto { get; set; }
+        public PaymentTicketDto? paymentDto { get; set; }
     }
 
     public class OrderedSupplementaryItem
@@ -29,12 +29,12 @@
     }
     public class AddCustomerDto
     {
-        public string email { get; set; }
-        public string phone { get; set; }
-        public string fullName { get; set; }
-        public int status { get; set; }
+        public string? email { get; set; }
+        public string? phone { get; set; }
+        public string? fullName { get; set; }
+        public int? status { get; set; }
     }
-    public class PaymentDto
+    public class PaymentTicketDto
     {
         public int? orderTicketId { get; set; }
         public int? orderProductId { get; set; }

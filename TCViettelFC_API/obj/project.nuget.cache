@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "m6A+s1ccUiI=",
+  "dgSpecHash": "Um5vurB2iJA=",
   "success": true,
-  "projectFilePath": "E:\\SEP490-G53\\SEP490_G53\\TCViettelFC_API\\TCViettelFC_API.csproj",
+  "projectFilePath": "E:\\MerFullCode\\SEP490_G53\\TCViettelFC_API\\TCViettelFC_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\quanr\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\quanr\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
