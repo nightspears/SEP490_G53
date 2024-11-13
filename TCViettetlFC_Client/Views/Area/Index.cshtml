@@ -555,7 +555,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="quantity">Số lượng vé:</label>
-                            <input id="quantity" type="number" name="quantity" class="form-control" min="1" max="4" placeholder="Số lượng" required />
+                            <input id="quantity" type="number" name="quantity" class="form-control" placeholder="Số lượng" required value="1" readonly />
                         </div>
                         <div class="col-md-4">
                             <label for="totalPrice">Tổng giá:</label>
@@ -630,6 +630,7 @@
                         document.getElementById('price').value = data.price || '';
                         document.getElementById('status').value = data.status === 1 ? "Còn vé" : "Hết vé";
 
+                        updateTotalPrice();
                         // Hiển thị form và overlay
                         document.getElementById('formOverlay').style.display = 'flex';
                         document.getElementById('ticketForm').style.display = 'block';
@@ -640,10 +641,41 @@
             // Đóng popup khi nhấp bên ngoài form
             document.getElementById('formOverlay').addEventListener('click', function (event) {
                 if (event.target === this) {
+                    // Xóa dữ liệu đã chọn khi đóng form
+                    clearFormData();
+
+                    // Ẩn form và overlay
                     document.getElementById('formOverlay').style.display = 'none';
                     document.getElementById('ticketForm').style.display = 'none';
                 }
             });
+
+            // Hàm để làm sạch dữ liệu trong form
+            function clearFormData() {
+                // Xóa giá trị các trường trong form
+                document.getElementById('areaId').value = '';
+                document.getElementById('stands').value = '';
+                document.getElementById('floor').value = '';
+                document.getElementById('section').value = '';
+                document.getElementById('price').value = '';
+                document.getElementById('status').value = '';
+                document.getElementById('quantity').value = '1'; // Đặt lại số lượng vé
+                document.getElementById('totalPrice').value = ''; // Xóa tổng giá
+
+                // Bỏ chọn tất cả checkbox đồ đính kèm và đặt lại số lượng về 1
+                const checkboxes = document.querySelectorAll('input[type="checkbox"][name="supplementary[]"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+
+                const quantityFields = document.querySelectorAll('input[type="number"][name^="quantity_"]');
+                quantityFields.forEach(input => {
+                    input.value = 1; // Đặt lại số lượng đồ đính kèm
+                });
+
+                // Ẩn overlay đồ đính kèm
+                document.getElementById('supplementaryOverlay').style.display = 'none';
+            }
 
             document.addEventListener('DOMContentLoaded', () => {
                 const paths = document.querySelectorAll('[id^="path-"]');
@@ -653,8 +685,18 @@
                         getAreaById(areaId);
                     });
                 });
-            });
 
+                // Xử lý đóng overlay đồ đính kèm
+                document.getElementById('closeOverlay').addEventListener('click', () => {
+                    document.getElementById('supplementaryOverlay').style.display = 'none';
+                });
+
+                // Mở overlay đồ đính kèm khi nhấn vào nút "Mua thêm"
+                document.getElementById('showSupplementaryItems').addEventListener('click', () => {
+                    document.getElementById('supplementaryOverlay').style.display = 'flex';
+                });
+            });
+            
         </script>
 
 
@@ -842,6 +884,7 @@
 
                      // Thêm vé vào giỏ hàng và thiết lập thời gian hết hạn
             document.getElementById('addToCartBtn').addEventListener('click', function () {
+                
                 // Thu thập thông tin vé
                 const matchId = document.getElementById('matchId').value;
                 const areaId = document.getElementById('areaId').value;
@@ -852,6 +895,14 @@
                 const status = document.getElementById('status').value;
                 const quantity = parseInt(document.getElementById('quantity').value);
 
+                 // Kiểm tra số lượng vé cho trận đấu hiện tại trong giỏ hàng
+                const cartItem = JSON.parse(localStorage.getItem('cart')) || [];
+                const existingTickets = cartItem.filter(ticket => ticket.matchId === matchId);
+
+                if (existingTickets.length >= 4) {
+                    alert('Bạn chỉ có thể thêm tối đa 4 vé cho mỗi trận đấu.');
+                    return;
+                }
                 // Thời gian hết hạn (10 phút từ lúc thêm vào giỏ hàng)
                 const expirationTime = Date.now() + 10 * 60 * 1000; // 10 phút = 600,000 ms
 
@@ -899,6 +950,7 @@
 
                 // Lưu lại giỏ hàng đã cập nhật
                 localStorage.setItem('cart', JSON.stringify(cart));
+                clearFormData();
                 document.getElementById('successPopup').style.display = 'flex';
                 setTimeout(() => document.getElementById('successPopup').style.display = 'none', 1500);
                 setTimeout(() => document.getElementById('formOverlay').style.display = 'none', 1500);
