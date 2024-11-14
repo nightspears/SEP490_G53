@@ -8,6 +8,10 @@ $(document).on("click", ".size", function () {
 $(document).ready(function () {
     format();
 
+    var li = $(".size").first();
+    li.css("border", "1px solid red");
+    var size = li.data('size');
+    $("#sizeSp").val(size);
 });
 function format() {
     debugger
