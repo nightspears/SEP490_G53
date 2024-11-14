@@ -777,6 +777,22 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.FeedbackController",
+    "Method": "AddFeedback",
+    "RelativePath": "api/Feedback/addfeedback",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "feedbackDto",
+        "Type": "TCViettelFC_API.Dtos.FeedbackPostDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.FeedbackController",
     "Method": "GetFeedbacks",
     "RelativePath": "api/Feedback/GetFeedbacks",
     "HttpMethod": "GET",
