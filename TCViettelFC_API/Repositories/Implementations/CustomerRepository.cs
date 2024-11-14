@@ -49,7 +49,38 @@ namespace TCViettelFC_API.Repositories.Implementations
                 return 0;
             }
         }
+        public async Task<int> PostFeedback(FeedbackPostDto feedbackDto)
+        {
+            var customerId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "CustomerId")?.Value;
+            Feedback feedback;
+            if (customerId == null)
+            {
+                return 0;
+            }
 
+            var customer = new Customer() { AccountId = int.Parse(customerId) };
+            await _context.Customers.AddAsync(customer);
+            feedback = new Feedback()
+            {
+                Content = feedbackDto.Content,
+                CreatedAt = DateTime.UtcNow,
+                Creator = customer,
+                Status = 0
+            };
+
+            try
+            {
+                await _context.Feedbacks.AddAsync(feedback);
+                await _context.SaveChangesAsync();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+
+
+        }
         private string GenerateConfirmationCode()
         {
             Random random = new Random();

@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TCViettelFC_API.Dtos;
-using TCViettelFC_API.Repositories.Implementations;
 using TCViettelFC_API.Repositories.Interfaces;
 
 namespace TCViettelFC_API.Controllers
@@ -12,13 +10,22 @@ namespace TCViettelFC_API.Controllers
     public class FeedbackController : ControllerBase
     {
         private readonly IFeedbackRepository _feedbackRepository;
+        private readonly ICustomerRepository _cR;
         private readonly IMapper _mapper;
-        public FeedbackController(IFeedbackRepository feedbackRepository, IMapper mapper)
+        public FeedbackController(IFeedbackRepository feedbackRepository, IMapper mapper, ICustomerRepository cR)
         {
             _feedbackRepository = feedbackRepository;
             _mapper = mapper;
+            _cR = cR;
         }
 
+        [HttpPost("addfeedback")]
+        public async Task<IActionResult> AddFeedback(FeedbackPostDto feedbackDto)
+        {
+            var result = await _cR.PostFeedback(feedbackDto);
+            if (result == 0) return Conflict("Error adding feedback");
+            return Ok("Feedback added successfully");
+        }
 
         // Get a list of users
         [HttpGet("GetFeedbacks")]

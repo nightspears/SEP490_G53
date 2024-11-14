@@ -8,6 +8,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<bool> VerifyConfirmationCodeAsync(string email, string code);
         Task<ProfileDto?> GetCustomerProfile();
         Task<int> UpdateCustomerProfile(ProfileDto profileDto);
+        Task<int> PostFeedback(FeedbackPostDto feedbackDto);
 
     }
 }

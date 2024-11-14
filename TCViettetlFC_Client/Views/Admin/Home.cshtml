@@ -1,6 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Home";
     Layout = "_LayoutAdmin";
+    decimal ticketRevenue = decimal.Parse(ViewBag.TotalTicketRevenue);
+    decimal productRevenue = decimal.Parse(ViewBag.TotalProductRevenue);
+    string aftertrev = ticketRevenue.ToString("#,0", new System.Globalization.CultureInfo("es-ES"));
+    string afterprrev = productRevenue.ToString("#,0", new System.Globalization.CultureInfo("es-ES"));
+
 }
 <div class="page-wrapper">
     <div class="content container-fluid">
@@ -9,9 +14,6 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h3 class="page-title">Welcome Admin!</h3>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item active">Dashboard</li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -22,34 +24,14 @@
                     <div class="card-body">
                         <div class="dash-widget-header">
                             <span class="dash-widget-icon text-primary border-primary">
-                                <i class="fe fe-user"></i>
-                            </span>
-                            <div class="dash-count">
-                                <h3>368</h3>
-                            </div>
-                        </div>
-                        <div class="dash-widget-info">
-                            <h6 class="text-muted">Nhân viên</h6>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-primary w-50"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="dash-widget-header">
-                            <span class="dash-widget-icon text-primary border-primary">
                                 <i class="fe fe-users"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>16900</h3>
+                                <h3>@ViewBag.TotalSoldTickets</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">
-                            <h6 class="text-muted">Người dùng</h6>
+                            <h6 class="text-muted">Số vé bán ra</h6>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-primary w-50"></div>
                             </div>
@@ -62,14 +44,14 @@
                     <div class="card-body">
                         <div class="dash-widget-header">
                             <span class="dash-widget-icon text-success">
-                                <i class="fe fe-cart"></i>
+                                <i class="fe fe-credit-card"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>2366</h3>
+                                <h3>@ViewBag.TotalCustomer</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">
-                            <h6 class="text-muted">Đơn hàng</h6>
+                            <h6 class="text-muted">Số người dùng</h6>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-success w-50"></div>
                             </div>
@@ -82,14 +64,14 @@
                     <div class="card-body">
                         <div class="dash-widget-header">
                             <span class="dash-widget-icon text-danger border-danger">
-                                <i class="fe fa-fire-extinguisher"></i>
+                                <i class="fe fe-star-o"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>75</h3>
+                                <h3>@(aftertrev+"đ")</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">
-                            <h6 class="text-muted">Trận đấu</h6>
+                            <h6 class="text-muted">Tổng doanh thu vé</h6>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-danger w-50"></div>
                             </div>
@@ -105,11 +87,11 @@
                                 <i class="fe fe-folder"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>450 triệu</h3>
+                                <h3>@(afterprrev+"đ")</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">
-                            <h6 class="text-muted">Doanh thu cửa hàng</h6>
+                            <h6 class="text-muted">Tổng doanh thu sản phẩm</h6>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-warning w-50"></div>
                             </div>
@@ -117,191 +99,10 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-xl-3 col-sm-6 col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="dash-widget-header">
-                            <span class="dash-widget-icon text-warning border-warning">
-                                <i class="fe fe-folder"></i>
-                            </span>
-                            <div class="dash-count">
-                                <h3>5 tỷ</h3>
-                            </div>
-                        </div>
-                        <div class="dash-widget-info">
-                            <h6 class="text-muted">Doanh thu bán vé</h6>
-                            <div class="progress progress-sm">
-                                <div class="progress-bar bg-warning w-50"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-        <div class="row">
-           
-
-            <div class="col-md-12 col-lg-6">
-
-                <div class="card card-chart">
-                    <div class="card-header">
-                        <h4 class="card-title">Revenue</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id="morrisArea"></div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-12 col-lg-6">
-
-                <div class="card card-chart">
-                    <div class="card-header">
-                        <h4 class="card-title">Status</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id="morrisLine"></div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-12 col-lg-6">
-
-                <div class="card card-chart">
-                    <div class="card-header">
-                        <h4 class="card-title">Status</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id="morrisDonut"></div>
-                    </div>
-                </div>
-
+            
+        
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 d-flex">
-
-                <div class="card  card-table flex-fill">
-                    <div class="card-header">
-                        <h4 class="card-title">Đơn hàng vé</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Mentee Name</th>
-                                        <th>Phone</th>
-                                        <th>Last Visit</th>
-                                        <th class="text-end">Paid</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm me-2">
-                                                    <img class="avatar-img rounded-circle"
-                                                         src="assets/img/user/user4.jpg" alt="User Image">
-                                                </a>
-                                                <a href="profile.html">Patricia Manzi </a>
-                                            </h2>
-                                        </td>
-                                        <td>9548207887</td>
-                                        <td>18 Sep 2019</td>
-                                        <td class="text-end">$350.00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-6 d-flex">
-
-                <div class="card  card-table flex-fill">
-                    <div class="card-header">
-                        <h4 class="card-title">Đơn hàng vật phẩm</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Mentee Name</th>
-                                        <th>Phone</th>
-                                        <th>Last Visit</th>
-                                        <th class="text-end">Paid</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                   
-                                    <tr>
-                                        <td>
-                                            <h2 class="table-avatar">
-                                                <a href="profile.html" class="avatar avatar-sm me-2">
-                                                    <img class="avatar-img rounded-circle"
-                                                         src="assets/img/user/user4.jpg" alt="User Image">
-                                                </a>
-                                                <a href="profile.html">Patricia Manzi </a>
-                                            </h2>
-                                        </td>
-                                        <td>9548207887</td>
-                                        <td>18 Sep 2019</td>
-                                        <td class="text-end">$350.00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="card card-table flex-fill">
-                    <div class="card-header">
-                        <h4 class="card-title">Khách hàng mới</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Email</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Đơn hàng đã mua</th>
-                                        <th>Trạng thái</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Tuannqhe160900@fpt.edu.vn</td>
-                                        <td>0523452907</td>
-                                        <td>10</td>
-                                        <td>
-                                            <div class="status-toggle">
-                                                <input type="checkbox" id="status_5" class="check" checked>
-                                                <label for="status_5" class="checktoggle">checkbox</label>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
 
 
