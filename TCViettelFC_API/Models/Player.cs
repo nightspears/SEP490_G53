@@ -11,13 +11,21 @@ public partial class Player
 
     public int? ShirtNumber { get; set; }
 
+    public int? SeasonId { get; set; }
+
     public string? Position { get; set; }
 
     public DateTime? JoinDate { get; set; }
 
+    public DateTime? OutDate { get; set; }
+
     public string? Description { get; set; }
+
+    public string? BackShirtImage { get; set; }
 
     public int? Status { get; set; }
 
-    public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+    public virtual ICollection<OrderProductDetail> OrderProductDetails { get; set; } = new List<OrderProductDetail>();
+
+    public virtual Season? Season { get; set; }
 }

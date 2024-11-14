@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using TCViettelFC_Client.ApiServices;
 using TCViettetlFC_Client.Models;
 
 namespace TCViettetlFC_Client.Controllers
@@ -7,10 +8,12 @@ namespace TCViettetlFC_Client.Controllers
     public class CustomerController : Controller
     {
         private readonly HttpClient _httpClient;
+        private readonly IApiHelper _apiHelper;
 
-        public CustomerController(IHttpClientFactory httpClientFactory)
+        public CustomerController(IHttpClientFactory httpClientFactory, IApiHelper apiHelper)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
+            _apiHelper = apiHelper;
         }
         public IActionResult Register()
         {
@@ -18,6 +21,11 @@ namespace TCViettetlFC_Client.Controllers
         }
         public IActionResult Home()
         {
+            return View();
+        }
+        public async Task<IActionResult> Profile()
+        {
+            ViewBag.Profile = await _apiHelper.GetApiResponseAsync<CustomerProfileModel>("customer/profile");
             return View();
         }
         public IActionResult Login()
@@ -35,12 +43,13 @@ namespace TCViettetlFC_Client.Controllers
                 {
                     HttpOnly = true,
                     Secure = true,
-                    SameSite = SameSiteMode.Strict,
+                    SameSite = SameSiteMode.Lax,
                     Expires = DateTime.UtcNow.AddHours(1)
                 };
 
                 Response.Cookies.Append("AuthToken", response.token, cookieOptions);
                 Response.Cookies.Append("CustomerId", response.customerId.ToString(), cookieOptions);
+                Response.Cookies.Append("CustomerEmail", response.email.ToString(), cookieOptions);
                 return RedirectToAction("Home");
             }
             else
@@ -48,6 +57,14 @@ namespace TCViettetlFC_Client.Controllers
                 ViewBag.Error = "Email hoặc mật khẩu sai!";
                 return View(clm);
             }
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(CustomerProfileModel model)
+        {
+
+            var result = await _apiHelper.UpdateApiResponseAsync("customer/updateprofile", model);
+            ViewBag.Result = result;
+            return RedirectToAction("Profile");
         }
         public IActionResult Verify()
         {

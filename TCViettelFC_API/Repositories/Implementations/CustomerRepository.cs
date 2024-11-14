@@ -14,18 +14,20 @@ namespace TCViettelFC_API.Repositories.Implementations
         private readonly Sep490G53Context _context;
         private readonly IConfiguration _configuration;
         private readonly IEmailService _emailService;
-        private static readonly Dictionary<string, (Customer Customer, string Code, DateTime Expiry)> _pendingRegistrations = new();
+        private static readonly Dictionary<string, (CustomersAccount Customer, string Code, DateTime Expiry)> _pendingRegistrations = new();
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public CustomerRepository(Sep490G53Context context, IConfiguration configuration, IEmailService emailService)
+        public CustomerRepository(Sep490G53Context context, IConfiguration configuration, IEmailService emailService, IHttpContextAccessor contextAccessor)
         {
             _context = context;
             _emailService = emailService;
             _configuration = configuration;
+            _contextAccessor = contextAccessor;
         }
 
         public async Task<int> RegisterAsync(CustomerRegisterRequest cusRegReq)
         {
-            var existedCus = await _context.Customers.FirstOrDefaultAsync(x => x.Email == cusRegReq.Email);
+            var existedCus = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.Email == cusRegReq.Email);
             if (existedCus != null) return 0;
             try
             {
@@ -33,7 +35,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 var subject = "Confirmation Code";
                 var message = $"Your confirmation code is: {confirmationCode}";
                 await _emailService.SendEmailAsync(cusRegReq.Email, subject, message);
-                var temporaryCustomer = new Customer()
+                var temporaryCustomer = new CustomersAccount()
                 {
                     Email = cusRegReq.Email,
                     Password = cusRegReq.Password,
@@ -61,7 +63,13 @@ namespace TCViettelFC_API.Repositories.Implementations
                 var (customer, confirmationCode, expiry) = storedData;
                 if (confirmationCode == code && expiry > DateTime.UtcNow)
                 {
-                    await _context.Customers.AddAsync(customer);
+                    await _context.CustomersAccounts.AddAsync(customer);
+                    await _context.SaveChangesAsync();
+                    var profile = new Profile()
+                    {
+                        CustomerId = customer.CustomerId,
+                    };
+                    await _context.Profiles.AddAsync(profile);
                     await _context.SaveChangesAsync();
                     _pendingRegistrations.Remove(email);
                     return true;
@@ -72,7 +80,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
         public async Task<CustomerLoginResponse> LoginAsync(CustomerLoginDto dto)
         {
-            var customer = await _context.Customers
+            var customer = await _context.CustomersAccounts
                 .FirstOrDefaultAsync(x => x.Email == dto.Email && x.Password == dto.Password);
             if (customer == null) return null;
 
@@ -87,6 +95,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 Subject = new ClaimsIdentity(new[]
                 {
                 new Claim("CustomerId", customer.CustomerId.ToString()),
+                new Claim("CustomerEmail", customer.Email.ToString()),
             }),
                 Expires = DateTime.UtcNow.AddHours(6),
                 Audience = audience,
@@ -105,6 +114,40 @@ namespace TCViettelFC_API.Repositories.Implementations
                 phone = customer.Phone,
             };
             return response;
+        }
+        public async Task<ProfileDto?> GetCustomerProfile()
+        {
+
+            var customerId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "CustomerId")?.Value;
+            if (customerId == null) return null;
+            var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.CustomerId == int.Parse(customerId));
+            if (profile == null) return null;
+            var result = new ProfileDto()
+            {
+                DateOfBirth = profile.DateOfBirth,
+                FullName = profile.FullName,
+                Gender = profile.Gender,
+            };
+            return result;
+        }
+        public async Task<int> UpdateCustomerProfile(ProfileDto profileDto)
+        {
+            var customerId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "CustomerId")?.Value;
+            if (customerId == null) return 0;
+            var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.CustomerId == int.Parse(customerId));
+            if (profile == null) return 0;
+            profile.FullName = profileDto.FullName;
+            profile.Gender = profileDto.Gender;
+            profile.DateOfBirth = profileDto.DateOfBirth;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
 

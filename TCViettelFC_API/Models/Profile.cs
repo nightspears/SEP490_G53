@@ -19,5 +19,5 @@ public partial class Profile
 
     public DateTime? CreatedAt { get; set; }
 
-    public virtual Customer? Customer { get; set; }
+    public virtual CustomersAccount? Customer { get; set; }
 }

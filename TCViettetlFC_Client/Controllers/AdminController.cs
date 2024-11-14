@@ -18,15 +18,15 @@ namespace TCViettetlFC_Client.Controllers
 
         public IActionResult Home()
         {
-            var token = Request.Cookies["AuthToken"];
-            if (string.IsNullOrEmpty(token))
+            var token = Request.Cookies["AuthToken"]; // Change this to AuthToken
+            var roleId = Request.Cookies["RoleId"]; // Keep this for role verification
+
+            // Check if token is missing or if roleId doesn't match
+            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(roleId) || roleId != "2")
             {
                 return RedirectToAction("Login", "User");
             }
-            else
-            {
-                return View();
-            }
+            return View();
 
         }
 

@@ -1,0 +1,142 @@
+﻿@model List<TCViettetlFC_Client.Models.MatchViewModel>
+
+@{
+    ViewBag.Title = "Matches";
+    Layout = "_LayoutCommon";
+}
+
+<section class="innerpage_all_wrap bg-white">
+    <div class=container>
+        <div class=row>
+            <div class="spacewithtop" style="padding-top:7.5%"></div>
+            <h2 class=heading>Trải nghiệm bóng đá đỉnh cao<span>- Đặt vé ngay hôm nay!</span></h2>
+
+            <p class=headParagraph>
+                Chào mừng bạn đến với hệ thống bán vé trực tuyến chính thức của sân vận động! 
+                Tận hưởng những trận cầu đỉnh cao cùng đội bóng yêu thích. 
+                Dễ dàng chọn chỗ ngồi, đặt vé nhanh chóng và an toàn chỉ với vài thao tác. 
+                Đừng bỏ lỡ cơ hội hòa mình vào không khí sôi động trên khán đài!
+            </p>
+
+            <div class=innerWrapper>
+                <aside class="widgetinner clearfix">
+                    <div class=widgetinfowrap>
+                        <div class=bg-blackimg>why book width us?</div>
+                        <ul class="widgetinfo info01">
+                            <li>150% MONEY BACK GURANTEE</li>
+                            <li>REAL TIME INVENTory</li>
+                            <li>friendly customer service</li>
+                            <li>secure payment</li>
+                            <li>last minute bookings</li>
+                            <li>7 years online swering fans</li>
+                        </ul>
+                        <a href=# class=blacklrnmore>learn more</a>
+                    </div>
+                    <div class=widgetinfowrap>
+                        <div class=bg-blackimg>english memebership</div>
+                        <ul class="widgetinfo info02">
+                            <li>liverpool ticket</li>
+                            <li>arsenasl ticket</li>
+                            <li>ticket 03</li>
+                            <li>ticket 04</li>
+                        </ul>
+                        <a href=# class=blacklrnmore>learn more</a>
+                    </div>
+                    <div class=widgetinfowrap>
+                        <div class=bg-blackimg>spanish la liga</div>
+                        <ul class="widgetinfo info02">
+                            <li>liverpool ticket</li>
+                            <li>arsenal ticket</li>
+                        </ul>
+                        <a href=# class=blacklrnmore>learn more</a>
+                    </div>
+                    <div class=widgetinfowrap>
+                        <div class=bg-blackimg>champions leauge</div>
+                        <ul class="widgetinfo info02">
+                            <li>liverpool ticket</li>
+                        </ul>
+                        <a href=# class=blacklrnmore>learn more</a>
+                    </div>
+                    <div class=widgetinfowrap>
+                        <div class=bg-blackimg>natinal football teams</div>
+                        <ul class="widgetinfo info02">
+                            <li>liverpool ticket</li>
+                            <li>arsenal ticket</li>
+                            <li>ticket 03</li>
+                            <li>ticket 04</li>
+                        </ul>
+                        <a href=# class=blacklrnmore>learn more</a>
+                    </div>
+                </aside>
+                <aside class=contentinner>
+                    <div class="bg-red headline01">most populat match ticket</div>
+                    <ul class="ticketInfo">
+                        @{
+                            int counter = 1; // Biến đếm bắt đầu từ 1
+                        }
+
+                        @foreach (var match in Model)
+                        {
+                            <li>
+                                <ul class="t_info headline01 clearfix">
+                                    <li>@counter</li> <!-- Số sẽ tự động tăng ở đây -->
+                                    <li>
+                                        <div class="headline01 clearfix">
+                                            <span>VIETTEL FC</span><span class="vs">vs</span> <span>@match.OpponentName</span>
+                                        </div>
+                                        <div class="ticketInner_info paragraph02 clearfix">
+                                            <span>@(match.MatchDate.HasValue ? match.MatchDate.Value.ToString("dd/MM/yyyy") : "")</span>
+                                            <span>@(match.MatchDate.HasValue ? match.MatchDate.Value.ToString("hh:mm tt") : "")</span> <span class="capitalize01">@match.StadiumName</span>
+                                        </div>
+                                    </li>
+                                    @if (match.Status == 1)
+                                    {
+                                        <li><a href="@Url.Action("Index", "Area", new { matchId = match.Id })" class="btn-small01 btn-green">book tickets</a></li>
+                                    }
+                                </ul>
+                            </li>
+
+                            counter++; // Tăng giá trị của biến đếm sau mỗi vòng lặp
+                        }
+                    </ul>
+
+                    <div class=center><a href=# class=vm-book>view more</a></div>
+                    <div class=buymatchticket>
+                        <div class=bg-red><h5>how by a match ticket</h5></div>
+                        <div class=ticktbody>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis,
+                                illum ut qui tenetur earum placeat? Molestiae libero debitis alias quo officiis amet
+                                quos mollitia vero modi, praesentium, iusto, harum eaque.
+                            </p>
+
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos ratione ad cum nobis
+                                voluptatum veritatis consequuntur distinctio quia velit reiciendis, quod rem earum
+                                alias, tempore placeat! Modi dolore necessitatibus quod.
+                            </p>
+
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos ratione ad cum nobis
+                                voluptatum veritatis consequuntur distinctio quia velit reiciendisd.
+                            </p>
+
+                            <div class=socialTicket>
+                                <a href=https://www.facebook.com/templatespoint.net
+                                   class="social_link facebook">
+                                    <i class="fa fa-facebook"></i>
+                                </a> <a href=https://twitter.com/
+                                        class="social_link twitter">
+                                    <i class="fa fa-twitter"></i>
+                                </a> <a href=https://www.behance.net/
+                                        class="social_link behance">
+                                    <i class="fa fa-behance"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>

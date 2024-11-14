@@ -14,25 +14,30 @@ namespace TCViettetlFC_Client.Controllers
         }
         public IActionResult Login()
         {
-            var token = Request.Cookies["AuthToken"];
+            var token = Request.Cookies["RoleId"];
             if (string.IsNullOrEmpty(token))
             {
                 return View();
             }
-            var userRole = Request.Cookies["UserRole"];
-            if (userRole == "2")
+            if (token.Equals("2"))
             {
                 return RedirectToAction("Home", "Admin");
             }
-            else
+            else if (token.Equals("1"))
             {
                 return RedirectToAction("Home", "Staff");
             }
+            else
+            {
+                return View();
+            }
+
         }
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
             Response.Cookies.Delete("AuthToken");
-            Response.Cookies.Delete("UserRole");
+            Response.Cookies.Delete("RoleId");
+            Response.Cookies.Delete("UserId");
 
             return RedirectToAction("Login", "User");
         }
@@ -55,22 +60,30 @@ namespace TCViettetlFC_Client.Controllers
                     var cookieOptions = new CookieOptions
                     {
                         HttpOnly = true,
-                        Secure = true,
-                        SameSite = SameSiteMode.Strict,
+
+                        SameSite = SameSiteMode.Lax,
                         Expires = DateTime.UtcNow.AddHours(1)
                     };
 
                     Response.Cookies.Append("AuthToken", token.token, cookieOptions);
-                    Response.Cookies.Append("UserRole", token.roleId.ToString(), cookieOptions);
                     Response.Cookies.Append("UserId", token.userId.ToString(), cookieOptions);
+                    Response.Cookies.Append("RoleId", token.roleId.ToString(), cookieOptions);
 
                     if (token.roleId == 2)
                     {
                         return RedirectToAction("Home", "Admin");
                     }
-                    else
+                    else if (token.roleId == 1)
                     {
                         return RedirectToAction("Home", "Staff");
+                    }
+                    else if (token.roleId == 3)
+                    {
+                        return RedirectToAction("Home", "Entry");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login");
                     }
 
                 }

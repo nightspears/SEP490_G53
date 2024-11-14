@@ -9,10 +9,12 @@ namespace TCViettelFC_API.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly ITicketUtilRepository _ticketUtilRepository;
 
-        public CustomerController(ICustomerRepository customerRepository)
+        public CustomerController(ICustomerRepository customerRepository, ITicketUtilRepository ticketUtilRepository)
         {
             _customerRepository = customerRepository;
+            _ticketUtilRepository = ticketUtilRepository;
         }
 
         [HttpPost("register")]
@@ -30,6 +32,13 @@ namespace TCViettelFC_API.Controllers
             if (result == null) return BadRequest("Login failed");
             return Ok(result);
         }
+        [HttpGet("profile")]
+        public async Task<IActionResult> GetCustomerProfile()
+        {
+            var result = await _customerRepository.GetCustomerProfile();
+            return Ok(result);
+        }
+
 
         [HttpPost("verify")]
         public async Task<IActionResult> VerifyConfirmationCodeAsync([FromBody] VerifyConfirmationCodeRequest request)
@@ -41,5 +50,16 @@ namespace TCViettelFC_API.Controllers
             }
             return BadRequest("Invalid or expired confirmation code");
         }
+        [HttpPut("updateprofile")]
+        public async Task<IActionResult> UpdateProfile(ProfileDto profile)
+        {
+            var result = await _customerRepository.UpdateCustomerProfile(profile);
+            if (result == 1)
+            {
+                return Ok("Profile updated successfully");
+            }
+            return BadRequest("Failed to update profile");
+        }
+
     }
 }
