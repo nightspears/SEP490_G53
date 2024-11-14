@@ -1,0 +1,133 @@
+﻿
+@{
+    Layout = "_LayoutCommon";
+}
+<style>
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 50px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .card {
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fff;
+        overflow: hidden;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+    .card-content {
+        padding: 15px;
+        text-align: center;
+        background-color: #20262d;
+    }
+
+        .card-content h2 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .card-content p {
+            font-size: 14px;
+            color: #ffc7c9;
+        }
+
+    .joindate {
+        font-family: "Open Sans", sans-serif;
+        font-size: 14px;
+        color: #ffc7c9;
+        font-weight: 400;
+    }
+</style>
+
+<section class="players">
+    <div class="container">
+        <div class="row">
+            <div class="spacewithtop" style="padding-top:7.5%"></div>
+
+            <h2 class="heading">Cầu<span>Thủ</span></h2>
+
+            <p class="headParagraph">
+                Câu lạc bộ bóng đá Thể Công – Viettel là một trong những đội bóng lâu đời và giàu truyền thống của bóng đá Việt Nam.
+                Đội hình của CLB luôn là sự kết hợp giữa những cầu thủ giàu kinh nghiệm và các tài năng trẻ,
+                hứa hẹn mang lại sự cạnh tranh mạnh mẽ trong các giải đấu.
+            </p>
+
+            <div class="wrapplayer clearfix" style="height: fit-content; margin: 1%;">
+                <div class="card-container" id="card-container">
+                    <!-- context -->
+                    @foreach (var player in Model)
+                    {
+                        <div class="card">
+                            <a href="@Url.Action("PlayerDetails", "Team", new { id = player.PlayerId })">
+                                <img src="@player.BackShirtImage ?? " https: //via.placeholder.com/200x150"" alt="@player.FullName">
+                                <div class="card-content">
+                                    <h2>@player.FullName</h2>
+                                    <p>Ngày gia nhập: @(player.JoinDate?.ToString("dd/MM/yyyy") ?? "N/A")</p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* <script>
+    async function fetchPlayers() {
+        try {
+            const response = await fetch('https://localhost:5000/api/Players/ListPlayer');
+            const players = await response.json();
+            const container = document.getElementById('card-container');
+
+            container.innerHTML = ''; // Clear previous cards
+
+            players.forEach(player => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+
+                // Add a click event to navigate to player details
+                card.addEventListener('click', () => {
+
+                    window.location.href = `PlayerDetails/${player.playerId}`;
+                });
+
+                card.innerHTML = `
+                    <img src="${player.backShirtImage || 'https://via.placeholder.com/250x200'}" alt="${player.fullName}">
+                    <div class="card-content">
+                        <h2>${player.fullName || 'N/A'}</h2>
+                        <p class="joindate">
+                            Ngày gia nhập: ${player.joinDate ? new Date(player.joinDate).toLocaleDateString() : 'N/A'}
+                        </p>
+                    </div>
+                  `;
+
+                container.appendChild(card);
+            });
+        } catch (error) {
+            console.error('Error fetching players:', error);
+        }
+    }
+
+    // Initialize
+    fetchPlayers();
+</script> *@
