@@ -59,6 +59,10 @@ function loadData() {
                 var tenSan = (item.isHome === true ? 'SVĐ Mỹ Đình' : item.stadiumName);
                 var logoUrl = item.logoUrl ? item.logoUrl : "/image/imagelogo/icon-image-not-found-free-vector.jpg";
 
+                var matchDate = new Date(item.matchDate);
+                var dateFormatted = matchDate.toLocaleDateString('en-GB'); // Formats as dd/MM/yyyy
+                var timeFormatted = matchDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); // Formats as HH:mm
+
                 var rowHtml = `
                     <tr>
                         <td>
@@ -77,7 +81,8 @@ function loadData() {
                             </h2>
                         </td>
                         <td>${tenSan}</td>
-                        <td>${item.matchDate} <br><small></small></td>
+                        <td>${dateFormatted}</td>
+                         <td>${timeFormatted}</td>
                         <td>${item.isHome === true ? 'Sân nhà' : 'Sân khách'}</td>
                         <td class="text-center">
                             <div class="status-toggle d-flex justify-content-center">

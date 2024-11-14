@@ -68,9 +68,9 @@ function loadData()  {
                         </td>
                         <td>${item.discountName}</td>
                         <td>${item.discountPercent}</td>
-                        <td>${item.validFrom}</td>
+                        <td>${item.fromFormatted}</td>
 
-                        <td>${item.validUntil}</td>
+                        <td>${item.untilFormatted}</td>
 
                         <td class="text-center">
                             <div class="status-toggle d-flex justify-content-center">

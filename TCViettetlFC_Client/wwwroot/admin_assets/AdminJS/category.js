@@ -67,7 +67,7 @@ function loadData() {
                             </div>
                         </td>
                         <td>${item.categoryName}</td>
-                        <td>${item.createdAt} <br><small></small></td>
+                        <td>${item.createdAtFormatted} <br><small></small></td>
                         <td class="text-center">
                             <div class="status-toggle d-flex justify-content-center">
                                 <input type="checkbox" id="status_${item.categoryId}" class="check" ${item.status === 1 ? 'checked' : ''}>
@@ -191,16 +191,18 @@ function EditOrCreate() {
     } else {
         formData.append('Status', 2);
     }
-
-
+    
+    var url = "https://localhost:5000/api/Category/UpdateCate/" + id;
+    debugger
     if (id != 0 && id != undefined) {
         $.ajax({
-            url: 'https://localhost:5000/api/Category/UpdateCate/' + id,
+            url: url,
             type: 'Put',
             data: formData,
             contentType: false, // Không thiết lập Content-Type
             processData: false, // Không xử lý dữ liệu
             success: function (response) {
+                debugger
                 loadData();
                 showAlert("Cập nhật thành công");
                 $("#modalEditorCreate").modal("hide");
