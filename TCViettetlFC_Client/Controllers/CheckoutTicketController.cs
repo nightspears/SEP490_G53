@@ -115,28 +115,14 @@ namespace TCViettetlFC_Client.Controllers
                 }
                 else if (VNPayresponse.VnPayResponseCode == "24") // Transaction cancelled by user
                 {
-                    viewModel.Message = "Payment was cancelled. Please try again or choose a different payment method.";
-                    viewModel.IsSuccess = false;
-                    return View("Checkout", viewModel);
-                }
-                else if (VNPayresponse.VnPayResponseCode == "51") // Insufficient funds
-                {
-                    viewModel.Message = "Insufficient funds in your account. Please try a different payment method.";
-                    viewModel.IsSuccess = false;
-                    return View("Checkout", viewModel);
-                }
-                else if (VNPayresponse.VnPayResponseCode == "99") // Payment timeout or system error
-                {
-                    viewModel.Message = "Payment timed out or encountered a system error. Please try again.";
-                    viewModel.IsSuccess = false;
-                    return View("Checkout", viewModel);
+                    return RedirectToAction("Checkout");
                 }
                 else
                 {
                     // Handle other failure scenarios
                     viewModel.Message = "Payment failed. Please try again.";
                     viewModel.IsSuccess = false;
-                    return View("Checkout", viewModel);
+                    return View(viewModel);
                 }
             }
             catch (Exception ex)

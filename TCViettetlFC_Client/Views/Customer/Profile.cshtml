@@ -1,181 +1,434 @@
 ﻿@model CustomerProfileModel
 @{
-    CustomerProfileModel bindmodel = ViewBag.Profile;
+	var customerId = ViewData["CustomerId"] as string; // Cast to string, or use null if it's not a string
+	var customerEmail = ViewData["CustomerEmail"] as string;  // Cast to string
+	var customerPhone = ViewData["CustomerPhone"] as string;  // Cast to string
+	Layout = "_layoutCommon";
 }
-<div class="breadcrumb-bar">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-12 col-12">
-                <nav aria-label="breadcrumb" class="page-breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
-                    </ol>
-                </nav>
-                <h2 class="breadcrumb-title">Profile Settings</h2>
-            </div>
-        </div>
-    </div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="~/home_assets/css/sanpham.css" rel="stylesheet" />
+<style>
+	.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scrolling of the whole page when modal is open */
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 900px;
+}
+
+.modal-body {
+    max-height: 400px; /* Set the maximum height of the modal body */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 10px; /* Optional: to prevent content from being clipped */
+}
+
+/* Optional: Close button */
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 25px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Modal close button for better visibility */
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #333;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: #e86565;
+}
+
+/* Modal content header */
+.modal-header {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.modal-footer {
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* Responsive Styling */
+@@media (max-width: 768px) {
+    .modal-content {
+        padding: 15px;
+    }
+
+    .modal-header {
+        font-size: 20px;
+    }
+
+    .modal-body {
+        font-size: 14px;
+    }
+
+    .modal-close {
+        font-size: 20px;
+    }
+}
+	/* Custom CSS */
+	.category ul li {
+		height: 50px;
+		line-height: 50px;
+		cursor: pointer;
+	}
+
+		.category ul li:hover {
+			background-color: #e86565;
+			border-radius: 10px;
+		}
+
+			.category ul li:hover a, .category ul li.active a {
+				color: white;
+			}
+
+		.category ul li.active {
+			background-color: #e86565;
+			border-radius: 10px;
+		}
+
+		.category ul li a {
+			font-size: 19px;
+			color: black;
+			margin-left: 10px;
+			text-decoration: none;
+		}
+
+	.aside-title {
+		font-size: 19px;
+		color: #333;
+	}
+
+	.container {
+		padding: 50px 0;
+	}
+
+	.card {
+		box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.heading {
+		font-size: 24px;
+		font-weight: bold;
+	}
+
+	/* Custom styles for order details section */
+	.order-summary, .customer-info, .shipping-address, .product-list, .payment-info {
+		margin-bottom: 20px;
+	}
+
+		.order-summary p, .customer-info p, .shipping-address p, .payment-info p {
+			font-size: 14px;
+			color: #555;
+		}
+
+		.order-summary h5, .customer-info h6, .shipping-address h6, .product-list h6, .payment-info h6 {
+			font-size: 16px;
+			font-weight: bold;
+			color: #333;
+		}
+
+	.product-item {
+		display: flex;
+		align-items: center;
+		margin-bottom: 10px;
+	}
+
+		.product-item img {
+			border-radius: 5px;
+		}
+
+		.product-item span {
+			font-size: 14px;
+			color: #555;
+		}
+
+	.payment-info p {
+		font-size: 14px;
+		color: #333;
+	}
+
+	.payment-info strong {
+		color: #000;
+	}
+</style>
+
+<div class="innerbannerwrap">
+	<div class="content"></div>
+	<div class="innerbanner">
+		<h2 class="bannerHeadline" style="font-size:65px">Trang <span>khách hàng</span></h2>
+	</div>
 </div>
 
-
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-7 col-lg-8 col-xl-9">
-                <div class="card">
-                    <div class="card-body">
-
-                        <form method="post" asp-action="UpdateProfile">
-                            <div class="row form-row">
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>Tên đầy đủ</label>
-                                        <input type="text" class="form-control" value="@bindmodel.FullName" asp-for="FullName">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>Ngày sinh</label>
-                                        <div class="cal-icon">
-                                            <input type="text" class="form-control datetimepicker" asp-for="DateOfBirth"
-                                                   value="@bindmodel.DateOfBirth">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="form-group">
-                                        <label>Giới tính</label>
-                                        <select class="form-control select" asp-for="Gender">
-                                            <option>Nam</option>
-                                            <option>Nữ</option>
-                                            
-                                        </select>
-                                    </div>
-                                </div>                             
-                            </div>
-                            <div class="submit-section">
-                                <button type="submit" class="btn btn-primary submit-btn">Cập nhật</button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div style="padding-top: 30px;">
+	<h2 style="padding-bottom: 20px" class="heading small">Trang tài khoản <span>Viettel Shop</span></h2>
 </div>
 
+<div class="container my-5 mt-5">
+	<div class="d-flex">
+		<!-- Left Column: Sidebar Menu -->
+		<div class="col-md-3">
+			<div class="filter-section">
+				<div class="mb-3">
+					<div class="category">
+						<ul id="lstCate">
+							<li onclick="showSection(event, 'accountInfo')" class="active"><a href="javascript:void(0)">Thông tin tài khoản</a></li>
+							<li onclick="showSection(event, 'orders')"><a href="javascript:void(0)">Đơn hàng của bạn</a></li>
+							<li onclick="showSection(event, 'changePassword')"><a href="javascript:void(0)">Đổi mật khẩu</a></li>
+							<li onclick="showSection(event, 'addressBook')"><a href="javascript:void(0)">Sổ địa chỉ (2)</a></li>
 
-<footer class="footer">
+					</div>
+				</div>
+			</div>
+		</div>
 
-    <div class="footer-top">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
+		<!-- Right Column: Account Details -->
+		<div class="col-md-9">
+			<div id="accountInfo" class="card section">
+				<div class="card-body">
+					<h4>Thông tin tài khoản</h4>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label>Họ tên</label>
+							<p id="fullName"></p>
+						</div>
+						<div class="form-group col-md-6">
+							<label>Email</label>
+							<p id="email"></p>
+						</div>
+						<div class="form-group col-md-6">
+							<label>Phone</label>
+							<p id="phone"></p>
+						</div>
+					</div>
+				</div>
+			</div>
 
-                    <div class="footer-widget footer-about">
-                        <div class="footer-logo">
-                            <img src="assets/img/logo.png" alt="logo">
-                        </div>
-                        <div class="footer-about-content">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                            </p>
-                            <div class="social-icon">
-                                <ul>
-                                    <li>
-                                        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+			<div id="orders" class="card section" style="display:none;">
+				<div class="card-body">
+					<h4>Đơn hàng của bạn</h4>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Mã đơn hàng</th>
+								<th scope="col">Ngày đặt</th>
+								<th scope="col">Tổng tiền</th>
+								<th scope="col">Trạng thái</th>
+							</tr>
+						</thead>
+						<tbody id="ordersTableBody">
+							<!-- Orders data will be populated here -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- Modal or Section to display Order details -->
+			<!-- Modal for displaying order details -->
+			<div id="orderDetailModal" class="modal">
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<h4>Order Details</h4>
+					<div class="modal-body">
+						<!-- Order details will be injected here dynamically -->
+					</div>
+				</div>
+			</div>
+			<div id="changePassword" class="card section" style="display:none;">
+				<div class="card-body">
+					<h4>Đổi mật khẩu</h4>
+					<!-- Change password form goes here -->
+					<p>Chức năng đổi mật khẩu sẽ hiển thị ở đây.</p>
+				</div>
+			</div>
 
-                </div>
-                <div class="col-lg-3 col-md-6">
+			<div id="addressBook" class="card section" style="display:none;">
+				<div class="card-body">
+					<h4>Sổ địa chỉ</h4>
+					<!-- Address book content goes here -->
+					<p>Thông tin sổ địa chỉ sẽ hiển thị ở đây.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-                    <div class="footer-widget footer-menu">
-                        <h2 class="footer-title">For Mentee</h2>
-                        <ul>
-                            <li><a href="search.html">Search Mentors</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="register.html">Register</a></li>
-                            <li><a href="booking.html">Booking</a></li>
-                            <li><a href="dashboard-mentee.html">Mentee Dashboard</a></li>
-                        </ul>
-                    </div>
+<script>
+	// Function to show and hide sections
+	function showSection(event, sectionId) {
+		document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
+		document.querySelectorAll('#lstCate li').forEach(item => item.classList.remove('active'));
 
-                </div>
-                <div class="col-lg-3 col-md-6">
+		document.getElementById(sectionId).style.display = 'block';
+		event.target.closest('li').classList.add('active');
+	}
 
-                    <div class="footer-widget footer-menu">
-                        <h2 class="footer-title">For Mentors</h2>
-                        <ul>
-                            <li><a href="appointments.html">Appointments</a></li>
-                            <li><a href="chat.html">Chat</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="register.html">Register</a></li>
-                            <li><a href="dashboard.html">Mentor Dashboard</a></li>
-                        </ul>
-                    </div>
+	// Fetch customer information and order data
+	const customerId = '@ViewData["CustomerId"]';
+	const apiBase = 'https://localhost:5000/api';
 
-                </div>
-                <div class="col-lg-3 col-md-6">
+	async function fetchData() {
+		try {
+			const customerRes = await fetch(`${apiBase}/customer/getCustomerAccountById/${customerId}`);
+			const customerData = await customerRes.json();
+			if (customerData) {
+				document.querySelector("#accountInfo #fullName").innerHTML = `Họ tên: ${customerData.fullName}`;
+				document.querySelector("#accountInfo #email").innerHTML = `Email: ${customerData.email}`;
+				document.querySelector("#accountInfo #phone").innerHTML = `Phone: ${customerData.phone}`;
+			} else {
+				throw new Error("Customer account not found.");
+			}
 
-                    <div class="footer-widget footer-contact">
-                        <h2 class="footer-title">Contact Us</h2>
-                        <div class="footer-contact-info">
-                            <div class="footer-address">
-                                <span><i class="fas fa-map-marker-alt"></i></span>
-                                <p> 3556 Beech Street, San Francisco,<br> California, CA 94108 </p>
-                            </div>
-                            <p>
-                                <i class="fas fa-phone-alt"></i>
-                                +1 315 369 5943
-                            </p>
-                            <p class="mb-0">
-                                <i class="fas fa-envelope"></i>
-                                <a href="https://mentoring.dreamguystech.com/cdn-cgi/l/email-protection"
-                                   class="__cf_email__"
-                                   data-cfemail="5e333b302a312c3730391e3b263f332e323b703d3133">[email&#160;protected]</a>
-                            </p>
-                        </div>
-                    </div>
+			const ordersRes = await fetch(`${apiBase}/Order/getordersbyaccount/${customerId}`);
+			const orders = await ordersRes.json();
+			const ordersTableBody = document.getElementById('ordersTableBody');
+			ordersTableBody.innerHTML = orders && orders.length > 0 ? orders.map(order => createOrderRow(order)).join('') : '<tr><td colspan="4">Chưa có đơn hàng nào.</td></tr>';
+		} catch (error) {
+			console.error("Error fetching data: ", error);
+			alert("Lỗi khi tải thông tin.");
+		}
+	}
 
-                </div>
-            </div>
-        </div>
-    </div>
+	function createOrderRow(order) {
+		const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.totalPrice);
+		const statusText = order.status ? 'Đã xử lý' : 'Chưa xử lý';
+		const statusColor = order.status ? 'green' : 'red';
 
+		return `
+			<tr>
+				<td><a href="#" class="order-id" data-order-id="${order.id}">${order.id}</a></td>
+				<td>${new Date(order.orderDate).toLocaleDateString()}</td>
+				<td>${formattedPrice}</td>
+				<td style="color: ${statusColor};">${statusText}</td>
+			</tr>
+		`;
+	}
 
-    <div class="footer-bottom">
-        <div class="container-fluid">
+	async function fetchOrderDetails(orderId) {
+		try {
+			const response = await fetch(`${apiBase}/Order/getorderdetails/${orderId}`);
+			const orderDetail = await response.json();
+			displayOrderDetails(orderDetail);
+		} catch (error) {
+			console.error("Error fetching order details:", error);
+			alert("Lỗi khi tải chi tiết đơn hàng.");
+		}
+	}
 
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <div class="copyright-text">
-                            <p class="mb-0">&copy; 2020 Mentoring. All rights reserved.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+	function displayOrderDetails(orderDetail) {
+		const modal = document.getElementById('orderDetailModal');
+		const modalBody = modal.querySelector('.modal-body');
+		const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(orderDetail.totalPrice);
 
-        </div>
-    </div>
+		modalBody.innerHTML = `
+			<h5><strong>Mã đơn hàng:</strong> ${orderDetail.id}</h5>
+			<p><strong>Ngày đặt:</strong> ${new Date(orderDetail.orderDate).toLocaleDateString()}</p>
+			<p><strong>Tổng tiền:</strong> ${formattedPrice}</p>
+			<p><strong>Phí vận chuyển:</strong> ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(orderDetail.shipmentFee)}</p>
+			<p><strong>Trạng thái:</strong> ${orderDetail.status ? 'Đã xử lý' : 'Chưa xử lý'}</p>
+			<p><strong>Ghi chú:</strong> ${orderDetail.note || 'Không có ghi chú.'}</p>
 
-</footer>
+			<h6><strong>Thông tin khách hàng:</strong></h6>
+			<p><strong>Email:</strong> ${orderDetail.customerEmail}</p>
+			<p><strong>Điện thoại:</strong> ${orderDetail.customerPhone}</p>
+			<p><strong>Họ tên:</strong> ${orderDetail.customerFullName}</p>
+			<p><strong>Địa chỉ giao hàng:</strong>${orderDetail.address.detailedAddress}, ${orderDetail.address.wardName}, ${orderDetail.address.districtName}, ${orderDetail.address.cityName}</p>
+
+			<h6><strong>Thông tin sản phẩm:</strong></h6>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Hình ảnh</th>
+						<th>Tên sản phẩm</th>
+						<th>Số lượng</th>
+						<th>Size</th>
+						<th>Giá</th>
+						<th>Thành tiền</th>
+						<th>Họ tên cầu thủ</th>
+						<th>Số áo cầu thủ</th>
+						<th>Số áo In Custom</th>
+						<th>Tên áo In Custom</th>
+					</tr>
+				</thead>
+				<tbody>
+					${orderDetail.products.map(product => `
+						<tr>
+							<td><img src="${product.product.avatar}" alt="${product.product.productName}" style="width: 50px; height: 50px; object-fit: cover;" /></td>
+							<td>${product.product.productName}</td>
+							<td>${product.quantity}</td>
+							<td>${product.size}</td>
+							<td>${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)}</td>
+							<td>${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price * product.quantity)}</td>
+							<td>${product.player ? product.player.fullName : '-'}</td>
+							<td>${product.player ? product.player.shirtNumber : '-'}</td>
+							<td>${product.customShirtNumber}</td>
+							<td>${product.customShirtName}</td>
+						</tr>
+					`).join('')}
+				</tbody>
+			</table>
+		`;
+		modal.style.display = 'block';
+	}
+
+	window.onload = () => {
+		// Hide all sections and show the account info section by default
+		document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
+		document.getElementById('accountInfo').style.display = 'block';
+
+		// Set the first item in the category list as active
+		document.querySelector('#lstCate li').classList.add('active');
+		fetchData();
+	};
+
+	// Close modal functionality
+	document.querySelector('.close').onclick = () => document.getElementById('orderDetailModal').style.display = 'none';
+	window.onclick = event => {
+		if (event.target === document.getElementById('orderDetailModal')) {
+			document.getElementById('orderDetailModal').style.display = 'none';
+		}
+	};
+
+	// Event listener for order IDs
+	document.addEventListener('click', (e) => {
+		if (e.target.classList.contains('order-id')) {
+			e.preventDefault();
+			const orderId = e.target.dataset.orderId;
+			fetchOrderDetails(orderId);
+		}
+	});
+
+</script>

@@ -60,6 +60,17 @@ namespace TCViettelFC_API.Controllers
             }
             return BadRequest("Failed to update profile");
         }
+		[HttpGet("getCustomerAccountById/{accountId}")]
+		public async Task<IActionResult> GetCustomerAccountById(int accountId)
+		{
+			var customerAccount = await _customerRepository.GetCustomerByAccountIdAsync(accountId);
+			if (customerAccount == null)
+			{
+				return NotFound("Customer account not found");
+			}
+			return Ok(customerAccount);
+		}
 
-    }
+
+	}
 }

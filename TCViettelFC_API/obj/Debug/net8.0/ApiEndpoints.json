@@ -431,6 +431,22 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "GetCustomerAccountById",
+    "RelativePath": "api/Customer/getCustomerAccountById/{accountId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "accountId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
     "Method": "LoginAsync",
     "RelativePath": "api/Customer/login",
     "HttpMethod": "POST",
@@ -1257,6 +1273,22 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.OrderController",
+    "Method": "GetOrdersByCustomerAccountId",
+    "RelativePath": "api/Order/getordersbyaccount/{customerAccountId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerAccountId",
         "Type": "System.Int32",
         "IsRequired": true
       }

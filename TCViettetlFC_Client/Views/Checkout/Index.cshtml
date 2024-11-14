@@ -1,5 +1,8 @@
 ﻿@model TCViettetlFC_Client.Models.CheckoutModel
 @{
+      var customerId = ViewData["CustomerId"] as string; // Cast to string, or use null if it's not a string
+    var customerEmail = ViewData["CustomerEmail"] as string;  // Cast to string
+    var customerPhone = ViewData["CustomerPhone"] as string;  // Cast to string
 Layout = null;
 }
 <!DOCTYPE html>
@@ -223,17 +226,21 @@ Layout = null;
                <!-- Shipping Information -->
                <div class="col-md-7">
                   <h5>Thông tin nhận hàng</h5>
-                  <div class="mb-3">
+                 <div class="mb-3">
+                         <input type="hidden" name=AccountId value="@customerId" />
                      <label for="email" class="form-label">Email</label>
-                     <input type="email" class="form-control" id="email" name="Email" value="@Model.Email" required>
+                     <input type="email" class="form-control" id="email" name="Email" 
+                            value="@((customerEmail ?? Model.Email) ?? "")" required>
                   </div>
                   <div class="mb-3">
                      <label for="fullName" class="form-label">Họ và tên</label>
-                     <input type="text" class="form-control" id="fullName" name="FullName" value="@Model.FullName" required>
+                     <input type="text" class="form-control" id="fullName" name="FullName" 
+                            value="@Model.FullName" required>
                   </div>
                   <div class="mb-3">
                      <label for="phone" class="form-label">Số điện thoại (tùy chọn)</label>
-                     <input type="text" class="form-control" id="phone" name="Phone" value="@Model.Phone">
+                     <input type="text" class="form-control" id="phone" name="Phone" 
+                            value="@((customerPhone ?? Model.Phone) ?? "")">
                   </div>
                   <div class="mb-3">
                      <label for="savedAddresses" class="form-label">Địa chỉ đã lưu</label>

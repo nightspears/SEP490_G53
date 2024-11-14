@@ -55,8 +55,31 @@ namespace TCViettelFC_API.Repositories.Implementations
             Random random = new Random();
             return random.Next(100000, 999999).ToString();
         }
+		// Method to retrieve a customer by account ID
+		public async Task<CustomerAccountDTO?> GetCustomerByAccountIdAsync(int accountId)
+		{
+			var customerAccount = await _context.CustomersAccounts
+				.FirstOrDefaultAsync(ca => ca.CustomerId == accountId);
 
-        public async Task<bool> VerifyConfirmationCodeAsync(string email, string code)
+			if (customerAccount == null) return null;
+
+			return new CustomerAccountDTO
+			{
+				CustomerId = customerAccount.CustomerId,
+				Email = customerAccount.Email,
+				Phone = customerAccount.Phone,
+				Status = customerAccount.Status
+			};
+		}
+
+		public class CustomerAccountDTO
+		{
+			public int CustomerId { get; set; }
+			public string? Email { get; set; }
+			public string? Phone { get; set; }
+			public int? Status { get; set; }
+		}
+		public async Task<bool> VerifyConfirmationCodeAsync(string email, string code)
         {
             if (_pendingRegistrations.TryGetValue(email, out var storedData))
             {
@@ -115,6 +138,8 @@ namespace TCViettelFC_API.Repositories.Implementations
             };
             return response;
         }
+
+
         public async Task<ProfileDto?> GetCustomerProfile()
         {
 
