@@ -450,7 +450,7 @@
               "RelativeDocumentMoniker": "Controllers\\CheckoutController.cs",
               "ToolTip": "D:\\GithubRepo\\SEP490_G53\\TCViettelFC_API\\Controllers\\CheckoutController.cs",
               "RelativeToolTip": "Controllers\\CheckoutController.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAowDkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-14T06:55:09.079Z",
               "EditorCaption": ""
@@ -465,8 +465,7 @@
               "RelativeToolTip": "Repositories\\Implementations\\CheckoutRepository.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAowBwAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T06:54:13.474Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-14T06:54:13.474Z"
             }
           ]
         },
