@@ -9,15 +9,77 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link href="~/home_assets/css/sanpham.css" rel="stylesheet" />
 <style>
-	.modal {
+	.card-body {
+		max-height: 384px; /* Adjust height as needed */
+		overflow-y: auto;
+		padding: 15px;
+		font-family: Arial, sans-serif;
+	}
+/* Address Entries */
+.address-entry {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 0 10px 20px 10px; /* Combined margin for spacing and indentation */
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+.address-entry p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.address-entry strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.default-address {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 0.85em;
+    margin-left: 5px;
+}
+
+.edit-link, .delete-link {
+    color: #007bff;
+    font-size: 14px;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.edit-link:hover, .delete-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: #1E2A78;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #16215b;
+}
+
+/* Modal Styles */
+.modal {
     display: none; /* Hidden by default */
     position: fixed;
-    z-index: 1;
+   
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Enable scrolling of the whole page when modal is open */
+    overflow: auto; /* Enable scrolling */
     background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
 }
 
@@ -31,45 +93,28 @@
 }
 
 .modal-body {
-    max-height: 400px; /* Set the maximum height of the modal body */
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding-right: 10px; /* Optional: to prevent content from being clipped */
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
-/* Optional: Close button */
-.close {
+.close, .modal-close {
     color: #aaa;
     font-size: 28px;
     font-weight: bold;
     position: absolute;
     top: 10px;
     right: 25px;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Modal close button for better visibility */
-.modal-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    color: #333;
     background: none;
     border: none;
     cursor: pointer;
 }
 
-.modal-close:hover {
+.close:hover, .close:focus, .modal-close:hover {
     color: #e86565;
 }
 
-/* Modal content header */
+/* Modal Header & Footer */
 .modal-header {
     font-size: 24px;
     font-weight: bold;
@@ -82,7 +127,7 @@
     margin-top: 20px;
 }
 
-/* Responsive Styling */
+/* Responsive Modal Styling */
 @@media (max-width: 768px) {
     .modal-content {
         padding: 15px;
@@ -100,91 +145,85 @@
         font-size: 20px;
     }
 }
-	/* Custom CSS */
-	.category ul li {
-		height: 50px;
-		line-height: 50px;
-		cursor: pointer;
-	}
 
-		.category ul li:hover {
-			background-color: #e86565;
-			border-radius: 10px;
-		}
+/* Category List */
+.category ul li {
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+}
 
-			.category ul li:hover a, .category ul li.active a {
-				color: white;
-			}
+.category ul li:hover, .category ul li.active {
+    background-color: #e86565;
+    border-radius: 10px;
+}
 
-		.category ul li.active {
-			background-color: #e86565;
-			border-radius: 10px;
-		}
+.category ul li a {
+    font-size: 19px;
+    color: black;
+    margin-left: 10px;
+    text-decoration: none;
+}
 
-		.category ul li a {
-			font-size: 19px;
-			color: black;
-			margin-left: 10px;
-			text-decoration: none;
-		}
+.category ul li:hover a, .category ul li.active a {
+    color: white;
+}
 
-	.aside-title {
-		font-size: 19px;
-		color: #333;
-	}
+/* Layout and Container */
+.container {
+    padding: 50px 0;
+}
 
-	.container {
-		padding: 50px 0;
-	}
+.card {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-	.card {
-		box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-	}
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+}
 
-	.heading {
-		font-size: 24px;
-		font-weight: bold;
-	}
+/* Order Summary and Details */
+.order-summary, .customer-info, .shipping-address, .product-list, .payment-info {
+    margin-bottom: 20px;
+}
 
-	/* Custom styles for order details section */
-	.order-summary, .customer-info, .shipping-address, .product-list, .payment-info {
-		margin-bottom: 20px;
-	}
+.order-summary p, .customer-info p, .shipping-address p, .payment-info p {
+    font-size: 14px;
+    color: #555;
+}
 
-		.order-summary p, .customer-info p, .shipping-address p, .payment-info p {
-			font-size: 14px;
-			color: #555;
-		}
+.order-summary h5, .customer-info h6, .shipping-address h6, .product-list h6, .payment-info h6 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
 
-		.order-summary h5, .customer-info h6, .shipping-address h6, .product-list h6, .payment-info h6 {
-			font-size: 16px;
-			font-weight: bold;
-			color: #333;
-		}
+/* Product Item */
+.product-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
 
-	.product-item {
-		display: flex;
-		align-items: center;
-		margin-bottom: 10px;
-	}
+.product-item img {
+    border-radius: 5px;
+}
 
-		.product-item img {
-			border-radius: 5px;
-		}
+.product-item span {
+    font-size: 14px;
+    color: #555;
+}
 
-		.product-item span {
-			font-size: 14px;
-			color: #555;
-		}
+.payment-info p {
+    font-size: 14px;
+    color: #333;
+}
 
-	.payment-info p {
-		font-size: 14px;
-		color: #333;
-	}
+.payment-info strong {
+    color: #000;
+}
 
-	.payment-info strong {
-		color: #000;
-	}
 </style>
 
 <div class="innerbannerwrap">
@@ -209,7 +248,7 @@
 							<li onclick="showSection(event, 'accountInfo')" class="active"><a href="javascript:void(0)">Thông tin tài khoản</a></li>
 							<li onclick="showSection(event, 'orders')"><a href="javascript:void(0)">Đơn hàng của bạn</a></li>
 							<li onclick="showSection(event, 'changePassword')"><a href="javascript:void(0)">Đổi mật khẩu</a></li>
-							<li onclick="showSection(event, 'addressBook')"><a href="javascript:void(0)">Sổ địa chỉ (2)</a></li>
+							<li onclick="showSection(event, 'addressBook')"><a href="javascript:void(0)">Sổ địa chỉ</a></li>
 
 					</div>
 				</div>
@@ -275,13 +314,62 @@
 				</div>
 			</div>
 
-			<div id="addressBook" class="card section" style="display:none;">
+			<div id="addressBook" class="card section">
 				<div class="card-body">
-					<h4>Sổ địa chỉ</h4>
-					<!-- Address book content goes here -->
-					<p>Thông tin sổ địa chỉ sẽ hiển thị ở đây.</p>
+					<h4>ĐỊA CHỈ CỦA BẠN</h4>
+					<button class="btn btn-primary" onclick="addNewAddress()">THÊM ĐỊA CHỈ</button>
+
+					<div id="addressEntries">
+						<!-- Dynamic address entries will be inserted here -->
+					</div>
 				</div>
 			</div>
+
+			<!-- Modal for Adding New Address -->
+			<div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="addressModalLabel">Thêm Địa Chỉ Mới</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="addressDetail">Chi Tiết Địa Chỉ</label>
+								<input type="text" class="form-control" id="addressDetail" placeholder="Nhập địa chỉ">
+							</div>
+							<div class="form-group">
+								<label for="citySelect">Thành Phố</label>
+								<select class="form-control" id="citySelect">
+									<option value="">Chọn Thành Phố</option>
+									<!-- Options will be dynamically populated -->
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="districtSelect">Quận/Huyện</label>
+								<select class="form-control" id="districtSelect">
+									<option value="">Chọn Quận/Huyện</option>
+									<!-- Options will be dynamically populated -->
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="wardSelect">Phường/Xã</label>
+								<select class="form-control" id="wardSelect">
+									<option value="">Chọn Phường/Xã</option>
+									<!-- Options will be dynamically populated -->
+								</select>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+							<button type="button" class="btn btn-primary" onclick="saveAddress()">Lưu Địa Chỉ</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </div>
@@ -324,7 +412,7 @@
 
 	function createOrderRow(order) {
 		const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.totalPrice);
-		const statusText = order.status ? 'Đã xử lý' : 'Chưa xử lý';
+		const statusText = order.status ? 'Đã gửi vận chuyển' : 'Chưa gửi vận chuyển';
 		const statusColor = order.status ? 'green' : 'red';
 
 		return `
@@ -377,25 +465,25 @@
 						<th>Size</th>
 						<th>Giá</th>
 						<th>Thành tiền</th>
-						<th>Họ tên cầu thủ</th>
-						<th>Số áo cầu thủ</th>
-						<th>Số áo In Custom</th>
-						<th>Tên áo In Custom</th>
+					
 					</tr>
 				</thead>
 				<tbody>
 					${orderDetail.products.map(product => `
 						<tr>
 							<td><img src="${product.product.avatar}" alt="${product.product.productName}" style="width: 50px; height: 50px; object-fit: cover;" /></td>
-							<td>${product.product.productName}</td>
+									<td>
+		${product.product.productName || ''}
+		${product.player && product.player.fullName ? `<br>Tên cầu thủ: ${product.player.fullName}` : ''}
+		${product.player && product.player.shirtNumber ? `<br>Số áo cầu thủ: ${product.player.shirtNumber}` : ''}
+		${product.customShirtNumber ? `<br>Số áo custom: ${product.customShirtNumber}` : ''}
+		${product.customShirtName ? `<br>Tên áo custom: ${product.customShirtName}` : ''}
+	</td>
 							<td>${product.quantity}</td>
 							<td>${product.size}</td>
 							<td>${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)}</td>
 							<td>${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price * product.quantity)}</td>
-							<td>${product.player ? product.player.fullName : '-'}</td>
-							<td>${product.player ? product.player.shirtNumber : '-'}</td>
-							<td>${product.customShirtNumber}</td>
-							<td>${product.customShirtName}</td>
+							
 						</tr>
 					`).join('')}
 				</tbody>
@@ -412,6 +500,7 @@
 		// Set the first item in the category list as active
 		document.querySelector('#lstCate li').classList.add('active');
 		fetchData();
+		fetchAddress();
 	};
 
 	// Close modal functionality
@@ -430,5 +519,227 @@
 			fetchOrderDetails(orderId);
 		}
 	});
+
+	async function fetchAddress() {
+		try {
+			const addressRes = await fetch(`${apiBase}/Customer/address/${customerId}`);
+			const addressData = await addressRes.json();
+
+			if (addressData && addressData.length > 0) {
+				// Display the address data in the address section
+				const addressContainer = document.getElementById('addressEntries');
+				addressContainer.innerHTML = ''; // Clear existing content
+
+				// Loop through the address data and display each address
+				addressData.forEach(address => {
+					addressContainer.innerHTML += `
+						<div class="address-entry">
+							<p><strong>Địa chỉ:</strong> ${address.detailedAddress}</p>
+							<p><strong>Phường/Xã:</strong> ${address.wardName}</p>
+							<p><strong>Quận/Huyện:</strong> ${address.districtName}</p>
+							<p><strong>Tỉnh/Thành phố:</strong> ${address.cityName}</p>
+						</div>
+					`;
+				});
+			} else {
+				throw new Error("Address not found.");
+			}
+		} catch (error) {
+			console.error("Error fetching address:", error);
+			alert("Lỗi khi tải địa chỉ.");
+		}
+	}
+
+	const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw';  // Replace this with your actual token or get it dynamically
+
+	const headers = {
+		'Authorization': `Bearer ${token}`,
+		// Add any other necessary headers here
+	};
+
+	// Function to show the modal
+	function addNewAddress() {
+		$('#addressModal').modal('show');
+		populateCities(); // Populate cities dynamically
+	}
+
+	// Function to fetch and populate cities dropdown
+	async function populateCities() {
+		const citySelect = document.getElementById('citySelect');
+		citySelect.innerHTML = '<option value="">Chọn Thành Phố</option>'; // Clear previous options
+
+		try {
+			const response = await fetch('https://sandbox.goship.io/api/v2/cities', {
+				method: 'GET', headers: headers,
+
+			});
+
+			if (response.ok) {
+				const citiesData = await response.json();
+				console.log('Cities Data:', citiesData);  // Log the response to check its structure
+
+				// Check if the 'data' field exists and is an array
+				if (Array.isArray(citiesData.data)) {
+					citiesData.data.forEach(city => {
+						const option = document.createElement('option');
+						option.value = city.id; // Assuming the API returns a "code" field for cities
+						option.textContent = city.name;
+						citySelect.appendChild(option);
+					});
+				} else {
+					console.error('Cities data is not an array:', citiesData.data);
+				}
+			} else {
+				console.error('Failed to fetch cities:', response.statusText);
+			}
+		} catch (error) {
+			console.error('Error fetching cities:', error);
+		}
+	}
+
+	document.getElementById('citySelect').addEventListener('change', function () {
+		const selectedCityCode = this.value;
+		console.log(`Selected City Code: ${selectedCityCode}`); // Check the city code
+		populateDistricts(selectedCityCode);  // Fetch districts when a city is selected
+	});
+
+	async function populateDistricts(cityCode) {
+		const districtSelect = document.getElementById('districtSelect');
+		districtSelect.innerHTML = '<option value="">Chọn Quận/Huyện</option>'; // Clear previous options
+
+		try {
+			console.log(`Fetching districts for city_code: ${cityCode}`);
+
+			const response = await fetch(`https://sandbox.goship.io/api/v2/cities/${cityCode}/districts`, {
+				method: 'GET',
+				headers: headers,
+			});
+			if (response.ok) {
+				const districtData = await response.json();
+				console.log('District Data:', districtData);  // Log the response to check its structure
+
+				// Check if the 'data' field exists and is an array
+				if (Array.isArray(districtData.data)) {
+					// Clear previous options if any
+					districtSelect.innerHTML = '<option value="">Chọn Quận/Huyện</option>';
+
+					// Populate the district select with new data
+					districtData.data.forEach(district => {
+						const option = document.createElement('option');
+						option.value = district.id; // Assuming the API returns a "code" field for cities
+						option.textContent = district.name;
+						districtSelect.appendChild(option);
+					});
+				} else {
+					console.error('district data is not an array:', districtData.data);
+				}
+			} else {
+				console.error('Failed to fetch district:', response.statusText);
+			}
+		} catch (error) {
+			console.error('Error fetching district:', error);
+		}
+	}
+
+
+	// Event handler for district selection
+	document.getElementById('districtSelect').addEventListener('change', function () {
+		const selectedCityCode = document.getElementById('citySelect').value;
+		const selectedDistrictCode = this.value;
+		if (selectedCityCode && selectedDistrictCode) {
+			populateWards(selectedCityCode, selectedDistrictCode);  // Fetch wards if both city and district are selected
+		}
+	});
+
+	// Fetch and populate wards based on selected district
+	async function populateWards(cityCode, districtCode) {
+		const wardSelect = document.getElementById('wardSelect');
+		wardSelect.innerHTML = '<option value="">Chọn Phường/Xã</option>'; // Clear previous options
+
+		try {
+			const response = await fetch(`https://sandbox.goship.io/api/v2/districts/${districtCode}/wards`, { method: 'GET', headers: headers, });
+
+			if (response.ok) {
+				const wardData = await response.json();
+				console.log('Ward Data:', wardData);  // Log the response to check its structure
+
+				// Check if the 'data' field exists and is an array
+				if (Array.isArray(wardData.data)) {
+					wardData.data.forEach(ward => {
+						const option = document.createElement('option');
+						option.value = ward.id; // Assuming the API returns a "code" field for cities
+						option.textContent = ward.name;
+						wardSelect.appendChild(option);
+					});
+				} else {
+					console.error('ward data is not an array:', wardData.data);
+				}
+			} else {
+				console.error('Failed to fetch ward:', response.statusText);
+			}
+		} catch (error) {
+			console.error('Error fetching ward:', error);
+		}
+	}
+	// Function to save the new address
+	async function saveAddress() {
+		// Get form field values
+		const addressDetail = document.getElementById('addressDetail').value;
+		const cityId = document.getElementById('citySelect').value;
+		const districtId = document.getElementById('districtSelect').value;
+		const wardId = document.getElementById('wardSelect').value;
+
+		// Ensure that all fields are selected
+		if (!addressDetail || !cityId || !districtId || !wardId) {
+			alert('Vui lòng điền đầy đủ thông tin!');
+			return;
+		}
+
+		// Create the DTO object
+		const personalAddressDto = {
+			CustomerId: customerId, // Replace with the actual customer ID if needed
+			DetailedAddress: addressDetail,
+			CityName: document.getElementById('citySelect').selectedOptions[0].text,
+			City: cityId,
+			DistrictName: document.getElementById('districtSelect').selectedOptions[0].text,
+			District: districtId,
+			WardName: document.getElementById('wardSelect').selectedOptions[0].text,
+			Ward: wardId,
+			Status: 1 // Replace with appropriate status if needed
+		};
+
+		try {
+			// Make POST request to add the new address
+			const response = await fetch('https://localhost:5000/api/Customer/add-address', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(personalAddressDto),
+			});
+
+			// Handle the response
+			if (response.ok) {
+				const contentType = response.headers.get("Content-Type");
+				if (contentType && contentType.includes("application/json")) {
+					const result = await response.json();
+					alert('Địa chỉ đã được thêm thành công!');
+					$('#addressModal').modal('hide'); // Close modal after success
+				} else {
+					// If response is plain text (not JSON)
+					const result = await response.text();
+					alert(`Thêm địa chỉ thành công: ${result}`);
+					$('#addressModal').modal('hide');
+					fetchAddress();
+				}
+			} else {
+				const error = await response.text();
+				alert(`Thêm địa chỉ thất bại: ${error}`);
+			}
+		} catch (error) {
+			console.error('Error saving address:', error);
+			alert('Đã có lỗi xảy ra. Vui lòng thử lại.');
+		}
+	}
 
 </script>

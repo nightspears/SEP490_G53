@@ -71,6 +71,40 @@ namespace TCViettelFC_API.Controllers
 			return Ok(customerAccount);
 		}
 
+		// API to get a list of PersonalAddressDTOs by CustomerId
+		[HttpGet("address/{customerId}")]
+		public async Task<ActionResult<List<PersonalAddressDTO>>> GetPersonalAddresses(int customerId)
+		{
+			var addressDtos = await _customerRepository.GetPersonalAddressesByCustomerIdAsync(customerId);
+
+			if (addressDtos == null || !addressDtos.Any())
+			{
+				return NotFound(new { message = "No addresses found for the given customer." });
+			}
+
+			return Ok(addressDtos);
+		}
+
+		// API Endpoint to add a new personal address
+		[HttpPost("add-address")]
+		public async Task<IActionResult> AddPersonalAddress([FromBody] PersonalAddressCreateDto personalAddressDto)
+		{
+			// Check if the DTO is valid
+			if (personalAddressDto == null)
+			{
+				return BadRequest("Invalid address data.");
+			}
+
+			// Call the repository to insert the personal address
+			var result = await _customerRepository.InsertPersonalAddressAsync(personalAddressDto);
+
+			if (result)
+			{
+				return Ok("Address added successfully.");
+			}
+
+			return BadRequest("Failed to add address.");
+		}
 
 	}
 }

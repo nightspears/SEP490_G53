@@ -25,7 +25,8 @@ namespace TCViettelFC_API.Repositories.Implementations
             _contextAccessor = contextAccessor;
         }
 
-        public async Task<int> RegisterAsync(CustomerRegisterRequest cusRegReq)
+	
+		public async Task<int> RegisterAsync(CustomerRegisterRequest cusRegReq)
         {
             var existedCus = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.Email == cusRegReq.Email);
             if (existedCus != null) return 0;
@@ -175,6 +176,74 @@ namespace TCViettelFC_API.Repositories.Implementations
             }
         }
 
+		public async Task<List<PersonalAddressDTO>> GetPersonalAddressesByCustomerIdAsync(int customerId)
+		{
+			// Fetch the list of PersonalAddresses associated with the CustomerId
+			var addresses = await _context.PersonalAddresses
+				.Where(pa => pa.CustomerId == customerId)
+				.ToListAsync();
 
-    }
+			// If no addresses are found, return an empty list
+			if (addresses == null || !addresses.Any())
+			{
+				return new List<PersonalAddressDTO>();
+			}
+
+			// Map each PersonalAddress to PersonalAddressDTO
+			var addressDtos = addresses.Select(address => new PersonalAddressDTO
+			{
+				AddressId = address.AddressId,
+				CityName = address.CityName,
+				City = address.City,
+				DistrictName = address.DistrictName,
+				District = address.District,
+				WardName = address.WardName,
+				Ward = address.Ward,
+				DetailedAddress = address.DetailedAddress,
+				Status = address.Status
+			}).ToList();
+
+			return addressDtos;
+		}
+		// Method to insert a PersonalAddress using DTO (manual mapping)
+		public async Task<bool> InsertPersonalAddressAsync(PersonalAddressCreateDto personalAddressDto)
+		{
+			if (personalAddressDto == null)
+			{
+				return false;
+			}
+
+			try
+			{
+				// Manually map the DTO to the entity
+				var personalAddress = new PersonalAddress
+				{
+					CustomerId = personalAddressDto.CustomerId,
+					CityName = personalAddressDto.CityName,
+					City = personalAddressDto.City,
+					DistrictName = personalAddressDto.DistrictName,
+					District = personalAddressDto.District,
+					WardName = personalAddressDto.WardName,
+					Ward = personalAddressDto.Ward,
+					DetailedAddress = personalAddressDto.DetailedAddress,
+					Status = personalAddressDto.Status
+				};
+
+				// Add the personal address to the database
+				await _context.PersonalAddresses.AddAsync(personalAddress);
+
+				// Save changes to the database
+				await _context.SaveChangesAsync();
+
+				return true;
+			}
+			catch (Exception ex)
+			{
+				// Log the error (you can implement a logging mechanism here)
+				Console.WriteLine($"Error inserting personal address: {ex.Message}");
+				return false;
+			}
+		}
+
+	}
 }

@@ -11,5 +11,8 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<ProfileDto?> GetCustomerProfile();
         Task<int> UpdateCustomerProfile(ProfileDto profileDto);
 		Task<CustomerAccountDTO?> GetCustomerByAccountIdAsync(int accountId);
+        Task<List<PersonalAddressDTO>> GetPersonalAddressesByCustomerIdAsync(int customerId);
+
+		Task<bool> InsertPersonalAddressAsync(PersonalAddressCreateDto personalAddressDto);
 	}
 }
