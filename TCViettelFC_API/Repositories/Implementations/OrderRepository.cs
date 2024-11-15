@@ -98,10 +98,42 @@ namespace TCViettelFC_API.Repositories.Implementations
                 })
                 .ToListAsync();
         }
+		// Method to get orders by CustomerAccountId
+		public async Task<IEnumerable<OrderProductCustomerDto>> GetOrdersByCustomerAccountIdAsync(int customerAccountId)
+		{
+			var orders = await _context.OrderProducts
+				.Where(op => op.Customer.AccountId == customerAccountId)
+				.Include(op => op.Customer) // Optional: Include Customer if you need customer details
+				.Include(op => op.OrderProductDetails) // Optional: Include OrderProductDetails if you need them
+				.Include(op => op.Payments) // Optional: Include Payments if you need them
+				.Include(op => op.Shipments) // Optional: Include Shipments if you need them
+				.Select(op => new OrderProductCustomerDto
+				{
+					Id = op.Id,
+					OrderCode = op.OrderCode,
+					OrderDate = op.OrderDate,
+					ShipmentFee = op.ShipmentFee,
+					TotalPrice = op.TotalPrice,
+					AddressId = op.AddressId,
+					Status = op.Status,
+					// Add other necessary fields here, such as Customer info or Payment details
+				})
+				.ToListAsync();
 
-  
-
-        public async Task<OrderDetailDto> GetOrderDetailsByOrderIdAsync(int orderId)
+			return orders;
+		}
+		public class OrderProductCustomerDto
+		{
+			public int Id { get; set; }
+			public string? OrderCode { get; set; }
+			public DateTime? OrderDate { get; set; }
+			public decimal? ShipmentFee { get; set; }
+			public decimal? TotalPrice { get; set; }
+			public int? AddressId { get; set; }
+			public int? Status { get; set; }
+			// Add other properties as needed
+		}
+		public async Task<OrderDetailDto> GetOrderDetailsByOrderIdAsync(int orderId)
         {
             // Fetch the order product including related entities
             var orderProduct = await _context.OrderProducts

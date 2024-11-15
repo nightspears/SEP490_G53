@@ -1,4 +1,6 @@
 ﻿using TCViettelFC_API.Dtos;
+using TCViettelFC_API.Models;
+using static TCViettelFC_API.Repositories.Implementations.CustomerRepository;
 namespace TCViettelFC_API.Repositories.Interfaces
 {
     public interface ICustomerRepository
@@ -8,7 +10,13 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<bool> VerifyConfirmationCodeAsync(string email, string code);
         Task<ProfileDto?> GetCustomerProfile();
         Task<int> UpdateCustomerProfile(ProfileDto profileDto);
+
         Task<int> PostFeedback(FeedbackPostDto feedbackDto);
 
-    }
+		Task<CustomerAccountDTO?> GetCustomerByAccountIdAsync(int accountId);
+        Task<List<PersonalAddressDTO>> GetPersonalAddressesByCustomerIdAsync(int customerId);
+
+
+		Task<bool> InsertPersonalAddressAsync(PersonalAddressCreateDto personalAddressDto);
+	}
 }
