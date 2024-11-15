@@ -32,7 +32,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                     OutDate = playerDto.OutDate,
                     Description = playerDto.Description,
                     BackShirtImage = playerDto.BackShirtImage,
-                    Status = 1,
+                    Status = playerDto.Status,
                 };
 
                 _context.Players.Add(player);
