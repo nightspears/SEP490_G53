@@ -16,6 +16,22 @@ namespace TCViettelFC_API.Controllers
         {
             _player = player;
         }
+        [HttpPost("AddPlayer")]
+        public async Task<IActionResult> AddPlayer([FromBody] PlayerDto playerDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var createdPlayer = await _player.AddPlayerAsync(playerDto);
+                return CreatedAtAction(nameof(GetPlayerById), new { id = createdPlayer.PlayerId }, createdPlayer);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
         [HttpGet("ListPlayer")]
         public async Task<IActionResult> GetAllPlayers()
         {
@@ -40,22 +56,6 @@ namespace TCViettelFC_API.Controllers
             catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-        [HttpPost("AddPlayer")]
-        public async Task<IActionResult> AddPlayer([FromBody] PlayerDto playerDto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            try
-            {
-                var createdPlayer = await _player.AddPlayerAsync(playerDto);
-                return CreatedAtAction(nameof(GetPlayerById), new { id = createdPlayer.PlayerId }, createdPlayer);
             }
             catch (Exception ex)
             {

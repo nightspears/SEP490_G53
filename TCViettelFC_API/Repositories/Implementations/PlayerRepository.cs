@@ -32,6 +32,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                     OutDate = playerDto.OutDate,
                     Description = playerDto.Description,
                     BackShirtImage = playerDto.BackShirtImage,
+                    avatar = playerDto.avatar,
                     Status = playerDto.Status,
                 };
 
@@ -52,7 +53,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             try
             {
                 var player = await _context.Players.FindAsync(id);
-                if (player == null || player.Status == 0)
+                if (player == null )
                     throw new KeyNotFoundException("không thấy cầu thủ");
 
                 player.Status = 0; // Soft delete
@@ -80,8 +81,6 @@ namespace TCViettelFC_API.Repositories.Implementations
 
         public async Task<PlayerDto> GetPlayerByIdAsync(int id)
         {
-            try
-            {
                 var player = await _context.Players
                     .Where(p => p.PlayerId == id)
                     .FirstOrDefaultAsync();
@@ -102,11 +101,6 @@ namespace TCViettelFC_API.Repositories.Implementations
                     BackShirtImage = player.BackShirtImage,
                     Status = player.Status
                 };
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("không lấy được cầu thủ", ex);
-            }
         }
 
         public async Task<List<PlayerDto>> ListAllPlayerAsync()
@@ -125,6 +119,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                         OutDate = player.OutDate,
                         Description = player.Description,
                         BackShirtImage = player.BackShirtImage,
+                        avatar = player.avatar,
                         Status = player.Status
                     })
                     .ToListAsync();
@@ -151,6 +146,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 player.OutDate = playerDto.OutDate ?? player.OutDate;
                 player.Description = playerDto.Description ?? player.Description;
                 player.BackShirtImage = playerDto.BackShirtImage ?? player.BackShirtImage;
+                player.avatar = playerDto.avatar ?? player.avatar;
                 player.Status = playerDto.Status ?? player.Status;
 
                 await _context.SaveChangesAsync();

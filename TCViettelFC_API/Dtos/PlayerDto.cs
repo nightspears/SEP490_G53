@@ -14,6 +14,7 @@ namespace TCViettelFC_API.Dtos
         public DateTime? OutDate { get; set; }
         public string? Description { get; set; }
         public string? BackShirtImage { get; set; }
+        public string? avatar { get; set; }
         public int? Status { get; set; }
     }
 }

@@ -49,6 +49,9 @@ namespace TCViettelFCTest.UnitTest
             {
                 new ProductResponse { ProductId  = 1, ProductName  = "Product 1" , Price = 1000000},
                 new ProductResponse { ProductId  = 2, ProductName  = "Product 2" , Price = 2002200},
+                new ProductResponse { ProductId  = 3, ProductName  = "Product 2" , Price = 2002200},
+                new ProductResponse { ProductId  = 4, ProductName  = "Product 2" , Price = 2002200},
+                new ProductResponse { ProductId  = 5, ProductName  = "Product 2" , Price = 2002200},
             };
             //lưu vào mock 
             _mockProductRepo.Setup(repo => repo.GetProductAsync()).ReturnsAsync(mockProductList);
@@ -65,7 +68,7 @@ namespace TCViettelFCTest.UnitTest
 
             var returnValue = okResult.Value as List<ProductResponse>;
 
-            Assert.AreEqual(2, returnValue.Count);
+            Assert.AreEqual(5, returnValue.Count);
         }
     }
 }
