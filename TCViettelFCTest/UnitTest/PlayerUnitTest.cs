@@ -27,7 +27,7 @@ namespace TCViettelFCTest.UnitTest
         [Test]
         public async Task AddPlayerAsync_UnitTest()
         {
-            // Arrange: Prepare a mock PlayerDto object
+            // Arrange
             var playerDto = new PlayerDto
             {
                 FullName = "Nguyễn Hoàng Đức",
@@ -41,18 +41,17 @@ namespace TCViettelFCTest.UnitTest
                 avatar = null
             };
 
-            // Mock the repository to return the same playerDto when AddPlayerAsync is called
+            // Mock repository
             _playerRepositoryMock.Setup(repo => repo.AddPlayerAsync(It.IsAny<PlayerDto>())).ReturnsAsync(playerDto);
 
-            // Act: Call the AddPlayer method of the controller
+            // Act
             var result = await _playersController.AddPlayer(playerDto);
 
-            // Assert: Verify that the result is a CreatedAtActionResult
+            // Assert
             var createdAtActionResult = result as CreatedAtActionResult;
             Assert.IsNotNull(createdAtActionResult);
             Assert.AreEqual(201, createdAtActionResult.StatusCode);
 
-            // Ensure the returned value is a PlayerDto and matches the input
             var returnedPlayerDto = createdAtActionResult.Value as PlayerDto;
             Assert.AreEqual(playerDto.FullName, returnedPlayerDto.FullName);
             Assert.AreEqual(playerDto.ShirtNumber, returnedPlayerDto.ShirtNumber);
@@ -64,25 +63,24 @@ namespace TCViettelFCTest.UnitTest
         [Test]
         public async Task GetAllPlayers_UnitTest()
         {
-            // Arrange: Prepare a mock list of PlayerDto objects
+            // Arrange
             var playersList = new List<PlayerDto>
             {
                 new PlayerDto { FullName = "Nguyễn Hoàng Đức", ShirtNumber = 14, Position = "Tiền đạo" },
                 new PlayerDto { FullName = "Trần Minh Tuấn", ShirtNumber = 7, Position = "Hậu vệ" }
             };
 
-            // Mock the repository to return the list of players
+            // Mock repository
             _playerRepositoryMock.Setup(repo => repo.ListAllPlayerAsync()).ReturnsAsync(playersList);
 
-            // Act: Call the GetAllPlayers method of the controller
+            // Act
             var result = await _playersController.GetAllPlayers();
 
-            // Assert: Verify that the result is an OkObjectResult
+            // Assert
             var okResult = result as OkObjectResult;
             Assert.IsNotNull(okResult);
             Assert.AreEqual(200, okResult.StatusCode);
 
-            // Ensure the returned value is a list of PlayerDto
             var returnedPlayersList = okResult.Value as List<PlayerDto>;
             Assert.AreEqual(playersList.Count, returnedPlayersList.Count);
             Assert.AreEqual(playersList[0].FullName, returnedPlayersList[0].FullName);
@@ -90,7 +88,7 @@ namespace TCViettelFCTest.UnitTest
         [Test]
         public async Task GetPlayerById_UnitTest()
         {
-            // Arrange: Prepare a mock PlayerDto object
+            // Arrange
             var playerDto = new PlayerDto
             {
                 FullName = "Nguyễn Hoàng Đức",
@@ -98,18 +96,17 @@ namespace TCViettelFCTest.UnitTest
                 Position = "Tiền đạo"
             };
 
-            // Mock the repository to return the playerDto when GetPlayerByIdAsync is called
+            // Mock repository
             _playerRepositoryMock.Setup(repo => repo.GetPlayerByIdAsync(1)).ReturnsAsync(playerDto);
 
-            // Act: Call the GetPlayerById method of the controller
+            // Act
             var result = await _playersController.GetPlayerById(1);
 
-            // Assert: Verify that the result is an OkObjectResult
+            // Assert
             var okResult = result as OkObjectResult;
             Assert.IsNotNull(okResult);
             Assert.AreEqual(200, okResult.StatusCode);
 
-            // Ensure the returned value is a PlayerDto and matches the input
             var returnedPlayerDto = okResult.Value as PlayerDto;
             Assert.AreEqual(playerDto.FullName, returnedPlayerDto.FullName);
             Assert.AreEqual(playerDto.ShirtNumber, returnedPlayerDto.ShirtNumber);
