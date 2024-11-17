@@ -31,7 +31,6 @@ namespace TCViettelFC_API.Repositories.Implementations
                     JoinDate = playerDto.JoinDate,
                     OutDate = playerDto.OutDate,
                     Description = playerDto.Description,
-                    BackShirtImage = playerDto.BackShirtImage,
                     avatar = playerDto.avatar,
                     Status = playerDto.Status,
                 };
@@ -50,34 +49,34 @@ namespace TCViettelFC_API.Repositories.Implementations
 
         public async Task<PlayerDto> DeletePlayerAsync(int id)
         {
-            try
+            // Tìm cầu thủ trong cơ sở dữ liệu
+            var player = await _context.Players.FindAsync(id);
+            if (player == null)
             {
-                var player = await _context.Players.FindAsync(id);
-                if (player == null )
-                    throw new KeyNotFoundException("không thấy cầu thủ");
-
-                player.Status = 0; // Soft delete
-                await _context.SaveChangesAsync();
-
-                return new PlayerDto
-                {
-                    PlayerId = player.PlayerId,
-                    FullName = player.FullName,
-                    ShirtNumber = player.ShirtNumber,
-                    SeasonId = player.SeasonId,
-                    Position = player.Position,
-                    JoinDate = player.JoinDate,
-                    OutDate = player.OutDate,
-                    Description = player.Description,
-                    BackShirtImage = player.BackShirtImage,
-                    Status = player.Status
-                };
+                // Ném ngoại lệ nếu không tìm thấy cầu thủ
+                throw new KeyNotFoundException("không thấy cầu thủ");
             }
-            catch (Exception ex)
+
+            // Thực hiện soft delete
+            player.Status = 0; // Đánh dấu trạng thái là "đã xóa"
+            await _context.SaveChangesAsync();
+
+            // Trả về thông tin cầu thủ đã xóa
+            return new PlayerDto
             {
-                throw new Exception("không xóa được cầu thủ", ex);
-            }
+                PlayerId = player.PlayerId,
+                FullName = player.FullName,
+                ShirtNumber = player.ShirtNumber,
+                SeasonId = player.SeasonId,
+                Position = player.Position,
+                JoinDate = player.JoinDate,
+                OutDate = player.OutDate,
+                Description = player.Description,
+                avatar = player.avatar,
+                Status = player.Status
+            };
         }
+
 
         public async Task<PlayerDto> GetPlayerByIdAsync(int id)
         {
@@ -98,7 +97,6 @@ namespace TCViettelFC_API.Repositories.Implementations
                     JoinDate = player.JoinDate,
                     OutDate = player.OutDate,
                     Description = player.Description,
-                    BackShirtImage = player.BackShirtImage,
                     Status = player.Status
                 };
         }
@@ -118,7 +116,6 @@ namespace TCViettelFC_API.Repositories.Implementations
                         JoinDate = player.JoinDate,
                         OutDate = player.OutDate,
                         Description = player.Description,
-                        BackShirtImage = player.BackShirtImage,
                         avatar = player.avatar,
                         Status = player.Status
                     })
@@ -132,31 +129,43 @@ namespace TCViettelFC_API.Repositories.Implementations
 
         public async Task<PlayerDto> UpdatePlayerAsync(PlayerDto playerDto)
         {
-            try
+            // Tìm cầu thủ trong cơ sở dữ liệu
+            var player = await _context.Players.FindAsync(playerDto.PlayerId);
+            if (player == null)
             {
-                var player = await _context.Players.FindAsync(playerDto.PlayerId);
-                if (player == null)
-                    throw new KeyNotFoundException("không tìm được cầu thủ để cập nhật");
-
-                player.FullName = playerDto.FullName ?? player.FullName;
-                player.ShirtNumber = playerDto.ShirtNumber ?? player.ShirtNumber;
-                player.SeasonId = playerDto.SeasonId ?? player.SeasonId;
-                player.Position = playerDto.Position ?? player.Position;
-                player.JoinDate = playerDto.JoinDate ?? player.JoinDate;
-                player.OutDate = playerDto.OutDate ?? player.OutDate;
-                player.Description = playerDto.Description ?? player.Description;
-                player.BackShirtImage = playerDto.BackShirtImage ?? player.BackShirtImage;
-                player.avatar = playerDto.avatar ?? player.avatar;
-                player.Status = playerDto.Status ?? player.Status;
-
-                await _context.SaveChangesAsync();
-
-                return playerDto;
+                // Ném ngoại lệ nếu không tìm thấy cầu thủ
+                throw new KeyNotFoundException("không tìm được cầu thủ với id đó");
             }
-            catch (Exception ex)
+
+            // Cập nhật thông tin cầu thủ
+            player.FullName = playerDto.FullName ?? player.FullName;
+            player.ShirtNumber = playerDto.ShirtNumber ?? player.ShirtNumber;
+            player.SeasonId = playerDto.SeasonId ?? player.SeasonId;
+            player.Position = playerDto.Position ?? player.Position;
+            player.JoinDate = playerDto.JoinDate ?? player.JoinDate;
+            player.OutDate = playerDto.OutDate ?? player.OutDate;
+            player.Description = playerDto.Description ?? player.Description;
+            player.avatar = playerDto.avatar ?? player.avatar;
+            player.Status = playerDto.Status ?? player.Status;
+
+            // Lưu thay đổi
+            await _context.SaveChangesAsync();
+
+            // Trả về đối tượng PlayerDto sau khi cập nhật
+            return new PlayerDto
             {
-                throw new Exception("không cập nhật được cầu thủ", ex);
-            }
+                PlayerId = player.PlayerId,
+                FullName = player.FullName,
+                ShirtNumber = player.ShirtNumber,
+                SeasonId = player.SeasonId,
+                Position = player.Position,
+                JoinDate = player.JoinDate,
+                OutDate = player.OutDate,
+                Description = player.Description,
+                avatar = player.avatar,
+                Status = player.Status
+            };
         }
+
     }
 }
