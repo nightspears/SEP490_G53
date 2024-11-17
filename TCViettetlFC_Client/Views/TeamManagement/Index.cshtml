@@ -1,6 +1,8 @@
 ﻿@{
     Layout = "_LayoutAdmin";
 }
+
+<!-- Include necessary scripts -->
 <script src="~/admin_assets/js/bootstrap-datetimepicker.min.js"></script>
 <script src="~/admin_assets/js/bootstrap.bundle.min.js"></script>
 <script src="~/admin_assets/js/chart.morris.js"></script>
@@ -13,6 +15,8 @@
 <script src="~/admin_assets/js/moment.min.js"></script>
 <script src="~/admin_assets/js/script.js"></script>
 <script src="~/admin_assets/adminjs/player.js"></script>
+
+<!-- The rest of your HTML content remains the same -->
 <div class="page-wrapper">
     <div class="content container-fluid">
         <div class="row">
@@ -76,6 +80,11 @@
                     <label for="statusCauThu" class="form-label">Trạng thái</label>
                     <input type="checkbox" id="statusCauThu" class="form-check-input"> Hoạt động
                 </div>
+                <!-- Avatar Image Upload -->
+                <div class="mb-3">
+                    <label for="avatar" class="form-label">Avatar</label>
+                    <input type="file" id="avatar" class="form-control" accept="image/*">
+                </div>
                 <button type="button" class="btn btn-primary" onclick="savePlayer()">Lưu</button>
             </div>
         </div>
@@ -96,6 +105,8 @@
         </div>
     </div>
 </div>
+
+<!-- Include necessary scripts -->
 <script src="~/admin_assets/js/bootstrap-datetimepicker.min.js"></script>
 <script src="~/admin_assets/js/bootstrap.bundle.min.js"></script>
 <script src="~/admin_assets/js/chart.morris.js"></script>

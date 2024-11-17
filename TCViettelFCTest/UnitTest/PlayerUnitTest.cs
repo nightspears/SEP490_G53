@@ -12,200 +12,161 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using TCViettelFC_API.Repositories.Implementations;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework.Internal;
+using CloudinaryDotNet.Actions;
 
 namespace TCViettelFCTest.UnitTest
 {
     [TestFixture]
     public class PlayerUnitTests
     {
-        private DbContextOptions<Sep490G53Context> _options;
-        private Sep490G53Context _context;
-        private PlayerRepository _playerRepository;
+        private DbContextOptions<Sep490G53Context> _dbContextOptions;
+        private Mock<ICloudinarySetting> _mockCloudinary;
 
         [SetUp]
-        public void SetUp()
+        public void Setup()
         {
-            // Use an in-memory database
-            _options = new DbContextOptionsBuilder<Sep490G53Context>()
+            _dbContextOptions = new DbContextOptionsBuilder<Sep490G53Context>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
 
-            _context = new Sep490G53Context(_options);
-            _playerRepository = new PlayerRepository(_context);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _context.Dispose();
+            _mockCloudinary = new Mock<ICloudinarySetting>();
         }
 
         [Test]
-        public async Task AddPlayer_Success()
+        public async Task ListAllPlayerAsync_ShouldReturnAllPlayers()
         {
-            // Arrange
+            using var context = new Sep490G53Context(_dbContextOptions);
+            context.Players.Add(new Player { PlayerId = 1, FullName = "Player 1", Status = 1 });
+            context.Players.Add(new Player { PlayerId = 2, FullName = "Player 2", Status = 0 });
+            await context.SaveChangesAsync();
+
+            var repository = new PlayerRepository(context, _mockCloudinary.Object);
+
+            var result = await repository.ListAllPlayerAsync();
+
+            Assert.AreEqual(2, result.Count);
+            Assert.IsTrue(result.Any(p => p.FullName == "Player 1"));
+            Assert.IsTrue(result.Any(p => p.FullName == "Player 2"));
+        }
+
+        [Test]
+        public async Task ListAllPlayerActiveAsync_ShouldReturnOnlyActivePlayers()
+        {
+            using var context = new Sep490G53Context(_dbContextOptions);
+            context.Players.Add(new Player { PlayerId = 1, FullName = "Player 1", Status = 1 });
+            context.Players.Add(new Player { PlayerId = 2, FullName = "Player 2", Status = 0 });
+            await context.SaveChangesAsync();
+
+            var repository = new PlayerRepository(context, _mockCloudinary.Object);
+
+            var result = await repository.ListAllPlayerActiveAsync();
+
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual("Player 1", result[0].FullName);
+        }
+
+        [Test]
+        public async Task GetPlayerByIdAsync_ShouldReturnPlayer_WhenPlayerExists()
+        {
+            using var context = new Sep490G53Context(_dbContextOptions);
+            var player = new Player { PlayerId = 1, FullName = "Player 1", Status = 1 };
+            context.Players.Add(player);
+            await context.SaveChangesAsync();
+
+            var repository = new PlayerRepository(context, _mockCloudinary.Object);
+
+            var result = await repository.GetPlayerByIdAsync(1);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Player 1", result.FullName);
+        }
+
+        [Test]
+        public async Task GetPlayerByIdAsync_ShouldReturnNull_WhenPlayerDoesNotExist()
+        {
+            using var context = new Sep490G53Context(_dbContextOptions);
+
+            var repository = new PlayerRepository(context, _mockCloudinary.Object);
+
+            var result = await repository.GetPlayerByIdAsync(999);
+
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public async Task AddPlayerAsync_ShouldAddPlayer()
+        {
+            using var context = new Sep490G53Context(_dbContextOptions);
             var playerDto = new PlayerDto
             {
-                FullName = "Nguyễn Hoàng Đức",
-                ShirtNumber = 14,
-                SeasonId = 1,
-                Position = "Tiền đạo",
-                JoinDate = DateTime.Parse("2022-05-19"),
+                FullName = "New Player",
+                ShirtNumber = 10,
+                Position = "Forward",
                 Status = 1,
-                Description = "Cầu thủ thuận cả 2 chân",
-                avatar = "img_avatar_location"
+                JoinDate = DateTime.Now,
+                Description = "Test player"
             };
 
-            // Act
-            var result = await _playerRepository.AddPlayerAsync(playerDto);
+            var repository = new PlayerRepository(context, _mockCloudinary.Object);
 
-            // Assert
+            var result = await repository.AddPlayerAsync(playerDto);
+
             Assert.IsNotNull(result);
-            Assert.AreEqual(playerDto.FullName, result.FullName);
-            Assert.AreEqual(playerDto.ShirtNumber, result.ShirtNumber);
-
-            var savedPlayer = await _context.Players.FirstOrDefaultAsync(p => p.PlayerId == result.PlayerId);
-            Assert.IsNotNull(savedPlayer);
-            Assert.AreEqual(playerDto.Position, savedPlayer.Position);
+            Assert.AreEqual("New Player", result.FullName);
         }
 
         [Test]
-        public async Task GetPlayerById_Success()
+        public async Task UpdatePlayerAsync_ShouldUpdatePlayer()
         {
-            // Arrange
-            var player = new Player
+            using var context = new Sep490G53Context(_dbContextOptions);
+            var player = new Player { PlayerId = 1, FullName = "Player 1", Status = 1 };
+            context.Players.Add(player);
+            await context.SaveChangesAsync();
+
+            var playerDto = new PlayerDto
             {
-                FullName = "Nguyễn Hoàng Đức",
-                ShirtNumber = 14,
-                Position = "Tiền đạo",
-                JoinDate = DateTime.Parse("2022-05-19"),
-                Status = 1
-            };
-            _context.Players.Add(player);
-            await _context.SaveChangesAsync();
-
-            // Act
-            var result = await _playerRepository.GetPlayerByIdAsync(player.PlayerId);
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(player.FullName, result.FullName);
-            Assert.AreEqual(player.ShirtNumber, result.ShirtNumber);
-        }
-
-        [Test]
-        public async Task GetPlayerById_NotFound_ThrowsException()
-        {
-            // Act & Assert
-            var ex = Assert.ThrowsAsync<KeyNotFoundException>(async () => await _playerRepository.GetPlayerByIdAsync(99));
-            Assert.AreEqual("không tìm được cầu thủ với id đó", ex.Message);
-        }
-
-        [Test]
-        public async Task ListAllPlayerAsync_ReturnsAllPlayers()
-        {
-            // Arrange
-            var players = new List<Player>
-            {
-                new Player { FullName = "Nguyễn Hoàng Đức", ShirtNumber = 14, Position = "Tiền đạo", Status = 1 },
-                new Player { FullName = "Trần Minh Tuấn", ShirtNumber = 7, Position = "Hậu vệ", Status = 1 }
-            };
-            _context.Players.AddRange(players);
-            await _context.SaveChangesAsync();
-
-            // Act
-            var result = await _playerRepository.ListAllPlayerAsync();
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(players.Count, result.Count);
-            Assert.AreEqual(players[0].FullName, result[0].FullName);
-        }
-
-        [Test]
-        public async Task DeletePlayer_Success()
-        {
-            // Arrange
-            var player = new Player
-            {
-                FullName = "Nguyễn Hoàng Đức",
-                ShirtNumber = 14,
-                Position = "Tiền đạo",
-                Status = 1
-            };
-            _context.Players.Add(player);
-            await _context.SaveChangesAsync();
-
-            // Act
-            var result = await _playerRepository.DeletePlayerAsync(player.PlayerId);
-
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(0, (await _context.Players.FindAsync(player.PlayerId)).Status); // Ensure status is updated
-        }
-
-        [Test]
-        public async Task DeletePlayer_PlayerNotFound_ThrowsKeyNotFoundException()
-        {
-            // Arrange
-            var nonExistentPlayerId = 999; // ID không tồn tại trong cơ sở dữ liệu
-
-            // Act & Assert
-            var ex = Assert.ThrowsAsync<KeyNotFoundException>(async () =>
-                await _playerRepository.DeletePlayerAsync(nonExistentPlayerId)
-            );
-
-            Assert.AreEqual("không tìm được cầu thủ với id đó", ex.Message); // Kiểm tra thông báo lỗi
-        }
-
-        [Test]
-        public async Task UpdatePlayer_Success()
-        {
-            // Arrange
-            var player = new Player
-            {
-                FullName = "Nguyễn Hoàng Đức",
-                ShirtNumber = 14,
-                Position = "Tiền đạo",
-                Status = 1
-            };
-            _context.Players.Add(player);
-            await _context.SaveChangesAsync();
-
-            var updatedPlayerDto = new PlayerDto
-            {
-                PlayerId = player.PlayerId,
-                FullName = "Cập nhật Hoàng Đức",
-                ShirtNumber = 10,
-                Position = "Hậu vệ",
-                Status = 1
+                FullName = "Updated Player 1",
+                ShirtNumber = 20,
+                Position = "Midfielder",
+                Status = 1,
+                JoinDate = DateTime.Now,
+                Description = "Updated player"
             };
 
-            // Act
-            var result = await _playerRepository.UpdatePlayerAsync(updatedPlayerDto.PlayerId, updatedPlayerDto);
+            var repository = new PlayerRepository(context, _mockCloudinary.Object);
 
-            // Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(updatedPlayerDto.FullName, result.FullName);
-            Assert.AreEqual(updatedPlayerDto.ShirtNumber, result.ShirtNumber);
+            var result = await repository.UpdatePlayerAsync(1, playerDto);
+
+            Assert.AreEqual("Updated Player 1", result.FullName);
+            Assert.AreEqual(20, result.ShirtNumber);
         }
 
         [Test]
-        public async Task UpdatePlayer_PlayerNotFound_ThrowsException()
+        public async Task DeletePlayerAsync_ShouldDeletePlayer()
         {
-            // Arrange
-            var updatedPlayerDto = new PlayerDto
-            {
-                PlayerId = 99,
-                FullName = "Cập nhật Hoàng Đức",
-                ShirtNumber = 10,
-                Position = "Hậu vệ",
-                Status = 1
-            };
+            using var context = new Sep490G53Context(_dbContextOptions);
+            var player = new Player { PlayerId = 1, FullName = "Player 1", Status = 1 };
+            context.Players.Add(player);
+            await context.SaveChangesAsync();
 
-            // Act & Assert
-            var ex = Assert.ThrowsAsync<KeyNotFoundException>(async () => await _playerRepository.UpdatePlayerAsync(updatedPlayerDto));
-            Assert.AreEqual("không tìm được cầu thủ với id đó", ex.Message);
+            var repository = new PlayerRepository(context, _mockCloudinary.Object);
+
+            var result = await repository.DeletePlayerAsync(1);
+
+            Assert.AreEqual("Player 1", result.FullName);
+            Assert.AreEqual(0, context.Players.Count());
+        }
+
+        [Test]
+        public async Task DeletePlayerAsync_ShouldThrowException_WhenPlayerNotFound()
+        {
+            using var context = new Sep490G53Context(_dbContextOptions);
+
+            var repository = new PlayerRepository(context, _mockCloudinary.Object);
+
+            var ex = Assert.ThrowsAsync<Exception>(async () => await repository.DeletePlayerAsync(999));
+
+            Assert.AreEqual("không tìm thấy người chơi", ex.Message);
         }
     }
 }

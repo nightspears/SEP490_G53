@@ -1,135 +1,117 @@
-﻿// API URL
-const apiUrl = 'https://localhost:5000/api/Players';
+﻿// Define the API base URL
+const apiUrl = '/api/Players';
 
-// Initialize on document ready
-$(document).ready(function () {
-    loadPlayers();
-});
-
-// Load Players List
+// Function to load players
 function loadPlayers() {
-    $.ajax({
-        url: `${apiUrl}/ListPlayer`,
-        method: 'GET',
-        success: function (players) {
-            const tbody = $('#tbody');
-            tbody.empty();
-
-            players.forEach(player => {
-                const row = `
-                    <tr>
-                        <td>${player.fullName}</td>
-                        <td>${player.shirtNumber}</td>
-                        <td>${player.position}</td>
-                        <td>${new Date(player.joinDate).toLocaleDateString()}</td>
-                        <td>${player.status === 1 ? 'Hoạt động' : 'Không hoạt động'}</td>
-                        <td class="text-center">
-                            <button class="btn btn-info" onclick="openModal(${player.playerId})">Sửa</button>
-                            <button class="btn btn-danger" onclick="confirmDelete(${player.playerId})">Xóa</button>
-                        </td>
-                    </tr>`;
-                tbody.append(row);
-            });
-        },
-        error: function (error) {
-            console.error('Error loading players:', error);
-        }
+    $.get(apiUrl, function (data) {
+        let playersHtml = "";
+        data.forEach(player => {
+            playersHtml += `
+                <tr>
+                    <td>${player.fullName}</td>
+                    <td>${player.shirtNumber}</td>
+                    <td>${player.position}</td>
+                    <td>${new Date(player.joinDate).toLocaleDateString()}</td>
+                    <td>${player.status ? 'Hoạt động' : 'Không hoạt động'}</td>
+                    <td class="text-center">
+                        <button class="btn btn-info btn-sm" onclick="editPlayer(${player.playerId})">Sửa</button>
+                        <button class="btn btn-danger btn-sm deletePlayerButton" data-id="${player.playerId}">Xóa</button>
+                    </td>
+                </tr>
+            `;
+        });
+        $("#tbody").html(playersHtml);
     });
 }
 
-// Open Modal for Create or Edit
-function openModal(playerId = 0) {
-    const modal = $('#modalEditorCreatePlayer');
-    modal.modal('show');
-
-    if (playerId === 0) {
-        $('#titleModalPlayer').text('Thêm cầu thủ mới');
-        resetModalFields();
-    } else {
-        $('#titleModalPlayer').text('Sửa cầu thủ');
-        fetchPlayerById(playerId);
-    }
-}
-
-// Fetch Player Data by ID
-function fetchPlayerById(playerId) {
-    $.ajax({
-        url: `${apiUrl}/GetPlayerById`,
-        method: 'GET',
-        data: { id: playerId },
-        success: function (player) {
-            $('#idCauThu').val(player.playerId);
-            $('#tenCauThu').val(player.fullName);
-            $('#soAo').val(player.shirtNumber);
-            $('#viTri').val(player.position);
-            $('#ngayGiaNhap').val(new Date(player.joinDate).toISOString().split('T')[0]);
-            $('#statusCauThu').prop('checked', player.status === 1);
-        },
-        error: function (error) {
-            console.error('Error fetching player:', error);
-        }
-    });
-}
-
-// Reset Modal Fields
-function resetModalFields() {
+// Function to open the modal for adding a new player
+function openModal() {
+    $('#modalEditorCreatePlayer').modal('show');
     $('#idCauThu').val('');
     $('#tenCauThu').val('');
     $('#soAo').val('');
     $('#viTri').val('');
     $('#ngayGiaNhap').val('');
-    $('#statusCauThu').prop('checked', true);
+    $('#statusCauThu').prop('checked', false);
+    $('#titleModalPlayer').text('Thêm cầu thủ mới');
 }
 
-// Save Player (Create or Update)
+// Function to save or update player
 function savePlayer() {
     const playerData = {
-        playerId: $('#idCauThu').val(),
         fullName: $('#tenCauThu').val(),
         shirtNumber: $('#soAo').val(),
         position: $('#viTri').val(),
         joinDate: $('#ngayGiaNhap').val(),
-        status: $('#statusCauThu').is(':checked') ? 1 : 0
+        status: $('#statusCauThu').prop('checked'),
+        avatar: $('#avatar')[0].files[0]
     };
 
-    const url = playerData.playerId ? `${apiUrl}/UpdatePlayer` : `${apiUrl}/AddPlayer`;
-    const method = playerData.playerId ? 'PUT' : 'POST';
+    const playerId = $('#idCauThu').val();
+    const url = playerId ? `${apiUrl}/${playerId}` : apiUrl;
+
+    const formData = new FormData();
+    formData.append("fullName", playerData.fullName);
+    formData.append("shirtNumber", playerData.shirtNumber);
+    formData.append("position", playerData.position);
+    formData.append("joinDate", playerData.joinDate);
+    formData.append("status", playerData.status);
+    if (playerData.avatar) {
+        formData.append("avatar", playerData.avatar);
+    }
 
     $.ajax({
         url: url,
-        method: method,
-        data: JSON.stringify(playerData),
-        contentType: 'application/json',
+        type: playerId ? 'PUT' : 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function () {
-            loadPlayers();
             $('#modalEditorCreatePlayer').modal('hide');
+            loadPlayers();
         },
         error: function (error) {
-            console.error('Error saving player:', error);
+            alert('Error saving player: ' + error.responseText);
         }
     });
 }
 
-// Confirm Delete
-function confirmDelete(playerId) {
-    $('#idXoaPlayer').val(playerId);
-    $('#delete_modal_player').modal('show');
+// Function to open the edit modal with player details
+function editPlayer(playerId) {
+    $.get(`${apiUrl}/${playerId}`, function (data) {
+        $('#idCauThu').val(data.playerId);
+        $('#tenCauThu').val(data.fullName);
+        $('#soAo').val(data.shirtNumber);
+        $('#viTri').val(data.position);
+        $('#ngayGiaNhap').val(new Date(data.joinDate).toISOString().substring(0, 10));
+        $('#statusCauThu').prop('checked', data.status);
+        $('#titleModalPlayer').text('Chỉnh sửa cầu thủ');
+        $('#modalEditorCreatePlayer').modal('show');
+    });
 }
 
-// Delete Player
-$('#btnXoaPlayer').click(function () {
+// Function to delete player
+$(document).on('click', '#btnXoaPlayer', function () {
     const playerId = $('#idXoaPlayer').val();
-
     $.ajax({
-        url: `${apiUrl}/DeletePlayer`,
-        method: 'DELETE',
-        data: { id: playerId },
+        url: `${apiUrl}/${playerId}`,
+        type: 'DELETE',
         success: function () {
-            loadPlayers();
             $('#delete_modal_player').modal('hide');
+            loadPlayers();
         },
-        error: function (error) {
-            console.error('Error deleting player:', error);
+        error: function () {
+            alert('Error deleting player');
         }
     });
 });
+
+// Show the delete confirmation modal
+$(document).on('click', '.deletePlayerButton', function () {
+    const playerId = $(this).data('id');
+    $('#idXoaPlayer').val(playerId);
+    $('#delete_modal_player').modal('show');
+});
+
+// Initial load of players
+loadPlayers();
