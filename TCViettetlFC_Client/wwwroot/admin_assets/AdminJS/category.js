@@ -133,7 +133,7 @@ function modalEditOrCreate(id) {
 
     $('#idCate').val("");
     $('#tenDanhMuc').val("");
-    $('#status').prop('checked', false);
+    $('#status').prop('checked', true);
 
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật danh mục sản phẩm")

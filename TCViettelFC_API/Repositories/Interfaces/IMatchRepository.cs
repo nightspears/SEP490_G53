@@ -1,4 +1,5 @@
-﻿using TCViettelFC_API.Dtos.Matches;
+﻿using System.Net.NetworkInformation;
+using TCViettelFC_API.Dtos.Matches;
 using TCViettelFC_API.Models;
 namespace TCViettelFC_API.Repositories.Interfaces
 {
@@ -11,6 +12,6 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task UpdateMatchesAsync(int id, MatchesAddDto matchDto);
         Task DeleteMatchesAsync(int id);
   
-
+        void UpdateStatus(int status,int id);
     }
 }
