@@ -47,9 +47,21 @@ $(function(){
 	    resize: true,
 		redraw: true
 	});
+
+	window.mD = Morris.Donut({
+		element: 'morrisDonut',
+		data: [
+			{ label: "Tickets Sales", value: 60 },
+			{ label: "Merchandise Sales", value: 30 },
+			{ label: "Other Revenue", value: 10 }
+		],
+		colors: ['#1b5a90', '#ff9d00', '#0c9'],
+		resize: true
+	});
 	$(window).on("resize", function(){
 		mA.redraw();
 		mL.redraw();
+		mD.redraw();
 	});
 
 });

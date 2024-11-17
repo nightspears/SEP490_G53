@@ -1,6 +1,7 @@
 ﻿using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Dtos.Order;
 using TCViettelFC_API.Models;
+using static TCViettelFC_API.Repositories.Implementations.OrderRepository;
 
 namespace TCViettelFC_API.Repositories.Interfaces
 {
@@ -17,5 +18,6 @@ namespace TCViettelFC_API.Repositories.Interfaces
         // New method to update the order status
         Task<bool> UpdateOrderStatusAsync(int orderId, int newStatus,int staffid);
         Task<bool> UpsertShipmentAsync(ShipmentDto shipmentDto);
-    }
+        Task<IEnumerable<OrderProductCustomerDto>> GetOrdersByCustomerAccountIdAsync(int customerAccountId);
+	}
 }

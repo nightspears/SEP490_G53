@@ -38,14 +38,14 @@ namespace TCViettelFC_API.Controllers
 
         }
         [HttpPost("AddCate")]
-        public async Task<IActionResult> AddCateAsync(CategoryDto category)
+        public async Task<IActionResult> AddCateAsync([FromForm]  CategoryDto category)
         {
             await _category.AddCateAsync(category);
             return Ok("Thêm category thành công");
         }
 
         [HttpPut("UpdateCate/{id}")]
-        public async Task<IActionResult> UpdatecCateAsync(int id, CategoryDto category)
+        public async Task<IActionResult> UpdatecCateAsync(int id, [FromForm] CategoryDto category)
         {
             try
             {

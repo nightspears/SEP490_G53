@@ -179,6 +179,46 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.AdminController",
+    "Method": "GetTotalCustomer",
+    "RelativePath": "api/Admin/totalcustomer",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.AdminController",
+    "Method": "GetTotalProductRevenue",
+    "RelativePath": "api/Admin/totalproductrevenue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.AdminController",
+    "Method": "GetTotalSoldTickets",
+    "RelativePath": "api/Admin/totalsoldtickets",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.AdminController",
+    "Method": "GetTotalTicketRevenue",
+    "RelativePath": "api/Admin/totalticketrevenue",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.AdminController",
     "Method": "UpdateUserAsync",
     "RelativePath": "api/Admin/UpdateUser/{id}",
     "HttpMethod": "PUT",
@@ -473,6 +513,16 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "SendTicketViaMailAsync",
+    "RelativePath": "api/Customer/sendmailticket",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
     "Method": "UpdateProfile",
     "RelativePath": "api/Customer/updateprofile",
     "HttpMethod": "PUT",
@@ -498,6 +548,22 @@
       {
         "Name": "request",
         "Type": "TCViettelFC_API.Dtos.VerifyConfirmationCodeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "VerifyTicketAsync",
+    "RelativePath": "api/Customer/verifyticket/{ticketId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ticketId",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -683,38 +749,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "TCViettelFC_API.Controllers.EntryController",
-    "Method": "VerifyItemAsync",
-    "RelativePath": "api/Entry/verifysupitem/{orderId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "orderId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TCViettelFC_API.Controllers.EntryController",
-    "Method": "VerifyTicketAsync",
-    "RelativePath": "api/Entry/verifyticket/{ticketId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ticketId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "TCViettelFC_API.Controllers.FeedbackController",
     "Method": "UpdateFeedback",
     "RelativePath": "api/Feedback/{feedbackId}",
@@ -730,6 +764,22 @@
       {
         "Name": "updateFeedbackDto",
         "Type": "TCViettelFC_API.Dtos.UpdateFeedbackDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.FeedbackController",
+    "Method": "AddFeedback",
+    "RelativePath": "api/Feedback/addfeedback",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "feedbackDto",
+        "Type": "TCViettelFC_API.Dtos.FeedbackPostDto",
         "IsRequired": true
       }
     ],
@@ -1799,106 +1849,6 @@
       },
       {
         "Name": "Status",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TCViettelFC_API.Controllers.SupplementaryItemController",
-    "Method": "GetAllItems",
-    "RelativePath": "api/SupplementaryItem",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TCViettelFC_API.Controllers.SupplementaryItemController",
-    "Method": "CreateItem",
-    "RelativePath": "api/SupplementaryItem",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "TCViettelFC_API.Dtos.Supplementary.SupplementaryDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TCViettelFC_API.Controllers.SupplementaryItemController",
-    "Method": "GetItemById",
-    "RelativePath": "api/SupplementaryItem/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TCViettelFC_API.Controllers.SupplementaryItemController",
-    "Method": "UpdateItem",
-    "RelativePath": "api/SupplementaryItem/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "dto",
-        "Type": "TCViettelFC_API.Dtos.Supplementary.SupplementaryDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TCViettelFC_API.Controllers.SupplementaryItemController",
-    "Method": "DeleteItem",
-    "RelativePath": "api/SupplementaryItem/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "TCViettelFC_API.Controllers.TicketOrderController",
-    "Method": "AddOrderedTicket",
-    "RelativePath": "api/TicketOrder",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ticketOrderDto",
-        "Type": "TCViettelFC_API.Dtos.OrderTicket.TicketOrderDto",
-        "IsRequired": true
-      },
-      {
-        "Name": "customerId",
         "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       }

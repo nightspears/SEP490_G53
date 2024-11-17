@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using TCViettelFC_API.Models;
 using System.Threading.Tasks;
 using TCViettelFC_API.Dtos.CheckOut;
+using TCViettelFC_API.Repositories.Interfaces;
 
 namespace TCViettelFC_API.Controllers
 {
@@ -14,10 +15,11 @@ namespace TCViettelFC_API.Controllers
     public class CheckoutController : ControllerBase
     {
         private readonly Sep490G53Context _context;
-
-        public CheckoutController(Sep490G53Context context)
+        private readonly ITicketUtilRepository _ticketUtilRepository;
+        public CheckoutController(Sep490G53Context context, ITicketUtilRepository ticketUtilRepository )
         {
             _context = context;
+            _ticketUtilRepository = ticketUtilRepository;
         }
 
         [HttpPost("create")]
@@ -97,6 +99,7 @@ namespace TCViettelFC_API.Controllers
 
                 // Commit the transaction
                 await transaction.CommitAsync();
+                _ticketUtilRepository.SendOrderConfirmationEmailAsync(request);
                 return Ok(new { Message = "Order created successfully" });
             }
             catch (Exception ex)

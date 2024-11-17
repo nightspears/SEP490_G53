@@ -25,10 +25,24 @@ namespace TCViettetlFC_Client.Controllers
         }
         public async Task<IActionResult> Profile()
         {
-            ViewBag.Profile = await _apiHelper.GetApiResponseAsync<CustomerProfileModel>("customer/profile");
-            return View();
+            SetCustomerInfoInViewData();
+
+			return View();
         }
-        public IActionResult Login()
+
+		public void SetCustomerInfoInViewData()
+		{
+			string customerId = Request.Cookies["CustomerId"];
+			string customerPhone = Request.Cookies["CustomerPhone"];
+			string customerEmail = Request.Cookies["CustomerEmail"];
+
+			// Check if the cookies exist and pass them to ViewData
+			ViewData["CustomerId"] = customerId ?? string.Empty;
+			ViewData["CustomerPhone"] = customerPhone ?? string.Empty;
+			ViewData["CustomerEmail"] = customerEmail ?? string.Empty;
+		}
+
+		public IActionResult Login()
         {
             return View();
         }
@@ -50,7 +64,8 @@ namespace TCViettetlFC_Client.Controllers
                 Response.Cookies.Append("AuthToken", response.token, cookieOptions);
                 Response.Cookies.Append("CustomerId", response.customerId.ToString(), cookieOptions);
                 Response.Cookies.Append("CustomerEmail", response.email.ToString(), cookieOptions);
-                return RedirectToAction("Home");
+				Response.Cookies.Append("CustomerPhone", response.phone?.ToString() ?? string.Empty, cookieOptions);
+				return RedirectToAction("Home");
             }
             else
             {

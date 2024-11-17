@@ -339,6 +339,10 @@
             <div class="col-md-6">
                 <label for="address_to_phone" class="form-label">Phone</label>
                 <input type="text" class="form-control" id="address_to_phone" name="AddressTo.Phone" required placeholder="Số điện thoại người nhận" value="@Model.CustomerPhone">
+            </div> 
+            <div class="col-md-6">
+                <label for="address_to_email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="address_to_email" name="AddressTo.Email" required placeholder="Email người nhận" value="@Model.CustomerEmail">
             </div>
         </div>
         <div class="mb-3">
@@ -445,6 +449,7 @@
                     address_to: {
                         name: formData.get("AddressTo.Name"),
                         phone: formData.get("AddressTo.Phone"),
+                        email: formData.get("AddressTo.Email"),
                         street: formData.get("AddressTo.Street"),
                         ward: formData.get("AddressTo.Ward"),
                         district: formData.get("AddressTo.District"),

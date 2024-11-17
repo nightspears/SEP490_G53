@@ -1,0 +1,11 @@
+﻿@model AddFeedbackViewModel
+@{
+    ViewData["Title"] = "Gửi phản hồi";
+}
+<div class="wrapper">
+    <h2>Gửi đánh giá cho chúng tôi</h2>
+    <form asp-action="AddFeedback" method="post">
+        <textarea asp-for="Content" cols="30" rows="6" placeholder="Đánh giá trải nghiệm của bạn"></textarea>
+        <button type="submit" class="submit-btn">Gửi</button>
+    </form>
+</div>

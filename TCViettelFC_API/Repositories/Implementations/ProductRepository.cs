@@ -46,6 +46,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                         product.Material = pro.Material;
                         product.Status = pro.Status;
                         product.CreatedAt = DateTime.Now;
+                        product.DiscountId = pro.DiscountId;
                     };
                     await _context.Products.AddAsync(product);
                     await _context.SaveChangesAsync();
@@ -187,6 +188,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                            {
                                ProductName = pro.ProductName,
                                CategoryId = cate.CategoryId,
+                               DiscountId = dis.DiscountId,
                                SeasonId = season.SeasonId,
                                Image = pro.Avatar,
                                Price = pro.Price,
@@ -295,6 +297,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                     product.Size = pro.Size ?? product.Size;
                     product.Color = pro.Color ?? product.Color;
                     product.Material = pro.Material ?? product.Material;
+                    product.DiscountId = pro.DiscountId ?? product.DiscountId;
                     product.Status = pro.Status ?? product.Status;
 
                     if (pro.ListExist != null && pro.ListExist.Count > 0)

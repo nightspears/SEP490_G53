@@ -11,5 +11,8 @@ namespace TCViettelFC_API.Dtos.Category
         public DateTime? CreatedAt { get; set; }
 
         public int? Status { get; set; }
+
     }
+
+   
 }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Globalization;
 using System.Net.Http.Headers;
 using TCViettetlFC_Client.Models;
 
@@ -28,7 +29,13 @@ namespace TCViettetlFC_Client.Services
                 response.EnsureSuccessStatusCode(); // Throw if not a success code.
 
                 var jsonResponse = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<ShipmentResponse>(jsonResponse);
+                var settings = new JsonSerializerSettings
+                {
+                    DateFormatString = "dd/MM/yyyy HH:mm",
+                    Culture = CultureInfo.InvariantCulture,
+                    DateTimeZoneHandling = DateTimeZoneHandling.Local
+                };
+                return JsonConvert.DeserializeObject<ShipmentResponse>(jsonResponse, settings);
             }
             catch (HttpRequestException ex)
             {

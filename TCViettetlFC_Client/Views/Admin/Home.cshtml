@@ -1,6 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Home";
     Layout = "_LayoutAdmin";
+    decimal ticketRevenue = decimal.Parse(ViewBag.TotalTicketRevenue);
+    decimal productRevenue = decimal.Parse(ViewBag.TotalProductRevenue);
+    string aftertrev = ticketRevenue.ToString("#,0", new System.Globalization.CultureInfo("es-ES"));
+    string afterprrev = productRevenue.ToString("#,0", new System.Globalization.CultureInfo("es-ES"));
+
 }
 <div class="page-wrapper">
     <div class="content container-fluid">
@@ -22,11 +27,11 @@
                                 <i class="fe fe-users"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>168</h3>
+                                <h3>@ViewBag.TotalSoldTickets</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">
-                            <h6 class="text-muted">Members</h6>
+                            <h6 class="text-muted">Số vé bán ra</h6>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-primary w-50"></div>
                             </div>
@@ -42,11 +47,11 @@
                                 <i class="fe fe-credit-card"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>487</h3>
+                                <h3>@ViewBag.TotalCustomer</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">
-                            <h6 class="text-muted">Appointments</h6>
+                            <h6 class="text-muted">Số người dùng</h6>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-success w-50"></div>
                             </div>
@@ -62,11 +67,11 @@
                                 <i class="fe fe-star-o"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>485</h3>
+                                <h3>@(aftertrev+"đ")</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">
-                            <h6 class="text-muted">Mentoring Points</h6>
+                            <h6 class="text-muted">Tổng doanh thu vé</h6>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-danger w-50"></div>
                             </div>
@@ -82,11 +87,11 @@
                                 <i class="fe fe-folder"></i>
                             </span>
                             <div class="dash-count">
-                                <h3>$62523</h3>
+                                <h3>@(afterprrev+"đ")</h3>
                             </div>
                         </div>
                         <div class="dash-widget-info">
-                            <h6 class="text-muted">Revenue</h6>
+                            <h6 class="text-muted">Tổng doanh thu sản phẩm</h6>
                             <div class="progress progress-sm">
                                 <div class="progress-bar bg-warning w-50"></div>
                             </div>

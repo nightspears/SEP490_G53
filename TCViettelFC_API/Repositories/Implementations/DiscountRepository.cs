@@ -60,6 +60,8 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             try
             {
+                _context.Database.ExecuteSqlRaw("EXEC UpdateDiscountStatus");
+
                 List<Discount> discounts = new List<Discount>();
                 discounts = await _context.Discounts.Where(x => x.Status != 0).ToListAsync();
 
