@@ -13,8 +13,14 @@ namespace TCViettelFC_API.Dtos
         public DateTime? JoinDate { get; set; }
         public DateTime? OutDate { get; set; }
         public string? Description { get; set; }
-        public string? BackShirtImage { get; set; }
-        public string? avatar { get; set; }
+        public IFormFile? avatar { get; set; }
         public int? Status { get; set; }
+
+        public class FileResponse
+        {
+            public string? FileName { get; set; }
+
+            public IFormFile? File { get; set; }
+        }
     }
 }

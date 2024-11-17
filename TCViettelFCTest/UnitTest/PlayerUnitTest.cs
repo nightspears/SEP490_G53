@@ -144,15 +144,19 @@ namespace TCViettelFCTest.UnitTest
             Assert.AreEqual(0, (await _context.Players.FindAsync(player.PlayerId)).Status); // Ensure status is updated
         }
 
-        //[Test]
-        //public async Task DeletePlayer_NotFound_ThrowsException()
-        //{
-        //    // Act & Assert
-        //    var ex = await _playerRepository.DeletePlayerAsync(99);
-        //    Assert.Throws<KeyNotFoundException>(ex);
-        //    var ex = Assert.ThrowsAsync<KeyNotFoundException>(async () => await _playerRepository.DeletePlayerAsync(99));
-        //    Assert.AreEqual("không thấy cầu thủ", ex.Message);
-        //}
+        [Test]
+        public async Task DeletePlayer_PlayerNotFound_ThrowsKeyNotFoundException()
+        {
+            // Arrange
+            var nonExistentPlayerId = 999; // ID không tồn tại trong cơ sở dữ liệu
+
+            // Act & Assert
+            var ex = Assert.ThrowsAsync<KeyNotFoundException>(async () =>
+                await _playerRepository.DeletePlayerAsync(nonExistentPlayerId)
+            );
+
+            Assert.AreEqual("không tìm được cầu thủ với id đó", ex.Message); // Kiểm tra thông báo lỗi
+        }
 
         [Test]
         public async Task UpdatePlayer_Success()
@@ -178,7 +182,7 @@ namespace TCViettelFCTest.UnitTest
             };
 
             // Act
-            var result = await _playerRepository.UpdatePlayerAsync(updatedPlayerDto);
+            var result = await _playerRepository.UpdatePlayerAsync(updatedPlayerDto.PlayerId, updatedPlayerDto);
 
             // Assert
             Assert.IsNotNull(result);
@@ -201,8 +205,7 @@ namespace TCViettelFCTest.UnitTest
 
             // Act & Assert
             var ex = Assert.ThrowsAsync<KeyNotFoundException>(async () => await _playerRepository.UpdatePlayerAsync(updatedPlayerDto));
-            Assert.AreEqual("không tìm được cầu thủ để cập nhật", ex.Message);
+            Assert.AreEqual("không tìm được cầu thủ với id đó", ex.Message);
         }
-
     }
 }

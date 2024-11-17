@@ -7,7 +7,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<List<PlayerDto>> ListAllPlayerAsync();
         Task<PlayerDto> GetPlayerByIdAsync(int id);
         Task<PlayerDto> AddPlayerAsync(PlayerDto player);
-        Task<PlayerDto> UpdatePlayerAsync(PlayerDto player);
+        Task<PlayerDto> UpdatePlayerAsync(int id,PlayerDto player);
         Task<PlayerDto> DeletePlayerAsync(int id);
 
     }

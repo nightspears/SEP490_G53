@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Repositories.Implementations;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -16,12 +17,10 @@ namespace TCViettelFC_API.Controllers
         {
             _player = player;
         }
+        [EnableQuery]
         [HttpPost("AddPlayer")]
-        public async Task<IActionResult> AddPlayer([FromBody] PlayerDto playerDto)
+        public async Task<IActionResult> AddPlayer(PlayerDto playerDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             try
             {
                 var createdPlayer = await _player.AddPlayerAsync(playerDto);
@@ -32,6 +31,7 @@ namespace TCViettelFC_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        [EnableQuery]
         [HttpGet("ListPlayer")]
         public async Task<IActionResult> GetAllPlayers()
         {
@@ -45,6 +45,7 @@ namespace TCViettelFC_API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [EnableQuery]
         [HttpGet("GetPlayerById")]
         public async Task<IActionResult> GetPlayerById(int id)
         {
@@ -62,18 +63,13 @@ namespace TCViettelFC_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-        [HttpPut("UpdatePlayer")]
-        public async Task<IActionResult> UpdatePlayer(int id, [FromBody] PlayerDto playerDto)
+        [EnableQuery]
+        [HttpPut("UpdatePlayer/{id}")]
+        public async Task<IActionResult> UpdatePlayer(int id,[FromBody] PlayerDto playerDto)
         {
-            if (id != playerDto.PlayerId)
-                return BadRequest("Player ID mismatch");
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             try
             {
-                var updatedPlayer = await _player.UpdatePlayerAsync(playerDto);
+                var updatedPlayer = await _player.UpdatePlayerAsync(id,playerDto);
                 return Ok(updatedPlayer);
             }
             catch (KeyNotFoundException ex)
@@ -85,6 +81,7 @@ namespace TCViettelFC_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        [EnableQuery]
         [HttpDelete("DeletePlayer")]
         public async Task<IActionResult> DeletePlayer(int id)
         {
