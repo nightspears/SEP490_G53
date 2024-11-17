@@ -129,7 +129,7 @@ function modalEditOrCreate(id) {
 
     $('#endDate').val("");
 
-    $('#status').prop('checked', false);
+    $('#status').prop('checked', true);
 
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật mã giảm giá")

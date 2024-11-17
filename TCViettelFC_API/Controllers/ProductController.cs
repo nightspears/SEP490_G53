@@ -147,6 +147,12 @@ namespace TCViettelFC_API.Controllers
 
         }
 
-
+        [HttpPost("updateStatus")]
+        public void updateStatus()
+        {
+            var status = int.Parse( Request.Form["status"] );
+            var id = int.Parse(Request.Form["id"]);
+            _product.UpdateStatus(status , id);
+        }
     }
 }

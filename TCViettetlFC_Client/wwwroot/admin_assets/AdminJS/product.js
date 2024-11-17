@@ -63,7 +63,7 @@ function loadData() {
         <td class="price" data-price="${item.price}">${item.price}</td>
         <td class="text-center">
             <div class="status-toggle d-flex justify-content-center">
-                <input type="checkbox" id="status_${item.productId}" class="check" ${item.status === 1 ? 'checked' : ''}>
+                <input type="checkbox" data-sid = "${item.productId}" id="status_${item.productId}" class="check" ${item.status === 1 ? 'checked' : ''}>
                     <label for="status_${item.productId}" class="checktoggle">checkbox</label>
             </div>
         </td>
@@ -141,9 +141,7 @@ $(document).on("click", "#btnXoa", function () {
 });
 
 // show modal and fill data (modal chung cho edit và create)
-function modalEditOrCreate(id) {
-    debugger
-
+function resetForm() {
     $('#btnNomal').show();
     $('#btnLoading').hide();
     $('#fileInput').val('');
@@ -157,8 +155,18 @@ function modalEditOrCreate(id) {
     $('#kichthuoc').val("");
     $('#chatlieu').val("");
     $('#maGiamGia').val(0);
+    $('#errorTen').hide();
+    $('#errorSeason').hide();
+    $('#errorCate').hide();
+    $('#errorGia').hide();
+    $('#errorSize').hide();
 
-    $('#status').prop('checked', false);
+    $('#status').prop('checked', true);
+}
+function modalEditOrCreate(id) {
+    debugger
+    resetForm();
+
 
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật sản phẩm")
@@ -212,6 +220,8 @@ function modalEditOrCreate(id) {
         $("#fileInputImg").val("");
         $("#ImgAvt").attr("src", "/image/imagelogo/logoviettel.jpg")
         $("#titleModal").text("Thêm sản phẩm")
+
+
         $('#idTran').hide()
         $(".modal-backdrop").remove();
         $('#modalEditorCreate').modal("show")
@@ -269,115 +279,165 @@ $(document).on("click", ".change-photo-btn", function () {
 
 var fileList = [];
 
+function validateData() {
+    var check = true;
+
+    if ($('#tensp').val().trim() == "" || $('#tensp').val() == undefined) {
+        check = false;
+        $('#errorTen').show();
+    } else {
+        $('#errorTen').hide();
+    }
+
+    if ($('#muaGiai').val().trim() == 0 || $('#muaGiai').val().trim() == undefined) {
+        check = false;
+        $('#errorSeason').show();
+    } else {
+        $('#errorSeason').hide();
+
+    }
+
+    if ($('#theLoai').val().trim() == 0 || $('#theLoai').val().trim() == undefined) {
+        check = false;
+        $('#errorCate').show();
+    } else {
+        $('#errorCate').hide();
+
+    }
+
+
+    if ($('#giaSp').val().trim() == "" || $('#giaSp').val() == undefined) {
+        check = false;
+        $('#errorGia').show();
+    } else {
+        $('#errorGia').hide();
+    }
+
+    if ($('#kichthuoc').val().trim() == "" || $('#kichthuoc').val() == undefined) {
+        check = false;
+        $('#errorSize').show();
+    } else {
+        $('#errorSize').hide();
+    }
+
+
+    return check;
+}
+
 // edit or create sản phẩm 
 function EditOrCreate() {
-    $('#btnNomal').hide();
-    $('#btnLoading').show();
-    debugger
-    var id = $('#idSanPham').val();
-    var formData = new FormData();
-    //xử lý lay file Avatar
-    var inputElement = $('#fileInputImg');
-    var files = inputElement.prop('files');
-    if (files.length > 0) {
-        var file = files[0];
-        formData.append('Avatar', file);
-    }
-
-    formData.append('ProductName', $('#tensp').val());
-    formData.append('SeasonId', $('#muaGiai').val());
-    formData.append('CategoryId', $('#theLoai').val());
-    formData.append('Description', $('#moTa').val());
-
-    formData.append('Price', $('#giaSp').val());
-    formData.append('Size', $('#kichthuoc').val());
-    formData.append('Material', $('#chatlieu').val());
-    formData.append('DiscountId', $('#maGiamGia').val());
-
-    if ($('#status').prop('checked')) {
-        formData.append('Status', 1);
-    } else {
-        formData.append('Status', 2);
-    }
-
-    // xử lý lấy listFile
-    var inputFileList = $('#fileInput');
-    var filesList = inputFileList.prop('files');
-
-    if (filesList.length > 0) {
-        var ListFile = [];
-        $.each(filesList, function (index, file) {
-            ListFile.push({
-                FileName: file.name,
-                File: file
-            });
-        });
-        $.each(ListFile, function (index, file) {
-            formData.append(`DataFile[${index}].FileNamme`, file.FileNamme);
-            formData.append(`DataFile[${index}].File`, file.File);
-        });
-    }
-    $('#fileInput').val("");
-
-    var dataIdList = [];
-    debugger
-    $('#previewContainer > div').each(function () {
+    if (validateData()) {
+        $('#btnNomal').hide();
+        $('#btnLoading').show();
         debugger
-        var dataId = $(this).attr('data-id');
-        if (dataId != 0 && dataId != undefined) {
-            dataIdList.push(dataId);
+        var id = $('#idSanPham').val();
+        var formData = new FormData();
+        //xử lý lay file Avatar
+        var inputElement = $('#fileInputImg');
+        var files = inputElement.prop('files');
+        if (files.length > 0) {
+            var file = files[0];
+            formData.append('Avatar', file);
         }
-    });
-    if (dataIdList.length > 0) {
-        debugger
-        dataIdList.forEach(function (id) {
-            formData.append('ListExist[]', id);
-        });
-    };
 
+        formData.append('ProductName', $('#tensp').val());
+        formData.append('SeasonId', $('#muaGiai').val());
+        formData.append('CategoryId', $('#theLoai').val());
+        formData.append('Description', $('#moTa').val());
+        formData.append('Price', $('#giaSp').val());
+        formData.append('Size', $('#kichthuoc').val());
+        formData.append('Material', $('#chatlieu').val());
+        formData.append('DiscountId', $('#maGiamGia').val());
 
-    if (id != 0 && id != undefined) {
+        if ($('#status').prop('checked')) {
+            formData.append('Status', 1);
+        } else {
+            formData.append('Status', 2);
+        }
+
+        // xử lý lấy listFile
+        var inputFileList = $('#fileInput');
+        var filesList = inputFileList.prop('files');
+
+        if (filesList.length > 0) {
+            var ListFile = [];
+            $.each(filesList, function (index, file) {
+                ListFile.push({
+                    FileName: file.name,
+                    File: file
+                });
+            });
+            $.each(ListFile, function (index, file) {
+                formData.append(`DataFile[${index}].FileNamme`, file.FileNamme);
+                formData.append(`DataFile[${index}].File`, file.File);
+            });
+        }
+        $('#fileInput').val("");
+
+        var dataIdList = [];
         debugger
-        $.ajax({
-            url: 'https://localhost:5000/api/Product/UpdateProduct/' + id,
-            type: 'Put',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                loadData();
-                showAlert("Cập nhật sản phẩm thành công");
-                $("#modalEditorCreate").modal("hide");
-                fileList = [];
-                debugger
-            },
-            error: function (error) {
-                debugger
+        $('#previewContainer > div').each(function () {
+            debugger
+            var dataId = $(this).attr('data-id');
+            if (dataId != 0 && dataId != undefined) {
+                dataIdList.push(dataId);
             }
         });
+        if (dataIdList.length > 0) {
+            debugger
+            dataIdList.forEach(function (id) {
+                formData.append('ListExist[]', id);
+            });
+        };
 
-    } else {
-        $.ajax({
-            url: 'https://localhost:5000/api/Product/AddProduct',
-            type: 'post',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                debugger
-                loadData();
-                showAlert("Thêm mới sản phẩm thành công");
-                $("#modalEditorCreate").modal("hide");
-                $('#fileInput').val('');
-                fileList = [];
-            },
-            error: function (error) {
-                debugger
-            }
-        });
+
+        if (id != 0 && id != undefined) {
+            debugger
+            $.ajax({
+                url: 'https://localhost:5000/api/Product/UpdateProduct/' + id,
+                type: 'Put',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    loadData();
+                    showAlert("Cập nhật sản phẩm thành công");
+                    $("#modalEditorCreate").modal("hide");
+                    fileList = [];
+                    debugger
+                },
+                error: function (error) {
+                    debugger
+                }
+            });
+
+        }
+        else {
+            $.ajax({
+                url: 'https://localhost:5000/api/Product/AddProduct',
+                type: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    debugger
+                    loadData();
+                    showAlert("Thêm mới sản phẩm thành công");
+                    $("#modalEditorCreate").modal("hide");
+                    $('#fileInput').val('');
+                    fileList = [];
+                },
+                error: function (error) {
+                    debugger
+                }
+            });
+        }
     }
 
 }
+
+
+
 
 function fillDataModal() {
     $.ajax({
@@ -546,3 +606,36 @@ function showAlert(mess) {
         $("#alertSuccess").hide(); // Hide the notification box with fade-out effect
     }, 3500); // 4 seconds delay
 }
+
+$(document).on("change", ".check", function () {
+
+    var checkbox = $(this);
+    var status = 1;
+    if (checkbox.prop('checked')) {
+        status = 1
+    } else {
+        status = 2;
+    }
+    var id = checkbox.data("sid");
+    var formData = new FormData();
+
+    formData.append('id', id);
+    formData.append('status', status);
+    debugger
+    $.ajax({
+        url: 'https://localhost:5000/api/Product/updateStatus',
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            debugger
+            loadData();
+            showAlert("Cập nhật trạng thái thành công");
+        },
+        error: function (error) {
+            debugger
+        }
+    });
+
+});
