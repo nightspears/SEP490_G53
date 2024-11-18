@@ -134,7 +134,9 @@ namespace TCViettelFC_API.Repositories.Implementations
 
         public async Task<ShowPlayerDtos> UpdatePlayerAsync(int id, PlayerDto playerDtoInput)
         {
-            var player = await _context.Players.FirstOrDefaultAsync(p => p.PlayerId == id);
+            var player = await _context.Players
+                .Include(p => p.Season)
+                .FirstOrDefaultAsync(p => p.PlayerId == id);
             if (player == null)
                 throw new Exception("Player not found");
 
@@ -170,7 +172,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 Status = player.Status,
                 Avatar = player.avatar,
                 SeasonId = player.SeasonId,
-                SeasonName = player.Season?.SeasonName,
+                SeasonName = player.Season.SeasonName,
             };
         }
 
