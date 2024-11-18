@@ -163,9 +163,10 @@ width:300px;
                         Price = (decimal)item1.Price!,
                         Quantity = (int)item1.Quantity!
                     });
-                    await _context.SaveChangesAsync();
+
                 }
             }
+            await _context.SaveChangesAsync();
             return res;
 
         }
