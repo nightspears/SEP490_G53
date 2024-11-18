@@ -28,7 +28,7 @@ namespace TCViettelFC_API.Dtos
         public int? NewsCategoryId { get; set; }
         public string? Title { get; set; }
         public string? Content { get; set; }
-        public string? Image { get; set; }
+        public IFormFile? Image { get; set; }
         public DateTime? CreatedAt { get; set; }
         public int? Status { get; set; }
     }
@@ -36,10 +36,10 @@ namespace TCViettelFC_API.Dtos
     public class UpdateNewDto
     {
         public int? CreatorId { get; set; }
-        public int NewsCategoryId { get; set; }
+        public int? NewsCategoryId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public string? Image { get; set; }
+        public IFormFile? Image { get; set; }
         public DateTime? CreatedAt { get; set; } 
         
     }
