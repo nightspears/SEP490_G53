@@ -44,7 +44,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                         product.Size = pro.Size;
                         product.Color = pro.Color;
                         product.Material = pro.Material;
-                        product.Status = pro.Status;
+                        product.Status = pro.Status == null ? 2 : pro.Status;
                         product.CreatedAt = DateTime.Now;
                         product.DiscountId = pro.DiscountId;
                     };
@@ -365,6 +365,13 @@ namespace TCViettelFC_API.Repositories.Implementations
             };
 
             return new JsonResult(data);
+        }
+
+        public void UpdateStatus(int status , int id)
+        {
+           var product = _context.Products.Find(id);
+           product.Status = status;
+           _context.SaveChanges();
         }
 
         public async Task<JsonResult> GetLienQuanProductAsync(List<int> lstID)
