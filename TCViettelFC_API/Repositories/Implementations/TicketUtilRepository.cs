@@ -3,14 +3,11 @@ using CloudinaryDotNet.Actions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using QRCoder;
-using System.Net.Mail;
-using System.Net;
+using System.Globalization;
 using TCViettelFC_API.Dtos;
+using TCViettelFC_API.Dtos.CheckOut;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
-using TCViettelFC_API.Dtos.CheckOut;
-using static System.Net.Mime.MediaTypeNames;
-using System.Globalization;
 
 namespace TCViettelFC_API.Repositories.Implementations
 {
@@ -166,9 +163,10 @@ width:300px;
                         Price = (decimal)item1.Price!,
                         Quantity = (int)item1.Quantity!
                     });
-                    await _context.SaveChangesAsync();
+
                 }
             }
+            await _context.SaveChangesAsync();
             return res;
 
         }
@@ -411,7 +409,7 @@ width:300px;
             QRCodeGenerator qr = new QRCodeGenerator();
             foreach (var ticket in tickets)
             {
-                string ticketUrl = $"http://192.168.1.134:7004/Entry/VerifyTicket/{ticket.Id}";
+                string ticketUrl = $"https://tcviettelfc.azurewebsites.net/Entry/VerifyTicket/{ticket.Id}";
 
                 QRCodeData data = qr.CreateQrCode(ticketUrl, QRCodeGenerator.ECCLevel.Q);
                 PngByteQRCode qrCode = new PngByteQRCode(data);
@@ -502,7 +500,7 @@ width:300px;
             }
             if (supp.Count > 0)
             {
-                string suppUrl = $"http://192.168.1.134:7004/Entry/VerifySupItem/{orderId}";
+                string suppUrl = $"https://tcviettelfc.azurewebsites.net/VerifySupItem/{orderId}";
                 QRCodeData suppData = qr.CreateQrCode(suppUrl, QRCodeGenerator.ECCLevel.Q);
                 PngByteQRCode suppQrCode = new PngByteQRCode(suppData);
 
