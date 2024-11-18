@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Dtos.Order;
-using TCViettelFC_API.Dtos.Product;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
 
@@ -18,19 +17,22 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             var orders = await _context.TicketOrders.Include(x => x.Customer).ToListAsync();
             var listresults = new List<TicketOrdersDto>();
+
             foreach (var order in orders)
             {
                 var dto = new TicketOrdersDto()
                 {
-                    CustomerEmail = order.Customer!.Email,
+                    CustomerEmail = order.Customer != null ? order.Customer.Email : null, // Handle null Customer
                     Id = order.Id,
                     OrderDate = order.OrderDate,
                     TotalAmount = order.TotalAmount,
                 };
                 listresults.Add(dto);
             }
+
             return listresults;
         }
+
         public async Task<IEnumerable<OrderedSuppItemDto>> GetOrderedSuppItemByTicketOrderId(int id)
         {
             var orders = await _context.OrderedSuppItems.Include(x => x.Item).Where(x => x.OrderId == id).ToListAsync();
@@ -98,42 +100,42 @@ namespace TCViettelFC_API.Repositories.Implementations
                 })
                 .ToListAsync();
         }
-		// Method to get orders by CustomerAccountId
-		public async Task<IEnumerable<OrderProductCustomerDto>> GetOrdersByCustomerAccountIdAsync(int customerAccountId)
-		{
-			var orders = await _context.OrderProducts
-				.Where(op => op.Customer.AccountId == customerAccountId)
-				.Include(op => op.Customer) // Optional: Include Customer if you need customer details
-				.Include(op => op.OrderProductDetails) // Optional: Include OrderProductDetails if you need them
-				.Include(op => op.Payments) // Optional: Include Payments if you need them
-				.Include(op => op.Shipments) // Optional: Include Shipments if you need them
-				.Select(op => new OrderProductCustomerDto
-				{
-					Id = op.Id,
-					OrderCode = op.OrderCode,
-					OrderDate = op.OrderDate,
-					ShipmentFee = op.ShipmentFee,
-					TotalPrice = op.TotalPrice,
-					AddressId = op.AddressId,
-					Status = op.Status,
-					// Add other necessary fields here, such as Customer info or Payment details
-				})
-				.ToListAsync();
+        // Method to get orders by CustomerAccountId
+        public async Task<IEnumerable<OrderProductCustomerDto>> GetOrdersByCustomerAccountIdAsync(int customerAccountId)
+        {
+            var orders = await _context.OrderProducts
+                .Where(op => op.Customer.AccountId == customerAccountId)
+                .Include(op => op.Customer) // Optional: Include Customer if you need customer details
+                .Include(op => op.OrderProductDetails) // Optional: Include OrderProductDetails if you need them
+                .Include(op => op.Payments) // Optional: Include Payments if you need them
+                .Include(op => op.Shipments) // Optional: Include Shipments if you need them
+                .Select(op => new OrderProductCustomerDto
+                {
+                    Id = op.Id,
+                    OrderCode = op.OrderCode,
+                    OrderDate = op.OrderDate,
+                    ShipmentFee = op.ShipmentFee,
+                    TotalPrice = op.TotalPrice,
+                    AddressId = op.AddressId,
+                    Status = op.Status,
+                    // Add other necessary fields here, such as Customer info or Payment details
+                })
+                .ToListAsync();
 
-			return orders;
-		}
-		public class OrderProductCustomerDto
-		{
-			public int Id { get; set; }
-			public string? OrderCode { get; set; }
-			public DateTime? OrderDate { get; set; }
-			public decimal? ShipmentFee { get; set; }
-			public decimal? TotalPrice { get; set; }
-			public int? AddressId { get; set; }
-			public int? Status { get; set; }
-			// Add other properties as needed
-		}
-		public async Task<OrderDetailDto> GetOrderDetailsByOrderIdAsync(int orderId)
+            return orders;
+        }
+        public class OrderProductCustomerDto
+        {
+            public int Id { get; set; }
+            public string? OrderCode { get; set; }
+            public DateTime? OrderDate { get; set; }
+            public decimal? ShipmentFee { get; set; }
+            public decimal? TotalPrice { get; set; }
+            public int? AddressId { get; set; }
+            public int? Status { get; set; }
+            // Add other properties as needed
+        }
+        public async Task<OrderDetailDto> GetOrderDetailsByOrderIdAsync(int orderId)
         {
             // Fetch the order product including related entities
             var orderProduct = await _context.OrderProducts
@@ -184,13 +186,13 @@ namespace TCViettelFC_API.Repositories.Implementations
                     OrderProductId = opd.OrderProductId,
                     Product = new ProductorderDto
                     {
-                        ProductId = opd.Product?.ProductId ?? 0, 
+                        ProductId = opd.Product?.ProductId ?? 0,
                         ProductName = opd.Product?.ProductName,
                         Avatar = opd.Product?.Avatar
                     },
                     Player = new PlayerProductorderDto
                     {
-                        PlayerId = opd.Player?.PlayerId ?? 0, 
+                        PlayerId = opd.Player?.PlayerId ?? 0,
                         FullName = opd.Player?.FullName,
                         ShirtNumber = opd.Player?.ShirtNumber
                     },
@@ -209,14 +211,14 @@ namespace TCViettelFC_API.Repositories.Implementations
                     TotalAmount = p.TotalAmount,
                     PaymentGateway = p.PaymentGateway,
                     Status = p.Status
-                }).FirstOrDefault() 
+                }).FirstOrDefault()
             };
 
             return orderDetailDto;
         }
 
         // Method to update the status of an order by orderId
-        public async Task<bool> UpdateOrderStatusAsync(int orderId, int newStatus,int staffid)
+        public async Task<bool> UpdateOrderStatusAsync(int orderId, int newStatus, int staffid)
         {
             var order = await _context.OrderProducts.FindAsync(orderId);
             if (order == null)
