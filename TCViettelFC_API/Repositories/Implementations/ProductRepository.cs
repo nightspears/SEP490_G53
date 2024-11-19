@@ -21,10 +21,40 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task AddProductAsync(ProductDto pro)
         {
 
+            var a = pro.ProductName.Length;
+            if (string.IsNullOrEmpty(pro.ProductName))
+            {
+                throw new ArgumentException("Product name cannot be null");
+            }
+            if (pro.ProductName.Length > 255)
+            {
+                throw new ArgumentException("Product name over 255 characters");
+            }
+            if (string.IsNullOrEmpty(pro.SeasonId.ToString()))
+            {
+                throw new ArgumentException("Season cannot be null");
+            }
+            if (string.IsNullOrEmpty(pro.CategoryId.ToString()))
+            {
+                throw new ArgumentException("CategoryId cannot be null");
+            }
+            if (string.IsNullOrEmpty(pro.Price.ToString()))
+            {
+                throw new ArgumentException("Price cannot be null");
+            }
+
+            if (string.IsNullOrEmpty(pro.Size))
+            {
+                throw new ArgumentException("Size cannot be null");
+            }
+
+
+
             using (var dbContextTransaction = _context.Database.BeginTransaction())
             {
                 try
                 {
+                   
                     Product product = new Product();
                     {
                         product.ProductName = pro.ProductName;
@@ -45,7 +75,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                         product.Color = pro.Color;
                         product.Material = pro.Material;
                         product.Status = pro.Status == null ? 2 : pro.Status;
-                        product.CreatedAt = DateTime.Now;
+                        product.CreatedAt =  DateTime.Now  ;
                         product.DiscountId = pro.DiscountId;
                     };
                     await _context.Products.AddAsync(product);
@@ -176,42 +206,51 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
         public async Task<JsonResult> GetProductByIdAsync(int id)
         {
-            var product = (from pro in _context.Products
-                           join cate in _context.ProductCategories on pro.CategoryId equals cate.CategoryId into category
-                           from cate in category.DefaultIfEmpty()
-                           join season in _context.Seasons on pro.SeasonId equals season.SeasonId into seasons
-                           from season in seasons.DefaultIfEmpty()
-                           join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
-                           from dis in discout.DefaultIfEmpty()
-                           where (pro.Status != 0 && cate.Status != 0 && season.Status != 0)
-                           select new ProductResponse
-                           {
-                               ProductName = pro.ProductName,
-                               CategoryId = cate.CategoryId,
-                               DiscountId = dis.DiscountId,
-                               SeasonId = season.SeasonId,
-                               Image = pro.Avatar,
-                               Price = pro.Price,
-                               ProductId = pro.ProductId,
-                               Status = pro.Status,
-                               discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
-                               Size = pro.Size,
-                               Material = pro.Material,
-                               Description = pro.Description
 
-                           }).FirstOrDefault(x => x.ProductId == id && x.Status != 0);
-
-
-            var proFile = _context.ProductFiles.Where(x => x.Status == 1 && x.ProductId == id).ToList();
-
-            var data = new
+            if(id <= 0 )
             {
-                Product = product,
-                PFile = proFile,
+                throw new NullReferenceException("ProductId not valid");
+            }
+            else
+            {
+                var product = (from pro in _context.Products
+                               join cate in _context.ProductCategories on pro.CategoryId equals cate.CategoryId into category
+                               from cate in category.DefaultIfEmpty()
+                               join season in _context.Seasons on pro.SeasonId equals season.SeasonId into seasons
+                               from season in seasons.DefaultIfEmpty()
+                               join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
+                               from dis in discout.DefaultIfEmpty()
+                               where (pro.Status != 0 && cate.Status != 0 && season.Status != 0)
+                               select new ProductResponse
+                               {
+                                   ProductName = pro.ProductName,
+                                   CategoryId = cate.CategoryId,
+                                   DiscountId = dis.DiscountId,
+                                   SeasonId = season.SeasonId,
+                                   Image = pro.Avatar,
+                                   Price = pro.Price,
+                                   ProductId = pro.ProductId,
+                                   Status = pro.Status,
+                                   discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
+                                   Size = pro.Size,
+                                   Material = pro.Material,
+                                   Description = pro.Description
 
-            };
+                               }).FirstOrDefault(x => x.ProductId == id && x.Status != 0);
 
-            return new JsonResult(data);
+
+                var proFile = _context.ProductFiles.Where(x => x.Status == 1 && x.ProductId == id).ToList();
+
+                var data = new
+                {
+                    Product = product,
+                    PFile = proFile,
+
+                };
+
+                return new JsonResult(data);
+            }
+            
 
         }
 

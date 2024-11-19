@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace TCViettelFC_API.Models;
 
@@ -77,6 +78,12 @@ public partial class Sep490G53Context : DbContext
         {
             optionsBuilder.UseSqlServer(config.GetConnectionString("value"));
         }
+
+        base.OnConfiguring(optionsBuilder);
+
+        optionsBuilder
+            .UseInMemoryDatabase("TestDatabase")
+            .ConfigureWarnings(warnings => warnings.Ignore(InMemoryEventId.TransactionIgnoredWarning));
 
     }
 
