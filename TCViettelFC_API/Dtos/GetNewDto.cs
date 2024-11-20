@@ -1,4 +1,5 @@
-﻿using TCViettelFC_API.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using TCViettelFC_API.Models;
 
 namespace TCViettelFC_API.Dtos
 {
@@ -26,9 +27,11 @@ namespace TCViettelFC_API.Dtos
     {
         public int? CreatorId { get; set; }
         public int? NewsCategoryId { get; set; }
+        [MaxLength(255)]
         public string? Title { get; set; }
         public string? Content { get; set; }
         public IFormFile? Image { get; set; }
+        [Required]
         public DateTime? CreatedAt { get; set; }
         public int? Status { get; set; }
     }

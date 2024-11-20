@@ -4,9 +4,29 @@
     var customerId = ViewData["CustomerId"];
     var supplementaryItems = ViewData["NewList"] as List<SupplementaryIteamViewModel>;
      var matchAreaTickets = ViewData["MatchAreaTickets"] as List<MatchAreaTicketViewModel>;
-    Layout = "_LayoutCommonTicket";
+    Layout = "_LayoutCommon";
 }
 <style>
+
+    
+    .sanbong {
+    position: relative;
+        background-color: #f8f9fa;
+    border-radius: 20px;
+    overflow: hidden; /* Đảm bảo các phần tử con không vượt ra ngoài thẻ */
+    max-width: 100%; /* Đảm bảo thẻ div không bị tràn */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+        margin-bottom: 20px;
+}
+
+.sanbong svg {
+            background-color: #f8f9fa;
+    display: block;
+    width: 100%; /* SVG tự động co giãn theo chiều rộng của thẻ div */
+    height: auto; /* Đảm bảo tỉ lệ SVG */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
      /* Default appearance */
     .interactive-path {
         transition: all 0.3s ease; /* Smooth transition for color */
@@ -51,15 +71,48 @@
 
     /* Popup form centered */
     #ticketForm {
-        display: none;
-        background-color: #fff;
-        padding: 20px;
+        background-color: white;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-        width: 80%;
-        max-width: 500px;
+        padding: 20px;
+        width: 80%; /* Giữ nguyên chiều rộng */
+        max-width: 900px; /* Giới hạn chiều rộng tối đa */
+        max-height: 90vh; /* Giới hạn chiều cao tối đa, để không vượt quá chiều cao màn hình */
+        height: auto; /* Chiều cao tự động nếu không đủ nội dung */
+        min-height: 300px; /* Đặt chiều cao tối thiểu nếu muốn form lớn hơn */
+        overflow-y: auto; /* Thêm scroll nếu nội dung vượt quá chiều cao */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+    }
+    /* Tăng kích thước chữ cho toàn bộ form */
+    #ticketForm {
+        font-size: 16px; /* Kích thước chữ tổng quát */
+        line-height: 1.5; /* Độ cao dòng để chữ dễ đọc hơn */
     }
 
+        /* Tăng kích thước của các input và button */
+        #ticketForm input,
+        #ticketForm button {
+            font-size: 16px; /* Tăng kích thước chữ trong input và button */
+            height: 45px; /* Tăng chiều cao của input */
+            padding: 10px; /* Thêm khoảng cách bên trong */
+            border-radius: 6px; /* Làm mềm góc của các trường */
+        }
+
+        /* Tăng kích thước button */
+        #ticketForm button {
+            font-size: 16px;
+            height: 45px;
+            padding: 10px 20px;
+        }
+
+        /* Tăng kích thước tiêu đề hoặc nhãn (label) */
+        #ticketForm label {
+            font-size: 16px;
+            font-weight: bold; /* Làm nổi bật nhãn */
+        }
+        #addToCartBtn{
+        margin-top: 10px;
+        margin-left: 15px;
+        }
     .popup {
         position: fixed;
         top: 0;
@@ -125,13 +178,90 @@
 
 
 
+    /* Tổng thể giỏ hàng */
     .cart-container {
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fa; /* Màu nền nhạt */
+        border-radius: 10px; /* Bo góc container */
+        padding: 20px; /* Khoảng cách nội dung */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
     }
-   
+
+    /* Header giỏ hàng */
+    .cart-header {
+        display: flex; /* Căn đều nội dung */
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8d7da; /* Nền đỏ nhạt */
+        padding: 10px;
+        border-radius: 5px; /* Bo góc header */
+        color: #dc3545; /* Màu đỏ chữ */
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 10px; /* Khoảng cách với phần thân */
+    }
+
+    /* Phần thân giỏ hàng */
+    .cart-body {
+        border: 1px dashed #ced4da; /* Viền nét đứt */
+        border-radius: 5px; /* Bo góc */
+        height: 150px; /* Chiều cao tối đa */
+        overflow-y: auto; /* Hiển thị thanh cuộn khi nội dung tràn */
+        padding: 10px; /* Khoảng cách nội dung */
+        color: #6c757d; /* Màu xám */
+        font-style: italic;
+        font-size: 16px;
+    }
+
+    /* Footer giỏ hàng */
+    .cart-footer {
+        display: flex; /* Căn đều nội dung */
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        border-top: 1px solid #ddd; /* Viền trên */
+        margin-top: 10px;
+    }
+
+        .cart-footer .total-price {
+            color: #dc3545; /* Màu đỏ đậm */
+            font-size: 18px; /* Tăng kích thước */
+        }
+
+    /* Mục vé */
+    .cart-item {
+        display: flex; /* Hiển thị ngang */
+        justify-content: space-between; /* Căn đều hai bên */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        border: 1px solid #ccc; /* Viền từng mục */
+        border-radius: 5px; /* Bo góc từng mục */
+        padding: 10px; /* Khoảng cách nội dung */
+        margin-bottom: 10px; /* Khoảng cách giữa các mục */
+        background-color: #fff; /* Nền trắng */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+    }
+
+        .cart-item:hover {
+            background-color: #f8f9fa; /* Đổi nền khi hover */
+        }
+
+        /* Nút xóa */
+        .cart-item .remove-ticket {
+            font-size: 14px; /* Cỡ chữ nút */
+            color: #dc3545; /* Màu đỏ */
+            background: none; /* Xóa nền */
+            border: none; /* Xóa viền */
+            cursor: pointer; /* Hiệu ứng con trỏ */
+            padding: 5px; /* Tăng diện tích nhấn */
+            transition: color 0.2s ease; /* Hiệu ứng chuyển màu */
+        }
+
+            .cart-item .remove-ticket:hover {
+                color: #b71c1c; /* Màu đỏ đậm hơn khi hover */
+            }
+
+
     #continueButton{
         margin-top: 10px;
         background-color: rgb(38, 55, 144);
@@ -163,36 +293,17 @@
         align-items: center;
         color: #dc3545; /* Đỏ cho chữ "Bạn chọn 0 vé" */
         font-weight: bold;
+        font-size: 16px;
     }
 
-    .cart-body {
-        border: 1px dashed #ced4da;
-        border-radius: 5px;
-        height: 150px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #6c757d; /* Màu xám cho chữ "Giỏ hàng rỗng" */
-        font-style: italic;
-    }
-
-    .cart-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 10px;
-        font-weight: bold;
-    }
-
-        .cart-footer .total-price {
-            color: #dc3545; /* Đỏ cho tổng tiền vé */
-        }
+   
 
     .trandoidau {
-        background-color: white;
+        background-color: #f8f9fa;
         border-radius: 20px;
         padding: 20px;
         text-align: center;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .trandoidau-body {
@@ -233,53 +344,86 @@
     margin: 5px 0; /* Khoảng cách giữa các dòng */
 }
 
+    .cartHeader {
+        padding: 20px;
+        background-color: #e4e4a7 !important; /* Nền màu vàng nhạt */
+        border-radius: 10px; /* Bo góc */
+        font-family: Arial, sans-serif;
+        line-height: 1.6; /* Khoảng cách giữa các dòng */
+    }
+
+        .cartHeader h3 {
+            color: #c48c00; /* Màu vàng đậm */
+            font-weight: bold;
+            margin-top: 20px;
+            text-transform: uppercase; /* Viết hoa tiêu đề */
+        }
+
+        .cartHeader .important {
+            color: #c41e00; /* Màu đỏ */
+        }
+
+        .cartHeader p {
+            color: #333; /* Màu chữ đậm */
+            margin-bottom: 15px;
+        }
+
+        .cartHeader a {
+            color: #007bff; /* Màu xanh link */
+            text-decoration: underline;
+        }
+
+            .cartHeader a:hover {
+                color: #0056b3; /* Xanh đậm khi hover */
+            }
+
 </style>
+
 <div>
     
     <section class=carttype02>
 
-        <div style="margin-left: 8.5rem !important;
-        margin-right: 8.5rem !important;">
+        <div class="container-fluid px-3">
             <div class=row>
-                <div class="">
+                <div style="margin-bottom: 20px; margin-top:75px;">
                     <div class="cartHeader clearfix">
-                        <h1 class=logo>
-                            <a href=index-2.html><img src=~/home_assets/images/logo.png alt=image></a>
-                        </h1>
+                        <div class="notice">
+                            <p>Mỗi khách hàng, tương ứng với 01 tài khoản, với mỗi số điện thoại, Email, Họ và tên, được mua số lượng vé quy định theo mỗi trận.</p>
 
-                        <div class=orderId>
-                            <div>
-                                <p>your order id is <span>nyhsak01</span></p>
+                            <h3 class="important">LƯU Ý QUAN TRỌNG:</h3>
+                            <p>
+                                Quý khách khi tới sân vận động cần mang theo CMT/CCCD đã đăng ký khi đặt vé để nhân viên an ninh đối chiếu nếu cần thiết. Trong trường hợp thông tin không khớp với thông tin đã đặt vé, quý khách phải hoàn toàn chịu trách nhiệm nếu không được vào sân.
+                            </p>
+                            <p>
+                                Quý khách có trách nhiệm tự bảo mật vé điện tử, trong trường hợp Email vé điện tử bị lộ cho người khác, quý khách sẽ chịu hoàn toàn mọi rủi ro (nếu có).
+                            </p>
+                            <p>
+                                Đây là vé điện tử không định danh, do đó để bảo vệ quyền lợi của mình, đề nghị quý khách bảo mật các thông tin liên quan tới vé khi nhận được qua Email. Tại cổng soát vé, vé sẽ chỉ được quét lần đầu tiên và duy nhất, các lần quét vé sau sẽ không được chấp nhận. Đề nghị quý khách lưu ý điều này để tránh xảy ra tranh chấp, tranh cãi. Nếu trường hợp này xảy ra, quý khách sẽ chịu hoàn toàn trách nhiệm.
+                            </p>
+                            <p>Mọi thắc mắc vui lòng liên hệ tổng đài 0xxxxxxxxxxx hoặc 0xxxxxxxxxx để được giải quyết nhanh chóng nhất.</p>
 
-                                <p class=datetime>monday 22nd April 2015</p>
-                            </div>
+                            <h3 class="terms">ĐIỀU KIỆN ĐIỀU KHOẢN:</h3>
+                            <p>- Vé chỉ được dùng 1 lần duy nhất để qua cửa soát vé.</p>
+                            <p>- Áp dụng 01 vé/01 người vào sân.</p>
+                            <p>- Vé này không được đổi trả, hoàn huỷ.</p>
+
+                            <h3 class="guide">HƯỚNG DẪN SỬ DỤNG VÉ ĐIỆN TỬ:</h3>
+                            <p>
+                                Bước 1: Sau khi thanh toán thành công, quý khách vui lòng kiểm tra Email để nhận vé điện tử trong đó có kèm mã QR. Trong Email, quý khách sẽ nhận được số lượng mã QR bằng số lượng vé quý khách đặt trên Website <a href="#">https://tcviettelfc.azurewebsites.net/</a>. Trong trường hợp quý khách không nhận được Email, quý khách vui lòng kiểm tra thư mục Spam hoặc liên hệ tổng đài: 0xxxxxxxx để được hỗ trợ.
+                            </p>
+                            <p>
+                                Bước 2: Chụp màn hình hoặc in nội dung vé điện tử bao gồm mã QR để tiết kiệm thời gian soát vé của quý khách.
+                            </p>
+                            <p>
+                                Bước 3: Khi đến sân vận động, quý khách vui lòng xuất trình mã QR đã được chụp lại hoặc in ra để vào sân.
+                            </p>
                         </div>
                     </div>
+
                 </div>
-                <div class=cartBody>
-                    <div class="">
-                        <div class="heading clearfix">
-                            <h5>confirm your order</h5>
-
-                            <p>you have selected <span class="red cartitems"></span> product</p>
-                        </div>
-                        <ul class=salectedProduct id=cartItemsType2></ul>
-                        <div class=cart-meta>
-                            <div class=clearfix>
-                                <div class=item-content>
-                                    <div>
-                                        <h4>your total order value is</h4>
-
-                                        <p>after added all tax</p>
-                                    </div>
-                                </div>
-
-                                <div class=item-price><span id=carttotal>$44</span></div>
-                            </div>
-                        </div>
-                    </div>
+               
                     <div class="row pt-5">
-                        <div class=" col-md-8">
+                    <div class="col-12 col-md-8 mb-3">
                             <div class="trandoidau">
                                 <h2>TRẬN ĐỐI ĐẦU GIỮA</h2>
                                 <div class="d-flex trandoidau-body">
@@ -300,16 +444,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-4" style="background-color: white;border-radius: 20px;">
+                            <div class="mt-4 sanbong" style="background-color: white;border-radius: 20px;">
                                 <div style="margin-left: 40px;padding-top:20px">
                                     <h3>Tiến hành đặt vé</h3>
                                     <i>Số lượng vé mỗi người có thể mua: 4 vé</i>
                                     <h4>1. Chọn khán đài</h4>
                                     <p>Nhấn vào khu vực khán đài trong hình dưới để chọn vị trí ngồi.</p>
                                 </div>
-                                <svg class="mt-4" viewBox="40 2 2050 1190" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="mt-4" viewBox="0 0 2000 1300" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-                                    <rect width="2126" height="1311" fill="white"></rect>
+                                    <rect width="2000" height="1300" fill="white"></rect>
                                     <path class="interactive-path @(matchAreaTickets.Any(t => t.AreaId == 28 && t.AvailableSeats > 0) ? "" : "disabled")" id="path-28" d="M802.478 391.133C796.43 394.734 794.184 400.954 795.087 406.78C795.993 412.62 800.074 418.093 806.799 420.104L913.543 452.031C918.718 453.578 924.279 452.4 928.839 449.263C929.992 448.469 931.17 447.686 932.374 446.913L834.852 374.284C823.317 379.537 812.5 385.166 802.478 391.133Z" fill="#FDDB54"></path>
                                     <path class="interactive-path @(matchAreaTickets.Any(t => t.AreaId == 26 && t.AvailableSeats > 0) ? "" : "disabled")" id="path-26" d="M835.813 373.848L933.207 446.382C942.063 440.781 952.237 435.733 963.501 431.341L900.755 350.589C877.282 357.131 855.51 364.945 835.813 373.848Z" fill="#7EB30B"></path>
                                     <path class="interactive-path @(matchAreaTickets.Any(t => t.AreaId == 24 && t.AvailableSeats > 0) ? "" : "disabled")" id="path-24" d="M987.761 423.366C992.194 422.152 996.719 421.034 1001.32 420.013L960.653 337.368L960.727 337.328C940.864 340.668 921.572 344.883 903.094 349.943C902.63 350.07 902.167 350.197 901.705 350.325L964.389 430.997C971.743 428.166 979.554 425.613 987.761 423.366Z" fill="#F46B40"></path>
@@ -519,7 +663,7 @@
                 <div class="form-group">
                     <div class="row">
 
-                        <input hidden readonly id="areaId" type="text" name="areaId" class="form-control" placeholder="Area ID" />
+                        <input style="display: none;!important" hidden readonly id="areaId" type="text" name="areaId" class="form-control" placeholder="Area ID" />
 
                         <div class="col-md-6">
                             <label for="stands">Khán đài:</label>
@@ -575,7 +719,7 @@
                                 {
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="supplementary[]" value="@item.ItemId" data-price="@item.Price">
+                                    <input style="height: fit-content;" type="checkbox" name="supplementary[]" value="@item.ItemId" data-price="@item.Price">
                                             @item.ItemName - @item.Price VND
                                         </label>
 
@@ -590,14 +734,14 @@
                         <button type="button" id="closeOverlay">Đóng</button>
                     </div>
                 </div>
-                <div class="form-group">
-                                           
-                        <!-- "Thêm vào giỏ hàng" button -->
-                        <div class="d-flex justify-content-between">
-                            <button type="button" id="addToCartBtn">Thêm vào giỏ hàng</button>
-                        </div>
+                
+            
+                <button type="button" id="addToCartBtn" class="btn btn-primary text-white">
+                    Thêm vào giỏ hàng
+                </button>
+                        
 
-                </div>
+               
             </form>
         </div>
         <!-- JavaScript để hiển thị và ẩn overlay -->
@@ -738,30 +882,43 @@
 
 
         <script>
+            // Hàm cập nhật tổng giá
             function updateTotalPrice() {
                 const pricePerTicket = parseFloat(document.getElementById('price').value) || 0;
-                const quantity = parseInt(document.getElementById('quantity').value) || 0;
+                const ticketQuantity = parseInt(document.getElementById('quantity').value) || 0;
                 let supplementaryTotal = 0;
 
-                // Tính toán tổng giá các đồ dùng đính kèm được chọn
+                // Tính tổng giá của đồ đính kèm
                 document.querySelectorAll('input[name="supplementary[]"]:checked').forEach(item => {
-                    supplementaryTotal += parseFloat(item.getAttribute('data-price')) || 0;
+                    const itemPrice = parseFloat(item.getAttribute('data-price')) || 0;
+                    const itemId = item.value;
+                    const itemQuantity = parseInt(document.querySelector(`input[name="quantity_${itemId}"]`).value) || 0;
+
+                    supplementaryTotal += itemPrice * itemQuantity; // Tính giá dựa trên số lượng và giá
                 });
 
-                // Tính tổng giá
-                const totalPrice = (pricePerTicket * quantity) + supplementaryTotal;
-                document.getElementById('totalPrice').value = totalPrice.toFixed(0) + ' VND'; // Format số tiền và thêm 'VND'
+                // Tổng giá = giá vé * số lượng vé + tổng đồ đính kèm
+                const totalPrice = (pricePerTicket * ticketQuantity) + supplementaryTotal;
+                document.getElementById('totalPrice').value = totalPrice.toFixed(0) + ' VND'; // Hiển thị tổng giá
             }
 
-            // Thêm sự kiện khi thay đổi số lượng vé hoặc khi chọn đồ dùng đính kèm
-            document.getElementById('quantity').addEventListener('change', updateTotalPrice);
-            document.querySelectorAll('input[name="supplementary[]"]').forEach(item => {
-                item.addEventListener('change', updateTotalPrice);
+            // Gán sự kiện cho các trường số lượng đồ đính kèm
+            function attachSupplementaryQuantityEvents() {
+                document.querySelectorAll('input[name^="quantity_"]').forEach(input => {
+                    input.addEventListener('input', updateTotalPrice); // Cập nhật giá khi thay đổi số lượng
+                });
+
+                document.querySelectorAll('input[name="supplementary[]"]').forEach(item => {
+                    item.addEventListener('change', updateTotalPrice); // Cập nhật giá khi chọn/bỏ chọn checkbox
+                });
+            }
+
+            // Gọi hàm khi DOM sẵn sàng
+            document.addEventListener('DOMContentLoaded', function () {
+                attachSupplementaryQuantityEvents(); // Gắn sự kiện khi trang tải xong
+                updateTotalPrice(); // Cập nhật tổng giá khi trang được tải
             });
 
-            document.addEventListener('DOMContentLoaded', function () {
-                updateTotalPrice(); // Cập nhật tổng giá khi trang tải xong
-            });
         </script>
 
 
@@ -1008,11 +1165,13 @@
                     cartHTML += `
                         <div class="cart-item">
                             <div>
+                            <div>
                                 <strong>Viettel FC vs ${matchDetails.opponentName}</strong> (tối đa 4 vé)
                             </div>
-                            <div>KĐ ${stands} - Cửa ${section} - Tầng ${floor}</div>
+                            <div>Khán đài: ${stands} - Cửa: ${section} - Tầng: ${floor}</div>
                             <div>${totalItemPrice.toLocaleString('vi-VN')} đ</div>
-                            <button class="remove-ticket" data-index="${index}">X</button>
+                            </div>
+                            <button class="remove-ticket" data-index="${index}">Xóa</button>
                         </div>
                     `;
                 });
