@@ -9,227 +9,227 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TCViettetlFC_Client
 build_property.RootNamespace = TCViettetlFC_Client
-build_property.ProjectDir = D:\DoAn\code\mycode\SEP490_G53\TCViettetlFC_Client\
+build_property.ProjectDir = D:\GithubRepo\SEP490_G53\TCViettetlFC_Client\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\DoAn\code\mycode\SEP490_G53\TCViettetlFC_Client
+build_property.MSBuildProjectDirectory = D:\GithubRepo\SEP490_G53\TCViettetlFC_Client
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/AboutUs/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/AboutUs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRVc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/AdminNews/ApproveNew.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/AdminNews/ApproveNew.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5OZXdzXEFwcHJvdmVOZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Admin/ChangePassword.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Admin/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2hhbmdlUGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Admin/Home.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Admin/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Admin/Profile.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Admin/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Admin/UserManagement.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Admin/UserManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlck1hbmFnZW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Area/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Area/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJlYVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Category/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Category/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/CheckoutTicket/Checkout.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/CheckoutTicket/Checkout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRUaWNrZXRcQ2hlY2tvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/CheckoutTicket/TicketPaymentCallback.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/CheckoutTicket/TicketPaymentCallback.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRUaWNrZXRcVGlja2V0UGF5bWVudENhbGxiYWNrLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Checkout/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Checkout/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Checkout/PaymentCallBack.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Checkout/PaymentCallBack.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcUGF5bWVudENhbGxCYWNrLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Checkout/Summary.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Checkout/Summary.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcU3VtbWFyeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Customer/Home.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Customer/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Customer/Login.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Customer/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Customer/Profile.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Customer/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcUHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Customer/Register.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Customer/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Customer/Verify.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Customer/Verify.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcVmVyaWZ5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Discount/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Discount/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzY291bnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Entry/Home.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Entry/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cnlcSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Entry/VerifyItem.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Entry/VerifyItem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cnlcVmVyaWZ5SXRlbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Entry/VerifyTicket.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Entry/VerifyTicket.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cnlcVmVyaWZ5VGlja2V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Feedback/FeedbackConfirmation.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Feedback/FeedbackConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tcRmVlZGJhY2tDb25maXJtYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Feedback/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Feedback/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Home/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Home/Privacy.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Home/Stadiumtemp.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Home/Stadiumtemp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTdGFkaXVtdGVtcC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/MatchManagement/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/MatchManagement/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hNYW5hZ2VtZW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Match/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Match/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/ProductManagement/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/ProductManagement/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdE1hbmFnZW1lbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Public/ChiTietSanPham.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Public/ChiTietSanPham.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljXENoaVRpZXRTYW5QaGFtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Public/GioHang.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Public/GioHang.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljXEdpb0hhbmcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Public/SanPham.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Public/SanPham.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljXFNhblBoYW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Season/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Season/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vhc29uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Shared/Error.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/FeedbackManagement.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Staff/FeedbackManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcRmVlZGJhY2tNYW5hZ2VtZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/Home.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Staff/Home.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/OrderProductDetail.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Staff/OrderProductDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcT3JkZXJQcm9kdWN0RGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/OrderProductManagement.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Staff/OrderProductManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcT3JkZXJQcm9kdWN0TWFuYWdlbWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/OrderShipmentDetail.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Staff/OrderShipmentDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcT3JkZXJTaGlwbWVudERldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/StaffManagermentNew.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Staff/StaffManagermentNew.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcU3RhZmZNYW5hZ2VybWVudE5ldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/TicketOrderDetail.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Staff/TicketOrderDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcVGlja2V0T3JkZXJEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Staff/TicketOrders.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Staff/TicketOrders.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcVGlja2V0T3JkZXJzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/TeamManagement/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/TeamManagement/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhbU1hbmFnZW1lbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Team/Index.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Team/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhbVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Team/PlayerDetails.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Team/PlayerDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhbVxQbGF5ZXJEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/User/Login.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/User/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/_ViewImports.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/_ViewStart.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Shared/_Layout.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-l6t009sd17
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Shared/_LayoutAdmin.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Shared/_LayoutAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-0pdoblycip
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Shared/_LayoutCommon.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Shared/_LayoutCommon.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRDb21tb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-0tx1nla85r
 
-[D:/DoAn/code/mycode/SEP490_G53/TCViettetlFC_Client/Views/Shared/_LayoutCommonTicket.cshtml]
+[D:/GithubRepo/SEP490_G53/TCViettetlFC_Client/Views/Shared/_LayoutCommonTicket.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRDb21tb25UaWNrZXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-creoa0yffq

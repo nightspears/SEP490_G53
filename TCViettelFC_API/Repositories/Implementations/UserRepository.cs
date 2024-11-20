@@ -202,9 +202,13 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 throw new Exception("User not found");
             }
-
-            // Update user properties
-            user.Email = userDto.Email ?? user.Email;
+			// Validate RoleId
+			if (userDto.RoleId.HasValue && (userDto.RoleId < 0 || userDto.RoleId > 4))
+			{
+				throw new ArgumentException("Invalid RoleId.");
+			}
+			// Update user properties
+			user.Email = userDto.Email ?? user.Email;
             user.Phone = userDto.Phone ?? user.Phone;
             user.FullName = userDto.FullName ?? user.FullName;
             user.RoleId = userDto.RoleId ?? user.RoleId;
