@@ -7,7 +7,7 @@ namespace TCViettelFC_API.Dtos
     {
         public int Id { get; set; }
 
-        public int? CreatorId { get; set; }
+        public string? CreatorId { get; set; }
 
         public string? NewsCategory { get; set; }
 

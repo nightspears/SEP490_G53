@@ -94,7 +94,7 @@
     }
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    <div class="row">
+    <div style="margin:20px;" class="row">
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
@@ -106,37 +106,40 @@
                         <table class="datatable table table-hover table-center mb-0">
                             <thead>
                                 <tr class="text-center">
-                                    <th>ID</th>
-                                    <th>Creator ID</th>
-                                    <th>Category</th>
-                                    <th>Title</th>
-                                    <th>Content</th>
-                                    <th>Image</th>
-                                    <th>Created At</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th hidden>ID</th>
+                                    <th>STT</th>
+                                    <th>Người tạo</th>
+                                    <th>Danh mục</th>
+                                    <th>Tiêu đề</th>
+                                    <th hidden>Content</th>
+                                    <th>Ảnh</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if (newsList != null && newsList.Any())
                                 {
-                                    @foreach (var news in newsList)
+                                    var index = 1; // Biến đếm STT bắt đầu từ 1
+                                    foreach (var news in newsList)
                                     {
                                         <tr class="text-center">
-                                            <td>@news.Id</td>
+                                            <td hidden>@news.Id</td>
+                                            <td>@index</td> <!-- Hiển thị giá trị của biến đếm -->
                                             <td>@news.CreatorId</td>
                                             <td>@news.NewsCategory</td>
                                             <td>
                                                 @if (!string.IsNullOrEmpty(news.Title) && news.Title.Length > 20)
                                                 {
-                                                    @(@news.Title.Substring(0, 20) + "...")
+                                                    @(@news.Title)
                                                 }
                                                 else
                                                 {
                                                     @news.Title
                                                 }
                                             </td>
-                                            <td>
+                                            <td hidden>
                                                 @if (!string.IsNullOrEmpty(news.Content) && news.Content.Length > 20)
                                                 {
                                                     @(@news.Content.Substring(0, 20) + "...")
@@ -182,6 +185,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        index++; // Tăng biến đếm sau mỗi lần lặp
                                     }
                                 }
                                 else
@@ -191,6 +195,7 @@
                                     </tr>
                                 }
                             </tbody>
+
                         </table>
                     </div>
 
@@ -206,7 +211,7 @@
                                     <!-- Add New Form -->
                                     <div id="newForm">
 
-                                        <form asp-action="CreateNew" method="post" enctype="multipart/form-data" >
+                                        <form asp-action="CreateNew" method="post" enctype="multipart/form-data">
                                             <div class="row">
                                                 <input type="hidden" value="@creatorId" class="form-control" name="creatorId" required>
 
@@ -355,7 +360,7 @@
     </div>
 </div>
 
- <script src="https://cdn.ckeditor.com/ckeditor5/35.3.1/classic/ckeditor.js"></script> 
+<script src="https://cdn.ckeditor.com/ckeditor5/35.3.1/classic/ckeditor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
 <script src="~/admin_assets/js/bootstrap.bundle.min.js"></script>
@@ -367,7 +372,7 @@
 @* <script src="~/ckeditor5-43.3.1/ckeditor5/ckeditor5.js"></script> *@
 
 <script>
-   
+
     class MyUploadAdapter {
         constructor(loader) {
             this.loader = loader;
@@ -390,7 +395,7 @@
 
         _initRequest() {
             const xhr = this.xhr = new XMLHttpRequest();
-        
+
             // Thay đổi đường dẫn '/Staff/UploadImage' theo API tải lên của bạn
             xhr.open('POST', '/Staff/UploadImage', true);
             xhr.responseType = 'json';
@@ -537,7 +542,7 @@
                 if (editingImage && document.getElementById('newEditForm').style.display === 'block') {
                     // Chế độ chỉnh sửa
                     editingImage.src = e.target.result;
-                   
+
 
                 } else if (newImage && document.getElementById('newForm').style.display === 'block') {
                     // Chế độ thêm mới
@@ -548,22 +553,26 @@
         }
     });
 
-    
+
     function updateNews() {
         const formData = new FormData();
         debugger;
         // Lấy giá trị từ các trường form
         formData.append('NewId', document.getElementById('EditingNewId').value);
-        formData.append('creatorId', document.getElementById('EditingCreatorId').value);
+        formData.append('creatorId', @creatorId);
         formData.append('title', document.getElementById('EditingTitle').value);
         formData.append('content', editorEditingContent.getData());  // CKEditor content
         formData.append('newsCategoryId', document.getElementById('EditingNewCategory').value);
         formData.append('createdAt', document.getElementById('EditingcreatedAt').value);
 
-        // Kiểm tra nếu có tệp hình ảnh được chọn và thêm vào FormData
+        // Kiểm tra nếu có tệp hình ảnh được chọn, thêm vào FormData
         const editingImage = document.getElementById('EditingImage');
         if (editingImage.files.length > 0) {
             formData.append('image', editingImage.files[0]);
+        } else {
+            // Nếu không chọn ảnh mới, gửi đường dẫn ảnh cũ
+            const currentImage = document.getElementById('EditImage').src; // Đường dẫn ảnh hiện tại
+            formData.append('currentImage', currentImage);
         }
 
         // Gửi dữ liệu qua AJAX
@@ -572,7 +581,7 @@
         xhr.onload = function () {
             if (xhr.status === 200) {
                 alert('Cập nhật bài tin thành công!');
-                // Có thể refresh lại trang hoặc đóng modal 
+                // Có thể refresh lại trang hoặc đóng modal
                 location.reload();  // Reload trang nếu cần
             } else {
                 alert('Có lỗi xảy ra khi cập nhật!');

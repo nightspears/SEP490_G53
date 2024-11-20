@@ -170,7 +170,7 @@ namespace TCViettetlFC_Client.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateNew(int NewId, UpdateNewViewModel model)
+        public async Task<IActionResult> UpdateNew(int NewId, UpdateNewViewModel model, string? currentImage)
         {
             if (ModelState.IsValid)
             {
@@ -193,9 +193,15 @@ namespace TCViettetlFC_Client.Controllers
 
                 if (model.image != null && model.image.Length > 0)
                 {
+                    // Nếu có ảnh mới, sử dụng ảnh này
                     var streamContent = new StreamContent(model.image.OpenReadStream());
-                    streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(model.image.ContentType);
+                    streamContent.Headers.ContentType = new MediaTypeHeaderValue(model.image.ContentType);
                     multipartContent.Add(streamContent, "Image", model.image.FileName);
+                }
+                else if (!string.IsNullOrEmpty(currentImage))
+                {
+                    // Nếu không có ảnh mới, sử dụng ảnh cũ
+                    multipartContent.Add(new StringContent(currentImage), "ImagePath");
                 }
 
                 string requestUri = $"https://localhost:5000/api/New/update/{NewId}";
@@ -214,6 +220,7 @@ namespace TCViettetlFC_Client.Controllers
 
             return RedirectToAction("StaffManagermentNew");
         }
+
 
 
 

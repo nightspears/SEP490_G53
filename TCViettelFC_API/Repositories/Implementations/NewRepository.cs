@@ -26,7 +26,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             var news  =  _context.News.Include(x=> x.Creator).Include(x => x.NewsCategory).Select(n => new GetNewDto
             {
                 Id = n.Id,
-                CreatorId = n.CreatorId,
+                CreatorId = n.Creator.FullName,
                 NewsCategory = n.NewsCategory.CategoryName,
                 Title = n.Title,
                 Content = n.Content,
@@ -45,7 +45,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                     .Select(n => new GetNewDto
                     {
                         Id = n.Id,
-                        CreatorId = n.CreatorId,
+                        CreatorId = n.Creator.FullName,
                         NewsCategory = n.NewsCategory.CategoryName,
                         Title = n.Title,
                         Content = n.Content,
@@ -68,7 +68,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 .Select(n => new GetNewDto
                 {
                     Id = n.Id,
-                    CreatorId = n.CreatorId,
+                    CreatorId = n.Creator.FullName,
                     NewsCategory = n.NewsCategory.CategoryName,
                     Title = n.Title,
                     Content = n.Content,
