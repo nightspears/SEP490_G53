@@ -116,7 +116,7 @@ namespace TCViettelFCTest.UnitTest
 			var user = new User { UserId = 6, RoleId = 1, Status = 1 };
 			_mockDbSet.Setup(m => m.FindAsync(6)).ReturnsAsync(user);
 
-			var userDto = new UserUpdateDto { RoleId = 0 }; // Invalid RoleId
+			var userDto = new UserUpdateDto { RoleId = -1 }; // Invalid RoleId
 
 			var exception = Assert.ThrowsAsync<ArgumentException>(async () => await _userRepository.UpdateUserAsync(6, userDto));
 			Assert.AreEqual("Invalid RoleId.", exception.Message);
