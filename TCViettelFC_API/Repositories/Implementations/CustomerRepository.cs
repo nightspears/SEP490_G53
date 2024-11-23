@@ -275,6 +275,35 @@ namespace TCViettelFC_API.Repositories.Implementations
 				return false;
 			}
 		}
+        public async Task<bool> DeletePersonalAddressAsync(int personalAddressId)
+        {
+            try
+            {
+                // Find the personal address by ID
+                var personalAddress = await _context.PersonalAddresses
+                    .FirstOrDefaultAsync(pa => pa.AddressId == personalAddressId);
 
-	}
+                // Check if it exists
+                if (personalAddress == null)
+                {
+                    return false; // Address not found
+                }
+
+                // Remove the personal address
+                _context.PersonalAddresses.Remove(personalAddress);
+
+                // Save changes to the database
+                await _context.SaveChangesAsync();
+
+                return true; // Deletion successful
+            }
+            catch (Exception ex)
+            {
+                // Log the error (implement logging mechanism as needed)
+                Console.WriteLine($"Error deleting personal address: {ex.Message}");
+                return false; // Deletion failed
+            }
+        }
+
+    }
 }

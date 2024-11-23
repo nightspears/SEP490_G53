@@ -573,6 +573,22 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "DeletePersonalAddress",
+    "RelativePath": "api/Customer/DeletePersonalAddress/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
     "Method": "GetCustomerAccountById",
     "RelativePath": "api/Customer/getCustomerAccountById/{accountId}",
     "HttpMethod": "GET",
