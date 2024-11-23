@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TCViettelFC_API.Models;
 
@@ -20,8 +18,4 @@ public partial class Discount
     public int? Status { get; set; }
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
-    [NotMapped]
-    public string FromFormatted => ValidFrom?.ToString("dd/MM/yyyy");
-    [NotMapped]
-    public string UntilFormatted => ValidUntil?.ToString("dd/MM/yyyy");
 }

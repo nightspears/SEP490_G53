@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Models;
@@ -14,7 +15,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         private readonly Sep490G53Context _context;
         private readonly IConfiguration _configuration;
         private readonly IEmailService _emailService;
-        private static readonly Dictionary<string, (CustomersAccount Customer, string Code, DateTime Expiry)> _pendingRegistrations = new();
+
         private readonly IHttpContextAccessor _contextAccessor;
 
         public CustomerRepository(Sep490G53Context context, IConfiguration configuration, IEmailService emailService, IHttpContextAccessor contextAccessor)
@@ -26,23 +27,70 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
 
 
+        private string HashPassword(string password)
+        {
+            byte[] salt = new byte[16];
+            RandomNumberGenerator.Fill(salt);
+            using var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000, HashAlgorithmName.SHA256);
+            byte[] hash = pbkdf2.GetBytes(32);
+            byte[] hashBytes = new byte[48];
+            Array.Copy(salt, 0, hashBytes, 0, 16);
+            Array.Copy(hash, 0, hashBytes, 16, 32);
+            return Convert.ToBase64String(hashBytes);
+        }
+        private bool VerifyPassword(string inputPassword, string storedHash)
+        {
+            byte[] hashBytes = Convert.FromBase64String(storedHash);
+            byte[] salt = new byte[16];
+            Array.Copy(hashBytes, 0, salt, 0, 16);
+            using var pbkdf2 = new Rfc2898DeriveBytes(inputPassword, salt, 100000, HashAlgorithmName.SHA256);
+            byte[] hash = pbkdf2.GetBytes(32);
+            for (int i = 0; i < 32; i++)
+            {
+                if (hashBytes[i + 16] != hash[i]) return false;
+            }
+            return true;
+        }
+
+
+
+
+        public async Task<int> CheckExistedCustomerEmail(string email)
+        {
+            var existedCus = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.Email == email);
+            if (existedCus != null) return 0;
+            return 1;
+        }
+
         public async Task<int> RegisterAsync(CustomerRegisterRequest cusRegReq)
         {
-            var existedCus = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.Email == cusRegReq.Email);
-            if (existedCus != null) return 0;
             try
             {
                 var confirmationCode = GenerateConfirmationCode();
                 var subject = "Confirmation Code";
                 var message = $"Your confirmation code is: {confirmationCode}";
                 await _emailService.SendEmailAsync(cusRegReq.Email, subject, message);
-                var temporaryCustomer = new CustomersAccount()
+
+                var customer = new CustomersAccount()
                 {
                     Email = cusRegReq.Email,
-                    Password = cusRegReq.Password,
-                    Status = 1
+                    Password = HashPassword(cusRegReq.Password),
+                    Phone = cusRegReq.Phone,
+                    Status = 0, // Pending
+                    ConfirmationCode = confirmationCode,
+                    CodeExpiry = DateTime.UtcNow.AddMinutes(15) // Code expires in 15 minutes
                 };
-                _pendingRegistrations[cusRegReq.Email] = (temporaryCustomer, confirmationCode, DateTime.UtcNow.AddMinutes(10)); // Set expiry time
+
+                await _context.CustomersAccounts.AddAsync(customer);
+                await _context.SaveChangesAsync();
+
+                var profile = new Profile()
+                {
+                    CustomerId = customer.CustomerId,
+                };
+                await _context.Profiles.AddAsync(profile);
+                await _context.SaveChangesAsync();
+
                 return 1;
             }
             catch
@@ -50,6 +98,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 return 0;
             }
         }
+
         public async Task<int> PostFeedback(FeedbackPostDto feedbackDto)
         {
             var customerId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "CustomerId")?.Value;
@@ -113,31 +162,31 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
         public async Task<bool> VerifyConfirmationCodeAsync(string email, string code)
         {
-            if (_pendingRegistrations.TryGetValue(email, out var storedData))
+            var customer = await _context.CustomersAccounts
+                .FirstOrDefaultAsync(x => x.Email == email);
+
+            if (customer == null || customer.ConfirmationCode != code || customer.CodeExpiry < DateTime.UtcNow)
             {
-                var (customer, confirmationCode, expiry) = storedData;
-                if (confirmationCode == code && expiry > DateTime.UtcNow)
-                {
-                    await _context.CustomersAccounts.AddAsync(customer);
-                    await _context.SaveChangesAsync();
-                    var profile = new Profile()
-                    {
-                        CustomerId = customer.CustomerId,
-                    };
-                    await _context.Profiles.AddAsync(profile);
-                    await _context.SaveChangesAsync();
-                    _pendingRegistrations.Remove(email);
-                    return true;
-                }
+                return false; // Invalid code or expired
             }
 
-            return false;
+            customer.Status = 1; // Active
+            customer.ConfirmationCode = null; // Clear the code
+            customer.CodeExpiry = null;
+
+            await _context.SaveChangesAsync();
+            return true;
         }
+
         public async Task<CustomerLoginResponse> LoginAsync(CustomerLoginDto dto)
         {
             var customer = await _context.CustomersAccounts
-                .FirstOrDefaultAsync(x => x.Email == dto.Email && x.Password == dto.Password);
-            if (customer == null) return null;
+        .FirstOrDefaultAsync(x => x.Email == dto.Email);
+            if (customer == null || !VerifyPassword(dto.Password, customer.Password))
+            {
+                return null;
+            }
+
 
 
             string token = string.Empty;

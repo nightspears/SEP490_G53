@@ -3,6 +3,78 @@
   "WorkspaceRootPath": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\customerregistermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\customerregistermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\customerloginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\customerloginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\verify.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\verify.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\emailverificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\emailverificationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\teamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\teamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\feedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\feedbackcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\matchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\matchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\match\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\match\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\wwwroot\\admin_assets\\adminjs\\matches.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:wwwroot\\admin_assets\\adminjs\\matches.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\wwwroot\\admin_assets\\adminjs\\player.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:wwwroot\\admin_assets\\adminjs\\player.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\wwwroot\\home_assets\\js\\sanpham.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:wwwroot\\home_assets\\js\\sanpham.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -26,7 +98,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 85,
+          "SelectedChildIndex": 87,
           "Children": [
             {
               "$type": "Bookmark",
@@ -358,7 +430,238 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CustomerLoginModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerLoginModel.cs",
+              "RelativeDocumentMoniker": "Models\\CustomerLoginModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerLoginModel.cs",
+              "RelativeToolTip": "Models\\CustomerLoginModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-23T10:22:32.475Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\Login.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Login.cshtml",
+              "RelativeToolTip": "Views\\Customer\\Login.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-23T10:21:27.689Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "EmailVerificationModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\EmailVerificationModel.cs",
+              "RelativeDocumentMoniker": "Models\\EmailVerificationModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\EmailVerificationModel.cs",
+              "RelativeToolTip": "Models\\EmailVerificationModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-23T10:07:30.403Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Verify.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Verify.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\Verify.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Verify.cshtml",
+              "RelativeToolTip": "Views\\Customer\\Verify.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-23T06:06:39.273Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-23T06:02:51.765Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "Controllers\\CustomerController.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAwwIMAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-23T05:45:34.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomerRegisterModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerRegisterModel.cs",
+              "RelativeDocumentMoniker": "Models\\CustomerRegisterModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerRegisterModel.cs",
+              "RelativeToolTip": "Models\\CustomerRegisterModel.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAswAgAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-23T05:31:47.429Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Register.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\Register.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Register.cshtml",
+              "RelativeToolTip": "Views\\Customer\\Register.cshtml",
+              "ViewState": "AgIAABEAAAAAAAAAAAAgwB4AAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-23T05:31:31.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAKcBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-18T16:49:47.653Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-18T16:46:06.026Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TeamController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\TeamController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TeamController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\TeamController.cs",
+              "RelativeToolTip": "Controllers\\TeamController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T16:46:01.404Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "FeedbackController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\FeedbackController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FeedbackController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\FeedbackController.cs",
+              "RelativeToolTip": "Controllers\\FeedbackController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAABAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T16:45:58.318Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T16:45:56.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MatchController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\MatchController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MatchController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\MatchController.cs",
+              "RelativeToolTip": "Controllers\\MatchController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAA1wBYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T16:18:10.64Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Match\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Match\\Index.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Match\\Index.cshtml",
+              "RelativeToolTip": "Views\\Match\\Index.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-18T16:17:54.763Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Matches.js",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\wwwroot\\admin_assets\\AdminJS\\Matches.js",
+              "RelativeDocumentMoniker": "wwwroot\\admin_assets\\AdminJS\\Matches.js",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\wwwroot\\admin_assets\\AdminJS\\Matches.js",
+              "RelativeToolTip": "wwwroot\\admin_assets\\AdminJS\\Matches.js",
+              "ViewState": "AgIAABAAAAAAAAAAAAAwwBgAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-11-18T16:17:15.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "player.js",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\wwwroot\\admin_assets\\AdminJS\\player.js",
+              "RelativeDocumentMoniker": "wwwroot\\admin_assets\\AdminJS\\player.js",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\wwwroot\\admin_assets\\AdminJS\\player.js",
+              "RelativeToolTip": "wwwroot\\admin_assets\\AdminJS\\player.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-11-18T16:16:52.14Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "sanpham.js",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\wwwroot\\home_assets\\js\\sanpham.js",
+              "RelativeDocumentMoniker": "wwwroot\\home_assets\\js\\sanpham.js",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\wwwroot\\home_assets\\js\\sanpham.js",
+              "RelativeToolTip": "wwwroot\\home_assets\\js\\sanpham.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-11-18T16:14:00.996Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "CheckoutModel.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CheckoutModel.cs",
               "RelativeDocumentMoniker": "Models\\CheckoutModel.cs",
@@ -370,7 +673,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 21,
               "Title": "PaymentCallBack.cshtml",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\PaymentCallBack.cshtml",
               "RelativeDocumentMoniker": "Views\\Checkout\\PaymentCallBack.cshtml",
@@ -382,7 +685,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 20,
               "Title": "CheckoutController.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CheckoutController.cs",
               "RelativeDocumentMoniker": "Controllers\\CheckoutController.cs",
@@ -394,7 +697,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 18,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Checkout\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Checkout\\Index.cshtml",
@@ -402,8 +705,7 @@
               "RelativeToolTip": "Views\\Checkout\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAECAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-23T09:27:14.449Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-23T09:27:14.449Z"
             }
           ]
         },
@@ -514,10 +816,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:8:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             },
             {
               "$type": "Bookmark",

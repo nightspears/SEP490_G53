@@ -20,16 +20,18 @@ namespace TCViettelFC_API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] CustomerRegisterRequest cusRegReq)
         {
+            var checkEmail = await _customerRepository.CheckExistedCustomerEmail(cusRegReq.Email);
+            if (checkEmail == 0) return BadRequest("Email đã tồn tại");
             var result = await _customerRepository.RegisterAsync(cusRegReq);
-            if (result == 1) return Ok("Register successfully");
-            return BadRequest("Register failed");
+            if (result == 1) return Ok("Đăng ký thành công");
+            return BadRequest("Đăng ký thất bại");
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] CustomerLoginDto customerLoginDto)
         {
             var result = await _customerRepository.LoginAsync(customerLoginDto);
-            if (result == null) return BadRequest("Login failed");
+            if (result == null) return BadRequest("Đăng nhập thất bại");
             return Ok(result);
         }
         [HttpGet("profile")]
@@ -60,51 +62,57 @@ namespace TCViettelFC_API.Controllers
             }
             return BadRequest("Failed to update profile");
         }
-		[HttpGet("getCustomerAccountById/{accountId}")]
-		public async Task<IActionResult> GetCustomerAccountById(int accountId)
-		{
-			var customerAccount = await _customerRepository.GetCustomerByAccountIdAsync(accountId);
-			if (customerAccount == null)
-			{
-				return NotFound("Customer account not found");
-			}
-			return Ok(customerAccount);
-		}
+        [HttpGet("getCustomerAccountById/{accountId}")]
+        public async Task<IActionResult> GetCustomerAccountById(int accountId)
+        {
+            var customerAccount = await _customerRepository.GetCustomerByAccountIdAsync(accountId);
+            if (customerAccount == null)
+            {
+                return NotFound("Customer account not found");
+            }
+            return Ok(customerAccount);
+        }
+        [HttpGet("emailexisted")]
+        public async Task<IActionResult> GetExistedCustomer(string email)
+        {
+            var cus = await _customerRepository.CheckExistedCustomerEmail(email);
+            if (cus == 0) return Ok("Email existed");
+            return BadRequest("Email not existed");
+        }
+        // API to get a list of PersonalAddressDTOs by CustomerId
+        [HttpGet("address/{customerId}")]
+        public async Task<ActionResult<List<PersonalAddressDTO>>> GetPersonalAddresses(int customerId)
+        {
+            var addressDtos = await _customerRepository.GetPersonalAddressesByCustomerIdAsync(customerId);
 
-		// API to get a list of PersonalAddressDTOs by CustomerId
-		[HttpGet("address/{customerId}")]
-		public async Task<ActionResult<List<PersonalAddressDTO>>> GetPersonalAddresses(int customerId)
-		{
-			var addressDtos = await _customerRepository.GetPersonalAddressesByCustomerIdAsync(customerId);
+            if (addressDtos == null || !addressDtos.Any())
+            {
+                return NotFound(new { message = "No addresses found for the given customer." });
+            }
 
-			if (addressDtos == null || !addressDtos.Any())
-			{
-				return NotFound(new { message = "No addresses found for the given customer." });
-			}
+            return Ok(addressDtos);
+        }
 
-			return Ok(addressDtos);
-		}
+        // API Endpoint to add a new personal address
+        [HttpPost("add-address")]
+        public async Task<IActionResult> AddPersonalAddress([FromBody] PersonalAddressCreateDto personalAddressDto)
+        {
+            // Check if the DTO is valid
+            if (personalAddressDto == null)
+            {
+                return BadRequest("Invalid address data.");
+            }
 
-		// API Endpoint to add a new personal address
-		[HttpPost("add-address")]
-		public async Task<IActionResult> AddPersonalAddress([FromBody] PersonalAddressCreateDto personalAddressDto)
-		{
-			// Check if the DTO is valid
-			if (personalAddressDto == null)
-			{
-				return BadRequest("Invalid address data.");
-			}
+            // Call the repository to insert the personal address
+            var result = await _customerRepository.InsertPersonalAddressAsync(personalAddressDto);
 
-			// Call the repository to insert the personal address
-			var result = await _customerRepository.InsertPersonalAddressAsync(personalAddressDto);
+            if (result)
+            {
+                return Ok("Address added successfully.");
+            }
 
-			if (result)
-			{
-				return Ok("Address added successfully.");
-			}
+            return BadRequest("Failed to add address.");
+        }
 
-			return BadRequest("Failed to add address.");
-		}
-
-	}
+    }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using TCViettelFC_Client.Controllers;
 using TCViettetlFC_Client.Models;
 
 namespace TCViettelFC_Client.Controllers
