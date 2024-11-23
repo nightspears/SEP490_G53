@@ -57,43 +57,32 @@ function loadData() {
         } else {
             sizeTen = ` <span  title="${item.size}" >${item.size}</span> <span></span>`
         }
-        var html = ` <tr style="height:110px">
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" data-pid="${item.Item_id}" >
-                                </div>
-                            </td>
-                            <td>
-                                <div style="display:flex">
-                                <a href="/public/ChiTietSanPham/${item.productId}" >
-                                    <img src="${Image}" alt="" class="ImgProduct">
-                                </a>
-                                    <div class="product-info" style="margin-top: 2px; cursor: pointer;">
-                                       
-                                        <span class="product-name" title="${item.nameProduct}">${item.nameProduct}</span>
-                                        ${sizeTen} 
-                                     
-                                       
-                                    </div>
-                                </div>
-                               
-                            </td>
-                            <td class="quantity">
-                                <div style="display:flex">
-                                   <button class="quantity-btn" onclick="updateCart(${item.Item_id}, ${-1})">-</button>
-
-                                    <input type="text" id="quantity_${item.Item_id}" value="${item.quantity}" class="quantity-input" min="1">
-                                    <button class="quantity-btn" onclick="updateCart(${item.Item_id},${1})">+</button>
-
-                                </div>
-                      
-                            </td>
-                            <td class="price" data-price="${item.price}">${item.price}</td>
-                            <td class="price" id="priceTotal_${item.Item_id}" data-price="${total}">${total}</td>
-                            <td class="text-center">
-                                <button class="btn btn-danger w-100 btnDeleteCart" data-id="${item.Item_id}"  style="margin - top : 10px">Xóa</button>
-                            </td>
-                        </tr>`;
+        var html = `
+   <div class="cart-item">
+    <div class="product-checkbox">
+        <input class="form-check-input" type="checkbox" data-pid="${item.Item_id}">
+    </div>
+    <div class="product-image-info">
+        <a href="/public/ChiTietSanPham/${item.productId}">
+            <img src="${Image}" alt="" class="ImgProduct">
+        </a>
+        <div class="product-info">
+            <span class="product-name" title="${item.nameProduct}">${item.nameProduct}</span>
+            ${sizeTen}
+        </div>
+    </div>
+    <div class="product-quantity">
+        <button class="quantity-btn" onclick="updateCart(${item.Item_id}, -1)">-</button>
+        <input type="text" id="quantity_${item.Item_id}" value="${item.quantity}" class="quantity-input" min="1">
+        <button class="quantity-btn" onclick="updateCart(${item.Item_id}, 1)">+</button>
+    </div>
+    <div class="price" data-price="${item.price}">${item.price}</div>
+   
+    <div class="product-actions">
+        <button class="btnDeleteCart" data-id="${item.Item_id}">Xóa</button>
+    </div>
+</div>
+`;
 
         tbody.append(html);
     });
@@ -114,6 +103,8 @@ $(document).on("click", ".btnDeleteCart", function () {
     removeProductByIdAndSize(pid);
     loadData();
     format();
+    getLienQuan();
+
 
 });
 
@@ -339,17 +330,17 @@ function getLienQuan() {
 }
 
 function checkTableData() {
-
-    var tableBody = $('#bodyData');
+    debugger
     var noDataMessage = document.getElementById('noDataMessage');
 
-    if ($('#bodyData tr').length === 0) {
+    var cartItems = getCartFromLocalStorage();
 
+    if (cartItems.length == 0) {
         noDataMessage.style.display = 'block';
+
     } else {
         noDataMessage.style.display = 'none';
     }
-
 
 
 }

@@ -70,21 +70,29 @@ public partial class Sep490G53Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var config = new ConfigurationBuilder()
+        // Kiểm tra nếu chưa được cấu hình
+        if (!optionsBuilder.IsConfigured)
+        {
+            // Sử dụng biến môi trường để chọn provider
+            var isTesting = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Testing";
+
+            if (isTesting)
+            {
+                optionsBuilder
+                    .UseInMemoryDatabase("TestDatabase")
+                    .ConfigureWarnings(warnings => warnings.Ignore(InMemoryEventId.TransactionIgnoredWarning));
+            }
+            else
+            {
+                var config = new ConfigurationBuilder()
                     .AddJsonFile("appsettings.json")
                     .Build();
 
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlServer(config.GetConnectionString("value"));
+                optionsBuilder.UseSqlServer(config.GetConnectionString("value"));
+            }
         }
 
         base.OnConfiguring(optionsBuilder);
-
-        optionsBuilder
-            .UseInMemoryDatabase("TestDatabase")
-            .ConfigureWarnings(warnings => warnings.Ignore(InMemoryEventId.TransactionIgnoredWarning));
-
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

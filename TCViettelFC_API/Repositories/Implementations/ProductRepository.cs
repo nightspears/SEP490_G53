@@ -21,31 +21,30 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task AddProductAsync(ProductDto pro)
         {
 
-            var a = pro.ProductName.Length;
             if (string.IsNullOrEmpty(pro.ProductName))
             {
-                throw new ArgumentException("Product name cannot be null");
+                throw new ArgumentException("The system returns an error, no new Product are added.");
             }
             if (pro.ProductName.Length > 255)
             {
-                throw new ArgumentException("Product name over 255 characters");
+                throw new ArgumentException("The system returns an error, no new Product are added.");
             }
             if (string.IsNullOrEmpty(pro.SeasonId.ToString()))
             {
-                throw new ArgumentException("Season cannot be null");
+                throw new ArgumentException("The system returns an error, no new Product are added.");
             }
             if (string.IsNullOrEmpty(pro.CategoryId.ToString()))
             {
-                throw new ArgumentException("CategoryId cannot be null");
+                throw new ArgumentException("The system returns an error, no new Product are added.");
             }
             if (string.IsNullOrEmpty(pro.Price.ToString()))
             {
-                throw new ArgumentException("Price cannot be null");
+                throw new ArgumentException("The system returns an error, no new Product are added.");
             }
 
             if (string.IsNullOrEmpty(pro.Size))
             {
-                throw new ArgumentException("Size cannot be null");
+                throw new ArgumentException("The system returns an error, no new Product are added.");
             }
 
 
@@ -311,7 +310,39 @@ namespace TCViettelFC_API.Repositories.Implementations
 
         }
         public async Task UpdateProductAsync(int id, ProductDto pro)
+
         {
+            if (id <= 0)
+            {
+                throw new ArgumentException("ProductId not valid");
+            }
+            if (string.IsNullOrEmpty(pro.ProductName))
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+            if (pro.ProductName.Length > 255)
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+            if (string.IsNullOrEmpty(pro.SeasonId.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+            if (string.IsNullOrEmpty(pro.CategoryId.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+            if (string.IsNullOrEmpty(pro.Price.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+
+            if (string.IsNullOrEmpty(pro.Size))
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+
+
             using (var dbContextTransaction = _context.Database.BeginTransaction())
             {
                 try
@@ -326,7 +357,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                     product.ProductName = pro.ProductName ?? product.ProductName;
                     product.SeasonId = pro.SeasonId ?? product.SeasonId;
                     product.CategoryId = pro.CategoryId ?? product.CategoryId;
-                    product.Description = pro.Description ?? product.Description;
+                    product.Description = pro.Description ;
                     if (pro.Avatar != null && pro.Avatar.Length > 0)
                     {
                         ImageUploadResult res = _cloudinary.CloudinaryUpload(pro.Avatar);
@@ -334,10 +365,10 @@ namespace TCViettelFC_API.Repositories.Implementations
                     }
                     product.Price = pro.Price ?? product.Price;
                     product.Size = pro.Size ?? product.Size;
-                    product.Color = pro.Color ?? product.Color;
-                    product.Material = pro.Material ?? product.Material;
-                    product.DiscountId = pro.DiscountId ?? product.DiscountId;
-                    product.Status = pro.Status ?? product.Status;
+                    //product.Color = pro.Color ?? product.Color;
+                    product.Material = pro.Material ;
+                    product.DiscountId = pro.DiscountId ;
+                    product.Status = pro.Status ;
 
                     if (pro.ListExist != null && pro.ListExist.Count > 0)
                     {
