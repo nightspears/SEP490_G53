@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\repositories\\implementations\\newrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:repositories\\implementations\\newrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\controllers\\newcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:controllers\\newcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\repositories\\implementations\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:repositories\\implementations\\customerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,20 +43,12 @@
       "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:repositories\\implementations\\playerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\models\\productcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:models\\productcategory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\installers\\systeminstaller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -62,7 +70,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 93,
+          "SelectedChildIndex": 81,
           "Children": [
             {
               "$type": "Bookmark",
@@ -390,7 +398,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 0,
+              "Title": "NewRepository.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Repositories\\Implementations\\NewRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Implementations\\NewRepository.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Repositories\\Implementations\\NewRepository.cs",
+              "RelativeToolTip": "Repositories\\Implementations\\NewRepository.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-24T11:26:40.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NewController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Controllers\\NewController.cs",
+              "RelativeDocumentMoniker": "Controllers\\NewController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Controllers\\NewController.cs",
+              "RelativeToolTip": "Controllers\\NewController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAzwDoAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-24T08:21:30.416Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "CustomerRegisterRequest.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Dtos\\CustomerRegisterRequest.cs",
               "RelativeDocumentMoniker": "Dtos\\CustomerRegisterRequest.cs",
@@ -398,12 +432,11 @@
               "RelativeToolTip": "Dtos\\CustomerRegisterRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T10:27:42.964Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T10:27:42.964Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "Player.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Models\\Player.cs",
               "RelativeDocumentMoniker": "Models\\Player.cs",
@@ -411,12 +444,11 @@
               "RelativeToolTip": "Models\\Player.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAswBYAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T09:18:20.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T09:18:20.126Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "PlayerRepository.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Repositories\\Implementations\\PlayerRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Implementations\\PlayerRepository.cs",
@@ -424,12 +456,11 @@
               "RelativeToolTip": "Repositories\\Implementations\\PlayerRepository.cs",
               "ViewState": "AgIAABUAAAAAAAAAAIAwwCIAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T09:17:56.38Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T09:17:56.38Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "CheckoutController.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Controllers\\CheckoutController.cs",
               "RelativeDocumentMoniker": "Controllers\\CheckoutController.cs",
@@ -442,7 +473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Sep490G53Context.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Models\\Sep490G53Context.cs",
               "RelativeDocumentMoniker": "Models\\Sep490G53Context.cs",
@@ -450,12 +481,11 @@
               "RelativeToolTip": "Models\\Sep490G53Context.cs",
               "ViewState": "AgIAANUBAAAAAAAAAIAwwAACAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T09:16:23.449Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T09:16:23.449Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "ProductCategory.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Models\\ProductCategory.cs",
               "RelativeDocumentMoniker": "Models\\ProductCategory.cs",
@@ -463,12 +493,11 @@
               "RelativeToolTip": "Models\\ProductCategory.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAiwBEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T09:16:13.238Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T09:16:13.238Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -476,12 +505,11 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAD8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-23T09:15:04.196Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T09:15:04.196Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "SystemInstaller.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Installers\\SystemInstaller.cs",
               "RelativeDocumentMoniker": "Installers\\SystemInstaller.cs",
@@ -489,25 +517,24 @@
               "RelativeToolTip": "Installers\\SystemInstaller.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T07:32:07.222Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T07:32:07.222Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAgwI0AAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAgwI0AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-23T06:31:28.719Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "launchSettings.json",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
@@ -515,12 +542,11 @@
               "RelativeToolTip": "Properties\\launchSettings.json",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-23T06:02:33.496Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T06:02:33.496Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "CustomerController.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Controllers\\CustomerController.cs",
               "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
@@ -528,12 +554,11 @@
               "RelativeToolTip": "Controllers\\CustomerController.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAmwBUAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T05:58:49.225Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T05:58:49.225Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "ICustomerRepository.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Repositories\\Interfaces\\ICustomerRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Interfaces\\ICustomerRepository.cs",
@@ -541,12 +566,11 @@
               "RelativeToolTip": "Repositories\\Interfaces\\ICustomerRepository.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAA1wAgAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-23T05:58:32.433Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-23T05:58:32.433Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "CustomerRepository.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Repositories\\Implementations\\CustomerRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Implementations\\CustomerRepository.cs",
@@ -666,10 +690,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:8:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             },
             {
               "$type": "Bookmark",
