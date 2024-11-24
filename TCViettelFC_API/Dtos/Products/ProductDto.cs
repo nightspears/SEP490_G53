@@ -27,6 +27,7 @@ namespace TCViettelFC_API.Dtos.Product
         public string? Description { get; set; }
 
         public int? Status { get; set; }
+
         public List<FileResponse>? DataFile { get; set; }
         public List<int>? ListExist { get; set; }
     }
