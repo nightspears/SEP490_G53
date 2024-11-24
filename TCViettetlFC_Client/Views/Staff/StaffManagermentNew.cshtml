@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Text.Encodings.Web
+@{
     ViewData["Title"] = "User Management";
     Layout = "_LayoutAdmin";
     var categories = ViewData["CategoryList"] as List<TCViettetlFC_Client.Models.CategoryNewViewModel>;
@@ -7,7 +8,82 @@
     var status = ViewData["Status"];
     var createdAt = ViewData["CreateAt"];
 }
+<style>
+    .position-relative {
+        position: relative;
+    }
 
+    .change-photo {
+        position: absolute;
+        top: 38%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: none;
+    }
+
+    .image-container:hover .change-photo {
+        display: block; /* Hiện nút khi hover */
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+
+    .change-photo-btn {
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+
+
+    select {
+        border: 1px solid #ddd;
+        box-shadow: none;
+        color: #333;
+        font-size: 15px;
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+    }
+
+    .required {
+        color: red;
+    }
+
+    #cardImg {
+        transition: box-shadow 0.3s ease; /* Hiệu ứng chuyển đổi khi hover */
+        border: none; /* Loại bỏ viền nếu muốn */
+        max-height: 300px;
+        max-width: 240px;
+    }
+
+    #cardImg {
+        transition: all 0.3s ease; /* Hiệu ứng mượt khi thay đổi kích thước và shadow */
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow nhẹ mặc định */
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        padding: 20px;
+    }
+
+        #cardImg:hover {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Bóng lớn hơn khi hover */
+            transform: scale(1.1); /* Phóng to card khi hover */
+        }
+
+        #cardImg img {
+            transition: all 0.3s ease;
+            object-fit: cover;
+            border-radius: 10px; /* Đảm bảo hình ảnh tròn */
+        }
+
+</style>
 <div class="page-wrapper">
 
     @if (TempData["Message"] != null)
@@ -18,54 +94,52 @@
     }
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
-    <div class="row">
+    <div style="margin:20px;" class="row">
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <!-- Add User Button -->
                     <button id="addUserBtn" class="btn btn-primary mb-3" onclick="toggleUserForm()">Thêm mới tin tức</button>
 
-                    <!-- User Form -->
-
-
+                    <!-- User Table -->
                     <div class="table-responsive">
                         <table class="datatable table table-hover table-center mb-0">
                             <thead>
                                 <tr class="text-center">
-                                    <th>ID</th>
-                                    <th>Creator ID</th>
-                                    <th>Category</th>
-                                    <th>Title</th>
-                                    <th>Content</th>
-                                    <th>Image</th>
-                                    <th>Created At</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th hidden>ID</th>
+                                    <th>STT</th>
+                                    <th>Người tạo</th>
+                                    <th>Danh mục</th>
+                                    <th>Tiêu đề</th>
+                                    <th hidden>Content</th>
+                                    <th>Ảnh</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if (newsList != null && newsList.Any())
                                 {
-                                    @foreach (var news in newsList)
+                                    var index = 1; // Biến đếm STT bắt đầu từ 1
+                                    foreach (var news in newsList)
                                     {
                                         <tr class="text-center">
-                                            <td>@news.Id</td>
+                                            <td hidden>@news.Id</td>
+                                            <td>@index</td> <!-- Hiển thị giá trị của biến đếm -->
                                             <td>@news.CreatorId</td>
                                             <td>@news.NewsCategory</td>
                                             <td>
                                                 @if (!string.IsNullOrEmpty(news.Title) && news.Title.Length > 20)
                                                 {
-                                                    @(@news.Title.Substring(0, 20) + "...")
+                                                    @(@news.Title)
                                                 }
                                                 else
                                                 {
                                                     @news.Title
                                                 }
-
-
                                             </td>
-                                            <td>
+                                            <td hidden>
                                                 @if (!string.IsNullOrEmpty(news.Content) && news.Content.Length > 20)
                                                 {
                                                     @(@news.Content.Substring(0, 20) + "...")
@@ -75,35 +149,34 @@
                                                     @news.Content
                                                 }
                                             </td>
-
-
                                             <td>
-                                                <img src="@news.Image" alt="News Image" style=" max-width: 100px;height: auto;" />
+                                                @if (!string.IsNullOrEmpty(news.Image))
+                                                {
+                                                    <img src="@news.Image" alt="Không có ảnh" style="max-width: 100px; height: auto;" />
+                                                }
+                                                else
+                                                {
+                                                    <span>Không có ảnh</span>
+                                                }
                                             </td>
+
                                             <td>@(news.CreatedAt.HasValue ? news.CreatedAt.Value.ToString("yyyy-MM-dd") : "N/A")</td>
                                             <td>
                                                 @if (news.Status.HasValue)
                                                 {
-                                                    @if (news.Status.Value == 0)
-                                                    {
-                                                        <span style="color:red">Chưa phê duyệt</span>
-                                                    }
-                                                    else
-                                                    {
-                                                        <span style="color:green">Đã phê duyệt</span>
-                                                    }
+                                                    <span style="color:@(news.Status.Value == 0 ? "red" : "green")">
+                                                        @(news.Status.Value == 0 ? "Chưa phê duyệt" : "Đã phê duyệt")
+                                                    </span>
                                                 }
                                                 else
                                                 {
                                                     <span class="badge badge-pill bg-secondary">Unknown</span>
                                                 }
                                             </td>
-
-
                                             <td class="text-end">
                                                 <div class="actions">
                                                     <a href="javascript:void(0)" class="btn btn-sm bg-success-light me-2"
-                                                       onclick="toggleUserForm(@news.Id, '@news.CreatorId', '@news.NewsCategory', '@news.Title', '@news.Content','@news.Image','@news.CreatedAt','@news.Status')">
+                                                       onclick="toggleUserForm(`@news.Id`, `@news.CreatorId`, `@news.NewsCategory`, `@Html.Raw(JavaScriptEncoder.Default.Encode(news.Title))`, `@Html.Raw(JavaScriptEncoder.Default.Encode(news.Content))`, `@news.Image`, `@(news.CreatedAt.HasValue ? news.CreatedAt.Value.ToString("yyyy-MM-dd") : "")`, `@news.Status`)">
                                                         <i class="fe fe-pencil"></i> Chỉnh sửa
                                                     </a>
                                                     <form asp-action="DeleteNew" asp-route-id="@news.Id" method="post" style="display:inline;">
@@ -111,188 +184,417 @@
                                                     </form>
                                                 </div>
                                             </td>
-
                                         </tr>
-
+                                        index++; // Tăng biến đếm sau mỗi lần lặp
                                     }
                                 }
                                 else
                                 {
                                     <tr>
-                                        <td colspan="8" class="text-center">No users available</td>
+                                        <td colspan="9" class="text-center">No users available</td>
                                     </tr>
                                 }
                             </tbody>
+
                         </table>
                     </div>
-                    <div class="p-4" id="newForm" style="display:none; margin-bottom: 20px;">
-                        <h5>Thêm mới tin tức </h5>
-                        <!-- Display Validation Summary -->
 
-                        <form asp-action="CreateNew" method="post">
-                            <div class="row">
+                    <!-- Modal Add/Edit New Form -->
+                    <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="newsModalLabel">Thêm mới tin tức</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Add New Form -->
+                                    <div id="newForm">
+
+                                        <form asp-action="CreateNew" method="post" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <input type="hidden" value="@creatorId" class="form-control" name="creatorId" required>
+
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-4">
+                                                        <div class="form-group" onclick="openFileInput()">
+                                                            <div class="card" id="cardImg" style="width: 100%;max-width: 300px;max-height: 300px;height:300px">
+                                                                <a href="#">
+                                                                    <img id="ImgAvt" class="rounded-5 AvtImg card-img-top" alt="User Image"
+                                                                         src="~/image/imagelogo/logoviettel.jpg"
+                                                                         style=" max-width:260px ; height: 100%; max-height:260px; object-fit: cover; width:100%">
+                                                                </a>
+                                                            </div>
+                                                            <i class="fa fa-pencil change-photo" style="font-size:20px"></i>
+                                                            <input type="file" name="image" id="EditingImage" style="display:none;" accept="image/*">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label>Title</label>
+                                                                <input type="text" class="form-control" name="title" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>Thể loại</label>
+                                                                    <select class="form-control" name="newsCategoryId" required>
+                                                                        <option value="">Chọn một thể loại</option>
+                                                                        @foreach (var category in categories)
+                                                                        {
+                                                                            <option value="@category.Id">@category.CategoryName</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>Created At</label>
+                                                                    <input value="@createdAt" type="text" class="form-control" name="createdAt" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>Content</label>
+                                                        <textarea id="content" name="content"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div hidden class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Status</label>
+                                                        <input type="text" value="@status" class="form-control" name="status" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <button type="submit" class="btn btn-success">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <!-- Edit Form -->
+                                    <div id="newEditForm" style="display:none;">
+
+                                        <form enctype="multipart/form-data" id="formUpdateNew">
+                                            <input type="hidden" id="EditingNewId" name="NewId" />
+                                            <input type="hidden" value="@creatorId" id="EditingCreatorId" name="creatorId" />
+
+                                            <div class="row">
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-4">
+                                                        <div class="form-group" onclick="openFileInput()">
+
+                                                            <div class="card" id="cardImg" style="width: 100%;max-width: 300px;max-height: 300px;height:300px">
+                                                                <a href="#">
+                                                                    <img id="EditImage" class="rounded-5 AvtImg card-img-top" alt="Image Preview"
+                                                                         src="~/image/imagelogo/logoviettel.jpg"
+                                                                         style=" max-width:260px ; height: 100%; max-height:260px; object-fit: cover; width:100%">
+                                                                </a>
+                                                            </div>
+                                                            <i class="fa fa-pencil change-photo" style="font-size:20px"></i>
+                                                            <input type="file" name="image" id="EditingImage" style="display:none;" accept="image/*">
 
 
-                                <input type="hidden" value="@creatorId" class="form-control" name="creatorId" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div class="col-12 ">
+                                                            <div class="form-group">
+                                                                <label>Title</label>
+                                                                <input type="text" class="form-control" id="EditingTitle" name="title" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>New Category</label>
+                                                                    <select class="form-control" id="EditingNewCategory" name="newsCategoryId" required>
+                                                                        <option>Chọn một thể loại</option>
+                                                                        @foreach (var category in categories)
+                                                                        {
+                                                                            <option value="@category.Id">@category.CategoryName</option>
+                                                                        }
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-sm-6">
+                                                                <div class="form-group">
+                                                                    <label>Created At</label>
+                                                                    <input readonly value="@createdAt" class="form-control" id="EditingcreatedAt" name="createdAt" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Thể loại</label>
-                                        <select class="form-control" name="newsCategoryId" required>
-                                            <option value="">Chọn một thể loại</option>
-                                            @foreach (var category in categories)
-                                            {
-                                                <option value="@category.Id">@category.CategoryName</option>
-                                            }
-
-
-                                        </select>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>Content</label>
+                                                        <textarea id="EditingContent" name="content"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div disabled hidden class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Status</label>
+                                                        <input disabled readonly class="form-control" id="EditingStatus" name="Status" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" id="btnupdatedb" class="btn btn-primary">Cập nhật bản tin</button>
+                                        </form>
                                     </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Title</label>
-                                        <input type="text" class="form-control" name="title" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Content</label>
-                                        <input type="text" class="form-control" name="content" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Image</label>
-                                        <input type="text" class="form-control" name="image" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>CreatedAt</label>
-                                        <input value="@createdAt" type="text" class="form-control" name="createdAt" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Status</label>
-                                        <input type="text" value="@status" class="form-control" name="status" required>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </div>
-                        </form>
-
+                        </div>
                     </div>
-                    <div class="p-4" id="newEditForm" style="display:none; margin-bottom: 20px;">
-                        <h5>Chỉnh Sửa tin tức</h5>
-                        <form asp-action="UpdateNew" method="post">
-                            <input type="hidden" id="EditingNewId" name="NewId" />
-                            <input type="hidden" value="@creatorId" id="EditingCreatorId" name="CreatorId" />
 
-                            <div class="row">
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>New Category</label>
-                                        <select class="form-control" id="EditingNewCategory" name="NewsCategoryId" required>
-                                            <option>Chọn một thể loại</option>
-                                            @foreach (var category in categories)
-                                            {
-                                                <option value="@category.Id">@category.CategoryName</option>
-                                            }
-
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Title</label>
-                                        <input type="text" class="form-control" id="EditingTitle" name="Title" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Content</label>
-                                        <input type="text" class="form-control" id="EditingContent" name="Content" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Image</label>
-                                        <input type="text" class="form-control" id="EditingImage" name="Image">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Created At</label>
-                                        <input value="@createdAt" class="form-control" name="CreatedAt" />
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label>Status</label>
-                                        <input class="form-control" id="EditingStatus" name="Status" />
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Cập nhật bản tin</button>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/35.3.1/classic/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
+<script src="~/admin_assets/js/bootstrap.bundle.min.js"></script>
+<script src="~/admin_assets/js/feather.min.js"></script>
+<script src="~/admin_assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/jquery.datatables.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
+<script src="~/admin_assets/js/script.js"></script>
+@* <script src="~/ckeditor5-43.3.1/ckeditor5/ckeditor5.js"></script> *@
 
 <script>
+
+    class MyUploadAdapter {
+        constructor(loader) {
+            this.loader = loader;
+        }
+
+        upload() {
+            return this.loader.file
+                .then(file => new Promise((resolve, reject) => {
+                    this._initRequest();
+                    this._initListeners(resolve, reject, file);
+                    this._sendRequest(file);
+                }));
+        }
+
+        abort() {
+            if (this.xhr) {
+                this.xhr.abort();
+            }
+        }
+
+        _initRequest() {
+            const xhr = this.xhr = new XMLHttpRequest();
+
+            // Thay đổi đường dẫn '/Staff/UploadImage' theo API tải lên của bạn
+            xhr.open('POST', '/Staff/UploadImage', true);
+            xhr.responseType = 'json';
+        }
+
+        _initListeners(resolve, reject, file) {
+            const xhr = this.xhr;
+            const loader = this.loader;
+            const genericErrorText = `Couldn't upload file: ${file.name}.`;
+
+            xhr.addEventListener('error', () => reject(genericErrorText));
+            xhr.addEventListener('abort', () => reject());
+            xhr.addEventListener('load', () => {
+                const response = xhr.response;
+
+                if (!response || response.error) {
+                    return reject(response && response.error ? response.error.message : genericErrorText);
+                }
+
+                resolve({
+                    default: response.url
+                });
+            });
+
+            if (xhr.upload) {
+                xhr.upload.addEventListener('progress', evt => {
+                    if (evt.lengthComputable) {
+                        loader.uploadTotal = evt.total;
+                        loader.uploaded = evt.loaded;
+                    }
+                });
+            }
+        }
+
+        _sendRequest(file) {
+            const data = new FormData();
+            data.append('upload', file);
+            this.xhr.send(data);
+        }
+    }
+
+    function MyCustomUploadAdapterPlugin(editor) {
+        editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+            return new MyUploadAdapter(loader);
+        };
+    }
+
+    // Khởi tạo CKEditor 5 với plugin MyCustomUploadAdapterPlugin
+    let editorContent, editorEditingContent;
+
+    ClassicEditor
+        .create(document.querySelector('#content'), {
+            extraPlugins: [MyCustomUploadAdapterPlugin],
+        })
+        .then(editor => {
+            editorContent = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    ClassicEditor
+        .create(document.querySelector('#EditingContent'), {
+            extraPlugins: [MyCustomUploadAdapterPlugin],
+        })
+        .then(editor => {
+            editorEditingContent = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+
     function toggleUserForm(Id, CreatorId, NewsCategory, Title, Content, Image, CreatedAt, Status) {
-        // Check if we are editing a user
+        var modalTitle = document.getElementById('newsModalLabel');
         if (Id) {
-            // Fill the editing form with current user data
+            // Chế độ chỉnh sửa
+            modalTitle.textContent = "Chỉnh sửa tin tức";
             document.getElementById('EditingNewId').value = Id;
             document.getElementById('EditingCreatorId').value = CreatorId;
             document.getElementById('EditingNewCategory').value = NewsCategory;
             document.getElementById('EditingTitle').value = Title;
-            document.getElementById('EditingContent').value = Content;
-            document.getElementById('EditingImage').value = Image; // Set the status
 
-            document.getElementById('EditingStatus').value = Status; // Set the status
+            // Set CKEditor data
+            if (editorEditingContent) {
+                editorEditingContent.setData(Content);
+            }
 
-            // Hide the add user form and show the edit form
+            // Cập nhật ảnh hoặc sử dụng ảnh mặc định
+            const editingImage = document.getElementById('EditImage');
+            editingImage.src = Image;
+            editingImage.style.display = 'block';
+
+            document.getElementById('EditingStatus').value = Status;
             document.getElementById('newForm').style.display = 'none';
             document.getElementById('newEditForm').style.display = 'block';
-        } else {
-            // Clear the editing form
 
+        } else {
+            // Chế độ thêm mới
+            modalTitle.textContent = "Thêm mới tin tức";
             document.getElementById('EditingNewId').value = '';
             document.getElementById('EditingCreatorId').value = '';
             document.getElementById('EditingNewCategory').value = '';
             document.getElementById('EditingTitle').value = '';
-            document.getElementById('EditingContent').value = '';
-            document.getElementById('EditingImage').value = '';
+
+            // Clear CKEditor data
+            if (editorEditingContent) {
+                editorEditingContent.setData('');
+            }
+
+            // Cập nhật ảnh mặc định
+            const newImage = document.getElementById('ImgAvt');
+            newImage.src = "~/image/imagelogo/logoviettel.jpg";
+            newImage.style.display = 'block';
 
             document.getElementById('EditingStatus').value = '';
-
-
-            // Hide the edit form and show the add user form
             document.getElementById('newEditForm').style.display = 'none';
             document.getElementById('newForm').style.display = 'block';
         }
+
+        // Hiển thị modal
+        var modal = new bootstrap.Modal(document.getElementById('newsModal'));
+        modal.show();
     }
 
+    function openFileInput() {
+        document.getElementById('EditingImage').click(); // Kích hoạt trình duyệt tệp
+    }
+
+    let selectedFile = null; // Biến toàn cục lưu ảnh mới
+
+    // Xử lý khi người dùng chọn ảnh
+    document.getElementById('EditingImage').addEventListener('change', function (event) {
+        selectedFile = event.target.files[0]; // Lấy file mới
+        console.log('File selected:', selectedFile); // Hiển thị file mới trong console
+
+        if (selectedFile) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                // Kiểm tra chế độ hiện tại
+                const editingImage = document.querySelector('#EditImage');
+                const newImage = document.querySelector('#ImgAvt');
+
+                if (editingImage && document.getElementById('newEditForm').style.display === 'block') {
+                    // Chế độ chỉnh sửa
+                    editingImage.src = e.target.result;
 
 
-    document.querySelectorAll('.delete-new').forEach(button => {
-        button.addEventListener('click', function (event) {
-            const confirmation = confirm("Bạn có chắc chắn muốn xóa tin tức này?");
-            if (!confirmation) {
-                event.preventDefault(); // Prevent the form from submitting
+                } else if (newImage && document.getElementById('newForm').style.display === 'block') {
+                    // Chế độ thêm mới
+                    newImage.src = e.target.result;
+                }
+            };
+            reader.readAsDataURL(selectedFile); // Đọc file ảnh và chuyển thành URL
+        }
+    });
+
+
+    function updateNews() {
+        const formData = new FormData();
+        debugger;
+        // Lấy giá trị từ các trường form
+        formData.append('NewId', document.getElementById('EditingNewId').value);
+        formData.append('creatorId', @creatorId);
+        formData.append('title', document.getElementById('EditingTitle').value);
+        formData.append('content', editorEditingContent.getData());  // CKEditor content
+        formData.append('newsCategoryId', document.getElementById('EditingNewCategory').value);
+        formData.append('createdAt', document.getElementById('EditingcreatedAt').value);
+
+        // Kiểm tra nếu có tệp hình ảnh được chọn, thêm vào FormData
+        const editingImage = document.getElementById('EditingImage');
+        if (editingImage.files.length > 0) {
+            formData.append('image', editingImage.files[0]);
+        } else {
+            // Nếu không chọn ảnh mới, gửi đường dẫn ảnh cũ
+            const currentImage = document.getElementById('EditImage').src; // Đường dẫn ảnh hiện tại
+            formData.append('currentImage', currentImage);
+        }
+
+        // Gửi dữ liệu qua AJAX
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Staff/UpdateNew', true);  // Đường dẫn API được cập nhật
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert('Cập nhật bài tin thành công!');
+                // Có thể refresh lại trang hoặc đóng modal
+                location.reload();  // Reload trang nếu cần
+            } else {
+                alert('Có lỗi xảy ra khi cập nhật!');
             }
-        });
+        };
+        xhr.send(formData);
+    }
+    document.getElementById('formUpdateNew').addEventListener('submit', function (event) {
+        event.preventDefault();  // Ngừng hành động mặc định của form (không gửi đi theo cách truyền thống)
+
+        updateNews();  // Gọi hàm gửi dữ liệu bằng AJAX
     });
 
 </script>
+
+

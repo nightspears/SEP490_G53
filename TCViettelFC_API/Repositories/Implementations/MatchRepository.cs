@@ -118,5 +118,13 @@ namespace TCViettelFC_API.Repositories.Implementations
                 throw new Exception("Error updating match: " + ex.Message);
             }
         }
+
+        public void UpdateStatus(int status, int id)
+        {
+            var match = _context.Matches.Find(id);
+            match.Status = status;
+            _context.SaveChanges();
+        }
+
     }
 }

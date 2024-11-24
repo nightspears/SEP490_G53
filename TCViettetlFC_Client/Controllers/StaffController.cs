@@ -12,18 +12,19 @@ namespace TCViettetlFC_Client.Controllers
     public class StaffController : Controller
     {
         private readonly HttpClient _httpClient;
-
+        private readonly IWebHostEnvironment _env;
         private readonly FeedbackService _feedbackService;
         private readonly OrderService _orderService;
         private readonly IApiHelper _apiHelper;
         private readonly GoShipService _goShipService;
-        public StaffController(IHttpClientFactory httpClientFactory, FeedbackService feedbackService, IApiHelper apiHelper, OrderService orderService, GoShipService goShipService)
+        public StaffController(IHttpClientFactory httpClientFactory, FeedbackService feedbackService, IApiHelper apiHelper, OrderService orderService, GoShipService goShipService, IWebHostEnvironment env)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
             _feedbackService = feedbackService;
             _apiHelper = apiHelper;
             _orderService = orderService;
             _goShipService = goShipService;
+            _env = env;
         }
         private async Task<List<TicketOrdersViewModel>> GetAllTicketOrders()
 
@@ -124,7 +125,6 @@ namespace TCViettetlFC_Client.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var token = Request.Cookies["AuthToken"];
                 if (!string.IsNullOrEmpty(token))
                 {
@@ -134,13 +134,23 @@ namespace TCViettetlFC_Client.Controllers
                 {
                     return RedirectToAction("Login", "User");
                 }
-                var creatorId = model.creatorId;
-                var newsCategoryId = model.newsCategoryId;
-                var createdAt = model.createdAt;
-                var status = model.status;
 
-                var content = new StringContent(JsonConvert.SerializeObject(model), System.Text.Encoding.UTF8, "application/json");
+                // Chuẩn bị nội dung gửi đi dưới dạng MultipartFormDataContent
+                using var content = new MultipartFormDataContent();
+                content.Add(new StringContent(model.creatorId.ToString()), "CreatorId");
+                content.Add(new StringContent(model.newsCategoryId.ToString()), "NewsCategoryId");
+                content.Add(new StringContent(model.title ?? ""), "Title");
+                content.Add(new StringContent(model.content ?? ""), "Content");
+                content.Add(new StringContent(model.createdAt.HasValue ? model.createdAt.Value.ToString("o") : ""), "CreatedAt"); // ISO 8601 format
+                content.Add(new StringContent(model.status.ToString()), "Status");
 
+                // Nếu có tệp hình ảnh, thêm vào nội dung
+                if (model.image != null && model.image.Length > 0)
+                {
+                    var fileContent = new StreamContent(model.image.OpenReadStream());
+                    fileContent.Headers.ContentType = new MediaTypeHeaderValue(model.image.ContentType);
+                    content.Add(fileContent, "Image", model.image.FileName);
+                }
 
                 string requestUri = "https://localhost:5000/api/New/create";
                 var response = await _httpClient.PostAsync(requestUri, content);
@@ -149,20 +159,18 @@ namespace TCViettetlFC_Client.Controllers
                 {
                     TempData["Message"] = "Đã thêm tin tức thành công";
                     return RedirectToAction("StaffManagermentNew");
-
                 }
                 else
                 {
-
                     TempData["Message"] = "Failed to create new news item.";
                 }
             }
 
-
             return RedirectToAction("StaffManagermentNew");
         }
+
         [HttpPost]
-        public async Task<IActionResult> UpdateNew(int NewId, UpdateNewViewModel model)
+        public async Task<IActionResult> UpdateNew(int NewId, UpdateNewViewModel model, string? currentImage)
         {
             if (ModelState.IsValid)
             {
@@ -176,12 +184,28 @@ namespace TCViettetlFC_Client.Controllers
                     return RedirectToAction("Login", "User");
                 }
 
-                // Serialize the model to JSON
-                var content = new StringContent(JsonConvert.SerializeObject(model), System.Text.Encoding.UTF8, "application/json");
+                using var multipartContent = new MultipartFormDataContent();
+                multipartContent.Add(new StringContent(model.creatorId.ToString()), "CreatorId");
+                multipartContent.Add(new StringContent(model.newsCategoryId.ToString()), "NewsCategoryId");
+                multipartContent.Add(new StringContent(model.title), "Title");
+                multipartContent.Add(new StringContent(model.content), "Content");
+                multipartContent.Add(new StringContent(model.createdAt.HasValue ? model.createdAt.Value.ToString("o") : ""), "CreatedAt");
 
-                // Construct the request URI for updating news
+                if (model.image != null && model.image.Length > 0)
+                {
+                    // Nếu có ảnh mới, sử dụng ảnh này
+                    var streamContent = new StreamContent(model.image.OpenReadStream());
+                    streamContent.Headers.ContentType = new MediaTypeHeaderValue(model.image.ContentType);
+                    multipartContent.Add(streamContent, "Image", model.image.FileName);
+                }
+                else if (!string.IsNullOrEmpty(currentImage))
+                {
+                    // Nếu không có ảnh mới, sử dụng ảnh cũ
+                    multipartContent.Add(new StringContent(currentImage), "ImagePath");
+                }
+
                 string requestUri = $"https://localhost:5000/api/New/update/{NewId}";
-                var response = await _httpClient.PostAsync(requestUri, content);
+                var response = await _httpClient.PostAsync(requestUri, multipartContent);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -196,6 +220,9 @@ namespace TCViettetlFC_Client.Controllers
 
             return RedirectToAction("StaffManagermentNew");
         }
+
+
+
 
         [HttpPost]
         public async Task<IActionResult> DeleteNew(int id)
@@ -315,6 +342,25 @@ namespace TCViettetlFC_Client.Controllers
 
             return View(shipmentData);
         }
+
+        [HttpPost]
+        [HttpPost]
+        public ActionResult UploadImage(List<IFormFile> files)
+        {
+            var filepath = "";
+            foreach (IFormFile photo in Request.Form.Files)
+            {
+                string serverMapPath = Path.Combine(_env.WebRootPath, "Image", photo.FileName);
+                using (var stream = new FileStream(serverMapPath, FileMode.Create))
+                {
+                    photo.CopyTo(stream);
+                }
+                filepath = "https://localhost:7004/" + "Image/" + photo.FileName;
+            }
+
+            return Json(new { url = filepath }); ;
+        }
+
 
 
     }

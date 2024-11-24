@@ -1,4 +1,5 @@
-﻿using TCViettelFC_API.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using TCViettelFC_API.Models;
 
 namespace TCViettelFC_API.Dtos
 {
@@ -6,7 +7,7 @@ namespace TCViettelFC_API.Dtos
     {
         public int Id { get; set; }
 
-        public int? CreatorId { get; set; }
+        public string? CreatorId { get; set; }
 
         public string? NewsCategory { get; set; }
 
@@ -26,9 +27,11 @@ namespace TCViettelFC_API.Dtos
     {
         public int? CreatorId { get; set; }
         public int? NewsCategoryId { get; set; }
+        [MaxLength(255)]
         public string? Title { get; set; }
         public string? Content { get; set; }
-        public string? Image { get; set; }
+        public IFormFile? Image { get; set; }
+        [Required]
         public DateTime? CreatedAt { get; set; }
         public int? Status { get; set; }
     }
@@ -36,10 +39,10 @@ namespace TCViettelFC_API.Dtos
     public class UpdateNewDto
     {
         public int? CreatorId { get; set; }
-        public int NewsCategoryId { get; set; }
+        public int? NewsCategoryId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public string? Image { get; set; }
+        public IFormFile? Image { get; set; }
         public DateTime? CreatedAt { get; set; } 
         
     }

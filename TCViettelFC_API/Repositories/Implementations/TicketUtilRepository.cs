@@ -141,9 +141,9 @@ width:300px;
         }
         public async Task<int> VerifyTicketAsync(OrderedTicket ticket)
         {
-            if (ticket.Status == 0)
+            if (ticket.Status == 1)
             {
-                ticket.Status = 1;
+                ticket.Status = 0;
                 await _context.SaveChangesAsync();
                 return 1;
             }

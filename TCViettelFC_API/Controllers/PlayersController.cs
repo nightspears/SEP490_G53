@@ -103,7 +103,8 @@ namespace TCViettelFC_API.Controllers
         {
             if (playerInputDto == null)
                 return BadRequest("Player data cannot be null.");
-
+            if (playerInputDto.SeasonId <= 0)
+                return BadRequest("Invalid season ID.");
             var playerDto = new PlayerDto
             {
                 FullName = playerInputDto.FullName,

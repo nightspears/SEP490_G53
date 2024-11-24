@@ -57,7 +57,7 @@
         public int? OrderTicketId { get; set; }
         public int? OrderProductId { get; set; }
         public decimal? TotalAmount { get; set; }
-        public string? PaymentGateway { get; set; } // e.g., "Credit Card", "PayPal"
+        public string? PaymentGateway { get; set; } // e.g.,"vnpay"
         public int? Status { get; set; } // e.g., 0 for "Pending", 1 for "Completed"
     }
 }
