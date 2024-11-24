@@ -41,6 +41,9 @@
     }
 
 </style>
+
+<link href="~/admin_assets/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+<link href="~/admin_assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
 <div class="page-wrapper">
     <div class="content container-fluid">
 
@@ -78,8 +81,9 @@
                                         <th>Đối thủ</th>
                                         <th>Tên sân</th>
                                         <th>Ngày đá</th>
+                                        <th>Giờ đá</th>
                                         <th>Là sân nhà</th>
-                                        <th class="text-center">Trạng thái</th>
+                                        <th class="text-center">Trạng thái hiển thị</th>
                                         <th class="text-center">Thao tác</th>
                                     </tr>
                                 </thead>
@@ -116,7 +120,7 @@
                             <div class="col-md-12 mb-3 d-flex  justify-content-center position-relative image-container">
                                 <a href="#">
                                     <img class="rounded-circle AvtImg" alt="User Image"
-                                         src="https://th.bing.com/th/id/OIP.Dr23KrOsbjEArWQsLaMAtgHaJh?rs=1&pid=ImgDetMain"
+                                         src="~/image/imagelogo/logoviettel.jpg"
                                          style="width: 150px; height: 150px; object-fit: cover;">
                                 </a>
                             </div>
@@ -133,25 +137,23 @@
                                  style="width: 150px; height: 150px; object-fit: cover;">
                         </a>
                     </div>
+
+
                     <div class="col-md-5 d-flex justify-content-center position-relative image-container">
                         <div class="row justify-content-center">
                             <div class="col-md-12 mb-3 d-flex  justify-content-center position-relative image-container">
-                               @*  <a href="#">
-                                    <img class="rounded-circle AvtImg" id="ImgAvt" alt="User Image"
-                                         src="https://th.bing.com/th/id/R.69fc0f120df8aa48de9c30d08e79a369?rik=Yt1RBiH0oON5Jw&pid=ImgRaw&r=0"
-                                         style="width: 150px; height: 150px; object-fit: cover;">
-                                </a> *@
+                              
                                 <a href="#">
-                                    <img class="rounded-circle AvtImg" id="ImgAvt" alt="User Image"
-                                         src="https://th.bing.com/th/id/OIP.gW2Ic5jvc81AK0aNUiJaugHaHa?rs=1&pid=ImgDetMain"
-                                         style="width: 150px; height: 150px; object-fit: cover;">
+                                    <img class="rounded-2 AvtImg" id="ImgAvt" alt="User Image"
+                                         src="~/image/imagelogo/plus.jpg"
+                                         style="width: 150px; height: 150px; object-fit: contain;">
                                 </a>
                             </div>
                             <div class="col-md-12  d-flex  justify-content-center position-relative image-container">
                                 <strong style="font-size:20px" id="tenCLB"></strong>
                             </div>
                         </div>
-                        <i class="fa fa-pencil change-photo-btn" style="font-size:20px"></i>
+                        <i class="fe fe-pencil change-photo-btn" style="font-size:20px"></i>
                         <input type="file" id="fileInput" style="display:none;" accept="image/*">
 
                     </div>

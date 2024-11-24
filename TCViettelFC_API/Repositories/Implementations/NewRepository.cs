@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Models;
@@ -11,11 +13,13 @@ namespace TCViettelFC_API.Repositories.Implementations
         private readonly Sep490G53Context _context;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _contextAccessor;
-        public NewRepository(Sep490G53Context context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        private readonly ICloudinarySetting _cloudinary;
+        public NewRepository(Sep490G53Context context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ICloudinarySetting cloudinary)
         {
             _context = context;
             _configuration = configuration;
             _contextAccessor = httpContextAccessor;
+            _cloudinary = cloudinary;
         }
         public IQueryable<GetNewDto> GetAllNewsAsQueryable() 
         { 
@@ -90,40 +94,90 @@ namespace TCViettelFC_API.Repositories.Implementations
 
         public async Task<int> CreateNewsAsync(CreateNewDto newDto)
         {
-            var news = new News
+            using (var dbContextTransaction = await _context.Database.BeginTransactionAsync())
             {
-                CreatorId = newDto.CreatorId,
-                NewsCategoryId = newDto.NewsCategoryId,
-                Title = newDto.Title,
-                Content = newDto.Content,
-                Image = newDto.Image,
-                CreatedAt = DateTime.UtcNow,
-                Status = newDto.Status
-            };
+                try
+                {
+                    // Upload ảnh lên Cloudinary nếu có
+                    var uploadResult = new ImageUploadResult();
+                    if (newDto.Image != null && newDto.Image.Length > 0)
+                    {
+                        uploadResult = _cloudinary.CloudinaryUpload(newDto.Image);
+                    }
 
-            _context.News.Add(news);
-            await _context.SaveChangesAsync();
+                    // Lưu thông tin vào cơ sở dữ liệu
+                    var news = new News
+                    {
+                        CreatorId = newDto.CreatorId,
+                        NewsCategoryId = newDto.NewsCategoryId,
+                        Title = newDto.Title,
+                        Content = newDto.Content,
+                        Image = uploadResult?.SecureUrl?.ToString() ?? "/image/default_image.jpg", // Sử dụng ảnh mặc định nếu không upload được
+                        CreatedAt = DateTime.UtcNow,
+                        Status = newDto.Status
+                    };
 
-            return news.Id;
+                    _context.News.Add(news);
+                    await _context.SaveChangesAsync();
+
+                    await dbContextTransaction.CommitAsync();
+                    return news.Id;
+                }
+                catch (Exception)
+                {
+                    await dbContextTransaction.RollbackAsync();
+                    throw;
+                }
+            }
         }
+
+
+
 
         public async Task<bool> UpdateNewsAsync(int id, UpdateNewDto newDto)
         {
-            var news = await _context.News.FirstOrDefaultAsync(n => n.Id == id);
-            if (news == null)
+            using (var dbContextTransaction = await _context.Database.BeginTransactionAsync())
             {
-                return false;
-            }
-            news.CreatorId = newDto.CreatorId;
-            news.NewsCategoryId = newDto.NewsCategoryId;
-            news.Title = newDto.Title;
-            news.Content = newDto.Content;
-            news.Image = newDto.Image;
-            news.CreatedAt = DateTime.Now;
-            await _context.SaveChangesAsync();
+                try
+                {
+                    // Tìm bản ghi cần cập nhật
+                    var news = await _context.News.FirstOrDefaultAsync(n => n.Id == id);
+                    if (news == null)
+                    {
+                        return false;
+                    }
 
-            return true;
+                    // Cập nhật các thông tin cơ bản
+                    news.CreatorId = newDto.CreatorId ?? news.CreatorId;
+                    news.NewsCategoryId = newDto.NewsCategoryId ?? news.NewsCategoryId;
+                    news.Title = newDto.Title ?? news.Title;
+                    news.Content = newDto.Content ?? news.Content;
+
+                    // Xử lý ảnh mới nếu có
+                    if (newDto.Image != null && newDto.Image.Length > 0)
+                    {
+                        var uploadResult = _cloudinary.CloudinaryUpload(newDto.Image);
+                        news.Image = uploadResult?.SecureUrl?.ToString() ?? news.Image; // Giữ nguyên ảnh cũ nếu upload thất bại
+                    }
+
+                    // Cập nhật thời gian chỉnh sửa
+                    news.CreatedAt = DateTime.UtcNow;
+
+                    // Lưu thay đổi vào cơ sở dữ liệu
+                    await _context.SaveChangesAsync();
+                    await dbContextTransaction.CommitAsync();
+
+                    return true;
+                }
+                catch (Exception)
+                {
+                    await dbContextTransaction.RollbackAsync();
+                    throw;
+                }
+            }
         }
+
+
 
         public async Task<bool> DeleteNewsAsync(int id)
         {
@@ -136,5 +190,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             await _context.SaveChangesAsync();
             return true;
         }
+
+        
     }
 }

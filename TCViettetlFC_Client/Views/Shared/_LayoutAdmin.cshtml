@@ -7,14 +7,18 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Mentoring - Profile</title>
+    <title>Viettel FC</title>
+
     <link href="~/admin_assets/plugins/datatables/datatables.min.css" rel="stylesheet" />
     <link href="~/admin_assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/admin_assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/admin_assets/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/admin_assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
+
     <link href="~/admin_assets/css/feathericon.min.css" rel="stylesheet" />
     <link href="~/admin_assets/plugins/datatables/datatables.min.css" rel="stylesheet" />
     <link href="~/admin_assets/css/style.css" rel="stylesheet" />
-
+    <link href="~/admin_assets/css/ckeditor.css" rel="stylesheet" />
 </head>
 <body>
     <div class="main-wrapper">
@@ -69,7 +73,7 @@
                         </div>
                         <a class="dropdown-item" href="profile.html">My Profile</a>
                         <a class="dropdown-item" href="settings.html">Settings</a>
-                        <a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="/User/Logout">Logout</a>
                     </div>
                 </li>
 
@@ -85,13 +89,11 @@
                         <li class="menu-title">
                             <span><i class="fe fe-home"></i> Main</span>
                         </li>
-                        <li>
-                            <a href="index.html"><span>Dashboard</span></a>
-                        </li>
-                        <li>
-                            <a href="mentor.html"><span>Mentor</span></a>
-                        </li>
                         <li class="active">
+                            <a href="/Admin/Home"><span>Dashboard</span></a>
+                        </li>
+                     
+                        <li >
                             <a href="/matchManagement/index"><span>Trận đấu</span></a>
                         </li>
                         <li>
@@ -106,10 +108,24 @@
                         <li>
                             <a href="/Discount/index"><span>Mã giảm giá</span></a>
                         </li>
-                        <li>
-                            <a href="/admin/usermanagement"><span>User Management</span></a>
+                        <li >
+                            <a href="/admin/usermanagement"><span>Nhân viên</span></a>
                         </li>
-
+                        <li>
+                            <a href="/Staff/StaffManagermentNew"><span>Tin tức</span></a>
+                        </li>
+                        <li>
+                            <a href="/TeamManagement/Index"><span>Đội bóng</span></a>
+                        </li>
+                       @*  <li class="submenu">
+                            <a href="#"><span>Tin tức</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="blog.html"> Tin tu </a></li>
+                                <li><a href="blog-details.html"> Blog Details </a></li>
+                                <li><a href="add-blog.html"> Add Blog </a></li>
+                                <li><a href="edit-blog.html"> Edit Blog </a></li>
+                            </ul>
+                        </li> *@
                         <li>
                             <a href="settings.html"><span>Settings</span></a>
                         </li>
@@ -133,15 +149,7 @@
                         <li>
                             <a href="profile.html"><span>My Profile</span></a>
                         </li>
-                        <li class="submenu">
-                            <a href="#"><span>Blog</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="blog.html"> Blog </a></li>
-                                <li><a href="blog-details.html"> Blog Details </a></li>
-                                <li><a href="add-blog.html"> Add Blog </a></li>
-                                <li><a href="edit-blog.html"> Edit Blog </a></li>
-                            </ul>
-                        </li>
+                      
                         <li class="submenu">
                             <a href="#"><span> Authentication </span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
@@ -160,10 +168,8 @@
         @RenderBody()
 
     </div>
-    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
-    <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
 
     <script src="~/admin_assets/js/bootstrap.bundle.min.js"></script>
 
@@ -182,6 +188,5 @@
     <script src="~/admin_assets/js/script.js"></script>
 </body>
 
-<!-- Mirrored from mentoring.dreamguystech.com/html/template/admin/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:33:22 GMT -->
 
 </html>

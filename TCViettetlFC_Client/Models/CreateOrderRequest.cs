@@ -39,6 +39,9 @@
     public class OrderProductDetailDTO
     {
         public int ProductId { get; set; }
+        public string? ProductName { get; set; }
+
+        public string? Avatar { get; set; }
         public int? PlayerId { get; set; }
         public string? CustomShirtNumber { get; set; }
 

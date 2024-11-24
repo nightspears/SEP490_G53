@@ -20,8 +20,10 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
         }
 
         public IActionResult Index(string data)
-            {
-                var checkoutModel = new CheckoutModel();
+           {
+            SetCustomerInfoInViewData();
+
+            var checkoutModel = new CheckoutModel();
                 checkoutModel.checkoutItems = new List<CheckoutCartModel>();
                 decimal totalPrice = 0;
 
@@ -41,10 +43,19 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                 // Pass the model to the checkout view
                 return View(checkoutModel);
             }
+        public void SetCustomerInfoInViewData()
+        {
+            string customerId = Request.Cookies["CustomerId"];
+            string customerPhone = Request.Cookies["CustomerPhone"];
+            string customerEmail = Request.Cookies["CustomerEmail"];
 
+            // Check if the cookies exist and pass them to ViewData
+            ViewData["CustomerId"] = customerId ?? string.Empty;
+            ViewData["CustomerPhone"] = customerPhone ?? string.Empty;
+            ViewData["CustomerEmail"] = customerEmail ?? string.Empty;
+        }
 
-
-            [HttpPost]
+        [HttpPost]
             public IActionResult SubmitCheckout(CheckoutModel model)
             {
                 if (ModelState.IsValid)
@@ -128,7 +139,9 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                                 CustomShirtName = item.TenCauThu,
                                 Size = item.size,
                                 Quantity = item.Quantity,
-                                Price = item.Price
+                                Price = item.Price,
+                                ProductName = item.nameProduct,
+                                Avatar = item.Avartar
                             }).ToList(),
                             Payment = new PaymentDTO
                             {
@@ -142,11 +155,8 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
 
                         // Handle the result (e.g., log it, show success message, etc.)
                         // Redirect or display a view accordingly
-                        return View("PaymentCallBack", new PaymentSuccessViewModel
-                        {
-                            CheckoutModel = checkoutModel,
-                            VnPayResponse = response,
-                        });
+                        return View("PaymentCallBack", model: result);
+                       
 
                     }
                     catch(Exception ex)
@@ -158,20 +168,18 @@ using TCViettetlFC_Client.VNPayHelper; // Assuming you create a CheckoutModel cl
                 else if (response.VnPayResponseCode == "24") // VnPay response code for "Transaction cancelled by user"
                 {
                     // Return to the checkout page if the user cancels the payment
-                    ViewBag.ErrorMessage = "Payment was cancelled. Please try again or choose a different payment method.";
+                    SetCustomerInfoInViewData();
                     return View("Index", checkoutModel); // Pass the retrieved CheckoutModel back to the checkout page
                 }
                 else
                 {
                     // Handle other failure scenarios
-                    ViewBag.ErrorMessage = "Payment failed. Please try again.";
-                    return View("Index", checkoutModel);
+                    return View("PaymentCallBack", model: "Error");
                 }
             }
 
             // In case the response is null or something went wrong, handle it gracefully
-            ViewBag.ErrorMessage = "Invalid response from VnPay.";
-            return View("Index", checkoutModel);
+            return View("PaymentCallBack", model: "Error");
         }
     }
     }

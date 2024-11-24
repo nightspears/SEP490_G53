@@ -59,6 +59,10 @@ function loadData() {
                 var tenSan = (item.isHome === true ? 'SVĐ Mỹ Đình' : item.stadiumName);
                 var logoUrl = item.logoUrl ? item.logoUrl : "/image/imagelogo/icon-image-not-found-free-vector.jpg";
 
+                var matchDate = new Date(item.matchDate);
+                var dateFormatted = matchDate.toLocaleDateString('en-GB'); // Formats as dd/MM/yyyy
+                var timeFormatted = matchDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); // Formats as HH:mm
+
                 var rowHtml = `
                     <tr>
                         <td>
@@ -77,11 +81,12 @@ function loadData() {
                             </h2>
                         </td>
                         <td>${tenSan}</td>
-                        <td>${item.matchDate} <br><small></small></td>
+                        <td>${dateFormatted}</td>
+                         <td>${timeFormatted}</td>
                         <td>${item.isHome === true ? 'Sân nhà' : 'Sân khách'}</td>
                         <td class="text-center">
                             <div class="status-toggle d-flex justify-content-center">
-                                <input type="checkbox" id="status_${item.id}" class="check" ${item.status === 1 ? 'checked' : ''}>
+                                <input type="checkbox" data-mid="${item.id}" id="status_${item.id}" class="check" ${item.status === 1 ? 'checked' : ''}>
                                 <label for="status_${item.id}" class="checktoggle">checkbox</label>
                             </div>
                         </td>
@@ -146,7 +151,7 @@ function modalEditOrCreate(id) {
     $('#TenDoiThu').val("");
     $('#tenSan').val("");
     $('#ngayDa').val("");
-    $('#status').prop('checked', false);
+    $('#status').prop('checked', true);
 
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật trận đấu")
@@ -193,7 +198,7 @@ function modalEditOrCreate(id) {
 
         $("#titleModal").text("Thêm trận đấu")
 
-        $("#ImgAvt").attr("src", "/image/imagelogo/oip.jpg")
+        $("#ImgAvt").attr("src", "/image/imagelogo/plus.jpg")
         $("#tenCLB").text("Tên đối thủ")
         $('#idTran').hide()
       
@@ -296,5 +301,36 @@ function showAlert(mess) {
     }, 3500); // 4 seconds delay
 }
 
+$(document).on("change", ".check", function () {
 
+    var checkbox = $(this);
+    var status = 1;
+    if (checkbox.prop('checked')) {
+        status = 1
+    } else {
+        status = 2;
+    }
+    var id = checkbox.data("mid");
+    var formData = new FormData();
+
+    formData.append('id', id);
+    formData.append('status', status);
+    debugger
+    $.ajax({
+        url: 'https://localhost:5000/api/Matches/updateStatus',
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            debugger
+            loadData();
+            showAlert("Cập nhật trạng thái thành công");
+        },
+        error: function (error) {
+            debugger
+        }
+    });
+
+});
 

@@ -23,7 +23,7 @@ namespace TCViettelFC_API.Controllers
         public IQueryable<GetNewDto> GetAllNews()
         {
             var newsList = _newRepository.GetAllNewsAsQueryable();
-            
+
             return newsList;
         }
         // API get new by id
@@ -38,7 +38,7 @@ namespace TCViettelFC_API.Controllers
             return Ok(news);
         }
         [Authorize(Policy = "admin")]
-        [HttpGet("updatestatus/{id}")] 
+        [HttpGet("updatestatus/{id}")]
         public async Task<IActionResult> UpdateNewsStatus(int id, int newStatus)
         {
             var result = await _newRepository.UpdateNewsStatusAsync(id, newStatus);
@@ -51,28 +51,42 @@ namespace TCViettelFC_API.Controllers
             return Ok(new { message = "News status updated successfully" });
         }
 
-
         [Authorize(Policy = "staff")]
         [HttpPost("create")]
-        public async Task<IActionResult> CreateNews([FromBody] CreateNewDto newDto)
+        public async Task<IActionResult> CreateNews( CreateNewDto newDto)
         {
-            var newId = await _newRepository.CreateNewsAsync(newDto);
-            return Ok(new { message = "News created successfully", id = newId });
+            try
+            {
+                var newId = await _newRepository.CreateNewsAsync(newDto);
+                return Ok(new { message = "News created successfully", id = newId });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Failed to create news", error = ex.Message });
+            }
         }
 
-        // Update an existing news article
+
         [Authorize(Policy = "staff")]
         [HttpPost("update/{id}")]
-        public async Task<IActionResult> UpdateNews(int id, [FromBody] UpdateNewDto newDto)
+        public async Task<IActionResult> UpdateNews(int id, UpdateNewDto newDto)
         {
-            var result = await _newRepository.UpdateNewsAsync(id, newDto);
-            if (!result)
+            try
             {
-                return NotFound(new { message = "News not found" });
-            }
+                var isUpdated = await _newRepository.UpdateNewsAsync(id, newDto);
+                if (!isUpdated)
+                {
+                    return NotFound(new { message = "News not found" });
+                }
 
-            return Ok(new { message = "News updated successfully" });
+                return Ok(new { message = "News updated successfully" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Failed to update news", error = ex.Message });
+            }
         }
+
 
         // Delete a news article
         [Authorize(Policy = "staff")]

@@ -85,5 +85,17 @@ namespace TCViettelFC_API.Controllers
             return StatusCode(500, new { Message = "An error occurred while processing the shipment" });
         }
 
-    }
+		// Endpoint to get orders by Customer Account ID
+		[HttpGet("getordersbyaccount/{customerAccountId}")]
+		public async Task<IActionResult> GetOrdersByCustomerAccountId(int customerAccountId)
+		{
+			var orders = await _orderRepository.GetOrdersByCustomerAccountIdAsync(customerAccountId);
+			if (orders == null || !orders.Any())
+			{
+				return NotFound($"No orders found for customer account ID {customerAccountId}.");
+			}
+			return Ok(orders);
+		}
+
+	}
 }

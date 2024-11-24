@@ -77,5 +77,13 @@ namespace TCViettelFC_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Xóa lỗi : " + ex.Message);
             }
         }
+
+        [HttpPost("updateStatus")]
+        public void updateStatus()
+        {
+            var status = int.Parse(Request.Form["status"]);
+            var id = int.Parse(Request.Form["id"]);
+            _matchRepository.UpdateStatus(status, id);
+        }
     }
 }

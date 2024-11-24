@@ -508,9 +508,6 @@ public partial class Sep490G53Context : DbContext
             entity.HasKey(e => e.PlayerId).HasName("PK__Players__44DA120C0E2EFD39");
 
             entity.Property(e => e.PlayerId).HasColumnName("player_id");
-            entity.Property(e => e.BackShirtImage)
-                .HasMaxLength(255)
-                .HasColumnName("back_shirt_image");
             entity.Property(e => e.Description).HasColumnName("description");
             entity.Property(e => e.FullName)
                 .HasMaxLength(255)
