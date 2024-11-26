@@ -1,336 +1,180 @@
-﻿
-$(document).ready(function () {
-    loadData();
-    if (!$.fn.DataTable.isDataTable('.datatable')) {
-        $('.datatable').DataTable({
-            "paging": true,
-            "pageLength": 10,
-            "ordering": true,
-            "info": true
-        });
+﻿const API_URL = "https://localhost:5000/api/Players";
+
+async function loadPlayers() {
+    try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const players = await response.json();
+        populateTable(players);
+    } catch (error) {
+        console.error("Error loading players:", error);
     }
-});
-function CheckAll(item) {
-    var isChecked = $(item).is(':checked');
-    var checkboxes = $(item).closest('table').find('.form-check-input');
-    checkboxes.prop('checked', isChecked);
-};
-$(document).on("click", "#confirmXoa", function () {
-    debugger
-    $("#idXoa").val("");
-    var id = $(this).data("id");
-    $("#idXoa").val(id);
-    debugger
+}
 
-});
-$(document).on("click", "#btnXoa", function () {
+function populateTable(players) {
+    const tbody = document.getElementById("tbody");
+    tbody.innerHTML = ""; // Clear previous rows
 
-    var id = $("#idXoa").val();
-    debugger
-    var url = "https://localhost:5000/api/Matches/DeleteMatches/" + id;
-    $.ajax({
-        url: url,
-        method: "Delete",
-        success: function (res) {
-            debugger;
-            $("#delete_modal").modal("hide");
-            $(".modal-backdrop").hide();
-            showAlert("xóa thành công ");
-            loadData();
-        },
-        error: function (res) {
-            alert("xóa thất bại ")
-        }
-    });
+    players.forEach(player => {
+        const maxLength = 30; // Độ dài tối đa của mô tả
+        const description = player.description.length > maxLength
+            ? player.description.substring(0, maxLength) + "..."
+            : player.description;
 
-});
-
-function loadData() {
-    $.ajax({
-        url: "https://localhost:5000/api/Matches/GetMatches",
-        method: "GET",
-        dataType: "json",
-        success: function (res) {
-
-            var table = $('.datatable').DataTable();
-
-            table.clear();
-            $.each(res, function (index, item) {
-                var tenSan = (item.isHome === true ? 'SVĐ Mỹ Đình' : item.stadiumName);
-                var logoUrl = item.logoUrl ? item.logoUrl : "/image/imagelogo/icon-image-not-found-free-vector.jpg";
-
-                var matchDate = new Date(item.matchDate);
-                var dateFormatted = matchDate.toLocaleDateString('en-GB'); // Formats as dd/MM/yyyy
-                var timeFormatted = matchDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); // Formats as HH:mm
-
-                var rowHtml = `
-                    <tr>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" data-id="${item.id}">
-                            </div>
-                        </td>
-                        <td>
-                            <h2 class="table-avatar">
-                                <a href="profile.html" class="avatar avatar-sm me-2">
-                                    <img class="avatar-img rounded-circle"
-                                        src="${logoUrl}"
-                                        alt="User Image">
-                                </a>
-                                <a href="profile.html">${item.opponentName}</a>
-                            </h2>
-                        </td>
-                        <td>${tenSan}</td>
-                        <td>${dateFormatted}</td>
-                         <td>${timeFormatted}</td>
-                        <td>${item.isHome === true ? 'Sân nhà' : 'Sân khách'}</td>
-                        <td class="text-center">
-                            <div class="status-toggle d-flex justify-content-center">
-                                <input type="checkbox" data-mid="${item.id}" id="status_${item.id}" class="check" ${item.status === 1 ? 'checked' : ''}>
-                                <label for="status_${item.id}" class="checktoggle">checkbox</label>
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <div class="actions">
-                                <a onclick="modalEditOrCreate(${item.id})" class="btn btn-sm bg-success-light me-2">
-                                    <i class="fe fe-pencil"></i> Sửa
-                                </a>
-                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-id="${item.id}" id="confirmXoa" href="#delete_modal">
-                                    <i class="fe fe-trash"></i> Xóa
-                                </a>
-                            </div>
-                        </td>
-                    </tr>`;
-
-                table.row.add($(rowHtml)); // Thêm từng dòng mới vào bảng
-            });
-
-            table.draw();
-        },
-        error: function (res) {
-            console.error("Error loading data", res);
-        }
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${player.fullName}</td>
+            <td>${player.shirtNumber}</td>
+            <td>${player.position}</td>
+            <td>${description}</td>
+            <td>${new Date(player.joinDate).toLocaleDateString()}</td>
+            <td>${player.OutDate ? new Date(player.OutDate).toLocaleDateString() : "N/A"}</td>
+            <td>${player.status === 1 ? "Hoạt động" : "Ngừng hoạt động"}</td>
+            <td class="text-center">
+                <button class="btn btn-sm bg-success-light me-2" onclick="openModal(${player.playerId})">Sửa</button>
+                <button class="btn btn-sm bg-danger-light" onclick="deletePlayer(${player.playerId})">Xóa</button>
+            </td>
+        `;
+        tbody.appendChild(row);
     });
 }
 
-// Khởi tạo DataTable khi trang tải lần đầu
-$(document).ready(function () {
-    if (!$.fn.DataTable.isDataTable('.datatable')) {
-        $('.datatable').DataTable({
-            "paging": true,
-            "pageLength": 10,
-            "ordering": true,
-            "info": true
-        });
-    }
-});
 
-
-// change Image
-$('.change-photo-btn').on('click', function () {
-    $('#fileInput').click();
-});
-
-$('#fileInput').on('change', function (event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            $('#ImgAvt').attr('src', e.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
-function modalEditOrCreate(id) {
+async function savePlayer() {
+    // Thu thập dữ liệu từ biểu mẫu
+    const fullName = document.getElementById("tenCauThu").value;
+    const shirtNumber = document.getElementById("soAo").value;
+    const position = document.getElementById("viTri").value;
+    const joinDate = document.getElementById("ngayGiaNhap").value;
+    const outDate = document.getElementById("ngayRoiDoi").value;
+    const status = document.getElementById("statusCauThu").checked ? 1 : 0;
+    const description = document.getElementById("description").value;
+    const seasonId = document.getElementById("seasonId").value;
     debugger
-    $('#btnNomal').show();
-    $('#btnLoading').hide();
+    // Tạo URL với query string
+    const url = new URL("https://localhost:5000/api/Players");
+    url.searchParams.append("FullName", fullName);
+    url.searchParams.append("ShirtNumber", shirtNumber);
+    url.searchParams.append("Position", position);
+    url.searchParams.append("JoinDate", joinDate);
+    if (outDate) url.searchParams.append("OutDate", outDate); // Chỉ thêm nếu có giá trị
+    url.searchParams.append("Description", description);
+    url.searchParams.append("Status", status);
+    url.searchParams.append("SeasonId", seasonId);
 
-    $('#idTran').val("");
-    $('#TenDoiThu').val("");
-    $('#tenSan').val("");
-    $('#ngayDa').val("");
-    $('#status').prop('checked', true);
-
-    if (id != 0 && id != undefined) {
-        $("#titleModal").text("Cập nhật trận đấu")
-
-        var url = "https://localhost:5000/api/Matches/GetMatchesById?id=" + id;
-        $.ajax({
-            url: url,
-            method: "get",
-            success: function (res) {
-
-                var logoUrl = "";
-                if (res.logoUrl == null || res.logoUrl == "" || res.logoUrl == undefined) {
-                    logoUrl = "/image/imagelogo/ImageFail.jpg"
-                } else {
-                    logoUrl = res.logoUrl;
-                }
-
-                $('#idTran').val(res.id);
-                $("#ImgAvt").attr("src", logoUrl);
-                $('#TenDoiThu').val(res.opponentName);
-                $('#tenSan').val(res.stadiumName);
-                $("#tenCLB").text(res.opponentName)
-                $('#ngayDa').val(res.matchDate);
-                debugger
-                res.isHome == true ? $('#isHome').val(1) : $('#isHome').val(2);
-                if (res.status == 1) {
-                    $('#status').prop('checked', true);
-                } else {
-                    $('#status').prop('checked', false);
-
-                }
-                $(".modal-backdrop").hide();
-
-                $('#modalEditorCreate').modal("show")
-
-            },
-            error: function (res) {
-                alert("Lỗi ")
-            }
+    try {
+        const response = await fetch(url, {
+            method: "POST"
         });
 
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const data = await response.json();
+        console.log("Player saved successfully:", data);
+        loadPlayers(); // Hàm để tải lại danh sách cầu thủ
+    } catch (error) {
+        console.error("Error saving player:", error);
     }
-    else {
-
-        $("#titleModal").text("Thêm trận đấu")
-
-        $("#ImgAvt").attr("src", "/image/imagelogo/plus.jpg")
-        $("#tenCLB").text("Tên đối thủ")
-        $('#idTran').hide()
-
-        $(".modal-backdrop").remove();
-        $('#modalEditorCreate').modal("show")
-
-    }
-
 }
 
-function EditOrCreate() {
-    $('#btnNomal').hide();
-    $('#btnLoading').show();
-    var id = $('#idTran').val();
-
-    var formData = new FormData();
-    var inputElement = $('#fileInput');
-    var files = inputElement.prop('files');
-    if (files.length > 0) {
-        var file = files[0];
-        formData.append('LogoUrl', file);
-    }
-
-    formData.append('OpponentName', $('#TenDoiThu').val());
-    formData.append('StadiumName', $('#tenSan').val());
-    formData.append('MatchDate', $('#ngayDa').val());
-    if ($('#status').prop('checked')) {
-        formData.append('Status', 1);
-    } else {
-        formData.append('Status', 2);
-    }
-
-    formData.append('IsHome', $('#isHome').val() === '1');
 
 
-    if (id != 0 && id != undefined) {
-        $.ajax({
-            url: 'https://localhost:5000/api/Matches/UpdateMatches/' + id,
-            type: 'Put',
-            data: formData,
-            contentType: false, // Không thiết lập Content-Type
-            processData: false, // Không xử lý dữ liệu
-            success: function (response) {
-                loadData();
-                showAlert("Cập nhật thành công");
-                $("#modalEditorCreate").modal("hide");
-            },
-            error: function (error) {
-                debugger
-            }
+async function deletePlayer(playerId) {
+    // Gán ID cầu thủ vào input ẩn trong modal
+    document.getElementById("idXoaPlayer").value = playerId;
+
+    // Hiển thị modal xác nhận
+    const deleteModal = new bootstrap.Modal(document.getElementById("delete_modal_player"));
+    deleteModal.show();
+}
+//xác nhận xóa 
+document.getElementById("btnXoaPlayer").addEventListener("click", async () => {
+    const playerId = document.getElementById("idXoaPlayer").value;
+
+    try {
+        const response = await fetch(`${API_URL}/${playerId}`, {
+            method: "DELETE",
         });
 
-    } else {
-        $.ajax({
-            url: 'https://localhost:5000/api/Matches/AddMatches',
-            type: 'post',
-            data: formData,
-            contentType: false, // Không thiết lập Content-Type
-            processData: false, // Không xử lý dữ liệu
-            success: function (response) {
-                loadData();
-                showAlert("Thêm mới thành công");
-                $("#modalEditorCreate").modal("hide");
-            },
-            error: function (error) {
-                debugger
+        if (!response.ok) {
+                
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-        });
-    }
+        // Đóng modal sau khi xóa thành công
+        const deleteModal = bootstrap.Modal.getInstance(document.getElementById("delete_modal_player"));
+        deleteModal.hide();
 
+        // Reload danh sách cầu thủ
+        loadPlayers();
+    } catch (error) {
+        console.error("Error deleting player:", error);
+        showError("Không thể xóa cầu thủ.");
+    }
+});
+
+
+function showError(message) {
+    const errorDiv = document.createElement("div");
+    errorDiv.className = "alert alert-danger";
+    errorDiv.innerText = message;
+    document.querySelector(".modal-body").prepend(errorDiv);
+    setTimeout(() => errorDiv.remove(), 3000);
+}
+// Initialize table on page load
+document.addEventListener("DOMContentLoaded", loadPlayers);
+function openModal(playerId) {
+    console.log(`Opening modal for player ID: ${playerId}`);
 }
 
-function validation() {
 
-    var check = true;
-    if ($('#TenDoiThu').val().trim() == "" || $('#TenDoiThu').val() == null) {
-        check = false;
-    }
-    if ($('#isHome').val() === '2') {
-        if ($('#tenSan').val().trim() == "" || $('#tenSan').val() == null) {
-            check = false;
+// mở cái chỗ để nhập thông tin 
+async function openModal(playerId) {
+    const titleModalPlayer = document.getElementById("titleModalPlayer");
+    const modalPlayer = new bootstrap.Modal(document.getElementById("modalEditorCreatePlayer"));
+    // nếu như bấm nút tạo thì nó sẽ gửi về id = 0 =>
+    if (playerId === 0) {
+        //tạo form 
+        // header 
+        titleModalPlayer.textContent = "Thêm cầu thủ mới";
+
+        document.getElementById("idCauThu").value = "";
+        document.getElementById("tenCauThu").value = "";
+        document.getElementById("soAo").value = "";
+        document.getElementById("viTri").value = "";
+        document.getElementById("ngayGiaNhap").value = ""; // Clear input
+        document.getElementById("ngayRoiDoi").value = "";  // Clear input
+        document.getElementById("statusCauThu").checked = false;
+    } else {
+        // nếu như bấm nút sửa thì nó gửi về id của cầu thủ cần sửa =>
+        titleModalPlayer.textContent = "Sửa thông tin cầu thủ";
+        try {
+            const response = await fetch(`${API_URL}/${playerId}`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+            const player = await response.json();
+
+            document.getElementById("idCauThu").value = player.playerId;
+            document.getElementById("tenCauThu").value = player.fullName;
+            document.getElementById("soAo").value = player.shirtNumber;
+            document.getElementById("viTri").value = player.position;
+
+            // Format and assign join date
+            document.getElementById("ngayGiaNhap").value = player.joinDate
+                ? new Date(player.joinDate).toISOString().split("T")[0]
+                : "";
+
+            // Format and assign out date
+            document.getElementById("ngayRoiDoi").value = player.OutDate
+                ? new Date(player.OutDate).toISOString().split("T")[0]
+                : "";
+
+            document.getElementById("statusCauThu").checked = player.status === 1;
+        } catch (error) {
+            console.error("Error loading player details:", error);
+            showError("Không thể tải thông tin cầu thủ.");
+            return;
         }
     }
-    if ($('#ngayDa').val().trim() == "" || $('#ngayDa').val() == null) {
-        check = false;
-    }
-
-
-
+    modalPlayer.show();
 }
-
-
-
-function showAlert(mess) {
-
-    $("#alertMessageSuccess").text(mess);
-    $("#alertSuccess").show();
-    setTimeout(function () {
-        $("#alertSuccess").hide(); // Hide the notification box with fade-out effect
-    }, 3500); // 4 seconds delay
-}
-
-$(document).on("change", ".check", function () {
-
-    var checkbox = $(this);
-    var status = 1;
-    if (checkbox.prop('checked')) {
-        status = 1
-    } else {
-        status = 2;
-    }
-    var id = checkbox.data("mid");
-    var formData = new FormData();
-
-    formData.append('id', id);
-    formData.append('status', status);
-    debugger
-    $.ajax({
-        url: 'https://localhost:5000/api/Matches/updateStatus',
-        type: 'post',
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-            debugger
-            loadData();
-            showAlert("Cập nhật trạng thái thành công");
-        },
-        error: function (error) {
-            debugger
-        }
-    });
-
-});
 
