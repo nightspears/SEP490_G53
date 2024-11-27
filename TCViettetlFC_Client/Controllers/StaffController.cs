@@ -290,20 +290,19 @@ namespace TCViettetlFC_Client.Controllers
             return 1; // Temporary hardcoded value for demonstration
         }
 
-
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> OrderProductManagement()
         {
-            IEnumerable<OrderProductDto> orders;
             try
             {
-                orders = await _orderService.GetAllOrderProductsAsync();
+                var orders = await _orderService.GetAllOrderProductsAsync();
+                return View(orders);
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = "Failed to retrieve orders.";
                 return RedirectToAction("ErrorPage");
             }
-            return View(orders);
         }
 
 

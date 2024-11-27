@@ -18,5 +18,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
 
 
 		Task<bool> InsertPersonalAddressAsync(PersonalAddressCreateDto personalAddressDto);
-	}
+
+        Task<bool> DeletePersonalAddressAsync(int personalAddressId);
+    }
 }

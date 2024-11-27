@@ -400,15 +400,26 @@
 				throw new Error("Customer account not found.");
 			}
 
-			const ordersRes = await fetch(`${apiBase}/Order/getordersbyaccount/${customerId}`);
-			const orders = await ordersRes.json();
-			const ordersTableBody = document.getElementById('ordersTableBody');
-			ordersTableBody.innerHTML = orders && orders.length > 0 ? orders.map(order => createOrderRow(order)).join('') : '<tr><td colspan="4">Chưa có đơn hàng nào.</td></tr>';
-		} catch (error) {
-			console.error("Error fetching data: ", error);
+			 // Fetch orders
+		const ordersRes = await fetch(`${apiBase}/Order/getordersbyaccount/${customerId}`);
+		if (!ordersRes.ok) {
+			throw new Error("Failed to fetch orders.");
+		}
+
+		const orders = await ordersRes.json();
+		const ordersTableBody = document.getElementById('ordersTableBody');
+		if (orders && orders.length > 0) {
+			ordersTableBody.innerHTML = orders.map(order => createOrderRow(order)).join('');
+		} else {
+			ordersTableBody.innerHTML = '<tr><td colspan="4">Chưa có đơn hàng nào.</td></tr>';
+		}
+	} catch (error) {
+		console.error("Error fetching data: ", error);
+		if (error.message !== "Failed to fetch orders.") {
 			alert("Lỗi khi tải thông tin.");
 		}
 	}
+}
 
 	function createOrderRow(order) {
 		const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.totalPrice);
@@ -520,35 +531,55 @@
 		}
 	});
 
-	async function fetchAddress() {
-		try {
-			const addressRes = await fetch(`${apiBase}/Customer/address/${customerId}`);
-			const addressData = await addressRes.json();
+async function fetchAddress() {
+	try {
+		const addressRes = await fetch(`${apiBase}/Customer/address/${customerId}`);
+		const addressData = await addressRes.json();
 
-			if (addressData && addressData.length > 0) {
-				// Display the address data in the address section
-				const addressContainer = document.getElementById('addressEntries');
-				addressContainer.innerHTML = ''; // Clear existing content
+		const addressContainer = document.getElementById('addressEntries');
+		addressContainer.innerHTML = ''; // Clear existing content
 
-				// Loop through the address data and display each address
-				addressData.forEach(address => {
-					addressContainer.innerHTML += `
-						<div class="address-entry">
-							<p><strong>Địa chỉ:</strong> ${address.detailedAddress}</p>
-							<p><strong>Phường/Xã:</strong> ${address.wardName}</p>
-							<p><strong>Quận/Huyện:</strong> ${address.districtName}</p>
-							<p><strong>Tỉnh/Thành phố:</strong> ${address.cityName}</p>
-						</div>
-					`;
-				});
-			} else {
-				throw new Error("Address not found.");
-			}
-		} catch (error) {
-			console.error("Error fetching address:", error);
-			alert("Lỗi khi tải địa chỉ.");
+		if (addressData && addressData.length > 0) {
+			// Loop through the address data and display each address
+			addressData.forEach(address => {
+				addressContainer.innerHTML += `
+					<div class="address-entry">
+						<p><strong>Địa chỉ:</strong> ${address.detailedAddress}</p>
+						<p><strong>Phường/Xã:</strong> ${address.wardName}</p>
+						<p><strong>Quận/Huyện:</strong> ${address.districtName}</p>
+						<p><strong>Tỉnh/Thành phố:</strong> ${address.cityName}</p>
+						<button class="btn btn-danger" onclick="deleteAddress(${address.addressId})">Xóa</button>
+					</div>
+				`;
+			});
+		} else {
+			// No addresses found, display a friendly message
+			addressContainer.innerHTML = '<p>Chưa có địa chỉ nào được lưu.</p>';
 		}
+	} catch (error) {
+		console.error("Error fetching address:", error);
+		alert("Lỗi khi tải địa chỉ.");
 	}
+}
+
+async function deleteAddress(addressId) {
+	try {
+		const response = await fetch(`${apiBase}/Customer/DeletePersonalAddress/${addressId}`, {
+			method: 'DELETE'
+		});
+
+		if (response.ok) {
+			alert("Địa chỉ đã được xóa thành công.");
+			await fetchAddress(); // Refresh the address list
+		} else {
+			const errorData = await response.json();
+			alert(`Lỗi khi xóa địa chỉ: ${errorData.message || 'Unknown error'}`);
+		}
+	} catch (error) {
+		console.error("Error deleting address:", error);
+		alert("Lỗi khi xóa địa chỉ.");
+	}
+}
 
 	const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw';  // Replace this with your actual token or get it dynamically
 
