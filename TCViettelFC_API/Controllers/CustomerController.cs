@@ -114,5 +114,35 @@ namespace TCViettelFC_API.Controllers
             return BadRequest("Failed to add address.");
         }
 
+			return BadRequest("Failed to add address.");
+		}
+
+        [HttpDelete("DeletePersonalAddress/{id}")]
+        public async Task<IActionResult> DeletePersonalAddress(int id)
+        {
+            try
+            {
+                // Call the repository method to delete the personal address
+                var result = await _customerRepository.DeletePersonalAddressAsync(id);
+
+                if (result)
+                {
+                    // Return 200 OK response if deletion is successful
+                    return Ok(new { success = true, message = "Personal address deleted successfully." });
+                }
+                else
+                {
+                    // Return 404 Not Found if the personal address does not exist
+                    return NotFound(new { success = false, message = "Personal address not found." });
+                }
+            }
+            catch (Exception ex)
+            {
+                // Return 500 Internal Server Error for unexpected errors
+                return StatusCode(500, new { success = false, message = "An error occurred while deleting the personal address.", details = ex.Message });
+            }
+        }
+
+
     }
 }
