@@ -21,10 +21,39 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task AddProductAsync(ProductDto pro)
         {
 
+            if (string.IsNullOrEmpty(pro.ProductName))
+            {
+                throw new ArgumentException("The system returns an error, no new Product are added.");
+            }
+            if (pro.ProductName.Length > 255)
+            {
+                throw new ArgumentException("The system returns an error, no new Product are added.");
+            }
+            if (string.IsNullOrEmpty(pro.SeasonId.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Product are added.");
+            }
+            if (string.IsNullOrEmpty(pro.CategoryId.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Product are added.");
+            }
+            if (string.IsNullOrEmpty(pro.Price.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Product are added.");
+            }
+
+            if (string.IsNullOrEmpty(pro.Size))
+            {
+                throw new ArgumentException("The system returns an error, no new Product are added.");
+            }
+
+
+
             using (var dbContextTransaction = _context.Database.BeginTransaction())
             {
                 try
                 {
+                   
                     Product product = new Product();
                     {
                         product.ProductName = pro.ProductName;
@@ -45,7 +74,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                         product.Color = pro.Color;
                         product.Material = pro.Material;
                         product.Status = pro.Status == null ? 2 : pro.Status;
-                        product.CreatedAt = DateTime.Now;
+                        product.CreatedAt =  DateTime.Now  ;
                         product.DiscountId = pro.DiscountId;
                     };
                     await _context.Products.AddAsync(product);
@@ -176,42 +205,51 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
         public async Task<JsonResult> GetProductByIdAsync(int id)
         {
-            var product = (from pro in _context.Products
-                           join cate in _context.ProductCategories on pro.CategoryId equals cate.CategoryId into category
-                           from cate in category.DefaultIfEmpty()
-                           join season in _context.Seasons on pro.SeasonId equals season.SeasonId into seasons
-                           from season in seasons.DefaultIfEmpty()
-                           join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
-                           from dis in discout.DefaultIfEmpty()
-                           where (pro.Status != 0 && cate.Status != 0 && season.Status != 0)
-                           select new ProductResponse
-                           {
-                               ProductName = pro.ProductName,
-                               CategoryId = cate.CategoryId,
-                               DiscountId = dis.DiscountId,
-                               SeasonId = season.SeasonId,
-                               Image = pro.Avatar,
-                               Price = pro.Price,
-                               ProductId = pro.ProductId,
-                               Status = pro.Status,
-                               discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
-                               Size = pro.Size,
-                               Material = pro.Material,
-                               Description = pro.Description
 
-                           }).FirstOrDefault(x => x.ProductId == id && x.Status != 0);
-
-
-            var proFile = _context.ProductFiles.Where(x => x.Status == 1 && x.ProductId == id).ToList();
-
-            var data = new
+            if(id <= 0 )
             {
-                Product = product,
-                PFile = proFile,
+                throw new NullReferenceException("ProductId not valid");
+            }
+            else
+            {
+                var product = (from pro in _context.Products
+                               join cate in _context.ProductCategories on pro.CategoryId equals cate.CategoryId into category
+                               from cate in category.DefaultIfEmpty()
+                               join season in _context.Seasons on pro.SeasonId equals season.SeasonId into seasons
+                               from season in seasons.DefaultIfEmpty()
+                               join dis in _context.Discounts on pro.DiscountId equals dis.DiscountId into discout
+                               from dis in discout.DefaultIfEmpty()
+                               where (pro.Status != 0 && cate.Status != 0 && season.Status != 0)
+                               select new ProductResponse
+                               {
+                                   ProductName = pro.ProductName,
+                                   CategoryId = cate.CategoryId,
+                                   DiscountId = dis.DiscountId,
+                                   SeasonId = season.SeasonId,
+                                   Image = pro.Avatar,
+                                   Price = pro.Price,
+                                   ProductId = pro.ProductId,
+                                   Status = pro.Status,
+                                   discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
+                                   Size = pro.Size,
+                                   Material = pro.Material,
+                                   Description = pro.Description
 
-            };
+                               }).FirstOrDefault(x => x.ProductId == id && x.Status != 0);
 
-            return new JsonResult(data);
+
+                var proFile = _context.ProductFiles.Where(x => x.Status == 1 && x.ProductId == id).ToList();
+
+                var data = new
+                {
+                    Product = product,
+                    PFile = proFile,
+
+                };
+
+                return new JsonResult(data);
+            }
+            
 
         }
 
@@ -272,7 +310,39 @@ namespace TCViettelFC_API.Repositories.Implementations
 
         }
         public async Task UpdateProductAsync(int id, ProductDto pro)
+
         {
+            if (id <= 0)
+            {
+                throw new ArgumentException("ProductId not valid");
+            }
+            if (string.IsNullOrEmpty(pro.ProductName))
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+            if (pro.ProductName.Length > 255)
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+            if (string.IsNullOrEmpty(pro.SeasonId.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+            if (string.IsNullOrEmpty(pro.CategoryId.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+            if (string.IsNullOrEmpty(pro.Price.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+
+            if (string.IsNullOrEmpty(pro.Size))
+            {
+                throw new ArgumentException("The system returns an error, no Product are updated.");
+            }
+
+
             using (var dbContextTransaction = _context.Database.BeginTransaction())
             {
                 try
@@ -287,7 +357,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                     product.ProductName = pro.ProductName ?? product.ProductName;
                     product.SeasonId = pro.SeasonId ?? product.SeasonId;
                     product.CategoryId = pro.CategoryId ?? product.CategoryId;
-                    product.Description = pro.Description ?? product.Description;
+                    product.Description = pro.Description ;
                     if (pro.Avatar != null && pro.Avatar.Length > 0)
                     {
                         ImageUploadResult res = _cloudinary.CloudinaryUpload(pro.Avatar);
@@ -295,10 +365,10 @@ namespace TCViettelFC_API.Repositories.Implementations
                     }
                     product.Price = pro.Price ?? product.Price;
                     product.Size = pro.Size ?? product.Size;
-                    product.Color = pro.Color ?? product.Color;
-                    product.Material = pro.Material ?? product.Material;
-                    product.DiscountId = pro.DiscountId ?? product.DiscountId;
-                    product.Status = pro.Status ?? product.Status;
+                    //product.Color = pro.Color ?? product.Color;
+                    product.Material = pro.Material ;
+                    product.DiscountId = pro.DiscountId ;
+                    product.Status = pro.Status ;
 
                     if (pro.ListExist != null && pro.ListExist.Count > 0)
                     {
