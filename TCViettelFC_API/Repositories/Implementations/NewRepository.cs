@@ -26,7 +26,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             var news  =  _context.News.Include(x=> x.Creator).Include(x => x.NewsCategory).Select(n => new GetNewDto
             {
                 Id = n.Id,
-                CreatorId = n.CreatorId,
+                CreatorId = n.Creator.FullName,
                 NewsCategory = n.NewsCategory.CategoryName,
                 Title = n.Title,
                 Content = n.Content,
@@ -45,7 +45,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                     .Select(n => new GetNewDto
                     {
                         Id = n.Id,
-                        CreatorId = n.CreatorId,
+                        CreatorId = n.Creator.FullName,
                         NewsCategory = n.NewsCategory.CategoryName,
                         Title = n.Title,
                         Content = n.Content,
@@ -68,7 +68,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 .Select(n => new GetNewDto
                 {
                     Id = n.Id,
-                    CreatorId = n.CreatorId,
+                    CreatorId = n.Creator.FullName,
                     NewsCategory = n.NewsCategory.CategoryName,
                     Title = n.Title,
                     Content = n.Content,
@@ -98,6 +98,34 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 try
                 {
+
+                    // Kiểm tra các giá trị null cần thiết
+                    if (newDto.NewsCategoryId == null)
+                    {
+                        throw new InvalidOperationException("NewsCategoryId cannot be null.");
+                    }
+                    if (newDto.CreatorId == null)
+                    {
+                        throw new InvalidOperationException("CreatorId cannot be null.");
+                    }
+                    if (newDto.Status == null)
+                    {
+                        throw new InvalidOperationException("Status cannot be null.");
+                    }
+                    // Kiểm tra giá trị của Title, nếu null hoặc rỗng thì ném ngoại lệ
+                    if (string.IsNullOrWhiteSpace(newDto.Title))
+                    {
+                        throw new InvalidOperationException("Title cannot be null or empty.");
+                    }
+                    // Kiểm tra giá trị của CreatedAt
+                    if (newDto.CreatedAt == null)
+                    {
+                        newDto.CreatedAt = DateTime.UtcNow;
+                    }
+                    if (newDto.CreatedAt == null || newDto.CreatedAt == default(DateTime))
+                    {
+                        throw new InvalidOperationException("CreatedAt cannot be null or invalid format.");
+                    }
                     // Upload ảnh lên Cloudinary nếu có
                     var uploadResult = new ImageUploadResult();
                     if (newDto.Image != null && newDto.Image.Length > 0)
