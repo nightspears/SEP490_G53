@@ -341,8 +341,6 @@ namespace TCViettetlFC_Client.Controllers
 
             return View(shipmentData);
         }
-
-        [HttpPost]
         [HttpPost]
         public ActionResult UploadImage(List<IFormFile> files)
         {
@@ -354,7 +352,7 @@ namespace TCViettetlFC_Client.Controllers
                 {
                     photo.CopyTo(stream);
                 }
-                filepath = "https://localhost:7004/" + "Image/" + photo.FileName;
+                filepath = "https://tcviettelfc.azurewebsites.net/" + "Image/" + photo.FileName;
             }
 
             return Json(new { url = filepath }); ;
