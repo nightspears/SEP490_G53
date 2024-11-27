@@ -2,11 +2,10 @@
 @{
     ViewData["Title"] = "Register";
 }
-<div class="main-wrapper">
 
+<div class="main-wrapper">
     <div class="bg-pattern-style bg-pattern-style-register">
         <div class="content">
-
             <div class="account-content">
                 <div class="account-box">
                     <div class="login-right">
@@ -16,35 +15,44 @@
                         </div>
 
                         <form asp-action="Register" method="post">
-                            <div class="form-group">
-                                <label class="form-control-label">Email</label>
-                                <input id="email" type="email" class="form-control" asp-for="Email">
-                            </div>
-                            <div class="row">
+                            
 
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="form-control-label">Email</label>
+                                    <input id="email" type="email" class="form-control" asp-for="Email">
+                                    <!-- Validation message for Email -->
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Số diện thoại</label>
+                                    <input id="phone" type="text" class="form-control" asp-for="Phone">
+                                    <!-- Validation message for Email -->
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
                                 <div class="form-group">
                                     <label class="form-control-label">Mật khẩu</label>
                                     <input id="password" type="password" class="form-control" asp-for="Password">
+                                    <!-- Validation message for Password -->
+                                    <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
-
-
                                 <div class="form-group">
                                     <label class="form-control-label">Nhập lại mật khẩu</label>
                                     <input id="password-confirm" type="password" class="form-control" asp-for="RePassword">
+                                    <!-- Validation message for RePassword -->
+                                    <span asp-validation-for="RePassword" class="text-danger"></span>
                                 </div>
-
                             </div>
+
                             <button class="btn btn-primary login-btn" type="submit">Tạo tài khoản</button>
+
                             <div class="account-footer text-center mt-3">
                                 Đã có tài khoản? <a class="forgot-link mb-0" asp-action="Login">Đăng nhập</a>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TCViettelFC_API.Models;
+﻿namespace TCViettelFC_API.Models;
 
 public partial class Player
 {
@@ -22,8 +19,9 @@ public partial class Player
     public string? Description { get; set; }
 
     public int? Status { get; set; }
+
     public string? avatar { get; set; }
-   
+
     public virtual ICollection<OrderProductDetail> OrderProductDetails { get; set; } = new List<OrderProductDetail>();
 
     public virtual Season? Season { get; set; }

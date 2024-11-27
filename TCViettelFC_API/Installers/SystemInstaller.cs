@@ -13,7 +13,13 @@ namespace TCViettelFC_API.Installers
             services.AddScoped<ITicketUtilRepository, TicketUtilRepository>();
             services.AddScoped<IAdminDashboardRepository, AdminDashboardRepository>();
             services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
-
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
 
         }

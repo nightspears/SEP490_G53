@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using TCViettelFC_Client.ApiServices;
 using TCViettetlFC_Client.Models;
-using TCViettetlFC_Client.Services;
 
 namespace TCViettetlFC_Client.Controllers
 {
@@ -10,12 +8,12 @@ namespace TCViettetlFC_Client.Controllers
     {
         private readonly HttpClient _httpClient;
 
-        
+
 
         public MatchController(IHttpClientFactory httpClientFactory)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
-           
+
         }
         public async Task<IActionResult> Index()
         {
