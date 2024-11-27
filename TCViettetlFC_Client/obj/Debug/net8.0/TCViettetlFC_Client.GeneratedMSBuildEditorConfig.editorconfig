@@ -34,10 +34,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Admin/Profile.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvZmlsZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Admin/UserManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlck1hbmFnZW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -68,10 +64,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Checkout/Summary.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcU3VtbWFyeS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Customer/Home.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Customer/Login.cshtml]
@@ -112,6 +104,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Feedback/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Forbidden/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9yYmlkZGVuXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Home/Index.cshtml]
@@ -166,16 +162,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Shared/_LayoutAdminReal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZG1pblJlYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Staff/FeedbackManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcRmVlZGJhY2tNYW5hZ2VtZW50LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Staff/Home.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Staff/OrderProductDetail.cshtml]

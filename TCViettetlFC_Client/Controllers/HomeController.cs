@@ -15,6 +15,7 @@ namespace TCViettetlFC_Client.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 

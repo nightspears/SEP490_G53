@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace TCViettelFC_API.Models;
 
@@ -69,31 +68,8 @@ public partial class Sep490G53Context : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-    //    // Kiểm tra nếu chưa được cấu hình
-    //    if (!optionsBuilder.IsConfigured)
-    //    {
-    //        // Sử dụng biến môi trường để chọn provider
-    //        var isTesting = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Testing";
-    //
-    //        if (isTesting)
-    //        {
-    //            optionsBuilder
-    //                .UseInMemoryDatabase("TestDatabase")
-    //                .ConfigureWarnings(warnings => warnings.Ignore(InMemoryEventId.TransactionIgnoredWarning));
-    //        }
-    //        else
-    //        {
-    //            var config = new ConfigurationBuilder()
-    //                .AddJsonFile("appsettings.json")
-    //                .Build();
-    //
-    //            optionsBuilder.UseSqlServer(config.GetConnectionString("value"));
-    //        }
-    //    }
-    //
-    //    base.OnConfiguring(optionsBuilder);
-    }
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=tcp:sep490g53.database.windows.net,1433;Initial Catalog=sep490g53;Persist Security Info=False;User ID=azurehecate;Password=Master12345!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -187,6 +163,7 @@ public partial class Sep490G53Context : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .HasColumnName("email");
+            entity.Property(e => e.FullName).HasColumnName("full_name");
             entity.Property(e => e.Password)
                 .HasMaxLength(256)
                 .HasColumnName("password");

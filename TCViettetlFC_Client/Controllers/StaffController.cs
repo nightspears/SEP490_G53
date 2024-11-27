@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
-using System.Text;
 using TCViettelFC_Client.ApiServices;
 using TCViettetlFC_Client.Models;
 using TCViettetlFC_Client.Services;
@@ -49,25 +48,14 @@ namespace TCViettetlFC_Client.Controllers
             ViewBag.Orders = await GetAllTicketOrders();
             return View();
         }
-        public IActionResult Home()
-        {
-            var token = Request.Cookies["AuthToken"]; // Change this to AuthToken
-            var roleId = Request.Cookies["RoleId"]; // Keep this for role verification
 
-            // Check if token is missing or if roleId doesn't match
-            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(roleId) || roleId != "1")
-            {
-                return RedirectToAction("Login", "User");
-            }
-            return View();
-        }
 
         public async Task<IActionResult> TicketOrderDetail(int id)
         {
-            var token = Request.Cookies["AuthToken"];
-            if (string.IsNullOrEmpty(token))
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
             {
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "Forbidden");
             }
             var sup = await GetOrderedSupp(id);
             var ticket = await GetOrderedTicket(id);
@@ -81,10 +69,10 @@ namespace TCViettetlFC_Client.Controllers
 
         public async Task<IActionResult> StaffManagermentNew()
         {
-            var token = Request.Cookies["AuthToken"];
-            if (string.IsNullOrEmpty(token))
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
             {
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "Forbidden");
             }
 
             var creatorId = Request.Cookies["UserId"];
@@ -255,6 +243,11 @@ namespace TCViettetlFC_Client.Controllers
 
         public async Task<IActionResult> FeedbackManagement()
         {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             var token = Request.Cookies["AuthToken"];
             var feedbacks = await _feedbackService.GetFeedbacksAsync(token);
             return View(feedbacks);
@@ -293,6 +286,11 @@ namespace TCViettetlFC_Client.Controllers
         [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> OrderProductManagement()
         {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             try
             {
                 var orders = await _orderService.GetAllOrderProductsAsync();
@@ -310,7 +308,11 @@ namespace TCViettetlFC_Client.Controllers
         {
 
 
-           
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             var orderDetail = await _orderService.GetOrderDetailsAsync(id /*, token*/);
 
             if (orderDetail == null)
@@ -324,6 +326,11 @@ namespace TCViettetlFC_Client.Controllers
 
         public async Task<IActionResult> OrderShipmentDetail(string trackingCode)
         {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             if (string.IsNullOrEmpty(trackingCode))
             {
                 return BadRequest("Tracking code is required.");

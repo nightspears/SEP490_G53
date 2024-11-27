@@ -61,41 +61,48 @@ namespace TCViettelFC_API.Repositories.Implementations
             if (existedCus != null) return 0;
             return 1;
         }
+        public async Task<bool> SendConfirmationCodeAsync(string email)
+        {
+            var customer = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.Email == email);
+            if (customer != null)
+            {
+                var confirmationCode = GenerateConfirmationCode();
+                var subject = "Mã xác nhận đăng ký tài khoản";
+                var message = $"Mã xác nhận của bạn là: {confirmationCode}";
+                await _emailService.SendEmailAsync(email, subject, message);
+                customer.ConfirmationCode = confirmationCode;
+                customer.CodeExpiry = DateTime.UtcNow.AddMinutes(15);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
 
-        public async Task<int> RegisterAsync(CustomerRegisterRequest cusRegReq)
+        public async Task<string> RegisterAsync(CustomerRegisterRequest cusRegReq)
         {
             try
             {
-                var confirmationCode = GenerateConfirmationCode();
-                var subject = "Confirmation Code";
-                var message = $"Your confirmation code is: {confirmationCode}";
-                await _emailService.SendEmailAsync(cusRegReq.Email, subject, message);
+
 
                 var customer = new CustomersAccount()
                 {
                     Email = cusRegReq.Email,
                     Password = HashPassword(cusRegReq.Password),
+                    FullName = cusRegReq.Fullname,
                     Phone = cusRegReq.Phone,
-                    Status = 0, // Pending
-                    ConfirmationCode = confirmationCode,
-                    CodeExpiry = DateTime.UtcNow.AddMinutes(15) // Code expires in 15 minutes
+                    Status = 0
                 };
 
                 await _context.CustomersAccounts.AddAsync(customer);
                 await _context.SaveChangesAsync();
 
-                var profile = new Profile()
-                {
-                    CustomerId = customer.CustomerId,
-                };
-                await _context.Profiles.AddAsync(profile);
-                await _context.SaveChangesAsync();
 
-                return 1;
+
+                return cusRegReq.Email;
             }
             catch
             {
-                return 0;
+                return "";
             }
         }
 
@@ -148,6 +155,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 CustomerId = customerAccount.CustomerId,
                 Email = customerAccount.Email,
+                FullName = customerAccount.FullName,
                 Phone = customerAccount.Phone,
                 Status = customerAccount.Status
             };
@@ -158,6 +166,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             public int CustomerId { get; set; }
             public string? Email { get; set; }
             public string? Phone { get; set; }
+            public string? FullName { get; set; }
             public int? Status { get; set; }
         }
         public async Task<bool> VerifyConfirmationCodeAsync(string email, string code)
@@ -315,15 +324,15 @@ namespace TCViettelFC_API.Repositories.Implementations
                 // Save changes to the database
                 await _context.SaveChangesAsync();
 
-				return true;
-			}
-			catch (Exception ex)
-			{
-				// Log the error (you can implement a logging mechanism here)
-				Console.WriteLine($"Error inserting personal address: {ex.Message}");
-				return false;
-			}
-		}
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log the error (you can implement a logging mechanism here)
+                Console.WriteLine($"Error inserting personal address: {ex.Message}");
+                return false;
+            }
+        }
         public async Task<bool> DeletePersonalAddressAsync(int personalAddressId)
         {
             try

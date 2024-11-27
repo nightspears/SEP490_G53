@@ -1,9 +1,10 @@
 ﻿@model TCViettetlFC_Client.Models.CustomerNewsModel
 
+@if (Model != null)
+{
+    <div>
+        @Html.Raw(Model.Content)
+    </div>
+    <a href="/News">Back to All News</a>
+}
 
-<h1>@Model.Title</h1>
-
-<div>
-    @Html.Raw(Model.Content)
-</div>
-<a href="/News">Back to All News</a>

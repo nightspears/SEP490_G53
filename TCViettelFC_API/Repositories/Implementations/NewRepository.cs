@@ -1,6 +1,4 @@
 ﻿using CloudinaryDotNet.Actions;
-using CloudinaryDotNet;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Models;
@@ -21,9 +19,9 @@ namespace TCViettelFC_API.Repositories.Implementations
             _contextAccessor = httpContextAccessor;
             _cloudinary = cloudinary;
         }
-        public IQueryable<GetNewDto> GetAllNewsAsQueryable() 
-        { 
-            var news  =  _context.News.Include(x=> x.Creator).Include(x => x.NewsCategory).Select(n => new GetNewDto
+        public IQueryable<GetNewDto> GetAllNewsAsQueryable()
+        {
+            var news = _context.News.Include(x => x.Creator).Include(x => x.NewsCategory).Select(n => new GetNewDto
             {
                 Id = n.Id,
                 CreatorId = n.Creator.FullName,
@@ -40,23 +38,23 @@ namespace TCViettelFC_API.Repositories.Implementations
 
         }
         public async Task<List<GetNewDto>> GetAllNewsAsync()
-            {
-                var news = await _context.News.Include(x => x.Creator).Include(x => x.NewsCategory)
-                    .Select(n => new GetNewDto
-                    {
-                        Id = n.Id,
-                        CreatorId = n.Creator.FullName,
-                        NewsCategory = n.NewsCategory.CategoryName,
-                        Title = n.Title,
-                        Content = n.Content,
-                        Image = n.Image,
-                        CreatedAt = n.CreatedAt,
-                        Status = n.Status
-                    })
-                    .ToListAsync();
+        {
+            var news = await _context.News.Include(x => x.Creator).Include(x => x.NewsCategory)
+                .Select(n => new GetNewDto
+                {
+                    Id = n.Id,
+                    CreatorId = n.Creator.FullName,
+                    NewsCategory = n.NewsCategory.CategoryName,
+                    Title = n.Title,
+                    Content = n.Content,
+                    Image = n.Image,
+                    CreatedAt = n.CreatedAt,
+                    Status = n.Status
+                })
+                .ToListAsync();
 
-                return news;
-            
+            return news;
+
         }
         // Method to get news by ID and convert to GetNewDto
         public async Task<GetNewDto?> GetNewsByIdAsync(int id)
@@ -85,7 +83,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             var news = await _context.News.FirstOrDefaultAsync(n => n.Id == id);
             if (news == null)
             {
-                return false; 
+                return false;
             }
             news.Status = newStatus;
             await _context.SaveChangesAsync();
@@ -219,6 +217,6 @@ namespace TCViettelFC_API.Repositories.Implementations
             return true;
         }
 
-        
+
     }
 }

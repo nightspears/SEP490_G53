@@ -23,7 +23,9 @@ namespace TCViettelFC_API.Controllers
             var checkEmail = await _customerRepository.CheckExistedCustomerEmail(cusRegReq.Email);
             if (checkEmail == 0) return BadRequest("Email đã tồn tại");
             var result = await _customerRepository.RegisterAsync(cusRegReq);
-            if (result == 1) return Ok("Đăng ký thành công");
+            if (result == "") return BadRequest("Đăng ký thất bại");
+            var emailRes = await _customerRepository.SendConfirmationCodeAsync(result);
+            if (emailRes) return Ok("Đăng ký thành công. Vui lòng xác minh email");
             return BadRequest("Đăng ký thất bại");
         }
 

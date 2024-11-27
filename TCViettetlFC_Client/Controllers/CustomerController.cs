@@ -17,14 +17,21 @@ namespace TCViettetlFC_Client.Controllers
         }
         public IActionResult Register()
         {
+            var cookie = Request.Cookies["CustomerId"];
+            if (cookie != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
-        public IActionResult Home()
-        {
-            return View();
-        }
+
         public async Task<IActionResult> Profile()
         {
+            var cookie = Request.Cookies["CustomerId"];
+            if (cookie == null)
+            {
+                return RedirectToAction("Login");
+            }
             SetCustomerInfoInViewData();
 
             return View();
@@ -42,8 +49,14 @@ namespace TCViettetlFC_Client.Controllers
             ViewData["CustomerEmail"] = customerEmail ?? string.Empty;
         }
 
+
         public IActionResult Login()
         {
+            var cookie = Request.Cookies["CustomerId"];
+            if (cookie != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         [HttpPost]
@@ -66,7 +79,7 @@ namespace TCViettetlFC_Client.Controllers
                 Response.Cookies.Append("CustomerId", response.customerId.ToString(), cookieOptions);
                 Response.Cookies.Append("CustomerEmail", response.email.ToString(), cookieOptions);
                 Response.Cookies.Append("CustomerPhone", response.phone?.ToString() ?? string.Empty, cookieOptions);
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -82,11 +95,18 @@ namespace TCViettetlFC_Client.Controllers
             ViewBag.Result = result;
             return RedirectToAction("Profile");
         }
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("CustomerId");
+            Response.Cookies.Delete("CustomerEmail");
+            Response.Cookies.Delete("CustomerPhone");
+            Response.Cookies.Delete("AuthToken");
+            Response.Cookies.Delete("EmailForVerification");
+            return RedirectToAction("Login");
+        }
+
         public IActionResult Verify()
         {
-
-
-
             return View();
         }
 
@@ -116,7 +136,7 @@ namespace TCViettetlFC_Client.Controllers
             }
             if (!ModelState.IsValid) return View();
 
-            var result = await _httpClient.PostAsJsonAsync("customer/register", new { crm.Email, crm.Phone, crm.Password });
+            var result = await _httpClient.PostAsJsonAsync("customer/register", new { crm.Email, crm.FullName, crm.Phone, crm.Password });
             if (result.IsSuccessStatusCode)
             {
                 var cookieOptions = new CookieOptions

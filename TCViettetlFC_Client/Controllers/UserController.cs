@@ -27,6 +27,10 @@ namespace TCViettetlFC_Client.Controllers
             {
                 return RedirectToAction("Home", "Staff");
             }
+            else if (token.Equals("3"))
+            {
+                return RedirectToAction("Home", "Entry");
+            }
             else
             {
                 return View();
@@ -75,7 +79,12 @@ namespace TCViettetlFC_Client.Controllers
                     }
                     else if (token.roleId == 1)
                     {
-                        return RedirectToAction("Home", "Staff");
+                        if (token.status == 0)
+                        {
+                            ViewBag.Error = "Tài khoản này không còn hoạt động";
+                            return View(userLoginViewModel);
+                        }
+                        return RedirectToAction("OrderProductManagement", "Staff");
                     }
                     else if (token.roleId == 3)
                     {

@@ -1,5 +1,6 @@
 ﻿@using static TCViettetlFC_Client.Controllers.AreaController
 @{
+     ViewData["Title"] = "Xem vị trí";
     var matchId = Context.Request.Query["matchId"];
     var customerId = ViewData["CustomerId"];
     var supplementaryItems = ViewData["NewList"] as List<SupplementaryIteamViewModel>;

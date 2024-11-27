@@ -21,7 +21,19 @@
                 <div class=container>
                     <div class=row>
                         <ul>
-                            <li><a href="/Customer/Login">Signup/login</a></li>
+                            @{
+                                var customerId = Context.Request.Cookies["CustomerId"];
+                            }
+                            @if (string.IsNullOrEmpty(customerId))
+                            {
+                                <li><a href="/Customer/Login">Đăng nhập</a></li>
+                                <li><a href="/Customer/Register">Đăng ký</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Customer/Profile">Tài khoản</a></li>
+                                <li><a href="/Customer/Logout">Đăng xuất</a></li>
+                            }
                             <li>
                                 <a href=/public/giohang>
                                     <i class="fa fa-shopping-cart"></i> <span>

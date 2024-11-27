@@ -1,6 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Home";
-    Layout = "_LayoutAdmin";
+    ViewData["Title"] = "Trang chủ";
+    Layout = "_LayoutAdminReal";
     decimal ticketRevenue = decimal.Parse(ViewBag.TotalTicketRevenue);
     decimal productRevenue = decimal.Parse(ViewBag.TotalProductRevenue);
     string aftertrev = ticketRevenue.ToString("#,0", new System.Globalization.CultureInfo("es-ES"));

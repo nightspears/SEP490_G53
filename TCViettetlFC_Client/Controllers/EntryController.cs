@@ -14,11 +14,21 @@ namespace TCViettetlFC_Client.Controllers
         }
         public IActionResult Home()
         {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "3")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             return View();
         }
         [HttpGet("verifyticket/{ticketId}")]
         public async Task<IActionResult> VerifyTicket(int ticketId)
         {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             var token = Request.Cookies["AuthToken"];
 
             using (var httpClient = new HttpClient())
@@ -40,6 +50,11 @@ namespace TCViettetlFC_Client.Controllers
         [HttpGet("verifyitem/{orderId}")]
         public async Task<IActionResult> VerifyItem(int orderId)
         {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             var token = Request.Cookies["AuthToken"];
 
             using (var httpClient = new HttpClient())

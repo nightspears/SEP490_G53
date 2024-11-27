@@ -1,27 +1,22 @@
 ﻿@model EmailVerificationModel
 
 @{
-    Layout = "_LayoutCommon";
+    ViewData["Title"] = "Xác nhận email";
 }
 
-@{
-    ViewData["Title"] = "Email Verification";
-   
-}
+<h2 class="text-center">Xác nhận email</h2>
 
-<h2>Email Verification</h2>
-
-<div class="container">
-    <form asp-action="Verify" method="post">
-       
-        <div class="form-group">
-            <label asp-for="Code" class="control-label">Mã xác nhận</label>
-            <input asp-for="Code" class="form-control" required />
-            <span asp-validation-for="Code" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <input type="submit" value="Xác nhận" class="btn btn-primary" />
-        </div>
-    </form>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; background-color: #f8f9fa;">
+    <div class="container p-4 shadow rounded" style="max-width: 400px; background-color: #ffffff;">
+        <form asp-action="Verify" method="post">
+            <div class="form-group">
+                <label asp-for="Code" class="control-label">Mã xác nhận</label>
+                <input asp-for="Code" class="form-control" required />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Xác nhận" class="btn btn-primary w-100" />
+            </div>
+        </form>
+    </div>
 </div>

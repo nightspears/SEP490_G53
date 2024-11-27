@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Text;
-using TCViettetlFC_Client.Models;
 
 namespace TCViettelFC_Client.Controllers.Admin
 {
@@ -9,6 +6,11 @@ namespace TCViettelFC_Client.Controllers.Admin
     {
         public IActionResult Index()
         {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             return View();
         }
     }

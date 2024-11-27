@@ -28,6 +28,7 @@ namespace TCViettetlFC_Client.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var news = await GetNewsByNewsId(id);
+            if (news == null) return RedirectToAction("Index");
             return View(news);
         }
     }

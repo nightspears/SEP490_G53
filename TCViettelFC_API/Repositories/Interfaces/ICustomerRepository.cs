@@ -5,7 +5,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
     public interface ICustomerRepository
     {
         Task<CustomerLoginResponse> LoginAsync(CustomerLoginDto customerLoginDto);
-        Task<int> RegisterAsync(CustomerRegisterRequest customerRegisterRequest);
+        Task<string> RegisterAsync(CustomerRegisterRequest customerRegisterRequest);
         Task<bool> VerifyConfirmationCodeAsync(string email, string code);
         Task<ProfileDto?> GetCustomerProfile();
         Task<int> UpdateCustomerProfile(ProfileDto profileDto);
@@ -16,10 +16,11 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<List<PersonalAddressDTO>> GetPersonalAddressesByCustomerIdAsync(int customerId);
 
 
-		Task<bool> InsertPersonalAddressAsync(PersonalAddressCreateDto personalAddressDto);
+        Task<bool> InsertPersonalAddressAsync(PersonalAddressCreateDto personalAddressDto);
 
         Task<bool> DeletePersonalAddressAsync(int personalAddressId);
         Task<int> CheckExistedCustomerEmail(string email);
+        Task<bool> SendConfirmationCodeAsync(string email);
 
     }
 }
