@@ -106,7 +106,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowMvcClient", builder =>
     {
-        builder.WithOrigins("https://tcviettelfc.azurewebsites.net")  // MVC app origin
+        builder.WithOrigins("https://localhost:7004")  // MVC app origin
                .AllowCredentials()                   // Allow cookies and credentials
                .AllowAnyHeader()                     // Allow any headers
                .AllowAnyMethod();                    // Allow any HTTP methods (GET, POST, etc.)

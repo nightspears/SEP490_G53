@@ -66,7 +66,7 @@ namespace TCViettetlFC_Client.Controllers
                 Response.Cookies.Append("CustomerId", response.customerId.ToString(), cookieOptions);
                 Response.Cookies.Append("CustomerEmail", response.email.ToString(), cookieOptions);
                 Response.Cookies.Append("CustomerPhone", response.phone?.ToString() ?? string.Empty, cookieOptions);
-                return RedirectToAction("Home");
+                return RedirectToAction("Index","Home");
             }
             else
             {

@@ -114,9 +114,6 @@ namespace TCViettelFC_API.Controllers
             return BadRequest("Failed to add address.");
         }
 
-			return BadRequest("Failed to add address.");
-		}
-
         [HttpDelete("DeletePersonalAddress/{id}")]
         public async Task<IActionResult> DeletePersonalAddress(int id)
         {
