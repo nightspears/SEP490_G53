@@ -17,38 +17,59 @@ namespace TCViettelFC_API.Repositories.Implementations
         private readonly Sep490G53Context _context;
         private readonly IConfiguration _configuration;
         private readonly ICloudinarySetting cloudinary;
-        public MatchRepository(Sep490G53Context context, IConfiguration configuration , ICloudinarySetting _cloudinarySetting)
+        public MatchRepository(Sep490G53Context context, IConfiguration configuration, ICloudinarySetting _cloudinarySetting)
         {
             _context = context;
             _configuration = configuration;
-            cloudinary  = _cloudinarySetting;
+            cloudinary = _cloudinarySetting;
         }
-        public async Task AddMatchesAsync( MatchesAddDto matchDto)
+        public async Task AddMatchesAsync(MatchesAddDto matchDto)
         {
 
-
-            Match Matches = new Match
-            {
-                OpponentName = matchDto.OpponentName,
-                StadiumName = matchDto.StadiumName,
-                Status = matchDto.Status,
-               
-                IsHome = matchDto.IsHome,
-                MatchDate = matchDto.MatchDate,
-            };
-            if (matchDto.LogoUrl != null && matchDto.LogoUrl.Length > 0 )
-            {
-                ImageUploadResult res = cloudinary.CloudinaryUpload(matchDto.LogoUrl);
-                Matches.LogoUrl = res.SecureUrl.ToString();
-            }
-            else
-            {
-                Matches.LogoUrl = "/image/imagelogo/ImageFail.jpg";
-            }
             try
             {
+                Match Matches = new Match
+                {
+                    OpponentName = matchDto.OpponentName,
+                    StadiumName = matchDto.StadiumName,
+                    Status = matchDto.Status,
+
+                    IsHome = matchDto.IsHome,
+                    MatchDate = matchDto.MatchDate,
+                };
+                if (matchDto.LogoUrl != null && matchDto.LogoUrl.Length > 0)
+                {
+                    ImageUploadResult res = cloudinary.CloudinaryUpload(matchDto.LogoUrl);
+                    Matches.LogoUrl = res.SecureUrl.ToString();
+                }
+                else
+                {
+                    Matches.LogoUrl = "/image/imagelogo/ImageFail.jpg";
+                }
+
+
                 await _context.Matches.AddAsync(Matches);
                 await _context.SaveChangesAsync();
+
+                if(Matches.IsHome == true)
+                {
+                    var lstArea = _context.Areas.ToList();
+                    var matchAreaTickets = new List<MatchAreaTicket>();
+
+                    foreach (var area in lstArea)
+                    {
+                        matchAreaTickets.Add(new MatchAreaTicket
+                        {
+                            MatchId = Matches.Id,
+                            AreaId = area.Id,
+                            AvailableSeats = 100
+                        });
+                    }
+
+                    await _context.MatchAreaTickets.AddRangeAsync(matchAreaTickets);
+                    await _context.SaveChangesAsync();
+                }
+               
             }
             catch (Exception ex)
             {
@@ -58,17 +79,16 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task DeleteMatchesAsync(int id)
         {
             var match = await _context.Matches.FindAsync(id);
-            if (match == null|| match.Status == 0) throw new KeyNotFoundException("Match not found");
+            if (match == null || match.Status == 0) throw new KeyNotFoundException("Match not found");
 
             try
             {
                 match.Status = 0;
                 await _context.SaveChangesAsync();
-               
+
             }
             catch (Exception ex)
             {
-                // Log or handle the exception
                 throw new Exception("Delete failed", ex);
             }
         }
@@ -82,7 +102,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<Match> GetMatchesByIdAsync(int id)
         {
             Match matches = new Match();
-            matches =  _context.Matches.FirstOrDefault(x => x.Id == id );   
+            matches = _context.Matches.FirstOrDefault(x => x.Id == id);
             return matches;
         }
 
@@ -107,7 +127,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 matches.LogoUrl = res.SecureUrl.ToString();
             }
             matches.Status = matchDto.Status ?? matches.Status;
-            matches.IsHome = matchDto.IsHome ?? matches.IsHome; 
+            matches.IsHome = matchDto.IsHome ?? matches.IsHome;
 
 
             try
@@ -136,7 +156,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             if (!DateTime.TryParse(checkMatch.NgayDa, out ngayDa))
             {
                 exists = true;
-                mess = "Ngày đá không hợp lệ." ;
+                mess = "Ngày đá không hợp lệ.";
                 type = 3;
             }
 
@@ -153,7 +173,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 var endTime = ngayDa.AddHours(24);
 
                 var matchcheck = _context.Matches.FirstOrDefault(
-                    x =>  x.MatchDate.HasValue
+                    x => x.MatchDate.HasValue
                       && x.MatchDate >= startTime
                       && x.MatchDate <= endTime && x.Status != 0
                 );
@@ -173,9 +193,9 @@ namespace TCViettelFC_API.Repositories.Implementations
                 Type = type,
 
             };
-            
-           return new JsonResult(data);
-            
+
+            return new JsonResult(data);
+
         }
 
     }

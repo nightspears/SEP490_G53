@@ -1,0 +1,164 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+}
+@model List<MatchArea> 
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <div class="page-header invoices-page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <ul class="breadcrumb invoices-breadcrumb">
+                        <li class="breadcrumb-item invoices-breadcrumb-item">
+                            <a href="/staff/seatmanagement">
+                                <i class="fe fe-arrow-left"></i> Quay lại
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card invoices-add-card">
+                    <div class="card-body">
+                        <div class="invoice-item">
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-4">
+                                    <div class="invoice-info">
+                                        <strong class="customer-text">
+                                           Trận đấu
+                                        </strong>
+                                        <p class="invoice-details invoice-details-two">
+                                            <h5>Thể Công - Viettel FC vs Sông Lam Nghệ An</h5>
+                                            <br>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4">
+                                    <div class="invoice-info">
+                                        <strong class="customer-text">
+                                            Địa điểm
+                                           </strong>
+                                        <p class="invoice-details invoice-details-two">
+                                            <h5> Sân vận động Quốc Gia Mỹ Đình</h5>
+                                            <br>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-4">
+                                    <div class="invoice-info">
+                                        <strong class="customer-text">
+                                           Thời gian
+                                        </strong>
+                                        <p class="invoice-details invoice-details-two">
+                                            <h5> 29/11/2024  17h30</h5>
+                                            <br>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="invoice-add-table">
+                            <input type="hidden" id="matchID" value="@ViewBag.Id"/>
+                            <div class="table-responsive">
+                                <table class="table table-center add-table-items">
+                                    <thead>
+                                        <tr>
+                                            <th>Khán đài</th>
+                                            <th>Tầng</th>
+                                            <th>Cửa</th>
+                                            <th>Giá</th>
+                                            <th>Tổng số ghế</th>
+                                            <th class="text-center">Tác vụ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody">
+                                        @{
+                                           if (Model != null && Model.Count() > 0)
+                                            {
+                                                foreach (var m in Model)
+                                                {
+                                                    <tr class="add-row">
+                                                        <td>
+                                                            <input type="text" value="@m.Stands" readonly class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" value="@m.Floor" readonly class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" value="@m.Section" readonly class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text"  value="@m.Price" readonly class="form-control price">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" value="@m.AvailableSeats" class="form-control seat-input" id="seat_@m.AreaId" />
+                                                        </td>
+                                                        <td class="add-remove text-center">
+                                                            <button class="btn btn-rounded btn-outline-primary me-2" data-aid="@m.AreaId" data-mid="@m.MatchId" onclick="updateSeat(@m.AreaId , @m.MatchId)">
+                                                                <i class="fe fe-pencil">cập nhật</i>
+                                                            </button>
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="alertBox" style="position: fixed; top: 20px; right: 20px; background-color: orange; color: white; padding: 10px;margin-top: 90px;margin-right :20px; border-radius: 15px; display: none;">
+    <strong><i class='bx bx-error' style="color:red"></i></strong> <span id="alertMessage"></span>
+</div>
+<div id="alertSuccess" style="position: fixed; top: 20px; right: 20px; background-color: lawngreen; color: black; padding: 10px;margin-top: 90px;margin-right :20px; border-radius: 15px; display: none; z-index:99">
+    <strong><i class="bi bi-check-circle" style="color:lawngreen"></i></strong> <span id="alertMessageSuccess" style="font-family: sans-serif;"></span>
+</div>
+
+<script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
+<script src="~/admin_assets/js/bootstrap.bundle.min.js"></script>
+<script src="~/admin_assets/js/feather.min.js"></script>
+<script src="~/admin_assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/jquery.datatables.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
+<script src="~/admin_assets/js/script.js"></script>
+<script src="~/admin_assets/adminjs/editSeat.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.price').each(function () {
+            let value = $(this).val().trim(); // Lấy giá trị từ input
+            if (value.includes(',')) {
+                value = value.replace(',', '.'); // Thay dấu phẩy bằng dấu chấm
+            }
+            if (!isNaN(value) && value !== '') {
+                const formattedValue = formatCurrency(parseFloat(value)); // Định dạng tiền tệ
+                $(this).val(formattedValue); // Cập nhật lại giá trị
+            }
+        });
+    });
+
+    function formatCurrency(value) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+    }
+
+    $(document).on('input', '.seat-input', function () {
+        let value = $(this).val().replace(/[^0-9]/g, '');
+
+        if (value > 100) value = 100;
+        if (value < 0) value = 0;
+
+        $(this).val(value);
+    });
+</script>
