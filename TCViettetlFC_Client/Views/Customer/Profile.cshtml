@@ -1,4 +1,4 @@
-﻿@model CustomerProfileModel
+﻿@model CustomerChangePassRequest
 @{
 	var customerId = ViewData["CustomerId"] as string; // Cast to string, or use null if it's not a string
 	var customerEmail = ViewData["CustomerEmail"] as string;  // Cast to string
@@ -227,14 +227,14 @@
 
 </style>
 
-<div class="innerbannerwrap">
+@* <div class="innerbannerwrap">
 	<div class="content"></div>
 	<div class="innerbanner">
 		<h2 class="bannerHeadline" style="font-size:65px">Trang <span>khách hàng</span></h2>
 	</div>
-</div>
+</div> *@
 
-<div style="padding-top: 30px;">
+<div style="padding-top: 30px; margin-top:10%;">
 	<h2 style="padding-bottom: 20px" class="heading small">Trang tài khoản <span>Viettel Shop</span></h2>
 </div>
 
@@ -248,7 +248,7 @@
 						<ul id="lstCate">
 							<li onclick="showSection(event, 'accountInfo')" class="active"><a href="javascript:void(0)">Thông tin tài khoản</a></li>
 							<li onclick="showSection(event, 'orders')"><a href="javascript:void(0)">Đơn hàng của bạn</a></li>
-							<li onclick="showSection(event, 'changePassword')"><a href="javascript:void(0)">Đổi mật khẩu</a></li>
+							<li onclick="window.location.href='/customer/changepass';"><a href="/customer/changepass">Đổi mật khẩu</a></li>
 							<li onclick="showSection(event, 'addressBook')"><a href="javascript:void(0)">Sổ địa chỉ</a></li>
 
 					</div>
@@ -296,24 +296,37 @@
 					</table>
 				</div>
 			</div>
-			<!-- Modal or Section to display Order details -->
-			<!-- Modal for displaying order details -->
 			<div id="orderDetailModal" class="modal">
 				<div class="modal-content">
 					<span class="close">&times;</span>
 					<h4>Order Details</h4>
 					<div class="modal-body">
-						<!-- Order details will be injected here dynamically -->
 					</div>
 				</div>
 			</div>
-			<div id="changePassword" class="card section" style="display:none;">
+			@* <div id="changePassword" class="card section" style="display:none;">
 				<div class="card-body">
 					<h4>Đổi mật khẩu</h4>
-					<!-- Change password form goes here -->
-					<p>Chức năng đổi mật khẩu sẽ hiển thị ở đây.</p>
+					<form method="post" asp-action="ChangePass">
+						<div class="form-group">
+							<label class="form-control-label">Mật khẩu cũ</label>
+							<input id="password" type="password" class="form-control" asp-for="OldPass">
+							<span asp-validation-for="OldPass" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label class="form-control-label">Mật khẩu mới</label>
+							<input id="password" type="password" class="form-control" asp-for="NewPassword">
+							<span asp-validation-for="NewPassword" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label class="form-control-label">Nhập lại mật khẩu mới</label>
+							<input id="password-confirm" type="password" class="form-control" asp-for="RePassword">
+							<span asp-validation-for="RePassword" class="text-danger"></span>
+						</div>
+						<button class="btn btn-primary login-btn" type="submit">Đổi mật khẩu</button>
+					</form>
 				</div>
-			</div>
+			</div> *@
 
 			<div id="addressBook" class="card section">
 				<div class="card-body">

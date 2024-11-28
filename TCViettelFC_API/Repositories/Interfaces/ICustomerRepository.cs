@@ -21,6 +21,8 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<bool> DeletePersonalAddressAsync(int personalAddressId);
         Task<int> CheckExistedCustomerEmail(string email);
         Task<bool> SendConfirmationCodeAsync(string email);
+        Task<int> ChangePasswordAsync(ChangePassRequest changePassRequest);
+        Task<int> ResetPasswordAsync(string email, string newPass);
 
     }
 }

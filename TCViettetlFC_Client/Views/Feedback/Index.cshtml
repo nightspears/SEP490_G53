@@ -1,11 +1,28 @@
 ﻿@model AddFeedbackViewModel
 @{
     ViewData["Title"] = "Gửi phản hồi";
+    Layout = "_layoutCommon";
 }
-<div class="wrapper">
-    <h2>Gửi đánh giá cho chúng tôi</h2>
-    <form asp-action="AddFeedback" method="post">
-        <textarea asp-for="Content" cols="30" rows="6" placeholder="Đánh giá trải nghiệm của bạn"></textarea>
-        <button type="submit" class="submit-btn">Gửi</button>
-    </form>
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh; padding: 20px;">
+
+    <div style="width: 100%; max-width: 500px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; text-align: center;">
+        <h4>Gửi phản hồi cho chúng tôi</h4>
+        <form asp-action="AddFeedback" method="post">
+            <div style="margin-bottom: 20px;">
+                <textarea asp-for="Content" cols="30" rows="6" placeholder="Đánh giá trải nghiệm của bạn" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+            </div>
+            <div>
+                <button type="submit" class="submit-btn" style="padding: 10px 20px; border: none; border-radius: 5px; background-color: #007bff; color: white; cursor: pointer;">
+                    Gửi
+                </button>
+            </div>
+        </form>
+
+        @if (ViewBag.Notify != null)
+        {
+            <h3 style="color:red; margin-top: 20px;">@ViewBag.Notify</h3>
+        }
+    </div>
+
 </div>

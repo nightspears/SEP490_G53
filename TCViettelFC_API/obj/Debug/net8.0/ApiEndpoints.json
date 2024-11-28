@@ -573,6 +573,22 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "ChangePassWordAsync",
+    "RelativePath": "api/Customer/changepass",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ch",
+        "Type": "TCViettelFC_API.Dtos.ChangePassRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
     "Method": "DeletePersonalAddress",
     "RelativePath": "api/Customer/DeletePersonalAddress/{id}",
     "HttpMethod": "DELETE",
@@ -656,6 +672,38 @@
       {
         "Name": "cusRegReq",
         "Type": "TCViettelFC_API.Dtos.CustomerRegisterRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "ResetPasswordAsync",
+    "RelativePath": "api/Customer/resetpassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "TCViettelFC_API.Dtos.ResetPassRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "SendConfirmationCodeAsync",
+    "RelativePath": "api/Customer/sendcode/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

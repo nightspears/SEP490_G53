@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Repositories.Interfaces;
 
@@ -16,7 +17,35 @@ namespace TCViettelFC_API.Controllers
             _customerRepository = customerRepository;
             _ticketUtilRepository = ticketUtilRepository;
         }
-
+        [Authorize(Policy = "customer")]
+        [HttpPost("changepass")]
+        public async Task<IActionResult> ChangePassWordAsync([FromBody] ChangePassRequest ch)
+        {
+            var result = await _customerRepository.ChangePasswordAsync(ch);
+            if (result == -1) return Conflict(new { Message = "Mật khẩu cũ không chính xác" });
+            if (result == -2) return Conflict(new { Message = "Mật khẩu mới không được trùng với mật khẩu cũ" });
+            if (result == 1) return Ok(new { Message = "Đổi mật khẩu thành công" });
+            return BadRequest(new { Message = "Đổi mật khẩu thất bại" });
+        }
+        [HttpGet("sendcode/{email}")]
+        public async Task<IActionResult> SendConfirmationCodeAsync(string email)
+        {
+            var res = await _customerRepository.CheckExistedCustomerEmail(email);
+            if (res == 1) return BadRequest("Email khong ton tai");
+            var emailRes = await _customerRepository.SendConfirmationCodeAsync(email);
+            if (emailRes) return Ok("Gui ma thanh cong");
+            return BadRequest("Gui ma that bai");
+        }
+        [HttpPost("resetpassword")]
+        public async Task<IActionResult> ResetPasswordAsync([FromBody] ResetPassRequest request)
+        {
+            var res = await _customerRepository.CheckExistedCustomerEmail(request.Email);
+            if (res == 1) return BadRequest("Email không tồn tại");
+            var resu = await _customerRepository.ResetPasswordAsync(request.Email, request.NewPass);
+            if (resu == -1) return Conflict("Mật khẩu mới không được trùng với mật khẩu cũ");
+            if (resu == 1) return Ok("Đặt lại mật khẩu thành công");
+            return BadRequest("Đặt lại mật khẩu thất bại");
+        }
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] CustomerRegisterRequest cusRegReq)
         {

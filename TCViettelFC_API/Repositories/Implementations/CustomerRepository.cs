@@ -61,13 +61,30 @@ namespace TCViettelFC_API.Repositories.Implementations
             if (existedCus != null) return 0;
             return 1;
         }
+        public async Task<int> ResetPasswordAsync(string email, string newPass)
+        {
+            var cus = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.Email == email);
+            if (cus == null) return 0;
+            if (VerifyPassword(newPass, cus.Password)) return -1;
+
+            try
+            {
+                cus.Password = HashPassword(newPass);
+                await _context.SaveChangesAsync();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         public async Task<bool> SendConfirmationCodeAsync(string email)
         {
             var customer = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.Email == email);
             if (customer != null)
             {
                 var confirmationCode = GenerateConfirmationCode();
-                var subject = "Mã xác nhận đăng ký tài khoản";
+                var subject = "Mã xác nhận tài khoản";
                 var message = $"Mã xác nhận của bạn là: {confirmationCode}";
                 await _emailService.SendEmailAsync(email, subject, message);
                 customer.ConfirmationCode = confirmationCode;
@@ -106,6 +123,27 @@ namespace TCViettelFC_API.Repositories.Implementations
             }
         }
 
+        public async Task<int> ChangePasswordAsync(ChangePassRequest changePassRequest)
+        {
+            if (changePassRequest == null) return 0;
+            var cusId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "CustomerId")?.Value;
+            if (cusId == null) return 0;
+            var cus = await _context.CustomersAccounts.FindAsync(int.Parse(cusId));
+            if (cus == null) return 0;
+            if (!VerifyPassword(changePassRequest.OldPass, cus.Password)) return -1;
+            if (VerifyPassword(changePassRequest.NewPass, cus.Password)) return -2;
+
+            try
+            {
+                cus.Password = HashPassword(changePassRequest.NewPass);
+                await _context.SaveChangesAsync();
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         public async Task<int> PostFeedback(FeedbackPostDto feedbackDto)
         {
             var customerId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "CustomerId")?.Value;
