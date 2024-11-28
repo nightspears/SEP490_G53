@@ -3,148 +3,44 @@
   "WorkspaceRootPath": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\admin\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\admin\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\teammanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\teammanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\team\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\team\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\staff\\ticketorders.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\ticketorders.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\staff\\ticketorderdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\ticketorderdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\staff\\staffmanagermentnew.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\staffmanagermentnew.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\staff\\ordershipmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\ordershipmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\staff\\orderproductmanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\orderproductmanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\staff\\orderproductdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\orderproductdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\staff\\feedbackmanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\feedbackmanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\season\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\season\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\public\\sanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\public\\sanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\public\\giohang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\public\\giohang.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\public\\chitietsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\public\\chitietsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\productmanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\productmanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\news\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\news\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\matchmanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\matchmanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\match\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\match\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\feedback\\feedbackconfirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\feedback\\feedbackconfirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\entry\\verifyticket.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\entry\\verifyticket.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\entry\\verifyitem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\entry\\verifyitem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\entry\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\entry\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\discount\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\discount\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\verify.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\verify.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\customerforgotpassmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\customerforgotpassmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\customerregistermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\customerregistermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\forgot.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\forgot.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\changepass.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\changepass.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\category\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\category\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\area\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\area\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\adminnews\\approvenew.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\adminnews\\approvenew.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\admin\\usermanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\admin\\usermanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\admin\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\admin\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\customersendmailmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\customersendmailmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -154,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 112,
+          "SelectedChildIndex": 84,
           "Children": [
             {
               "$type": "Bookmark",
@@ -483,469 +379,131 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\TeamManagement\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\TeamManagement\\Index.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\TeamManagement\\Index.cshtml",
-              "RelativeToolTip": "Views\\TeamManagement\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:03:25.475Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Team\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Team\\Index.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Team\\Index.cshtml",
-              "RelativeToolTip": "Views\\Team\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:03:21.881Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TicketOrders.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\TicketOrders.cshtml",
-              "RelativeDocumentMoniker": "Views\\Staff\\TicketOrders.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\TicketOrders.cshtml",
-              "RelativeToolTip": "Views\\Staff\\TicketOrders.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:03:13.787Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TicketOrderDetail.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\TicketOrderDetail.cshtml",
-              "RelativeDocumentMoniker": "Views\\Staff\\TicketOrderDetail.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\TicketOrderDetail.cshtml",
-              "RelativeToolTip": "Views\\Staff\\TicketOrderDetail.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:03:05.735Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "StaffManagermentNew.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\StaffManagermentNew.cshtml",
-              "RelativeDocumentMoniker": "Views\\Staff\\StaffManagermentNew.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\StaffManagermentNew.cshtml",
-              "RelativeToolTip": "Views\\Staff\\StaffManagermentNew.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:02:55.677Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "OrderShipmentDetail.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderShipmentDetail.cshtml",
-              "RelativeDocumentMoniker": "Views\\Staff\\OrderShipmentDetail.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderShipmentDetail.cshtml",
-              "RelativeToolTip": "Views\\Staff\\OrderShipmentDetail.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:02:52.605Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "OrderProductManagement.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderProductManagement.cshtml",
-              "RelativeDocumentMoniker": "Views\\Staff\\OrderProductManagement.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderProductManagement.cshtml",
-              "RelativeToolTip": "Views\\Staff\\OrderProductManagement.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:02:40.41Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "OrderProductDetail.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderProductDetail.cshtml",
-              "RelativeDocumentMoniker": "Views\\Staff\\OrderProductDetail.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\OrderProductDetail.cshtml",
-              "RelativeToolTip": "Views\\Staff\\OrderProductDetail.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:02:26.958Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "FeedbackManagement.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\FeedbackManagement.cshtml",
-              "RelativeDocumentMoniker": "Views\\Staff\\FeedbackManagement.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\FeedbackManagement.cshtml",
-              "RelativeToolTip": "Views\\Staff\\FeedbackManagement.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:02:18.756Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Season\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Season\\Index.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Season\\Index.cshtml",
-              "RelativeToolTip": "Views\\Season\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:02:04.641Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "SanPham.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Public\\SanPham.cshtml",
-              "RelativeDocumentMoniker": "Views\\Public\\SanPham.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Public\\SanPham.cshtml",
-              "RelativeToolTip": "Views\\Public\\SanPham.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:01:56.471Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "GioHang.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Public\\GioHang.cshtml",
-              "RelativeDocumentMoniker": "Views\\Public\\GioHang.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Public\\GioHang.cshtml",
-              "RelativeToolTip": "Views\\Public\\GioHang.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:01:47.359Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ChiTietSanPham.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Public\\ChiTietSanPham.cshtml",
-              "RelativeDocumentMoniker": "Views\\Public\\ChiTietSanPham.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Public\\ChiTietSanPham.cshtml",
-              "RelativeToolTip": "Views\\Public\\ChiTietSanPham.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:01:33.515Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\ProductManagement\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\ProductManagement\\Index.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\ProductManagement\\Index.cshtml",
-              "RelativeToolTip": "Views\\ProductManagement\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:01:24.334Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\News\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\News\\Index.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\News\\Index.cshtml",
-              "RelativeToolTip": "Views\\News\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:01:20.598Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\MatchManagement\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\MatchManagement\\Index.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\MatchManagement\\Index.cshtml",
-              "RelativeToolTip": "Views\\MatchManagement\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:01:07.029Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Match\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Match\\Index.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Match\\Index.cshtml",
-              "RelativeToolTip": "Views\\Match\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:00:59.606Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "FeedbackConfirmation.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Feedback\\FeedbackConfirmation.cshtml",
-              "RelativeDocumentMoniker": "Views\\Feedback\\FeedbackConfirmation.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Feedback\\FeedbackConfirmation.cshtml",
-              "RelativeToolTip": "Views\\Feedback\\FeedbackConfirmation.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:00:43.046Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "VerifyTicket.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\VerifyTicket.cshtml",
-              "RelativeDocumentMoniker": "Views\\Entry\\VerifyTicket.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\VerifyTicket.cshtml",
-              "RelativeToolTip": "Views\\Entry\\VerifyTicket.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:00:39.822Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "VerifyItem.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\VerifyItem.cshtml",
-              "RelativeDocumentMoniker": "Views\\Entry\\VerifyItem.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\VerifyItem.cshtml",
-              "RelativeToolTip": "Views\\Entry\\VerifyItem.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:00:38.808Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "Home.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\Home.cshtml",
-              "RelativeDocumentMoniker": "Views\\Entry\\Home.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\Home.cshtml",
-              "RelativeToolTip": "Views\\Entry\\Home.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:00:37.11Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Discount\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Discount\\Index.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Discount\\Index.cshtml",
-              "RelativeToolTip": "Views\\Discount\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:00:28.312Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
               "Title": "Verify.cshtml",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Verify.cshtml",
               "RelativeDocumentMoniker": "Views\\Customer\\Verify.cshtml",
               "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Verify.cshtml",
               "RelativeToolTip": "Views\\Customer\\Verify.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACcAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:00:20.177Z",
+              "WhenOpened": "2024-11-28T10:29:58.595Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 4,
               "Title": "Register.cshtml",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Register.cshtml",
               "RelativeDocumentMoniker": "Views\\Customer\\Register.cshtml",
               "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Register.cshtml",
               "RelativeToolTip": "Views\\Customer\\Register.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADwAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:00:14.243Z",
+              "WhenOpened": "2024-11-28T10:15:21.935Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "Profile.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Profile.cshtml",
-              "RelativeDocumentMoniker": "Views\\Customer\\Profile.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Profile.cshtml",
-              "RelativeToolTip": "Views\\Customer\\Profile.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T14:00:02.467Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Login.cshtml",
-              "RelativeDocumentMoniker": "Views\\Customer\\Login.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Login.cshtml",
-              "RelativeToolTip": "Views\\Customer\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T13:59:56.769Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Category\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Category\\Index.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Category\\Index.cshtml",
-              "RelativeToolTip": "Views\\Category\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T13:59:36.617Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Area\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Area\\Index.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Area\\Index.cshtml",
-              "RelativeToolTip": "Views\\Area\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T13:59:20.918Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "ApproveNew.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\AdminNews\\ApproveNew.cshtml",
-              "RelativeDocumentMoniker": "Views\\AdminNews\\ApproveNew.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\AdminNews\\ApproveNew.cshtml",
-              "RelativeToolTip": "Views\\AdminNews\\ApproveNew.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T13:59:04.955Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "UserManagement.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\UserManagement.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\UserManagement.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\UserManagement.cshtml",
-              "RelativeToolTip": "Views\\Admin\\UserManagement.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T13:58:52.239Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "Home.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\Home.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\Home.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\Home.cshtml",
-              "RelativeToolTip": "Views\\Admin\\Home.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T13:58:43.215Z",
+              "DocumentIndex": 3,
+              "Title": "CustomerForgotPassModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerForgotPassModel.cs",
+              "RelativeDocumentMoniker": "Models\\CustomerForgotPassModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerForgotPassModel.cs",
+              "RelativeToolTip": "Models\\CustomerForgotPassModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T10:14:45.916Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ChangePassword.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\ChangePassword.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\ChangePassword.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\ChangePassword.cshtml",
-              "RelativeToolTip": "Views\\Admin\\ChangePassword.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA6AAAAAAAAAA==",
+              "Title": "ResetPassword.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\ResetPassword.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\ResetPassword.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\ResetPassword.cshtml",
+              "RelativeToolTip": "Views\\Customer\\ResetPassword.cshtml",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAxwBgAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T13:57:23.517Z",
+              "WhenOpened": "2024-11-28T10:05:25.848Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "Controllers\\AdminController.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAswEQAAAANAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "CustomerRegisterModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerRegisterModel.cs",
+              "RelativeDocumentMoniker": "Models\\CustomerRegisterModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerRegisterModel.cs",
+              "RelativeToolTip": "Models\\CustomerRegisterModel.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwBcAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-27T13:55:07.545Z",
+              "WhenOpened": "2024-11-28T08:01:15.18Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "_LayoutAdmin.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_LayoutAdmin.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_LayoutAdmin.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_LayoutAdmin.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_LayoutAdmin.cshtml",
-              "ViewState": "AgIAADkAAAAAAAAAAAAswE0AAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T13:45:54.004Z",
+              "DocumentIndex": 9,
+              "Title": "CustomerSendMailModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerSendMailModel.cs",
+              "RelativeDocumentMoniker": "Models\\CustomerSendMailModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerSendMailModel.cs",
+              "RelativeToolTip": "Models\\CustomerSendMailModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T08:00:57.428Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAkAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\Login.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Login.cshtml",
+              "RelativeToolTip": "Views\\Customer\\Login.cshtml",
+              "ViewState": "AgIAAB0AAAAAAAAAAAA0wDkAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T13:38:11.324Z",
+              "WhenOpened": "2024-11-28T07:37:15.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ChangePass.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\ChangePass.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\ChangePass.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\ChangePass.cshtml",
+              "RelativeToolTip": "Views\\Customer\\ChangePass.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-28T07:37:06.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Forgot.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Forgot.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\Forgot.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Forgot.cshtml",
+              "RelativeToolTip": "Views\\Customer\\Forgot.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-28T07:33:56.859Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\Login.cshtml",
-              "RelativeDocumentMoniker": "Views\\User\\Login.cshtml",
-              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\Login.cshtml",
-              "RelativeToolTip": "Views\\User\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-27T13:38:06.977Z",
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "Controllers\\CustomerController.cs",
+              "ViewState": "AgIAAK0AAAAAAAAAAAAuwLQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T07:33:19.771Z",
               "EditorCaption": ""
             }
           ]

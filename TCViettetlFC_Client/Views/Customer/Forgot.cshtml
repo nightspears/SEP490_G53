@@ -1,6 +1,6 @@
-﻿@model EmailVerificationModel
+﻿@model CustomerSendMailModel
 @{
-    ViewData["Title"] = "Xác nhận email";
+    ViewData["Title"] = "Quên mật khẩu";
 }
 <div class="main-wrapper">
     <style>
@@ -22,20 +22,21 @@
                 <div class="account-box" style="opacity:97%;background-color:#ffb8b8d1">
                     <div class="login-right">
                         <div class="login-header">
-                            <a href="/"><h3><span>ViettelFC</span></h3></a>
+                            <a href="/"><h3>Quên mật khẩu <span>ViettelFC</span></h3></a>
                             <p class="text-muted">Đặt lại mật khẩu của bạn</p>
                         </div>
-                        <form action="Verify" method="post">
+                        <form action="SendForgotMail" method="post">
                             <div class="form-group">
-                                <label asp-for="Code" class="control-label">Mã xác nhận</label>
-                                <input asp-for="Code" class="form-control" required />
-                                <span asp-validation-for="Code" class="text-danger"></span>
+                                <label class="form-control-label">Email</label>
+                                <input type="email" class="form-control" asp-for="Email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
-                            <button class="btn btn-primary login-btn" type="submit">Xác nhận</button>
+                            
+                            <button class="btn btn-primary login-btn" type="submit">Gửi mã xác nhận</button>
                             @if (ViewBag.Error != null)
                             {
                                 <h4 style="color:red;">@ViewBag.Error</h4>
-                            }
+                            }                            
                         </form>
                     </div>
                 </div>

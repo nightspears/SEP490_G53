@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using TCViettelFC_Client.ApiServices;
 using TCViettetlFC_Client.Models;
@@ -23,6 +24,37 @@ namespace TCViettetlFC_Client.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+
+        public IActionResult Forgot()
+        {
+            var cookie = Request.Cookies["CustomerId"];
+            if (cookie != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+        public async Task<IActionResult> SendForgotMail(CustomerSendMailModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            var result = await _httpClient.GetAsync($"customer/sendcode/{model.Email}");
+            if (result.IsSuccessStatusCode)
+            {
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Lax,
+                    Expires = DateTime.UtcNow.AddHours(1)
+                };
+                Response.Cookies.Append("EmailForgot", model.Email, cookieOptions);
+                return RedirectToAction("Verify");
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         public async Task<IActionResult> Profile()
@@ -59,6 +91,59 @@ namespace TCViettetlFC_Client.Controllers
             }
             return View();
         }
+        [HttpGet]
+        public IActionResult ChangePass()
+        {
+            var cookie = Request.Cookies["CustomerId"];
+            if (cookie == null)
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ChangePass(CustomerChangePassRequest ch)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(ch);
+            }
+            var cookie = Request.Cookies["AuthToken"];
+            if (cookie == null)
+            {
+                return RedirectToAction("Login");
+            }
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", cookie);
+            var result = await _httpClient.PostAsJsonAsync("customer/changepass", new { OldPass = ch.OldPass, NewPass = ch.NewPassword });
+
+            var msg = await JsonSerializer.DeserializeAsync<CustomerChangePassResponse>(await result.Content.ReadAsStreamAsync());
+            if (result.IsSuccessStatusCode)
+            {
+                ViewBag.Notify = msg.message;
+                return View(ch);
+            }
+            else
+            {
+                if (msg.message.Contains("cũ"))
+                {
+                    ModelState.AddModelError("OldPass", msg.message);
+                    return View(ch);
+                }
+                else if (msg.message.Contains("mới"))
+                {
+                    ModelState.AddModelError("NewPassword", msg.message);
+                    return View(ch);
+                }
+                else
+                {
+                    TempData["ChNotify"] = msg.message;
+                    return View(ch);
+                }
+
+            }
+
+
+        }
         [HttpPost]
         public async Task<IActionResult> Login(CustomerLoginModel clm)
         {
@@ -71,7 +156,7 @@ namespace TCViettetlFC_Client.Controllers
                 {
                     HttpOnly = true,
                     Secure = true,
-                    SameSite = SameSiteMode.Lax,
+                    SameSite = SameSiteMode.None,
                     Expires = DateTime.UtcNow.AddHours(1)
                 };
 
@@ -85,6 +170,33 @@ namespace TCViettetlFC_Client.Controllers
             {
                 ViewBag.Error = "Email hoặc mật khẩu sai!";
                 return View(clm);
+            }
+        }
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(CustomerForgotPassModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            var email1 = Request.Cookies["EmailForgot"];
+            if (email1 != null)
+            {
+                var result = await _httpClient.PostAsJsonAsync("customer/resetpassword", new { Email = email1, NewPass = model.Password });
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ModelState.AddModelError("Code", "Mã xác nhận không chính xác, vui lòng thử lại");
+                    return View(model);
+                }
+            }
+            else
+            {
+                return View(model);
             }
         }
         [HttpPost]
@@ -113,17 +225,45 @@ namespace TCViettetlFC_Client.Controllers
         [HttpPost]
         public async Task<IActionResult> Verify(EmailVerificationModel evd)
         {
+            if (!ModelState.IsValid) return View();
             var email = Request.Cookies["EmailForVerification"];
-            var result = await _httpClient.PostAsJsonAsync("customer/verify", new { Email = email, evd.Code });
-            if (result.IsSuccessStatusCode)
+            if (email != null)
             {
-                return RedirectToAction("Login");
+                var result = await _httpClient.PostAsJsonAsync("customer/verify", new { Email = email, evd.Code });
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ModelState.AddModelError("Code", "Mã xác nhận không chính xác, vui lòng thử lại");
+                    return View();
+                }
             }
             else
             {
-                ModelState.AddModelError("Code", "Mã xác nhận không chính xác, vui lòng thử lại");
+                var email1 = Request.Cookies["EmailForgot"];
+                if (email1 != null)
+                {
+                    var result = await _httpClient.PostAsJsonAsync("customer/verify", new { Email = email1, evd.Code });
+                    if (result.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("ResetPassword");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Code", "Mã xác nhận không chính xác, vui lòng thử lại");
+                        return View();
+                    }
+                }
+                else
+                {
+                    return View();
+                }
+
             }
-            return View();
+
+
         }
         [HttpPost]
         public async Task<IActionResult> Register(CustomerRegisterModel crm)

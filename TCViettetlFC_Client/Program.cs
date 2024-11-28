@@ -12,46 +12,46 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient("ApiClient", (serviceProvider, options) =>
 {
-    options.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
-    var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
-    var token = httpContextAccessor.HttpContext?.Request.Cookies["AuthToken"];
+	options.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
+	var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+	var token = httpContextAccessor.HttpContext?.Request.Cookies["AuthToken"];
 
-    if (!string.IsNullOrEmpty(token))
-    {
-        options.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-    }
+	if (!string.IsNullOrEmpty(token))
+	{
+		options.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+	}
 });
 // Register UserService with the configured HttpClient
 builder.Services.AddHttpClient<UserService>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
-    client.DefaultRequestHeaders.Add("Accept", "application/json");
+	client.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
+	client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
 builder.Services.AddHttpClient<GoShipService>();
 builder.Services.AddSingleton<HtmlEncoder>(
-    HtmlEncoder.Create(allowedRanges: new[] {
-        UnicodeRanges.All
-    }));
+	HtmlEncoder.Create(allowedRanges: new[] {
+		UnicodeRanges.All
+	}));
 
 // Register UserService with the configured HttpClient
 builder.Services.AddHttpClient<FeedbackService>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
-    client.DefaultRequestHeaders.Add("Accept", "application/json");
+	client.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
+	client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
 builder.Services.AddHttpClient<CheckOutService>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
-    client.DefaultRequestHeaders.Add("Accept", "application/json");
+	client.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
+	client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
 
 builder.Services.AddHttpClient<OrderService>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
-    client.DefaultRequestHeaders.Add("Accept", "application/json");
+	client.BaseAddress = new Uri(builder.Configuration["ApiConfig:BaseAddress"]);
+	client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IApiHelper, ApiHelper>();
@@ -61,9 +61,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+	app.UseExceptionHandler("/Home/Error");
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -74,7 +74,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+	name: "default",
+	pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
