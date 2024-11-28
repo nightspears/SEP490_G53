@@ -1,5 +1,6 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -124,6 +125,57 @@ namespace TCViettelFC_API.Repositories.Implementations
             var match = _context.Matches.Find(id);
             match.Status = status;
             _context.SaveChanges();
+        }
+
+        public JsonResult CheckExist(CheckMatch checkMatch)
+        {
+            var mess = "";
+            var exists = false;
+            var type = 0;
+            DateTime ngayDa;
+            if (!DateTime.TryParse(checkMatch.NgayDa, out ngayDa))
+            {
+                exists = true;
+                mess = "Ngày đá không hợp lệ." ;
+                type = 3;
+            }
+
+            var match = _context.Matches.FirstOrDefault(x => x.StadiumName.Equals(checkMatch.TenSan) && x.OpponentName.Equals(checkMatch.TenDoiThu) && (x.MatchDate == ngayDa) && x.Status != 0);
+            if (match != null)
+            {
+                exists = true;
+                mess = "Trận đấu này đã tồn tại";
+                type = 1;
+            }
+            else
+            {
+                var startTime = ngayDa.AddHours(-24);
+                var endTime = ngayDa.AddHours(24);
+
+                var matchcheck = _context.Matches.FirstOrDefault(
+                    x =>  x.MatchDate.HasValue
+                      && x.MatchDate >= startTime
+                      && x.MatchDate <= endTime && x.Status != 0
+                );
+
+                if (matchcheck != null)
+                {
+                    exists = true;
+                    mess = "Khung giờ này đã có trận đấu khác";
+                    type = 2;
+                }
+            }
+
+            var data = new
+            {
+                mess = mess,
+                exists = exists,
+                Type = type,
+
+            };
+            
+           return new JsonResult(data);
+            
         }
 
     }

@@ -79,9 +79,7 @@ function loadData() {
                                 <a onclick="modalEditOrCreate(${item.categoryId})" class="btn btn-sm bg-success-light me-2">
                                     <i class="fe fe-pencil"></i> Sửa
                                 </a>
-                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal" data-id="${item.categoryId}" id="confirmXoa" href="#delete_modal">
-                                    <i class="fe fe-trash"></i> Xóa
-                                </a>
+                              
                             </div>
                         </td>
                     </tr>`;
