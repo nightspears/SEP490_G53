@@ -9,29 +9,16 @@
 }
 
 
-
-
-
-
-
         <div class="page-wrapper">
             <div class="content container-fluid">
 
                 <div class="page-header">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h3 class="page-title">Transactions</h3>
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Transactions</li>
-                            </ul>
+                            <h3 class="page-title">Quản lý đơn hàng sản phẩm</h3>
                         </div>
                     </div>
                 </div>
-
-
-
-
 
                 <div class="row">
                     <div class="col-sm-12">
@@ -42,15 +29,15 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Email Khách Hàng</th>
-                                                <th>Sđt Khách Hàng</th>
-                                                <th>Tên Khách Hàng</th>
-                                                <th>Mã Vân Đơn</th>
-                                                <th>Ngày Order</th>
+                                                <th>Email</th>
+                                                <th>Số điện thoại</th>
+                                                <th>Họ tên</th>
+                                                <th>Mã đơn</th>
+                                                <th>Ngày đặt</th>
                                                 <th>Tổng tiền</th>
-                                                <th>Nhân viên xử lí đơn</th>
-                                                <th class="text-center">Status</th>
-                                                <th class="text-center">Actions</th>
+                                                <th>Nhân viên xử lý</th>
+                                                <th class="text-center">Trạng thái</th>
+                                                <th class="text-center">Tác vụ</th>
                                             </tr>
                                         </thead>                                     
 
@@ -65,11 +52,16 @@
                                                     <td>@order.shipmentTrackingCode</td>
                                                     <td>@order.orderDate?.ToString("yyyy-MM-dd")</td>
                                                     <td>@order.totalPrice?.ToString("N0")đ</td>
-                                                    <td>
+                                                    <td> 
                                                         @if (!string.IsNullOrWhiteSpace(order.staffFullName))
                                                         {
                                                             @order.staffFullName <br />
                                                         }
+                                                        else if (!string.IsNullOrWhiteSpace(order.staffEmail))
+                                                        {
+                                                            <span>Email: @order.staffEmail</span>
+                                                        }
+                                                @*
                                                         @if (order.staffId.HasValue) // Check if staffId is not null
                                                         {
                                                             <span>ID: @order.staffId.Value</span>
@@ -81,11 +73,11 @@
                                                             <span>Phone: @order.staffPhone</span>
 
                                                             <br />
-                                                        }
+                                                        } 
                                                         @if (!string.IsNullOrWhiteSpace(order.staffEmail))
                                                         {
                                                             <span>Email: @order.staffEmail</span>
-                                                        }
+                                                        }*@
                                                     </td>
 
                                                     <td class="text-center">

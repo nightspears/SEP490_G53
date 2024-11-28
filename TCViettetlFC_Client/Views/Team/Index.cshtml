@@ -77,7 +77,7 @@
                     {
                         <div class="card">
                             <a href="@Url.Action("PlayerDetails", "Team", new { id = player.PlayerId })">
-                                <img src="@player.avatar ?? " https: //via.placeholder.com/200x150"" alt="@player.FullName">
+                                <img src="@player.avatar"  alt="@player.FullName">
                                 <div class="card-content">
                                     <h2>@player.FullName</h2>
                                     <p>Ngày gia nhập: @(player.JoinDate?.ToString("dd/MM/yyyy") ?? "N/A")</p>
