@@ -29,10 +29,10 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Email</th>
-                                                <th>Số điện thoại</th>
+                                                <th>Email KH </th>
+                                               <th>Số điện thoại KH</th>
                                                 <th>Họ tên</th>
-                                                <th>Mã đơn</th>
+                                                <th>Mã vân đơn</th>
                                                 <th>Ngày đặt</th>
                                                 <th>Tổng tiền</th>
                                                 <th>Nhân viên xử lý</th>
@@ -61,7 +61,7 @@
                                                         {
                                                             <span>Email: @order.staffEmail</span>
                                                         }
-                                                @*
+                                                
                                                         @if (order.staffId.HasValue) // Check if staffId is not null
                                                         {
                                                             <span>ID: @order.staffId.Value</span>
@@ -77,7 +77,7 @@
                                                         @if (!string.IsNullOrWhiteSpace(order.staffEmail))
                                                         {
                                                             <span>Email: @order.staffEmail</span>
-                                                        }*@
+                                                        }
                                                     </td>
 
                                                     <td class="text-center">
