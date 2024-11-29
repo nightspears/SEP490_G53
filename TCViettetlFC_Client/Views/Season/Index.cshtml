@@ -103,7 +103,7 @@
     <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="titleModal">Sửa danh mục sản phẩm</h5>
+                <h5 class="modal-title" id="titleModal"></h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -116,18 +116,23 @@
                         <div class="form-group">
                             <label>Tên mùa giải <span class="required"> *</span></label>
                             <input type="text" id="tenMuaGiai" class="form-control">
+                            <span class="dz-error-message text-danger" id="errorTenMua">Vui lòng nhập tên mùa giải </span>
+
                         </div>
                     </div>
                     <div class="col-12 col-sm-12">
                         <div class="form-group">
                             <label>Ngày bắt đầu <span class="required"> *</span></label>
                             <input type="date" id="startdate" class="form-control">
+                            <span class="dz-error-message text-danger" id="errorNgayStart">Vui lòng nhập ngày bắt đầu </span>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12">
                         <div class="form-group">
                             <label>Ngày kết thúc <span class="required"> *</span></label>
                             <input type="date" id="endDate" class="form-control">
+                            <span class="dz-error-message text-danger" id="errorNgayEnd">Vui lòng nhập ngày kết thúc </span>
+
                         </div>
                     </div>
 

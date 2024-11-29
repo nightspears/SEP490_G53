@@ -1,4 +1,5 @@
-﻿using System.Net.NetworkInformation;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.NetworkInformation;
 using TCViettelFC_API.Dtos.Matches;
 using TCViettelFC_API.Models;
 namespace TCViettelFC_API.Repositories.Interfaces
@@ -13,5 +14,6 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task DeleteMatchesAsync(int id);
   
         void UpdateStatus(int status,int id);
+        JsonResult CheckExist(CheckMatch data);
     }
 }

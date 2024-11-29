@@ -4,6 +4,7 @@ $(document).on("click", ".size", function () {
     $(this).css("border", "1px solid red");
     var a = $(this).data('size');
     $("#sizeSp").val(a);
+
 });
 $(document).ready(function () {
     format();
@@ -12,6 +13,9 @@ $(document).ready(function () {
     li.css("border", "1px solid red");
     var size = li.data('size');
     $("#sizeSp").val(size);
+    //$("#successModal").show()
+   
+
 });
 function format() {
     debugger
@@ -152,13 +156,19 @@ function AddToCart(id) {
 
        
         saveCartToLocalStorage(cartItems, 60 * 24 * 7);
-        alert("thêm thành công")
+
+        $("#successModal").fadeIn(100);
+        setTimeout(function () {
+            $("#successModal").fadeOut(800);
+            //$("#successModal").hide();
+        }, 1000);
+       
     }
 }
 
 
 function validateAddCart() {
-    debugger
+    
     var check = true;
     if ($("#sizeSp").val() == null || $("#sizeSp").val().trim() == "" || $("#sizeSp").val() == undefined) {
         check = false

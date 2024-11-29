@@ -72,7 +72,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<Season> GetSeasonByIdAsync(int id)
         {
             Season seasons = new Season();
-            seasons = await _context.Seasons.FirstOrDefaultAsync(x => x.SeasonId == id && x.Status == 1);
+            seasons = await _context.Seasons.FirstOrDefaultAsync(x => x.SeasonId == id && x.Status != 0);
               
             if (seasons == null)
             {

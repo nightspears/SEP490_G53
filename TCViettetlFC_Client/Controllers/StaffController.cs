@@ -302,7 +302,30 @@ namespace TCViettetlFC_Client.Controllers
                 return RedirectToAction("ErrorPage");
             }
         }
+        public IActionResult SeatManagement()
+        {
+            return View();
+        }
 
+        public async Task<IActionResult> SeatEdit(int id)
+        {
+            ViewBag.Id = id;
+
+            string requestUri = "https://localhost:5000/api/MatchAreas/GetSanPhamById?id=" + id;
+            var response = await _httpClient.GetAsync(requestUri);
+
+            List< MatchArea> ListData = new List<MatchArea>();
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonData = await response.Content.ReadAsStringAsync();
+                ListData = JsonConvert.DeserializeObject<List<MatchArea>>(jsonData);
+            }
+            ViewBag.DoiThu = ListData.FirstOrDefault().OpponentName;
+            ViewBag.TenSan = ListData.FirstOrDefault().StadiumName;
+            ViewBag.NgayDa = ListData.FirstOrDefault().MatchDate;
+            return View(ListData);
+        }
 
         public async Task<IActionResult> OrderProductDetail(int id)
         {
