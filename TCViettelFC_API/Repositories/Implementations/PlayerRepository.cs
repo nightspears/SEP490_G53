@@ -20,6 +20,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             var players = await _context.Players
                 .Include(p => p.Season)
+                .Where(p=>p.Status!= 0)
                 .ToListAsync();
 
             return players.Select(p => new ShowPlayerDtos
@@ -174,9 +175,10 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             var player = await _context.Players.FirstOrDefaultAsync(p => p.PlayerId == id);
             if (player == null)
-                throw new Exception("không tìm thấy người chơi");
+                throw new Exception("Không tìm thấy người chơi");
+            player.Status = 0;
 
-            _context.Players.Remove(player);
+            _context.Players.Update(player);
             await _context.SaveChangesAsync();
 
             return new ShowPlayerDtos
@@ -193,7 +195,5 @@ namespace TCViettelFC_API.Repositories.Implementations
                 SeasonName = player.Season?.SeasonName
             };
         }
-
-
     }
 }
