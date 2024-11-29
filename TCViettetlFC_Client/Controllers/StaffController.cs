@@ -317,7 +317,9 @@ namespace TCViettetlFC_Client.Controllers
                 var jsonData = await response.Content.ReadAsStringAsync();
                 ListData = JsonConvert.DeserializeObject<List<MatchArea>>(jsonData);
             }
-
+            ViewBag.DoiThu = ListData.FirstOrDefault().OpponentName;
+            ViewBag.TenSan = ListData.FirstOrDefault().StadiumName;
+            ViewBag.NgayDa = ListData.FirstOrDefault().MatchDate;
             return View(ListData);
         }
 

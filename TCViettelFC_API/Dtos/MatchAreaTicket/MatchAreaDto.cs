@@ -28,8 +28,7 @@
 
         public string? StadiumName { get; set; }
         public decimal? Price { get; set; }
-
-
+        public DateTime? MatchDate { get; set; }
     }
 
     public class MatchAreaRequest

@@ -29,7 +29,7 @@ namespace TCViettelFC_API.Controllers
         }
         [EnableQuery]
         [HttpGet("GetSanPhamById")]
-        public async Task<ActionResult<IEnumerable<MatchAreaTicketDto>>> GetSanPhamById(int id)
+        public async Task<ActionResult<IEnumerable<MatchAreaRespone>>> GetSanPhamById(int id)
         {
             var match = await matchArea.GetSanPhamById(id);
             return Ok(match);
