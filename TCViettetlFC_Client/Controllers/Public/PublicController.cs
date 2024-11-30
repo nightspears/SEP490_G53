@@ -25,12 +25,13 @@ namespace TCViettetlFC_Client.Controllers.Common
             _feedbackService = feedbackService;
             _apiHelper = apiHelper;
         }
-        public IActionResult SanPham()
+        [Route("public/sanpham")]
+        public IActionResult Product()
         {
             return View();
         }
-      
-        public async Task<IActionResult> ChiTietSanPham(int id)
+        [Route("public/ChiTietSanPham/{id}")]
+        public async Task<IActionResult> DetailProduct(int id)
         {
             ViewBag.Id = id;
 
@@ -48,8 +49,8 @@ namespace TCViettetlFC_Client.Controllers.Common
             return View(ListData);
         }
 
-
-        public IActionResult GioHang()
+        [Route("public/giohang")]
+        public IActionResult Cart()
         {
             return View();
         }
