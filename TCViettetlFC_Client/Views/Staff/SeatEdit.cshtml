@@ -205,13 +205,13 @@
 <script>
     $(document).ready(function () {
         $('.price').each(function () {
-            let value = $(this).val().trim(); // Lấy giá trị từ input
+            let value = $(this).val().trim();
             if (value.includes(',')) {
-                value = value.replace(',', '.'); // Thay dấu phẩy bằng dấu chấm
+                value = value.replace(',', '.'); 
             }
             if (!isNaN(value) && value !== '') {
-                const formattedValue = formatCurrency(parseFloat(value)); // Định dạng tiền tệ
-                $(this).val(formattedValue); // Cập nhật lại giá trị
+                const formattedValue = formatCurrency(parseFloat(value)); 
+                $(this).val(formattedValue); 
             }
         });
     });

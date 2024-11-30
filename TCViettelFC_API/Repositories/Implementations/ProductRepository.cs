@@ -1,6 +1,7 @@
 ﻿using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using TCViettelFC_API.Dtos.Matches;
 using TCViettelFC_API.Dtos.Product;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -75,7 +76,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                         product.Material = pro.Material;
                         product.Status = pro.Status == null ? 2 : pro.Status;
                         product.CreatedAt =  DateTime.Now  ;
-                        product.DiscountId = pro.DiscountId;
+                        product.DiscountId = pro.DiscountId == 0 ? null : pro.DiscountId;
                     };
                     await _context.Products.AddAsync(product);
                     await _context.SaveChangesAsync();
@@ -180,7 +181,8 @@ namespace TCViettelFC_API.Repositories.Implementations
                                discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
                                ProductId = pro.ProductId,
                                Status = pro.Status,
-                           }).ToList();
+                               CategoryId = pro.CategoryId,
+                           }).OrderBy(x => x.CategoryId).ToList();
 
                 return product;
             }
@@ -199,7 +201,8 @@ namespace TCViettelFC_API.Repositories.Implementations
                                discoutPercent = dis != null && dis.Status == 1 ? dis.DiscountPercent : null,
                                ProductId = pro.ProductId,
                                Status = pro.Status,
-                           }).ToList();
+                               CategoryId = pro.CategoryId,
+                           }).OrderBy(x => x.CategoryId).ToList();
                 return product;
             }
         }
@@ -367,7 +370,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                     product.Size = pro.Size ?? product.Size;
                     //product.Color = pro.Color ?? product.Color;
                     product.Material = pro.Material ;
-                    product.DiscountId = pro.DiscountId ;
+                    product.DiscountId = pro.DiscountId == 0 ? null : pro.DiscountId ;
                     product.Status = pro.Status ;
 
                     if (pro.ListExist != null && pro.ListExist.Count > 0)
@@ -484,5 +487,31 @@ namespace TCViettelFC_API.Repositories.Implementations
 
             return new JsonResult(data);
         }
+
+
+        public JsonResult CheckExist(ProductDto pro)
+        {
+            var mess = "";
+            var exists = false;
+
+            var product = _context.Products.FirstOrDefault(x => x.ProductName.Equals(pro.ProductName) && x.CategoryId == pro.CategoryId && x.SeasonId == pro.SeasonId 
+            && x.Price == pro.Price && x.Description.Equals(pro.Description) && x.Material.Equals(pro.Material));
+
+            if(product != null)
+            {
+                mess = "Sản phẩm đã tồn tại vui lòng nhập sản phẩm khác";
+                exists = true;
+            }
+            var data = new
+            {
+                mess = mess,
+                exists = exists,
+
+            };
+
+            return new JsonResult(data);
+
+        }
+
     }
 }

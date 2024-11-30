@@ -140,14 +140,19 @@
 
 
 
+                           
+
+                        }
+                        @if ( !string.IsNullOrEmpty( @Model.Product.Material))
+                        {
                             <div class=rate-item style="width:80% !important;padding-top:20px">
                                 <h4 style="color:black ;text-align:left">Chất liệu</h4>
                                 <div style="display:flex">
                                     <div id="chatlieu" style="font-size:18px ;color:#979da0 ;">@Model.Product.Material</div>
                                 </div>
                             </div>
-
                         }
+                 
                     </div>
 
                     <a class="btn-addcart" onclick="AddToCart(@ViewBag.Id)">Thêm giỏ hàng</a>
@@ -260,9 +265,9 @@
             </form>
             </div> *@
         </div>
-        <div class="product-list col-md-12">
-            <h5 style="font-size:35px">Mô tả</h5>
-            <p id="moTa" style="font-size:19px;margin-top:15px">@Model.Product.Description</p>
+        <div class="col-md-12">
+            <h5 style="font-size:35px; color:#b81e20 !important">Mô tả</h5>
+            @Html.Raw(@Model.Product.Description)
             @if (Model.Product.CategoryId == 1)
             {
                 <img style="max-width: 70% !important" src="~/image/imagelogo/tablesize.webp" />

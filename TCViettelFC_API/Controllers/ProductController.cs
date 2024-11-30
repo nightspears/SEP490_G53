@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using TCViettelFC_API.Dtos.Matches;
 using TCViettelFC_API.Dtos.Product;
+using TCViettelFC_API.Repositories.Implementations;
 using TCViettelFC_API.Repositories.Interfaces;
 
 namespace TCViettelFC_API.Controllers
@@ -154,5 +156,16 @@ namespace TCViettelFC_API.Controllers
             var id = int.Parse(Request.Form["id"]);
             _product.UpdateStatus(status , id);
         }
+
+
+        [HttpPost("CheckExist")]
+        public JsonResult CheckExist([FromForm] ProductDto checkProduct)
+        {
+
+            var data = _product.CheckExist(checkProduct);
+            return data;
+
+        }
+
     }
 }
