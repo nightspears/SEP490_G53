@@ -68,7 +68,7 @@ namespace TCViettelFC_API.Controllers
 
         // POST: api/Players
         [HttpPost]
-        public async Task<ActionResult> AddPlayer(PlayerInputDto playerInputDto)
+        public async Task<ActionResult> AddPlayer([FromForm]  PlayerInputDto playerInputDto)
         {
             if (playerInputDto == null)
                 return BadRequest("Player data cannot be null.");
@@ -98,8 +98,8 @@ namespace TCViettelFC_API.Controllers
         }
 
         // PUT: api/Players/{id}
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdatePlayer(int id, PlayerInputDto playerInputDto)
+        [HttpPut("updatePlayer/{id}")]
+        public async Task<ActionResult> UpdatePlayer(int id,[FromForm] PlayerInputDto playerInputDto)
         {
             if (playerInputDto == null)
                 return BadRequest("Player data cannot be null.");

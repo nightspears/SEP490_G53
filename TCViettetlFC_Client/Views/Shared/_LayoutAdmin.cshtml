@@ -17,6 +17,7 @@
     <link href="~/admin_assets/plugins/datatables/datatables.min.css" rel="stylesheet" />
     <link href="~/admin_assets/css/style.css" rel="stylesheet" />
     <link href="~/admin_assets/css/ckeditor.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="~/favicon-32x32.png">
 </head>
 <body>
     <div class="main-wrapper">
@@ -31,11 +32,7 @@
                 </a>
             </div>
 
-            
 
-
-            
-            
 
         </div>
 
@@ -47,18 +44,19 @@
                         <li class="menu-title">
                             <span><i class="fe fe-home"></i> NHÂN VIÊN</span>
                         </li>
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/ProductManagement/Index" ? "active" : "")">
+                            <a href="/ProductManagement/Index"><span>Sản phẩm</span></a>
+                        </li>
                         <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/OrderProductManagement" ? "active" : "")">
-                            <a href="/Staff/OrderProductManagement"><span>Đơn Hàng Sản Phẩm</span></a>
+                            <a href="/Staff/OrderProductManagement"><span>Đơn hàng sản phẩm</span></a>
                         </li>
                         <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/TicketOrders" ? "active" : "")">
-                            <a href="/Staff/TicketOrders"><span>Đơn Hàng Vé</span></a>
+                            <a href="/Staff/TicketOrders"><span>Đơn hàng Vé</span></a>
                         </li>
                         <li class="@(ViewContext.HttpContext.Request.Path == "/MatchManagement/Index" ? "active" : "")">
                             <a href="/MatchManagement/Index"><span>Trận đấu</span></a>
                         </li>
-                        <li class="@(ViewContext.HttpContext.Request.Path == "/ProductManagement/Index" ? "active" : "")">
-                            <a href="/ProductManagement/Index"><span>Sản phẩm</span></a>
-                        </li>
+                      
                         <li class="@(ViewContext.HttpContext.Request.Path == "/Category/Index" ? "active" : "")">
                             <a href="/Category/Index"><span>Danh mục sản phẩm</span></a>
                         </li>
@@ -67,6 +65,9 @@
                         </li>
                         <li class="@(ViewContext.HttpContext.Request.Path == "/Discount/Index" ? "active" : "")">
                             <a href="/Discount/Index"><span>Mã giảm giá</span></a>
+                        </li>
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/SeatManagement" ? "active" : "")">
+                            <a href="/Staff/SeatManagement"><span>Quản lý ghế</span></a>
                         </li>
                         <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/StaffManagermentNew" ? "active" : "")">
                             <a href="/Staff/StaffManagermentNew"><span>Tin tức</span></a>
