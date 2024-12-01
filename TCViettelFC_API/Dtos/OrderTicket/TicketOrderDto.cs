@@ -3,7 +3,7 @@
     public class TicketOrderDto
     {
         public AddCustomerDto? AddCustomerDto { get; set; }
-        public DateTime? OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; } = DateTime.UtcNow;
 
         public decimal? TotalAmount { get; set; }
 

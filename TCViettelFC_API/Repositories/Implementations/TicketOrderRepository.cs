@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Dtos.CheckOut;
 using TCViettelFC_API.Dtos.OrderTicket;
@@ -25,6 +26,11 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 try
                 {
+                    // Nếu cả CustomerId và AddCustomerDto đều null
+                    if (customerId == null && ticketOrdersDto.AddCustomerDto == null)
+                    {
+                        throw new Exception("Thông tin khách hàng yêu cầu nhưng không được cung cấp.");
+                    }
                     var ticketOrder = new TicketOrder
                     {
                         OrderDate = ticketOrdersDto.OrderDate,
@@ -34,14 +40,17 @@ namespace TCViettelFC_API.Repositories.Implementations
                     };
                     if (customerId == null)
                     {
+                       
                         if (ticketOrdersDto.AddCustomerDto == null ||
                             string.IsNullOrEmpty(ticketOrdersDto.AddCustomerDto.Email) ||
-                            string.IsNullOrEmpty(ticketOrdersDto.AddCustomerDto.Phone))
+                            string.IsNullOrEmpty(ticketOrdersDto.AddCustomerDto.Phone) ||
+                            string.IsNullOrEmpty(ticketOrdersDto.AddCustomerDto.FullName))
                         {
                             throw new Exception("Thông tin khách hàng yêu cầu nhưng không được cung cấp.");
                         }
+                        // Kiểm tra tính hợp lệ của thông tin khách hàng
+                        ValidateCustomerInformation(ticketOrdersDto.AddCustomerDto);
 
-                        // Create a new customer if customerId is not provided
                         var newCustomer = new Customer
                         {
                             Email = ticketOrdersDto.AddCustomerDto.Email,
@@ -76,6 +85,10 @@ namespace TCViettelFC_API.Repositories.Implementations
                     await _context.SaveChangesAsync();
                     var orderId = ticketOrder.Id;
 
+                    if (ticketOrdersDto.OrderedTickets.Count <= 0)
+                    {
+                        throw new Exception("Không có vé được chọn để mua");
+                    }
                     // Add ordered tickets if any
                     if (ticketOrdersDto.OrderedTickets != null)
                     {
@@ -95,6 +108,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                             });
                         }
                     }
+                    
 
                     // Add ordered supplementary items if any
                     if (ticketOrdersDto.OrderedSuppItems != null)
@@ -114,8 +128,26 @@ namespace TCViettelFC_API.Repositories.Implementations
                     }
 
                     await _context.SaveChangesAsync();
+
+                    if(ticketOrdersDto.PaymentDto == null)
+                    {
+                        throw new Exception("Payment là thông tin bắt buộc");
+                    }
                     if (ticketOrdersDto.PaymentDto != null)
                     {
+                        if (ticketOrdersDto.PaymentDto.OrderTicketId == null)
+                        {
+                            throw new Exception("OrderTicketId không được phép null.");
+                        }
+                        if (ticketOrdersDto.PaymentDto.TotalAmount == null)
+                        {
+                            throw new Exception("TotalAmount không được phép null.");
+                        }
+                        // Kiểm tra sự khớp giữa tổng tiền của đơn hàng và tổng tiền thanh toán
+                        if (ticketOrdersDto.TotalAmount != ticketOrdersDto.PaymentDto.TotalAmount)
+                        {
+                            throw new Exception("Tổng tiền thanh toán không khớp với tổng tiền của đơn hàng.");
+                        }
                         var payment = new Payment
                         {
                             OrderTicketId = orderId,
@@ -137,10 +169,13 @@ namespace TCViettelFC_API.Repositories.Implementations
                         if (matchAreaTicket != null && matchAreaTicket.AvailableSeats > 0)
                         {
                             matchAreaTicket.AvailableSeats -= 1;
-                            if (matchAreaTicket.AvailableSeats < 0)
-                            {
-                                throw new Exception("Không còn chỗ trống cho khu vực đã chọn.");
-                            }
+
+                            
+                        }
+                        else if (matchAreaTicket.AvailableSeats < 0)
+                        {
+                            throw new Exception("Không còn chỗ trống cho khu vực đã chọn.");
+
                         }
                         else
                         {
@@ -168,6 +203,59 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             return await _context.OrderedTickets.Where(x => x.OrderId == orderId).Select(x => x.Id).ToListAsync();
         }
+        private void ValidateCustomerInformation(AddCustomerDto addCustomerDto)
+        {
+            // Kiểm tra tính hợp lệ của email
+            var email = addCustomerDto.Email;
+            if (email.Contains(" "))
+            {
+                throw new Exception("Email không hợp lệ: không được chứa dấu cách.");
+            }
+
+            try
+            {
+                var mailAddress = new System.Net.Mail.MailAddress(email);
+            }
+            catch
+            {
+                throw new Exception("Email không hợp lệ.");
+            }
+
+            if (!Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
+            {
+                throw new Exception("Email không hợp lệ: Định dạng email không đúng.");
+            }
+
+            // Kiểm tra tính hợp lệ của số điện thoại
+            var phone = addCustomerDto.Phone;
+            if (string.IsNullOrWhiteSpace(phone) || phone.Contains(" "))
+            {
+                throw new Exception("Số điện thoại không hợp lệ: không được chứa dấu cách.");
+            }
+
+            if (!Regex.IsMatch(phone, @"^[\d\+]+$"))
+            {
+                throw new Exception("Số điện thoại không hợp lệ: chỉ được phép chứa các chữ số và ký tự '+'.");
+            }
+
+            // Kiểm tra tính hợp lệ của tên đầy đủ
+            var fullName = addCustomerDto.FullName;
+            if (string.IsNullOrWhiteSpace(fullName) || fullName.Trim().Length == 0)
+            {
+                throw new Exception("Tên đầy đủ không hợp lệ: không được chỉ chứa dấu cách.");
+            }
+
+            if (fullName != fullName.Trim())
+            {
+                throw new Exception("Tên đầy đủ không hợp lệ: không được chứa dấu cách ở đầu và cuối.");
+            }
+
+            if (!Regex.IsMatch(fullName, @"^[a-zA-Zàáạảãâầấậẩẫbcdđeéẹẻẽêềếệểễfghíìịỉĩjklmnoóòọỏõôồốộổỗơờớợởỡpqrstuúùụủũưừứựửữvwxyz\s.,'-]+$"))
+            {
+                throw new Exception("Tên đầy đủ không hợp lệ: không được chứa ký tự đặc biệt.");
+            }
+        }
+
     }
 
 }
