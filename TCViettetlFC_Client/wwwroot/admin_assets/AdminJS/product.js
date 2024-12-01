@@ -11,7 +11,96 @@ $(document).ready(function () {
     }
     fillDataModal();
 
+
+    class MyUploadAdapter {
+    constructor(loader) {
+        this.loader = loader;
+    }
+
+    upload() {
+        return this.loader.file
+            .then(file => new Promise((resolve, reject) => {
+                this._initRequest();
+                this._initListeners(resolve, reject, file);
+                this._sendRequest(file);
+            }));
+    }
+
+    abort() {
+        if (this.xhr) {
+            this.xhr.abort();
+        }
+    }
+
+    _initRequest() {
+        const xhr = this.xhr = new XMLHttpRequest();
+
+        xhr.open('POST', '/Staff/UploadImage', true);
+        xhr.responseType = 'json';
+    }
+
+    _initListeners(resolve, reject, file) {
+        const xhr = this.xhr;
+        const loader = this.loader;
+        const genericErrorText = `Couldn't upload file: ${file.name}.`;
+
+        xhr.addEventListener('error', () => reject(genericErrorText));
+        xhr.addEventListener('abort', () => reject());
+        xhr.addEventListener('load', () => {
+            const response = xhr.response;
+
+            if (!response || response.error) {
+                return reject(response && response.error ? response.error.message : genericErrorText);
+            }
+
+            resolve({
+                default: response.url
+            });
+        });
+
+        if (xhr.upload) {
+            xhr.upload.addEventListener('progress', evt => {
+                if (evt.lengthComputable) {
+                    loader.uploadTotal = evt.total;
+                    loader.uploaded = evt.loaded;
+                }
+            });
+        }
+    }
+
+    _sendRequest(file) {
+        const data = new FormData();
+        data.append('upload', file);
+        this.xhr.send(data);
+    }
+}
+
+function MyCustomUploadAdapterPlugin(editor) {
+    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+        return new MyUploadAdapter(loader);
+    };
+}
+
+
+
+ClassicEditor
+    .create(document.querySelector('#moTa'), {
+        extraPlugins: [MyCustomUploadAdapterPlugin],
+        height: 500
+    })
+    .then(editor => {
+        editorContent = editor;
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
 });
+
+// xử lý ckeiditor
+
+let editorContent;
+
 function CheckAll(item) {
     var isChecked = $(item).is(':checked');
     var checkboxes = $(item).closest('table').find('.form-check-input');
@@ -25,7 +114,6 @@ function loadData() {
         method: "GET",
         dataType: "json",
         success: function (res) {
-            debugger;
             //var tbody = $("#tbody"); 
             //tbody.empty(); 
             var table = $('.datatable').DataTable();
@@ -39,7 +127,6 @@ function loadData() {
                 } else {
                     Avatar = item.image;
                 }
-                debugger
                 var html = `
            <tr>
                     <td>
@@ -50,12 +137,12 @@ function loadData() {
 
         <td>
             <h2 class="table-avatar">
-                <a href="profile.html" class="avatar avatar-sm me-2">
+                <a  class="avatar avatar-sm me-2">
                     <img class="avatar-img rounded-circle"
                         src="${Avatar}"
                         alt="User Image">
                 </a>
-                <a href="profile.html">${item.productName}</a>
+                <a >${item.productName}</a>
             </h2>
         </td>
         <td> ${item.categoryName}</td>
@@ -89,7 +176,6 @@ function loadData() {
 
         },
         error: function (res) {
-            debugger;
         }
     });
 
@@ -112,23 +198,19 @@ function format() {
 }
 
 $(document).on("click", "#confirmXoa", function () {
-    debugger
     $("#idXoa").val("");
     var id = $(this).data("id");
     $("#idXoa").val(id);
-    debugger
 
 });
 $(document).on("click", "#btnXoa", function () {
 
     var id = $("#idXoa").val();
-    debugger
     var url = "https://localhost:5000/api/Product/DeleteProduct/" + id;
     $.ajax({
         url: url,
         method: "Delete",
         success: function (res) {
-            debugger;
             $("#delete_modal").modal("hide");
             showAlert("xóa thành công ");
             loadData();
@@ -151,6 +233,9 @@ function resetForm() {
     $('#muaGiai').val(0);
     $('#theLoai').val(0);
     $('#moTa').val("");
+  
+     editorContent.setData("");
+                
     $('#giaSp').val("");
     $('#kichthuoc').val("");
     $('#chatlieu').val("");
@@ -164,7 +249,6 @@ function resetForm() {
     $('#status').prop('checked', true);
 }
 function modalEditOrCreate(id) {
-    debugger
     resetForm();
 
 
@@ -176,7 +260,6 @@ function modalEditOrCreate(id) {
             url: url,
             method: "GET",
             success: function (res) {
-                debugger
                 var avatar = "";
                 if (res.product.image == null || res.product.image == "" || res.product.image == undefined) {
                     avatar = "/image/imagelogo/ImageFail.jpg"
@@ -188,7 +271,7 @@ function modalEditOrCreate(id) {
                 $('#tensp').val(res.product.productName);
                 $('#muaGiai').val(res.product.seasonId);
                 $('#theLoai').val(res.product.categoryId);
-                $('#moTa').val(res.product.description);
+                //$('#moTa').val(res.product.description);
                 $('#giaSp').val(res.product.price);
                 $('#kichthuoc').val(res.product.size);
                 $('#chatlieu').val(res.product.material);
@@ -203,6 +286,10 @@ function modalEditOrCreate(id) {
                 } else {
                     $('#status').prop('checked', false);
 
+                }
+                
+                if (editorContent) {
+                    editorContent.setData(res.product.description);
                 }
                 $(".modal-backdrop").hide();
                 loadImageOther(res.pFile);
@@ -273,7 +360,6 @@ function loadImageOther(data) {
 }
 
 $(document).on("click", ".change-photo-btn", function () {
-    debugger
     $('#fileInput').click();
 })
 
@@ -329,7 +415,6 @@ function EditOrCreate() {
     if (validateData()) {
         $('#btnNomal').hide();
         $('#btnLoading').show();
-        debugger
         var id = $('#idSanPham').val();
         var formData = new FormData();
         //xử lý lay file Avatar
@@ -343,7 +428,7 @@ function EditOrCreate() {
         formData.append('ProductName', $('#tensp').val());
         formData.append('SeasonId', $('#muaGiai').val());
         formData.append('CategoryId', $('#theLoai').val());
-        formData.append('Description', $('#moTa').val());
+        formData.append('Description', editorContent.getData());
         formData.append('Price', $('#giaSp').val());
         formData.append('Size', $('#kichthuoc').val());
         formData.append('Material', $('#chatlieu').val());
@@ -375,16 +460,14 @@ function EditOrCreate() {
         $('#fileInput').val("");
 
         var dataIdList = [];
-        debugger
+        
         $('#previewContainer > div').each(function () {
-            debugger
             var dataId = $(this).attr('data-id');
             if (dataId != 0 && dataId != undefined) {
                 dataIdList.push(dataId);
             }
         });
         if (dataIdList.length > 0) {
-            debugger
             dataIdList.forEach(function (id) {
                 formData.append('ListExist[]', id);
             });
@@ -392,7 +475,7 @@ function EditOrCreate() {
 
 
         if (id != 0 && id != undefined) {
-            debugger
+
             $.ajax({
                 url: 'https://localhost:5000/api/Product/UpdateProduct/' + id,
                 type: 'Put',
@@ -404,39 +487,64 @@ function EditOrCreate() {
                     showAlert("Cập nhật sản phẩm thành công");
                     $("#modalEditorCreate").modal("hide");
                     fileList = [];
-                    debugger
                 },
                 error: function (error) {
-                    debugger
                 }
             });
 
         }
         else {
-            $.ajax({
-                url: 'https://localhost:5000/api/Product/AddProduct',
-                type: 'post',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (response) {
+            checkExist(formData, function (exist, mess) {
+                debugger
+                if (exist) {
+                    $('#btnNomal').show();
+                    $('#btnLoading').hide();
+                } else {
                     debugger
-                    loadData();
-                    showAlert("Thêm mới sản phẩm thành công");
-                    $("#modalEditorCreate").modal("hide");
-                    $('#fileInput').val('');
-                    fileList = [];
-                },
-                error: function (error) {
-                    debugger
+                    $.ajax({
+                        url: 'https://localhost:5000/api/Product/AddProduct',
+                        type: 'post',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            loadData();
+                            showAlert("Thêm mới sản phẩm thành công");
+                            $("#modalEditorCreate").modal("hide");
+                            $('#fileInput').val('');
+                            fileList = [];
+                        },
+                        error: function (error) {
+                        }
+                    });
                 }
             });
+
+
         }
     }
 
 }
 
 
+function checkExist(formData, callback) {
+    debugger
+    $.ajax({
+        url: 'https://localhost:5000/api/Product/CheckExist',
+        type: 'post',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+            callback(res.exists, res.mess, res.type); 
+        },
+        error: function (error) {
+            debugger
+            console.error("Error during checkExist", error);
+            callback(false);
+        }
+    });
+}
 
 
 function fillDataModal() {
@@ -444,7 +552,6 @@ function fillDataModal() {
         url: "https://localhost:5000/api/Product/GetJson",
         method: "GET",
         success: function (res) {
-            debugger
             $('#muaGiai').empty();
             $('#muaGiai').append($('<option>', {
                 value: 0,
@@ -475,7 +582,6 @@ function fillDataModal() {
                 value: 0,
                 text: "-- Chọn mã giảm giá --"
             }));
-            debugger
             $.each(res.dis, function (i, d) {
                 $('#maGiamGia').append($('<option>', {
                     value: d.discountId,
@@ -588,7 +694,6 @@ $('#fileInput').on('change', function (event) {
 
 function updateFileInput() {
     const dataTransfer = new DataTransfer();
-    debugger
     $.each(fileList, function (index, file) {
         dataTransfer.items.add(file);
     });
@@ -629,7 +734,6 @@ $(document).on("change", ".check", function () {
         contentType: false,
         processData: false,
         success: function (response) {
-            debugger
             loadData();
             showAlert("Cập nhật trạng thái thành công");
         },
@@ -639,3 +743,5 @@ $(document).on("change", ".check", function () {
     });
 
 });
+
+

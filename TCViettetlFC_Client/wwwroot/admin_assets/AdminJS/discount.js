@@ -45,7 +45,7 @@ $(document).on("click", "#btnXoa", function () {
 
 });
 
-function loadData()  {
+function loadData() {
     debugger
 
     $.ajax({
@@ -113,11 +113,7 @@ $(document).ready(function () {
     }
 });
 
-
-
-
-function modalEditOrCreate(id) {
-    debugger
+function resetForm() {
     $('#btnNomal').show();
     $('#btnLoading').hide();
 
@@ -130,6 +126,17 @@ function modalEditOrCreate(id) {
     $('#endDate').val("");
 
     $('#status').prop('checked', true);
+    $('#errorMa').hide();
+    $('#errorPercent').hide();
+    $('#errorEnd').hide();
+    $('#errorStart').hide();
+
+}
+
+
+function modalEditOrCreate(id) {
+    debugger
+    resetForm()
 
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật mã giảm giá")
@@ -140,14 +147,23 @@ function modalEditOrCreate(id) {
             method: "get",
             success: function (res) {
 
-              
+                debugger
                 $('#idDiscount').val(res.discountId);
                 $('#maGiamGia').val(res.discountName);
                 $('#percent').val(res.discountPercent);
-                $('#startDate').val(res.validFrom);
-                $('#endDate').val(res.validUntil);
 
-                debugger
+                let validFrom = res.validFrom;
+                let formattedValidFrom = validFrom.split("T")[0];
+
+                $('#startDate').val(formattedValidFrom);
+
+                let validUntil = res.validUntil;
+                let formattedValidUntil = validUntil.split("T")[0];
+
+                $('#endDate').val(formattedValidUntil);
+
+
+
                 if (res.status == 1) {
                     $('#status').prop('checked', true);
                 } else {
@@ -170,7 +186,7 @@ function modalEditOrCreate(id) {
         $("#titleModal").text("Thêm mã giảm giá")
 
         $('#idDiscount').hide()
-      
+
         $(".modal-backdrop").remove();
         $('#modalEditorCreate').modal("show")
 
@@ -179,82 +195,147 @@ function modalEditOrCreate(id) {
 }
 
 function EditOrCreate() {
-    $('#btnNomal').hide();
-    $('#btnLoading').show();
-    var id = $('#idDiscount').val();
+    if (validation()) {
 
-    var formData = new FormData();
+        $('#btnNomal').hide();
+        $('#btnLoading').show();
+        var id = $('#idDiscount').val();
 
-    formData.append('DiscountName', $('#maGiamGia').val());
-    formData.append('DiscountPercent', $('#percent').val());
+        var formData = new FormData();
 
-    formData.append('ValidFrom', $('#startDate').val());
+        formData.append('DiscountName', $('#maGiamGia').val());
+        formData.append('DiscountPercent', $('#percent').val());
 
-    formData.append('ValidUntil', $('#endDate').val());
+        formData.append('ValidFrom', $('#startDate').val());
+
+        formData.append('ValidUntil', $('#endDate').val());
 
 
-    if ($('#status').prop('checked')) {
-        formData.append('Status', 1);
-    } else {
-        formData.append('Status', 2);
+        if ($('#status').prop('checked')) {
+            formData.append('Status', 1);
+        } else {
+            formData.append('Status', 2);
+        }
+
+
+        if (id != 0 && id != undefined) {
+            $.ajax({
+                url: 'https://localhost:5000/api/Discount/UpdateDiscount/' + id,
+                type: 'Put',
+                data: formData,
+                contentType: false, // Không thiết lập Content-Type
+                processData: false, // Không xử lý dữ liệu
+                success: function (response) {
+                    loadData();
+                    showAlert("Cập nhật thành công");
+                    $("#modalEditorCreate").modal("hide");
+                },
+                error: function (error) {
+                    debugger
+                }
+            });
+
+        } else {
+            $.ajax({
+                url: 'https://localhost:5000/api/Discount/AddDiscount',
+                type: 'post',
+                data: formData,
+                contentType: false, // Không thiết lập Content-Type
+                processData: false, // Không xử lý dữ liệu
+                success: function (response) {
+                    loadData();
+                    showAlert("Thêm mới thành công");
+                    $("#modalEditorCreate").modal("hide");
+                },
+                error: function (error) {
+                    debugger
+                }
+            });
+        }
     }
-
-
-    if (id != 0 && id != undefined) {
-        $.ajax({
-            url: 'https://localhost:5000/api/Discount/UpdateDiscount/' + id,
-            type: 'Put',
-            data: formData,
-            contentType: false, // Không thiết lập Content-Type
-            processData: false, // Không xử lý dữ liệu
-            success: function (response) {
-                loadData();
-                showAlert("Cập nhật thành công");
-                $("#modalEditorCreate").modal("hide");
-            },
-            error: function (error) {
-                debugger
-            }
-        });
-
-    } else {
-        $.ajax({
-            url: 'https://localhost:5000/api/Discount/AddDiscount',
-            type: 'post',
-            data: formData,
-            contentType: false, // Không thiết lập Content-Type
-            processData: false, // Không xử lý dữ liệu
-            success: function (response) {
-                loadData();
-                showAlert("Thêm mới thành công");
-                $("#modalEditorCreate").modal("hide");
-            },
-            error: function (error) {
-                debugger
-            }
-        });
-    }
-
 }
 
 function validation() {
-
     var check = true;
-    if ($('#TenDoiThu').val().trim() == "" || $('#TenDoiThu').val() == null) {
+
+    if ($('#maGiamGia').val().trim() == "" || $('#maGiamGia').val() == null) {
         check = false;
+        $('#errorMa').show();
+
+    } else {
+        $('#errorMa').hide();
+
     }
-    if ($('#isHome').val() === '2') {
-        if ($('#tenSan').val().trim() == "" || $('#tenSan').val() == null) {
+    debugger
+    var percent = $('#percent').val().trim();
+
+    if (percent === "" || percent === null) {
+        check = false;
+        $('#errorPercent').show(); 
+    } else {
+        $('#errorPercent').hide();
+        if (isNaN(percent) || percent < 0 || percent > 100) {
             check = false;
+            $('#errorPercent').text("Vui lòng nhập số từ 0 - 100");
+            $('#errorPercent').show();
+        } else {
+            $('#errorPercent').hide();
+
+        }
+
+    }
+
+    var startDate = $('#startDate').val().trim();
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (startDate == "" || startDate == null) {
+        check = false;
+        $('#errorStart').show();
+
+    } else {
+        $('#errorStart').hide();
+
+       
+        var startDateObj = new Date(startDate);
+        if (startDateObj <= today) {
+            check = false;
+            $('#errorStart').text("Ngày bắt đầu phải lớn hơn hoặc bằng ngày hôm nay");
+            $('#errorStart').show();
+
         }
     }
-    if ($('#ngayDa').val().trim() == "" || $('#ngayDa').val() == null) {
+
+    // Kiểm tra ngày kết thúc
+    var endDate = $('#endDate').val().trim();
+    if (endDate == "" || endDate == null) {
         check = false;
+        $('#errorEnd').show();
+    } else {
+        $('#errorEnd').hide();
+
+        var endDateObj = new Date(endDate);
+        if (endDateObj <= today) {
+            check = false;
+            $('#errorEnd').text("Ngày kết thúc phải lớn hơn ngày hôm nay.");
+            $('#errorEnd').show();
+        }
+        else {
+            $('#errorEnd').hide();
+
+        }
+        if (startDate && endDate && new Date(startDate) >= endDateObj) {
+            check = false;
+            $('#errorEnd').text("Ngày kết thúc phải lớn hơn ngày bắt đầu.");
+            $('#errorEnd').show();
+        } else {
+            $('#errorEnd').hide();
+
+        }
     }
 
-
-
+    return check;
 }
+
 
 
 function showAlert(mess) {

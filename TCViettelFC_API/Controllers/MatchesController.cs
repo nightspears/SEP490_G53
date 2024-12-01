@@ -85,5 +85,16 @@ namespace TCViettelFC_API.Controllers
             var id = int.Parse(Request.Form["id"]);
             _matchRepository.UpdateStatus(status, id);
         }
+         [HttpPost("CheckExist")]
+        public  JsonResult CheckExist([FromBody] CheckMatch checkMatch)
+        {
+          
+            var data =  _matchRepository.CheckExist(checkMatch);
+            return data;
+
+        }
+
+
+        
     }
 }

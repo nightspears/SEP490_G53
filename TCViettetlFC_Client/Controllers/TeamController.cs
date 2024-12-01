@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using TCViettelFC_Client.Controllers;
 using TCViettetlFC_Client.Models;
 
 namespace TCViettelFC_Client.Controllers
@@ -8,15 +7,17 @@ namespace TCViettelFC_Client.Controllers
     public class TeamController : Controller
     {
         private readonly HttpClient _httpClient;
+        private readonly string _baseAddress;
 
-        public TeamController(IHttpClientFactory httpClientFactory)
+        public TeamController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
+            _baseAddress = configuration["ApiConfig:BaseAddress"]; // Retrieve BaseAddress from appsettings.json
         }
-
+        
         public async Task<IActionResult> Index()
         {
-            var response = await _httpClient.GetAsync("https://localhost:5000/api/Players/ListPlayer");
+            var response = await _httpClient.GetAsync($"{_baseAddress}Players/active");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -34,11 +35,10 @@ namespace TCViettelFC_Client.Controllers
         {
             if (id <= 0)
             {
-                return BadRequest("ID không thấy.");
+                return BadRequest("Invalid ID.");
             }
 
-            // Call API to get player details
-            var response = await _httpClient.GetAsync($"https://localhost:5000/api/Players/GetPlayerById?id={id}");
+            var response = await _httpClient.GetAsync($"{_baseAddress}Players/{id}");
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
@@ -48,7 +48,7 @@ namespace TCViettelFC_Client.Controllers
             else
             {
                 // Handle error (e.g., player not found)
-                return NotFound("ko thấy người chơi từ api.");
+                return NotFound("Player not found from API.");
             }
         }
     }

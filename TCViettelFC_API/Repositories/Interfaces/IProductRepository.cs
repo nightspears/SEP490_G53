@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TCViettelFC_API.Dtos.Matches;
 using TCViettelFC_API.Dtos.Product;
 namespace TCViettelFC_API.Repositories.Interfaces
 {
@@ -15,6 +16,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<JsonResult> GetSanPhamByIdAsync(int id);
         Task<JsonResult> GetLienQuanProductAsync(List<int> lstID);
         void UpdateStatus(int status, int id);
+        JsonResult CheckExist(ProductDto data);
 
     }
 }

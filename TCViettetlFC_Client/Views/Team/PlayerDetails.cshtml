@@ -74,18 +74,6 @@
             background: #b91e20;
         }
 </style>
-<div class="player-details">
-    
-    <h2>@Model.FullName</h2>
-    <p><strong>Số áo:</strong> @(Model.ShirtNumber?.ToString() ?? "N/A")</p>
-    <p><strong>Vị trí:</strong> @Model.Position</p>
-    <p><strong>Ngày gia nhập:</strong> @(Model.JoinDate?.ToString("dd/MM/yyyy") ?? "N/A")</p>
-    <p><strong>Ngày rời đội:</strong> @(Model.OutDate?.ToString("dd/MM/yyyy") ?? "N/A")</p>
-    <p><strong>Mô tả:</strong> @(string.IsNullOrEmpty(Model.Description) ? "Không có mô tả." : Model.Description)</p>
-    
-</div>
-
-
 <section class="playerDetails02">
     <div class="container">
         <div class="row">
@@ -102,14 +90,13 @@
 
                         <p><strong>Vị trí:</strong> @Model.Position</p>
                         <p><strong>Ngày gia nhập:</strong> @(Model.JoinDate?.ToString("dd/MM/yyyy") ?? "N/A")</p>
-                        <p><strong>Ngày rời đội:</strong> @(Model.OutDate?.ToString("dd/MM/yyyy") ?? "")</p>
+                        <p><strong>Ngày rời đội:</strong> @(Model.OutDate?.ToString("dd/MM/yyyy") ?? "Chưa rời đội")</p>
                     </div>
-                    <a href="shop.html" class="player_cart"><i class="fa fa-shopping-cart"></i><span>By the t-shirt of Connie Chesson</span></a>
                 </li>
                 <li style="background-image:none">
                     <img style="width: -webkit-fill-available;
                                 height: -webkit-fill-available;"
-                         src="@Model.BackShirtImage ?? " https: //via.placeholder.com/500x450"" alt="@Model.FullName">
+                         src="@Model.avatar" alt="@Model.FullName">
                 </li>
                 <li style="display: flex;
                            flex-wrap: wrap;

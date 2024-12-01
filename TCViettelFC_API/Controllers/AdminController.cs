@@ -26,7 +26,6 @@ namespace TCViettelFC_API.Controllers
         {
             return Ok("Authorize");
         }
-        [Authorize(Policy = "admin")]
         [HttpPost("changepass")]
         public async Task<IActionResult> ChangePassword(ChangePassRequest ch)
         {

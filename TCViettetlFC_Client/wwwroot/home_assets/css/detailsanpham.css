@@ -159,6 +159,12 @@
     font-size: 18px;
     font-weight: bold;
 }
+p{
+    color :black !important
+}
+li {
+    color: black !important
+}
 
 #shirtNameOverlay {
     top: 27%; /* Adjust to position over the upper area of the shirt */

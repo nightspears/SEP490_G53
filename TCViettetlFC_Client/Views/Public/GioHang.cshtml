@@ -1,10 +1,11 @@
 ﻿@{
     Layout = "_layoutCommon";
+    ViewData["Title"] = "Giỏ hàng";
 }
 
 
-<style>
-    .cart-table {
+@* <style>
+   /*  .cart-table {
         width: 100%;
         border-collapse: collapse;
         font-family: Arial, sans-serif;
@@ -30,8 +31,8 @@
         .cart-table tr:hover {
             background-color: #f9f9f9;
         }
-
-    .item-info {
+ */
+   /*  .item-info {
         display: flex;
         align-items: center;
     }
@@ -78,7 +79,7 @@
         outline: none;
         border: none;
     }
-
+ */
     h5 {
         font-size: 19px;
     }
@@ -86,8 +87,8 @@
         h5 span {
             font-weight: normal
         }
-    /* Custom scrollbar for WebKit browsers (Chrome, Safari, etc.) */
-    .table-responsive::-webkit-scrollbar {
+  /*   /* Custom scrollbar for WebKit browsers (Chrome, Safari, etc.) */
+/*     .table-responsive::-webkit-scrollbar {
         height: 6px; /* Height of horizontal scrollbar */
     }
 
@@ -103,7 +104,7 @@
     /* Optional: Hover effect to highlight the scrollbar */
     .table-responsive::-webkit-scrollbar-thumb:hover {
         background-color: #555; /* Darker color on hover */
-    }
+    } */
 
     .product-info {
         display: flex;
@@ -124,8 +125,8 @@
         display: block; /* Để nó hoạt động chính xác trên thẻ span */
         max-width: 200px; /* Đặt chiều rộng tối đa cho sản phẩm */
     }
+ */
 
-   
 
     .product-info {
         display: block;
@@ -136,6 +137,165 @@
         max-width: 100px;
         height: auto;
     }
+
+</style> *@
+
+<style>
+
+    /* Cấu trúc chung cho giỏ hàng */
+    .cart-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 25px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 20px;
+    }
+
+        .cart-item:hover {
+            background-color: #f9f9f9;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Checkbox sản phẩm */
+        .cart-item .product-checkbox {
+            flex: 0 0 40px; /* Chiều rộng cố định */
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Thông tin ảnh và sản phẩm */
+        .cart-item .product-image-info {
+            display: flex;
+            align-items: center;
+            flex: 3;
+        }
+
+        .cart-item .ImgProduct {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+        }
+
+            .cart-item .ImgProduct:hover {
+                transform: scale(1.05);
+            }
+
+        .cart-item .product-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 270px;
+        }
+
+        .cart-item .product-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .cart-item .product-info span {
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* Các phần điều chỉnh số lượng sản phẩm */
+        .cart-item .product-quantity {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-item .quantity-btn {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+            .cart-item .quantity-btn:hover {
+                background-color: #ddd;
+            }
+
+        .cart-item .quantity-input {
+            width: 50px;
+            height: 35px;
+            text-align: center;
+            margin: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fafafa;
+        }
+
+        /* Giá sản phẩm */
+        .cart-item .price {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            color: #333;
+        }
+
+        /* Nút xóa sản phẩm */
+        .cart-item .product-actions {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .cart-item .btnDeleteCart {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 80%;
+        }
+
+            .cart-item .btnDeleteCart:hover {
+                background-color: #c0392b;
+            }
+
+    /* Khi không có dữ liệu trong giỏ hàng */
+    #noDataMessage {
+        display: none;
+        text-align: center;
+        padding: 20px;
+    }
+
+        #noDataMessage img {
+            width: 250px;
+            margin-top: 20px;
+        }
+
+    /* Responsive cho màn hình nhỏ */
+
+
+
 
 </style>
 
@@ -150,33 +310,16 @@
 <div class="container my-5 mt-5" style="padding:50px 0">
     <div class="d-flex">
         <div class="col-md-8 d-flex flex-wrap mb-4" id="lstSanPham">
-            <div class="table-responsive" style=" box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;">
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <th>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="0" onchange="CheckAll(this)">
-                                </div>
-                            </th>
-                            <th>Sản phẩm</th>
-                            <th>Số lượng</th>
-                            <th>Giá</th>
-                            <th>Tổng</th>
-                            <th>Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody id="bodyData">
+            <div class="cart-container">
+                <div id="bodyData">
+                </div>
 
-                    </tbody>
-                </table>
                 <div id="noDataMessage" style="display: none; text-align: center;">
-                    <img src="https://img.freepik.com/premium-vector/no-data-concept-illustration_86047-488.jpg?w=2000" alt="No products" style="width: 250px;">
+                    <img src="https://img.freepik.com/premium-vector/no-data-concept-illustration_86047-488.jpg?w=2000" alt="No products" style="width: 70%;">
                 </div>
             </div>
-
-
         </div>
+
 
         <!-- Left Column: Filters Section -->
 
@@ -197,7 +340,6 @@
 
 
         <div class="col-md-12" style="margin-top:20px" id="lstLienQuan">
-           
         </div>
     </div>
 </div>
@@ -209,4 +351,8 @@
         var checkboxes = $(item).closest('table').find('.form-check-input');
         checkboxes.prop('checked', isChecked);
     };
+
+
+
+
 </script>

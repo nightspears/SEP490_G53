@@ -27,6 +27,7 @@ namespace TCViettelFC_API.Dtos.Product
         public string? Description { get; set; }
 
         public int? Status { get; set; }
+
         public List<FileResponse>? DataFile { get; set; }
         public List<int>? ListExist { get; set; }
     }
@@ -45,6 +46,7 @@ namespace TCViettelFC_API.Dtos.Product
         public string? SeasonName { get; set; }
         public int? discoutPercent { get; set; }
         public string? Image { get; set; }
+        public int? CategoryId { get; set; }
 
     }
 
@@ -68,7 +70,12 @@ namespace TCViettelFC_API.Dtos.Product
         public int? Quantity{ get; set; }
 
     }
-
+    public class CheckProduct
+    {
+        public string NgayDa { get; set; }
+        public string TenDoiThu { get; set; }
+        public string TenSan { get; set; }
+    }
 
 
 

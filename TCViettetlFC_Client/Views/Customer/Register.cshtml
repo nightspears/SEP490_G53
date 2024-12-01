@@ -1,50 +1,75 @@
 ﻿@model CustomerRegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Đăng ký";
 }
+<style>
+    .bg-pattern-style2 {
+        background-size: cover;
+        background-position: center;
+        background-position-y: top;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+</style>
 <div class="main-wrapper">
-
-    <div class="bg-pattern-style bg-pattern-style-register">
+    <div class="bg-pattern-style2" style="background-image: url('/image/big_bacground.jpg');">
         <div class="content">
-
             <div class="account-content">
-                <div class="account-box">
+                <div class="account-box" style="opacity:97%;background-color:#ffb8b8d1">
                     <div class="login-right">
                         <div class="login-header">
-                            <h3>Đăng ký <span>ViettelFC</span></h3>
+                            <a href="/"><h3>Đăng ký <span>ViettelFC</span></h3></a>
                             <p class="text-muted">Đăng ký vào hệ thống của chúng tôi</p>
                         </div>
 
                         <form asp-action="Register" method="post">
-                            <div class="form-group">
-                                <label class="form-control-label">Email</label>
-                                <input id="email" type="email" class="form-control" asp-for="Email">
-                            </div>
-                            <div class="row">
+                            
 
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="form-control-label">Email</label>
+                                    <input id="email" type="email" class="form-control" asp-for="Email">
+                                    <!-- Validation message for Email -->
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Họ và tên</label>
+                                    <input id="phone" type="text" class="form-control" asp-for="FullName">                                 
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Số diện thoại</label>
+                                    <input id="phone" type="text" class="form-control" asp-for="Phone">
+                                    <!-- Validation message for Email -->
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
                                 <div class="form-group">
                                     <label class="form-control-label">Mật khẩu</label>
                                     <input id="password" type="password" class="form-control" asp-for="Password">
+                                    <!-- Validation message for Password -->
+                                    <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
-
-
                                 <div class="form-group">
                                     <label class="form-control-label">Nhập lại mật khẩu</label>
                                     <input id="password-confirm" type="password" class="form-control" asp-for="RePassword">
+                                    <!-- Validation message for RePassword -->
+                                    <span asp-validation-for="RePassword" class="text-danger"></span>
                                 </div>
-
                             </div>
+
                             <button class="btn btn-primary login-btn" type="submit">Tạo tài khoản</button>
+
                             <div class="account-footer text-center mt-3">
                                 Đã có tài khoản? <a class="forgot-link mb-0" asp-action="Login">Đăng nhập</a>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>

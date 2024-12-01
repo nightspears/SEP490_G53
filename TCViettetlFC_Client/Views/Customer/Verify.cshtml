@@ -1,23 +1,47 @@
 ﻿@model EmailVerificationModel
-
 @{
-    ViewData["Title"] = "Email Verification";
+    ViewData["Title"] = "Xác nhận email";
 }
+<div class="main-wrapper">
+    <style>
+        .bg-pattern-style2 {
+            background-size: cover;
+            background-position: center;
+            background-position-y: top;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+    </style>
+    <div class="bg-pattern-style2" style="background-image: url('/image/big_bacground.jpg');">
+        <div class="content">
+            <div class="account-content">
+                <div class="account-box" style="opacity:97%;background-color:#ffb8b8d1">
+                    <div class="login-right">
+                        <div class="login-header">
+                            <a href="/"><h3><span>ViettelFC</span></h3></a>
+                            <p class="text-muted">Đặt lại mật khẩu của bạn</p>
+                        </div>
+                        <form action="Verify" method="post">
+                            <div class="form-group">
+                                <label asp-for="Code" class="control-label">Mã xác nhận</label>
+                                <input asp-for="Code" class="form-control" required />
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                            </div>
+                            <button class="btn btn-primary login-btn" type="submit">Xác nhận</button>
+                            @if (ViewBag.Error != null)
+                            {
+                                <h4 style="color:red;">@ViewBag.Error</h4>
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-<h2>Email Verification</h2>
-
-<div class="container">
-    <form asp-action="Verify" method="post">
-        <input type="hidden" asp-for="Email" value="@TempData["Email"]" />
-
-        <div class="form-group">
-            <label asp-for="Code" class="control-label">Mã xác nhận</label>
-            <input asp-for="Code" class="form-control" required />
-            <span asp-validation-for="Code" class="text-danger"></span>
         </div>
+    </div>
 
-        <div class="form-group">
-            <input type="submit" value="Xác nhận" class="btn btn-primary" />
-        </div>
-    </form>
 </div>

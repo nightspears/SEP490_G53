@@ -1,7 +1,7 @@
 ﻿@model List<TCViettetlFC_Client.Models.MatchViewModel>
 
 @{
-    ViewBag.Title = "Matches";
+    ViewBag.Title = "Xem trận đấu";
     Layout = "_LayoutCommon";
 }
 
@@ -21,108 +21,105 @@
             <div class=innerWrapper>
                 <aside class="widgetinner clearfix">
                     <div class=widgetinfowrap>
-                        <div class=bg-blackimg>why book width us?</div>
+                        <div class=bg-blackimg>Tại sao đặt vé với chúng tôi?</div>
                         <ul class="widgetinfo info01">
-                            <li>150% MONEY BACK GURANTEE</li>
-                            <li>REAL TIME INVENTory</li>
-                            <li>friendly customer service</li>
-                            <li>secure payment</li>
-                            <li>last minute bookings</li>
-                            <li>7 years online swering fans</li>
+                            <li>Đảm bảo gửi vé qua mail không chập trễ</li>
+                            <li>Thân thiện với người dùng</li>
+                            <li>Đảm bảo thanh toán</li>
+                            <li>Website dành riêng cho câu lạc bộ</li>
                         </ul>
-                        <a href=# class=blacklrnmore>learn more</a>
+                        <a href="https://vi.wikipedia.org/wiki/C%C3%A2u_l%E1%BA%A1c_b%E1%BB%99_b%C3%B3ng_%C4%91%C3%A1_Th%E1%BB%83_C%C3%B4ng_%E2%80%93_Viettel" 
+                        class=blacklrnmore>
+                        Thông tin về câu lạc bộ
+                        </a>
                     </div>
                     <div class=widgetinfowrap>
-                        <div class=bg-blackimg>english memebership</div>
+                        <div class=bg-blackimg>Ưu đãi giảm giá đồ tặng kèm</div>
                         <ul class="widgetinfo info02">
-                            <li>liverpool ticket</li>
-                            <li>arsenasl ticket</li>
-                            <li>ticket 03</li>
-                            <li>ticket 04</li>
+                            <li>Có phục vụ đồ ăn</li>
+                            <li>Có Đồ cổ vũ giúp </li>
+                            <li>Tiền đồ bán được sẽ giúp ủng hộ CLB</li>
+                            <li>Tiền vé bán được sẽ giúp ủng hộ CLB</li>
                         </ul>
-                        <a href=# class=blacklrnmore>learn more</a>
                     </div>
                     <div class=widgetinfowrap>
-                        <div class=bg-blackimg>spanish la liga</div>
+                        <div class=bg-blackimg>Đỡ áp lực về tinh thần </div>
                         <ul class="widgetinfo info02">
-                            <li>liverpool ticket</li>
-                            <li>arsenal ticket</li>
+                            <li>Giảm áp lực tại điểm bán vé trực tiếp</li>
+                            <li>Khả năng đặt vé sớm và giữ chỗ</li>
                         </ul>
-                        <a href=# class=blacklrnmore>learn more</a>
                     </div>
                     <div class=widgetinfowrap>
-                        <div class=bg-blackimg>champions leauge</div>
+                        <div class=bg-blackimg>Tích hợp công nghệ hiện đại</div>
                         <ul class="widgetinfo info02">
-                            <li>liverpool ticket</li>
+                            <li>QR code để check-in nhanh tại sân vận động, giảm thời gian chờ đợi.</li>
                         </ul>
-                        <a href=# class=blacklrnmore>learn more</a>
                     </div>
                     <div class=widgetinfowrap>
-                        <div class=bg-blackimg>natinal football teams</div>
+                        <div class=bg-blackimg>Ưu đãi và khuyến mãi</div>
                         <ul class="widgetinfo info02">
-                            <li>liverpool ticket</li>
-                            <li>arsenal ticket</li>
-                            <li>ticket 03</li>
-                            <li>ticket 04</li>
+                            <li>Nhận giảm giá cho các mặt hàng của CLB.</li>
                         </ul>
-                        <a href=# class=blacklrnmore>learn more</a>
+                        
                     </div>
                 </aside>
                 <aside class=contentinner>
-                    <div class="bg-red headline01">most populat match ticket</div>
-                    <ul class="ticketInfo">
-                        @{
-                            int counter = 1; // Biến đếm bắt đầu từ 1
-                        }
+                    <div class="bg-red headline01">Danh sách các trận đấu</div>
+                    @if (Model.Any())
+                    {
+                        <ul class="ticketInfo">
+                            @{
+                                int counter = 1; // Biến đếm bắt đầu từ 1
+                            }
+                            @foreach (var match in Model)
+                            {
+                                <li>
+                                    <ul class="t_info headline01 clearfix">
+                                        <li>@counter</li> <!-- Số sẽ tự động tăng ở đây -->
+                                        <li>
+                                            <div class="headline01 clearfix">
+                                                <span>VIETTEL FC</span><span class="vs">vs</span> <span>@match.OpponentName</span>
+                                            </div>
+                                            <div class="ticketInner_info paragraph02 clearfix">
+                                                <span>@(match.MatchDate.HasValue ? match.MatchDate.Value.ToString("dd/MM/yyyy") : "")</span>
+                                                <span>@(match.MatchDate.HasValue ? match.MatchDate.Value.ToString("hh:mm tt") : "")</span> <span class="capitalize01">@match.StadiumName</span>
+                                            </div>
+                                        </li>
+                                        @if (match.Status == 1)
+                                        {
+                                            <li><a href="@Url.Action("Index", "Area", new { matchId = match.Id })" class="btn-small01 btn-green">Đặt vé</a></li>
+                                        }
+                                    </ul>
+                                </li>
 
-                        @foreach (var match in Model)
-                        {
-                            <li>
-                                <ul class="t_info headline01 clearfix">
-                                    <li>@counter</li> <!-- Số sẽ tự động tăng ở đây -->
-                                    <li>
-                                        <div class="headline01 clearfix">
-                                            <span>VIETTEL FC</span><span class="vs">vs</span> <span>@match.OpponentName</span>
-                                        </div>
-                                        <div class="ticketInner_info paragraph02 clearfix">
-                                            <span>@(match.MatchDate.HasValue ? match.MatchDate.Value.ToString("dd/MM/yyyy") : "")</span>
-                                            <span>@(match.MatchDate.HasValue ? match.MatchDate.Value.ToString("hh:mm tt") : "")</span> <span class="capitalize01">@match.StadiumName</span>
-                                        </div>
-                                    </li>
-                                    @if (match.Status == 1)
-                                    {
-                                        <li><a href="@Url.Action("Index", "Area", new { matchId = match.Id })" class="btn-small01 btn-green">book tickets</a></li>
-                                    }
-                                </ul>
-                            </li>
+                                counter++; // Tăng giá trị của biến đếm sau mỗi vòng lặp
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <h4 style="text-align:center">Không tải được trận đấu</h4>
+                    }
 
-                            counter++; // Tăng giá trị của biến đếm sau mỗi vòng lặp
-                        }
-                    </ul>
 
                     <div class=center><a href=# class=vm-book>view more</a></div>
                     <div class=buymatchticket>
-                        <div class=bg-red><h5>how by a match ticket</h5></div>
+                        <div class=bg-red><h5>Cách đặt vé cho trận đấu</h5></div>
                         <div class=ticktbody>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis,
-                                illum ut qui tenetur earum placeat? Molestiae libero debitis alias quo officiis amet
-                                quos mollitia vero modi, praesentium, iusto, harum eaque.
+                                Bấm vào nút đặt vé trên danh sách trận đấu sắp diễn ra
                             </p>
 
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos ratione ad cum nobis
-                                voluptatum veritatis consequuntur distinctio quia velit reiciendis, quod rem earum
-                                alias, tempore placeat! Modi dolore necessitatibus quod.
+                                Bấm vào vị trí của sân bóng mà bạn muốn ngồi để xem tình trạng số vé 
                             </p>
 
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos ratione ad cum nobis
-                                voluptatum veritatis consequuntur distinctio quia velit reiciendisd.
+                                Chọn thêm đồ đính kèm và thanh toán 
                             </p>
 
                             <div class=socialTicket>
-                                <a href=https://www.facebook.com/templatespoint.net
+                                <a href="https://www.facebook.com/thecongviettelfc"
                                    class="social_link facebook">
                                     <i class="fa fa-facebook"></i>
                                 </a> <a href=https://twitter.com/

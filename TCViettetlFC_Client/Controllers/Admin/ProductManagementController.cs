@@ -6,6 +6,11 @@ namespace TCViettetlFC_Client.Controllers.Admin
     {
         public IActionResult Index()
         {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             return View();
         }
     }

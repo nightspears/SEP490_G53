@@ -169,11 +169,13 @@ namespace TCViettelFC_API.Repositories.Implementations
                         if (matchAreaTicket != null && matchAreaTicket.AvailableSeats > 0)
                         {
                             matchAreaTicket.AvailableSeats -= 1;
+
                             
                         }
-                        else if (matchAreaTicket.AvailableSeats <= 0)
+                        else if (matchAreaTicket.AvailableSeats < 0)
                         {
                             throw new Exception("Không còn chỗ trống cho khu vực đã chọn.");
+
                         }
                         else
                         {

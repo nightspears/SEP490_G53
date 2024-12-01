@@ -21,7 +21,19 @@
                 <div class=container>
                     <div class=row>
                         <ul>
-                            <li><a href="/Customer/Login">Signup/login</a></li>
+                            @{
+                                var customerId = Context.Request.Cookies["CustomerId"];
+                            }
+                            @if (string.IsNullOrEmpty(customerId))
+                            {
+                                <li><a href="/Customer/Login">Đăng nhập</a></li>
+                                <li><a href="/Customer/Register">Đăng ký</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/Customer/Profile">Tài khoản</a></li>
+                                <li><a href="/Customer/Logout">Đăng xuất</a></li>
+                            }
                             <li>
                                 <a href=/public/giohang>
                                     <i class="fa fa-shopping-cart"></i> <span>
@@ -52,7 +64,7 @@
                                         <ul class="nav navbar-nav menu-bar">
                                             <li>
                                                 <a href="/Home/Index">
-                                                    Home <span></span> <span></span> <span></span>
+                                                    Trang Chủ <span></span> <span></span> <span></span>
                                                     <span></span>
                                                 </a>
                                             </li>
@@ -63,15 +75,15 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a>gallery <span></span> <span></span> <span></span> <span></span></a>
-                                                <ul class=sub-menu>
+                                                <a href="/Team/">Đội Hình <span></span> <span></span> <span></span> <span></span></a>
+                                                @* <ul class=sub-menu>
                                                     <li><a href=gallerypage01.html>masonry</a></li>
                                                     <li><a href=gallery02.html>gallery column two</a></li>
                                                     <li><a href=gallery03.html>gallery column 03</a></li>
-                                                </ul>
+                                                </ul> *@
                                             </li>
                                             <li>
-                                                <a href=#>
+                                                <a href="/news">
                                                     Tin Tức <span></span> <span></span> <span></span>
                                                     <span></span>
                                                 </a>

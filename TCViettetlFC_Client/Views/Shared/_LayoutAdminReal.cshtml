@@ -1,0 +1,137 @@
+﻿﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from mentoring.dreamguystech.com/html/template/admin/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:33:22 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Viettel FC</title>
+
+    <link href="~/admin_assets/plugins/datatables/datatables.min.css" rel="stylesheet" />
+    <link href="~/admin_assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/admin_assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/admin_assets/plugins/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/admin_assets/plugins/fontawesome/css/all.min.css" rel="stylesheet" />
+
+    <link href="~/admin_assets/css/feathericon.min.css" rel="stylesheet" />
+    <link href="~/admin_assets/plugins/datatables/datatables.min.css" rel="stylesheet" />
+    <link href="~/admin_assets/css/style.css" rel="stylesheet" />
+    <link href="~/admin_assets/css/ckeditor.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="header">
+
+            <div class="header-left">
+                <a href="/admin/home" class="logo">
+                    <img src="https://th.bing.com/th/id/OIP._8oz8stVnLGxjKspfdnnGAHaEK?rs=1&pid=ImgDetMain" alt="Logo">
+                </a>
+                <a href="/admin/home" class="logo logo-small">
+                    <img src="https://th.bing.com/th/id/OIP._8oz8stVnLGxjKspfdnnGAHaEK?rs=1&pid=ImgDetMain" alt="Logo" width="30" height="30">
+                </a>
+            </div>
+
+            <a href="javascript:void(0);" id="toggle_btn">
+                <i class="fe fe-text-align-left"></i>
+            </a>
+            <div class="top-nav-search">
+                <form>
+                    <input type="text" class="form-control" placeholder="Search here">
+                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+
+            <a class="mobile_btn" id="mobile_btn">
+                <i class="fa fa-bars"></i>
+            </a>
+
+
+            <ul class="nav user-menu">
+
+
+
+
+                <li class="nav-item dropdown has-arrow">
+                    <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
+                        <span class="user-img">
+                            <img class="rounded-circle" src="https://th.bing.com/th/id/R.b4276bb8a190277405b339a4be5cc56d?rik=Lg9k30Yh3esUnQ&pid=ImgRaw&r=0"
+                                 width="31" alt="Ryan Taylor">
+                        </span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="user-header">
+                            <div class="avatar avatar-sm">
+                                <img src="https://th.bing.com/th/id/R.b4276bb8a190277405b339a4be5cc56d?rik=Lg9k30Yh3esUnQ&pid=ImgRaw&r=0" alt="User Image"
+                                     class="avatar-img rounded-circle">
+                            </div>
+                            <div class="user-text">
+                                <h6>Allen Davis</h6>
+                                <p class="text-muted mb-0">Administrator</p>
+                            </div>
+                        </div>
+                        <a class="dropdown-item" href="profile.html">My Profile</a>
+                        <a class="dropdown-item" href="settings.html">Settings</a>
+                        <a class="dropdown-item" href="/User/Logout">Logout</a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    <ul>
+                        <li class="menu-title">
+                            <span><i class="fe fe-home"></i> Main</span>
+                        </li>
+                        <li class="active">
+                            <a href="/Admin/Home"><span>Dashboard</span></a>
+                        </li>
+                        <li>
+                            <a href="/admin/usermanagement"><span>Nhân viên</span></a>
+                        </li>
+                        <li>
+                            <a href="/adminnews/approvenew"><span>Quản lý tin tức</span></a>
+                        </li>
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/admin/changepassword" ? "active" : "")">
+                            <a href="/admin/changepassword"><span>Đổi mật khẩu</span></a>
+                        </li>
+                        <li>
+                            <a href="/user/logout"><span>Đăng xuất</span></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        @RenderBody()
+
+    </div>
+
+    <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
+
+    <script src="~/admin_assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/admin_assets/js/feather.min.js"></script>
+
+    <script src="~/admin_assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/admin_assets/plugins/datatables/jquery.datatables.min.js"></script>
+    <script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
+
+    <script src="~/admin_assets/plugins/raphael/raphael.min.js"></script>
+
+    <script src="~/admin_assets/plugins/morris/morris.min.js"></script>
+
+    <script src="~/admin_assets/js/chart.morris.js"></script>
+
+    <script src="~/admin_assets/js/script.js"></script>
+</body>
+
+
+</html>

@@ -1,5 +1,6 @@
 ﻿@using static TCViettetlFC_Client.Controllers.AreaController
 @{
+     ViewData["Title"] = "Xem vị trí";
     var matchId = Context.Request.Query["matchId"];
     var customerId = ViewData["CustomerId"];
     var supplementaryItems = ViewData["NewList"] as List<SupplementaryIteamViewModel>;
@@ -1035,7 +1036,7 @@
             }
 
             document.addEventListener('DOMContentLoaded', loadMatchDetails);
-
+    const matchAreaTickets = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(matchAreaTickets));
                      // Thêm vé vào giỏ hàng và thiết lập thời gian hết hạn
             document.getElementById('addToCartBtn').addEventListener('click', function () {
                 
@@ -1052,7 +1053,20 @@
                  // Kiểm tra số lượng vé cho trận đấu hiện tại trong giỏ hàng
                 const cartItem = JSON.parse(localStorage.getItem('cart')) || [];
                 const existingTickets = cartItem.filter(ticket => ticket.matchId === matchId);
+        const existingTickets2 = cartItem.filter(ticket => ticket.matchId === matchId && ticket.areaId === areaId);
 
+        // Calculate total quantity for the same area and match in the cart
+        const totalCartQuantity = existingTickets2.reduce((sum, ticket) => sum + ticket.quantity, 0);
+        debugger
+        // Find available tickets in matchAreaTickets
+        const availableTicket = matchAreaTickets.find(ticket => ticket.AreaId === parseInt(areaId) && ticket.MatchId === parseInt(matchId));
+        const availableQuantity = availableTicket ? availableTicket.AvailableSeats : 0;
+
+        // Check if the requested quantity exceeds available tickets
+        if (totalCartQuantity + quantity > availableQuantity) {
+            alert(`Bạn đã đặt quá số lượng vé hiện có của khu này, hiện có ${availableQuantity} vé, bạn đã đặt ${totalCartQuantity}, số lượng vé còn lại ${availableQuantity - totalCartQuantity}.`);
+            return;
+        }
                 if (existingTickets.length >= 4) {
                     alert('Bạn chỉ có thể thêm tối đa 4 vé cho mỗi trận đấu.');
                     return;

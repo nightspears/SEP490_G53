@@ -15,6 +15,12 @@ public partial class CustomersAccount
 
     public int? Status { get; set; }
 
+    public string? ConfirmationCode { get; set; }
+
+    public DateTime? CodeExpiry { get; set; }
+
+    public string? FullName { get; set; }
+
     public virtual ICollection<Customer> Customers { get; set; } = new List<Customer>();
 
     public virtual ICollection<PersonalAddress> PersonalAddresses { get; set; } = new List<PersonalAddress>();

@@ -25,7 +25,35 @@ namespace TCViettelFC_API.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
         {
-            using var transaction = await _context.Database.BeginTransactionAsync();
+			if (request.Customer == null || string.IsNullOrEmpty(request.Customer.FullName) || string.IsNullOrEmpty(request.Customer.Email))
+			{
+				return BadRequest(new { Message = "Customer data is required." });
+            }
+
+            // Validate Address data
+            if (request.Address == null || string.IsNullOrEmpty(request.Address.City) || string.IsNullOrEmpty(request.Address.District) || string.IsNullOrEmpty(request.Address.Ward))
+            {
+                return BadRequest(new { Message = "Address data is required." });
+            }
+			if (request.OrderProduct == null || string.IsNullOrEmpty(request.OrderProduct.OrderCode) || string.IsNullOrEmpty(request.OrderProduct.ShipmentFee.ToString()) || string.IsNullOrEmpty(request.OrderProduct.OrderDate.ToString()))
+			{
+				return BadRequest(new { Message = "Order product data is required." });
+			}
+
+			if (request.OrderProductDetails == null || !request.OrderProductDetails.Any())
+            {
+                return BadRequest(new { Message = "Order product details are required." });
+            }
+
+			if (string.IsNullOrEmpty(request.Payment?.PaymentGateway))
+			{
+				return BadRequest(new { Message = "Payment gateway is required." });
+			}
+			if (request.Payment?.TotalAmount < 0 || request.OrderProduct?.TotalPrice < 0)
+			{
+				return BadRequest(new { Message = "Total price and payment amount cannot be negative." });
+			}
+			using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 // 1. Create Customer if not exists
@@ -40,7 +68,7 @@ namespace TCViettelFC_API.Controllers
                     _context.Customers.Add(customer);
                     await _context.SaveChangesAsync();
                 
-
+             
                 // 2. Create Address
                 var address = new Address
                 {

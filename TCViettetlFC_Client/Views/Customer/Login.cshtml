@@ -1,29 +1,41 @@
 ﻿@model CustomerLoginModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Đăng nhập";
 }
 <div class="main-wrapper">
-
-    <div class="bg-pattern-style">
+    <style>
+        .bg-pattern-style2 {
+            background-size: cover;
+            background-position: center;
+            background-position-y:top;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            padding: 20px;
+        }
+    </style>
+    <div class="bg-pattern-style2" style="background-image: url('/image/big_bacground.jpg');">
         <div class="content">
-
             <div class="account-content">
-                <div class="account-box">
+                <div class="account-box" style="opacity:97%;background-color:#ffb8b8d1">
                     <div class="login-right">
                         <div class="login-header">
-                            <h3>Đăng nhập <span>ViettelFC</span></h3>
+                            <a href="/"><h3>Đăng nhập <span>ViettelFC</span></h3></a>
                             <p class="text-muted">Đăng ký vào hệ thống của chúng tôi</p>
                         </div>
                         <form action="Login" method="post">
                             <div class="form-group">
                                 <label class="form-control-label">Email</label>
                                 <input type="email" class="form-control" asp-for="Email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">Mật khẩu</label>
                                 <div class="pass-group">
                                     <input type="password" class="form-control pass-input" asp-for="Password">
-                                    <span class="fas fa-eye toggle-password"></span>
+                                    <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="text-end">

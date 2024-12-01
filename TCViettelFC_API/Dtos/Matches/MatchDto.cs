@@ -20,4 +20,11 @@ namespace TCViettelFC_API.Dtos.Matches
 
 
     }
+
+    public class CheckMatch
+    {
+        public string NgayDa { get; set; } 
+        public string TenDoiThu { get; set; } 
+        public string TenSan { get; set; }
+    }
 }

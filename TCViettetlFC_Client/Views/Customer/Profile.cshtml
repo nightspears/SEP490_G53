@@ -1,9 +1,10 @@
-﻿@model CustomerProfileModel
+﻿@model CustomerChangePassRequest
 @{
 	var customerId = ViewData["CustomerId"] as string; // Cast to string, or use null if it's not a string
 	var customerEmail = ViewData["CustomerEmail"] as string;  // Cast to string
 	var customerPhone = ViewData["CustomerPhone"] as string;  // Cast to string
 	Layout = "_layoutCommon";
+	ViewData["Title"] = "Hồ sơ người dùng";
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -226,14 +227,14 @@
 
 </style>
 
-<div class="innerbannerwrap">
+@* <div class="innerbannerwrap">
 	<div class="content"></div>
 	<div class="innerbanner">
 		<h2 class="bannerHeadline" style="font-size:65px">Trang <span>khách hàng</span></h2>
 	</div>
-</div>
+</div> *@
 
-<div style="padding-top: 30px;">
+<div style="padding-top: 30px; margin-top:10%;">
 	<h2 style="padding-bottom: 20px" class="heading small">Trang tài khoản <span>Viettel Shop</span></h2>
 </div>
 
@@ -247,7 +248,7 @@
 						<ul id="lstCate">
 							<li onclick="showSection(event, 'accountInfo')" class="active"><a href="javascript:void(0)">Thông tin tài khoản</a></li>
 							<li onclick="showSection(event, 'orders')"><a href="javascript:void(0)">Đơn hàng của bạn</a></li>
-							<li onclick="showSection(event, 'changePassword')"><a href="javascript:void(0)">Đổi mật khẩu</a></li>
+							<li onclick="window.location.href='/customer/changepass';"><a href="/customer/changepass">Đổi mật khẩu</a></li>
 							<li onclick="showSection(event, 'addressBook')"><a href="javascript:void(0)">Sổ địa chỉ</a></li>
 
 					</div>
@@ -295,24 +296,37 @@
 					</table>
 				</div>
 			</div>
-			<!-- Modal or Section to display Order details -->
-			<!-- Modal for displaying order details -->
 			<div id="orderDetailModal" class="modal">
 				<div class="modal-content">
 					<span class="close">&times;</span>
 					<h4>Order Details</h4>
 					<div class="modal-body">
-						<!-- Order details will be injected here dynamically -->
 					</div>
 				</div>
 			</div>
-			<div id="changePassword" class="card section" style="display:none;">
+			@* <div id="changePassword" class="card section" style="display:none;">
 				<div class="card-body">
 					<h4>Đổi mật khẩu</h4>
-					<!-- Change password form goes here -->
-					<p>Chức năng đổi mật khẩu sẽ hiển thị ở đây.</p>
+					<form method="post" asp-action="ChangePass">
+						<div class="form-group">
+							<label class="form-control-label">Mật khẩu cũ</label>
+							<input id="password" type="password" class="form-control" asp-for="OldPass">
+							<span asp-validation-for="OldPass" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label class="form-control-label">Mật khẩu mới</label>
+							<input id="password" type="password" class="form-control" asp-for="NewPassword">
+							<span asp-validation-for="NewPassword" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label class="form-control-label">Nhập lại mật khẩu mới</label>
+							<input id="password-confirm" type="password" class="form-control" asp-for="RePassword">
+							<span asp-validation-for="RePassword" class="text-danger"></span>
+						</div>
+						<button class="btn btn-primary login-btn" type="submit">Đổi mật khẩu</button>
+					</form>
 				</div>
-			</div>
+			</div> *@
 
 			<div id="addressBook" class="card section">
 				<div class="card-body">
@@ -400,15 +414,26 @@
 				throw new Error("Customer account not found.");
 			}
 
-			const ordersRes = await fetch(`${apiBase}/Order/getordersbyaccount/${customerId}`);
-			const orders = await ordersRes.json();
-			const ordersTableBody = document.getElementById('ordersTableBody');
-			ordersTableBody.innerHTML = orders && orders.length > 0 ? orders.map(order => createOrderRow(order)).join('') : '<tr><td colspan="4">Chưa có đơn hàng nào.</td></tr>';
-		} catch (error) {
-			console.error("Error fetching data: ", error);
+			 // Fetch orders
+		const ordersRes = await fetch(`${apiBase}/Order/getordersbyaccount/${customerId}`);
+		if (!ordersRes.ok) {
+			throw new Error("Failed to fetch orders.");
+		}
+
+		const orders = await ordersRes.json();
+		const ordersTableBody = document.getElementById('ordersTableBody');
+		if (orders && orders.length > 0) {
+			ordersTableBody.innerHTML = orders.map(order => createOrderRow(order)).join('');
+		} else {
+			ordersTableBody.innerHTML = '<tr><td colspan="4">Chưa có đơn hàng nào.</td></tr>';
+		}
+	} catch (error) {
+		console.error("Error fetching data: ", error);
+		if (error.message !== "Failed to fetch orders.") {
 			alert("Lỗi khi tải thông tin.");
 		}
 	}
+}
 
 	function createOrderRow(order) {
 		const formattedPrice = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.totalPrice);
@@ -520,35 +545,55 @@
 		}
 	});
 
-	async function fetchAddress() {
-		try {
-			const addressRes = await fetch(`${apiBase}/Customer/address/${customerId}`);
-			const addressData = await addressRes.json();
+async function fetchAddress() {
+	try {
+		const addressRes = await fetch(`${apiBase}/Customer/address/${customerId}`);
+		const addressData = await addressRes.json();
 
-			if (addressData && addressData.length > 0) {
-				// Display the address data in the address section
-				const addressContainer = document.getElementById('addressEntries');
-				addressContainer.innerHTML = ''; // Clear existing content
+		const addressContainer = document.getElementById('addressEntries');
+		addressContainer.innerHTML = ''; // Clear existing content
 
-				// Loop through the address data and display each address
-				addressData.forEach(address => {
-					addressContainer.innerHTML += `
-						<div class="address-entry">
-							<p><strong>Địa chỉ:</strong> ${address.detailedAddress}</p>
-							<p><strong>Phường/Xã:</strong> ${address.wardName}</p>
-							<p><strong>Quận/Huyện:</strong> ${address.districtName}</p>
-							<p><strong>Tỉnh/Thành phố:</strong> ${address.cityName}</p>
-						</div>
-					`;
-				});
-			} else {
-				throw new Error("Address not found.");
-			}
-		} catch (error) {
-			console.error("Error fetching address:", error);
-			alert("Lỗi khi tải địa chỉ.");
+		if (addressData && addressData.length > 0) {
+			// Loop through the address data and display each address
+			addressData.forEach(address => {
+				addressContainer.innerHTML += `
+					<div class="address-entry">
+						<p><strong>Địa chỉ:</strong> ${address.detailedAddress}</p>
+						<p><strong>Phường/Xã:</strong> ${address.wardName}</p>
+						<p><strong>Quận/Huyện:</strong> ${address.districtName}</p>
+						<p><strong>Tỉnh/Thành phố:</strong> ${address.cityName}</p>
+						<button class="btn btn-danger" onclick="deleteAddress(${address.addressId})">Xóa</button>
+					</div>
+				`;
+			});
+		} else {
+			// No addresses found, display a friendly message
+			addressContainer.innerHTML = '<p>Chưa có địa chỉ nào được lưu.</p>';
 		}
+	} catch (error) {
+		console.error("Error fetching address:", error);
+		alert("Lỗi khi tải địa chỉ.");
 	}
+}
+
+async function deleteAddress(addressId) {
+	try {
+		const response = await fetch(`${apiBase}/Customer/DeletePersonalAddress/${addressId}`, {
+			method: 'DELETE'
+		});
+
+		if (response.ok) {
+			alert("Địa chỉ đã được xóa thành công.");
+			await fetchAddress(); // Refresh the address list
+		} else {
+			const errorData = await response.json();
+			alert(`Lỗi khi xóa địa chỉ: ${errorData.message || 'Unknown error'}`);
+		}
+	} catch (error) {
+		console.error("Error deleting address:", error);
+		alert("Lỗi khi xóa địa chỉ.");
+	}
+}
 
 	const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImRlYmI4YjNlYTc3OTYzY2JhZWNiNmY5M2ZjOWQ5M2QwZjRhNzRmOTBjZTgyMDc2MjlmM2Q5ODcxY2M2MDYyMWU5N2EzZjgxNjMzNTVhOGMyIn0.eyJhdWQiOiIxMTYiLCJqdGkiOiJkZWJiOGIzZWE3Nzk2M2NiYWVjYjZmOTNmYzlkOTNkMGY0YTc0ZjkwY2U4MjA3NjI5ZjNkOTg3MWNjNjA2MjFlOTdhM2Y4MTYzMzU1YThjMiIsImlhdCI6MTcyNjc5ODk3MCwibmJmIjoxNzI2Nzk4OTcwLCJleHAiOjE3NTgzMzQ5NzAsInN1YiI6IjMzMTYiLCJzY29wZXMiOltdfQ.Rd_OwL2rf4B7VmpSYa4ryaEqL5K2QQCZ24pN-rWclHZ_Ltx7ItWtUrEz8SIXGODTe3vfDrO80KvsMkvRLlB0-e8h96jMoAMsDz8z5qpbekfQTaneFDdMbQPWLPWzYtbzhQv44p6oWDLI9g0gPNIwfLXMYqZvPwTXPh9PdJrY4zqiQKWbZnfZIgbR1ovPifqMmZwiszQd8y-wVgCxqvb8I4zWJkfCw-Qva081kOgx0wphAEbfngInpzs8EngFZg0tMyH-mKBL1d1Zx20DhqQbrzGBTRUkZjCur_x2jgwdUtwu36O3ESuHfCxI-I-qCAIbHssbKSCe1gtZS5UcK5M5-H60rsRfSBTEnU3hqW1RM1CBt2cGu0pzc3RGtOzwBXzhyJaORI6PI9oDrb2Z_S7riZO9xXiedz-EUNh1oO27--ltBksJs2wBuDUvUhNRi-bewXAxCo_gYbY0Dvc8urSrij6h7bo8wNcu2KjelCrbA16Mo_n-Lz6gL6IfYV3M072YSnGTTejZ0d3nodekXR6SKun_cx85Dvf7US5TMIC5Pfndm0b0Q9ly0fnEVD_8WN9_9tjZMrC98nrS1Hm-4oxHrWzAuW3OeotJlgze9h42exNxOjt438J4zUvJd6fRCXbog4ewVPiqQRvhRpaBBnqBrx_7FyjtOAOOVNA3rQq2jhw';  // Replace this with your actual token or get it dynamically
 

@@ -1,0 +1,48 @@
+﻿@model CustomerSendMailModel
+@{
+    ViewData["Title"] = "Quên mật khẩu";
+}
+<div class="main-wrapper">
+    <style>
+        .bg-pattern-style2 {
+            background-size: cover;
+            background-position: center;
+            background-position-y: top;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+    </style>
+    <div class="bg-pattern-style2" style="background-image: url('/image/big_bacground.jpg');">
+        <div class="content">
+            <div class="account-content">
+                <div class="account-box" style="opacity:97%;background-color:#ffb8b8d1">
+                    <div class="login-right">
+                        <div class="login-header">
+                            <a href="/"><h3>Quên mật khẩu <span>ViettelFC</span></h3></a>
+                            <p class="text-muted">Đặt lại mật khẩu của bạn</p>
+                        </div>
+                        <form action="SendForgotMail" method="post">
+                            <div class="form-group">
+                                <label class="form-control-label">Email</label>
+                                <input type="email" class="form-control" asp-for="Email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            
+                            <button class="btn btn-primary login-btn" type="submit">Gửi mã xác nhận</button>
+                            @if (ViewBag.Error != null)
+                            {
+                                <h4 style="color:red;">@ViewBag.Error</h4>
+                            }                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

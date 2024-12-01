@@ -44,11 +44,11 @@ namespace TCViettetlFC_Client.Controllers
         }
         public async Task<IActionResult> Home()
         {
-            var token = Request.Cookies["AuthToken"];
-            var roleId = Request.Cookies["RoleId"];
-            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(roleId) || roleId != "2")
+
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "2")
             {
-                return RedirectToAction("Login", "User");
+                return RedirectToAction("Index", "Forbidden");
             }
             ViewBag.TotalCustomer = await GetTotalCustomerAsync();
             ViewBag.TotalTicketRevenue = await GetTotalTicketRevenueAsync();
@@ -62,6 +62,11 @@ namespace TCViettetlFC_Client.Controllers
 
         public IActionResult ChangePassword()
         {
+            var cookies = Request.Cookies["RoleId"];
+            if (string.IsNullOrEmpty(cookies))
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             return View();
         }
 
@@ -94,6 +99,11 @@ namespace TCViettetlFC_Client.Controllers
 
         public async Task<IActionResult> UserManagement()
         {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "2")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             var token = Request.Cookies["AuthToken"];
             var users = await _userService.GetUsersAsync(token);
             var roles = await _userService.GetRolesAsync();

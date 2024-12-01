@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "_layoutCommon";
+    ViewData["Title"] = "TCViettelFC";
 }
 <head>
     <link href="~/css/loading.css" rel="stylesheet" />
@@ -32,6 +33,17 @@
             .spacewithtop {
                 margin-top: 1%;
             }
+        }
+        .logo-match img {
+            width: 150px; /* Đặt chiều rộng mong muốn */
+            height: 150px; /* Đặt chiều cao mong muốn */
+            object-fit: contain; /* Giữ nguyên tỉ lệ ảnh */
+        }
+
+        .logo-match img {
+            width: 150px;
+            aspect-ratio: 1 / 1; /* Tỉ lệ 1:1 */
+            object-fit: contain; /* Đảm bảo ảnh vừa khung mà không bị méo */
         }
     </style>
 </head>
@@ -69,9 +81,14 @@
                                 </div>
                                 <!--ảnh giữa 2 đội-->
                                 <div class="wrap-logo clearfix">
-                                    <div class="logo-match"><img src="~/image/imagelogo/logonobackgroud.png" alt="ảnh đội mình"></div>
+                                    <div class="logo-match">
+                                    <img src="~/image/imagelogo/logoviettel.jpg" style="border-radius:50% !important ;object-fit: cover;" alt="ảnh đội mình">
+                                </div>
                                     <div class="match_vs">vs</div>
-                                    <div class="logo-match"><img id="opponent-img" src="lấy từ api" alt="ảnh đội đối thủ" style="height:154.875px;width:198.975px"></div>
+
+                                    <div class="logo-match">
+                                        <img id="opponent-img" src="lấy từ api" alt="ảnh đội đối thủ">
+                                    </div>
                                 </div>
                             <div style="display: flex;flex-wrap: wrap;justify-content:space-evenly;">
                                     <!--thời gian-->
@@ -84,7 +101,7 @@
                                     </p>
                                 </div>
                             <!--đặt vé sau sẽ gắn link theo id cái này làm sau khi có ticket-->
-                            <a href="#" class="btn btn-red">Place ticket</a>
+                                @* <button class="btn btn-red" onclick="OderTicket()">Place ticket</button> *@
                             </div>
                         </div>
                     </div>

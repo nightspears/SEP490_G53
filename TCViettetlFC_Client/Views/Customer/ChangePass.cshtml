@@ -1,0 +1,37 @@
+﻿@model CustomerChangePassRequest
+@{
+	Layout = "_layoutCommon";
+	ViewData["Title"] = "Đổi mật khẩu";
+}
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+
+	<div style="width: 100%; max-width: 500px; margin-top: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+		<h4>Đổi mật khẩu</h4>
+		<form method="post" asp-action="ChangePass">
+			<div class="form-group">
+				<label class="form-control-label">Mật khẩu cũ</label>
+				<input id="password" type="password" class="form-control" asp-for="OldPass">
+				<span asp-validation-for="OldPass" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label class="form-control-label">Mật khẩu mới</label>
+				<input id="password" type="password" class="form-control" asp-for="NewPassword">
+				<span asp-validation-for="NewPassword" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label class="form-control-label">Nhập lại mật khẩu mới</label>
+				<input id="password-confirm" type="password" class="form-control" asp-for="RePassword">
+				<span asp-validation-for="RePassword" class="text-danger"></span>
+			</div>
+			<div style="text-align:center;">
+			<button style="background-color:red; color:white;" class="btn btn-primary login-btn" type="submit">Đổi mật khẩu</button>
+			</div>
+		</form>
+
+		@if (ViewBag.Notify != null)
+		{
+			<h3 style="color:red">@ViewBag.Notify</h3>
+		}
+	</div>
+</div>

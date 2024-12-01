@@ -24,5 +24,4 @@ public partial class News
     public virtual User? Creator { get; set; }
 
     public virtual NewsCategory? NewsCategory { get; set; }
-    
 }

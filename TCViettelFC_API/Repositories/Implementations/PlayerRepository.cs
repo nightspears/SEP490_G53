@@ -1,11 +1,4 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -26,7 +19,8 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<List<ShowPlayerDtos>> ListAllPlayerAsync()
         {
             var players = await _context.Players
-                .Include(p => p.Season) 
+                .Include(p => p.Season)
+                .Where(p=>p.Status!= 0)
                 .ToListAsync();
 
             return players.Select(p => new ShowPlayerDtos
@@ -47,8 +41,8 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<List<ShowPlayerDtos>> ListAllPlayerActiveAsync()
         {
             var players = await _context.Players
-                .Include(p => p.Season) 
-                .Where(p => p.Status == 1) 
+                .Include(p => p.Season)
+                .Where(p => p.Status == 1)
                 .ToListAsync();
 
             return players.Select(p => new ShowPlayerDtos
@@ -61,7 +55,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 OutDate = p.OutDate,
                 Description = p.Description,
                 Status = p.Status,
-                Avatar = p.avatar, 
+                Avatar = p.avatar,
                 SeasonId = p.SeasonId,
                 SeasonName = p.Season?.SeasonName
             }).ToList();
@@ -70,7 +64,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<ShowPlayerDtos> GetPlayerByIdAsync(int id)
         {
             var player = await _context.Players
-                .Include(p => p.Season) 
+                .Include(p => p.Season)
                 .FirstOrDefaultAsync(p => p.PlayerId == id);
 
             if (player == null)
@@ -181,9 +175,10 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             var player = await _context.Players.FirstOrDefaultAsync(p => p.PlayerId == id);
             if (player == null)
-                throw new Exception("không tìm thấy người chơi");
+                throw new Exception("Không tìm thấy người chơi");
+            player.Status = 0;
 
-            _context.Players.Remove(player);
+            _context.Players.Update(player);
             await _context.SaveChangesAsync();
 
             return new ShowPlayerDtos
@@ -200,7 +195,5 @@ namespace TCViettelFC_API.Repositories.Implementations
                 SeasonName = player.Season?.SeasonName
             };
         }
-
-        
     }
 }

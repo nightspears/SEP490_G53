@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CustomerNewsModel>
+@if (Model != null)
+{
+    <div class="container">
+        @foreach (var news in Model)
+        {
+            <div class="row">
+                <a href="news/@news.Id">
+                <div class="col-md-4">
+                    
+
+                   
+                    <img src="@news.Image" alt="tin-tuc" class="w-full rounded-md">
+                    <div>
+                        <div class="flex justify-start mt-5 mb-2 time ">
+                            <span class="text-10 mr-2">TCViettelFC</span>
+                            <span class="text-10"> | @news.CreatedAt.Value.ToString("dd-MM-yyyy hh:mm:ss")</span>
+                        </div>
+                        <p>@news.Title</p>
+
+                    </div>
+                </div>
+                </a>
+            </div>
+        }
+
+    </div>
+}
+else
+{
+    <h3>Không có tin tức nào</h3>
+}

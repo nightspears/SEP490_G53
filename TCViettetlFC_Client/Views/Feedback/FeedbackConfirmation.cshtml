@@ -1,6 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Xác nhận phản hồi";
+    Layout = "_layoutCommon"; // Use the same layout as other pages
 }
 
-<h2>@TempData["SuccessMessage"]</h2>
-<p>Cảm ơn bạn đã gửi đánh giá!</p>
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh; padding: 20px;">
+
+    <div style="width: 100%; max-width: 500px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; text-align: center;">
+        <h2>@TempData["SuccessMessage"]</h2>
+        <p>Cảm ơn bạn đã gửi đánh giá!</p>
+    </div>
+
+</div>

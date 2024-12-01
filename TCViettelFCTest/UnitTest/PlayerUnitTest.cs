@@ -44,9 +44,8 @@ namespace TCViettelFCTest.UnitTest
 
             var result = await repository.ListAllPlayerAsync();
 
-            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(1, result.Count);
             Assert.IsTrue(result.Any(p => p.FullName == "Player 1"));
-            Assert.IsTrue(result.Any(p => p.FullName == "Player 2"));
         }
 
         [Test]

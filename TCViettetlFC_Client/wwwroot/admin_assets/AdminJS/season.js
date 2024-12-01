@@ -127,8 +127,9 @@ $(document).ready(function () {
 //    }
 //});
 
-function modalEditOrCreate(id) {
-    debugger
+function resetForm() {
+
+
     $('#btnNomal').show();
     $('#btnLoading').hide();
 
@@ -136,7 +137,16 @@ function modalEditOrCreate(id) {
     $('#tenMuaGiai').val("");
     $('#startdate').val("");
     $('#endDate').val("");
-    $('#status').prop('checked', false);
+    $('#status').prop('checked', true);
+
+    $('#errorTenMua').hide();
+    $('#errorNgayEnd').hide();
+    $('#errorNgayStart').hide();
+
+}
+function modalEditOrCreate(id) {
+    debugger
+    resetForm();
 
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật mùa giải")
@@ -146,12 +156,21 @@ function modalEditOrCreate(id) {
             url: url,
             method: "get",
             success: function (res) {
-
-              
+                debugger
+                var a = new Date();
                 $('#idSeason').val(res.seasonId);
                 $('#tenMuaGiai').val(res.seasonName);
-                $('#startdate').val(res.startYear);
-                $('#endDate').val(res.endYear);
+
+                let startYear = res.startYear;
+                let formatStartYear = startYear.split("T")[0];
+
+                $('#startdate').val(formatStartYear);
+
+
+                let endYear = res.endYear; 
+                let formattedEndDate = endYear.split("T")[0]; 
+
+                $('#endDate').val(formattedEndDate);
 
                 if (res.status == 1) {
                     $('#status').prop('checked', true);
@@ -184,75 +203,143 @@ function modalEditOrCreate(id) {
 }
 
 function EditOrCreate() {
-    $('#btnNomal').hide();
-    $('#btnLoading').show();
-    var id = $('#idSeason').val();
 
-    var formData = new FormData();
+    if (validation()) {
 
-    formData.append('SeasonName', $('#tenMuaGiai').val());
 
-    formData.append('StartYear', $('#startdate').val());
-    formData.append('EndYear', $('#endDate').val());
-    if ($('#status').prop('checked')) {
-        formData.append('Status', 1);
-    } else {
-        formData.append('Status', 2);
+        $('#btnNomal').hide();
+        $('#btnLoading').show();
+        var id = $('#idSeason').val();
+
+        var formData = new FormData();
+
+        formData.append('SeasonName', $('#tenMuaGiai').val());
+
+        formData.append('StartYear', $('#startdate').val());
+        formData.append('EndYear', $('#endDate').val());
+        if ($('#status').prop('checked')) {
+            formData.append('Status', 1);
+        } else {
+            formData.append('Status', 2);
+        }
+        var data = {
+            MuaGiai: formData.get("SeasonName"),
+            EndYear: formData.get("EndYear"),
+            StartYear: formData.get("StartYear")
+        }
+
+        if (id != 0 && id != undefined) {
+            debugger
+            checkExist(data, function (exist, mess, type) {
+
+                if (exist) {
+
+                } else {
+                    $.ajax({
+                        url: 'https://localhost:5000/api/Season/UpdateSeason/' + id,
+                        type: 'Put',
+                        data: formData,
+                        contentType: false, // Không thiết lập Content-Type
+                        processData: false, // Không xử lý dữ liệu
+                        success: function (response) {
+                            loadData();
+                            showAlert("Cập nhật thành công");
+                            $("#modalEditorCreate").modal("hide");
+                        },
+                        error: function (error) {
+                            debugger
+                        }
+                    });
+                }
+
+              
+            })
+           
+
+        } else {
+
+
+            $.ajax({
+                url: 'https://localhost:5000/api/Season/AddSeason',
+                type: 'post',
+                data: formData,
+                contentType: false, // Không thiết lập Content-Type
+                processData: false, // Không xử lý dữ liệu
+                success: function (response) {
+                    loadData();
+                    showAlert("Thêm mới thành công");
+                    $("#modalEditorCreate").modal("hide");
+                },
+                error: function (error) {
+                    debugger
+                }
+            });
+        }
     }
+}
 
 
-    if (id != 0 && id != undefined) {
-        $.ajax({
-            url: 'https://localhost:5000/api/Season/UpdateSeason/' + id,
-            type: 'Put',
-            data: formData,
-            contentType: false, // Không thiết lập Content-Type
-            processData: false, // Không xử lý dữ liệu
-            success: function (response) {
-                loadData();
-                showAlert("Cập nhật thành công");
-                $("#modalEditorCreate").modal("hide");
-            },
-            error: function (error) {
-                debugger
-            }
-        });
-
-    } else {
-        $.ajax({
-            url: 'https://localhost:5000/api/Season/AddSeason',
-            type: 'post',
-            data: formData,
-            contentType: false, // Không thiết lập Content-Type
-            processData: false, // Không xử lý dữ liệu
-            success: function (response) {
-                loadData();
-                showAlert("Thêm mới thành công");
-                $("#modalEditorCreate").modal("hide");
-            },
-            error: function (error) {
-                debugger
-            }
-        });
-    }
-
+function checkExist(data, callback) {
+    $.ajax({
+        url: 'https://localhost:5000/api/Matches/CheckExist',
+        type: 'post',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: function (res) {
+            debugger
+            callback(res.exists, res.mess, res.type); // Giả sử API trả về { exists: true/false }
+        },
+        error: function (error) {
+            console.error("Error during checkExist", error);
+            callback(false); // Mặc định là không tồn tại nếu lỗi xảy ra
+        }
+    });
 }
 
 function validation() {
 
     var check = true;
-    if ($('#TenDoiThu').val().trim() == "" || $('#TenDoiThu').val() == null) {
+    if ($('#tenMuaGiai').val().trim() == "" || $('#tenMuaGiai').val() == null) {
         check = false;
+        $('#errorTenMua').show();
+
+    } else {
+        $('#errorTenMua').hide();
+
     }
-    if ($('#isHome').val() === '2') {
-        if ($('#tenSan').val().trim() == "" || $('#tenSan').val() == null) {
-            check = false;
-        }
-    }
-    if ($('#ngayDa').val().trim() == "" || $('#ngayDa').val() == null) {
+    let endDate = $('#endDate').val().trim();
+    if (endDate === "" || endDate == null) {
         check = false;
+        $('#errorNgayEnd').show();
+
+    } else {
+        $('#errorNgayEnd').hide();
+
     }
 
+    let startdate = $('#startdate').val().trim();
+    if (startdate === "" || startdate == null) {
+        check = false;
+        $('#errorNgayStart').show();
+
+    }
+    else {
+        $('#errorNgayStart').hide();
+
+        let start = new Date(startdate);
+        let end = new Date(endDate);
+        if (start > end) {
+            check = false;
+            $('#errorNgayStart').text("Ngày bắt đầu  phải trước ngày kết thúc");
+
+            $('#errorNgayStart').show();
+
+        } else {
+            $('#errorNgayStart').hide();
+
+        }
+    }
+    return check;
 }
 function showAlert(mess) {
 

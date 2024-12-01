@@ -53,5 +53,6 @@ namespace TCViettetlFC_Client.Controllers.Common
         {
             return View();
         }
+        
     }
 }
