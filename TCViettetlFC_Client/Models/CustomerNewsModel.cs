@@ -4,8 +4,6 @@
     {
         public int Id { get; set; }
 
-        public int? CreatorId { get; set; }
-
         public string? NewsCategory { get; set; }
 
         public string? Title { get; set; }

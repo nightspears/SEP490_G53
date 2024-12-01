@@ -1,32 +1,104 @@
 ﻿@model IEnumerable<CustomerNewsModel>
-@if (Model != null)
-{
-    <div class="container">
-        @foreach (var news in Model)
-        {
-            <div class="row">
-                <a href="news/@news.Id">
-                <div class="col-md-4">
-                    
+@{
+    Layout = "_layoutCommon";
+    ViewData["Title"] = "Tin tức viettelfc";
+    var path = @ViewContext.HttpContext.Request.Path;
+}
+<style>
+    .news-image {
+        width: 100%; /* Ensure the image fills the card width */
+        height: 200px; /* Set a fixed height for all images */
+        object-fit: cover; /* Crop the image to fit the specified dimensions */
+        border-radius: 8px; /* Optional: Add rounded corners */
+    }
 
-                   
-                    <img src="@news.Image" alt="tin-tuc" class="w-full rounded-md">
-                    <div>
-                        <div class="flex justify-start mt-5 mb-2 time ">
-                            <span class="text-10 mr-2">TCViettelFC</span>
-                            <span class="text-10"> | @news.CreatedAt.Value.ToString("dd-MM-yyyy hh:mm:ss")</span>
-                        </div>
-                        <p>@news.Title</p>
+    /* Hover effect: Scale up the news item */
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-                    </div>
-                </div>
-                </a>
-            </div>
+        .card:hover {
+            transform: scale(1.05); /* Slightly enlarge the card */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
         }
 
+    /* Pagination styles */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+            .pagination a:hover {
+                background-color: #007bff;
+                color: white;
+            }
+
+        .pagination .active {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        .pagination .disabled {
+            color: #ddd;
+            pointer-events: none;
+        }
+
+</style>
+
+@if (Model != null && Model.Any())
+{
+    <div class="container mt-4" style="margin-top:10%;">
+        <div class="row">
+            @foreach (var news in Model)
+            {
+                <div class="col-md-3" style="margin-bottom:2%;">
+                    <!-- Each news item gets its own column -->
+                    <a href="/news/details/@news.Id" class="text-decoration-none">
+                        <div class="card h-100">
+                            <!-- Card ensures consistent sizing -->
+                            <img src="@news.Image" alt="tin-tuc" class="card-img-top news-image">
+                            <div class="card-body">
+                                <h5 class="card-title">@news.Title</h5>
+                                <p class="card-text">
+                                    <span class="text-muted">
+                                        TCViettelFC | @news.CreatedAt?.ToString("dd-MM-yyyy hh:mm:ss")
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        @for (int i = 1; i <= (int)TempData["TotalPages"]; i++)
+        {
+            <a href="@Url.Action("Index", "News", new { id = i })"
+               class="@(path== $"/news/index/{i}"||path ==$"/news/index"&&i==1 ? "active" : "")">
+                @i
+            </a>
+        }
     </div>
 }
 else
 {
-    <h3>Không có tin tức nào</h3>
+    <div class="container mt-4">
+        <h3 class="text-center">Không có tin tức nào</h3>
+    </div>
 }
