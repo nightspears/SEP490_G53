@@ -1,4 +1,5 @@
-﻿const API_URL = "https://localhost:5000/api";
+﻿
+const API_URL = "https://localhost:5000/api";
 
 // Load danh sách cầu thủ khi trang được tải
 async function loadPlayers() {
@@ -11,7 +12,7 @@ async function loadPlayers() {
         const players = await response.json();
         populateTable(players);
     } catch (error) {
-        showErrorMessage("không load được cầu thủ :"+error);
+        showErrorMessage("không load được cầu thủ :" + error);
     }
 }
 
@@ -31,16 +32,25 @@ function populateTable(players) {
         const description = player.description.length > maxLength
             ? player.description.substring(0, maxLength) + "..."
             : player.description;
-
+        var statusTxt = "";
+        if (player.status === 1) {
+            statusTxt = ` <td class="text-center">
+                <span class="badge badge-pill bg-success inv-badge">Hoạt động</span>
+             </td>`
+        } else {
+            statusTxt = ` <td class="text-center">
+                <span class="badge badge-pill bg-secondary inv-badge">Ngừng hoạt động</span>
+             </td>`
+        }
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${player.fullName}</td>
             <td>${player.shirtNumber}</td>
             <td>${player.position}</td>
-            <td>${description}</td>
+          
             <td>${new Date(player.joinDate).toLocaleDateString()}</td>
             <td>${player.OutDate ? new Date(player.OutDate).toLocaleDateString() : "N/A"}</td>
-            <td>${player.status === 1 ? "Hoạt động" : "Ngừng hoạt động"}</td>
+            ${statusTxt}
             <td class="text-center">
                 <button class="btn btn-sm bg-success-light me-2" onclick="openModal(${player.playerId})">Sửa</button>
                 <button class="btn btn-sm bg-danger-light" onclick="deletePlayer(${player.playerId})">Xóa</button>
@@ -109,7 +119,7 @@ function populateSeasonSelect(seasons) {
     seasonSelect.innerHTML = "";  // Xóa các lựa chọn cũ
 
     const defaultOption = document.createElement("option");
-    defaultOption.value = "";
+    defaultOption.value = 0;
     defaultOption.textContent = "--Chọn mùa giải--";
     seasonSelect.appendChild(defaultOption);
 
@@ -135,9 +145,10 @@ async function openModal(playerId) {
         //tạo form 
         // header 
         titleModalPlayer.textContent = "Thêm cầu thủ mới";
-
+        
+        document.getElementById("seasonId").value = 0;
         document.getElementById("idCauThu").value = "";
-        document.getElementById("ImgAvt").setAttribute("src", "/image/imagelogo/logoviettel.jpg");  // Ảnh mặc định
+        document.getElementById("ImgAvt").setAttribute("src", "/image/imagelogo/avatar_khong_hinh.jpg");  // Ảnh mặc định
         document.getElementById("tenCauThu").value = "";
         document.getElementById("soAo").value = "";
         document.getElementById("viTri").value = "";
@@ -153,7 +164,7 @@ async function openModal(playerId) {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
             const player = await response.json();
-            document.getElementById("ImgAvt").setAttribute("src", player.avatar || "default-avatar.jpg");
+            document.getElementById("ImgAvt").setAttribute("src", player.avatar || "/image/imagelogo/avatar_khong_hinh.jpg");
             document.getElementById("idCauThu").value = player.playerId;
             document.getElementById("tenCauThu").value = player.fullName;
             document.getElementById("soAo").value = player.shirtNumber;
@@ -174,34 +185,58 @@ async function openModal(playerId) {
     modalPlayer.show();
 }
 
+
+$('#avatarInput').on('change', function (event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            $('#ImgAvt').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+
+
 // Xử lý thay đổi ảnh avatar
 function changeAvatar() {
-    const fileReader = new FileReader();
-    const filePicker = document.createElement('input');
-    filePicker.type = 'file';
-    filePicker.accept = 'image/*';  // Chỉ chọn ảnh
-
-    filePicker.onchange = function (event) {
-        const file = event.target.files[0];  // Lấy tệp ảnh người dùng chọn
-        if (file) {
-            fileReader.onload = function (e) {
-                document.getElementById('ImgAvt').setAttribute('src', e.target.result);  // Hiển thị ảnh trên thẻ img
-            };
-            fileReader.readAsDataURL(file);  // Chuyển đổi tệp thành Data URL để hiển thị ảnh
-        }
-    };
-
-    filePicker.click();  // Mở hộp thoại chọn tệp
+    $('#avatarInput').click();
 }
+    //const fileReader = new FileReader();
+    //const filePicker = document.createElement('input');
+    //filePicker.type = 'file';
+    //filePicker.accept = 'image/*';  // Chỉ chọn ảnh
+
+    //filePicker.onchange = function (event) {
+    //    const file = event.target.files[0];  // Lấy tệp ảnh người dùng chọn
+    //    if (file) {
+    //        fileReader.onload = function (e) {
+    //            document.getElementById('ImgAvt').setAttribute('src', e.target.result);  // Hiển thị ảnh trên thẻ img
+    //        };
+    //        fileReader.readAsDataURL(file);  // Chuyển đổi tệp thành Data URL để hiển thị ảnh
+    //    }
+    //};
+
+    //filePicker.click();  // Mở hộp thoại chọn tệp
+
 
 
 // Lưu cầu thủ mới
 function savePlayer() {
-    debugger;
-    const avatarInput = document.getElementById('avatarInput');
-    const avatarFile = avatarInput.files.length > 0 ? avatarInput.files[0] : null; // Nếu không có file, avatar sẽ là null
+    //const avatarInput = document.getElementById('avatarInput');
+    //const avatarFile = avatarInput.files.length > 0 ? avatarInput.files[0] : null; // Nếu không có file, avatar sẽ là null
     const formData = new FormData();
 
+    var inputElement = $('#avatarInput');
+    var files = inputElement.prop('files'); 
+    debugger;
+
+    if (files.length > 0) {
+        var file = files[0];
+        debugger
+        formData.append('Avatar', file);
+    }
     // Lấy ID cầu thủ từ modal
     const playerId = document.getElementById('idCauThu').value;
 
@@ -214,21 +249,30 @@ function savePlayer() {
         formData.append('OutDate', document.getElementById('ngayRoiDoi').value);
         formData.append('Description', document.getElementById('description').value || ''); // Có thể là null hoặc chuỗi rỗng
         formData.append('SeasonId', document.getElementById('seasonId').value);
-        formData.append('Status', document.getElementById('statusCauThu').checked ? true : false);
 
-        // Nếu có ảnh đại diện, thêm vào FormData
-        if (avatarFile) {
-            formData.append('Avatar', avatarFile);
+        if ($('#statusCauThu').prop('checked')) {
+            formData.append('Status', 1);
+        } else {
+            formData.append('Status', 2);
         }
+        //// Nếu có ảnh đại diện, thêm vào FormData
+        //if (avatarFile) {
+        //    formData.append('Avatar', avatarFile);
+        //}
+
 
         // Gửi yêu cầu POST để tạo mới cầu thủ
         fetch(`${API_URL}/Players`, {
             method: 'POST',
-            body: formData
+            body: formData,
+            contentType: false,
+            processData: false,
         })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
+                    loadPlayers();
+                    $("#modalEditorCreatePlayer").modal("hide");
                     showSuccessMessage('Cầu thủ mới đã được thêm!');
                 } else {
                     showErrorMessage('Có lỗi xảy ra trả về api thêm cầu thủ');
@@ -239,37 +283,64 @@ function savePlayer() {
             });
 
     } else {
+        debugger
         // Nếu ID có sẵn, đây là thao tác cập nhật cầu thủ
-        formData.append('id', playerId);
         formData.append('FullName', document.getElementById('tenCauThu').value);
         formData.append('ShirtNumber', document.getElementById('soAo').value);
         formData.append('Position', document.getElementById('viTri').value);
         formData.append('JoinDate', document.getElementById('ngayGiaNhap').value);
         formData.append('OutDate', document.getElementById('ngayRoiDoi').value);
-        formData.append('Description', document.getElementById('description').value || ''); // Có thể là null hoặc chuỗi rỗng
+        formData.append('Description', document.getElementById('description').value || ''); 
         formData.append('SeasonId', document.getElementById('seasonId').value);
-        formData.append('Status', document.getElementById('statusCauThu').checked ? true : false);
 
-        // Nếu có ảnh đại diện, thêm vào FormData
-        if (avatarFile) {
-            formData.append('Avatar', avatarFile);
+
+        if ($('#statusCauThu').prop('checked')) {
+            formData.append('Status', 1);
+        } else {
+            formData.append('Status', 2);
         }
 
+        //// Nếu có ảnh đại diện, thêm vào FormData
+        //if (avatarFile) {
+        //    formData.append('Avatar', avatarFile);
+        //}
+        
+        var url = API_URL + "/Players/updatePlayer/" + playerId;
+        debugger
+        $.ajax({
+            url: url,
+            type: 'Put',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                debugger
+                loadPlayers();
+                $("#modalEditorCreatePlayer").modal("hide");
+                showSuccessMessage('Cập nhật cầu thủ thành công!');
+            },
+            error: function (error) {
+                debugger
+            }
+        });
+
         // Gửi yêu cầu PUT để cập nhật cầu thủ
-        fetch(`${API_URL}/Players/${playerId}`, {
-            method: 'PUT',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    showSuccessMessage('Cập nhật cầu thủ thành công!');
-                } else {
-                    showErrorMessage("Có lỗi xảy ra khi lấy trả về api...")
-                }
-            })
-            .catch(error => {
-                showErrorMessage("Có lỗi xảy ra khi cập nhật cầu thủ.:" + error)
-            });
+        //fetch(, {
+        //    method: 'PUT',
+        //    body: formData,
+        //    contentType: false,
+        //    processData: false,
+        //})
+        //.then(response => response.json())
+        //    .then(data => {
+        //        if (data.success) {
+        //            showSuccessMessage('Cập nhật cầu thủ thành công!');
+        //        } else {
+        //            showErrorMessage("Có lỗi xảy ra khi lấy trả về api...")
+        //        }
+        //    })
+        // .catch(error => {
+        //        showErrorMessage("Có lỗi xảy ra khi cập nhật cầu thủ.:" + error)
+        // });
     }
 }

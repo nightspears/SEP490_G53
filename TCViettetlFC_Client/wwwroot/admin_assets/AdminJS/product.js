@@ -121,6 +121,10 @@ function loadData() {
             table.clear();
             $.each(res, function (index, item) {
                 /*  var tenSan = (item.isHome === true ? 'SVĐ Mỹ Đình' : item.stadiumName);*/
+
+                var maxLength = 40; // Độ dài tối đa của mô tả
+                var proName = item.productName.length > maxLength ? item.productName.substring(0, maxLength) + "..."  : item.productName ;
+
                 var Avatar = "";
                 if (item.image == null || item.image == "" || item.image == undefined) {
                     Avatar = "/image/imagelogo/ImageFail.jpg"
@@ -142,7 +146,7 @@ function loadData() {
                         src="${Avatar}"
                         alt="User Image">
                 </a>
-                <a >${item.productName}</a>
+                <a title="${item.productName}" style="cursor:pointer" >${proName}</a>
             </h2>
         </td>
         <td> ${item.categoryName}</td>
@@ -150,7 +154,7 @@ function loadData() {
         <td class="price" data-price="${item.price}">${item.price}</td>
         <td class="text-center">
             <div class="status-toggle d-flex justify-content-center">
-                <input type="checkbox" data-sid = "${item.productId}" id="status_${item.productId}" class="check" ${item.status === 1 ? 'checked' : ''}>
+                <input type="checkbox" data-sid = "${item.productId}" id="status_${item.productId}" class="check changeStatus" ${item.status === 1 ? 'checked' : ''}>
                     <label for="status_${item.productId}" class="checktoggle">checkbox</label>
             </div>
         </td>
@@ -712,7 +716,7 @@ function showAlert(mess) {
     }, 3500); // 4 seconds delay
 }
 
-$(document).on("change", ".check", function () {
+$(document).on("change", ".changeStatus", function () {
 
     var checkbox = $(this);
     var status = 1;

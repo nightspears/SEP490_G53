@@ -304,9 +304,68 @@ namespace TCViettetlFC_Client.Controllers
         }
         public IActionResult SeatManagement()
         {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
+            return View();
+        }
+        public IActionResult SupplementaryItem()
+        {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
             return View();
         }
 
+        public IActionResult ProductManagement()
+        {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
+            return View();
+        }
+        public IActionResult MatchManagement()
+        {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
+            return View();
+        }
+        public IActionResult CategoryProduct()
+        {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
+            return View();
+        }
+        public IActionResult Season()
+        {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
+            return View();
+        }
+        public IActionResult Discount()
+        {
+            var cookies = Request.Cookies["RoleId"];
+            if (cookies != "1")
+            {
+                return RedirectToAction("Index", "Forbidden");
+            }
+            return View();
+        }
         public async Task<IActionResult> SeatEdit(int id)
         {
             ViewBag.Id = id;

@@ -84,7 +84,7 @@ namespace TCViettetlFC_Client.Controllers
                             ViewBag.Error = "Tài khoản này không còn hoạt động";
                             return View(userLoginViewModel);
                         }
-                        return RedirectToAction("OrderProductManagement", "Staff");
+                        return RedirectToAction("ProductManagement", "Staff");
                     }
                     else if (token.roleId == 3)
                     {

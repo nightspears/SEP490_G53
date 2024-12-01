@@ -17,25 +17,22 @@
     <link href="~/admin_assets/plugins/datatables/datatables.min.css" rel="stylesheet" />
     <link href="~/admin_assets/css/style.css" rel="stylesheet" />
     <link href="~/admin_assets/css/ckeditor.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="~/image/imagelogo/logonobackgroud.png" sizes="64x64">
 </head>
 <body>
     <div class="main-wrapper">
         <div class="header">
 
             <div class="header-left">
-                <a href="/staff/OrderProductManagement" class="logo">
-                    <img src="https://th.bing.com/th/id/OIP._8oz8stVnLGxjKspfdnnGAHaEK?rs=1&pid=ImgDetMain" alt="Logo">
+                <a href="/ProductManagement/index" class="logo">
+                    <img src="~/image/imagelogo/logonobackgroud.png" alt="Logo">
                 </a>
-                <a href="/staff/OrderProductManagement" class="logo logo-small">
-                    <img src="https://th.bing.com/th/id/OIP._8oz8stVnLGxjKspfdnnGAHaEK?rs=1&pid=ImgDetMain" alt="Logo" width="30" height="30">
+                <a href="/ProductManagement/index" class="logo logo-small">
+                    <img src="~/image/imagelogo/logonobackgroud.png" alt="Logo" width="30" height="30">
                 </a>
             </div>
 
-            
 
-
-            
-            
 
         </div>
 
@@ -47,27 +44,44 @@
                         <li class="menu-title">
                             <span><i class="fe fe-home"></i> NHÂN VIÊN</span>
                         </li>
+                        <hr />
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/ProductManagement" ? "active" : "")">
+                            <a href="/Staff/ProductManagement"><span>Sản phẩm</span></a>
+                        </li>
+                        <hr />
+                      
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/MatchManagement" ? "active" : "")">
+                            <a href="/Staff/MatchManagement"><span>Trận đấu</span></a>
+                        </li>
+                        <hr />
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/CategoryProduct" ? "active" : "")">
+                            <a href="/Staff/CategoryProduct"><span>Danh mục sản phẩm</span></a>
+                        </li>
+                        <hr />
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/Season" ? "active" : "")">
+                            <a href="/Staff/Season"><span>Mùa giải</span></a>
+                        </li>
+                        <hr />
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/Discount" ? "active" : "")">
+                            <a href="/Staff/Discount"><span>Mã giảm giá</span></a>
+                        </li>
+                        <hr />
                         <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/OrderProductManagement" ? "active" : "")">
-                            <a href="/Staff/OrderProductManagement"><span>Đơn Hàng Sản Phẩm</span></a>
+                            <a href="/Staff/OrderProductManagement"><span>Đơn hàng sản phẩm</span></a>
                         </li>
+                        <hr />
                         <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/TicketOrders" ? "active" : "")">
-                            <a href="/Staff/TicketOrders"><span>Đơn Hàng Vé</span></a>
+                            <a href="/Staff/TicketOrders"><span>Đơn hàng Vé</span></a>
                         </li>
-                        <li class="@(ViewContext.HttpContext.Request.Path == "/MatchManagement/Index" ? "active" : "")">
-                            <a href="/MatchManagement/Index"><span>Trận đấu</span></a>
+                        <hr />
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/SeatManagement" ? "active" : "")">
+                            <a href="/Staff/SeatManagement"><span>Quản lý ghế</span></a>
                         </li>
-                        <li class="@(ViewContext.HttpContext.Request.Path == "/ProductManagement/Index" ? "active" : "")">
-                            <a href="/ProductManagement/Index"><span>Sản phẩm</span></a>
+                        <hr />
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/SupplementaryItem" ? "active" : "")">
+                            <a href="/Staff/SupplementaryItem"><span>Đồ đính kèm</span></a>
                         </li>
-                        <li class="@(ViewContext.HttpContext.Request.Path == "/Category/Index" ? "active" : "")">
-                            <a href="/Category/Index"><span>Danh mục sản phẩm</span></a>
-                        </li>
-                        <li class="@(ViewContext.HttpContext.Request.Path == "/Season/Index" ? "active" : "")">
-                            <a href="/Season/Index"><span>Mùa giải</span></a>
-                        </li>
-                        <li class="@(ViewContext.HttpContext.Request.Path == "/Discount/Index" ? "active" : "")">
-                            <a href="/Discount/Index"><span>Mã giảm giá</span></a>
-                        </li>
+                        <hr />
                         <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/StaffManagermentNew" ? "active" : "")">
                             <a href="/Staff/StaffManagermentNew"><span>Tin tức</span></a>
                         </li>
@@ -79,18 +93,20 @@
                         <li class="@(ViewContext.HttpContext.Request.Path == "/TeamManagement/Index" ? "active" : "")">
                             <a href="/TeamManagement/Index"><span>Đội bóng</span></a>
                         </li>
+                        <hr />
                         <li class="@(ViewContext.HttpContext.Request.Path == "/admin/changepassword" ? "active" : "")">
                             <a href="/admin/changepassword"><span>Đổi mật khẩu</span></a>
                         </li>
+                        <hr />
                         <li>
                             <a href="/user/logout"><span>Đăng xuất</span></a>
                         </li>
+                        <hr />
                     </ul>
                 </div>
             </div>
 
         </div>
-
         @RenderBody()
 
     </div>

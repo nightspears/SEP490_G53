@@ -2,16 +2,42 @@
     Layout = "_LayoutAdmin";
     ViewData["Title"] = "Quản lý đội bóng";
 }
+
+<style>
+    .modal-body {
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        height: 100%; /* Đảm bảo chiều cao đủ để căn giữa */
+    }
+
+    #cardImg {
+        display: flex;
+        justify-content: center; /* Căn giữa ảnh theo chiều ngang */
+        align-items: center; /* Căn giữa ảnh theo chiều dọc */
+        width: 100%;
+        max-width: 300px;
+        max-height: 300px;
+        height: 300px;
+    }
+</style>
 <div class="page-wrapper">
     <div class="content container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="page-title">Quản lý cầu thủ</h3>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3">
-                            <button class="btn btn-primary" onclick="openModal(0)">
+                            <button class="btn btn-success" onclick="openModal(0)">
                                 
-                                <i class="fa fa-plus"></i> Thêm cầu thủ mới
+                                <i class="fa fa-plus"></i> Thêm mới
                                 
                             </button>
                         </div>
@@ -22,10 +48,9 @@
                                         <th>Tên cầu thủ</th>
                                         <th>Số áo</th>
                                         <th>Vị trí</th>
-                                        <th>Mô tả</th>
                                         <th>Ngày gia nhập</th>
                                         <th>Ngày rời đội</th>
-                                        <th>Trạng thái</th>
+                                        <th class="text-center">Trạng thái</th>
                                         <th class="text-center">Thao tác</th>
                                     </tr>
                                 </thead>
@@ -51,7 +76,7 @@
 
 <!-- Player Modal -->
 <div class="modal fade" id="modalEditorCreatePlayer" tabindex="-1" aria-labelledby="titleModalPlayer" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="titleModalPlayer"></h5>
@@ -60,51 +85,58 @@
             <div class="modal-body row form-row mt-3">
                 
                 <!-- Ảnh đại diện -->
-                <div class="card col-12 col-sm-12" id="cardImg" style="width: 100%; max-width: 300px; max-height: 300px; height: 300px">
+                <div class="card col-12 col-sm-12" id="cardImg" style="width: 100%; max-width: 250px; max-height: 250px; height: 250px">
                     <a href="#" onclick="changeAvatar()">
                         <img id="ImgAvt" class="rounded-5 AvtImg card-img-top"
-                             alt="Player Image" src="/image/imagelogo/logoviettel.jpg"
-                             style="max-width:260px; height: 100%; max-height:260px; object-fit: cover; width:100%">
+                             alt="Player Image" src="~/image/imagelogo/avatar_khong_hinh.jpg"
+                             style="max-width:250px; height: 100%; max-height:230px; object-fit: cover; width:100%">
                     </a>
                     <!-- Input file để chọn ảnh -->
+
                     <input type="file" id="avatarInput" accept="image/*" style="display:none;">
                 </div>
 
                 <!-- Các trường thông tin cầu thủ -->
                 <input type="hidden" id="idCauThu">
-                <div class="col-12">
+                <div class="col-12 mb-3">
                     <label for="tenCauThu" class="form-label">Tên cầu thủ</label>
-                    <input type="text" id="tenCauThu" class="form-control">
+                    <input type="text" id="tenCauThu" class="form-control" placeholder="Nguyễn Văn A">
                 </div>
-                <div class="col-12">
+                <div class="col-12  col-md-4 mb-3">
                     <label for="soAo" class="form-label">Số áo</label>
-                    <input type="text" id="soAo" class="form-control">
+                    <input type="text" id="soAo" class="form-control" placeholder="01">
                 </div>
-                <div class="col-12">
+                <div class="col-12  col-md-4 mb-3">
                     <label for="viTri" class="form-label">Vị trí</label>
-                    <input type="text" id="viTri" class="form-control">
+                    <input type="text" id="viTri" class="form-control" placeholder="Tiền đạo">
                 </div>
-                <div class="col-12">
+                <div class="col-12 col-md-4">
+                    <div class="form-group">
+                        <label>Mùa giải <span class="required"> *</span></label>
+                        <select style="width:100%" class="form-control" id="seasonId">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 mb-3">
                     <label for="ngayGiaNhap" class="form-label">Ngày gia nhập</label>
                     <input type="date" id="ngayGiaNhap" class="form-control">
                 </div>
-                <div class="col-12">
+                <div class="col-12 col-md-6 mb-3">
                     <label for="ngayRoiDoi" class="form-label">Ngày rời đội</label>
                     <input type="date" id="ngayRoiDoi" class="form-control">
                 </div>
-                <div class="col-12">
+                <div class="col-12 mb-3">
                     <label for="description" class="form-label">Mô tả</label>
-                    <input type="text" id="description" class="form-control">
+                    <textarea  id="description" class="form-control" placeholder="Mô tả ngắn ..."></textarea>
                 </div>
-                <div class="col-12">
-                    <label for="seasons" class="form-label">Mùa Giải</label>
-                    <select id="seasonId">
-                        <!-- Các lựa chọn sẽ được thêm tại đây -->
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="statusCauThu" class="form-label">Trạng thái</label>
-                    <input type="checkbox" id="statusCauThu" class="form-check-input"> Hoạt động
+           
+                <div class="col-12 ">
+                    <label>Trạng thái</label>
+                    <div class="status-toggle d-flex " style="padding-bottom:15px !important">
+                        <input type="checkbox" id="statusCauThu" class="check">
+                        <label for="statusCauThu" style="height:35px ; width:60px" class="checktoggle">checkbox</label>
+                    </div>
                 </div>
                 <button type="button" class="btn btn-primary btn-block w-100 mt-4" onclick="savePlayer()">Lưu</button>
             </div>
@@ -136,16 +168,12 @@
 
 
 <!-- Include necessary scripts -->
-<script src="~/admin_assets/js/bootstrap-datetimepicker.min.js"></script>
-<script src="~/admin_assets/js/bootstrap.bundle.min.js"></script>
-<script src="~/admin_assets/js/chart.morris.js"></script>
-<script src="~/admin_assets/js/ckeditor.js"></script>
-<script src="~/admin_assets/js/feather.min.js"></script>
-<script src="~/admin_assets/js/form-validation.js"></script>
 <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
-<script src="~/admin_assets/js/jquery.maskedinput.min.js"></script>
-<script src="~/admin_assets/js/mask.js"></script>
-<script src="~/admin_assets/js/moment.min.js"></script>
+<script src="~/admin_assets/js/bootstrap.bundle.min.js"></script>
+<script src="~/admin_assets/js/feather.min.js"></script>
+<script src="~/admin_assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/jquery.datatables.min.js"></script>
+<script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
 <script src="~/admin_assets/js/script.js"></script>
 
 <script src="~/admin_assets/adminjs/player.js"></script>

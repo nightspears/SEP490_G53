@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CloudinaryDotNet.Actions;
+using Microsoft.EntityFrameworkCore;
 using TCViettelFC_API.Dtos.Supplementary;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -7,22 +8,28 @@ namespace TCViettelFC_API.Repositories.Implementations
 {
     public class SupplementaryItemRepository: ISupplementaryItemRepository
     {
+
+        private readonly ICloudinarySetting _cloudinary;
+
         private readonly Sep490G53Context _context;
 
-        public SupplementaryItemRepository(Sep490G53Context context)
+        public SupplementaryItemRepository(Sep490G53Context context, ICloudinarySetting cloudinary)
         {
             _context = context;
+            _cloudinary = cloudinary;
+
 
         }
-        public async Task<IEnumerable<SupplementaryDto>> GetAllAsync()
+        public async Task<IEnumerable<SupplementaryRespone>> GetAllAsync()
         {
-            var items = await _context.SupplementaryItems
-                .Select(item => new SupplementaryDto
+            var items = await _context.SupplementaryItems.Where(x => x.Status != 0)
+                .Select(item => new SupplementaryRespone
                 {
                     ItemId = item.ItemId,
                     ItemName = item.ItemName,
                     Price = item.Price,
-                    Status = item.Status
+                    Status = item.Status,
+                    Image = item.ImageUrl
                 })
                 .ToListAsync();
 
@@ -41,8 +48,19 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 ItemName = dto.ItemName,
                 Price = dto.Price,
-                Status = dto.Status
+                Status = dto.Status,
+
+
             };
+            if (dto.Imageurl != null && dto.Imageurl.Length > 0)
+            {
+                ImageUploadResult res = _cloudinary.CloudinaryUpload(dto.Imageurl);
+                item.ImageUrl = res.SecureUrl.ToString();
+            }
+            else
+            {
+                item.ImageUrl = "/image/imagelogo/ImageFail.jpg";
+            }
 
             _context.SupplementaryItems.Add(item);
             await _context.SaveChangesAsync();
@@ -58,12 +76,17 @@ namespace TCViettelFC_API.Repositories.Implementations
                 item.Price = dto.Price;
                 item.Status = dto.Status;
 
-                _context.Entry(item).State = EntityState.Modified;
+                if (dto.Imageurl != null && dto.Imageurl.Length > 0)
+                {
+                    ImageUploadResult res = _cloudinary.CloudinaryUpload(dto.Imageurl);
+                    item.ImageUrl = res.SecureUrl.ToString();
+                }
+              
                 await _context.SaveChangesAsync();
             }
             else
             {
-                throw new Exception("Item not found"); // Hoặc xử lý khác phù hợp với logic ứng dụng của bạn
+                throw new Exception("Item not found"); 
             }
         }
 
@@ -72,9 +95,16 @@ namespace TCViettelFC_API.Repositories.Implementations
             var item = await _context.SupplementaryItems.FindAsync(itemId);
             if (item != null)
             {
-                _context.SupplementaryItems.Remove(item);
+                item.Status = 0;
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public void UpdateStatus(int status, int id)
+        {
+            var product = _context.SupplementaryItems.Find(id);
+            product.Status = status;
+            _context.SaveChanges();
         }
     }
 }

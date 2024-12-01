@@ -86,7 +86,7 @@ function loadData() {
                         <td>${item.isHome === true ? 'Sân nhà' : 'Sân khách'}</td>
                         <td class="text-center">
                             <div class="status-toggle d-flex justify-content-center">
-                                <input type="checkbox" data-mid="${item.id}" id="status_${item.id}" class="check" ${item.status === 1 ? 'checked' : ''}>
+                                <input type="checkbox" data-mid="${item.id}" id="status_${item.id}" class="check changeStatus" ${item.status === 1 ? 'checked' : ''}>
                                 <label for="status_${item.id}" class="checktoggle">checkbox</label>
                             </div>
                         </td>
@@ -447,7 +447,7 @@ function showAlert(mess) {
     }, 3500); // 4 seconds delay
 }
 
-$(document).on("change", ".check", function () {
+$(document).on("change", ".changeStatus", function () {
 
     var checkbox = $(this);
     var status = 1;

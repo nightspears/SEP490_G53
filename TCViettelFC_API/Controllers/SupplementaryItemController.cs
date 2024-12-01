@@ -49,7 +49,7 @@ namespace TCViettelFC_API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateItem([FromBody] SupplementaryDto dto)
+        public async Task<IActionResult> CreateItem([FromForm] SupplementaryDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -59,7 +59,7 @@ namespace TCViettelFC_API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateItem(int id, [FromBody] SupplementaryDto dto)
+        public async Task<IActionResult> UpdateItem(int id, [FromForm] SupplementaryDto dto)
         {
             if (id != dto.ItemId)
                 return BadRequest();
@@ -73,7 +73,15 @@ namespace TCViettelFC_API.Controllers
         public async Task<IActionResult> DeleteItem(int id)
         {
             await _repository.DeleteAsync(id);
-            return NoContent();
+            return Ok();
+        }
+
+        [HttpPost("updateStatus")]
+        public void updateStatus()
+        {
+            var status = int.Parse(Request.Form["status"]);
+            var id = int.Parse(Request.Form["id"]);
+            _repository.UpdateStatus(status, id);
         }
     }
 }
