@@ -69,6 +69,7 @@
         background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
         justify-content: center;
         align-items: center;
+        z-index: 1;
     }
 
     /* Popup form centered */
@@ -338,18 +339,37 @@
     }
     #countdownContainer{
         display: block;
-        margin-top: 10px;
-        background-color: rgb(255, 251, 235);
-        border-radius: 10px;
-        padding: 13px;
+      
+  
+       
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         width: 100%;
         color: black;
         font-size: x-large;
-        font-weight: 100;
+    
         text-align: center;
+        border: 2px dashed #ff6666;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
     }
-        
+
+    .timer-container span {
+        font-size: medium;
+    }
+
+    .timer {
+        display: inline-block;
+        background-color: #ff4d4d;
+        color: white;
+        padding: 5px 10px;
+        margin: 0 5px;
+        border-radius: 5px;
+        font-size: medium;
+    }
+
     .cart-header {
         display: flex;
         justify-content: space-between;
@@ -416,7 +436,7 @@
 
     .cartHeader {
         padding: 20px;
-        background-color: #e4e4a7 !important; /* Nền màu vàng nhạt */
+        
         border-radius: 10px; /* Bo góc */
         font-family: Arial, sans-serif;
         line-height: 1.6; /* Khoảng cách giữa các dòng */
@@ -447,6 +467,40 @@
                 color: #0056b3; /* Xanh đậm khi hover */
             }
 
+    .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .popup-content {
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        width: 80%;
+        max-width: 900px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #closePopup {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #D81B60;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
 </style>
 
 <div>
@@ -455,38 +509,33 @@
 
         <div class="container-fluid px-3">
             <div class=row>
+                
                 <div style="margin-bottom: 20px; margin-top:75px;padding-left:15px;padding-right:15px;">
-                    <div class="cartHeader clearfix">
-                        <div class="notice">
-                            <p>Mỗi khách hàng, tương ứng với 01 tài khoản, với mỗi số điện thoại, Email, Họ và tên, được mua số lượng vé quy định theo mỗi trận.</p>
-
-                            <h3 class="important">LƯU Ý QUAN TRỌNG:</h3>
-                            <p>
-                                Quý khách khi tới sân vận động cần mang theo CMT/CCCD đã đăng ký khi đặt vé để nhân viên an ninh đối chiếu nếu cần thiết. Trong trường hợp thông tin không khớp với thông tin đã đặt vé, quý khách phải hoàn toàn chịu trách nhiệm nếu không được vào sân.
-                            </p>
-                            <p>
-                                Quý khách có trách nhiệm tự bảo mật vé điện tử, trong trường hợp Email vé điện tử bị lộ cho người khác, quý khách sẽ chịu hoàn toàn mọi rủi ro (nếu có).
-                            </p>
-                            <p>
-                                Đây là vé điện tử không định danh, do đó để bảo vệ quyền lợi của mình, đề nghị quý khách bảo mật các thông tin liên quan tới vé khi nhận được qua Email. Tại cổng soát vé, vé sẽ chỉ được quét lần đầu tiên và duy nhất, các lần quét vé sau sẽ không được chấp nhận. Đề nghị quý khách lưu ý điều này để tránh xảy ra tranh chấp, tranh cãi. Nếu trường hợp này xảy ra, quý khách sẽ chịu hoàn toàn trách nhiệm.
-                            </p>
-                            <p>Mọi thắc mắc vui lòng liên hệ tổng đài 0xxxxxxxxxxx hoặc 0xxxxxxxxxx để được giải quyết nhanh chóng nhất.</p>
-
-                            <h3 class="terms">ĐIỀU KIỆN ĐIỀU KHOẢN:</h3>
-                            <p>- Vé chỉ được dùng 1 lần duy nhất để qua cửa soát vé.</p>
-                            <p>- Áp dụng 01 vé/01 người vào sân.</p>
-                            <p>- Vé này không được đổi trả, hoàn huỷ.</p>
-
-                            <h3 class="guide">HƯỚNG DẪN SỬ DỤNG VÉ ĐIỆN TỬ:</h3>
-                            <p>
-                                Bước 1: Sau khi thanh toán thành công, quý khách vui lòng kiểm tra Email để nhận vé điện tử trong đó có kèm mã QR. Trong Email, quý khách sẽ nhận được số lượng mã QR bằng số lượng vé quý khách đặt trên Website <a href="#">https://tcviettelfc.azurewebsites.net/</a>. Trong trường hợp quý khách không nhận được Email, quý khách vui lòng kiểm tra thư mục Spam hoặc liên hệ tổng đài: 0xxxxxxxx để được hỗ trợ.
-                            </p>
-                            <p>
-                                Bước 2: Chụp màn hình hoặc in nội dung vé điện tử bao gồm mã QR để tiết kiệm thời gian soát vé của quý khách.
-                            </p>
-                            <p>
-                                Bước 3: Khi đến sân vận động, quý khách vui lòng xuất trình mã QR đã được chụp lại hoặc in ra để vào sân.
-                            </p>
+                    <!-- Popup -->
+                    
+                    <div id="popupOverlay" class="popup-overlay">
+                        <div id="popupContent" class="popup-content">
+                            <div>
+                                <div class="cartHeader clearfix">
+                                    <div class="notice">
+                                        <p>Mỗi khách hàng, tương ứng với 01 tài khoản, với mỗi số điện thoại, Email, Họ và tên, được mua số lượng vé quy định theo mỗi trận.</p>
+                                        <h3 class="important">LƯU Ý QUAN TRỌNG:</h3>
+                                        <p>Quý khách khi tới sân vận động cần mang theo CMT/CCCD đã đăng ký khi đặt vé để nhân viên an ninh đối chiếu nếu cần thiết. Trong trường hợp thông tin không khớp với thông tin đã đặt vé, quý khách phải hoàn toàn chịu trách nhiệm nếu không được vào sân.</p>
+                                        <p>Quý khách có trách nhiệm tự bảo mật vé điện tử, trong trường hợp Email vé điện tử bị lộ cho người khác, quý khách sẽ chịu hoàn toàn mọi rủi ro (nếu có).</p>
+                                        <p>Đây là vé điện tử không định danh, do đó để bảo vệ quyền lợi của mình, đề nghị quý khách bảo mật các thông tin liên quan tới vé khi nhận được qua Email. Tại cổng soát vé, vé sẽ chỉ được quét lần đầu tiên và duy nhất, các lần quét vé sau sẽ không được chấp nhận. Đề nghị quý khách lưu ý điều này để tránh xảy ra tranh chấp, tranh cãi. Nếu trường hợp này xảy ra, quý khách sẽ chịu hoàn toàn trách nhiệm.</p>
+                                        <p>Mọi thắc mắc vui lòng liên hệ tổng đài 0xxxxxxxxxxx hoặc 0xxxxxxxxxx để được giải quyết nhanh chóng nhất.</p>
+                                        <h3 class="terms">ĐIỀU KIỆN ĐIỀU KHOẢN:</h3>
+                                        <p>- Vé chỉ được dùng 1 lần duy nhất để qua cửa soát vé.</p>
+                                        <p>- Áp dụng 01 vé/01 người vào sân.</p>
+                                        <p>- Vé này không được đổi trả, hoàn huỷ.</p>
+                                        <h3 class="guide">HƯỚNG DẪN SỬ DỤNG VÉ ĐIỆN TỬ:</h3>
+                                        <p>Bước 1: Sau khi thanh toán thành công, quý khách vui lòng kiểm tra Email để nhận vé điện tử trong đó có kèm mã QR. Trong Email, quý khách sẽ nhận được số lượng mã QR bằng số lượng vé quý khách đặt trên Website <a href="#">https://tcviettelfc.azurewebsites.net/</a>. Trong trường hợp quý khách không nhận được Email, quý khách vui lòng kiểm tra thư mục Spam hoặc liên hệ tổng đài: 0xxxxxxxx để được hỗ trợ.</p>
+                                        <p>Bước 2: Chụp màn hình hoặc in nội dung vé điện tử bao gồm mã QR để tiết kiệm thời gian soát vé của quý khách.</p>
+                                        <p>Bước 3: Khi đến sân vận động, quý khách vui lòng xuất trình mã QR đã được chụp lại hoặc in ra để vào sân.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="closePopup" class="close-popup-btn">Đóng</button>
                         </div>
                     </div>
 
@@ -514,6 +563,7 @@
                                     </div>
                                 </div>
                             </div>
+                        <a id="openPopup" class="open-popup-link" style="color:red;    margin-left: 22px;">Lưu ý quan trọng khi mua, sử dụng vé</a>
                             <div class="mt-4 sanbong" style="background-color: white;border-radius: 20px;">
                                 <div style="margin-left: 40px;padding-top:20px">
                                     <h3>Tiến hành đặt vé</h3>
@@ -699,9 +749,9 @@
                                 </div>
                                 <!-- Thêm nút Tiếp Tục ở đây -->
                                <button class="purchase-button" onclick="redirectToCheckout()" id="continueButton" style="display: none;">Tiếp tục</button>
-                               <div id="countdownContainer" style="display: none;">
+                            <div class="timer-container" id="countdownContainer" style="display: none;">
                                     <span>Giao dịch kết thúc sau</span>
-                                    <span id="countdownMinutes">10</span> : <span id="countdownSeconds">00</span>
+                                <span class="timer" id="countdownMinutes">10</span> : <span class="timer" id="countdownSeconds">00</span>
                                 </div>
                             </div>
                         </div>
@@ -1458,7 +1508,28 @@
         });
     });
 </script>
+<script>
+       // Mở popup
+    document.getElementById('openPopup').addEventListener('click', function(event) {
+        event.preventDefault(); // Ngừng hành động mặc định của thẻ <a>
+        document.getElementById('popupOverlay').style.display = 'flex'; // Hiển thị popup
+    });
 
+    // Đóng popup khi click vào nút đóng (ví dụ: <span id="closePopup">X</span>)
+    document.getElementById('closePopup').addEventListener('click', function() {
+        document.getElementById('popupOverlay').style.display = 'none'; // Ẩn popup
+    });
+
+    // Đóng popup khi click ra ngoài popup (trên overlay)
+    document.getElementById('popupOverlay').addEventListener('click', function(event) {
+        // Kiểm tra xem người dùng có click vào phần nội dung popup không
+        if (event.target === document.getElementById('popupOverlay')) {
+            document.getElementById('popupOverlay').style.display = 'none'; // Ẩn popup nếu click ngoài popup
+        }
+    });
+
+
+</script>
     </section>
     @* <script src="~/home_assets/js/buyTicket.js"></script> *@
     <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>

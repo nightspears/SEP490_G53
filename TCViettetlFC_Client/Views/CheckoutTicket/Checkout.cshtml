@@ -4,6 +4,7 @@
 @{
     var customerId = ViewData["CustomerId"];
     Layout = "_LayoutCommonTicket";
+
 }
 
 <style>
@@ -174,8 +175,18 @@
     .Button-mua button {
         font-size: x-large;
     }
+   
+
 </style>
 <div class="checkout-body">
+    <!-- Nút Back -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <button onclick="window.history.back();" class="btn btn-light">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </button>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-8">
