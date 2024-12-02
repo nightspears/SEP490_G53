@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Repositories.Interfaces;
 
@@ -14,11 +15,13 @@ namespace TCViettelFC_API.Controllers
         {
             _orderRepository = orderRepository;
         }
-        [Authorize(Policy = "staff")]
+        [EnableQuery]
+        //[Authorize(Policy = "staff")]
         [HttpGet("getticketorders")]
-        public async Task<IActionResult> GetAllTicketOrders()
+        public async Task<IQueryable> GetAllTicketOrders()
         {
-            return Ok(await _orderRepository.GetAllTicketOrders());
+            var result = await _orderRepository.GetAllTicketOrders();
+            return result.AsQueryable();
         }
         [Authorize(Policy = "staff")]
         [HttpGet("getorderedticket/{id}")]
@@ -85,17 +88,17 @@ namespace TCViettelFC_API.Controllers
             return StatusCode(500, new { Message = "An error occurred while processing the shipment" });
         }
 
-		// Endpoint to get orders by Customer Account ID
-		[HttpGet("getordersbyaccount/{customerAccountId}")]
-		public async Task<IActionResult> GetOrdersByCustomerAccountId(int customerAccountId)
-		{
-			var orders = await _orderRepository.GetOrdersByCustomerAccountIdAsync(customerAccountId);
-			if (orders == null || !orders.Any())
-			{
-				return NotFound($"No orders found for customer account ID {customerAccountId}.");
-			}
-			return Ok(orders);
-		}
+        // Endpoint to get orders by Customer Account ID
+        [HttpGet("getordersbyaccount/{customerAccountId}")]
+        public async Task<IActionResult> GetOrdersByCustomerAccountId(int customerAccountId)
+        {
+            var orders = await _orderRepository.GetOrdersByCustomerAccountIdAsync(customerAccountId);
+            if (orders == null || !orders.Any())
+            {
+                return NotFound($"No orders found for customer account ID {customerAccountId}.");
+            }
+            return Ok(orders);
+        }
 
-	}
+    }
 }

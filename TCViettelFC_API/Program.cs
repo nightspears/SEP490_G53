@@ -19,48 +19,48 @@ builder.Services.AddEndpointsApiExplorer();
 
 
 builder.Services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand().SetMaxTop(100)
-			.AddRouteComponents("odata", GetEdmModel()));
+            .AddRouteComponents("odata", GetEdmModel()));
 
 
 static IEdmModel GetEdmModel()
 {
-	ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
-	builder.EntitySet<News>("NewsOdata");
-	return builder.GetEdmModel();
+    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+    builder.EntitySet<News>("NewsOdata");
+    return builder.GetEdmModel();
 }
 builder.Services.AddSwaggerGen(c =>
 {
-	c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-	{
-		Title = "Your API",
-		Version = "v1"
-	});
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Your API",
+        Version = "v1"
+    });
 
-	// Cấu hình cho JWT Bearer
-	c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-	{
-		Name = "Authorization",
-		Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-		Scheme = "bearer",
-		BearerFormat = "JWT",
-		In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-		Description = "Nhập JWT Bearer token vào ô dưới đây (ví dụ: Bearer {token})"
-	});
+    // Cấu hình cho JWT Bearer
+    c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "Nhập JWT Bearer token vào ô dưới đây (ví dụ: Bearer {token})"
+    });
 
-	c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
-	{
-		{
-			new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-			{
-				Reference = new Microsoft.OpenApi.Models.OpenApiReference
-				{
-					Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-					Id = "Bearer"
-				}
-			},
-			new string[] {}
-		}
-	});
+    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
 });
 
 
@@ -89,44 +89,44 @@ builder.Services.AddAuthorization();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddAuthentication().AddJwtBearer(o =>
 {
-	o.TokenValidationParameters = new TokenValidationParameters()
-	{
-		ValidIssuer = builder.Configuration["JwtConfig:Issuer"],
-		ValidAudience = builder.Configuration["JwtConfig:Audience"],
-		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtConfig:Key"])),
-		ValidateIssuer = true,
-		ValidateAudience = true,
-		ValidateLifetime = true,
-		ValidateIssuerSigningKey = true
+    o.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidIssuer = builder.Configuration["JwtConfig:Issuer"],
+        ValidAudience = builder.Configuration["JwtConfig:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtConfig:Key"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true
 
 
-	};
+    };
 });
 builder.Services.AddCors(options =>
 {
-	options.AddPolicy("AllowMvcClient", builder =>
-	{
-		builder.WithOrigins("https://localhost:7004")  // MVC app origin
-			   .AllowCredentials()                   // Allow cookies and credentials
-			   .AllowAnyHeader()                     // Allow any headers
-			   .AllowAnyMethod();                    // Allow any HTTP methods (GET, POST, etc.)
-	});
+    options.AddPolicy("AllowMvcClient", builder =>
+    {
+        builder.WithOrigins("https://tcviettelfc.azurewebsites.net", "https://localhost:7004")// MVC app origin
+               .AllowCredentials()                   // Allow cookies and credentials
+               .AllowAnyHeader()                     // Allow any headers
+               .AllowAnyMethod();                    // Allow any HTTP methods (GET, POST, etc.)
+    });
 });
 builder.Services.AddAuthorization(options =>
 {
-	// Policy cho admin
-	options.AddPolicy("admin", policy =>
-		policy.RequireClaim("RoleId", "2"));
+    // Policy cho admin
+    options.AddPolicy("admin", policy =>
+        policy.RequireClaim("RoleId", "2"));
 
-	// Policy cho staff
-	options.AddPolicy("staff", policy =>
-		policy.RequireClaim("RoleId", "1"));
+    // Policy cho staff
+    options.AddPolicy("staff", policy =>
+        policy.RequireClaim("RoleId", "1"));
 
-	options.AddPolicy("entry", policy =>
-	  policy.RequireClaim("RoleId", "3"));
+    options.AddPolicy("entry", policy =>
+      policy.RequireClaim("RoleId", "3"));
 
-	options.AddPolicy("customer", policy =>
-	   policy.RequireClaim("CustomerId"));
+    options.AddPolicy("customer", policy =>
+       policy.RequireClaim("CustomerId"));
 });
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.InstallerServicesInAssembly(builder.Configuration);
@@ -137,13 +137,13 @@ app.UseSession();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
-	app.UseSwaggerUI(options =>
-	{
-		options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-		options.RoutePrefix = string.Empty;
-	});
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.RoutePrefix = string.Empty;
+    });
 
 }
 
