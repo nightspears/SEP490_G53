@@ -184,9 +184,10 @@
                     <thead>
                         <tr class="text-center" style="font-size: medium;">
                             <th scope="col"><input type="checkbox" id="selectAll"></th>
-                            <th scope="col">Tất cả (1 vé)</th>
+                            <th scope="col">Tất cả </th>
                             <th scope="col">Đơn giá</th>
                             <th scope="col">Số lượng</th>
+                            <th scope="col">Đồ đính kèm</th>
                             <th scope="col">Thành tiền</th>
                             <th scope="col"><i class="fas fa-trash-alt delete-icon"></i></th>
                         </tr>
@@ -337,6 +338,7 @@
                                 </td>
                                 <td>${price.toLocaleString('vi-VN')} đ</td>
                                 <td>${quantity}</td>
+                                    <td>${supplementaryTotalPrice.toLocaleString('vi-VN')} đ</td>
                                 <td>${totalItemPrice.toLocaleString('vi-VN')} đ</td>
                                 <td><i class="fas fa-trash-alt delete-icon" onclick="removeTicket(${index})"></i></td>
                             </tr>

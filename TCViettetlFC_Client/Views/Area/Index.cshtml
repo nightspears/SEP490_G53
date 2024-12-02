@@ -21,6 +21,7 @@
         margin-bottom: 20px;
 }
 
+
 .sanbong svg {
             background-color: #f8f9fa;
     display: block;
@@ -90,7 +91,7 @@
     }
 
         /* Tăng kích thước của các input và button */
-        #ticketForm input,
+        #ticketForm input:not(.input-checkbox),
         #ticketForm button {
             font-size: 16px; /* Tăng kích thước chữ trong input và button */
             height: 45px; /* Tăng chiều cao của input */
@@ -103,6 +104,7 @@
             font-size: 16px;
             height: 45px;
             padding: 10px 20px;
+            margin-top: 5px;
         }
 
         /* Tăng kích thước tiêu đề hoặc nhãn (label) */
@@ -137,7 +139,6 @@
     }
 
 
-    /* Kiểu overlay bao phủ toàn màn hình */
     .overlay {
         position: fixed;
         top: 0;
@@ -149,6 +150,7 @@
         align-items: center;
         justify-content: center;
         z-index: 1000; /* Hiển thị lớp overlay trên cùng */
+        overflow: auto; /* Cho phép cuộn dọc nếu cần */
     }
 
     /* Nội dung overlay */
@@ -156,28 +158,88 @@
         background-color: #fff;
         padding: 20px;
         border-radius: 8px;
-        width: 400px;
-        max-width: 90%;
+        width: 80%; /* Đặt chiều rộng tối đa */
+        max-width: 600px; /* Chiều rộng tối đa */
         text-align: center;
+        max-height: 80vh; /* Chiều cao tối đa của overlay */
+        overflow-y: auto; /* Cuộn dọc nếu nội dung quá dài */
     }
 
+        /* Tiêu đề */
         .overlay-content h3 {
             margin-top: 0;
         }
 
+    /* Container cho checkbox */
     .checkbox-container {
         display: flex;
-        flex-wrap: wrap; /* Cho phép xuống dòng khi hết chỗ */
-        gap: 10px; /* Khoảng cách giữa các checkbox */
+        flex-wrap: wrap; /* Cho phép các phần tử cuộn xuống khi không đủ chỗ */
+        justify-content: space-between; /* Căn đều các phần tử */
+        gap: 15px; /* Khoảng cách giữa các phần tử */
+        max-height: 60vh; /* Giới hạn chiều cao */
+        overflow-y: auto; /* Cho phép cuộn dọc nếu quá dài */
     }
 
+    /* Mỗi checkbox */
     .checkbox {
-        display: flex;
-        align-items: center;
-        margin-bottom: 5px; /* Khoảng cách dọc giữa các checkbox */
+        margin-top: 0px !important;
+        flex: 1 1 30%; /* Tự động điều chỉnh kích thước phần tử, chiếm 30% chiều rộng */
+    max-width: 200px; /* Giới hạn chiều rộng tối đa của mỗi checkbox */
+    box-sizing: border-box; /* Đảm bảo không bị tràn */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 200px; /* Đảm bảo mỗi ô có chiều cao cố định */
+    text-align: center;
     }
 
+        /* Căn chỉnh ảnh */
+        .checkbox .image-container img {
+            height: 60px; /* Giảm kích thước ảnh */
+            width:60px;
+        }
 
+        /* Căn chỉnh text */
+        .checkbox .text-container p {
+            font-size: 14px; /* Điều chỉnh kích thước font */
+            margin-bottom: 10px;
+        }
+
+        /* Input container (số lượng và checkbox) */
+        .checkbox .input-container {
+            display: flex;
+            justify-content: space-around;
+            /* Căn đều giữa ô số lượng và checkbox */
+            width: 100%;
+            align-items: center;
+        }
+
+        /* Điều chỉnh size của input số lượng */
+        .checkbox input[type="number"] {
+            width: 50px; /* Giảm chiều rộng của input */
+            padding: 5px;
+            font-size: 14px;
+            height: 26px !important;
+        }
+
+        /* Căn chỉnh checkbox */
+        .checkbox input[type="checkbox"] {
+            margin: 0;
+        }
+
+    /* Style cho nút đóng */
+    button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+        }
 
     /* Tổng thể giỏ hàng */
     .cart-container {
@@ -205,7 +267,7 @@
     .cart-body {
         border: 1px dashed #ced4da; /* Viền nét đứt */
         border-radius: 5px; /* Bo góc */
-        height: 150px; /* Chiều cao tối đa */
+        height: 215px; /* Chiều cao tối đa */
         overflow-y: auto; /* Hiển thị thanh cuộn khi nội dung tràn */
         padding: 10px; /* Khoảng cách nội dung */
         color: #6c757d; /* Màu xám */
@@ -297,53 +359,60 @@
         font-size: 16px;
     }
 
-   
 
     .trandoidau {
         background-color: #f8f9fa;
-        border-radius: 20px;
-        padding: 20px;
+        border-radius: 15px;
+        padding: 2px 5px; /* Giảm padding lên và xuống */
         text-align: center;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        max-width: 100%; /* Giữ nguyên chiều rộng */
+        margin: 0 auto;
+        max-height:fit-content;
     }
 
     .trandoidau-body {
         display: flex;
         justify-content: space-around;
-        margin-top: 20px;
+        margin-top: 2px; /* Giảm khoảng cách giữa tiêu đề và nội dung */
     }
 
     .team-logo {
-        width: 200px;
+        width: 130px; /* Giảm chiều rộng logo */
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin-bottom: 2px; /* Giảm margin dưới mỗi logo */
     }
 
         .team-logo img {
             max-width: 100%;
-            max-height: 200px;
+            max-height: 60px; /* Giảm chiều cao của ảnh */
         }
 
         .team-logo label {
-            margin-top: 10px;
+            margin-top: 3px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 12px; /* Giảm kích thước chữ */
         }
 
-  .ngay-gio-sandau {
-    display: flex;
-    flex-direction: column; /* Đặt các thông tin ngày, giờ, và sân đấu theo cột */
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+    .ngay-gio-sandau {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 2px;
+    }
 
-.ngay-gio-sandau span {
-    display: block; /* Mỗi span trên một dòng */
-    margin: 5px 0; /* Khoảng cách giữa các dòng */
-}
+        .ngay-gio-sandau span {
+            display: block;
+            margin: 2px 0; /* Giảm khoảng cách giữa các span */
+            font-size: 10px; /* Giảm kích thước chữ */
+        }
+
+
 
     .cartHeader {
         padding: 20px;
@@ -426,7 +495,7 @@
                     <div class="row pt-5">
                     <div class="col-12 col-md-8 mb-3">
                             <div class="trandoidau">
-                                <h2>TRẬN ĐỐI ĐẦU GIỮA</h2>
+                                <h2 style="font-size: 20px;">TRẬN ĐỐI ĐẦU GIỮA</h2>
                                 <div class="d-flex trandoidau-body">
                                     <!-- Đội cố định: Viettel FC -->
                                     <div class="team-logo" id="teamFixed">
@@ -719,22 +788,31 @@
                                 @foreach (var item in supplementaryItems)
                                 {
                                     <div class="checkbox">
-                                        <label>
-                                    <input style="height: fit-content;" type="checkbox" name="supplementary[]" value="@item.ItemId" data-price="@item.Price">
-                                            @item.ItemName - @item.Price VND
-                                        </label>
+                                        <div class="image-container">
+                                            <img src="@item.ImageUrl" alt="@item.ItemName">
+                                        </div>
+                                        <div class="text-container">
+                                            <p>@item.ItemName</p>
+                                    <p id="price-supplement" class="price" data-price="@item.Price">@item.Price VND</p>
 
-                                        <!-- Input để chọn số lượng, giới hạn từ 1 đến 4 -->
-                                        <input type="number" name="quantity_@item.ItemId" min="1" max="4" value="1" class="form-control" style="width: 60px; display: inline-block; margin-left: 10px;">
+                                        </div>
+                                        <div class="input-container">
+                                           <div>
+                                               <input type="number" name="quantity_@item.ItemId" min="1" max="4" value="1" class="form-control">
+                                           </div> 
+                                            <div style="display: flex;align-items: center;">
+                                                        <input class="input-checkbox" type="checkbox" name="supplementary[]" value="@item.ItemId" data-price="@item.Price">
+                                            </div>
+                                    
+                                        </div>
                                     </div>
                                 }
                             </div>
-
                         }
-
                         <button type="button" id="closeOverlay">Đóng</button>
                     </div>
                 </div>
+
                 
             
                 <button type="button" id="addToCartBtn" class="btn btn-primary text-white">
@@ -900,7 +978,10 @@
 
                 // Tổng giá = giá vé * số lượng vé + tổng đồ đính kèm
                 const totalPrice = (pricePerTicket * ticketQuantity) + supplementaryTotal;
-                document.getElementById('totalPrice').value = totalPrice.toFixed(0) + ' VND'; // Hiển thị tổng giá
+        // Format tổng giá với dấu chấm phân cách hàng nghìn
+        const formattedTotalPrice = new Intl.NumberFormat('vi-VN').format(totalPrice);
+
+        document.getElementById('totalPrice').value = formattedTotalPrice + ' đ'; // Hiển thị tổng giá
             }
 
             // Gán sự kiện cho các trường số lượng đồ đính kèm
@@ -1361,6 +1442,23 @@
                 });
             });
         </script>
+<script>
+    function formatCurrency(value) {
+        return parseInt(value).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const prices = document.querySelectorAll('.price');
+
+        prices.forEach(function (priceElement) {
+            const priceValue = priceElement.getAttribute('data-price');
+            if (priceValue) {
+                priceElement.innerText = formatCurrency(priceValue);
+            }
+        });
+    });
+</script>
+
     </section>
     @* <script src="~/home_assets/js/buyTicket.js"></script> *@
     <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
