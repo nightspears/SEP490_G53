@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TCViettelFC_API.Models;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 using TCViettelFC_API.Dtos.CheckOut;
+using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
 
 namespace TCViettelFC_API.Controllers
@@ -16,7 +11,7 @@ namespace TCViettelFC_API.Controllers
     {
         private readonly Sep490G53Context _context;
         private readonly ITicketUtilRepository _ticketUtilRepository;
-        public CheckoutController(Sep490G53Context context, ITicketUtilRepository ticketUtilRepository )
+        public CheckoutController(Sep490G53Context context, ITicketUtilRepository ticketUtilRepository)
         {
             _context = context;
             _ticketUtilRepository = ticketUtilRepository;
@@ -25,9 +20,9 @@ namespace TCViettelFC_API.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request)
         {
-			if (request.Customer == null || string.IsNullOrEmpty(request.Customer.FullName) || string.IsNullOrEmpty(request.Customer.Email))
-			{
-				return BadRequest(new { Message = "Customer data is required." });
+            if (request.Customer == null || string.IsNullOrEmpty(request.Customer.FullName) || string.IsNullOrEmpty(request.Customer.Email))
+            {
+                return BadRequest(new { Message = "Customer data is required." });
             }
 
             // Validate Address data
@@ -35,40 +30,40 @@ namespace TCViettelFC_API.Controllers
             {
                 return BadRequest(new { Message = "Address data is required." });
             }
-			if (request.OrderProduct == null || string.IsNullOrEmpty(request.OrderProduct.OrderCode) || string.IsNullOrEmpty(request.OrderProduct.ShipmentFee.ToString()) || string.IsNullOrEmpty(request.OrderProduct.OrderDate.ToString()))
-			{
-				return BadRequest(new { Message = "Order product data is required." });
-			}
+            if (request.OrderProduct == null || string.IsNullOrEmpty(request.OrderProduct.OrderCode) || string.IsNullOrEmpty(request.OrderProduct.ShipmentFee.ToString()) || string.IsNullOrEmpty(request.OrderProduct.OrderDate.ToString()))
+            {
+                return BadRequest(new { Message = "Order product data is required." });
+            }
 
-			if (request.OrderProductDetails == null || !request.OrderProductDetails.Any())
+            if (request.OrderProductDetails == null || !request.OrderProductDetails.Any())
             {
                 return BadRequest(new { Message = "Order product details are required." });
             }
 
-			if (string.IsNullOrEmpty(request.Payment?.PaymentGateway))
-			{
-				return BadRequest(new { Message = "Payment gateway is required." });
-			}
-			if (request.Payment?.TotalAmount < 0 || request.OrderProduct?.TotalPrice < 0)
-			{
-				return BadRequest(new { Message = "Total price and payment amount cannot be negative." });
-			}
-			using var transaction = await _context.Database.BeginTransactionAsync();
+            if (string.IsNullOrEmpty(request.Payment?.PaymentGateway))
+            {
+                return BadRequest(new { Message = "Payment gateway is required." });
+            }
+            if (request.Payment?.TotalAmount < 0 || request.OrderProduct?.TotalPrice < 0)
+            {
+                return BadRequest(new { Message = "Total price and payment amount cannot be negative." });
+            }
+            using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
                 // 1. Create Customer if not exists
-              
-                  var  customer = new Customer
-                    {
-                        AccountId = request.Customer.AccountId,
-                        Email = request.Customer.Email,
-                        Phone = request.Customer.Phone,
-                        FullName= request.Customer.FullName,
-                    };
-                    _context.Customers.Add(customer);
-                    await _context.SaveChangesAsync();
-                
-             
+
+                var customer = new Customer
+                {
+                    AccountId = request.Customer.AccountId,
+                    Email = request.Customer.Email,
+                    Phone = request.Customer.Phone,
+                    FullName = request.Customer.FullName,
+                };
+                _context.Customers.Add(customer);
+                await _context.SaveChangesAsync();
+
+
                 // 2. Create Address
                 var address = new Address
                 {

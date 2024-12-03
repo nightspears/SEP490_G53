@@ -3,8 +3,117 @@
   "WorkspaceRootPath": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\admin\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\admin\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\shared\\_layoutentry.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\shared\\_layoutentry.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\entry\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\entry\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\entrycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\entrycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\entry\\verifyitem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\entry\\verifyitem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\entry\\verifyticket.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\entry\\verifyticket.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\shared\\_layoutadmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\changepasswordmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\changepasswordmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\staff\\ticketorders.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\staff\\ticketorders.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\shared\\_layoutadminreal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\shared\\_layoutadminreal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\admin\\usermanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\admin\\usermanagement.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\customerregistermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\customerregistermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\AppData\\Local\\SourceServer\\3104adc48b716528c315f1db323ce1b5b069e5d06272f5c860c3c86b14119555\\src\\Mvc\\Mvc.ViewFeatures\\src\\ViewExecutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\AppData\\Local\\SourceServer\\33c7f453f5d1c723bbbfa90a91b12d8f16343c8f6c3cf1da8c0d70b347b547f6\\src\\Mvc\\Mvc.Razor\\src\\RazorView.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Admin\\AppData\\Local\\Microsoft\\VisualStudio\\BackupFiles\\TCViettelFC_API\\Recovered-Dec-03-2024-0654PM.UserRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\ResetPassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\User\\ResetPassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\ForgotPassUserModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\ForgotPassUserModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\verify.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\verify.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\customer\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\customer\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\customerforgotpassmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\customerforgotpassmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\user\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\customersendmailmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\customersendmailmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\models\\userloginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:models\\userloginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,8 +124,16 @@
       "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:views\\news\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|d:\\resumeprojects\\sep490_g53\\tcviettetlfc_client\\controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{76141A8A-F484-40EA-BA97-7A00D83ABAC8}|TCViettetlFC_Client.csproj|solutionrelative:controllers\\newscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\UserResetPassModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Models\\UserResetPassModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\Verify.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\User\\Verify.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\ForgotPassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Views\\User\\ForgotPassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +143,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 82,
+          "SelectedChildIndex": 95,
           "Children": [
             {
               "$type": "Bookmark",
@@ -355,6 +472,380 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T14:03:46.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_LayoutEntry.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_LayoutEntry.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_LayoutEntry.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_LayoutEntry.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_LayoutEntry.cshtml",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAACYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T13:50:54.461Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "VerifyTicket.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\VerifyTicket.cshtml",
+              "RelativeDocumentMoniker": "Views\\Entry\\VerifyTicket.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\VerifyTicket.cshtml",
+              "RelativeToolTip": "Views\\Entry\\VerifyTicket.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T13:34:02.662Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "VerifyItem.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\VerifyItem.cshtml",
+              "RelativeDocumentMoniker": "Views\\Entry\\VerifyItem.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\VerifyItem.cshtml",
+              "RelativeToolTip": "Views\\Entry\\VerifyItem.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T13:34:00.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EntryController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\EntryController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EntryController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\EntryController.cs",
+              "RelativeToolTip": "Controllers\\EntryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T12:53:17.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Home.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\Home.cshtml",
+              "RelativeDocumentMoniker": "Views\\Entry\\Home.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Entry\\Home.cshtml",
+              "RelativeToolTip": "Views\\Entry\\Home.cshtml",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAAAI4AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T12:41:16.878Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_LayoutAdmin.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_LayoutAdmin.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_LayoutAdmin.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_LayoutAdmin.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF0AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T12:40:41.805Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "_LayoutAdminReal.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_LayoutAdminReal.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_LayoutAdminReal.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Shared\\_LayoutAdminReal.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_LayoutAdminReal.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGsAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T12:34:21.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UserManagement.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\UserManagement.cshtml",
+              "RelativeDocumentMoniker": "Views\\Admin\\UserManagement.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\UserManagement.cshtml",
+              "RelativeToolTip": "Views\\Admin\\UserManagement.cshtml",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAADwAAACCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T12:30:02.75Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ViewExecutor.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\AppData\\Local\\SourceServer\\3104adc48b716528c315f1db323ce1b5b069e5d06272f5c860c3c86b14119555\\src\\Mvc\\Mvc.ViewFeatures\\src\\ViewExecutor.cs",
+              "ToolTip": "C:\\Users\\Admin\\AppData\\Local\\SourceServer\\3104adc48b716528c315f1db323ce1b5b069e5d06272f5c860c3c86b14119555\\src\\Mvc\\Mvc.ViewFeatures\\src\\ViewExecutor.cs",
+              "ViewState": "AgIAAMsAAAAAAAAAAIAzwNgAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T12:27:49.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "RazorView.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\AppData\\Local\\SourceServer\\33c7f453f5d1c723bbbfa90a91b12d8f16343c8f6c3cf1da8c0d70b347b547f6\\src\\Mvc\\Mvc.Razor\\src\\RazorView.cs",
+              "ToolTip": "C:\\Users\\Admin\\AppData\\Local\\SourceServer\\33c7f453f5d1c723bbbfa90a91b12d8f16343c8f6c3cf1da8c0d70b347b547f6\\src\\Mvc\\Mvc.Razor\\src\\RazorView.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAIAzwFQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T12:27:44.87Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "CustomerRegisterModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerRegisterModel.cs",
+              "RelativeDocumentMoniker": "Models\\CustomerRegisterModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerRegisterModel.cs",
+              "RelativeToolTip": "Models\\CustomerRegisterModel.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAgwBAAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T12:15:54.706Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Controllers\\AdminController.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAawFoAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T12:12:08.331Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ChangePasswordModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\ChangePasswordModel.cs",
+              "RelativeDocumentMoniker": "Models\\ChangePasswordModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\ChangePasswordModel.cs",
+              "RelativeToolTip": "Models\\ChangePasswordModel.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAwBAAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T12:11:08.057Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChangePassword.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "Views\\Admin\\ChangePassword.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Admin\\ChangePassword.cshtml",
+              "RelativeToolTip": "Views\\Admin\\ChangePassword.cshtml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAwwDMAAACTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T12:10:54.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Recovered-Dec-03-2024-0654PM.UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\AppData\\Local\\Microsoft\\VisualStudio\\BackupFiles\\TCViettelFC_API\\Recovered-Dec-03-2024-0654PM.UserRepository.cs",
+              "ToolTip": "C:\\Users\\Admin\\AppData\\Local\\Microsoft\\VisualStudio\\BackupFiles\\TCViettelFC_API\\Recovered-Dec-03-2024-0654PM.UserRepository.cs",
+              "ViewState": "AgIAAPYAAAAAAAAAAAAywA8BAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T12:00:59.037Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "UserResetPassModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\UserResetPassModel.cs",
+              "RelativeDocumentMoniker": "Models\\UserResetPassModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\UserResetPassModel.cs",
+              "RelativeToolTip": "Models\\UserResetPassModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T11:02:29.438Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ResetPassword.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\ResetPassword.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\ResetPassword.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\ResetPassword.cshtml",
+              "RelativeToolTip": "Views\\Customer\\ResetPassword.cshtml",
+              "ViewState": "AgIAABAAAAAAAAAAAAA0wBUAAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T10:55:01.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ResetPassword.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\ResetPassword.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\ResetPassword.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\ResetPassword.cshtml",
+              "RelativeToolTip": "Views\\User\\ResetPassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T10:54:51.878Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Verify.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Verify.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\Verify.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Verify.cshtml",
+              "RelativeToolTip": "Views\\Customer\\Verify.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAAoAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T10:40:41.42Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Verify.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\Verify.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\Verify.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\Verify.cshtml",
+              "RelativeToolTip": "Views\\User\\Verify.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAxwBEAAABgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T10:40:34.206Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Customer\\Login.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Customer\\Login.cshtml",
+              "RelativeToolTip": "Views\\Customer\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T10:40:20.383Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "Controllers\\CustomerController.cs",
+              "ViewState": "AgIAALoAAAAAAAAAAAA0wMkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T10:28:31.255Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAwwLAAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T06:10:58.39Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "CustomerSendMailModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerSendMailModel.cs",
+              "RelativeDocumentMoniker": "Models\\CustomerSendMailModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerSendMailModel.cs",
+              "RelativeToolTip": "Models\\CustomerSendMailModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T10:17:25.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "CustomerForgotPassModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerForgotPassModel.cs",
+              "RelativeDocumentMoniker": "Models\\CustomerForgotPassModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\CustomerForgotPassModel.cs",
+              "RelativeToolTip": "Models\\CustomerForgotPassModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T10:17:20.285Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ForgotPassUserModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\ForgotPassUserModel.cs",
+              "RelativeDocumentMoniker": "Models\\ForgotPassUserModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\ForgotPassUserModel.cs",
+              "RelativeToolTip": "Models\\ForgotPassUserModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T10:17:08.831Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ForgotPassword.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\ForgotPassword.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\ForgotPassword.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\ForgotPassword.cshtml",
+              "RelativeToolTip": "Views\\User\\ForgotPassword.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABMAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T10:16:30.94Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "UserLoginViewModel.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\UserLoginViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\UserLoginViewModel.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Models\\UserLoginViewModel.cs",
+              "RelativeToolTip": "Models\\UserLoginViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-03T06:09:25.591Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\Login.cshtml",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\User\\Login.cshtml",
+              "RelativeToolTip": "Views\\User\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-03T06:09:10.736Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\News\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\News\\Index.cshtml",
@@ -362,25 +853,24 @@
               "RelativeToolTip": "Views\\News\\Index.cshtml",
               "ViewState": "AgIAAFQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-02T15:13:36.044Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T15:13:36.044Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 10,
               "Title": "TicketOrders.cshtml",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\TicketOrders.cshtml",
               "RelativeDocumentMoniker": "Views\\Staff\\TicketOrders.cshtml",
               "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Views\\Staff\\TicketOrders.cshtml",
               "RelativeToolTip": "Views\\Staff\\TicketOrders.cshtml",
-              "ViewState": "AgIAAHEAAAAAAAAAAAAUwH8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-12-02T15:12:52.734Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 12,
               "Title": "NewsController.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\NewsController.cs",
               "RelativeDocumentMoniker": "Controllers\\NewsController.cs",
@@ -393,7 +883,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 29,
               "Title": "StaffController.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\StaffController.cs",
               "RelativeDocumentMoniker": "Controllers\\StaffController.cs",
@@ -401,8 +891,7 @@
               "RelativeToolTip": "Controllers\\StaffController.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAmwCgAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T14:27:24.125Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-02T14:27:24.125Z"
             }
           ]
         },

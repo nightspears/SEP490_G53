@@ -1,0 +1,32 @@
+﻿@model EmailVerificationModel
+@{
+    ViewData["Title"] = "Xác nhận email";
+}
+<div class="main-wrapper login-body">
+    <div class="login-wrapper">
+        <div class="container">
+            <div class="loginbox">
+                <div class="login-left" style="background:red;">
+                    <img class="img-fluid" src="~/assets/img/tcvtfc.png" alt="Logo">
+                </div>
+                <div class="login-right">
+                    <div class="login-right-wrap">
+                        <h1>Mã xác nhận đã được gửi đến email của bạn</h1>
+                        <p class="account-subtitle">Nhập mã xác nhận</p>
+                        <form asp-action="Verify" method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="Mã xác nhận" asp-for="Code">
+                                <span asp-validation-for="Code" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-block w-100" type="submit">Xác nhận</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

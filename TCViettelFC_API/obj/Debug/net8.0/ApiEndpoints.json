@@ -2843,6 +2843,22 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.UserController",
+    "Method": "CheckExistedMailAsync",
+    "RelativePath": "api/User/checkmail/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.UserController",
     "Method": "LoginAsync",
     "RelativePath": "api/User/login",
     "HttpMethod": "POST",
@@ -2852,6 +2868,54 @@
       {
         "Name": "loginDto",
         "Type": "TCViettelFC_API.Dtos.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.UserController",
+    "Method": "ResetPasswordAsync",
+    "RelativePath": "api/User/resetpassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "TCViettelFC_API.Dtos.ResetPassRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.UserController",
+    "Method": "SendConfimationEmailAsync",
+    "RelativePath": "api/User/sendcode/{email}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.UserController",
+    "Method": "VerifyConfirmationCodeAsync",
+    "RelativePath": "api/User/verify",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "TCViettelFC_API.Dtos.VerifyConfirmationCodeRequest",
         "IsRequired": true
       }
     ],

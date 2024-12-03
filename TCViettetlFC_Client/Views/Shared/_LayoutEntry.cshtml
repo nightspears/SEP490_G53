@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đổi mật khẩu</title>
+    <link rel="stylesheet" href="~/admin_assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="~/customer_assets/css/bootstrap.min.css">
+
+   
+
+    <!-- Custom CSS -->
+    <style>
+
+        
+
+     
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 50px;
+        }
+
+
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .card{
+          
+            margin:0 auto;
+            width:40%;
+            
+        }
+        .card-body {
+            padding: 2%;
+            margin:2%;
+
+            
+            
+        }
+
+
+        h3 {
+            color: #007bff;
+            margin: 0 auto;
+            text-align: center; /* Centers the h4 text */
+            margin-top: 12%;
+        }
+       
+
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+            display: block; /* Ensures button takes up the full width */
+            margin: 0 auto; /* Centers the button horizontally */
+           
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+
+        .alert {
+            margin-bottom: 20px;
+        }
+
+
+        @@media (max-width: 768px) {
+            .card-body {
+                padding: 20px;
+                margin:1%;
+            }
+
+            .card {
+                width: 100%;
+                margin: 0 auto;
+            }
+            h3 {
+                font-size: 24px;
+            }
+
+            .btn-primary {
+                width: 80%;
+            }
+        } 
+    </style>
+</head>
+<body>
+
+    <!-- Page content goes here -->
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <!-- Bootstrap JS (optional, if you need JS components like modals, tooltips, etc.) -->
+   
+</body>
+</html>
