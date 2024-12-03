@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using TCViettelFC_API.Dtos;
-using TCViettelFC_API.Models;
-using TCViettelFC_API.Repositories.Implementations;
 using TCViettelFC_API.Repositories.Interfaces;
 
 namespace TCViettelFC_API.Controllers
@@ -25,6 +23,16 @@ namespace TCViettelFC_API.Controllers
             var newsList = _newRepository.GetAllNewsAsQueryable();
 
             return newsList;
+        }
+        [EnableQuery]
+        [HttpGet("getallactivenews")]
+        public async Task<IQueryable<GetNewDto>> GetAllActiveNews()
+        {
+            // Fetch the active news from the repository
+            var newsList = await _newRepository.GetAllActiveNews();
+
+            // Return the IQueryable, OData will handle pagination for you
+            return newsList.AsQueryable();
         }
         // API get new by id
         [HttpGet("getnewsbyid/{id}")]
@@ -53,7 +61,7 @@ namespace TCViettelFC_API.Controllers
 
         [Authorize(Policy = "staff")]
         [HttpPost("create")]
-        public async Task<IActionResult> CreateNews( CreateNewDto newDto)
+        public async Task<IActionResult> CreateNews(CreateNewDto newDto)
         {
             try
             {

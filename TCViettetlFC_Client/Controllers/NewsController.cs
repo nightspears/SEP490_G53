@@ -6,25 +6,31 @@ namespace TCViettetlFC_Client.Controllers
 {
     public class NewsController : Controller
     {
+        private readonly int itemPerPage = 8;
         private IApiHelper _apiHelper;
         public NewsController(IApiHelper apiHelper)
         {
             _apiHelper = apiHelper;
         }
-        private async Task<List<CustomerNewsModel>> GetAllNews()
+        private async Task<List<CustomerNewsModel>> GetAllNews(int page)
         {
-            return await _apiHelper.GetApiResponseAsync<List<CustomerNewsModel>>("New/GetAllNews");
+            return await _apiHelper.GetApiResponseAsync<List<CustomerNewsModel>>($"New/getallactivenews?$skip={(page - 1) * itemPerPage}&$top={itemPerPage}");
         }
         private async Task<CustomerNewsModel> GetNewsByNewsId(int id)
         {
             return await _apiHelper.GetApiResponseAsync<CustomerNewsModel>($"new/getnewsbyid/{id}");
         }
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(int id = 1)
         {
-            var news = await GetAllNews();
+            var result = await _apiHelper.GetApiResponseAsync<List<CustomerNewsModel>>($"New/getallactivenews");
+            int totalPage = (int)Math.Ceiling((double)result.Count() / itemPerPage);
+            if (id > totalPage) id = totalPage;
+            if (id < 1) id = 1;
+            TempData["TotalPages"] = totalPage;
+            var news = await GetAllNews(id);
             return View(news);
         }
-        [HttpGet("News/{id}")]
         public async Task<IActionResult> Details(int id)
         {
             var news = await GetNewsByNewsId(id);

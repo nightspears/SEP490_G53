@@ -1,10 +1,61 @@
 ﻿@model TCViettetlFC_Client.Models.CustomerNewsModel
+@{
+    Layout = "_layoutCommon";
+    ViewData["Title"] = "Tin tức viettelfc";
+}
+<style>
+    /* Default for larger screens (PC) */
+    .dynamic-margin {
+        margin-top: 8%; /* Applies to desktop and larger devices */
+    }
+    /* Override for smaller screens (mobile) */
+    @@media (max-width: 768px) {
+        .dynamic-margin {
+            margin-top: 25%; /* Applies to devices with a width of 768px or less */
+        }
+    }
 
+
+
+    /* Container for the news content */
+    .news-content {
+        background-color: #f9f9f9; /* Light background for readability */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    /* Title styling */
+    .news-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333; /* Darker text for contrast */
+    }
+
+    /* Meta information (e.g., date) */
+    .news-meta {
+        font-size: 1.5rem !important;
+        font-style: italic;
+    }
+
+    div.news-body p {
+        font-size: 1.8rem !important; /* Ensure the font size is applied */
+        line-height: 2 !important; /* Override existing line-height */
+        color: #444 !important; /* Adjust text color */
+        font-family: "Arial", sans-serif !important;
+    }
+
+</style>
 @if (Model != null)
 {
-    <div>
-        @Html.Raw(Model.Content)
+    <div class="container dynamic-margin">
+        <div class="news-content">
+            <div class="news-meta text-center text-muted mb-4">
+                <span>Ngày đăng: @Model.CreatedAt?.ToString("dd-MM-yyyy hh:mm:ss")</span>
+            </div>
+            <div class="news-body">
+                @Html.Raw(Model.Content)
+            </div>
+        </div>
     </div>
-    <a href="/News">Back to All News</a>
 }
-

@@ -38,6 +38,20 @@ namespace TCViettelFC_API.Repositories.Implementations
             return news;
 
         }
+        public async Task<IEnumerable<GetNewDto>> GetAllActiveNews()
+        {
+            var news = await _context.News.Include(x => x.Creator).Include(x => x.NewsCategory).Where(x => x.Status == 1).Select(n => new GetNewDto
+            {
+                Id = n.Id,
+                NewsCategory = n.NewsCategory.CategoryName,
+                Title = n.Title,
+                Content = n.Content,
+                Image = n.Image,
+                CreatedAt = n.CreatedAt,
+
+            }).ToListAsync();
+            return news;
+        }
         public async Task<List<GetNewDto>> GetAllNewsAsync()
         {
             var news = await _context.News.Include(x => x.Creator).Include(x => x.NewsCategory)
