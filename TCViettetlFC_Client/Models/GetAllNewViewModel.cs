@@ -17,6 +17,8 @@
         public DateTime? CreatedAt { get; set; }
 
         public int? Status { get; set; }
+        public int? NewsCategoryId { get; set; }
+
 
     }
 }

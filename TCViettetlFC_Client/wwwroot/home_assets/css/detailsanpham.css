@@ -184,6 +184,7 @@ li {
 @media (max-width: 425px) {
     #shirtNameOverlay {
         font-size: 15px; /* Adjust font size for smaller screens */
+        top:28%
     }
 
     #shirtNumberOverlay {

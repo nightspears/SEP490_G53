@@ -343,11 +343,11 @@
             </div>
             <!-- Inputs for shirt name and number -->
             <div class="col-sm-6">
-                <input type="text" style="height:45px !important" placeholder="Nhập tên cầu thủ" class="form-control" id="nameAoCustom" onchange="updateText('shirtNameOverlay', this.value)">
+                <input type="text" style="height:45px !important" placeholder="Nhập tên cầu thủ" class="form-control" id="nameAoCustom" >
             </div>
 
             <div class="col-sm-6">
-                <input type="text" style="height:45px !important" placeholder="Nhập số áo" class="form-control" id="SoAoCustom" onchange="updateText('shirtNumberOverlay', this.value)">
+                <input type="text" style="height:45px !important" placeholder="Nhập số áo" class="form-control" id="SoAoCustom" >
             </div>
             <div style="margin-left:15px ; margin-top:55px ; margin-right:10px">
                 <p style="color:red"><strong>Ghi chú: </strong> Ảnh mẫu có thể không cùng màu sắc và kiểu dáng sản phẩm .</p>
@@ -374,3 +374,27 @@
 <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
 
 <script src="~/home_assets/js/detailsanpham.js"></script>
+<script>
+    $(document).on('input', '#nameAoCustom', function () {
+        debugger
+        let value = $(this).val();
+        if (value.length > 16) {
+            value = value.substring(0, 16);
+        }
+        $(this).val(value); 
+        updateText('shirtNameOverlay', value);
+    });
+
+    $(document).on('input', '#SoAoCustom', function () {
+
+        let value = $(this).val().replace(/[^0-9]/g, '');
+
+        if (value > 999) value = 999;
+        if (value < 0) value = 0;
+        $("#SoAoCustom").val(value);
+        updateText('shirtNumberOverlay', value);
+    });
+    function updateText(elementId, text) {
+       document.getElementById(elementId).textContent = text;
+    }
+</script>

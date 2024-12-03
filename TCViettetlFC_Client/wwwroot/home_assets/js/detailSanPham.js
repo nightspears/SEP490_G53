@@ -18,7 +18,6 @@ $(document).ready(function () {
 
 });
 function format() {
-    debugger
     function formatCurrency(value) {
         return parseInt(value).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
@@ -102,7 +101,6 @@ function AddToCart(id) {
         var soLuong = 1;
         var cartItems = getCartFromLocalStorage();
         var item_id = cartItems.length > 0 ? Math.max(...cartItems.map(item => item.Item_id)) + 1 : 1;
-        debugger
         var existing = cartItems.find(function (item) {
             return item.productId === productId && item.size === size && item.shirtNumber === playerId;
         });
@@ -195,22 +193,19 @@ function ChonSoAo() {
 }
 
 function customAo() {
-    debugger
     if ($("#customAo").is(":checked")) {
-        debugger
         document.getElementById("previewModal").style.display = "flex";
         $("#shirtNumber").val(-1)
     }
-    debugger
 }
 
 function closeModal() {
     document.getElementById("previewModal").style.display = "none";
 }
 
-function updateText(elementId, text) {
-    document.getElementById(elementId).textContent = text;
-}
+//function updateText(elementId, text) {
+//    document.getElementById(elementId).textContent = text;
+//}
 
 window.onclick = function (event) {
     if (event.target == document.getElementById("previewModal")) {

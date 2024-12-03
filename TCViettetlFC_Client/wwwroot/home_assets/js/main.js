@@ -746,213 +746,213 @@ $(document).ready(function () {
 
     /*--------------- Cart Features  ------------------*/
 
-    var $cartitems = JSON.parse(sessionStorage.getItem('cartItems')) || [],
-        $cartquantity = $cartitems.length,
-        $cartTotal = 0;
+    //var $cartitems = JSON.parse(sessionStorage.getItem('cartItems')) || [],
+    //    $cartquantity = $cartitems.length,
+    //    $cartTotal = 0;
 
-    function getCartLength(){
-        $cartquantity = $cartitems.length;
-        $('.cartitems').html($cartquantity);
-    }
+    //function getCartLength(){
+    //    $cartquantity = $cartitems.length;
+    //    $('.cartitems').html($cartquantity);
+    //}
 
-    function updateSession(){
-        getCartLength();
-        sessionStorage.setItem('cartQuantity', $cartquantity);
-        sessionStorage.setItem('cartItems', JSON.stringify($cartitems));
-    }
+    //function updateSession(){
+    //    getCartLength();
+    //    sessionStorage.setItem('cartQuantity', $cartquantity);
+    //    sessionStorage.setItem('cartItems', JSON.stringify($cartitems));
+    //}
 
-    function addToCart(data){
-        if(!data){
-            return;
-        }
-        var check = true;
+    //function addToCart(data){
+    //    if(!data){
+    //        return;
+    //    }
+    //    var check = true;
 
-        for(var i = 0; i < $cartquantity; i++){
-            if(data.id === $cartitems[i].id){
-                check = false;
-                $cartitems[i].quantity = $cartitems[i].quantity + 1;
-                break;
-            }
-        }
+    //    for(var i = 0; i < $cartquantity; i++){
+    //        if(data.id === $cartitems[i].id){
+    //            check = false;
+    //            $cartitems[i].quantity = $cartitems[i].quantity + 1;
+    //            break;
+    //        }
+    //    }
 
-        if(check){
-            $cartitems.push(data);
-            getCartLength();
+    //    if(check){
+    //        $cartitems.push(data);
+    //        getCartLength();
 
-            $('.cartitems').html($cartquantity);
-        }
+    //        $('.cartitems').html($cartquantity);
+    //    }
 
-        updateSession();
-    }
+    //    updateSession();
+    //}
 
-    function removeProduct(id, that){
-        var check;
-        for(var i = 0; i < $cartquantity; i++){
-            if(id === $cartitems[i].id){
-                $cartitems.splice(i, 1);
-                break;
-            }
-        }
+    //function removeProduct(id, that){
+    //    var check;
+    //    for(var i = 0; i < $cartquantity; i++){
+    //        if(id === $cartitems[i].id){
+    //            $cartitems.splice(i, 1);
+    //            break;
+    //        }
+    //    }
 
-        that.parents('li').slideToggle().remove();
-        getCartLength();
-        updateTotal();
-        updateSession();
-        if($cartquantity === 0){
-            updatehtml();
-        }
-    }
+    //    that.parents('li').slideToggle().remove();
+    //    getCartLength();
+    //    updateTotal();
+    //    updateSession();
+    //    if($cartquantity === 0){
+    //        updatehtml();
+    //    }
+    //}
 
-    function updateTotal(){
-        //Dont total if page does not have carttotal
-        if($('#carttotal').length){
-            $cartTotal = 0;
-            for(var i = 0; i < $cartquantity; i++){
-                $cartTotal += ($cartitems[i].price * $cartitems[i].quantity);
-            }
-            $('#carttotal').html('$ ' + $cartTotal);
-        }
-    }
+    //function updateTotal(){
+    //    //Dont total if page does not have carttotal
+    //    if($('#carttotal').length){
+    //        $cartTotal = 0;
+    //        for(var i = 0; i < $cartquantity; i++){
+    //            $cartTotal += ($cartitems[i].price * $cartitems[i].quantity);
+    //        }
+    //        $('#carttotal').html('$ ' + $cartTotal);
+    //    }
+    //}
 
-    function updatehtml(){
-        var html = '';
-        if($('#cartItems').length){
-            for(var i = 0; i < $cartquantity; i++){
-                html += updatetpl($cartitems[i].image, $cartitems[i].name, $cartitems[i].price, $cartitems[i].quantity, $cartitems[i].id, 1);
-            }
-            if(html === ''){
-                html = '<div class="clearfix">' + 
-                        '<div class="big-content">' + 
-                          '<div class="product-cart-wrap">' + 
-                            '<h5>Sorry, you do not have any product in cart.</h5>' + 
-                          '</div></div></div>';
-            }
-            $('#cartItems').html(html);
-        }
-        else if($('#cartItemsType2').length){
-            for(var i = 0; i < $cartquantity; i++){
-                html += updatetpl($cartitems[i].image, $cartitems[i].name, $cartitems[i].price, $cartitems[i].quantity, $cartitems[i].id, 2);
-            }
-            if(html === ''){
-                html = '<div class="clearfix">' + 
-                        '<div class="big-content">' + 
-                          '<div class="product-cart-wrap">' + 
-                            '<h5>Sorry, you do not have any product in cart.</h5>' + 
-                          '</div></div></div>';
-            }
-            $('#cartItemsType2').html(html);
-        }
-    }
+    //function updatehtml(){
+    //    var html = '';
+    //    if($('#cartItems').length){
+    //        for(var i = 0; i < $cartquantity; i++){
+    //            html += updatetpl($cartitems[i].image, $cartitems[i].name, $cartitems[i].price, $cartitems[i].quantity, $cartitems[i].id, 1);
+    //        }
+    //        if(html === ''){
+    //            html = '<div class="clearfix">' + 
+    //                    '<div class="big-content">' + 
+    //                      '<div class="product-cart-wrap">' + 
+    //                        '<h5>Sorry, you do not have any product in cart.</h5>' + 
+    //                      '</div></div></div>';
+    //        }
+    //        $('#cartItems').html(html);
+    //    }
+    //    else if($('#cartItemsType2').length){
+    //        for(var i = 0; i < $cartquantity; i++){
+    //            html += updatetpl($cartitems[i].image, $cartitems[i].name, $cartitems[i].price, $cartitems[i].quantity, $cartitems[i].id, 2);
+    //        }
+    //        if(html === ''){
+    //            html = '<div class="clearfix">' + 
+    //                    '<div class="big-content">' + 
+    //                      '<div class="product-cart-wrap">' + 
+    //                        '<h5>Sorry, you do not have any product in cart.</h5>' + 
+    //                      '</div></div></div>';
+    //        }
+    //        $('#cartItemsType2').html(html);
+    //    }
+    //}
 
-    function updatetpl(image, name, price, quantity, id, type){
-        var option = '';
-        for(var i = 1; i < 5; i++){
-            option += '<option value="' + i + '"' + ((quantity === i) ? 'selected' : '') + '>' + i + ' product</option>';
-        }
-        if(type === 1){
-            return '<div class="clearfix">' + 
-                        '<div class="big-content">' + 
-                          '<div class="product-cart-wrap">' + 
-                            '<figure>' + 
-                              '<img src="' + image + '" alt="image">' + 
-                            '</figure>  ' + 
-                            '<h5>' + name + '</h5>' + 
-                          '</div>' + 
-                        '</div>' + 
-                        '<div class="big-content medium-content productQuantity">' + 
-                          '<select class="form-control" data-id="' + id + '">' + 
-                            option +
-                          '</select>' + 
-                        '</div>' + 
-                        '<div class="big-content small-content">' + 
-                          '<h5>$ ' + price + '</h5>' + 
-                        '</div>' + 
-                    '</div>';
-        }
-        else{
-            return '<li class="clearfix">' + 
-                      '<div class="item-content">' + 
-                        '<div class="item-image">' + 
-                          '<img src="' + image + '" alt="image">' + 
-                        '</div>' + 
-                        '<div class="item-details">' + 
-                          '<h6>' + name + '</h6>' + 
-                          '<div>' + 
-                            '<i class="fa fa-heart"></i>' + 
-                            '<span>1263</span>' + 
-                          '</div>' + 
-                        '</div>' + 
-                      '</div>' + 
-                      '<div class="item-price">' + 
-                        '<span>$ ' + price + '</span>' + 
-                      '</div>' + 
-                      '<a href="#" class="removeProduct" data-id="' + id + '">' + 
-                        '<i class="fa fa-times"></i>' + 
-                      '</a>' + 
-                    '</li>';
-        }
-    }
+    //function updatetpl(image, name, price, quantity, id, type){
+    //    var option = '';
+    //    for(var i = 1; i < 5; i++){
+    //        option += '<option value="' + i + '"' + ((quantity === i) ? 'selected' : '') + '>' + i + ' product</option>';
+    //    }
+    //    if(type === 1){
+    //        return '<div class="clearfix">' + 
+    //                    '<div class="big-content">' + 
+    //                      '<div class="product-cart-wrap">' + 
+    //                        '<figure>' + 
+    //                          '<img src="' + image + '" alt="image">' + 
+    //                        '</figure>  ' + 
+    //                        '<h5>' + name + '</h5>' + 
+    //                      '</div>' + 
+    //                    '</div>' + 
+    //                    '<div class="big-content medium-content productQuantity">' + 
+    //                      '<select class="form-control" data-id="' + id + '">' + 
+    //                        option +
+    //                      '</select>' + 
+    //                    '</div>' + 
+    //                    '<div class="big-content small-content">' + 
+    //                      '<h5>$ ' + price + '</h5>' + 
+    //                    '</div>' + 
+    //                '</div>';
+    //    }
+    //    else{
+    //        return '<li class="clearfix">' + 
+    //                  '<div class="item-content">' + 
+    //                    '<div class="item-image">' + 
+    //                      '<img src="' + image + '" alt="image">' + 
+    //                    '</div>' + 
+    //                    '<div class="item-details">' + 
+    //                      '<h6>' + name + '</h6>' + 
+    //                      '<div>' + 
+    //                        '<i class="fa fa-heart"></i>' + 
+    //                        '<span>1263</span>' + 
+    //                      '</div>' + 
+    //                    '</div>' + 
+    //                  '</div>' + 
+    //                  '<div class="item-price">' + 
+    //                    '<span>$ ' + price + '</span>' + 
+    //                  '</div>' + 
+    //                  '<a href="#" class="removeProduct" data-id="' + id + '">' + 
+    //                    '<i class="fa fa-times"></i>' + 
+    //                  '</a>' + 
+    //                '</li>';
+    //    }
+    //}
 
 
-    //Update Cart length at page init
-    getCartLength();
+    ////Update Cart length at page init
+    //getCartLength();
 
-    //Update Cart items in cart area
-    updatehtml();
+    ////Update Cart items in cart area
+    //updatehtml();
     
-    //Update total price in cart area
-    updateTotal();
+    ////Update total price in cart area
+    //updateTotal();
 
-    /* On Click handler for add to cart.
-        Usage add ``addToCart`` class to any button
-        The button should have the following data parameters
-        // data-productid
-            - Id of the product. This must be unique. Internally all checking is done via this parameter
-        // data-productname
-            - Name of the product
-        // data-productprice
-            - Price of the product
-        // data-productimage
-            - Image URL of the product
-    */
+    ///* On Click handler for add to cart.
+    //    Usage add ``addToCart`` class to any button
+    //    The button should have the following data parameters
+    //    // data-productid
+    //        - Id of the product. This must be unique. Internally all checking is done via this parameter
+    //    // data-productname
+    //        - Name of the product
+    //    // data-productprice
+    //        - Price of the product
+    //    // data-productimage
+    //        - Image URL of the product
+    //*/
 
-    $('.addToCart').on('click', function(e){
-        e.preventDefault();
-        var _this = $(this);
+    //$('.addToCart').on('click', function(e){
+    //    e.preventDefault();
+    //    var _this = $(this);
 
-        var data = {
-            id : _this.data('productid'),
-            name : _this.data('productname'),
-            price : _this.data('productprice'),
-            image : _this.data('productimage'),
-            quantity : 1
-        };
+    //    var data = {
+    //        id : _this.data('productid'),
+    //        name : _this.data('productname'),
+    //        price : _this.data('productprice'),
+    //        image : _this.data('productimage'),
+    //        quantity : 1
+    //    };
 
-        if(!(data.id === undefined || data.name === undefined || data.price === undefined || data.image === undefined)){
-            addToCart(data);
-        }
-    });
+    //    if(!(data.id === undefined || data.name === undefined || data.price === undefined || data.image === undefined)){
+    //        addToCart(data);
+    //    }
+    //});
 
-    $('.productQuantity select').on('change', function () {
+    //$('.productQuantity select').on('change', function () {
         
-        var val = $(this).val(),
-            id = $(this).data('id');
-        for(var i = 0; i < $cartquantity; i++){
-            if(id === $cartitems[i].id){
-                $cartitems[i].quantity = val;
-                break;
-            }
-        }
+    //    var val = $(this).val(),
+    //        id = $(this).data('id');
+    //    for(var i = 0; i < $cartquantity; i++){
+    //        if(id === $cartitems[i].id){
+    //            $cartitems[i].quantity = val;
+    //            break;
+    //        }
+    //    }
 
-        updateSession();
-        updateTotal();
-    });
+    //    updateSession();
+    //    updateTotal();
+    //});
 
-    $('.removeProduct').on('click', function(e){
-        e.preventDefault();
-        var id = $(this).data('id');
-        removeProduct(id, $(this));
-    });
+    //$('.removeProduct').on('click', function(e){
+    //    e.preventDefault();
+    //    var id = $(this).data('id');
+    //    removeProduct(id, $(this));
+    //});
 
     /*--------------- Google Maps -- Contact Page  ------------------*/
 
@@ -1011,16 +1011,16 @@ $(document).ready(function () {
 
     /*--------------- Countdown Timer - Homepage ------------------*/
 
-    if($('.match_timing').length){
-        $('.match_timing').countdown('2015/10/31', function(event) {
-            $(this).html(
-                event.strftime('<ul class="counter-wrap ">' + 
-                                '<li ><span>%D</span>days</li>' + 
-                                '<li ><span>%H</span>hours</li>' + 
-                                '<li> <span>%M</span>minutes</li>' + 
-                                '<li ><span>%S</span>seconds</li>' + 
-                              '</ul>')
-            );
-        });
-    }
+    //if($('.match_timing').length){
+    //    $('.match_timing').countdown('2015/10/31', function(event) {
+    //        $(this).html(
+    //            event.strftime('<ul class="counter-wrap ">' + 
+    //                            '<li ><span>%D</span>days</li>' + 
+    //                            '<li ><span>%H</span>hours</li>' + 
+    //                            '<li> <span>%M</span>minutes</li>' + 
+    //                            '<li ><span>%S</span>seconds</li>' + 
+    //                          '</ul>')
+    //        );
+    //    });
+    //}
 });

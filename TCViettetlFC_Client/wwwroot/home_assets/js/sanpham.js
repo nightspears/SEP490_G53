@@ -1,4 +1,7 @@
-﻿function loadData(id, url) {
+﻿
+var currentPage = 1;
+var totalItem = 0;
+function loadData(id, url) {
     var link = "";
     if (url.trim() == "" || url == null) {
         link = "https://localhost:5000/api/Product/GetSanPham";
@@ -8,13 +11,16 @@
 
     $.ajax({
         url: link,
-        data: {cid:id},
+        data: { cid: id },
         method: "GET",
         dataType: "json",
         success: function (res) {
-            debugger
+
             var container = $('#lstSanPham').empty();
             $.each(res, function (index, item) {
+                if (index === 12) {
+                    return false; 
+                }
                 var Avatar = "";
                 if (item.image == null || item.image == "" || item.image == undefined) {
                     Avatar = "/image/imagelogo/ImageFail.jpg"
@@ -22,12 +28,11 @@
                     Avatar = item.image;
                 }
                 var price = 0;
-                
+
                 var discout = "";
                 var priceText = "";
                 if (item.discoutPercent != null && item.discoutPercent != "" && item.discout != 0) {
                     price = (item.price - (item.price * item.discoutPercent / 100));
-                    debugger
                     discout = `<div class="discount-badge">-${item.discoutPercent}%</div> `;
 
                     priceText = `<span class="price" data-price="${price}">${price}</span> 
@@ -61,7 +66,14 @@
                    </div>`
 
                 container.append(html);
+               
             });
+            if (url.trim() == "" || url == null) {
+                totalItem = res.length;
+            }
+            renderPagination(totalItem)
+
+            $("#paging").show();
             format();
 
         },
@@ -71,6 +83,78 @@
 
     });
 }
+
+
+
+
+$(document).on("click", ".page-btn", function () {
+    debugger
+    var page = $(this).data("page");
+    currentPage = page;
+
+    let filters = [];
+    let sortOption = '';
+    var txtSearch = $("#search").val().trim();
+    var cateID = $("#idCategory").val();
+    if (cateID == undefined || cateID == null) {
+        cateID = 0;
+    }
+
+    var url = "https://localhost:5000/api/Product/GetSanPham?cid=" + cateID;
+    if (txtSearch) {
+        url += "&$filter=contains(ProductName, '" + encodeURIComponent(txtSearch) + "')";
+    }
+    $('.filter-checkbox:checked').each(function () {
+        let filterValue = $(this).val();
+        filters.push(`${filterValue.trim()}`);
+    });
+    if (filters.length > 0) {
+        if (txtSearch) {
+            let filterQuery = filters.join(' or ');
+            url += `and (${filterQuery})`;
+        } else {
+            let filterQuery = filters.join(' or ');
+            url += `&$filter=(${filterQuery})`;
+        }
+
+    }
+
+    $('input.SortProduct:checked').each(function () {
+
+        if ($('#sort-hangMoi').is(':checked')) {
+            debugger
+            sortOption = ` and (discoutPercent ne null)`
+        } else {
+            sortOption = $(this).val();
+
+        }
+    });
+    debugger
+    if (sortOption) {
+        url += sortOption;
+    }
+    var skip = 12 * (currentPage-1);
+    url += `&$skip=${skip}&top=12`
+    loadData(cateID, url);
+
+});
+function renderPagination(totalItems) {
+    debugger;
+
+    let totalPages = Math.ceil(totalItems / 12);
+
+    const pagination = $("#page-buttons");
+    pagination.empty();
+
+    // Tạo các nút trang
+    for (let i = 1; i <= totalPages; i++) {
+        pagination.append(
+            `<button  class="btn btn-outline-primary page-btn ${i === currentPage ? "active" : ""}" data-page="${i}">${i}</button>`
+        );
+    }
+    debugger;
+
+}
 function loadCategory() {
     debugger
     $.ajax({
@@ -78,7 +162,6 @@ function loadCategory() {
         method: "GET",
         dataType: "json",
         success: function (res) {
-            debugger
             var lstCate = $("#lstCate").empty();
             var tatca = `<li class="category_product active"  onclick="showProductByCate(0)" >
                                 <a >Tất cả</a>
@@ -93,7 +176,7 @@ function loadCategory() {
 
                 lstCate.append(html);
             });
-           
+
         },
         error: function (res) {
             console.error("Error loading data", res);
@@ -103,16 +186,16 @@ function loadCategory() {
 
 
 function showProductByCate(id) {
-    debugger
+    
     $("#idCategory").val(id);
     $('.filter-checkbox').prop('checked', false);
     $('.SortProduct').prop('checked', false);
-    loadData(id ,"");
+    loadData(id, "");
 
 }
 
 $(document).ready(function () {
-    loadData(0,"");
+    loadData(0, "");
     loadCategory();
     addActive();
 });
@@ -124,7 +207,6 @@ function addActive() {
     });
 }
 function format() {
-    debugger
     function formatCurrency(value) {
         return parseInt(value).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
@@ -134,7 +216,7 @@ function format() {
     prices.forEach(function (priceElement) {
         const priceValue = priceElement.getAttribute('data-price');
         if (priceValue) {
-            priceElement.innerText = formatCurrency(priceValue);  
+            priceElement.innerText = formatCurrency(priceValue);
         }
     });
 
@@ -142,7 +224,6 @@ function format() {
 
 
 function saveCartToLocalStorage(cartItems) {
-    debugger
     const cartJson = JSON.stringify(cartItems);
     localStorage.setItem("cartProduct", cartJson);
 }
@@ -153,7 +234,6 @@ function getCartFromLocalStorage() {
     if (CartJson) {
         return JSON.parse(CartJson);
     }
-    debugger
     return [];
 }
 
@@ -188,9 +268,7 @@ function AddToCart(id) {
             };
             cartItems.push(Product);
         }
-        debugger
         saveCartToLocalStorage(cartItems);
-        debugger
         alert("thêm thành công")
     }
 }
@@ -204,14 +282,14 @@ function toggleFilter() {
     if (cateID == undefined || cateID == null) {
         cateID = 0;
     }
-   
+
     var url = "https://localhost:5000/api/Product/GetSanPham?cid=" + cateID;
     if (txtSearch) {
         url += "&$filter=contains(ProductName, '" + encodeURIComponent(txtSearch) + "')";
     }
     $('.filter-checkbox:checked').each(function () {
         let filterValue = $(this).val();
-        filters.push(`${filterValue.trim()}`); 
+        filters.push(`${filterValue.trim()}`);
     });
     if (filters.length > 0) {
         if (txtSearch) {
@@ -221,7 +299,7 @@ function toggleFilter() {
             let filterQuery = filters.join(' or ');
             url += `&$filter=(${filterQuery})`;
         }
-       
+
     }
 
     $('input.SortProduct:checked').each(function () {
@@ -230,16 +308,15 @@ function toggleFilter() {
             debugger
             sortOption = ` and (discoutPercent ne null)`
         } else {
-            sortOption = $(this).val(); 
+            sortOption = $(this).val();
 
         }
     });
 
     if (sortOption) {
-        url += sortOption; 
+        url += sortOption;
     }
 
-    debugger
     loadData(cateID, url);
 
 }

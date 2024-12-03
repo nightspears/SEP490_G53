@@ -6222,12 +6222,13 @@ h6 {
     color: rgba(255, 255, 255, 0.8); }
 
 .cartContainer span {
+    margin-right:10px;
   position: relative;
-  float: left;
+  float: right;
   width: 25%;
-  min-height: 1px;
+/*  min-height: 1px;
   padding-left: 15px;
-  padding-right: 15px; }
+  padding-right: 15px;*/ }
   .cartContainer span:first-of-type {
     position: relative;
     float: left;

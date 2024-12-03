@@ -20,8 +20,10 @@ namespace TCViettelFC_API.Dtos
         public DateTime? CreatedAt { get; set; }
 
         public int? Status { get; set; }
+        public int? NewsCategoryId { get; set; }
 
-        
+
+
     }
     public class CreateNewDto
     {

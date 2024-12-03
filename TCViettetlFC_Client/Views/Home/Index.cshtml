@@ -1,11 +1,15 @@
 ﻿@{
     Layout = "_layoutCommon";
     ViewData["Title"] = "TCViettelFC";
+
+    List<PlayerViewModel> player = ViewBag.Player as List<PlayerViewModel>; 
+    List<GetAllNewViewModel> news = ViewBag.News as List<GetAllNewViewModel>;
 }
+<link href="~/home_assets/style.css" rel="stylesheet" />
+<link rel="shortcut icon" href="~/image/imagelogo/the-cong-viettel.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <head>
-    <link href="~/css/loading.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="~/home_assets/css/sanpham.css" rel="stylesheet" />
+
     <style>
         @@media (max-width: 1200px) {
             .spacewithtop {
@@ -34,6 +38,7 @@
                 margin-top: 1%;
             }
         }
+
         .logo-match img {
             width: 150px; /* Đặt chiều rộng mong muốn */
             height: 150px; /* Đặt chiều cao mong muốn */
@@ -45,6 +50,22 @@
             aspect-ratio: 1 / 1; /* Tỉ lệ 1:1 */
             object-fit: contain; /* Đảm bảo ảnh vừa khung mà không bị méo */
         }
+
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: #eb3636;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .imageProduct {
+            position: relative;
+        }
     </style>
 </head>
 
@@ -55,176 +76,214 @@
             <img src="~/image/mainbanner.jpg" alt="Banner Image" style="width: 100%; height: auto;" />
         </section>
     </div>
+
     <!-- những trận đấu sắp tới -->
     <section class=matchSchedule>
-            <div class=row>
-            <h2 class=heading>lịch<span>trận đấu</span></h2>
+        <div class=container>
+            <h2 class=heading>lịch <span> trận đấu</span></h2>
 
-                <!--Trận đấu gần nhất-->
-                <div class="matchSchedule_details">
-                    <div class="match_next right-triangle">
-                        <div class="wrap_match_next right-triangle">
-                            <div class="right-padding">
-                                <h4 class="headline03">Trận đấu gần nhất</h4>
-                            </div>
+            <!--Trận đấu gần nhất-->
+            <div class="matchSchedule_details row">
+                <div class="match_next right-triangle">
+                    <div class="wrap_match_next right-triangle">
+                        <div class="right-padding">
+                            <h4 class="headline03">Trận đấu gần nhất</h4>
                         </div>
                     </div>
-                    <div class="match_versus">
-                        <div class="bg-blackimg match_versus02">
-                            <div class="nextmatchDetails">
-                                <!--miêu tả trận đấu-->
+                </div>
+                <div class="match_versus">
+                    <div class="bg-blackimg match_versus02">
+                        <div class="nextmatchDetails">
+                            <!--miêu tả trận đấu-->
                             <div style="display: flex; align-items: center;justify-content:center ">
-                                    <p>Trận đấu giữa </p>
-                                    <p style="margin: 0 5px;">Thể Công</p>
-                                    <p>và</p>
-                                    <p id="opponent-name" style="margin: 0 5px;"></p>
-                                </div>
-                                <!--ảnh giữa 2 đội-->
-                                <div class="wrap-logo clearfix">
-                                    <div class="logo-match">
+
+                                <p style="margin: 0 10px; font-size:22px;color:#b81e20;font-weight:700">Viettel - Thể Công</p>
+                                <p style="color:white">và</p>
+                                <p id="opponent-name" style="margin: 0 10px;font-size:22px;color:#b81e20;font-weight:700"></p>
+                            </div>
+                            <!--ảnh giữa 2 đội-->
+                            <div class="wrap-logo clearfix">
+                                <div class="logo-match">
                                     <img src="~/image/imagelogo/logoviettel.jpg" style="border-radius:50% !important ;object-fit: cover;" alt="ảnh đội mình">
                                 </div>
-                                    <div class="match_vs">vs</div>
+                                <div class="match_vs">vs</div>
 
-                                    <div class="logo-match">
-                                        <img id="opponent-img" src="lấy từ api" alt="ảnh đội đối thủ">
-                                    </div>
+                                <div class="logo-match">
+                                    <img id="opponent-img" src="lấy từ api" alt="ảnh đội đối thủ">
                                 </div>
-                            <div style="display: flex;flex-wrap: wrap;justify-content:space-evenly;">
-                                    <!--thời gian-->
-                                    <p id="match-schedule" class="match_dtls">
-                                        thời gian diễn ra trận đấu chắc phải thêm vào database lấy từ api
-                                    </p>
-                                    <!--địa điểm-->
-                                    <p id="match-stadium" class="match_dtls">
-                                        stadium diễn ra trận đấu lấy từ api
-                                    </p>
-                                </div>
+                            </div>
+                            <div style="display: block;flex-wrap: wrap;justify-content:space-evenly;">
+                                <!--thời gian-->
+                                <i class="fe fe-clock"></i>  <p id="match-schedule" class="match_dtls">
+
+                                    thời gian diễn ra trận đấu chắc phải thêm vào database lấy từ api
+                                </p>
+                                <!--địa điểm-->
+                                <i class="fe fe-location"></i>  <p id="match-stadium" class="match_dtls">
+
+                                    stadium diễn ra trận đấu lấy từ api
+                                </p>
+                            </div>
                             <!--đặt vé sau sẽ gắn link theo id cái này làm sau khi có ticket-->
-                                @* <button class="btn btn-red" onclick="OderTicket()">Place ticket</button> *@
-                            </div>
-                        </div>
-                    </div>
-                    <div class="match_timing">
-                        <ul class="counter-wrap" id="countdown">
-                            <li><span id="days">00</span>ngày</li>
-                            <li><span id="hours">00</span>giờ</li>
-                            <li><span id="minutes">00</span>phút</li>
-                            <li><span id="seconds">00</span>giây</li>
-                        </ul>
-                        <p id="matchStatus" style="display: none;">Trận đấu đã bắt đầu!</p>
-                    </div>
-                </div>
-
-                <!-- 4 Trận đấu sắp tới không tính cái gần nhất -->
-                <div class="matchSchedule_details">
-                    <div style="margin-top:2%">
-                        <div class="match_versus-wrap">
-                            <div class="wrap_match-innerdetails">
-                                <ul id="upcoming-matches" class="home_tInfo scrollable">
-                                    <!-- Các trận đấu sắp tới sẽ được thêm vào đây -->
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="match_next">
-                            <div class="wrap_match_next left_triangle">
-                                <div class="left_padding">
-                                    <h4 class="headline03">Những trận đấu sắp tới</h4>
-                                </div>
-                            </div>
+                            @* <button class="btn btn-red" onclick="OderTicket()">Place ticket</button> *@
                         </div>
                     </div>
                 </div>
+                <div class="match_timing">
+                    <ul class="counter-wrap" id="countdown">
+                        <li><span id="days">00</span>ngày</li>
+                        <li><span id="hours">00</span>giờ</li>
+                        <li><span id="minutes">00</span>phút</li>
+                        <li><span id="seconds">00</span>giây</li>
+                    </ul>
 
+                    <p id="matchStatus" style="display: none;">Trận đấu đã bắt đầu!</p>
+                </div>
+            </div>
 
-                <!--cái này là bảng điểm có vẻ thú vị nghiên cứu sau-->
-            <div class="matchSchedule_details row" style="display:none;margin-bottom:2%">
-                    <div class=match_next>
-                        <div class="wrap_match_next right-triangle">
-                            <div class=right-padding>
-                                <h4 class=headline03>pointed table</h4>
-
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class=match_versus-wrap>
-                        <div class=wrap_match-innerdetails>
-                            <ul class="point_table scrollable">
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">1</div>
-                                        <div class="headline01 largepoint">FC Silver Bullets</div>
-                                        <div class="headline01 smallpoint row row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">2</div>
-                                        <div class="headline01 largepoint">FC Spinning Slammers</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">3</div>
-                                        <div class="headline01 largepoint">FC Crimson Executioners</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">4</div>
-                                        <div class="headline01 largepoint">FC Shaolin Robots</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">5</div>
-                                        <div class="headline01 largepoint">FC Silent Xpress</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">6</div>
-                                        <div class="headline01 largepoint">FC Dark Scorpions</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">7</div>
-                                        <div class="headline01 largepoint">FC Cyborg Snakes</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">8</div>
-                                        <div class="headline01 largepoint">FC Skull Killers</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>10</span></div>
-                                    </div>
-                                </li>
-                                <li class=clearfix>
-                                    <div class=subPoint_table>
-                                        <div class="headline01 smallpoint">1</div>
-                                        <div class="headline01 largepoint">FC Reptile Kickers</div>
-                                        <div class="headline01 smallpoint row"><span>p</span><span>11</span></div>
-                                    </div>
-                                </li>
+            <!-- 4 Trận đấu sắp tới không tính cái gần nhất -->
+            <div class="matchSchedule_details">
+                <div style="margin-top:2%">
+                    <div class="match_versus-wrap">
+                        <div class="wrap_match-innerdetails">
+                            <ul id="upcoming-matches" class="home_tInfo scrollable">
+                                <!-- Các trận đấu sắp tới sẽ được thêm vào đây -->
                             </ul>
                         </div>
                     </div>
-                </div>
 
+                    <div class="match_next">
+                        <div class="wrap_match_next left_triangle">
+                            <div class="left_padding">
+                                <h4 class="headline03">Trận đấu sắp tới</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+            <!--cái này là bảng điểm có vẻ thú vị nghiên cứu sau-->
+            <div class="matchSchedule_details row" style="display:block;margin-bottom:2%">
+                <div class=match_next>
+                    <div class="wrap_match_next right-triangle">
+                        <div class=right-padding>
+                            <h4 class=headline03>Bảng xếp hạng</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class=match_versus-wrap>
+                    <div class=wrap_match-innerdetails>
+                        <ul class="point_table scrollable">
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">1</div>
+                                    <div class="headline01 largepoint">Đông Á Thanh Hóa</div>
+                                    <div class="headline01 smallpoint row row"><span>Điểm</span><span>20</span></div>
+                                </div>
+                            </li>
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">2</div>
+                                    <div class="headline01 largepoint">Nam Định FC</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>19</span></div>
+                                </div>
+                            </li>
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">3</div>
+                                    <div class="headline01 largepoint">Thể Công - Viettel</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>15</span></div>
+                                </div>
+                            </li>
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">4</div>
+                                    <div class="headline01 largepoint">Hồng Lĩnh Hà Tĩnh</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>15</span></div>
+                                </div>
+                            </li>
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">5</div>
+                                    <div class="headline01 largepoint">Công An Nhân Dân</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>14</span></div>
+                                </div>
+                            </li>
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">6</div>
+                                    <div class="headline01 largepoint">Hà Nội FC</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>14</span></div>
+                                </div>
+                            </li>
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">7</div>
+                                    <div class="headline01 largepoint">Hoàng Anh Gia Lai</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>12</span></div>
+                                </div>
+                            </li>
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">8</div>
+                                    <div class="headline01 largepoint">Becamex Bình Dương</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>11</span></div>
+                                </div>
+                            </li>
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">9</div>
+                                    <div class="headline01 largepoint">Bình Định FC</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>11</span></div>
+                                </div>
+                            </li>
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">10</div>
+                                    <div class="headline01 largepoint">Thành Phố Hồ Chí Minh</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>10</span></div>
+                                </div>
+                            </li>
+                             <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">11</div>
+                                    <div class="headline01 largepoint">Quảng Nam FC</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>8</span></div>
+                                </div>
+                            </li>
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">12</div>
+                                    <div class="headline01 largepoint">Hải Phòng FC</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>7</span></div>
+                                </div>
+                            </li>
+                             <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">13</div>
+                                    <div class="headline01 largepoint">Sông Lam Nghệ An</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>5</span></div>
+                                </div>
+                            </li>
+                            <li class=clearfix>
+                                <div class=subPoint_table>
+                                    <div class="headline01 smallpoint">14</div>
+                                    <div class="headline01 largepoint">SHB Đà Nẵng</div>
+                                    <div class="headline01 smallpoint row"><span>Điểm</span><span>4</span></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </section>
 
     <!--mùa giải đang làm-->
-    <section class="booking bg-smallwhite"style="display:none">
+    <section class="booking bg-smallwhite" style="display:none">
         <div class="container">
             <div class="row">
                 <h2 class="heading">Mùa giải <span>gần đây</span></h2>
@@ -233,7 +292,7 @@
                     <h4>Mùa giải gần nhất.</h4>
 
                     <p>
-                       Tên mùa giải.
+                        Tên mùa giải.
                     </p>
                 </div>
                 <div class="result clearfix" style="display: flex;
@@ -284,190 +343,311 @@
         </div>
     </section>
 
-
+    @*
     <!--tin tức-->
     <section class="latest_news bg-white">
-        <div class="container">
-            <div class="row">
-                <h2 class="heading">Tin<span>Nóng</span></h2>
-                <p class="headParagraph">
-                    Những tin tức gần đây nhất được đưa bởi câu lạc bộ Thể Cộng ViettelFC.
-                </p>
+    <div class="container">
+    <div class="row">
+    <h2 class="heading">Tin <span> Nóng</span></h2>
+    <p class="headParagraph">
+    Những tin tức gần đây nhất được đưa bởi câu lạc bộ Thể Cộng ViettelFC.
+    </p>
 
-                <!--Tabs-->
-                <ul class="nav accordion-news" role="tablist" id="category-tabs">
-                    <!-- news category -->
-                </ul>
+    <!--Tabs-->
+    <ul class="nav accordion-news" role="tablist" id="category-tabs">
+    <!-- news category -->
+    </ul>
 
-                <div class="tab-content news_display_container clearfix">
-                    <!-- content   -->
+    <div class="tab-content news_display_container clearfix">
+    <!-- content   -->
+    </div>
+    </div>
+    </div>
+    </section> *@
+
+    <section class="latest_news bg-white">
+        <div class=container>
+            <div class=row>
+                <h2 class=heading style="margin-bottom:40px;">Tin <span>tức</span></h2>
+
+                <div class="LatestNews_wrap clearfix">
+                    <ul class="nav accordion-news" role=tablist>
+                        <li class=active>
+                            <a href=#club_news aria-controls=club_news role=tab data-toggle=tab
+                               id=club_news_button>Viettel FC</a>
+                        </li>
+                        <li>
+                            <a href=#world_news aria-controls=world_news role=tab data-toggle=tab id=world_news_button>
+                               V-League
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content news_display_container clearfix">
+
+                        <ul id=world_news class=tab-pane>
+                            @if(news != null && news.Count() > 0)
+                            {
+                                foreach(var n in news)
+                                {
+                                    if(n.NewsCategoryId == 2)
+                                    {
+                                        <li>
+                                            <div class=figure>
+                                                <div class=column-news>
+                                                    <div class=figure-01><img src="@n.Image" alt=image style="object-fit:cover ; height:210px;width:100%"></div>
+                                                    <div class=content-01>
+                                                        @if (n.Title.Length > 70)
+                                                        {
+                                                            <h6><a href= href="news/@n.Id"> @n.Title.Substring(0, 70) ... </a></h6>
+                                                        }
+                                                        else
+                                                        {
+                                                            <h6><a href="news/@n.Id">@n.Title</a></h6>
+
+                                                        }
+
+                                                        <p class=red_p>@n.NewsCategory</p>
+                                                    </div>
+                                                    <div class="news_date clearfix">
+                                                        <span>@n.CreatedAt.HasValue ? @n.CreatedAt.Value.ToString("dd/mm/yyyy") </span> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                               
+                            }
+                           
+                        </ul>
+                        <a class="prv club_prev"></a> <a class="nxt club_next"></a>
+                        <ul id=club_news class="tab-pane active clearfix">
+
+                            @if (news != null && news.Count() > 0)
+                            {
+                                foreach (var n in news)
+                                {
+                                    if (n.NewsCategoryId == 1)
+                                    {
+                                        <li>
+                                            <div class=figure>
+                                                <div class=column-news>
+                                                    <div class=figure-01><img src="@n.Image" alt=image style="object-fit:cover ; height:210px;width:100%"></div>
+                                                    <div class=content-01>
+                                                        @if(n.Title.Length > 70)
+                                                        {
+                                                            <h6><a href="news/@n.Id"> @n.Title.Substring(0, 70) ... </a></h6>
+                                                        }
+                                                        else
+                                                        {
+                                                            <h6><a href="news/@n.Id">@n.Title</a></h6>
+
+                                                        }
+
+                                                        <p class=red_p>@n.NewsCategory</p>
+                                                    </div>
+                                                    <div class="news_date clearfix">
+                                                        <span>@(n.CreatedAt.HasValue ? n.CreatedAt.Value.ToString("dd/mm/yyyy") : "N/A") </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- thành tích -->
+    <section class=awards>
+        <div class=container>
+            <div class=row>
+                <h2 class=heading style="margin-bottom:40px;">Thành <span>tích</span></h2>
+
+                <div class="wrapper-container clearfix">
+                    <a class="prv awards_prev"></a> <a class="nxt awards_next"></a>
+                    <ul class="awards-wrap clearfix">
+                        <li>
+                            <a href=achivement_details.html>
+                                <img src=~/home_assets/images/awards/awards01.png alt=image>
+                                <ul class=awards-info>
+                                    <li>V-League</li>
+                                    <li>2020</li>
+                                </ul>
+                            </a>
+                        </li>
+                        <li>
+                            <a href=achivement_details.html>
+                                <img src=~/home_assets/images/awards/awards02.png alt=image>
+                                <ul class=awards-info>
+                                    <li>V-League</li>
+                                    <li>1998</li>
+                                </ul>
+                            </a>
+                        </li>
+                        <li>
+                            <a href=achivement_details.html>
+                                <img src=~/home_assets/images/awards/awards03.png alt=image>
+                                <ul class=awards-info>
+                                    <li>V-League</li>
+                                    <li>1990</li>
+                                </ul>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href=#>
+                                <img src=~/home_assets/images/awards/awards04.png alt=image>
+                                <ul class=awards-info>
+                                    <li>V-League</li>
+                                    <li>1987</li>
+                                </ul>
+                            </a>
+                        </li>
+                        <li>
+                            <a href=achivement_details.html>
+                                <img src=~/home_assets/images/awards/awards02.png alt=image>
+                                <ul class=awards-info>
+                                    <li>V-League</li>
+                                    <li>1982/83</li>
+                                </ul>
+                            </a>
+                        </li>
+                        <li>
+                            <a href=achivement_details.html>
+                                <img src=~/home_assets/images/awards/awards03.png alt=image>
+                                <ul class=awards-info>
+                                    <li>V-League</li>
+                                    <li>1981/82</li>
+                                </ul>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Đội hình-->
+    <section class="players homeplayer">
+        <div class=container>
+            <div class=row>
+                <h2 class=heading>Cầu <span>thủ</span></h2>
 
+                <div class="wrapplayer clearfix">
+                    <a class="prv prev-player"></a> <a class="nxt next-player"></a>
+                    <ul class="slideHeroes clearfix">
+                        @if(player != null && player.Count() > 0)
+                        {
+                            foreach(var p in player)
+                            {
+                                <li>
+                                    <a href="@Url.Action("PlayerDetails", "Team", new { id = p.PlayerId })">
+                                        <div class=playerFig>
+                                            <div class=playerpic>
+                                                <div style="background:url(@Url.Content(p.avatar))" class="bgimg"></div>
+                                            </div>
+                                            <ul class="playerDetails clearfix">
+                                                <li>
+                                                    <span>@p.FullName</span> số @p.ShirtNumber <span>
 
+                                                    </span>
+                                                </li>
+                                                <li class=playinfodetails>Ngày gia nhập : @(p.JoinDate.HasValue ? p.JoinDate.Value.ToString("dd/MM/yyyy") : "N/A")</li>
 
+                                            </ul>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                            
+                        }
+                       
+                       
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
     <!--sản phẩm đang làm-->
     <section class="product bg-white">
         <div class=container>
             <div class=row>
-                <h2 class=heading>TOP PRODUCTS & <span>merchandise</span></h2>
+                <h2 class=heading style="margin-bottom:30px">Sản phẩm <span>và phụ kiện</span></h2>
 
-                <p class=headParagraph>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis
-                    consequuntur animi, commodi, voluptatibus labore aperiam fugit maxime quos optio architecto cum?
-                    Laborum nesciunt doloribus expedita atque error rem molestias, ducimus.
-                </p>
                 <ul class=product_details>
-                    <li>
-                        <a href=#>
-                            <div>
-                                <div class=product-img
-                                     style="background:url(images/product/product01.jpg) center no-repeat"></div>
-                            </div>
-                            <ul class="oswald16 product_info">
-                                <li class=detailsContainer>
-                                    <span>soccer jersey</span> <span>
-                                        <i class="fa fa-user"></i>360
-                                    </span>
-                                </li>
-                                <li class=cartContainer>
-                                    <span>Add to cart</span> <span>
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </span> <span class=price>$199</span>
-                                </li>
-                            </ul>
-                        </a>
-                    </li>
-                    <li>
-                        <a href=#>
-                            <div>
-                                <div class=product-img
-                                     style="background:url(images/product/product02.jpg) center no-repeat"></div>
-                            </div>
-                            <ul class="oswald16 product_info">
-                                <li class=detailsContainer>
-                                    <span>soccer jersey</span> <span>
-                                        <i class="fa fa-user"></i>360
-                                    </span>
-                                </li>
-                                <li class=cartContainer>
-                                    <span>Add to cart</span> <span>
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </span> <span class=price>$199</span>
-                                </li>
-                            </ul>
-                        </a>
-                    </li>
-                    <li>
-                        <a href=#>
-                            <div>
-                                <div class=product-img
-                                     style="background:url(images/product/product03.jpg) center no-repeat"></div>
-                            </div>
-                            <ul class="oswald16 product_info">
-                                <li class=detailsContainer>
-                                    <span>soccer jersey</span> <span>
-                                        <i class="fa fa-user"></i>360
-                                    </span>
-                                </li>
-                                <li class=cartContainer>
-                                    <span>Add to cart</span> <span>
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </span> <span class=price>$199</span>
-                                </li>
-                            </ul>
-                        </a>
-                    </li>
-                    <li>
-                        <a href=#>
-                            <div>
-                                <div class=product-img
-                                     style="background:url(images/product/product04.jpg) center no-repeat"></div>
-                            </div>
-                            <ul class="oswald16 product_info">
-                                <li class=detailsContainer>
-                                    <span>soccer jersey</span> <span>
-                                        <i class="fa fa-user"></i>360
-                                    </span>
-                                </li>
-                                <li class=cartContainer>
-                                    <span>Add to cart</span> <span>
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </span> <span class=price>$199</span>
-                                </li>
-                            </ul>
-                        </a>
-                    </li>
                 </ul>
-                <div class=center><a href="/Public/SanPham" class="btn btn-red">view more</a></div>
+                <div class=center><a href="/Public/SanPham" class="btn btn-red">xem thêm</a></div>
             </div>
         </div>
     </section>
 
 
 
-    <!-- lịch sử câu lạc bộ fix cứng -->
+    @*  <!-- lịch sử câu lạc bộ fix cứng -->
     <div class="row">
-        <h2 class="heading">club <span>history</span></h2>
+    <h2 class="heading">club <span>history</span></h2>
 
-        <p class="headParagraph">
-            text1
-        </p>
+    <p class="headParagraph">
+    text1
+    </p>
 
-        <div class="nav clubHistory-wrap clearfix">
-            <ul class="historyMeter slick-initialized slick-slider">
-                <div aria-live="polite" class="slick-list draggable"><div class="slick-track" role="listbox" style="opacity: 1; width: 3720px; transform: translate3d(-1116px, 0px, 0px);">
-                <li class="win slick-slide slick-cloned" data-slick-index="-12" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win02" tabindex="-1"><span>1991</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="-11" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1991</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="-10" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1995</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="-9" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1997</span></a></li>
-                <li class="win slick-slide slick-cloned" data-slick-index="-8" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win03" tabindex="-1"><span>2000</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="-7" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2005</span></li>
-                <li class="slick-slide slick-cloned" data-slick-index="-6" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2007</span></li>
-                <li class="slick-slide slick-cloned" data-slick-index="-5" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2009</span></li>
-                <li class="win slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win04" tabindex="-1"><span>2012</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>2013</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>2014</span></a></li>
-                <li class="win slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win05" tabindex="-1"><span>2015</span></a></li>
-                <li class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide50" style="width: 93px;"><a href="#" tabindex="0"><span>1987</span></a></li>
-                <li class="win slick-slide slick-active" data-slick-index="1" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide51" style="width: 93px;"><a href="#win01" tabindex="0"><span>1988</span></a></li>
-                <li class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide52" style="width: 93px;"><a href="#" tabindex="0"><span>1989</span></a></li>
-                <li class="slick-slide slick-active" data-slick-index="3" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide53" style="width: 93px;"><a href="#" tabindex="0"><span>1990</span></a></li>
-                <li class="win slick-slide slick-active" data-slick-index="4" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide54" style="width: 93px;"><a href="#win02" tabindex="0"><span>1991</span></a></li>
-                <li class="slick-slide slick-active" data-slick-index="5" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide55" style="width: 93px;"><a href="#" tabindex="0"><span>1991</span></a></li>
-                <li class="slick-slide slick-active" data-slick-index="6" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide56" style="width: 93px;"><a href="#" tabindex="0"><span>1995</span></a></li>
-                <li class="slick-slide slick-active" data-slick-index="7" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide57" style="width: 93px;"><a href="#" tabindex="0"><span>1997</span></a></li>
-                <li class="win slick-slide slick-active" data-slick-index="8" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide58" style="width: 93px;"><a href="#win03" tabindex="0"><span>2000</span></a></li>
-                <li class="slick-slide slick-active" data-slick-index="9" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide59" style="width: 93px;"><span>2005</span></li>
-                <li class="slick-slide slick-active" data-slick-index="10" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide510" style="width: 93px;"><span>2007</span></li>
-                <li class="slick-slide slick-active" data-slick-index="11" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide511" style="width: 93px;"><span>2009</span></li>
-                <li class="win slick-slide active" data-slick-index="12" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide512" style="width: 93px;"><a href="#win04" tabindex="-1"><span>2012</span></a></li>
-                <li class="slick-slide" data-slick-index="13" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide513" style="width: 93px;"><a href="#" tabindex="-1"><span>2013</span></a></li>
-                <li class="slick-slide" data-slick-index="14" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide514" style="width: 93px;"><a href="#" tabindex="-1"><span>2014</span></a></li>
-                <li class="win slick-slide" data-slick-index="15" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide515" style="width: 93px;"><a href="#win05" tabindex="-1"><span>2015</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="16" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1987</span></a></li>
-                <li class="win slick-slide slick-cloned" data-slick-index="17" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win01" tabindex="-1"><span>1988</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="18" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1989</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="19" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1990</span></a></li>
-                <li class="win slick-slide slick-cloned" data-slick-index="20" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win02" tabindex="-1"><span>1991</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="21" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1991</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="22" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1995</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="23" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1997</span></a></li>
-                <li class="win slick-slide slick-cloned" data-slick-index="24" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win03" tabindex="-1"><span>2000</span></a></li>
-                <li class="slick-slide slick-cloned" data-slick-index="25" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2005</span></li>
-                <li class="slick-slide slick-cloned" data-slick-index="26" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2007</span></li>
-                <li class="slick-slide slick-cloned" data-slick-index="27" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2009</span></li>
-        
-           </div>
-    </div>
+    <div class="nav clubHistory-wrap clearfix">
+    <ul class="historyMeter slick-initialized slick-slider">
+    <div aria-live="polite" class="slick-list draggable"><div class="slick-track" role="listbox" style="opacity: 1; width: 3720px; transform: translate3d(-1116px, 0px, 0px);">
+    <li class="win slick-slide slick-cloned" data-slick-index="-12" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win02" tabindex="-1"><span>1991</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="-11" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1991</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="-10" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1995</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="-9" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1997</span></a></li>
+    <li class="win slick-slide slick-cloned" data-slick-index="-8" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win03" tabindex="-1"><span>2000</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="-7" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2005</span></li>
+    <li class="slick-slide slick-cloned" data-slick-index="-6" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2007</span></li>
+    <li class="slick-slide slick-cloned" data-slick-index="-5" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2009</span></li>
+    <li class="win slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win04" tabindex="-1"><span>2012</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>2013</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>2014</span></a></li>
+    <li class="win slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win05" tabindex="-1"><span>2015</span></a></li>
+    <li class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide50" style="width: 93px;"><a href="#" tabindex="0"><span>1987</span></a></li>
+    <li class="win slick-slide slick-active" data-slick-index="1" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide51" style="width: 93px;"><a href="#win01" tabindex="0"><span>1988</span></a></li>
+    <li class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide52" style="width: 93px;"><a href="#" tabindex="0"><span>1989</span></a></li>
+    <li class="slick-slide slick-active" data-slick-index="3" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide53" style="width: 93px;"><a href="#" tabindex="0"><span>1990</span></a></li>
+    <li class="win slick-slide slick-active" data-slick-index="4" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide54" style="width: 93px;"><a href="#win02" tabindex="0"><span>1991</span></a></li>
+    <li class="slick-slide slick-active" data-slick-index="5" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide55" style="width: 93px;"><a href="#" tabindex="0"><span>1991</span></a></li>
+    <li class="slick-slide slick-active" data-slick-index="6" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide56" style="width: 93px;"><a href="#" tabindex="0"><span>1995</span></a></li>
+    <li class="slick-slide slick-active" data-slick-index="7" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide57" style="width: 93px;"><a href="#" tabindex="0"><span>1997</span></a></li>
+    <li class="win slick-slide slick-active" data-slick-index="8" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide58" style="width: 93px;"><a href="#win03" tabindex="0"><span>2000</span></a></li>
+    <li class="slick-slide slick-active" data-slick-index="9" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide59" style="width: 93px;"><span>2005</span></li>
+    <li class="slick-slide slick-active" data-slick-index="10" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide510" style="width: 93px;"><span>2007</span></li>
+    <li class="slick-slide slick-active" data-slick-index="11" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide511" style="width: 93px;"><span>2009</span></li>
+    <li class="win slick-slide active" data-slick-index="12" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide512" style="width: 93px;"><a href="#win04" tabindex="-1"><span>2012</span></a></li>
+    <li class="slick-slide" data-slick-index="13" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide513" style="width: 93px;"><a href="#" tabindex="-1"><span>2013</span></a></li>
+    <li class="slick-slide" data-slick-index="14" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide514" style="width: 93px;"><a href="#" tabindex="-1"><span>2014</span></a></li>
+    <li class="win slick-slide" data-slick-index="15" aria-hidden="true" tabindex="-1" role="option" aria-describedby="slick-slide515" style="width: 93px;"><a href="#win05" tabindex="-1"><span>2015</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="16" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1987</span></a></li>
+    <li class="win slick-slide slick-cloned" data-slick-index="17" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win01" tabindex="-1"><span>1988</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="18" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1989</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="19" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1990</span></a></li>
+    <li class="win slick-slide slick-cloned" data-slick-index="20" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win02" tabindex="-1"><span>1991</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="21" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1991</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="22" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1995</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="23" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#" tabindex="-1"><span>1997</span></a></li>
+    <li class="win slick-slide slick-cloned" data-slick-index="24" aria-hidden="true" tabindex="-1" style="width: 93px;"><a href="#win03" tabindex="-1"><span>2000</span></a></li>
+    <li class="slick-slide slick-cloned" data-slick-index="25" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2005</span></li>
+    <li class="slick-slide slick-cloned" data-slick-index="26" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2007</span></li>
+    <li class="slick-slide slick-cloned" data-slick-index="27" aria-hidden="true" tabindex="-1" style="width: 93px;"><span>2009</span></li>
 
     </div>
+    </div>
+
+    </div> *@
     <!-- trận đấu -->
     <script>
-        // lấy trận đầu 
+        // lấy trận đầu
         async function fetchMatchData() {
             try {
                 const response = await fetch("https://localhost:5000/api/Matches/GetMatches");
@@ -495,11 +675,10 @@
                     document.getElementById("match-schedule").textContent = `Thời gian: ${matchDateTime}`;
 
                     //sân
-                    document.getElementById("match-stadium").textContent = `Sân vận động: ${nextMatch.stadiumName}`;
-
+                    document.getElementById("match-stadium").textContent = ` Sân vận động: ${nextMatch.stadiumName}`;
                     // đếm ngược đến trận đấu
                     startCountdown(matchDate);
-                    // Lấy 4 trận đấu tiếp 
+                    // Lấy 4 trận đấu tiếp
                     const upcomingList = upcomingMatches.slice(1, 5);
                     displayUpcomingMatches(upcomingList);
                 }
@@ -507,7 +686,7 @@
                 console.error("Error fetching match data:", error);
             }
         }
-    
+
         // Hàm hiển thị trận đấu sắp tới
         function displayUpcomingMatches(matches) {
             const upcomingContainer = document.getElementById("upcoming-matches");
@@ -517,40 +696,41 @@
                 const matchDate = new Date(match.matchDate);
                 const matchDateTime = `${matchDate.toLocaleDateString()} ${matchDate.toLocaleTimeString()}`;
 
-                //html cho từng trận một 
+                //html cho từng trận một
                 const matchHtml = `
-                <li>
-                    <a>
-                        <ul class="t_info match_info01 headline01 clearfix">
-                            <li>
-                                ${index+1}
-                            </li>
-                            <li>
-                                <div class="headline01 clearfix">
-                                    <span>CLB Thể Công</span>
-                                    <span class="vs">vs</span>
-                                        <span>${match.opponentName}</span>
-                                </div>
-                                <div class="paragraph02 clearfix">
-                                        <span>${matchDateTime}</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </a>
-                </li>
-                `;
+                        <li>
+                            <a>
+                                <ul class="t_info match_info01 headline01 clearfix">
+                                    <li>
+                                        ${index + 1}
+                                    </li>
+                                    <li>
+                                        <div class="headline01 clearfix">
+                                            <span>CLB Thể Công</span>
+                                            <span class="vs">vs</span>
+                                                <span>${match.opponentName}</span>
+                                        </div>
+                                        <div class="paragraph02 clearfix">
+                                                <span>${matchDateTime}</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </a>
+                        </li>
+                        `;
 
                 //thêm trận trên vào danh sách
                 upcomingContainer.innerHTML += matchHtml;
             });
         }
-    
+
         // Hàm đếm ngược đến trận đấu
         function startCountdown(matchDate) {
             const countdownElement = document.getElementById("countdown");
             const matchStatusElement = document.getElementById("matchStatus");
 
             function updateCountdown() {
+                
                 const now = new Date().getTime();
                 const timeRemaining = matchDate - now;
 
@@ -563,211 +743,238 @@
                     const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-                    document.getElementById("days").textContent = days.toString().padStart(2, '0');
-                    document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
-                    document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
-                    document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+                    const daysElement =  $("#days")
+                    const hoursElement =  $("#hours")
+                    const minutesElement =  $("#minutes")
+                    const secondsElement =  $("#seconds")
+                    if (daysElement) daysElement.text(days.toString().padStart(2, '0')) 
+                    if (hoursElement) hoursElement.text( hours.toString().padStart(2, '0'));
+                    if (minutesElement) minutesElement.text(minutes.toString().padStart(2, '0'));
+                    if (secondsElement) secondsElement.text( seconds.toString().padStart(2, '0'));
                 }
             }
 
             const interval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // Gọi ngay lần đầu tiên
         }
-    
+
+
         // Gọi hàm fetchMatchData khi trang được tải
         document.addEventListener("DOMContentLoaded", fetchMatchData);
     </script>
 
     <!-- tin tức  -->
-    <script>
-    //temp sau sẽ thay bằng api
-    const categories = [
-        { id: 1, category_name: "Hoạt động VPF" },
-        { id: 2, category_name: "Tin nổi bật" },
-        { id: 3, category_name: "Tin Cúp Quốc Gia" }
-    ];
-    //temp sau sẽ thay bằng api 
-    const newsData = [
-        {
-            category_id: 1,
-            title: "Số liệu chuyên môn sau vòng 2 HNQG Bia Sao Vàng – 2024/25 ",
-            description: "Số liệu chuyên môn vòng 6 LPBank V.League 1 – 2024/25 Tổng số bàn thắng: 13 bàn; Trung bình 1,86 bàn/trận Thẻ vàng: 25 thẻ; Trung bình 3,57...",
-            createdAt: "2024-11-07T03:54:51.572Z"
-        },
-        {
-            category_id: 2,
-            title: "Vòng 2 Giải HNQG Bia Sao Vàng 2024/25: “Cuộc chiến” trên đỉnh",
-            description: "Sau vòng 2 Giải HNQG Bia Sao Vàng 2024/25, những ứng viên được giới chuyên môn đánh giá cao đều đang có khởi đầu khá ấn tượng, đeo bám nhau san sát trên đỉnh BXH. Điều này dự báo cuộc đua giành tấm vé lên chơi V.League 1 mùa tới sẽ ngày càng hấp dẫn, căng thẳng…",
-            createdAt: "2024-11-06T10:00:00.000Z"
-        },
-        {
-            category_id: 3,
-            title: "Vòng 6 LPBank V.League 1-2024/25: Giải mã “hiện tượng” HAGL",
-            description: "Hàng loạt diễn biến bất ngờ đã xảy ra ở vòng 6 LPBank V.League 1-2024/25, khi danh sách đội bóng bất bại ở mùa giải năm nay giảm xuống chỉ còn 1 đội duy nhất, còn ngôi vị số một trên bảng tổng sắp cũng có sự thay đổi đáng kể.",
-            createdAt: "2024-11-08T12:00:00.000Z"
+ @*    <script>
+        //temp sau sẽ thay bằng api
+        const categories = [
+            { id: 1, category_name: "Hoạt động VPF" },
+            { id: 2, category_name: "Tin nổi bật" },
+            { id: 3, category_name: "Tin Cúp Quốc Gia" }
+        ];
+        //temp sau sẽ thay bằng api
+        const newsData = [
+            {
+                category_id: 1,
+                title: "Số liệu chuyên môn sau vòng 2 HNQG Bia Sao Vàng – 2024/25 ",
+                description: "Số liệu chuyên môn vòng 6 LPBank V.League 1 – 2024/25 Tổng số bàn thắng: 13 bàn; Trung bình 1,86 bàn/trận Thẻ vàng: 25 thẻ; Trung bình 3,57...",
+                createdAt: "2024-11-07T03:54:51.572Z"
+            },
+            {
+                category_id: 2,
+                title: "Vòng 2 Giải HNQG Bia Sao Vàng 2024/25: “Cuộc chiến” trên đỉnh",
+                description: "Sau vòng 2 Giải HNQG Bia Sao Vàng 2024/25, những ứng viên được giới chuyên môn đánh giá cao đều đang có khởi đầu khá ấn tượng, đeo bám nhau san sát trên đỉnh BXH. Điều này dự báo cuộc đua giành tấm vé lên chơi V.League 1 mùa tới sẽ ngày càng hấp dẫn, căng thẳng…",
+                createdAt: "2024-11-06T10:00:00.000Z"
+            },
+            {
+                category_id: 3,
+                title: "Vòng 6 LPBank V.League 1-2024/25: Giải mã “hiện tượng” HAGL",
+                description: "Hàng loạt diễn biến bất ngờ đã xảy ra ở vòng 6 LPBank V.League 1-2024/25, khi danh sách đội bóng bất bại ở mùa giải năm nay giảm xuống chỉ còn 1 đội duy nhất, còn ngôi vị số một trên bảng tổng sắp cũng có sự thay đổi đáng kể.",
+                createdAt: "2024-11-08T12:00:00.000Z"
+            }
+        ];
+
+        // chỉnh cái categiory
+        function populateCategories(categories) {
+            const categoryTabsContainer = document.getElementById("category-tabs");
+
+            // Add Show All News tab using innerHTML
+            let showAllNewsTabHTML = `
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#all_news" aria-controls="all_news" role="tab" data-toggle="tab">Tất cả tin tức</a>
+                    </li>
+                `;
+            categoryTabsContainer.innerHTML += showAllNewsTabHTML;
+
+            // Create categories and tabs using innerHTML
+            categories.forEach((category, index) => {
+                let categoryTabHTML = `
+                        <li class="nav-item ${index === 0 ? 'active' : ''}">
+                            <a class="nav-link ${index === 0 ? 'active' : ''}" href="#category_${category.id}" aria-controls="category_${category.id}" role="tab" data-toggle="tab">
+                                ${category.category_name}
+                            </a>
+                        </li>
+                    `;
+                categoryTabsContainer.innerHTML += categoryTabHTML;
+
+                // Add category content
+                createCategoryContent(category);
+            });
         }
-    ];
 
-    // chỉnh cái categiory
-    function populateCategories(categories) {
-        const categoryTabsContainer = document.getElementById("category-tabs");
+        // show news với mỗi category khacs nhau
+        function createCategoryContent(category) {
+            const contentContainer = document.querySelector(".tab-content");
+            //yeah mất 1 ngày để viết đống này
+            let categoryContentHTML = `
+                    <div class="tab-pane" id="category_${category.id}">
+                        <ul id="news-container-${category.id}">
+                            ${newsData.filter(news => news.category_id === category.id).map(news => `
+                                    <li class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide42" style="width: 293px;">
+                                                <div class="figure addfigure animatefig-before">
+                                                    <div class="column-news">
+                                                        <!-- cái này sẽ thay vào ảnh sau -->
+                                                        <div class="figure-01"><img src="images/news/" alt="image"></div>
+                                                        <div class="content-01">
+                                                            <h6>
+                                                                <a href="#" tabindex="0">
+                                                                        ${news.title}
+                                                                </a>
+                                                            </h6>
+                                                                <p class="describtion">${news.description}</p>
+                                                        </div>
+                                                        <div class="news_date clearfix">
+                                                            <span class="news-date">
+                                                            ${new Date(news.createdAt).toLocaleString()}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
 
-        // Add Show All News tab using innerHTML
-        let showAllNewsTabHTML = `
-            <li class="nav-item">
-                <a class="nav-link active" href="#all_news" aria-controls="all_news" role="tab" data-toggle="tab">Tất cả tin tức</a>
-            </li>
-        `;
-        categoryTabsContainer.innerHTML += showAllNewsTabHTML;
+            contentContainer.innerHTML += categoryContentHTML;
+        }
 
-        // Create categories and tabs using innerHTML
-        categories.forEach((category, index) => {
-            let categoryTabHTML = `
-                <li class="nav-item ${index === 0 ? 'active' : ''}">
-                    <a class="nav-link ${index === 0 ? 'active' : ''}" href="#category_${category.id}" aria-controls="category_${category.id}" role="tab" data-toggle="tab">
-                        ${category.category_name}
-                    </a>
-                </li>
-            `;
-            categoryTabsContainer.innerHTML += categoryTabHTML;
+        // vứt hết tất cả news vào showall
+        function showAllNews() {
+            const contentContainer = document.querySelector(".tab-content");
 
-            // Add category content
-            createCategoryContent(category);
+            let allNewsContentHTML = `
+                    <div class="tab-pane active" id="all_news">
+                        <ul id="news-container-all">
+                            ${newsData.map(news => `
+                                    <li class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide42" style="width: 293px;">
+                                            <div class="figure addfigure animatefig-before">
+                                                <div class="column-news">
+                                                    <!-- cái này sẽ thay vào ảnh sau -->
+                                                    <div class="figure-01"><img src="images/news/" alt="image"></div>
+                                                    <div class="content-01">
+                                                        <h6>
+                                                            <a href="#" tabindex="0">
+                                                                    ${news.title}
+                                                            </a>
+                                                        </h6>
+                                                            <p class="describtion">${news.description}</p>
+                                                    </div>
+                                                    <div class="news_date clearfix">
+                                                        <span class="news-date">
+                                                        ${new Date(news.createdAt).toLocaleString()}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+
+            contentContainer.innerHTML += allNewsContentHTML;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            populateCategories(categories);
+            showAllNews(); // mới vào show hết
         });
-    }
 
-    // show news với mỗi category khacs nhau
-    function createCategoryContent(category) {
-        const contentContainer = document.querySelector(".tab-content");
-        //yeah mất 1 ngày để viết đống này
-        let categoryContentHTML = `
-            <div class="tab-pane" id="category_${category.id}">
-                <ul id="news-container-${category.id}">
-                    ${newsData.filter(news => news.category_id === category.id).map(news => `
-                            <li class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide42" style="width: 293px;">
-                                        <div class="figure addfigure animatefig-before">
-                                            <div class="column-news">
-                                                <!-- cái này sẽ thay vào ảnh sau -->
-                                                <div class="figure-01"><img src="images/news/" alt="image"></div>
-                                                <div class="content-01">
-                                                    <h6>
-                                                        <a href="#" tabindex="0">
-                                                                ${news.title}
-                                                        </a>
-                                                    </h6>
-                                                        <p class="describtion">${news.description}</p>
-                                                </div>
-                                                <div class="news_date clearfix">
-                                                    <span class="news-date">
-                                                    ${new Date(news.createdAt).toLocaleString()}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                    `).join('')}
-                </ul>
-            </div>
-        `;
-
-        contentContainer.innerHTML += categoryContentHTML;
-    }
-
-    // vứt hết tất cả news vào showall
-    function showAllNews() {
-        const contentContainer = document.querySelector(".tab-content");
-        
-        let allNewsContentHTML = `
-            <div class="tab-pane active" id="all_news">
-                <ul id="news-container-all">
-                    ${newsData.map(news => `
-                            <li class="slick-slide slick-active" data-slick-index="2" aria-hidden="false" tabindex="0" role="option" aria-describedby="slick-slide42" style="width: 293px;">
-                                    <div class="figure addfigure animatefig-before">
-                                        <div class="column-news">
-                                            <!-- cái này sẽ thay vào ảnh sau -->
-                                            <div class="figure-01"><img src="images/news/" alt="image"></div>
-                                            <div class="content-01">
-                                                <h6>
-                                                    <a href="#" tabindex="0">
-                                                            ${news.title}
-                                                    </a>
-                                                </h6>
-                                                    <p class="describtion">${news.description}</p>
-                                            </div>
-                                            <div class="news_date clearfix">
-                                                <span class="news-date">
-                                                ${new Date(news.createdAt).toLocaleString()}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                    `).join('')}
-                </ul>
-            </div>
-        `;
-
-        contentContainer.innerHTML += allNewsContentHTML;
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        populateCategories(categories);
-        showAllNews(); // mới vào show hết
-    });
-
-</script>
+    </script> *@
 
     <!--sản phẩm-->
-<script>
-    //cái này làm giống TUẤNNQ 
-    function loadData() {
-        $.ajax({
-            url: "https://localhost:5000/api/Product/GetProduct",
-            method: "GET",
-            dataType: "json",
-            success: function (res) {
-                var productDetailsContainer = $(".product_details");
-                productDetailsContainer.empty();//em dùng innerHtml ="" nhưng sao cũng đc
+    <script>
+        //cái này làm giống TUẤNNQ
+        function loadData() {
+            $.ajax({
+                url: "https://localhost:5000/api/Product/GetSanPham?top=8",
+                method: "GET",
+                dataType: "json",
+                success: function (res) {
+                    var productDetailsContainer = $(".product_details");
+                    productDetailsContainer.empty();//em dùng innerHtml ="" nhưng sao cũng đc
 
-                //thêm từng html mỗi sản phẩm 
-                $.each(res, function (index, item) {
-                    var Avatar = "";
-                    if (item.image == null || item.image == "" || item.image == undefined) {
-                        Avatar = "/image/imagelogo/icon-image-not-found-free-vector.jpg"; // Default image if none is provided
-                    } else {
-                        Avatar = item.image;
-                    }
+                    //thêm từng html mỗi sản phẩm
+                    $.each(res, function (index, item) {
+                        var Avatar = "";
+                        if (item.image == null || item.image == "" || item.image == undefined) {
+                            Avatar = "/image/imagelogo/icon-image-not-found-free-vector.jpg"; // Default image if none is provided
+                        } else {
+                            Avatar = item.image;
+                        }
+                        var maxLength = 35; // Độ dài tối đa của mô tả
+                        var proName = item.productName.length > maxLength ? item.productName.substring(0, maxLength) + "..." : item.productName;
+                        // Construct the HTML for each product
+                        var html = `
+                                <li>
+                                        <a href="/Public/ChiTietSanPham/${item.productId}">
+                                        <div>
+                                                <div class="product-img imageProduct"  style="background:url(${Avatar}) center no-repeat ; height: 300px !important"></div>
+                                                <div class="discount-badge">-${item.discoutPercent}%</div>
+                                        </div>
 
-                    // Construct the HTML for each product
-                    var html = `
-                        <li>
-                                    <a href="/Public/ChiTietSanPham/${index+1}">
-                                <div>
-                                    <div class="product-img" style="background:url(${Avatar}) center no-repeat"></div>
-                                </div>
-                                <ul class="oswald16 product_info">
-                                    <li class="detailsContainer">
-                                        <span>${item.productName}</span> <span><i class="fa fa-user"></i>360</span>
-                                    </li>
-                                    <li class="cartContainer">
-                                        <span>Add to cart</span> <span><i class="fa fa-shopping-cart"></i></span> <span class="price">$${item.price}</span>
-                                    </li>
-                                </ul>
-                            </a>
-                        </li>`;
+                                        <ul class="oswald16 product_info">
+                                            <li class="detailsContainer">
+                                                        <span style="text-align: left !important; width:100% ; font-size:12px !important ;">${proName}</span>
+                                                </li>
+                                            <li class="cartContainer">
+                                                                    <span>Xem</span>  <span class="price" data-price="${item.price}" style="font-family: fantasy;color:#d90003 !important ;font-size:17px !important " >${item.price}</span>
+                                            </li>
+                                        </ul>
+                                    </a>
+                                </li>`;
 
-                    // Append the HTML to the product details container
-                    productDetailsContainer.append(html);
-                });
-            },
-            error: function (res) {
-                console.error("Error loading data:", res);
+                        // Append the HTML to the product details container
+                        productDetailsContainer.append(html);
+
+
+                    });
+
+                    format();
+                },
+                error: function (res) {
+                    console.error("Error loading data:", res);
+                }
+            });
+        }
+
+        function format() {
+            function formatCurrency(value) {
+                return parseInt(value).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
             }
-        });
-    }
-    document.addEventListener("DOMContentLoaded", function () {
-        loadData();
-    });
-</script>
 
-    
+            const prices = document.querySelectorAll('.price');
+
+            prices.forEach(function (priceElement) {
+                const priceValue = priceElement.getAttribute('data-price');
+                if (priceValue) {
+                    priceElement.innerText = formatCurrency(priceValue);
+                }
+            });
+
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            loadData();
+        });
+    </script>
+

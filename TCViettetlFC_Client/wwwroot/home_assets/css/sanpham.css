@@ -8,7 +8,7 @@
     max-height: 400px;
     position: relative;
 }
-}
+
 
     .card:hover {
         transform: scale(1.05) !important;
