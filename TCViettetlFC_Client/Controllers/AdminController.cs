@@ -74,6 +74,10 @@ namespace TCViettetlFC_Client.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordModel changePasswordModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(changePasswordModel);
+            }
             var token = Request.Cookies["AuthToken"];
             if (string.IsNullOrEmpty(token))
             {
@@ -84,15 +88,17 @@ namespace TCViettetlFC_Client.Controllers
             var response = await _httpClient.PostAsJsonAsync("admin/changepass", new { OldPass = changePasswordModel.OldPassword, NewPass = changePasswordModel.NewPassword });
             if (response.IsSuccessStatusCode)
             {
-                TempData["Notification"] = "Đổi mật khẩu thành công";
+                TempData["Notification"] = await response.Content.ReadAsStringAsync();
                 TempData["NotificationType"] = "success";
+                return View();
             }
             else
             {
-                TempData["Notification"] = "Đổi mật khẩu thất bại";
+                TempData["Notification"] = await response.Content.ReadAsStringAsync();
                 TempData["NotificationType"] = "error";
+                return View(changePasswordModel);
             }
-            return RedirectToAction("ChangePassword");
+
 
         }
 

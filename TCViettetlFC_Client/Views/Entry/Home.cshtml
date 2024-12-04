@@ -1,1 +1,226 @@
-﻿<h1>Hello Entry</h1>
+﻿@{
+    
+    var cookieExpirationTime = Context.Request.Cookies["SessionTimer"];
+    string CookieExpiration;
+    if (string.IsNullOrEmpty(cookieExpirationTime))
+    {
+        CookieExpiration = DateTime.UtcNow.AddMinutes(30).ToString("o");
+    }
+    else
+    {
+        DateTime expirationTimeUtc = DateTime.Parse(cookieExpirationTime);
+        DateTime expirationTimeLocal = expirationTimeUtc.AddHours(7);
+        CookieExpiration = expirationTimeLocal.ToString("o");
+    }
+﻿
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>Trang chủ</title> <!-- Directly set title here -->
+    <style>
+        /* Style for the page container */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container style */
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* Title styles */
+        h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Subtitle styles */
+        h6 {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+     
+        /* Style for the countdown text */
+        #countdown {
+            display: inline-block;
+            font-size: 36px;
+            font-weight: bold;
+            color: #4CAF50;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid #4CAF50;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 250px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+            /* Style for the expired message */
+            #countdown.expired {
+                color: #f44336;
+                border-color: #f44336;
+            }
+
+            /* Add a hover effect on countdown box */
+            #countdown:hover {
+                background-color: #e8f5e9;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+        /* Style for the text showing when time is up */
+        #countdown {
+            font-size: 24px;
+            color: #ff5722;
+        }
+        @@media screen and (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 20px;
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 10px 18px;
+            }
+
+            #countdown {
+                font-size: 20px;
+                padding: 12px 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SOÁT VÉ</h1>
+        <button onclick="window.location.href='/user/logout';">Đăng xuất</button>
+        <button onclick="window.location.href='/admin/changepassword';">Đổi mật khẩu</button>
+        <h6>Phiên đăng nhập của bạn còn:</h6>
+        <div id="countdown"></div>
+    </div>
+
+    <script>
+        // Thời gian hết hạn cookie từ server
+        const cookieExpiration = '@CookieExpiration';
+        debugger;
+        if (cookieExpiration) {
+            const expirationTime = new Date(cookieExpiration); // Chuyển về dạng Date
+            const countdownElement = document.getElementById('countdown');
+
+            function updateCountdown() {
+                const now = new Date();
+                const timeLeft = expirationTime - now; // Thời gian còn lại (ms)
+
+                if (timeLeft > 0) {
+                    const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    // Format hours, minutes, seconds to always have 2 digits
+                    const formattedHours = String(hours).padStart(2, '0');
+                    const formattedMinutes = String(minutes).padStart(2, '0');
+                    const formattedSeconds = String(seconds).padStart(2, '0');
+
+                    countdownElement.textContent = `${formattedHours} : ${formattedMinutes} : ${formattedSeconds}`;
+                } else {
+                    countdownElement.textContent = "Phiên đã hết hạn.";
+                    clearInterval(interval); // Dừng đếm ngược
+                }
+            }
+
+            // Cập nhật đếm ngược mỗi giây
+            const interval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // Gọi ngay khi trang load
+        } else {
+            document.getElementById('countdown').textContent = "Không tìm thấy thời gian hết hạn.";
+        }
+    </script>
+</body>
+</html>
+
+
+<script>
+    // Thời gian hết hạn cookie từ server
+    const cookieExpiration = '@CookieExpiration';
+    debugger;
+    if (cookieExpiration) {
+        const expirationTime = new Date(cookieExpiration); // Chuyển về dạng Date
+        const countdownElement = document.getElementById('countdown');
+
+        function updateCountdown() {
+
+            const now = new Date();
+            const timeLeft = expirationTime - now; // Thời gian còn lại (ms)
+
+            if (timeLeft > 0) {
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                // Format hours, minutes, seconds to always have 2 digits
+                const formattedHours = String(hours).padStart(2, '0');
+                const formattedMinutes = String(minutes).padStart(2, '0');
+                const formattedSeconds = String(seconds).padStart(2, '0');
+
+                countdownElement.textContent = `${formattedHours} : ${formattedMinutes} : ${formattedSeconds}`;
+            } else {
+                countdownElement.textContent = "Phiên đã hết hạn.";
+                clearInterval(interval); // Dừng đếm ngược
+            }
+        }
+
+        // Cập nhật đếm ngược mỗi giây
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Gọi ngay khi trang load
+    } else {
+        document.getElementById('countdown').textContent = "Không tìm thấy thời gian hết hạn.";
+    }
+</script>
+
+

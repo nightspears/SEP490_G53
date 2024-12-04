@@ -58,7 +58,7 @@
                                                         <td>@user.fullName</td>
                                                         <td>@user.email</td>
                                                         <td>@user.phone</td>
-                                                        <td>@(user.roleName == "Staff" ? "Nhân viên" : (!string.IsNullOrEmpty(user.roleName) ? user.roleName : "N/A"))</td>
+                                                <td>@(user.roleName == "Staff" ? "Nhân viên" : user.roleName == "Entry"?"Soát vé":(!string.IsNullOrEmpty(user.roleName) ? user.roleName : "N/A"))</td>
                                                         <td>
                                                             @if (user.status.HasValue)
                                                             {
@@ -101,7 +101,7 @@
                                     </table>
                                 </div>
                                 <div id="userForm" style="display:none; margin-bottom: 20px;">
-                                    <h5>Add New User</h5>
+                                    <h5>Thêm mới nhân viên</h5>
                            
                                 <form asp-action="AddUser" method="post">
                                     <div class="row">
@@ -133,7 +133,8 @@
                                             <div class="form-group">
                                                 <label>Vai trò</label>
                                                 <select class="form-control" name="RoleId" required>
-                                                    <option value="1">Nhân viên</option>
+                                                <option value="1">Nhân viên</option>
+                                                <option value="3">Soát vé</option>
                                                 </select>
                                             </div>
                                         </div>

@@ -30,8 +30,10 @@ namespace TCViettelFC_API.Controllers
         public async Task<IActionResult> ChangePassword(ChangePassRequest ch)
         {
             var result = await _userRepository.AdminChangePasswordAsync(ch);
-            if (result != 1) return BadRequest("Change password failed");
-            return Ok("Change password successfully");
+            if (result == 1) return Ok("Đổi mật khẩu thành công");
+            if (result == -2) return Conflict("Mật khẩu mới không được trùng với mật khẩu cũ");
+            if (result == -1) return Conflict("Mật khẩu cũ không chính xác");
+            return BadRequest("Đổi mật khẩu không thành công");
         }
 
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace TCViettelFC_API.Models;
+﻿namespace TCViettelFC_API.Models;
 
 public partial class User
 {
@@ -20,6 +17,10 @@ public partial class User
     public int? Status { get; set; }
 
     public DateTime? CreatedAt { get; set; }
+
+    public string? ConfirmationCode { get; set; }
+
+    public DateTime? CodeExpiry { get; set; }
 
     public virtual ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
 

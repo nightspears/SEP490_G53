@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
+using System.Text.Json;
 using TCViettelFC_Client.ApiServices;
+using TCViettetlFC_Client.Models;
 
 namespace TCViettetlFC_Client.Controllers
 {
@@ -25,7 +27,7 @@ namespace TCViettetlFC_Client.Controllers
         public async Task<IActionResult> VerifyTicket(int ticketId)
         {
             var cookies = Request.Cookies["RoleId"];
-            if (cookies != "1")
+            if (cookies != "3")
             {
                 return RedirectToAction("Index", "Forbidden");
             }
@@ -51,7 +53,7 @@ namespace TCViettetlFC_Client.Controllers
         public async Task<IActionResult> VerifyItem(int orderId)
         {
             var cookies = Request.Cookies["RoleId"];
-            if (cookies != "1")
+            if (cookies != "3")
             {
                 return RedirectToAction("Index", "Forbidden");
             }
@@ -63,15 +65,17 @@ namespace TCViettetlFC_Client.Controllers
                 var response = await httpClient.GetAsync($"https://localhost:5000/api/entry/verifysupitem/{orderId}");
                 if (response.IsSuccessStatusCode)
                 {
-                    ViewBag.Result = await response.Content.ReadAsStringAsync();
+                    var result = await JsonSerializer.DeserializeAsync<List<VerifySupDto>>(await response.Content.ReadAsStreamAsync());
+                    return View(result);
                 }
                 else
                 {
                     ViewBag.Result = await response.Content.ReadAsStringAsync();
+                    return View();
                 }
 
             }
-            return View();
+
         }
     }
 }

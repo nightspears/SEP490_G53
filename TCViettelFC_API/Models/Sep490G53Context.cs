@@ -744,6 +744,7 @@ public partial class Sep490G53Context : DbContext
             entity.HasIndex(e => e.Email, "UQ__Users__AB6E616413921862").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.CodeExpiry).HasColumnType("datetime");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")

@@ -21,5 +21,39 @@ namespace TCViettelFC_API.Controllers
             if (response == null) return BadRequest("Login failed");
             return Ok(response);
         }
+        [HttpGet("checkmail/{email}")]
+        public IActionResult CheckExistedMailAsync(string email)
+        {
+            var result = _userRepository.CheckExistedEmailAsync(email);
+            if (result == true) return Ok();
+            return Conflict("Email không tồn tại");
+        }
+        [HttpGet("sendcode/{email}")]
+        public async Task<IActionResult> SendConfimationEmailAsync(string email)
+        {
+            var result = await _userRepository.SendConfirmationCodeAsync(email);
+            if (result == true) return Ok("Gửi mã thành công");
+            else return BadRequest("Gửi mã thất bại");
+        }
+        [HttpPost("verify")]
+        public async Task<IActionResult> VerifyConfirmationCodeAsync([FromBody] VerifyConfirmationCodeRequest request)
+        {
+            var isValid = await _userRepository.VerifyConfirmationCodeAsync(request.Email, request.Code);
+            if (isValid)
+            {
+                return Ok("Email confirmed successfully");
+            }
+            return BadRequest("Invalid or expired confirmation code");
+        }
+        [HttpPost("resetpassword")]
+        public async Task<IActionResult> ResetPasswordAsync([FromBody] ResetPassRequest request)
+        {
+            var res = _userRepository.CheckExistedEmailAsync(request.Email);
+            if (!res) return Conflict("Email không tồn tại");
+            var resu = await _userRepository.ResetPasswordAsync(request.Email, request.NewPass);
+            if (resu == -1) return Conflict("Mật khẩu mới không được trùng với mật khẩu cũ");
+            if (resu == 1) return Ok("Đặt lại mật khẩu thành công");
+            return BadRequest("Đặt lại mật khẩu thất bại");
+        }
     }
 }

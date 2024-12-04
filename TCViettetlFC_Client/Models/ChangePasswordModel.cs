@@ -7,6 +7,7 @@ namespace TCViettetlFC_Client.Models
         [DataType(DataType.Password)]
         public string OldPassword { get; set; }
         [Required(ErrorMessage = "Mật khẩu mới không được để trống")]
+        [MinLength(8, ErrorMessage = "Mật khẩu phải có ít nhất 8 ký tự")]
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 

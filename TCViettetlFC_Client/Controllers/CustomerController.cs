@@ -186,6 +186,7 @@ namespace TCViettetlFC_Client.Controllers
                 var result = await _httpClient.PostAsJsonAsync("customer/resetpassword", new { Email = email1, NewPass = model.Password });
                 if (result.IsSuccessStatusCode)
                 {
+                    Response.Cookies.Delete("EmailForgot");
                     return RedirectToAction("Login");
                 }
                 else

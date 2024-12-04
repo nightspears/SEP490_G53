@@ -12,6 +12,138 @@ namespace TCViettetlFC_Client.Controllers
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
         }
+        public IActionResult ForgotPassword()
+        {
+            var token = Request.Cookies["RoleId"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return View();
+            }
+            if (token.Equals("2"))
+            {
+                return RedirectToAction("Home", "Admin");
+            }
+            if (token.Equals("1"))
+            {
+                return RedirectToAction("ProductManagement", "Staff");
+            }
+            if (token.Equals("3"))
+            {
+                return RedirectToAction("Home", "Entry");
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPassUserModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            var result = await _httpClient.GetAsync($"user/sendcode/{model.Email}");
+            if (result.IsSuccessStatusCode)
+            {
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Lax,
+                    Expires = DateTime.UtcNow.AddHours(1)
+                };
+                Response.Cookies.Append("EmailForgot", model.Email, cookieOptions);
+                return RedirectToAction("Verify");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+        public IActionResult Verify()
+        {
+            var token = Request.Cookies["RoleId"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return View();
+            }
+            if (token.Equals("2"))
+            {
+                return RedirectToAction("Home", "Admin");
+            }
+            if (token.Equals("1"))
+            {
+                return RedirectToAction("ProductManagement", "Staff");
+            }
+            if (token.Equals("3"))
+            {
+                return RedirectToAction("Home", "Entry");
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Verify(EmailVerificationModel evd)
+        {
+
+            var email1 = Request.Cookies["EmailForgot"];
+            if (email1 != null)
+            {
+                var result = await _httpClient.PostAsJsonAsync("user/verify", new { Email = email1, evd.Code });
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("ResetPassword");
+                }
+                else
+                {
+                    ModelState.AddModelError("Code", "Mã xác nhận không chính xác, vui lòng thử lại");
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+            }
+        }
+        public IActionResult ResetPassword()
+        {
+            var token = Request.Cookies["RoleId"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return View();
+            }
+            if (token.Equals("2"))
+            {
+                return RedirectToAction("Home", "Admin");
+            }
+            if (token.Equals("1"))
+            {
+                return RedirectToAction("ProductManagement", "Staff");
+            }
+            if (token.Equals("3"))
+            {
+                return RedirectToAction("Home", "Entry");
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(UserResetPassModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            var email1 = Request.Cookies["EmailForgot"];
+            if (email1 != null)
+            {
+                var result = await _httpClient.PostAsJsonAsync("user/resetpassword", new { Email = email1, NewPass = model.Password });
+                if (result.IsSuccessStatusCode)
+                {
+                    Response.Cookies.Delete("EmailForgot");
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    ModelState.AddModelError("Code", "Mã xác nhận không chính xác, vui lòng thử lại");
+                    return View(model);
+                }
+            }
+            else
+            {
+                return View(model);
+            }
+        }
         public IActionResult Login()
         {
             var token = Request.Cookies["RoleId"];
@@ -25,7 +157,7 @@ namespace TCViettetlFC_Client.Controllers
             }
             else if (token.Equals("1"))
             {
-                return RedirectToAction("Home", "Staff");
+                return RedirectToAction("ProductManagement", "Staff");
             }
             else if (token.Equals("3"))
             {
@@ -42,6 +174,7 @@ namespace TCViettetlFC_Client.Controllers
             Response.Cookies.Delete("AuthToken");
             Response.Cookies.Delete("RoleId");
             Response.Cookies.Delete("UserId");
+            Response.Cookies.Delete("SessionTimer");
 
             return RedirectToAction("Login", "User");
         }
@@ -66,12 +199,13 @@ namespace TCViettetlFC_Client.Controllers
                         HttpOnly = true,
 
                         SameSite = SameSiteMode.Lax,
-                        Expires = DateTime.UtcNow.AddHours(1)
+                        Expires = DateTime.UtcNow.AddHours(4)
                     };
 
                     Response.Cookies.Append("AuthToken", token.token, cookieOptions);
                     Response.Cookies.Append("UserId", token.userId.ToString(), cookieOptions);
                     Response.Cookies.Append("RoleId", token.roleId.ToString(), cookieOptions);
+                    Response.Cookies.Append("SessionTimer", DateTime.UtcNow.AddHours(4).ToString(), cookieOptions);
 
                     if (token.roleId == 2)
                     {
@@ -98,7 +232,7 @@ namespace TCViettetlFC_Client.Controllers
                 }
                 else
                 {
-                    ViewBag.Error = "Số điện thoại hoặc mật khẩu sai!";
+                    ViewBag.Error = "Email hoặc mật khẩu sai!";
                     return View(userLoginViewModel);
                 }
             }

@@ -16,6 +16,7 @@ namespace TCViettetlFC_Client.Controllers
         private readonly OrderService _orderService;
         private readonly IApiHelper _apiHelper;
         private readonly GoShipService _goShipService;
+        private readonly int itemPerPage = 14;
         public StaffController(IHttpClientFactory httpClientFactory, FeedbackService feedbackService, IApiHelper apiHelper, OrderService orderService, GoShipService goShipService, IWebHostEnvironment env)
         {
             _httpClient = httpClientFactory.CreateClient("ApiClient");
@@ -25,10 +26,9 @@ namespace TCViettetlFC_Client.Controllers
             _goShipService = goShipService;
             _env = env;
         }
-        private async Task<List<TicketOrdersViewModel>> GetAllTicketOrders()
-
+        private async Task<List<TicketOrdersViewModel>> GetAllTicketOrders(int page)
         {
-            return await _apiHelper.GetApiResponseAsync<List<TicketOrdersViewModel>>("order/getticketorders");
+            return await _apiHelper.GetApiResponseAsync<List<TicketOrdersViewModel>>($"order/getticketorders?$skip={(page - 1) * itemPerPage}&$top={itemPerPage}");
         }
         private async Task<List<OrderedTicketDto>> GetOrderedTicket(int id)
         {
@@ -38,15 +38,20 @@ namespace TCViettetlFC_Client.Controllers
         {
             return await _apiHelper.GetApiResponseAsync<List<OrderedSuppItemDto>>($"order/getorderedsupp/{id}");
         }
-        public async Task<IActionResult> TicketOrders()
+        public async Task<IActionResult> TicketOrders(int id = 1)
         {
             var token = Request.Cookies["AuthToken"];
             if (string.IsNullOrEmpty(token))
             {
                 return RedirectToAction("Login", "User");
             }
-            ViewBag.Orders = await GetAllTicketOrders();
-            return View();
+            var result = await _apiHelper.GetApiResponseAsync<List<TicketOrdersViewModel>>("order/getticketorders");
+            int totalPage = (int)Math.Ceiling((double)result.Count() / itemPerPage);
+            if (id > totalPage) id = totalPage;
+            if (id < 1) id = 1;
+            TempData["TotalPages"] = totalPage;
+            var orders = await GetAllTicketOrders(id);
+            return View(orders);
         }
 
 
@@ -373,7 +378,7 @@ namespace TCViettetlFC_Client.Controllers
             string requestUri = "https://localhost:5000/api/MatchAreas/GetSanPhamById?id=" + id;
             var response = await _httpClient.GetAsync(requestUri);
 
-            List< MatchArea> ListData = new List<MatchArea>();
+            List<MatchArea> ListData = new List<MatchArea>();
 
             if (response.IsSuccessStatusCode)
             {
