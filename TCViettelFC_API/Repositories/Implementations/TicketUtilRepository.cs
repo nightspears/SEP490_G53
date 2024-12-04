@@ -11,12 +11,12 @@ using TCViettelFC_API.Repositories.Interfaces;
 
 namespace TCViettelFC_API.Repositories.Implementations
 {
-    public class TicketUtilRepository : ITicketUtilRepository
-    {
-        private readonly IEmailService _emailService;
-        private readonly IHttpContextAccessor _contextAccessor;
-        private readonly Cloudinary _cloudinary;
-        private string htmlHeader = @"
+	public class TicketUtilRepository : ITicketUtilRepository
+	{
+		private readonly IEmailService _emailService;
+		private readonly IHttpContextAccessor _contextAccessor;
+		private readonly Cloudinary _cloudinary;
+		private string htmlHeader = @"
     <!DOCTYPE html>
     <html lang='en'>
     <head>
@@ -111,90 +111,90 @@ width:300px;
     <body>
         <div class='ticket-container'>
     ";
-        private string htmlFooter = @"
+		private string htmlFooter = @"
         </div>
     </body>
     </html>";
-        private readonly Sep490G53Context _context;
-        public TicketUtilRepository(IOptions<CloudinarySettings> config, IEmailService emailService, IHttpContextAccessor contextAccessor, Sep490G53Context context)
-        {
-            _context = context;
-            _contextAccessor = contextAccessor;
-            _emailService = emailService;
-            var account = new Account(
-                config.Value.CloudName,
-                config.Value.ApiKey,
-                config.Value.ApiSecret);
-            _cloudinary = new Cloudinary(account);
-        }
-        public async Task<List<OrderedTicket>> GetOrderedTicketsByOrderId(int orderId)
-        {
-            return await _context.OrderedTickets.Include(x => x.Area).Include(x => x.Match).Where(x => x.OrderId == orderId).ToListAsync();
-        }
-        public async Task<List<OrderedSuppItem>> GetOrderedSuppByOrderId(int orderId)
-        {
-            return await _context.OrderedSuppItems.Include(x => x.Item).Where(x => x.OrderId == orderId).ToListAsync();
-        }
-        public async Task<OrderedTicket> GetOrderedTicketByIdAsync(int id)
-        {
-            return await _context.OrderedTickets.Include(x => x.Area).Include(x => x.Match).FirstOrDefaultAsync(x => x.Id == id);
-        }
-        public async Task<int> VerifyTicketAsync(OrderedTicket ticket)
-        {
-            if (ticket.Status == 1)
-            {
-                ticket.Status = 0;
-                await _context.SaveChangesAsync();
-                return 1;
-            }
-            return 0;
-        }
-        public async Task<List<VerifySupDto>> VerifyItemAsync(List<OrderedSuppItem> item)
-        {
-            List<VerifySupDto> res = new();
-            foreach (var item1 in item)
-            {
-                if (item1.Status == 0)
-                {
-                    item1.Status = 1;
-                    res.Add(new VerifySupDto
-                    {
-                        Imageurl = item1.Item.ImageUrl,
-                        ItemName = item1.Item.ItemName,
-                        Price = (decimal)item1.Price!,
-                        Quantity = (int)item1.Quantity!
-                    });
+		private readonly Sep490G53Context _context;
+		public TicketUtilRepository(IOptions<CloudinarySettings> config, IEmailService emailService, IHttpContextAccessor contextAccessor, Sep490G53Context context)
+		{
+			_context = context;
+			_contextAccessor = contextAccessor;
+			_emailService = emailService;
+			var account = new Account(
+				config.Value.CloudName,
+				config.Value.ApiKey,
+				config.Value.ApiSecret);
+			_cloudinary = new Cloudinary(account);
+		}
+		public async Task<List<OrderedTicket>> GetOrderedTicketsByOrderId(int orderId)
+		{
+			return await _context.OrderedTickets.Include(x => x.Area).Include(x => x.Match).Where(x => x.OrderId == orderId).ToListAsync();
+		}
+		public async Task<List<OrderedSuppItem>> GetOrderedSuppByOrderId(int orderId)
+		{
+			return await _context.OrderedSuppItems.Include(x => x.Item).Where(x => x.OrderId == orderId).ToListAsync();
+		}
+		public async Task<OrderedTicket> GetOrderedTicketByIdAsync(int id)
+		{
+			return await _context.OrderedTickets.Include(x => x.Area).Include(x => x.Match).FirstOrDefaultAsync(x => x.Id == id);
+		}
+		public async Task<int> VerifyTicketAsync(OrderedTicket ticket)
+		{
+			if (ticket.Status == 1)
+			{
+				ticket.Status = 0;
+				await _context.SaveChangesAsync();
+				return 1;
+			}
+			return 0;
+		}
+		public async Task<List<VerifySupDto>> VerifyItemAsync(List<OrderedSuppItem> item)
+		{
+			List<VerifySupDto> res = new();
+			foreach (var item1 in item)
+			{
+				if (item1.Status == 0)
+				{
+					item1.Status = 1;
+					res.Add(new VerifySupDto
+					{
+						Imageurl = item1.Item.ImageUrl,
+						ItemName = item1.Item.ItemName,
+						Price = (decimal)item1.Price!,
+						Quantity = (int)item1.Quantity!
+					});
 
-                }
-            }
-            await _context.SaveChangesAsync();
-            return res;
+				}
+			}
+			await _context.SaveChangesAsync();
+			return res;
 
-        }
-        public async Task SendOrderConfirmationEmailAsync(CreateOrderRequest request)
-        {
-            // Extract relevant details from the request
-            string customerName = request.Customer.FullName ?? "Customer";
-            string customerEmail = request.Customer.Email;
-            string customerPhone = request.Customer.Phone ?? "N/A";
-            string orderCode = request.OrderProduct.OrderCode;
-            DateTime orderDate = request.OrderProduct.OrderDate;
-            decimal totalAmount = request.Payment.TotalAmount;
-            decimal shipmentFee = request.OrderProduct.ShipmentFee ?? 0;
+		}
+		public async Task SendOrderConfirmationEmailAsync(CreateOrderRequest request)
+		{
+			// Extract relevant details from the request
+			string customerName = request.Customer.FullName ?? "Customer";
+			string customerEmail = request.Customer.Email;
+			string customerPhone = request.Customer.Phone ?? "N/A";
+			string orderCode = request.OrderProduct.OrderCode;
+			DateTime orderDate = request.OrderProduct.OrderDate;
+			decimal totalAmount = request.Payment.TotalAmount;
+			decimal shipmentFee = request.OrderProduct.ShipmentFee ?? 0;
 
-            string shippingAddress = $"{request.Address.DetailedAddress}, " +
-                                      $"{request.Address.WardName}, {request.Address.DistrictName}, " +
-                                      $"{request.Address.CityName}";
+			string shippingAddress = $"{request.Address.DetailedAddress}, " +
+									  $"{request.Address.WardName}, {request.Address.DistrictName}, " +
+									  $"{request.Address.CityName}";
 
-            // Generate product details in HTML format
-            string productDetails = "<ul style='list-style-type:none; padding: 0; margin: 0;'>";
-            foreach (var detail in request.OrderProductDetails)
-            {
-                decimal productTotalPrice = detail.Price * detail.Quantity;
-                string formattedPrice = detail.Price.ToString("C0", new CultureInfo("vi-VN"));
-                string formattedTotalPrice = productTotalPrice.ToString("C0", new CultureInfo("vi-VN"));
+			// Generate product details in HTML format
+			string productDetails = "<ul style='list-style-type:none; padding: 0; margin: 0;'>";
+			foreach (var detail in request.OrderProductDetails)
+			{
+				decimal productTotalPrice = detail.Price * detail.Quantity;
+				string formattedPrice = detail.Price.ToString("C0", new CultureInfo("vi-VN"));
+				string formattedTotalPrice = productTotalPrice.ToString("C0", new CultureInfo("vi-VN"));
 
-                productDetails += $@"
+				productDetails += $@"
 <li style='padding-bottom: 10px; display: flex; align-items: center;'>
   <img src='{(!string.IsNullOrEmpty(detail.Avatar) ? detail.Avatar : "https://via.placeholder.com/50")}' 
        alt='{detail.ProductName}' 
@@ -202,34 +202,34 @@ width:300px;
   <div>
     <p class='mb-0'>Tên Sản Phẩm: {detail.ProductName}</p>";
 
-                if (detail.PlayerId > 0)
-                {
-                    productDetails += $"<p class='mb-0'>Mã Code In Số Áo: {detail.PlayerId}</p>";
-                }
+				if (detail.PlayerId > 0)
+				{
+					productDetails += $"<p class='mb-0'>Mã Code In Số Áo: {detail.PlayerId}</p>";
+				}
 
-                if (!string.IsNullOrEmpty(detail.CustomShirtNumber) && !string.IsNullOrEmpty(detail.CustomShirtName))
-                {
-                    productDetails += $@"
+				if (!string.IsNullOrEmpty(detail.CustomShirtNumber) && !string.IsNullOrEmpty(detail.CustomShirtName))
+				{
+					productDetails += $@"
 <p class='mb-0'>Customer In Số Áo: {detail.CustomShirtName}</p>
 <p class='mb-0'>Customer In Tên Áo: {detail.CustomShirtNumber}</p>";
-                }
+				}
 
-                productDetails += $@"
+				productDetails += $@"
 <p class='mb-0'>Kích Cỡ: {detail.Size}</p>
 <p class='mb-0'>Số lượng: {detail.Quantity}</p>
 <span>Đơn Giá: {formattedPrice}</span><br>                         
 <span>Tổng: {formattedPrice} x {detail.Quantity} = {formattedTotalPrice}</span>
   </div>
 </li>";
-            }
-            productDetails += "</ul>";
+			}
+			productDetails += "</ul>";
 
-            // Format monetary values as VND
-            string formattedTotalAmount = totalAmount.ToString("C0", new CultureInfo("vi-VN"));
-            string formattedShipmentFee = shipmentFee.ToString("C0", new CultureInfo("vi-VN"));
+			// Format monetary values as VND
+			string formattedTotalAmount = totalAmount.ToString("C0", new CultureInfo("vi-VN"));
+			string formattedShipmentFee = shipmentFee.ToString("C0", new CultureInfo("vi-VN"));
 
-            // Begin constructing the email HTML body
-            string htmlBody = $@"
+			// Begin constructing the email HTML body
+			string htmlBody = $@"
 <html>
     <head>
         <style>
@@ -388,39 +388,39 @@ width:300px;
     </body>
 </html>";
 
-            // Send the email using the _emailService
-            await _emailService.SendEmailAsync(customerEmail, "Xác nhận đơn hàng - Shop TCVIETTELFC", htmlBody);
-        }
-        public async Task<int> SendTicketViaEmailAsync(int orderId, string email)
-        {
-            if (string.IsNullOrEmpty(email))
-            {
-                return 0;
-            }
-            var tickets = await GetOrderedTicketsByOrderId(orderId);
-            if (tickets.Count() <= 0) return 0;
-            var supp = await GetOrderedSuppByOrderId(orderId);
+			// Send the email using the _emailService
+			await _emailService.SendEmailAsync(customerEmail, "Xác nhận đơn hàng - Shop TCVIETTELFC", htmlBody);
+		}
+		public async Task<int> SendTicketViaEmailAsync(int orderId, string email)
+		{
+			if (string.IsNullOrEmpty(email))
+			{
+				return 0;
+			}
+			var tickets = await GetOrderedTicketsByOrderId(orderId);
+			if (tickets.Count() <= 0) return 0;
+			var supp = await GetOrderedSuppByOrderId(orderId);
 
 
 
 
 
 
-            string htmlBody = htmlHeader;
-            QRCodeGenerator qr = new QRCodeGenerator();
-            foreach (var ticket in tickets)
-            {
-                string ticketUrl = $"https://tcviettelfc.azurewebsites.net/Entry/VerifyTicket/{ticket.Id}";
+			string htmlBody = htmlHeader;
+			QRCodeGenerator qr = new QRCodeGenerator();
+			foreach (var ticket in tickets)
+			{
+				string ticketUrl = $"https://tcviettelfc.azurewebsites.net/Entry/VerifyTicket/{ticket.Id}";
 
-                QRCodeData data = qr.CreateQrCode(ticketUrl, QRCodeGenerator.ECCLevel.Q);
-                PngByteQRCode qrCode = new PngByteQRCode(data);
+				QRCodeData data = qr.CreateQrCode(ticketUrl, QRCodeGenerator.ECCLevel.Q);
+				PngByteQRCode qrCode = new PngByteQRCode(data);
 
-                byte[] qrCodeImage = qrCode.GetGraphic(20);
-                var imageUrl = await UploadQrCodeImageToServerAsync(qrCodeImage, ticket.Id);
-                string ticketHtml;
-                if (ticket.Area.Stands.Equals("C") || ticket.Area.Stands.Equals("D"))
-                {
-                    ticketHtml = $@"
+				byte[] qrCodeImage = qrCode.GetGraphic(20);
+				var imageUrl = await UploadQrCodeImageToServerAsync(qrCodeImage, ticket.Id);
+				string ticketHtml;
+				if (ticket.Area.Stands.Equals("C") || ticket.Area.Stands.Equals("D"))
+				{
+					ticketHtml = $@"
             <div class='ticket-container'>
  <div class='ticket'>
      <div class='header'>
@@ -454,10 +454,10 @@ width:300px;
      </div>
  </div>
      </div>";
-                }
-                else
-                {
-                    ticketHtml = $@"
+				}
+				else
+				{
+					ticketHtml = $@"
             <div class='ticket-container'>
  <div class='ticket'>
      <div class='header'>
@@ -495,20 +495,20 @@ width:300px;
      </div>
  </div>
      </div>";
-                }
+				}
 
-                htmlBody += ticketHtml;
-            }
-            if (supp.Count > 0)
-            {
-                string suppUrl = $"https://tcviettelfc.azurewebsites.net/VerifyItem/{orderId}";
-                QRCodeData suppData = qr.CreateQrCode(suppUrl, QRCodeGenerator.ECCLevel.Q);
-                PngByteQRCode suppQrCode = new PngByteQRCode(suppData);
+				htmlBody += ticketHtml;
+			}
+			if (supp.Count > 0)
+			{
+				string suppUrl = $"https://tcviettelfc.azurewebsites.net/Entry/VerifyItem/{orderId}";
+				QRCodeData suppData = qr.CreateQrCode(suppUrl, QRCodeGenerator.ECCLevel.Q);
+				PngByteQRCode suppQrCode = new PngByteQRCode(suppData);
 
-                byte[] suppQrCodeImage = suppQrCode.GetGraphic(20);
-                var suppImageUrl = await UploadQrCodeImageToServerAsync(suppQrCodeImage, orderId);
+				byte[] suppQrCodeImage = suppQrCode.GetGraphic(20);
+				var suppImageUrl = await UploadQrCodeImageToServerAsync(suppQrCodeImage, orderId);
 
-                string suppHtml = $@"
+				string suppHtml = $@"
             <div class='ticket-container'>
                 <div class='ticket'>
                     <div class='header'>
@@ -520,27 +520,27 @@ width:300px;
                 </div>
             </div>";
 
-                htmlBody += suppHtml;
-            }
-            htmlBody += htmlFooter;
-            await _emailService.SendEmailAsync(email, "Thông tin vé", htmlBody);
-            return 1;
-        }
-        private async Task<string> UploadQrCodeImageToServerAsync(byte[] qrCodeImage, int ticketId)
-        {
-            using (var stream = new MemoryStream(qrCodeImage))
-            {
-                var uploadParams = new ImageUploadParams()
-                {
-                    File = new FileDescription($"ticket-{ticketId}.png", stream),
-                };
-                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+				htmlBody += suppHtml;
+			}
+			htmlBody += htmlFooter;
+			await _emailService.SendEmailAsync(email, "Thông tin vé", htmlBody);
+			return 1;
+		}
+		private async Task<string> UploadQrCodeImageToServerAsync(byte[] qrCodeImage, int ticketId)
+		{
+			using (var stream = new MemoryStream(qrCodeImage))
+			{
+				var uploadParams = new ImageUploadParams()
+				{
+					File = new FileDescription($"ticket-{ticketId}.png", stream),
+				};
+				var uploadResult = await _cloudinary.UploadAsync(uploadParams);
 
-                return uploadResult.SecureUrl.ToString();
-            }
-        }
+				return uploadResult.SecureUrl.ToString();
+			}
+		}
 
 
-    }
+	}
 }
 
