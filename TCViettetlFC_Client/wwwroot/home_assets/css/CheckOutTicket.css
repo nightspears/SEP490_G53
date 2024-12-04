@@ -1,0 +1,29 @@
+﻿/* Đảm bảo bảng cuộn ngang khi màn hình nhỏ */
+.Card {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Điều chỉnh kiểu dáng cho các cột khi màn hình nhỏ */
+@media (max-width: 768px) {
+    .table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+    }
+
+        .table th, .table td {
+            white-space: nowrap; /* Ngăn việc text bị gãy dòng */
+            text-align: center;
+        }
+
+        /* Thêm khoảng cách giữa các phần tử trong bảng để dễ nhìn hơn */
+        .table th, .table td {
+            padding: 10px;
+        }
+
+        /* Điều chỉnh font-size nhỏ hơn trên màn hình nhỏ */
+        .table th, .table td {
+            font-size: 14px;
+        }
+}

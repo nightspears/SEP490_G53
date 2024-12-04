@@ -27,6 +27,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 {
                     ItemId = item.ItemId,
                     ItemName = item.ItemName,
+                    ImageUrl = item.ImageUrl,
                     Price = item.Price,
                     Status = item.Status,
                     Image = item.ImageUrl

@@ -21,6 +21,7 @@
         margin-bottom: 20px;
 }
 
+
 .sanbong svg {
             background-color: #f8f9fa;
     display: block;
@@ -68,6 +69,7 @@
         background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
         justify-content: center;
         align-items: center;
+        z-index: 1;
     }
 
     /* Popup form centered */
@@ -90,7 +92,7 @@
     }
 
         /* Tăng kích thước của các input và button */
-        #ticketForm input,
+        #ticketForm input:not(.input-checkbox),
         #ticketForm button {
             font-size: 16px; /* Tăng kích thước chữ trong input và button */
             height: 45px; /* Tăng chiều cao của input */
@@ -103,6 +105,7 @@
             font-size: 16px;
             height: 45px;
             padding: 10px 20px;
+            margin-top: 5px;
         }
 
         /* Tăng kích thước tiêu đề hoặc nhãn (label) */
@@ -137,7 +140,6 @@
     }
 
 
-    /* Kiểu overlay bao phủ toàn màn hình */
     .overlay {
         position: fixed;
         top: 0;
@@ -149,6 +151,7 @@
         align-items: center;
         justify-content: center;
         z-index: 1000; /* Hiển thị lớp overlay trên cùng */
+        overflow: auto; /* Cho phép cuộn dọc nếu cần */
     }
 
     /* Nội dung overlay */
@@ -156,28 +159,88 @@
         background-color: #fff;
         padding: 20px;
         border-radius: 8px;
-        width: 400px;
-        max-width: 90%;
+        width: 80%; /* Đặt chiều rộng tối đa */
+        max-width: 600px; /* Chiều rộng tối đa */
         text-align: center;
+        max-height: 80vh; /* Chiều cao tối đa của overlay */
+        overflow-y: auto; /* Cuộn dọc nếu nội dung quá dài */
     }
 
+        /* Tiêu đề */
         .overlay-content h3 {
             margin-top: 0;
         }
 
+    /* Container cho checkbox */
     .checkbox-container {
         display: flex;
-        flex-wrap: wrap; /* Cho phép xuống dòng khi hết chỗ */
-        gap: 10px; /* Khoảng cách giữa các checkbox */
+        flex-wrap: wrap; /* Cho phép các phần tử cuộn xuống khi không đủ chỗ */
+        justify-content: space-between; /* Căn đều các phần tử */
+        gap: 15px; /* Khoảng cách giữa các phần tử */
+        max-height: 60vh; /* Giới hạn chiều cao */
+        overflow-y: auto; /* Cho phép cuộn dọc nếu quá dài */
     }
 
+    /* Mỗi checkbox */
     .checkbox {
-        display: flex;
-        align-items: center;
-        margin-bottom: 5px; /* Khoảng cách dọc giữa các checkbox */
+        margin-top: 0px !important;
+        flex: 1 1 30%; /* Tự động điều chỉnh kích thước phần tử, chiếm 30% chiều rộng */
+    max-width: 200px; /* Giới hạn chiều rộng tối đa của mỗi checkbox */
+    box-sizing: border-box; /* Đảm bảo không bị tràn */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 200px; /* Đảm bảo mỗi ô có chiều cao cố định */
+    text-align: center;
     }
 
+        /* Căn chỉnh ảnh */
+        .checkbox .image-container img {
+            height: 60px; /* Giảm kích thước ảnh */
+            width:60px;
+        }
 
+        /* Căn chỉnh text */
+        .checkbox .text-container p {
+            font-size: 14px; /* Điều chỉnh kích thước font */
+            margin-bottom: 10px;
+        }
+
+        /* Input container (số lượng và checkbox) */
+        .checkbox .input-container {
+            display: flex;
+            justify-content: space-around;
+            /* Căn đều giữa ô số lượng và checkbox */
+            width: 100%;
+            align-items: center;
+        }
+
+        /* Điều chỉnh size của input số lượng */
+        .checkbox input[type="number"] {
+            width: 50px; /* Giảm chiều rộng của input */
+            padding: 5px;
+            font-size: 14px;
+            height: 26px !important;
+        }
+
+        /* Căn chỉnh checkbox */
+        .checkbox input[type="checkbox"] {
+            margin: 0;
+        }
+
+    /* Style cho nút đóng */
+    button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+        }
 
     /* Tổng thể giỏ hàng */
     .cart-container {
@@ -205,7 +268,7 @@
     .cart-body {
         border: 1px dashed #ced4da; /* Viền nét đứt */
         border-radius: 5px; /* Bo góc */
-        height: 150px; /* Chiều cao tối đa */
+        height: 215px; /* Chiều cao tối đa */
         overflow-y: auto; /* Hiển thị thanh cuộn khi nội dung tràn */
         padding: 10px; /* Khoảng cách nội dung */
         color: #6c757d; /* Màu xám */
@@ -276,18 +339,37 @@
     }
     #countdownContainer{
         display: block;
-        margin-top: 10px;
-        background-color: rgb(255, 251, 235);
-        border-radius: 10px;
-        padding: 13px;
+      
+  
+       
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         width: 100%;
         color: black;
         font-size: x-large;
-        font-weight: 100;
+    
         text-align: center;
+        border: 2px dashed #ff6666;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
     }
-        
+
+    .timer-container span {
+        font-size: medium;
+    }
+
+    .timer {
+        display: inline-block;
+        background-color: #ff4d4d;
+        color: white;
+        padding: 5px 10px;
+        margin: 0 5px;
+        border-radius: 5px;
+        font-size: medium;
+    }
+
     .cart-header {
         display: flex;
         justify-content: space-between;
@@ -297,57 +379,64 @@
         font-size: 16px;
     }
 
-   
 
     .trandoidau {
         background-color: #f8f9fa;
-        border-radius: 20px;
-        padding: 20px;
+        border-radius: 15px;
+        padding: 2px 5px; /* Giảm padding lên và xuống */
         text-align: center;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+        max-width: 100%; /* Giữ nguyên chiều rộng */
+        margin: 0 auto;
+        max-height:fit-content;
     }
 
     .trandoidau-body {
         display: flex;
         justify-content: space-around;
-        margin-top: 20px;
+        margin-top: 2px; /* Giảm khoảng cách giữa tiêu đề và nội dung */
     }
 
     .team-logo {
-        width: 200px;
+        width: 130px; /* Giảm chiều rộng logo */
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin-bottom: 2px; /* Giảm margin dưới mỗi logo */
     }
 
         .team-logo img {
             max-width: 100%;
-            max-height: 200px;
+            max-height: 60px; /* Giảm chiều cao của ảnh */
         }
 
         .team-logo label {
-            margin-top: 10px;
+            margin-top: 3px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 12px; /* Giảm kích thước chữ */
         }
 
-  .ngay-gio-sandau {
-    display: flex;
-    flex-direction: column; /* Đặt các thông tin ngày, giờ, và sân đấu theo cột */
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+    .ngay-gio-sandau {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 2px;
+    }
 
-.ngay-gio-sandau span {
-    display: block; /* Mỗi span trên một dòng */
-    margin: 5px 0; /* Khoảng cách giữa các dòng */
-}
+        .ngay-gio-sandau span {
+            display: block;
+            margin: 2px 0; /* Giảm khoảng cách giữa các span */
+            font-size: 10px; /* Giảm kích thước chữ */
+        }
+
+
 
     .cartHeader {
         padding: 20px;
-        background-color: #e4e4a7 !important; /* Nền màu vàng nhạt */
+        
         border-radius: 10px; /* Bo góc */
         font-family: Arial, sans-serif;
         line-height: 1.6; /* Khoảng cách giữa các dòng */
@@ -378,6 +467,40 @@
                 color: #0056b3; /* Xanh đậm khi hover */
             }
 
+    .popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .popup-content {
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        width: 80%;
+        max-width: 900px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #closePopup {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #D81B60;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
 </style>
 
 <div>
@@ -386,38 +509,33 @@
 
         <div class="container-fluid px-3">
             <div class=row>
+                
                 <div style="margin-bottom: 20px; margin-top:75px;padding-left:15px;padding-right:15px;">
-                    <div class="cartHeader clearfix">
-                        <div class="notice">
-                            <p>Mỗi khách hàng, tương ứng với 01 tài khoản, với mỗi số điện thoại, Email, Họ và tên, được mua số lượng vé quy định theo mỗi trận.</p>
-
-                            <h3 class="important">LƯU Ý QUAN TRỌNG:</h3>
-                            <p>
-                                Quý khách khi tới sân vận động cần mang theo CMT/CCCD đã đăng ký khi đặt vé để nhân viên an ninh đối chiếu nếu cần thiết. Trong trường hợp thông tin không khớp với thông tin đã đặt vé, quý khách phải hoàn toàn chịu trách nhiệm nếu không được vào sân.
-                            </p>
-                            <p>
-                                Quý khách có trách nhiệm tự bảo mật vé điện tử, trong trường hợp Email vé điện tử bị lộ cho người khác, quý khách sẽ chịu hoàn toàn mọi rủi ro (nếu có).
-                            </p>
-                            <p>
-                                Đây là vé điện tử không định danh, do đó để bảo vệ quyền lợi của mình, đề nghị quý khách bảo mật các thông tin liên quan tới vé khi nhận được qua Email. Tại cổng soát vé, vé sẽ chỉ được quét lần đầu tiên và duy nhất, các lần quét vé sau sẽ không được chấp nhận. Đề nghị quý khách lưu ý điều này để tránh xảy ra tranh chấp, tranh cãi. Nếu trường hợp này xảy ra, quý khách sẽ chịu hoàn toàn trách nhiệm.
-                            </p>
-                            <p>Mọi thắc mắc vui lòng liên hệ tổng đài 0xxxxxxxxxxx hoặc 0xxxxxxxxxx để được giải quyết nhanh chóng nhất.</p>
-
-                            <h3 class="terms">ĐIỀU KIỆN ĐIỀU KHOẢN:</h3>
-                            <p>- Vé chỉ được dùng 1 lần duy nhất để qua cửa soát vé.</p>
-                            <p>- Áp dụng 01 vé/01 người vào sân.</p>
-                            <p>- Vé này không được đổi trả, hoàn huỷ.</p>
-
-                            <h3 class="guide">HƯỚNG DẪN SỬ DỤNG VÉ ĐIỆN TỬ:</h3>
-                            <p>
-                                Bước 1: Sau khi thanh toán thành công, quý khách vui lòng kiểm tra Email để nhận vé điện tử trong đó có kèm mã QR. Trong Email, quý khách sẽ nhận được số lượng mã QR bằng số lượng vé quý khách đặt trên Website <a href="#">https://localhost:7004/</a>. Trong trường hợp quý khách không nhận được Email, quý khách vui lòng kiểm tra thư mục Spam hoặc liên hệ tổng đài: 0xxxxxxxx để được hỗ trợ.
-                            </p>
-                            <p>
-                                Bước 2: Chụp màn hình hoặc in nội dung vé điện tử bao gồm mã QR để tiết kiệm thời gian soát vé của quý khách.
-                            </p>
-                            <p>
-                                Bước 3: Khi đến sân vận động, quý khách vui lòng xuất trình mã QR đã được chụp lại hoặc in ra để vào sân.
-                            </p>
+                    <!-- Popup -->
+                    
+                    <div id="popupOverlay" class="popup-overlay">
+                        <div id="popupContent" class="popup-content">
+                            <div>
+                                <div class="cartHeader clearfix">
+                                    <div class="notice">
+                                        <p>Mỗi khách hàng, tương ứng với 01 tài khoản, với mỗi số điện thoại, Email, Họ và tên, được mua số lượng vé quy định theo mỗi trận.</p>
+                                        <h3 class="important">LƯU Ý QUAN TRỌNG:</h3>
+                                        <p>Quý khách khi tới sân vận động cần mang theo CMT/CCCD đã đăng ký khi đặt vé để nhân viên an ninh đối chiếu nếu cần thiết. Trong trường hợp thông tin không khớp với thông tin đã đặt vé, quý khách phải hoàn toàn chịu trách nhiệm nếu không được vào sân.</p>
+                                        <p>Quý khách có trách nhiệm tự bảo mật vé điện tử, trong trường hợp Email vé điện tử bị lộ cho người khác, quý khách sẽ chịu hoàn toàn mọi rủi ro (nếu có).</p>
+                                        <p>Đây là vé điện tử không định danh, do đó để bảo vệ quyền lợi của mình, đề nghị quý khách bảo mật các thông tin liên quan tới vé khi nhận được qua Email. Tại cổng soát vé, vé sẽ chỉ được quét lần đầu tiên và duy nhất, các lần quét vé sau sẽ không được chấp nhận. Đề nghị quý khách lưu ý điều này để tránh xảy ra tranh chấp, tranh cãi. Nếu trường hợp này xảy ra, quý khách sẽ chịu hoàn toàn trách nhiệm.</p>
+                                        <p>Mọi thắc mắc vui lòng liên hệ tổng đài 0xxxxxxxxxxx hoặc 0xxxxxxxxxx để được giải quyết nhanh chóng nhất.</p>
+                                        <h3 class="terms">ĐIỀU KIỆN ĐIỀU KHOẢN:</h3>
+                                        <p>- Vé chỉ được dùng 1 lần duy nhất để qua cửa soát vé.</p>
+                                        <p>- Áp dụng 01 vé/01 người vào sân.</p>
+                                        <p>- Vé này không được đổi trả, hoàn huỷ.</p>
+                                        <h3 class="guide">HƯỚNG DẪN SỬ DỤNG VÉ ĐIỆN TỬ:</h3>
+                                        <p>Bước 1: Sau khi thanh toán thành công, quý khách vui lòng kiểm tra Email để nhận vé điện tử trong đó có kèm mã QR. Trong Email, quý khách sẽ nhận được số lượng mã QR bằng số lượng vé quý khách đặt trên Website <a href="#">https://tcviettelfc.azurewebsites.net/</a>. Trong trường hợp quý khách không nhận được Email, quý khách vui lòng kiểm tra thư mục Spam hoặc liên hệ tổng đài: 0xxxxxxxx để được hỗ trợ.</p>
+                                        <p>Bước 2: Chụp màn hình hoặc in nội dung vé điện tử bao gồm mã QR để tiết kiệm thời gian soát vé của quý khách.</p>
+                                        <p>Bước 3: Khi đến sân vận động, quý khách vui lòng xuất trình mã QR đã được chụp lại hoặc in ra để vào sân.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="closePopup" class="close-popup-btn">Đóng</button>
                         </div>
                     </div>
 
@@ -426,7 +544,7 @@
                     <div class="row pt-5">
                     <div class="col-12 col-md-8 mb-3">
                             <div class="trandoidau">
-                                <h2>TRẬN ĐỐI ĐẦU GIỮA</h2>
+                                <h2 style="font-size: 20px;">TRẬN ĐỐI ĐẦU GIỮA</h2>
                                 <div class="d-flex trandoidau-body">
                                     <!-- Đội cố định: Viettel FC -->
                                     <div class="team-logo" id="teamFixed">
@@ -445,6 +563,7 @@
                                     </div>
                                 </div>
                             </div>
+                        <a id="openPopup" class="open-popup-link" style="color:red;    margin-left: 22px;">Lưu ý quan trọng khi mua, sử dụng vé</a>
                             <div class="mt-4 sanbong" style="background-color: white;border-radius: 20px;">
                                 <div style="margin-left: 40px;padding-top:20px">
                                     <h3>Tiến hành đặt vé</h3>
@@ -630,9 +749,9 @@
                                 </div>
                                 <!-- Thêm nút Tiếp Tục ở đây -->
                                <button class="purchase-button" onclick="redirectToCheckout()" id="continueButton" style="display: none;">Tiếp tục</button>
-                               <div id="countdownContainer" style="display: none;">
+                            <div class="timer-container" id="countdownContainer" style="display: none;">
                                     <span>Giao dịch kết thúc sau</span>
-                                    <span id="countdownMinutes">10</span> : <span id="countdownSeconds">00</span>
+                                <span class="timer" id="countdownMinutes">10</span> : <span class="timer" id="countdownSeconds">00</span>
                                 </div>
                             </div>
                         </div>
@@ -719,22 +838,31 @@
                                 @foreach (var item in supplementaryItems)
                                 {
                                     <div class="checkbox">
-                                        <label>
-                                    <input style="height: fit-content;" type="checkbox" name="supplementary[]" value="@item.ItemId" data-price="@item.Price">
-                                            @item.ItemName - @item.Price VND
-                                        </label>
+                                        <div class="image-container">
+                                            <img src="@item.ImageUrl" alt="@item.ItemName">
+                                        </div>
+                                        <div class="text-container">
+                                            <p>@item.ItemName</p>
+                                    <p id="price-supplement" class="price" data-price="@item.Price">@item.Price VND</p>
 
-                                        <!-- Input để chọn số lượng, giới hạn từ 1 đến 4 -->
-                                        <input type="number" name="quantity_@item.ItemId" min="1" max="4" value="1" class="form-control" style="width: 60px; display: inline-block; margin-left: 10px;">
+                                        </div>
+                                        <div class="input-container">
+                                           <div>
+                                               <input type="number" name="quantity_@item.ItemId" min="1" max="4" value="1" class="form-control">
+                                           </div> 
+                                            <div style="display: flex;align-items: center;">
+                                                        <input class="input-checkbox" type="checkbox" name="supplementary[]" value="@item.ItemId" data-price="@item.Price">
+                                            </div>
+                                    
+                                        </div>
                                     </div>
                                 }
                             </div>
-
                         }
-
                         <button type="button" id="closeOverlay">Đóng</button>
                     </div>
                 </div>
+
                 
             
                 <button type="button" id="addToCartBtn" class="btn btn-primary text-white">
@@ -900,7 +1028,10 @@
 
                 // Tổng giá = giá vé * số lượng vé + tổng đồ đính kèm
                 const totalPrice = (pricePerTicket * ticketQuantity) + supplementaryTotal;
-                document.getElementById('totalPrice').value = totalPrice.toFixed(0) + ' VND'; // Hiển thị tổng giá
+        // Format tổng giá với dấu chấm phân cách hàng nghìn
+        const formattedTotalPrice = new Intl.NumberFormat('vi-VN').format(totalPrice);
+
+        document.getElementById('totalPrice').value = formattedTotalPrice + ' đ'; // Hiển thị tổng giá
             }
 
             // Gán sự kiện cho các trường số lượng đồ đính kèm
@@ -1087,11 +1218,16 @@
                 const supplementaryItems = [];
                 document.querySelectorAll('input[name="supplementary[]"]:checked').forEach(item => {
                     const itemId = parseInt(item.value);
+                      const itemName = document.querySelector(`input[name="supplementary[]"][value="${item.value}"]`)
+                          .closest('.checkbox')
+                          .querySelector('.text-container p').textContent.trim(); // Lấy tên đồ đính kèm
+                    
                     const itemPrice = parseFloat(item.getAttribute('data-price'));
                     const itemQuantity = parseInt(document.querySelector(`input[name="quantity_${item.value}"]`).value);
 
                     supplementaryItems.push({
                         itemId,
+                        itemName,
                         itemPrice,
                         itemQuantity
                     });
@@ -1361,6 +1497,44 @@
                 });
             });
         </script>
+<script>
+    function formatCurrency(value) {
+        return parseInt(value).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const prices = document.querySelectorAll('.price');
+
+        prices.forEach(function (priceElement) {
+            const priceValue = priceElement.getAttribute('data-price');
+            if (priceValue) {
+                priceElement.innerText = formatCurrency(priceValue);
+            }
+        });
+    });
+</script>
+<script>
+       // Mở popup
+    document.getElementById('openPopup').addEventListener('click', function(event) {
+        event.preventDefault(); // Ngừng hành động mặc định của thẻ <a>
+        document.getElementById('popupOverlay').style.display = 'flex'; // Hiển thị popup
+    });
+
+    // Đóng popup khi click vào nút đóng (ví dụ: <span id="closePopup">X</span>)
+    document.getElementById('closePopup').addEventListener('click', function() {
+        document.getElementById('popupOverlay').style.display = 'none'; // Ẩn popup
+    });
+
+    // Đóng popup khi click ra ngoài popup (trên overlay)
+    document.getElementById('popupOverlay').addEventListener('click', function(event) {
+        // Kiểm tra xem người dùng có click vào phần nội dung popup không
+        if (event.target === document.getElementById('popupOverlay')) {
+            document.getElementById('popupOverlay').style.display = 'none'; // Ẩn popup nếu click ngoài popup
+        }
+    });
+
+
+</script>
     </section>
     @* <script src="~/home_assets/js/buyTicket.js"></script> *@
     <script src="~/admin_assets/js/jquery-3.6.0.min.js"></script>
