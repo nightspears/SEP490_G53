@@ -4,6 +4,7 @@
 @{
     var customerId = ViewData["CustomerId"];
     Layout = "_LayoutCommonTicket";
+
 }
 
 <style>
@@ -174,8 +175,18 @@
     .Button-mua button {
         font-size: x-large;
     }
+   
+
 </style>
 <div class="checkout-body">
+    <!-- Nút Back -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <button onclick="window.history.back();" class="btn btn-light">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </button>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-8">
@@ -184,9 +195,12 @@
                     <thead>
                         <tr class="text-center" style="font-size: medium;">
                             <th scope="col"><input type="checkbox" id="selectAll"></th>
-                            <th scope="col">Tất cả (1 vé)</th>
+                            <th scope="col">Tất cả </th>
                             <th scope="col">Đơn giá</th>
                             <th scope="col">Số lượng</th>
+                            <th scope="col">Đồ đính kèm</th>
+                            
+                            <th scope="col">Đơn giá</th>
                             <th scope="col">Thành tiền</th>
                             <th scope="col"><i class="fas fa-trash-alt delete-icon"></i></th>
                         </tr>
@@ -325,7 +339,9 @@
                 }
 
                 const totalItemPrice = itemTotal + supplementaryTotalPrice;
-
+                const supplementaryItemsString = supplementaryItems && supplementaryItems.length > 0
+                    ? supplementaryItems.map(item => `${item.itemName} (x${item.itemQuantity})`).join('<br>')
+                    : 'None';
                 // Thêm dòng vào bảng giỏ hàng
                 cartItemsContainer.innerHTML += `
                             <tr class="text-center" style="font-size: medium;">
@@ -337,6 +353,8 @@
                                 </td>
                                 <td>${price.toLocaleString('vi-VN')} đ</td>
                                 <td>${quantity}</td>
+                                 <td>${supplementaryItemsString}</td>
+                                <td>${supplementaryTotalPrice.toLocaleString('vi-VN')} đ</td>
                                 <td>${totalItemPrice.toLocaleString('vi-VN')} đ</td>
                                 <td><i class="fas fa-trash-alt delete-icon" onclick="removeTicket(${index})"></i></td>
                             </tr>
