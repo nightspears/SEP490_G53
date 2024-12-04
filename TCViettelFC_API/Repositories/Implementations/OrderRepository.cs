@@ -53,7 +53,8 @@ namespace TCViettelFC_API.Repositories.Implementations
                 var dto = new OrderedSuppItemDto()
                 {
                     Id = order.Id,
-                    ItemName = order.Item!.ItemName,
+                    Imageurl = order.Item.ImageUrl,
+                    ItemName = order.Item.ItemName,
                     OrderId = order.OrderId,
                     Price = order.Price,
                     Quantity = order.Quantity
@@ -64,13 +65,15 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
         public async Task<IEnumerable<OrderedTicketDto>> GetOrderedTicketByTicketOrderId(int id)
         {
-            var orders = await _context.OrderedTickets.Where(x => x.OrderId == id).ToListAsync();
+            var orders = await _context.OrderedTickets.Include(x => x.Area).Include(x => x.Match).Where(x => x.OrderId == id).ToListAsync();
             var results = new List<OrderedTicketDto>();
             foreach (var order in orders)
             {
                 var dto = new OrderedTicketDto()
                 {
                     Id = order.Id,
+                    Vitri = "Khán đài " + order.Area.Stands + " - Tầng " + order.Area.Floor + " - Cửa " + order.Area.Section,
+                    Trandau = order.Match.StadiumName + " - Thể Công Viettel vs " + order.Match.OpponentName + " - " + order.Match.MatchDate,
                     AreaId = order.AreaId,
                     MatchId = order.MatchId,
                     OrderId = order.OrderId,
