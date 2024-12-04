@@ -1218,11 +1218,16 @@
                 const supplementaryItems = [];
                 document.querySelectorAll('input[name="supplementary[]"]:checked').forEach(item => {
                     const itemId = parseInt(item.value);
+                      const itemName = document.querySelector(`input[name="supplementary[]"][value="${item.value}"]`)
+                          .closest('.checkbox')
+                          .querySelector('.text-container p').textContent.trim(); // Lấy tên đồ đính kèm
+                    
                     const itemPrice = parseFloat(item.getAttribute('data-price'));
                     const itemQuantity = parseInt(document.querySelector(`input[name="quantity_${item.value}"]`).value);
 
                     supplementaryItems.push({
                         itemId,
+                        itemName,
                         itemPrice,
                         itemQuantity
                     });

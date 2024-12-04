@@ -72,7 +72,10 @@ namespace TCViettelFC_API.Repositories.Implementations
                         obj.CustomerEmail = customer.Email;
                         var cus = new Customer()
                         {
-                            AccountId = customerId.Value
+                            AccountId = customerId.Value,
+                            FullName= customer.FullName,
+                            Email= customer.Email
+                           
                         };
                         ticketOrder.Customer = cus;
                     }

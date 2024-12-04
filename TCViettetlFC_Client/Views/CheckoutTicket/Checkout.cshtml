@@ -199,6 +199,8 @@
                             <th scope="col">Đơn giá</th>
                             <th scope="col">Số lượng</th>
                             <th scope="col">Đồ đính kèm</th>
+                            
+                            <th scope="col">Đơn giá</th>
                             <th scope="col">Thành tiền</th>
                             <th scope="col"><i class="fas fa-trash-alt delete-icon"></i></th>
                         </tr>
@@ -337,7 +339,9 @@
                 }
 
                 const totalItemPrice = itemTotal + supplementaryTotalPrice;
-
+                const supplementaryItemsString = supplementaryItems && supplementaryItems.length > 0
+                    ? supplementaryItems.map(item => `${item.itemName} (x${item.itemQuantity})`).join('<br>')
+                    : 'None';
                 // Thêm dòng vào bảng giỏ hàng
                 cartItemsContainer.innerHTML += `
                             <tr class="text-center" style="font-size: medium;">
@@ -349,7 +353,8 @@
                                 </td>
                                 <td>${price.toLocaleString('vi-VN')} đ</td>
                                 <td>${quantity}</td>
-                                    <td>${supplementaryTotalPrice.toLocaleString('vi-VN')} đ</td>
+                                 <td>${supplementaryItemsString}</td>
+                                <td>${supplementaryTotalPrice.toLocaleString('vi-VN')} đ</td>
                                 <td>${totalItemPrice.toLocaleString('vi-VN')} đ</td>
                                 <td><i class="fas fa-trash-alt delete-icon" onclick="removeTicket(${index})"></i></td>
                             </tr>

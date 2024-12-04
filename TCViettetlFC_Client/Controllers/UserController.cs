@@ -25,7 +25,7 @@ namespace TCViettetlFC_Client.Controllers
             }
             else if (token.Equals("1"))
             {
-                return RedirectToAction("Home", "Staff");
+                return RedirectToAction("ProductManagement", "Staff");
             }
             else if (token.Equals("3"))
             {
