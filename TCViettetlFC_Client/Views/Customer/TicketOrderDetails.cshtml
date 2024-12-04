@@ -1,0 +1,111 @@
+﻿@model TicketOrderDetailModel
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng vé";
+    Layout = "_LayoutCommon";
+    var sups = Model.Sup;
+    var tickets = Model.Ticket;
+}
+
+<div class="page-wrapper" style="margin-top: 8%;">
+    <div class="content container-fluid">
+
+        <!-- Page Header -->
+        <div class="page-header text-center mb-4">
+            <h2 class="page-title">Chi tiết đơn hàng</h2>
+        </div>
+
+        <!-- Ticket Table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">Danh sách vé</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Trận đấu</th>
+                                        <th>Vị trí</th>
+                                        <th>Giá tiền</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var ticket in tickets)
+                                    {
+                                        <tr>
+                                            <td>@ticket.Id</td>
+                                            <td>@ticket.Trandau</td>
+                                            <td>@ticket.Vitri</td>
+                                            <td>@ticket.Price.Value.ToString("#,0")</td>
+                                            <td class="text-@((ticket.Status == 1) ? "success" : "danger")">
+                                                @(ticket.Status == 1 ? "Khả dụng" : "Không khả dụng")
+                                            </td>
+                                        </tr>
+                                    }
+                                    @if (!tickets.Any())
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center">Không có vé nào</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supplementary Items Table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="card-title mb-0">Sản phẩm bổ sung</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Hình ảnh</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var sup in sups)
+                                    {
+                                        <tr>
+                                            <td>@sup.Id</td>
+                                            <td>
+                                                <img src="@sup.ImageUrl" alt="@sup.ItemName"
+                                                     class="img-thumbnail" style="max-width: 50px;" />
+                                            </td>
+                                            <td>@sup.ItemName</td>
+                                            <td>@sup.Quantity</td>
+                                            <td>@sup.Price.Value.ToString("#,0")</td>
+                                        </tr>
+                                    }
+                                    @if (!sups.Any())
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center">Không có sản phẩm bổ sung</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -5,6 +5,8 @@
         public int Id { get; set; }
 
         public int? MatchId { get; set; }
+        public string? Vitri { get; set; }
+        public string? Trandau { get; set; }
 
         public int? AreaId { get; set; }
 

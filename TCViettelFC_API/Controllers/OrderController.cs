@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -23,13 +22,11 @@ namespace TCViettelFC_API.Controllers
             var result = await _orderRepository.GetAllTicketOrders();
             return result.AsQueryable();
         }
-        [Authorize(Policy = "staff")]
         [HttpGet("getorderedticket/{id}")]
         public async Task<IActionResult> GetOrderedTicketByOrderedId(int id)
         {
             return Ok(await _orderRepository.GetOrderedTicketByTicketOrderId(id));
         }
-        [Authorize(Policy = "staff")]
         [HttpGet("getorderedsupp/{id}")]
         public async Task<IActionResult> GetOrderedSuppByOrderId(int id)
         {

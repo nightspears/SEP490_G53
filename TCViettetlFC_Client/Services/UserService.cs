@@ -68,7 +68,7 @@ namespace TCViettelFC_Client.Services
             // Handle response
             if (response.IsSuccessStatusCode)
             {
-                return "User created successfully.";
+                return "Tạo mới người dùng thành công";
             }
             else
             {
@@ -87,7 +87,7 @@ namespace TCViettelFC_Client.Services
 
             if (response.IsSuccessStatusCode)
             {
-                return "User updated successfully.";
+                return "Cập nhật người dùng thành công";
             }
             else
             {
@@ -105,7 +105,7 @@ namespace TCViettelFC_Client.Services
 
             if (response.IsSuccessStatusCode)
             {
-                return "User deleted successfully.";
+                return "Xóa người dùng thành công";
             }
             else
             {

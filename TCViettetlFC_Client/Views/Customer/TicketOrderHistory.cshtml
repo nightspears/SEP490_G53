@@ -1,0 +1,41 @@
+﻿@model List<TCViettetlFC_Client.Models.TicketOrderHistoryDto>
+@{
+    Layout = "_layoutCommon";
+    ViewData["Title"] = "Lịch sử vé";
+}
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div style="width: 100%; max-width: 500px; margin-top: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+        <h2 style="text-align: center; margin-bottom: 20px;">Lịch sử vé</h2>
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr>
+                    <th style="border-bottom: 2px solid #ddd; padding: 8px;">ID</th>
+                    <th style="border-bottom: 2px solid #ddd; padding: 8px;">Ngày đặt</th>
+                    <th style="border-bottom: 2px solid #ddd; padding: 8px;">Tổng tiền</th>
+                    <th style="border-bottom: 2px solid #ddd; padding: 8px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="border-bottom: 1px solid #ddd; padding: 8px;">@item.id</td>
+                            <td style="border-bottom: 1px solid #ddd; padding: 8px;">@(item.orderDate?.ToString("dd/MM/yyyy") ?? "N/A")</td>
+                            <td style="border-bottom: 1px solid #ddd; padding: 8px;">@(item.totalAmount?.ToString("#,0") + " đ" ?? "N/A")</td>
+                            <td style="border-bottom: 1px solid #ddd; padding: 8px;"><a href="/customer/ticketorderdetails/@item.id">Chi tiết</a></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" style="padding: 10px; text-align: center;">Không có dữ liệu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -17,6 +17,12 @@ namespace TCViettelFC_API.Controllers
             _customerRepository = customerRepository;
             _ticketUtilRepository = ticketUtilRepository;
         }
+        [HttpGet("ticketorderhistory")]
+        public async Task<IActionResult> GetTicketOrdersHistory()
+        {
+            var result = await _customerRepository.GetTicketOrderHistory();
+            return Ok(result);
+        }
         [Authorize(Policy = "customer")]
         [HttpPost("changepass")]
         public async Task<IActionResult> ChangePassWordAsync([FromBody] ChangePassRequest ch)

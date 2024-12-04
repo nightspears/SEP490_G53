@@ -26,6 +26,25 @@ namespace TCViettelFC_API.Repositories.Implementations
             _contextAccessor = contextAccessor;
         }
 
+        public async Task<List<TicketOrderHistoryDto>> GetTicketOrderHistory()
+        {
+            var cusId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "CustomerId")?.Value;
+            if (cusId == null) return null;
+            var cus = await _context.Customers.FirstOrDefaultAsync(x => x.AccountId == int.Parse(cusId));
+            if (cus == null) return null;
+            var orderhistory = await _context.TicketOrders.Where(x => x.CustomerId == cus.CustomerId).ToListAsync();
+            List<TicketOrderHistoryDto> results = new List<TicketOrderHistoryDto>();
+            foreach (var order in orderhistory)
+            {
+                results.Add(new TicketOrderHistoryDto()
+                {
+                    Id = order.Id,
+                    OrderDate = order.OrderDate,
+                    TotalAmount = order.TotalAmount,
+                });
+            }
+            return results;
+        }
 
         private string HashPassword(string password)
         {

@@ -16,6 +16,48 @@ namespace TCViettetlFC_Client.Controllers
             _httpClient = httpClientFactory.CreateClient("ApiClient");
             _apiHelper = apiHelper;
         }
+        public async Task<IActionResult> TicketOrderHistory()
+        {
+            var cookie = Request.Cookies["CustomerId"];
+            if (cookie == null)
+            {
+                return RedirectToAction("Login");
+            }
+            var result = await _httpClient.GetAsync("customer/ticketorderhistory");
+            if (result.IsSuccessStatusCode)
+            {
+                return View(await JsonSerializer.DeserializeAsync<List<TicketOrderHistoryDto>>(await result.Content.ReadAsStreamAsync()));
+            }
+            else
+            {
+                return View();
+            }
+        }
+        private async Task<List<OrderedTicketDto>> GetOrderedTicket(int id)
+        {
+            return await _apiHelper.GetApiResponseAsync<List<OrderedTicketDto>>($"order/getorderedticket/{id}");
+        }
+        private async Task<List<OrderedSuppItemDto>> GetOrderedSupp(int id)
+        {
+            return await _apiHelper.GetApiResponseAsync<List<OrderedSuppItemDto>>($"order/getorderedsupp/{id}");
+        }
+        public async Task<IActionResult> TicketOrderDetails(int id)
+        {
+            var cookie = Request.Cookies["CustomerId"];
+            if (cookie == null)
+            {
+                return RedirectToAction("Login");
+            }
+            var sup = await GetOrderedSupp(id);
+            var ticket = await GetOrderedTicket(id);
+            var viewModel = new TicketOrderDetailModel
+            {
+                Sup = sup,
+                Ticket = ticket
+            };
+            return View(viewModel);
+
+        }
         public IActionResult Register()
         {
             var cookie = Request.Cookies["CustomerId"];

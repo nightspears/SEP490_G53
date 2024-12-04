@@ -711,6 +711,16 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
+    "Method": "GetTicketOrdersHistory",
+    "RelativePath": "api/Customer/ticketorderhistory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.CustomerController",
     "Method": "UpdateProfile",
     "RelativePath": "api/Customer/updateprofile",
     "HttpMethod": "PUT",
