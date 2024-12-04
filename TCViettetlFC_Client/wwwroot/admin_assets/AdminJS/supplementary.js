@@ -157,6 +157,7 @@ function resetForm() {
     $('#tenSp').val("");
     $('#giaSp').val("");
     $('#status').prop('checked', true);
+    $('#fileInputImg').val(null);
 }
 
 function modalEditOrCreate(id) {
@@ -170,14 +171,14 @@ function modalEditOrCreate(id) {
             url: url,
             method: "get",
             success: function (res) {
-
+                debugger
                 var logoUrl = "";
-                if (res.image == null || res.image == "" || res.image == undefined) {
+                if (res.imageUrl == null || res.imageUrl == "" || res.imageUrl == undefined) {
                     logoUrl = "/image/anh_mau_do_an.jpg"
                 } else {
-                    logoUrl = res.image;
+                    logoUrl = res.imageUrl;
                 }
-
+                debugger
                 $('#idSP').val(res.itemId);
                 $("#ImgAvt").attr("src", logoUrl);
                 $('#tenSp').val(res.itemName);
