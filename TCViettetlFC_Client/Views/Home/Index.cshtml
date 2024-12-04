@@ -397,15 +397,19 @@
                                                 <div class=column-news>
                                                     <div class=figure-01><img src="@n.Image" alt=image style="object-fit:cover ; height:210px;width:100%"></div>
                                                     <div class=content-01>
-                                                        @if (n.Title.Length > 70)
+                                                        @if (!string.IsNullOrEmpty(n.Title))
                                                         {
-                                                            <h6><a href= href="news/@n.Id"> @n.Title.Substring(0, 70) ... </a></h6>
-                                                        }
-                                                        else
-                                                        {
-                                                            <h6><a href="news/@n.Id">@n.Title</a></h6>
+                                                            @if (n.Title.Length > 70)
+                                                            {
+                                                                <h6><a href="/news/details/@n.Id"> @n.Title.Substring(0, 70) ... </a></h6>
+                                                            }
+                                                            else
+                                                            {
+                                                                <h6><a href="/news/details/@n.Id">@n.Title</a></h6>
 
+                                                            }
                                                         }
+                                                        
 
                                                         <p class=red_p>@n.NewsCategory</p>
                                                     </div>
@@ -435,15 +439,19 @@
                                                 <div class=column-news>
                                                     <div class=figure-01><img src="@n.Image" alt=image style="object-fit:cover ; height:210px;width:100%"></div>
                                                     <div class=content-01>
-                                                        @if(n.Title.Length > 70)
+                                                        @if (!string.IsNullOrEmpty(n.Title))
                                                         {
-                                                            <h6><a href="news/@n.Id"> @n.Title.Substring(0, 70) ... </a></h6>
-                                                        }
-                                                        else
-                                                        {
-                                                            <h6><a href="news/@n.Id">@n.Title</a></h6>
+                                                            @if (n.Title.Length > 70)
+                                                            {
+                                                                <h6><a href="/news/details/@n.Id"> @n.Title.Substring(0, 70) ... </a></h6>
+                                                            }
+                                                            else
+                                                            {
+                                                                <h6><a href="/news/details/@n.Id">@n.Title</a></h6>
 
+                                                            }
                                                         }
+                                                        
 
                                                         <p class=red_p>@n.NewsCategory</p>
                                                     </div>

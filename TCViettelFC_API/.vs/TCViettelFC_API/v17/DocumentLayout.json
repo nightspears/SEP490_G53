@@ -366,8 +366,7 @@
               "RelativeToolTip": "Repositories\\Implementations\\TicketOrderRepository.cs",
               "ViewState": "AgIAAH8AAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T02:34:13.278Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T02:34:13.278Z"
             },
             {
               "$type": "Document",
@@ -379,8 +378,7 @@
               "RelativeToolTip": "Dtos\\VerifySupDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T14:44:27.755Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-03T14:44:27.755Z"
             },
             {
               "$type": "Document",
@@ -417,8 +415,7 @@
               "RelativeToolTip": "Controllers\\TicketOrderController.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAgwBQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T14:41:48.412Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-03T14:41:48.412Z"
             }
           ]
         },
