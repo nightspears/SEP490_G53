@@ -22,6 +22,36 @@ namespace TCViettelFC_API.Repositories.Implementations
             _contextAccessor = httpContextAccessor;
             _emailService = emailService;
         }
+        public async Task<UserProfileDto> GetUserProfile()
+        {
+            var userId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+            if (userId == null) return null;
+            var user = await _context.Users.FindAsync(int.Parse(userId));
+            if (user == null) return null;
+            return new UserProfileDto()
+            {
+                FullName = user.FullName,
+                Phone = user.Phone
+            };
+        }
+        public async Task<bool> UpdateUserProfile(UserProfileDto model)
+        {
+            var userId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+            if (userId == null) return false;
+            var user = await _context.Users.FindAsync(int.Parse(userId));
+            if (user == null) return false;
+            user.Phone = model.Phone;
+            user.FullName = model.FullName;
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public async Task AddUserAsync(UserCreateDto userCreateDto)
         {
             var user = new User

@@ -33,19 +33,7 @@
                 </a>
             </div>
 
-            <a href="javascript:void(0);" id="toggle_btn">
-                <i class="fe fe-text-align-left"></i>
-            </a>
-            <div class="top-nav-search">
-                <form>
-                    <input type="text" class="form-control" placeholder="Search here">
-                    <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-                </form>
-            </div>
-
-            <a class="mobile_btn" id="mobile_btn">
-                <i class="fa fa-bars"></i>
-            </a>
+        
 
 
             
@@ -60,21 +48,31 @@
                         <li class="menu-title">
                             <span><i class="fe fe-home"></i> Main</span>
                         </li>
-                        <li class="active">
+                        <hr />
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/user/updateprofile" ? "active" : "")">
+                            <a href="/user/updateprofile"><span>Cập nhật hồ sơ</span></a>
+                        </li>
+                        <hr />
+                        <li>
+                            <a style="color:red;" href="/user/logout"><span>Đăng xuất</span></a>
+                        </li>
+                        <hr />
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/Admin/Home" ? "active" : "")">
                             <a href="/Admin/Home"><span>Dashboard</span></a>
                         </li>
-                        <li>
+                        <hr />
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/admin/usermanagement" ? "active" : "")">
                             <a href="/admin/usermanagement"><span>Nhân viên</span></a>
                         </li>
-                        <li>
+                        <hr />
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/adminnews/approvenew" ? "active" : "")">
                             <a href="/adminnews/approvenew"><span>Quản lý tin tức</span></a>
                         </li>
+                        <hr />
                         <li class="@(ViewContext.HttpContext.Request.Path == "/admin/changepassword" ? "active" : "")">
                             <a href="/admin/changepassword"><span>Đổi mật khẩu</span></a>
                         </li>
-                        <li>
-                            <a href="/user/logout"><span>Đăng xuất</span></a>
-                        </li>
+                        <hr />
 
                     </ul>
                 </div>

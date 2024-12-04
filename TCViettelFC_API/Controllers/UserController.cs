@@ -14,6 +14,20 @@ namespace TCViettelFC_API.Controllers
         {
             _userRepository = userRepository;
         }
+        [HttpGet("userprofile")]
+        public async Task<IActionResult> GetUserProfile()
+        {
+            var result = await _userRepository.GetUserProfile();
+            if (result == null) return NotFound();
+            return Ok(result);
+        }
+        [HttpPost("updateprofile")]
+        public async Task<IActionResult> UpdateUserProfile(UserProfileDto dto)
+        {
+            var result = await _userRepository.UpdateUserProfile(dto);
+            if (result) return Ok(result);
+            return Conflict("Cập nhật thất bại");
+        }
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(LoginDto loginDto)
         {

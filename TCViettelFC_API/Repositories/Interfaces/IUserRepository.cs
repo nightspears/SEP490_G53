@@ -9,7 +9,8 @@ namespace TCViettelFC_API.Repositories.Interfaces
         //Task<AdminLoginResponse> LoginAsync(LoginDto loginDto);
         Task<LoginResponse> LoginAsync(LoginDto loginDto);
         Task<int> AdminChangePasswordAsync(ChangePassRequest ch);
-
+        Task<UserProfileDto> GetUserProfile();
+        Task<bool> UpdateUserProfile(UserProfileDto model);
         bool CheckExistedEmailAsync(string email);
         Task<IEnumerable<User>> GetUsersAsync();
         Task<int> ResetPasswordAsync(string email, string newPass);
