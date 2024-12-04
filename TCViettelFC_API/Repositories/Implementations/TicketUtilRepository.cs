@@ -159,6 +159,7 @@ width:300px;
                     item1.Status = 1;
                     res.Add(new VerifySupDto
                     {
+                        Imageurl = item1.Item.ImageUrl,
                         ItemName = item1.Item.ItemName,
                         Price = (decimal)item1.Price!,
                         Quantity = (int)item1.Quantity!
@@ -490,7 +491,7 @@ width:300px;
          <img src='{imageUrl}' alt='QR Code'>
      </div>
      <div class='footer'>
-         <p>Giá vé: {ticket.Price}</p>
+         <p>Giá vé: {ticket.Price.Value.ToString("#,0")} đ</p>
      </div>
  </div>
      </div>";
@@ -500,7 +501,7 @@ width:300px;
             }
             if (supp.Count > 0)
             {
-                string suppUrl = $"https://tcviettelfc.azurewebsites.net/VerifySupItem/{orderId}";
+                string suppUrl = $"https://tcviettelfc.azurewebsites.net/VerifyItem/{orderId}";
                 QRCodeData suppData = qr.CreateQrCode(suppUrl, QRCodeGenerator.ECCLevel.Q);
                 PngByteQRCode suppQrCode = new PngByteQRCode(suppData);
 
