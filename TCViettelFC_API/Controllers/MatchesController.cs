@@ -31,6 +31,17 @@ namespace TCViettelFC_API.Controllers
             return Ok(match);
 
         }
+        [HttpGet("GetMatchesNotStartYetAsync")]
+        public async Task<ActionResult<IEnumerable<MatchDto>>> GetMatchesNotStartYetAsync()
+        {
+            var match = await _matchRepository.GetMatchesNotStartYetAsync();
+            var data = new
+            {
+                data = match,
+            };
+            return Ok(match);
+
+        }
         [HttpGet("GetMatchesById")]
         public async Task<ActionResult> GetMatchesById(int id)
         {

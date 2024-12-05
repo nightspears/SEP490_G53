@@ -99,6 +99,20 @@ namespace TCViettelFC_API.Repositories.Implementations
             matches = await _context.Matches.Where(x => x.Status != 0).ToListAsync();
             return matches;
         }
+
+        public async Task<List<Match>> GetMatchesNotStartYetAsync()
+        {
+            List<Match> matches = new List<Match>();
+            DateTime currentDate = DateTime.Now;
+            DateTime threeDaysLater = currentDate.AddDays(8); // Tính ngày cách hiện tại 3 ngày
+
+            matches = await _context.Matches
+                                    .Where(x => x.Status == 1 && x.MatchDate > currentDate && x.MatchDate <= threeDaysLater)
+                                    .ToListAsync();
+
+            return matches;
+        }
+
         public async Task<Match> GetMatchesByIdAsync(int id)
         {
             Match matches = new Match();

@@ -70,6 +70,7 @@
                         <ul class="ticketInfo">
                             @{
                                 int counter = 1; // Biến đếm bắt đầu từ 1
+                                DateTime currentDateTime = DateTime.Now;
                             }
                             @foreach (var match in Model)
                             {
@@ -85,9 +86,28 @@
                                                 <span>@(match.MatchDate.HasValue ? match.MatchDate.Value.ToString("hh:mm tt") : "")</span> <span class="capitalize01">@match.StadiumName</span>
                                             </div>
                                         </li>
-                                        @if (match.Status == 1)
+                                        @if (match.MatchDate.HasValue)
                                         {
-                                            <li><a href="@Url.Action("Index", "Area", new { matchId = match.Id })" class="btn-small01 btn-green">Đặt vé</a></li>
+                                            var matchDateTime = match.MatchDate.Value;
+
+                                            // Kiểm tra nếu trận đấu là ngày hôm nay và còn 10 tiếng đến giờ thi đấu
+                                            if (matchDateTime.Date == currentDateTime.Date && (matchDateTime - currentDateTime).TotalHours <= 72)
+                                            {
+                                                <li><a href="@Url.Action("Index", "Area", new { matchId = match.Id })" class="btn-small01 btn-green">Đặt vé</a></li>
+                                            }
+                                            else if (matchDateTime.Date == currentDateTime.Date && (matchDateTime - currentDateTime).TotalHours >= 0.5)
+                                            {
+                                                <li><span class="btn-small01 btn-yellow" style="color: orangered;">Ngưng bán</span></li>
+                                            }
+                                            // Kiểm tra nếu trận đấu cách hôm nay 3 ngày
+                                            else if ((matchDateTime.Date - currentDateTime.Date).TotalDays <= 8)
+                                            {
+                                                <li><span class="btn-small01 btn-yellow" style="color: burlywood;">Sắp mở bán</span></li>
+                                            }
+                                        }
+                                        else
+                                        {
+                                        <li><span class="btn-small01 btn-grey">Ngày không xác định</span></li>
                                         }
                                     </ul>
                                 </li>
