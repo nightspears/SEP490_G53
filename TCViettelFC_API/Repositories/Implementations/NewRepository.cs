@@ -21,7 +21,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
         public IQueryable<GetNewDto> GetAllNewsAsQueryable()
         {
-            var news = _context.News.Include(x => x.Creator).Include(x => x.NewsCategory).Where(x => x.Status == 1).Select(n => new GetNewDto
+            var news = _context.News.Include(x => x.Creator).Include(x => x.NewsCategory).Select(n => new GetNewDto
             {
                 Id = n.Id,
                 CreatorId = n.Creator.FullName,
