@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System.Text.RegularExpressions;
 using TCViettelFC_API.Dtos;
 using TCViettelFC_API.Dtos.CheckOut;
@@ -200,6 +201,38 @@ namespace TCViettelFC_API.Repositories.Implementations
                     throw new Exception("Có lỗi xảy ra khi lưu thay đổi của thực thể. Xem chi tiết lỗi bên trong để biết thêm.", ex);
                 }
             }
+        }
+
+        public async Task<int> CheckCustomerlimitBuyTicket(int matchId, int? customerId = null)
+        {
+            if (!customerId.HasValue)
+            {
+                // Nếu customerId là null, trả về -1
+                return -1;
+            }
+
+            var totalTickets = await (from t in _context.TicketOrders
+                                      join c in _context.Customers on t.CustomerId equals c.CustomerId
+                                      join ot in _context.OrderedTickets on t.Id equals ot.OrderId
+                                      where c.AccountId == customerId && ot.MatchId == matchId
+                                      select ot.Id)
+                           .CountAsync();
+
+            return totalTickets;
+        }
+
+        public async Task<int> CheckCustomerNoAccountBuyTicket(int matchId, string? email,int? customerId = null)
+        {
+            if (customerId.HasValue)
+            {
+                return -1;
+            }
+            var totalTicket = await(from t in _context.TicketOrders
+                                    join c in _context.Customers on t.CustomerId equals c.CustomerId
+                                    join ot in _context.OrderedTickets on t.Id equals ot.OrderId
+                                    where c.Email == email && ot.MatchId == matchId
+                                    select ot.Id) .CountAsync();
+            return totalTicket;
         }
 
         public async Task<List<int>> GetOrderedTicketsIdByOrderId(int orderId)

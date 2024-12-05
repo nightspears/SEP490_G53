@@ -38,6 +38,23 @@ namespace TCViettelFC_API.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        [HttpGet("check-ticket-limit")]
+        public async Task<IActionResult> CheckTicketLimit(int matchId, int? customerId = null)
+        {
+            
+            var totalTickets = await _ticketOrderRepository.CheckCustomerlimitBuyTicket(matchId, customerId);
 
+            
+            return Ok(new { TotalTickets = totalTickets });
+        }
+        [HttpGet("check-ticket-limit-customernoacc")]
+        public async Task<IActionResult> CheckCustomerNoAccountBuyTicket(int matchId,string? email, int? customerId = null)
+        {
+           
+            var totalTickets = await _ticketOrderRepository.CheckCustomerNoAccountBuyTicket(matchId, email,customerId);
+
+            
+            return Ok(new { TotalTickets = totalTickets });
+        }
     }
 }
