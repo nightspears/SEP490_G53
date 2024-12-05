@@ -12,7 +12,7 @@ namespace TCViettelFC_API.Repositories.Interfaces
         Task<Match> GetMatchesByIdAsync(int id);
         Task UpdateMatchesAsync(int id, MatchesAddDto matchDto);
         Task DeleteMatchesAsync(int id);
-  
+        Task<List<Match>> GetMatchesNotStartYetAsync();
         void UpdateStatus(int status,int id);
         JsonResult CheckExist(CheckMatch data);
     }

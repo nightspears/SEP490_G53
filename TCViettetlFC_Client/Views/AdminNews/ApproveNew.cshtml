@@ -42,52 +42,67 @@
                         <table class="table table-hover table-center mb-0">
                             <thead>
                                 <tr class="text-center">
-                                    <th>ID</th>
-                                    <th>Creator ID</th>
-                                    <th>Category</th>
-                                    <th>Title</th>
-                                    <th>Content</th>
-                                    <th>Image</th>
-                                    <th>Created At</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    
+                                    <th>STT</th>
+                                    <th hidden>ID</th>
+                                    <th>Người tạo</th>
+                                    <th>Danh mục</th>
+                                    <th>Tiêu đề</th>
+                                    
+                                    <th hidden>Content</th>
+                                    <th hidden>Ảnh</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Tin tức</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @foreach (var news in Model)
+                                @foreach (var news in Model.Select((value, index) => new { value, index }))
                                 {
-                                    <tr class="text-center">
-                                        <td>@news.Id</td>
-                                        <td>@news.CreatorId</td>
-                                        <td>@news.NewsCategory</td>
-                                        <td>@news.Title</td>
-                                        <td>
-                                            @if (!string.IsNullOrEmpty(news.Content) && news.Content.Length > 20)
+                                    <tr >
+                                        <td class="text-center">@(news.index + 1)</td> <!-- Thêm số thứ tự tăng dần -->
+                                        <td hidden>@news.value.Id</td>
+                                        <td class="text-center">@news.value.CreatorId</td>
+                                        <td class="text-center">@news.value.NewsCategory</td>
+                                        <td style="word-wrap: break-word; max-width: 200px; white-space: normal;">@news.value.Title</td>
+                                        <td hidden>
+                                            @if (!string.IsNullOrEmpty(news.value.Content) && news.value.Content.Length > 20)
                                             {
-                                                @(@news.Content.Substring(0, 20) + "...")
+                                                @(@news.value.Content)
                                             }
                                             else
                                             {
-                                                @news.Content
+                                                @news.value.Content
                                             }
                                         </td>
-
-
-                                        <td>
-                                            <img src="@news.Image" alt="News Image" style=" max-width: 100px;height: auto;" />
+                                        
+                                        <td hidden>
+                                            <img src="@news.value.Image" alt="News Image" style=" max-width: 100px;height: auto;" />
                                         </td>
-                                        <td>@news.CreatedAt</td>
-                                        <td>
-                                            @if (news.Status.HasValue)
+                                        <td class="text-center">@news.value.CreatedAt</td>
+                                        <td class="text-center">
+                                            <a href="javascript:void(0)" class="btn btn-sm bg-success-light me-2"
+                                               onclick="toggleNewForm(@news.value.Id, '@Html.Encode(news.value.Title)', '@Html.Encode(news.value.CreatorId)', '@Html.Encode(news.value.NewsCategory)', '@Html.Encode(news.value.Content)','@Html.Encode(news.value.CreatedAt)')">
+                                                Xem chi tiết
+                                            </a>
+
+
+                                         
+                                        </td>
+
+
+                                        <td class="text-center">
+                                            @if (news.value.Status.HasValue)
                                             {
-                                                @if (news.Status.Value == 0)
+                                                @if (news.value.Status.Value == 0)
                                                 {
-                                                    <span style="color:red">Pending</span>
+                                                    <span style="color:red">Chưa phê duyệt</span>
                                                 }
                                                 else
                                                 {
-                                                    <span style="color:green">Approved</span>
+                                                    <span style="color:green">Đã phê duyệt</span>
                                                 }
                                             }
                                             else
@@ -95,23 +110,21 @@
                                                 <span class="badge badge-pill bg-secondary">Unknown</span>
                                             }
                                         </td>
-                                        @* <td>@(news.Status == 0 ? "Pending" : "Approved")</td> *@
-                                        <td>
-                                            @if (news.Status == 0)
+                                        <td class="text-center">
+                                            @if (news.value.Status == 0)
                                             {
                                                 <form asp-action="UpdateStatus" method="post">
-                                                    <input type="hidden" name="newsId" value="@news.Id" />
+                                                    <input type="hidden" name="newsId" value="@news.value.Id" />
                                                     <input type="hidden" name="newStatus" value="1" />
-                                                    <button type="submit" class="badge btn-accept bg-success border-0">Accept</button>
-
+                                                    <button type="submit" class="badge btn-accept bg-success border-0">Phê duyệt</button>
                                                 </form>
                                             }
                                             else
                                             {
                                                 <form asp-action="UpdateStatus" method="post">
-                                                    <input type="hidden" name="newsId" value="@news.Id" />
+                                                    <input type="hidden" name="newsId" value="@news.value.Id" />
                                                     <input type="hidden" name="newStatus" value="0" />
-                                                    <button type="submit" class="badge btn-reject bg-danger border-0">Reject</button>
+                                                    <button type="submit" class="badge btn-reject bg-danger border-0">Từ chối</button>
                                                 </form>
                                             }
                                         </td>
@@ -121,7 +134,118 @@
                         </table>
                     </div>
                 </div>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="newsDetailModal" tabindex="-1" aria-labelledby="newsDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal-width">
+        <!-- Thêm class custom-modal-width -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newsDetailModalLabel">Thông tin chi tiết</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p hidden id="newsId"></p>
+                <div class="data-header">
+                    <p id="newsCreator"></p>
+                    <span>-</span>
+                    <p id="newsCategory"></p>
+                    <span>-</span>
+                    <p id="newsCreatedAt"></p>
+                </div>
+                
+                <h1 id="newsTitle"></h1>
+                <p id="newsContent"></p>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .data-header{
+        display: flex;
+        justify-content: end;
+        color: darkblue;
+    }
+
+    .data-header p{
+        margin-left:10px;
+        margin-right:10px;
+    }
+    .custom-modal-width {
+        max-width: 80%; /* Điều chỉnh chiều rộng modal (90% của màn hình) */
+    }
+    #newsContent{
+        max-width:90%;
+        margin:auto;
+    }
+
+
+    .modal-body img {
+        max-width: 100%; /* Đặt chiều rộng tối đa là 90% của modal */
+        height: auto; /* Đảm bảo tỷ lệ khung hình của ảnh không bị méo */
+        margin-bottom:20px;
+        margin-top:20px;
+    }
+
+    #newsTitle {
+        margin: revert;
+        align-content: center;
+        text-align: center;
+        font-family: sans-serif, Arial, Verdana, "Trebuchet MS", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        font-weight: 600;
+    }
+</style>
+
+<script>
+    function decodeHtml(html) {
+        var txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+    }
+
+    function toggleNewForm(Id, Title, CreatorId, NewsCategory, Content, CreatedAt) {
+        if (Id) {
+            // Cập nhật thông tin khác trong modal
+            document.getElementById('newsId').innerText = Id;
+            document.getElementById('newsTitle').innerText = Title;
+            document.getElementById('newsCreator').innerText = "Người tạo: " + CreatorId;
+            document.getElementById('newsCategory').innerText = "Danh mục: " + NewsCategory;
+            document.getElementById('newsCreatedAt').innerText = "Ngày tạo: " + CreatedAt;
+
+            // Giải mã HTML trước khi hiển thị
+            document.getElementById('newsContent').innerHTML = decodeHtml(Content);
+
+            // Hiển thị modal
+            var myModal = new bootstrap.Modal(document.getElementById('newsDetailModal'));
+            myModal.show(); // Hiển thị modal
+        }
+    }
+
+
+
+</script>
+
+<script src="~/assets/js/jquery-3.6.0.min.js"></script>
+
+<script src="~/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="~/assets/js/feather.min.js"></script>
+
+<script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/assets/plugins/datatables/datatables.min.js"></script>
+
+<script src="~/assets/js/script.js"></script>
+
+
+
+
+
+

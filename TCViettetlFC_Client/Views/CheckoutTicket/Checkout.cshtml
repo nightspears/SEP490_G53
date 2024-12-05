@@ -8,6 +8,23 @@
 }
 
 <style>
+    .adjust-quantity {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+        padding: 2px;
+        border-radius: 50%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+        .adjust-quantity:hover {
+            background-color: #e0e0e0;
+        }
     .popup {
         display: none;
         position: fixed;
@@ -197,7 +214,7 @@
                             <th scope="col"><input type="checkbox" id="selectAll"></th>
                             <th scope="col">Tất cả </th>
                             <th scope="col">Đơn giá</th>
-                            <th scope="col">Số lượng</th>
+                       
                             <th scope="col">Đồ đính kèm</th>
                             
                             <th scope="col">Đơn giá</th>
@@ -223,7 +240,7 @@
                 </table>
             </div>
             <div class="info-customer bg-white">
-                <h4>Thông tin của bạn</h4>
+                <h4>Thông tin thanh toán</h4>
                 <input id="customerId" name="customerId" value="@customerId" hidden />
                 @if (string.IsNullOrEmpty(customerId as string))
                 {
@@ -313,10 +330,36 @@
     </div>
 </div>
 <script>
+    document.addEventListener('click', function (e) {
+        if (e.target && e.target.classList.contains('adjust-quantity')) {
+            const index = e.target.getAttribute('data-index');
+            const subIndex = e.target.getAttribute('data-subindex');
+            const action = e.target.getAttribute('data-action');
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const ticket = cart[index];
+            const item = ticket.supplementaryItems[subIndex];
+
+            if (action === 'increase') {
+                // Kiểm tra xem số lượng có vượt quá 4 không
+                if (item.itemQuantity < 4) {
+                    item.itemQuantity++;
+                }
+            } else if (action === 'decrease' && item.itemQuantity > 1) {
+                item.itemQuantity--;
+            }
+
+            // Cập nhật lại localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Cập nhật lại giao diện
+            displayCart();
+            updateTotal();
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const selectAllCheckbox = document.getElementById('selectAll');
-        const cartItemsContainer = document.querySelector('.table-borderless tbody');
         const totalTicketElement = document.querySelector('.don-hang-body .body-content:nth-child(1) p:nth-child(2)');
         const totalSupplementaryElement = document.querySelector('.don-hang-body .body-content:nth-child(2) p:nth-child(2)');
         const totalAmountElement = document.querySelector('.don-hang-footer .body-content p.total-amount');
@@ -324,131 +367,12 @@
         let countdownInterval;
 
         // Hiển thị các mục giỏ hàng trong bảng
-        function displayCart() {
-            cartItemsContainer.innerHTML = '';
-
-            cart.forEach((ticket, index) => {
-                const { stands, floor, section, price, quantity, matchDetails, supplementaryItems, expirationTime } = ticket;
-                const itemTotal = price * quantity;
-                let supplementaryTotalPrice = 0;
-
-                if (supplementaryItems && supplementaryItems.length > 0) {
-                    supplementaryItems.forEach(item => {
-                        supplementaryTotalPrice += item.itemPrice * item.itemQuantity;
-                    });
-                }
-
-                const totalItemPrice = itemTotal + supplementaryTotalPrice;
-                const supplementaryItemsString = supplementaryItems && supplementaryItems.length > 0
-                    ? supplementaryItems.map(item => `${item.itemName} (x${item.itemQuantity})`).join('<br>')
-                    : 'None';
-                // Thêm dòng vào bảng giỏ hàng
-                cartItemsContainer.innerHTML += `
-                            <tr class="text-center" style="font-size: medium;">
-                                <td><input type="checkbox" class="item-checkbox" data-index="${index}" /></td>
-                                <td>
-                                    <span class="font-weight-bold d-block">Viettel FC vs ${matchDetails.opponentName}</span>
-                                    <span class="d-block text-primary">${matchDetails.matchDate} - ${matchDetails.matchTime}</span>
-                                    <span class="text-muted d-block">${stands} - Cửa ${floor} - Tầng ${section}</span>
-                                </td>
-                                <td>${price.toLocaleString('vi-VN')} đ</td>
-                                <td>${quantity}</td>
-                                 <td>${supplementaryItemsString}</td>
-                                <td>${supplementaryTotalPrice.toLocaleString('vi-VN')} đ</td>
-                                <td>${totalItemPrice.toLocaleString('vi-VN')} đ</td>
-                                <td><i class="fas fa-trash-alt delete-icon" onclick="removeTicket(${index})"></i></td>
-                            </tr>
-                        `;
-            });
-
-            // Gắn sự kiện cho các checkbox của từng mục
-            document.querySelectorAll('.item-checkbox').forEach(checkbox => {
-                checkbox.addEventListener('change', updateTotal);
-            });
-        }
-
-        // Hàm để tìm mục có thời gian hết hạn gần nhất
-        function getNearestExpirationTime() {
-            const now = new Date().getTime();
-            let nearestExpirationTime = null;
-            let nearestIndex = -1;
-
-            cart.forEach((ticket, index) => {
-                if (ticket.expirationTime > now && (nearestExpirationTime === null || ticket.expirationTime < nearestExpirationTime)) {
-                    nearestExpirationTime = ticket.expirationTime;
-                    nearestIndex = index;
-                }
-            });
-
-            return { nearestExpirationTime, nearestIndex };
-        }
+        displayCart();
 
         // Đếm ngược toàn cục
-        function startGlobalCountdown() {
-            const { nearestExpirationTime, nearestIndex } = getNearestExpirationTime();
+        startGlobalCountdown();
 
-            if (nearestExpirationTime === null) {
-                // Không có mục nào cần đếm ngược
-                document.getElementById("countdownMinutes").textContent = "00";
-                document.getElementById("countdownSeconds").textContent = "00";
-                return;
-            }
-
-            if (countdownInterval) clearInterval(countdownInterval);
-
-            countdownInterval = setInterval(() => {
-                const now = new Date().getTime();
-                const distance = nearestExpirationTime - now;
-
-                if (distance < 0) {
-                    clearInterval(countdownInterval);
-                    removeTicket(nearestIndex);
-                    startGlobalCountdown();
-                    return;
-                }
-
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById("countdownMinutes").textContent = minutes.toString().padStart(2, '0');
-                document.getElementById("countdownSeconds").textContent = seconds.toString().padStart(2, '0');
-            }, 1000);
-        }
-
-        // Hàm cập nhật tổng tiền khi checkbox được thay đổi
-        function updateTotal() {
-            let totalTicketPrice = 0;
-            let totalSupplementaryPrice = 0;
-
-            document.querySelectorAll('.item-checkbox').forEach(checkbox => {
-                if (checkbox.checked) {
-                    const index = parseInt(checkbox.getAttribute('data-index'));
-                    const ticket = cart[index];
-
-                    // Tính tiền vé
-                    const ticketPrice = ticket.price * ticket.quantity;
-                    totalTicketPrice += ticketPrice;
-
-                    // Tính tiền đồ đính kèm
-                    if (ticket.supplementaryItems && ticket.supplementaryItems.length > 0) {
-                        ticket.supplementaryItems.forEach(item => {
-                            totalSupplementaryPrice += item.itemPrice * item.itemQuantity;
-                        });
-                    }
-                }
-            });
-
-            const subtotal = totalTicketPrice + totalSupplementaryPrice;
-            const vat = subtotal * 0.10; // 10% VAT
-            const totalAmount = subtotal + vat;
-
-            totalTicketElement.textContent = `${totalTicketPrice.toLocaleString('vi-VN')} đ`;
-            totalSupplementaryElement.textContent = `${totalSupplementaryPrice.toLocaleString('vi-VN')} đ`;
-            totalAmountElement.textContent = `${totalAmount.toLocaleString('vi-VN')} đ`;
-            vatNoteElement.textContent = `(Đã bao gồm VAT ${vat.toLocaleString('vi-VN')} đ)`;
-        }
-
-
+        // Thêm sự kiện cho "select all" checkbox
         selectAllCheckbox.addEventListener('change', function () {
             const isChecked = this.checked;
             document.querySelectorAll('.item-checkbox').forEach(checkbox => {
@@ -456,19 +380,167 @@
             });
             updateTotal();
         });
-
-
-        displayCart();
-        startGlobalCountdown();
     });
 
-    // Hàm xóa mục khỏi giỏ hàng
+    function displayCart() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.querySelector('.table-borderless tbody');
+        cartItemsContainer.innerHTML = '';
+
+        cart.forEach((ticket, index) => {
+            const { stands, floor, section, price, quantity, matchDetails, supplementaryItems } = ticket;
+            const itemTotal = price * quantity;
+            let supplementaryTotalPrice = 0;
+
+            if (supplementaryItems && supplementaryItems.length > 0) {
+                supplementaryItems.forEach(item => {
+                    supplementaryTotalPrice += item.itemPrice * item.itemQuantity;
+                });
+            }
+
+            const totalItemPrice = itemTotal + supplementaryTotalPrice;
+            const supplementaryItemsString = supplementaryItems && supplementaryItems.length > 0
+                ? supplementaryItems.map((item, subIndex) => `
+                    <div class="row" style="display: flex; align-items: center; justify-content: center;">
+                                <div class="col-md-4" style="flex-grow: 1; display: flex; justify-content: flex-end;padding:0;">
+                            <img src="${item.itemImage}" alt="${item.itemName}" style="width: 30px; height: 30px; margin-right: 10px;" />
+                            </div>
+                                    <div class="col-md-4" style="max-width: 30%;">${item.itemName}</div>
+                                        <div class="col-md-4" style="display: flex; justify-content: flex-start; align-items: center;">
+                                <button class="adjust-quantity" data-index="${index}" data-subindex="${subIndex}" data-action="decrease">-</button>
+                            <span class="item-quantity">${item.itemQuantity}</span>
+                            <button class="adjust-quantity" data-index="${index}" data-subindex="${subIndex}" data-action="increase">+</button></div>
+                        
+                    </div><hr style="height:0">
+                `).join('')
+                : 'Không có';
+
+            cartItemsContainer.innerHTML += `
+                <tr class="text-center" style="font-size: medium;">
+                    <td><input type="checkbox" class="item-checkbox" data-index="${index}" /></td>
+                    <td>
+                        <span class="font-weight-bold d-block">Viettel FC vs ${matchDetails.opponentName}</span>
+                        <span class="d-block text-primary">${matchDetails.matchDate} - ${matchDetails.matchTime}</span>
+                        <span class="text-muted d-block">${stands} - Cửa ${floor} - Tầng ${section}</span>
+                    </td>
+                    <td>${price.toLocaleString('vi-VN')} đ</td>
+                    <td>${supplementaryItemsString}</td>
+                    <td>${supplementaryTotalPrice.toLocaleString('vi-VN')} đ</td>
+                    <td>${totalItemPrice.toLocaleString('vi-VN')} đ</td>
+                    <td><i class="fas fa-trash-alt delete-icon" onclick="removeTicket(${index})"></i></td>
+                </tr>
+            `;
+        });
+
+        document.querySelectorAll('.item-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', updateTotal);
+        });
+    }
+
+    function updateTotal() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let totalTicketPrice = 0;
+        let totalSupplementaryPrice = 0;
+
+        document.querySelectorAll('.item-checkbox').forEach(checkbox => {
+            if (checkbox.checked) {
+                const index = parseInt(checkbox.getAttribute('data-index'));
+                const ticket = cart[index];
+
+                // Tính tiền vé
+                const ticketPrice = ticket.price * ticket.quantity;
+                totalTicketPrice += ticketPrice;
+
+                // Tính tiền đồ đính kèm
+                if (ticket.supplementaryItems && ticket.supplementaryItems.length > 0) {
+                    ticket.supplementaryItems.forEach(item => {
+                        totalSupplementaryPrice += item.itemPrice * item.itemQuantity;
+                    });
+                }
+            }
+        });
+
+        const subtotal = totalTicketPrice + totalSupplementaryPrice;
+        const vat = subtotal * 0.10; // 10% VAT
+        const totalAmount = subtotal + vat;
+
+        const totalTicketElement = document.querySelector('.don-hang-body .body-content:nth-child(1) p:nth-child(2)');
+        const totalSupplementaryElement = document.querySelector('.don-hang-body .body-content:nth-child(2) p:nth-child(2)');
+        const totalAmountElement = document.querySelector('.don-hang-footer .body-content p.total-amount');
+        const vatNoteElement = document.querySelector('.vat-note');
+
+        totalTicketElement.textContent = `${totalTicketPrice.toLocaleString('vi-VN')} đ`;
+        totalSupplementaryElement.textContent = `${totalSupplementaryPrice.toLocaleString('vi-VN')} đ`;
+        totalAmountElement.textContent = `${totalAmount.toLocaleString('vi-VN')} đ`;
+        vatNoteElement.textContent = `(Đã bao gồm VAT ${vat.toLocaleString('vi-VN')} đ)`;
+    }
+    let countdownInterval;
+    // Cập nhật hàm startGlobalCountdown để in ra thông báo và kiểm tra
+    function startGlobalCountdown() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const { nearestExpirationTime, nearestIndex } = getNearestExpirationTime(cart);
+
+        if (nearestExpirationTime === null) {
+            // Không có mục nào cần đếm ngược
+            document.getElementById("countdownMinutes").textContent = "00";
+            document.getElementById("countdownSeconds").textContent = "00";
+            return;
+        }
+
+        // Nếu có countdownInterval trước đó, xóa đi
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+
+        countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = nearestExpirationTime - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval); // Hủy đếm ngược khi hết hạn
+                removeTicket(nearestIndex); // Xóa mục đã hết hạn
+                startGlobalCountdown(); // Lập lại đếm ngược cho mục tiếp theo
+                return;
+            }
+
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("countdownMinutes").textContent = minutes.toString().padStart(2, '0');
+            document.getElementById("countdownSeconds").textContent = seconds.toString().padStart(2, '0');
+        }, 1000);
+    }
+
+
+    // Cập nhật hàm lấy thời gian hết hạn gần nhất
+    function getNearestExpirationTime(cart) {
+        const now = new Date().getTime();
+        let nearestExpirationTime = null;
+        let nearestIndex = -1;
+
+        cart.forEach((ticket, index) => {
+            console.log(`Ticket ${index} Expiration Time:`, ticket.expirationTime);
+            if (ticket.expirationTime > now && (nearestExpirationTime === null || ticket.expirationTime < nearestExpirationTime)) {
+                nearestExpirationTime = ticket.expirationTime;
+                nearestIndex = index;
+            }
+        });
+
+        return { nearestExpirationTime, nearestIndex };
+    }
+
+
+
+
     function removeTicket(index) {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         cart.splice(index, 1);
         localStorage.setItem('cart', JSON.stringify(cart));
-        location.reload();
+        displayCart();
+        updateTotal();
+        startGlobalCountdown();
     }
+
 </script>
 
 <script>

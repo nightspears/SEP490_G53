@@ -898,7 +898,7 @@
                         document.getElementById('floor').value = data.floor || '';
                         document.getElementById('section').value = data.section || '';
                         document.getElementById('price').value = data.price || '';
-                        document.getElementById('status').value = data.status === 1 ? "Còn vé" : "Hết vé";
+                        document.getElementById('status').value = data.status === 1 ? "Hoạt động" : "Đang sửa";
 
                         updateTotalPrice();
                         // Hiển thị form và overlay
@@ -1184,20 +1184,20 @@
                  // Kiểm tra số lượng vé cho trận đấu hiện tại trong giỏ hàng
                 const cartItem = JSON.parse(localStorage.getItem('cart')) || [];
                 const existingTickets = cartItem.filter(ticket => ticket.matchId === matchId);
-        const existingTickets2 = cartItem.filter(ticket => ticket.matchId === matchId && ticket.areaId === areaId);
+                const existingTickets2 = cartItem.filter(ticket => ticket.matchId === matchId && ticket.areaId === areaId);
 
-        // Calculate total quantity for the same area and match in the cart
-        const totalCartQuantity = existingTickets2.reduce((sum, ticket) => sum + ticket.quantity, 0);
-        debugger
-        // Find available tickets in matchAreaTickets
-        const availableTicket = matchAreaTickets.find(ticket => ticket.AreaId === parseInt(areaId) && ticket.MatchId === parseInt(matchId));
-        const availableQuantity = availableTicket ? availableTicket.AvailableSeats : 0;
+                // Calculate total quantity for the same area and match in the cart
+                const totalCartQuantity = existingTickets2.reduce((sum, ticket) => sum + ticket.quantity, 0);
+                debugger
+                // Find available tickets in matchAreaTickets
+                const availableTicket = matchAreaTickets.find(ticket => ticket.AreaId === parseInt(areaId) && ticket.MatchId === parseInt(matchId));
+                const availableQuantity = availableTicket ? availableTicket.AvailableSeats : 0;
 
-        // Check if the requested quantity exceeds available tickets
-        if (totalCartQuantity + quantity > availableQuantity) {
-            alert(`Bạn đã đặt quá số lượng vé hiện có của khu này, hiện có ${availableQuantity} vé, bạn đã đặt ${totalCartQuantity}, số lượng vé còn lại ${availableQuantity - totalCartQuantity}.`);
-            return;
-        }
+                // Check if the requested quantity exceeds available tickets
+                if (totalCartQuantity + quantity > availableQuantity) {
+                    alert(`Bạn đã đặt quá số lượng vé hiện có của khu này, hiện có ${availableQuantity} vé, bạn đã đặt ${totalCartQuantity}, số lượng vé còn lại ${availableQuantity - totalCartQuantity}.`);
+                    return;
+                }
                 if (existingTickets.length >= 4) {
                     alert('Bạn chỉ có thể thêm tối đa 4 vé cho mỗi trận đấu.');
                     return;
@@ -1218,16 +1218,18 @@
                 const supplementaryItems = [];
                 document.querySelectorAll('input[name="supplementary[]"]:checked').forEach(item => {
                     const itemId = parseInt(item.value);
-                      const itemName = document.querySelector(`input[name="supplementary[]"][value="${item.value}"]`)
+                    const itemName = document.querySelector(`input[name="supplementary[]"][value="${item.value}"]`)
                           .closest('.checkbox')
                           .querySelector('.text-container p').textContent.trim(); // Lấy tên đồ đính kèm
-                    
+                    const itemImage = item.closest('.checkbox')
+                            .querySelector('img').src;
                     const itemPrice = parseFloat(item.getAttribute('data-price'));
                     const itemQuantity = parseInt(document.querySelector(`input[name="quantity_${item.value}"]`).value);
 
                     supplementaryItems.push({
                         itemId,
                         itemName,
+                        itemImage,
                         itemPrice,
                         itemQuantity
                     });
