@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|d:\\resumeprojects\\sep490_g53\\tcviettelfc_api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ACF380A3-AF63-4B1E-96B7-D08FED0D50F1}|TCViettelFC_API.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -26,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 82,
+          "SelectedChildIndex": 81,
           "Children": [
             {
               "$type": "Bookmark",
@@ -354,7 +358,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
+              "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "Controllers\\CustomerController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T12:00:54.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Repositories\\Implementations\\UserRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Implementations\\UserRepository.cs",
@@ -362,25 +379,24 @@
               "RelativeToolTip": "Repositories\\Implementations\\UserRepository.cs",
               "ViewState": "AgIAAP4AAAAAAAAAAAAIwAgBAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T09:57:53.244Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-05T09:57:53.244Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AdminController.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
               "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Controllers\\AdminController.cs",
               "RelativeToolTip": "Controllers\\AdminController.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAYwFQAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAADsAAAAAAAAAAAAYwFQAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-05T09:57:25.127Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "UserController.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
@@ -388,12 +404,11 @@
               "RelativeToolTip": "Controllers\\UserController.cs",
               "ViewState": "AgIAADcAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-05T09:57:18.875Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-05T09:57:18.875Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "TicketUtilRepository.cs",
               "DocumentMoniker": "D:\\ResumeProjects\\SEP490_G53\\TCViettelFC_API\\Repositories\\Implementations\\TicketUtilRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Implementations\\TicketUtilRepository.cs",
@@ -401,8 +416,7 @@
               "RelativeToolTip": "Repositories\\Implementations\\TicketUtilRepository.cs",
               "ViewState": "AgIAAIcAAAAAAAAAAAAwwJIAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T15:02:38.65Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T15:02:38.65Z"
             }
           ]
         },

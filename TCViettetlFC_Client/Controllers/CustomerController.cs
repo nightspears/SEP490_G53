@@ -77,9 +77,15 @@ namespace TCViettetlFC_Client.Controllers
             }
             return View();
         }
-        public async Task<IActionResult> SendForgotMail(CustomerSendMailModel model)
+        [HttpPost]
+        public async Task<IActionResult> Forgot(CustomerSendMailModel model)
         {
             if (!ModelState.IsValid) return View(model);
+            var check = await _httpClient.GetAsync($"customer/emailexisted/{model.Email}");
+            if (!check.IsSuccessStatusCode)
+            {
+                ModelState.AddModelError("Email", "Không tồn tại tài khoản với email này.");
+            }
             var result = await _httpClient.GetAsync($"customer/sendcode/{model.Email}");
             if (result.IsSuccessStatusCode)
             {
@@ -95,6 +101,7 @@ namespace TCViettetlFC_Client.Controllers
             }
             else
             {
+                ModelState.AddModelError("Email", "Có lỗi bất ngờ xảy ra.");
                 return View(model);
             }
         }

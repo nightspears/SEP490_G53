@@ -110,6 +110,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cnlcVmVyaWZ5VGlja2V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Error/Error400.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3I0MDAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Error/Error403.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3I0MDMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Error/Error404.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3I0MDQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Error/Error500.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3I1MDAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/ResumeProjects/SEP490_G53/TCViettetlFC_Client/Views/Feedback/FeedbackConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tcRmVlZGJhY2tDb25maXJtYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
