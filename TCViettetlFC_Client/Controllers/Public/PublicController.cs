@@ -33,7 +33,7 @@ namespace TCViettetlFC_Client.Controllers.Common
         [Route("public/ChiTietSanPham/{id}")]
         public async Task<IActionResult> DetailProduct(int id)
         {
-            ViewBag.Id = id;
+           
 
             string requestUri = "https://localhost:5000/api/Product/GetSanPhamById?id=" + id;
             var response = await _httpClient.GetAsync(requestUri);
@@ -42,11 +42,16 @@ namespace TCViettetlFC_Client.Controllers.Common
 
             if (response.IsSuccessStatusCode)
             {
+                ViewBag.Id = id;
                 var jsonData = await response.Content.ReadAsStringAsync();
                 ListData = JsonConvert.DeserializeObject<ApiResponse>(jsonData);
+                return View(ListData);
+            }
+            else
+            {
+                return RedirectToAction("404", "Error");
             }
           
-            return View(ListData);
         }
 
         [Route("public/giohang")]
