@@ -29,9 +29,9 @@
                             foreach (var f in Model.pFile)
                             {
                                 index++;
-                                <div class=product-image id="product_@index" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important">
-                                    <img src="@f.FilePath" alt="@f.FileName">
-                                </div>
+                                    <div class=product-image id="product_@index" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);background-image:none !important">
+                                        <img src="@f.FilePath" alt="@f.FileName">
+                                    </div>
                             }
                         }
 
@@ -63,7 +63,7 @@
                                     foreach (var f in Model.pFile)
                                     {
                                         num++;
-                                        <li style="height: 100px !important; width: 100px !important;"><a href=#product_@num><img src="@f.FilePath" alt="@f.FileName" style="max-width:58% !important"></a></li>
+                                            <li style="height: 100px !important; width: 100px !important;"><a href=#product_@num><img src="@f.FilePath" alt="@f.FileName" style="max-width:58% !important"></a></li>
                                     }
                                 }
                                 @*  <li><a href=#product02><img src=images/product/shoe02.jpg alt=image></a></li>
@@ -318,8 +318,10 @@
                                 </a>
 
                                 <div class="d-flex" style="float:right ;margin :40px 20px 20px 0">
+
+                                  
                                     <button class=" text-center" style="padding: 11px 20px 7px 20px; border:none; border-radius:5px">
-                                        <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;" onclick="AddToCart(${item.productId})"></i>
+                                        <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;" onclick="loadDetail(@p.ProductId)"></i>
                                     </button>
                                 </div>
                             </div>
@@ -384,6 +386,10 @@
         $(this).val(value); 
         updateText('shirtNameOverlay', value);
     });
+
+    function loadDetail(id) {
+        window.location.href = "/public/ChiTietSanPham/"+id;
+    }
 
     $(document).on('input', '#SoAoCustom', function () {
 

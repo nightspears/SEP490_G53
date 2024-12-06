@@ -164,7 +164,7 @@ function modalEditOrCreate(id) {
     debugger
     resetForm();
     if (id != 0 && id != undefined) {
-        $("#titleModal").text("Cập nhật trận đồ đính kèm")
+        $("#titleModal").text("Cập nhật đồ đính kèm")
 
         var url = "https://localhost:5000/api/SupplementaryItem/" + id;
         $.ajax({

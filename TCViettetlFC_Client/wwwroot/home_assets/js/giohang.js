@@ -310,8 +310,8 @@ function getLienQuan() {
                         </a>
 
                        <div class="d-flex" style="float:right ;margin :40px 20px 20px 0">
-                            <button class="btn btn-outline-warning text-center">
-                                <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;"></i>
+                            <button class="btn btn-outline-warning text-center" onclick="loadDetail(${p.productId})" >
+                                <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;" ></i>
                             </button>
                         </div>
                     </div>
@@ -328,7 +328,9 @@ function getLienQuan() {
     });
 
 }
-
+function loadDetail(id) {
+    window.location.href = "/public/ChiTietSanPham/" + id;
+}
 function checkTableData() {
     debugger
     var noDataMessage = document.getElementById('noDataMessage');

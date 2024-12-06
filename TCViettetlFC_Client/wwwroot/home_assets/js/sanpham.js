@@ -56,10 +56,10 @@ function loadData(id, url) {
                                    </p>
                             </a>
 
-                            <div class="d-flex" style="float:right ;margin :40px 20px 20px 0">
-                                <button class="btn btn-outline-warning text-center">
-                                    <i class="fa fa-shopping-cart" style="color:#eb3636 ;font-size:20px;" onclick="AddToCart(${item.productId})"></i>
-                                </button>
+                            <div class="d-flex" id="btnXem" style="float:right ;margin :40px 20px 20px 0 ; display:none">
+                                <a class="btn btn-outline-warning text-center" href="/public/ChiTietSanPham/${item.productId}" >
+                                  Chọn thuộc tính
+                                </a>
                             </div>
                         </div>
                      </div>
