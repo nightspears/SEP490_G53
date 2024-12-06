@@ -263,11 +263,17 @@ namespace TCViettetlFC_Client.Controllers
         {
             var token = Request.Cookies["AuthToken"];
 
-            // Logic to get the responder ID
-            int responderId = GetResponderId(); // Implement this method to retrieve the responder ID
+            var responderId = GetResponderId();
+
+            if (responderId == null)
+            {
+                TempData["ErrorMessage"] = "Unable to approve feedback. Responder ID not found.";
+                return RedirectToAction("FeedbackManagement");
+            }
+
 
             // Call the feedback service to approve the feedback
-            var success = await _feedbackService.ApproveFeedbackAsync(feedbackId, responderId, token);
+            var success = await _feedbackService.ApproveFeedbackAsync(feedbackId, responderId.Value, token);
 
             if (success)
             {
@@ -281,12 +287,17 @@ namespace TCViettetlFC_Client.Controllers
             // Redirect back to FeedbackManagement view
             return RedirectToAction("FeedbackManagement");
         }
-
-        private int GetResponderId()
+        private int? GetResponderId()
         {
-            // Implement logic to retrieve the responder ID (e.g., from User.Identity)
-            return 1; // Temporary hardcoded value for demonstration
+            if (Request.Cookies.TryGetValue("UserId", out var userIdString) && int.TryParse(userIdString, out var userId))
+            {
+                return userId;
+            }
+
+            // Return null if the cookie does not exist or cannot be parsed as an integer
+            return null;
         }
+
 
         [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> OrderProductManagement()
@@ -400,6 +411,8 @@ namespace TCViettetlFC_Client.Controllers
             {
                 return RedirectToAction("Index", "Forbidden");
             }
+            string UserId = Request.Cookies["UserId"];
+            ViewData["UserId"] = UserId;
             var orderDetail = await _orderService.GetOrderDetailsAsync(id /*, token*/);
 
             if (orderDetail == null)
@@ -422,7 +435,6 @@ namespace TCViettetlFC_Client.Controllers
             {
                 return BadRequest("Tracking code is required.");
             }
-
             var shipmentResponse = await _goShipService.GetShipmentAsync(trackingCode);
 
             if (shipmentResponse == null || shipmentResponse.data == null || shipmentResponse.data.Count == 0)

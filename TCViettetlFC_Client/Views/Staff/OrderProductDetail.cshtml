@@ -2,10 +2,13 @@
 
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
 *@
 @{
     Layout = "_LayoutAdmin";
     ViewData["Title"] = "Chi tiết đơn hàng sản phẩm";
+   var useridString = ViewData["UserId"]?.ToString();
+    int? userid = int.TryParse(useridString, out var parsedUserId) ? parsedUserId : (int?)null;
 }
 
 
@@ -368,10 +371,10 @@
                 if (response.ok) {
                     alert('Shipment created successfully!');
                     console.log(result);
-
-                  
+                    debugger
+                  const userId = @userid;
                     // Step 2: Update the order status
-                    await updateOrderStatus(formData.get("OrderId"),1,1);
+                await updateOrderStatus(formData.get("OrderId"), 1, userId);
                     debugger
                     // Step 3: Prepare shipment data for local DB insertion
                     const localShipmentData = {
