@@ -91,7 +91,7 @@
                                             var matchDateTime = match.MatchDate.Value;
 
                                             // Kiểm tra nếu trận đấu là ngày hôm nay và còn 10 tiếng đến giờ thi đấu
-                                            if (matchDateTime.Date == currentDateTime.Date && (matchDateTime - currentDateTime).TotalHours <= 72)
+                                            if ((matchDateTime.Date - currentDateTime.Date).TotalDays <= 3)
                                             {
                                                 <li><a href="@Url.Action("Index", "Area", new { matchId = match.Id })" class="btn-small01 btn-green">Đặt vé</a></li>
                                             }
@@ -100,9 +100,9 @@
                                                 <li><span class="btn-small01 btn-yellow" style="color: orangered;">Ngưng bán</span></li>
                                             }
                                             // Kiểm tra nếu trận đấu cách hôm nay 3 ngày
-                                            else if ((matchDateTime.Date - currentDateTime.Date).TotalDays <= 8)
+                                            else if ( (matchDateTime.Date - currentDateTime.Date).TotalDays > 3 )
                                             {
-                                                <li><span class="btn-small01 btn-yellow" style="color: burlywood;">Sắp mở bán</span></li>
+                                                <li><span class="btn-small01 btn-yellow" style="color: burlywood;margin: auto;">Sắp mở bán</span></li>
                                             }
                                         }
                                         else

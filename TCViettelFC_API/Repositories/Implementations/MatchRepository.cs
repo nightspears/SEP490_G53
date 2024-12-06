@@ -104,10 +104,10 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             List<Match> matches = new List<Match>();
             DateTime currentDate = DateTime.Now;
-            DateTime threeDaysLater = currentDate.AddDays(8); // Tính ngày cách hiện tại 3 ngày
+            DateTime threeDaysLater = currentDate.AddDays(8); 
 
             matches = await _context.Matches
-                                    .Where(x => x.Status == 1 && x.MatchDate > currentDate && x.MatchDate <= threeDaysLater)
+                                    .Where(x => x.Status == 1 && x.MatchDate > currentDate && x.MatchDate <= threeDaysLater && x.IsHome == true)
                                     .ToListAsync();
 
             return matches;
