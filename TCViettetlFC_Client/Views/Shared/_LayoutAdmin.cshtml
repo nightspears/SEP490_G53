@@ -101,6 +101,10 @@
                             <a href="/TeamManagement/Index"><span>Đội bóng</span></a>
                         </li>
                         <hr />
+                        <li class="@(ViewContext.HttpContext.Request.Path == "/Staff/FeedbackManagement" ? "active" : "")">
+                            <a href="/Staff/FeedbackManagement"><span>Phản hồi</span></a>
+                        </li>
+                        <hr />
                         <li class="@(ViewContext.HttpContext.Request.Path == "/admin/changepassword" ? "active" : "")">
                             <a href="/admin/changepassword"><span>Đổi mật khẩu</span></a>
                         </li>

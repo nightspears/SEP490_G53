@@ -32,8 +32,19 @@ namespace TCViettelFC_API.Controllers
         public async Task<ActionResult<IEnumerable<FeedbackDto>>> GetFeedbacks()
         {
             var feedbacks = await _feedbackRepository.GetFeedbackAsync();
-            var feedbackDtos = _mapper.Map<IEnumerable<FeedbackDto>>(feedbacks);
-            return Ok(feedbackDtos);
+            List<FeedbackDto> results = new List<FeedbackDto>();
+            foreach (var feedback in feedbacks)
+            {
+                results.Add(new FeedbackDto()
+                {
+                    Id = feedback.Id,
+                    Content = feedback.Content,
+                    CreatedAt = feedback.CreatedAt,
+                    Email = feedback.Creator.Account.Email,
+                    Phone = feedback.Creator.Account.Phone,
+                });
+            }
+            return Ok(results);
         }
 
         // Update feedback

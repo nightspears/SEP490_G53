@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
 
@@ -11,13 +10,13 @@ namespace TCViettelFC_API.Repositories.Implementations
         public FeedbackRepository(Sep490G53Context context)
         {
             _context = context;
-         
+
         }
 
         public async Task<IEnumerable<Feedback>> GetFeedbackAsync()
         {
             return await _context.Feedbacks
-             .Include(u => u.Creator)
+             .Include(u => u.Creator).ThenInclude(x => x.Account)
              .ToListAsync();
         }
 
