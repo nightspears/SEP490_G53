@@ -19,6 +19,11 @@ namespace TCViettetlFC_Client.Controllers
         public async Task<IActionResult> TicketOrderHistory()
         {
             var cookie = Request.Cookies["CustomerId"];
+            var auth = Request.Cookies["AuthToken"];
+            if (auth == null)
+            {
+                return RedirectToAction("Login");
+            }
             if (cookie == null)
             {
                 return RedirectToAction("Login");

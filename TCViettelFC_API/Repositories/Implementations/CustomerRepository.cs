@@ -30,12 +30,23 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             var cusId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "CustomerId")?.Value;
             if (cusId == null) return null;
-            var cus = await _context.Customers.FirstOrDefaultAsync(x => x.AccountId == int.Parse(cusId));
+            var cus = await _context.Customers.Where(x => x.AccountId == int.Parse(cusId)).ToListAsync();
             if (cus == null) return null;
-            var orderhistory = await _context.TicketOrders.Where(x => x.CustomerId == cus.CustomerId).ToListAsync();
-            List<TicketOrderHistoryDto> results = new List<TicketOrderHistoryDto>();
-            foreach (var order in orderhistory)
+            List<TicketOrder> ticketOrders = new();
+            foreach (var c in cus)
             {
+                var order = await _context.TicketOrders.FirstOrDefaultAsync(x => x.CustomerId == c.CustomerId);
+                if (order != null)
+                {
+                    ticketOrders.Add(order);
+                }
+
+            }
+
+            List<TicketOrderHistoryDto> results = new List<TicketOrderHistoryDto>();
+            foreach (var order in ticketOrders)
+            {
+
                 results.Add(new TicketOrderHistoryDto()
                 {
                     Id = order.Id,
