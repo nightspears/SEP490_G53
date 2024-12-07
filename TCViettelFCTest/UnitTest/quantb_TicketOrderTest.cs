@@ -23,7 +23,7 @@ namespace TCViettelFCTest.UnitTest
         public void SetUp()
         {
             _options = new DbContextOptionsBuilder<Sep490G53Context>()
-                .UseInMemoryDatabase(databaseName: "InMemoryDatabase")
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
                 .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .Options;
 
