@@ -20,7 +20,7 @@ public class UserRepositoryTests
         _mockContext = new Mock<Sep490G53Context>();
         _mockConfiguration = new Mock<IConfiguration>();
         _mockContextAccessor = new Mock<IHttpContextAccessor>();
-        _userRepository = new UserRepository(_mockContext.Object, _mockConfiguration.Object, _mockContextAccessor.Object);
+        _userRepository = new UserRepository(null, _mockContext.Object, _mockConfiguration.Object, _mockContextAccessor.Object);
     }
 
     [Test]

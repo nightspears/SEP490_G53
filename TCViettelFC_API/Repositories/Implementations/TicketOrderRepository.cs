@@ -286,10 +286,6 @@ namespace TCViettelFC_API.Repositories.Implementations
                 throw new Exception("Tên đầy đủ không hợp lệ: không được chứa dấu cách ở đầu và cuối.");
             }
 
-            if (!Regex.IsMatch(fullName, @"^[a-zA-Zàáạảãâầấậẩẫbcdđeéẹẻẽêềếệểễfghíìịỉĩjklmnoóòọỏõôồốộổỗơờớợởỡpqrstuúùụủũưừứựửữvwxyz\s.,'-]+$"))
-            {
-                throw new Exception("Tên đầy đủ không hợp lệ: không được chứa ký tự đặc biệt.");
-            }
         }
 
     }

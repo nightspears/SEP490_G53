@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 namespace TCViettelFCTest.UnitTest
 {
     [TestFixture]
-    public class CreateNewsAsyncTests
+    public class QuanTb_NewUnittTest
     {
         private DbContextOptions<Sep490G53Context> _options;
         private Sep490G53Context _context;
@@ -27,8 +27,8 @@ namespace TCViettelFCTest.UnitTest
         public void SetUp()
         {
             _options = new DbContextOptionsBuilder<Sep490G53Context>()
-                .UseInMemoryDatabase(databaseName: "NewsTestDB")
-                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)) // Bỏ qua cảnh báo transaction
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)) 
                 .Options;
 
             _context = new Sep490G53Context(_options);
