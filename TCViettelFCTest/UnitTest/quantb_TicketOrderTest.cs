@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TCViettelFC_API.Dtos.OrderTicket;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Implementations;
@@ -52,7 +47,7 @@ namespace TCViettelFCTest.UnitTest
             _context.Matches.Add(new Match
             {
                 Id = 1,
-                Status=1
+                Status = 1
             });
             _context.Areas.Add(new Area
             {
@@ -159,8 +154,8 @@ namespace TCViettelFCTest.UnitTest
                         Price = 100000
                     }
                 },
-                
-                
+
+
                 PaymentDto = new PaymentTicketDto
                 {
                     OrderTicketId = 1,
@@ -315,7 +310,7 @@ namespace TCViettelFCTest.UnitTest
             var ticketOrderDto = new TicketOrderDto
             {
                 CustomerId = 1,
-                
+
                 PaymentDto = new PaymentTicketDto
                 {
                     OrderTicketId = 1,
@@ -457,7 +452,7 @@ namespace TCViettelFCTest.UnitTest
         {
             var ticketOrderDto = new TicketOrderDto
             {
-                
+
                 OrderedTickets = new List<OrderedTicketDto>
         {
             new OrderedTicketDto
@@ -523,7 +518,7 @@ namespace TCViettelFCTest.UnitTest
         {
             var ticketOrderDto = new TicketOrderDto
             {
-                TotalAmount=100000,
+                TotalAmount = 100000,
                 OrderedTickets = new List<OrderedTicketDto>
             {
             new OrderedTicketDto
@@ -599,7 +594,7 @@ namespace TCViettelFCTest.UnitTest
                 TotalAmount = 100000,
                 OrderedTickets = new List<OrderedTicketDto>
         {
-                    
+
             new OrderedTicketDto
             {
                 MatchId = 1,
@@ -756,7 +751,7 @@ namespace TCViettelFCTest.UnitTest
                 {
                     Email = "quanthai111202@gmail.com",
                     Phone = "0378793050",
-                    FullName = "  Thái Bá Quân " 
+                    FullName = "  Thái Bá Quân "
                 },
                 OrderedTickets = new List<OrderedTicketDto>
         {

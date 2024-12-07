@@ -1,17 +1,13 @@
-﻿using NUnit.Framework;
-using Moq;
-using System;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using TCViettelFC_API.Models;
-using TCViettelFC_API.Dtos;
-using TCViettelFC_API.Repositories.Implementations;
-using CloudinaryDotNet.Actions;
+﻿using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
-using System.IO;
-using TCViettelFC_API.Repositories.Interfaces;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
+using Moq;
+using TCViettelFC_API.Dtos;
+using TCViettelFC_API.Models;
+using TCViettelFC_API.Repositories.Implementations;
+using TCViettelFC_API.Repositories.Interfaces;
 
 namespace TCViettelFCTest.UnitTest
 {
