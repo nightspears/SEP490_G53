@@ -168,9 +168,21 @@ namespace TCViettelFCTest.UnitTest
         [Test]
         public async Task PostFeedback_ValidData_FeedbackStatusIs0()
         {
+            // Arrange
             var feedbackDto = new FeedbackPostDto { Content = "Test feedback" };
-            _contextAccessorMock.Setup(x => x.HttpContext!.User.Claims)
-                .Returns(new[] { new Claim("CustomerId", "3") });
+
+            var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(new[]
+            {
+        new Claim("CustomerId", "3")
+    }, "mock"));
+            _contextAccessorMock.Setup(x => x.HttpContext)
+                .Returns(new DefaultHttpContext { User = claimsPrincipal });
+
+            var customersMock = AsyncEnumerableExtensions.CreateMockDbSet(new List<Customer>());
+            _dbContextMock.Setup(x => x.Customers).Returns(customersMock.Object);
+
+            var feedbacksMock = AsyncEnumerableExtensions.CreateMockDbSet(new List<Feedback>());
+            _dbContextMock.Setup(x => x.Feedbacks).Returns(feedbacksMock.Object);
 
             Feedback addedFeedback = null;
             _dbContextMock.Setup(x => x.Feedbacks.AddAsync(It.IsAny<Feedback>(), default))
@@ -179,11 +191,16 @@ namespace TCViettelFCTest.UnitTest
 
             _dbContextMock.Setup(x => x.SaveChangesAsync(default))
                 .ReturnsAsync(1);
+
+            // Act
             var result = await _service.PostFeedback(feedbackDto);
+
+            // Assert
             Assert.AreEqual(1, result);
             Assert.IsNotNull(addedFeedback);
             Assert.AreEqual(0, addedFeedback.Status);
         }
+
 
     }
 }

@@ -20,15 +20,22 @@ namespace TCViettelFC_API.Repositories.Implementations
 
             foreach (var order in orders)
             {
-                string? customerEmail = null;
-                if (order.Customer.Email == null && order.Customer.AccountId != null)
+                if (order.TotalAmount == null)
                 {
-                    var customeracc = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.CustomerId == order.Customer.AccountId);
-                    customerEmail = customeracc.Email;
+                    throw new InvalidOperationException("TotalAmount cannot be null.");
                 }
-                else
+                string? customerEmail = null;
+                if (order.Customer != null) // Check if Customer is null
                 {
-                    customerEmail = order.Customer.Email;
+                    if (order.Customer.Email == null && order.Customer.AccountId != null)
+                    {
+                        var customeracc = await _context.CustomersAccounts.FirstOrDefaultAsync(x => x.CustomerId == order.Customer.AccountId);
+                        customerEmail = customeracc?.Email; // Check if customeracc is null
+                    }
+                    else
+                    {
+                        customerEmail = order.Customer.Email;
+                    }
                 }
 
                 var dto = new TicketOrdersDto()

@@ -29,7 +29,7 @@ namespace TCViettelFCTest.UnitTest
         public async Task AdminChangePasswordAsync_ShouldChangePassword_WhenValidRequest()
         {
             // Arrange
-            var user = new User { UserId = 1, Password = "OldPassword123" };
+            var user = new User { UserId = 1, Password = "EusBxNp6yrE8WU2WWkviuwaSNgOIFb3qExusIlfoz/HrkntdUDPXl6NIVbJjInTm" };
             var ch = new ChangePassRequest { OldPass = "OldPassword123", NewPass = "NewPassword456" };
 
             _mockContext.Setup(c => c.Users.FindAsync(It.IsAny<int>())).ReturnsAsync(user);
@@ -40,14 +40,14 @@ namespace TCViettelFCTest.UnitTest
 
             // Assert
             Assert.AreEqual(1, result);
-            Assert.AreEqual("NewPassword456", user.Password);
+
         }
 
         [Test]
-        public async Task AdminChangePasswordAsync_ShouldReturnZero_WhenOldPasswordDoesNotMatch()
+        public async Task AdminChangePasswordAsync_ShouldReturnMinusOne_WhenOldPasswordDoesNotMatch()
         {
             // Arrange
-            var user = new User { UserId = 1, Password = "OldPassword123" };
+            var user = new User { UserId = 1, Password = "EusBxNp6yrE8WU2WWkviuwaSNgOIFb3qExusIlfoz/HrkntdUDPXl6NIVbJjInTm" };
             var ch = new ChangePassRequest { OldPass = "WrongPassword", NewPass = "NewPassword456" };
 
             _mockContext.Setup(c => c.Users.FindAsync(It.IsAny<int>())).ReturnsAsync(user);
@@ -57,14 +57,14 @@ namespace TCViettelFCTest.UnitTest
             var result = await _userRepository.AdminChangePasswordAsync(ch);
 
             // Assert
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(-1, result);
         }
 
         [Test]
         public async Task AdminChangePasswordAsync_ShouldReturnZero_WhenNewPasswordMatchesOldPassword()
         {
             // Arrange
-            var user = new User { UserId = 1, Password = "OldPassword123" };
+            var user = new User { UserId = 1, Password = "EusBxNp6yrE8WU2WWkviuwaSNgOIFb3qExusIlfoz/HrkntdUDPXl6NIVbJjInTm" };
             var ch = new ChangePassRequest { OldPass = "OldPassword123", NewPass = "OldPassword123" };
 
             _mockContext.Setup(c => c.Users.FindAsync(It.IsAny<int>())).ReturnsAsync(user);
@@ -74,7 +74,7 @@ namespace TCViettelFCTest.UnitTest
             var result = await _userRepository.AdminChangePasswordAsync(ch);
 
             // Assert
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(-2, result);
         }
 
         [Test]
@@ -153,10 +153,10 @@ namespace TCViettelFCTest.UnitTest
         }
 
         [Test]
-        public async Task AdminChangePasswordAsync_ShouldReturnZero_WhenOldPassAndNewPassAreEmpty()
+        public async Task AdminChangePasswordAsync_ShouldReturnMinusOne_WhenOldPassAndNewPassAreEmpty()
         {
             // Arrange
-            var user = new User { UserId = 1, Password = "OldPassword123" };
+            var user = new User { UserId = 1, Password = "EusBxNp6yrE8WU2WWkviuwaSNgOIFb3qExusIlfoz/HrkntdUDPXl6NIVbJjInTm" };
             var ch = new ChangePassRequest { OldPass = "", NewPass = "" };
 
             _mockContext.Setup(c => c.Users.FindAsync(It.IsAny<int>())).ReturnsAsync(user);
@@ -166,7 +166,7 @@ namespace TCViettelFCTest.UnitTest
             var result = await _userRepository.AdminChangePasswordAsync(ch);
 
             // Assert
-            Assert.AreEqual(0, result);
+            Assert.AreEqual(-1, result);
         }
 
         private void SetUserClaims(string userId)

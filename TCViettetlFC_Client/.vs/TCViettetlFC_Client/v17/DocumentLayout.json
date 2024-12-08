@@ -134,7 +134,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 83,
+          "SelectedChildIndex": 84,
           "Children": [
             {
               "$type": "Bookmark",
@@ -461,6 +461,10 @@
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "TicketPaymentCallback.cshtml",
@@ -470,8 +474,7 @@
               "RelativeToolTip": "Views\\CheckoutTicket\\TicketPaymentCallback.cshtml",
               "ViewState": "AgIAAIoAAAAAAAAAAAAgwJIAAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-06T15:14:33.487Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T15:14:33.487Z"
             },
             {
               "$type": "Document",
@@ -483,8 +486,7 @@
               "RelativeToolTip": "VNPayHelper\\VnPayService.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAIwCAAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T15:09:47.26Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T15:09:47.26Z"
             },
             {
               "$type": "Document",
@@ -509,8 +511,7 @@
               "RelativeToolTip": "Views\\CheckoutTicket\\Checkout.cshtml",
               "ViewState": "AgIAAG8CAAAAAAAAAAAewIMCAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-06T15:03:32.402Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T15:03:32.402Z"
             },
             {
               "$type": "Document",
@@ -834,8 +835,7 @@
               "RelativeToolTip": "Controllers\\CustomerController.cs",
               "ViewState": "AgIAAJwAAAAAAAAAAAA0wB4AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T13:00:11.846Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T13:00:11.846Z"
             }
           ]
         },
