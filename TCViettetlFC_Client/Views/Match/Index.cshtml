@@ -86,28 +86,33 @@
                                                 <span>@(match.MatchDate.HasValue ? match.MatchDate.Value.ToString("hh:mm tt") : "")</span> <span class="capitalize01">@match.StadiumName</span>
                                             </div>
                                         </li>
-                                        @if (match.MatchDate.HasValue)
+                                        @if(match.IsHome == true)
                                         {
-                                            var matchDateTime = match.MatchDate.Value;
+                                            @if (match.MatchDate.HasValue)
+                                            {
+                                                var matchDateTime = match.MatchDate.Value;
+                                                var totalMinute = ((matchDateTime.TimeOfDay - currentDateTime.TimeOfDay).TotalMinutes);
 
-                                            // Kiểm tra nếu trận đấu là ngày hôm nay và còn 10 tiếng đến giờ thi đấu
-                                            if ((matchDateTime.Date - currentDateTime.Date).TotalDays <= 3)
-                                            {
-                                                <li><a href="@Url.Action("Index", "Area", new { matchId = match.Id })" class="btn-small01 btn-green">Đặt vé</a></li>
-                                            }
-                                            else if (matchDateTime.Date == currentDateTime.Date && (matchDateTime - currentDateTime).TotalHours >= 0.5)
-                                            {
-                                                <li><span class="btn-small01 btn-yellow" style="color: orangered;">Ngưng bán</span></li>
-                                            }
-                                            // Kiểm tra nếu trận đấu cách hôm nay 3 ngày
-                                            else if ( (matchDateTime.Date - currentDateTime.Date).TotalDays > 3 )
-                                            {
-                                                <li><span class="btn-small01 btn-yellow" style="color: burlywood;margin: auto;">Sắp mở bán</span></li>
+                                                // Kiểm tra nếu trận đấu là ngày hôm nay và còn 10 tiếng đến giờ thi đấu
+                                                if (matchDateTime.Date == currentDateTime.Date && totalMinute <= 30)
+                                                {
+                                                    <li><span class="btn-small01 btn-yellow" style="color: orangered;margin: auto;">Ngưng bán</span></li>
+
+                                                }
+                                                else if ((matchDateTime.Date - currentDateTime.Date).TotalDays <= 3)
+                                                {
+                                                    <li><a href="@Url.Action("Index", "Area", new { matchId = match.Id })" class="btn-small01 btn-green">Đặt vé</a></li>
+                                                }
+                                                // Kiểm tra nếu trận đấu cách hôm nay 3 ngày
+                                                else if ((matchDateTime.Date - currentDateTime.Date).TotalDays > 3)
+                                                {
+                                                    <li><span class="btn-small01 btn-yellow" style="color: burlywood;margin: auto;">Sắp mở bán</span></li>
+                                                }
                                             }
                                         }
                                         else
                                         {
-                                        <li><span class="btn-small01 btn-grey">Ngày không xác định</span></li>
+                                        <li><span class="btn-small01 btn-grey"></span></li>
                                         }
                                     </ul>
                                 </li>
