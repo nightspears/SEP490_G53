@@ -207,7 +207,7 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             if (!customerId.HasValue)
             {
-                // Nếu customerId là null, trả về -1
+
                 return -1;
             }
 
