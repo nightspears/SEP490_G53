@@ -107,7 +107,7 @@ namespace TCViettelFC_API.Repositories.Implementations
             DateTime threeDaysLater = currentDate.AddDays(8); 
 
             matches = await _context.Matches
-                                    .Where(x => x.Status == 1 && x.MatchDate > currentDate && x.MatchDate <= threeDaysLater && x.IsHome == true)
+                                    .Where(x => x.Status == 1 && x.MatchDate > currentDate && x.MatchDate <= threeDaysLater )
                                     .ToListAsync();
 
             return matches;
