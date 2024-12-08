@@ -109,7 +109,9 @@ namespace TCViettelFC_API.Repositories.Implementations
             matches = await _context.Matches
                                     .Where(x => x.Status == 1 && x.MatchDate > currentDate && x.MatchDate <= threeDaysLater && x.IsHome == true)
                                     .ToListAsync();
-
+            if (matches == null ) {
+                throw new Exception("Không có trận đấu nào");
+            }
             return matches;
         }
 
