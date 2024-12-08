@@ -148,13 +148,19 @@ namespace TCViettelFCTest.UnitTest
         {
             int ticketId = 1;
             var orderedTicket = new OrderedTicket { Id = ticketId, Status = 1, Price = -10 }; // Negative price
+
+            // Mock the GetOrderedTicketByIdAsync method to return the ticket with negative price
             _ticketUtilRepositoryMock.Setup(repo => repo.GetOrderedTicketByIdAsync(ticketId)).ReturnsAsync(orderedTicket);
-            _ticketUtilRepositoryMock.Setup(repo => repo.VerifyTicketAsync(orderedTicket)).ReturnsAsync(1); // Invalid ticket due to negative price
+
+            // Act
             var result = await _controller.VerifyTicketAsync(ticketId);
+
+            // Assert
             var badRequestResult = result as BadRequestObjectResult;
             Assert.IsNotNull(badRequestResult);
             Assert.AreEqual("Ticket not valid", badRequestResult.Value);
         }
+
 
         [Test]
         public async Task VerifyTicketAsync_TicketWithMissingArea_ReturnsBadRequest()

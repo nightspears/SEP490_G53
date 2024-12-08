@@ -42,7 +42,13 @@ namespace TCViettelFCTest.UnitTest
             Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
 
         }
-
+        [TearDown]
+        public void TearDown()
+        {
+            _context.Database.EnsureDeleted(); // Xóa sạch dữ liệu trong InMemoryDatabase
+            _context.Dispose();
+            _cloudinaryMock.Reset();
+        }
 
         [Test]
         public async Task CreateNewsAsync_ValidInput_ShouldCreateNews()

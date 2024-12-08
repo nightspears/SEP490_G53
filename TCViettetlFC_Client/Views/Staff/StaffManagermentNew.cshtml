@@ -129,7 +129,7 @@
                                             <td>@index</td> <!-- Hiển thị giá trị của biến đếm -->
                                             <td>@news.CreatorId</td>
                                             <td>@news.NewsCategory</td>
-                                            <td>
+                                            <td style="word-wrap: break-word; max-width: 200px; white-space: normal;">
                                                 @if (!string.IsNullOrEmpty(news.Title) && news.Title.Length > 20)
                                                 {
                                                     @(@news.Title)

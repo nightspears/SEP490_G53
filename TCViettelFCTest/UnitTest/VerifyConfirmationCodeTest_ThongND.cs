@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Implementations;
@@ -10,93 +10,129 @@ namespace TCViettelFCTest.UnitTest
     [TestFixture]
     public class VerifyConfirmationCodeTest_ThongND
     {
-        private Mock<Sep490G53Context> _dbContextMock;
         private Mock<IHttpContextAccessor> _contextAccessorMock;
+        private Sep490G53Context _dbContext;  // Use real DbContext with in-memory provider
         private ICustomerRepository _service;
         private static readonly Dictionary<string, (CustomersAccount CustomersAccount, string Code, DateTime Expiry)> _pendingRegistrations = new();
-
 
         [SetUp]
         public void SetUp()
         {
-            _dbContextMock = new Mock<Sep490G53Context>();
+            // Use in-memory database for testing
+            var options = new DbContextOptionsBuilder<Sep490G53Context>()
+                .UseInMemoryDatabase(databaseName: "TestDatabase")
+                .Options;
+
+            _dbContext = new Sep490G53Context(options);
 
             _contextAccessorMock = new Mock<IHttpContextAccessor>();
 
+            _service = new CustomerRepository(_dbContext, null, null, _contextAccessorMock.Object);
 
-            _service = new CustomerRepository(_dbContextMock.Object, null, null, _contextAccessorMock.Object);
+            // Preload some test data in the in-memory database
+            var customerAccount = new CustomersAccount
+            {
+
+                Email = "test@example.com",
+                ConfirmationCode = "123456",
+                CodeExpiry = DateTime.UtcNow.AddMinutes(10),
+                Status = 0
+            };
+
+            _dbContext.CustomersAccounts.Add(customerAccount);
+            _dbContext.SaveChanges();
         }
 
-        // Test Case 1: Valid Email and Code
         [Test]
         public async Task VerifyConfirmationCodeAsync_ValidEmailAndCode_ReturnsTrue()
         {
             // Arrange
-            var CustomersAccount = new CustomersAccount
-            {
-                CustomerId = 1,
-                Password = "1234",
-                Email = "test@example.com",
-            };
-
             var confirmationCode = "123456";
-            var expiry = DateTime.UtcNow.AddMinutes(10);
-            _pendingRegistrations["test@example.com"] = (CustomersAccount, confirmationCode, expiry);
-
-            _dbContextMock.Setup(db => db.CustomersAccounts.AddAsync(It.IsAny<CustomersAccount>(), It.IsAny<CancellationToken>()))
-     .ReturnsAsync((CustomersAccount account, CancellationToken _) =>
-         Mock.Of<EntityEntry<CustomersAccount>>(e => e.Entity == account));
-
-            _dbContextMock.Setup(db => db.Profiles.AddAsync(It.IsAny<Profile>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync((Profile account, CancellationToken _) =>
-         Mock.Of<EntityEntry<Profile>>(e => e.Entity == account));
-            _dbContextMock.Setup(db => db.SaveChangesAsync(It.IsAny<CancellationToken>()))
-                .ReturnsAsync(1);
+            var email = "test@example.com";
 
             // Act
-            var result = await _service.VerifyConfirmationCodeAsync("test@example.com", confirmationCode);
+            var result = await _service.VerifyConfirmationCodeAsync(email, confirmationCode);
 
             // Assert
             Assert.IsTrue(result);
-            _dbContextMock.Verify(db => db.CustomersAccounts.AddAsync(It.Is<CustomersAccount>(c => c.CustomerId == CustomersAccount.CustomerId), default), Times.Once);
-            _dbContextMock.Verify(db => db.Profiles.AddAsync(It.Is<Profile>(p => p.CustomerId == CustomersAccount.CustomerId), default), Times.Once);
-            _dbContextMock.Verify(db => db.SaveChangesAsync(default), Times.Exactly(2));
-            Assert.IsFalse(_pendingRegistrations.ContainsKey("test@example.com"));
+
+            // Verify the customer account was updated
+            var customer = await _dbContext.CustomersAccounts.FirstOrDefaultAsync(c => c.Email == email);
+            Assert.AreEqual(1, customer.Status);  // Customer should now be active (status 1)
+            Assert.IsNull(customer.ConfirmationCode);  // Code should be cleared
+            Assert.IsNull(customer.CodeExpiry);  // Expiry should be cleared
         }
-
-
-
-
-        // Test Case 2: Invalid Code
         [Test]
         public async Task VerifyConfirmationCodeAsync_InvalidCode_ReturnsFalse()
         {
             // Arrange
             var email = "test@example.com";
-            var code = "invalidcode";
-            var CustomersAccount = new CustomersAccount { CustomerId = 1 };
+            var invalidCode = "invalidcode";
             var confirmationCode = "validcode";
             var expiry = DateTime.UtcNow.AddMinutes(10);
-            _pendingRegistrations[email] = (CustomersAccount, confirmationCode, expiry);
+
+            var customerAccount = new CustomersAccount
+            {
+
+                Email = email,
+                ConfirmationCode = confirmationCode,
+                CodeExpiry = expiry,
+                Status = 0
+            };
+
+            // Check if the entity is already in the DbContext before adding it.
+            if (!_dbContext.CustomersAccounts.Any(ca => ca.CustomerId == customerAccount.CustomerId))
+            {
+                _dbContext.CustomersAccounts.Add(customerAccount);
+                await _dbContext.SaveChangesAsync();
+            }
+
+            // Detach the entity to avoid it being tracked by the context
+            _dbContext.Entry(customerAccount).State = EntityState.Detached;
+
+            // Query the customer account with AsNoTracking to ensure it's not tracked.
+            var trackedCustomerAccount = await _dbContext.CustomersAccounts
+                .AsNoTracking()  // This prevents the entity from being tracked.
+                .FirstOrDefaultAsync(ca => ca.Email == email);
 
             // Act
-            var result = await _service.VerifyConfirmationCodeAsync(email, code);
+            var result = await _service.VerifyConfirmationCodeAsync(email, invalidCode);
 
             // Assert
             Assert.IsFalse(result);
         }
 
-        // Test Case 3: Expired Code
+
+
+
+
         [Test]
         public async Task VerifyConfirmationCodeAsync_ExpiredCode_ReturnsFalse()
         {
             // Arrange
             var email = "test@example.com";
             var code = "validcode";
-            var CustomersAccount = new CustomersAccount { CustomerId = 1 };
             var confirmationCode = "validcode";
             var expiry = DateTime.UtcNow.AddMinutes(-10); // Expired
-            _pendingRegistrations[email] = (CustomersAccount, confirmationCode, expiry);
+
+            var customerAccount = new CustomersAccount
+            {
+
+                Email = email,
+                ConfirmationCode = confirmationCode,
+                CodeExpiry = expiry,
+                Status = 0
+            };
+
+            // Detach all entities from the DbContext to clear tracking
+            foreach (var entry in _dbContext.ChangeTracker.Entries())
+            {
+                entry.State = EntityState.Detached;
+            }
+
+            // Now add the new entity to the context
+            _dbContext.CustomersAccounts.Add(customerAccount);
+            await _dbContext.SaveChangesAsync();
 
             // Act
             var result = await _service.VerifyConfirmationCodeAsync(email, code);
@@ -105,7 +141,7 @@ namespace TCViettelFCTest.UnitTest
             Assert.IsFalse(result);
         }
 
-        // Test Case 4: Email Not Found
+
         [Test]
         public async Task VerifyConfirmationCodeAsync_EmailNotFound_ReturnsFalse()
         {
@@ -120,17 +156,26 @@ namespace TCViettelFCTest.UnitTest
             Assert.IsFalse(result);
         }
 
-        // Test Case 5: No Code Provided
         [Test]
         public async Task VerifyConfirmationCodeAsync_NoCodeProvided_ReturnsFalse()
         {
             // Arrange
             var email = "test@example.com";
             var code = "";
-            var CustomersAccount = new CustomersAccount { CustomerId = 1 };
             var confirmationCode = "validcode";
             var expiry = DateTime.UtcNow.AddMinutes(10);
-            _pendingRegistrations[email] = (CustomersAccount, confirmationCode, expiry);
+
+            var customerAccount = new CustomersAccount
+            {
+
+                Email = email,
+                ConfirmationCode = confirmationCode,
+                CodeExpiry = expiry,
+                Status = 0
+            };
+
+            _dbContext.CustomersAccounts.Add(customerAccount);
+            await _dbContext.SaveChangesAsync();
 
             // Act
             var result = await _service.VerifyConfirmationCodeAsync(email, code);
@@ -139,32 +184,36 @@ namespace TCViettelFCTest.UnitTest
             Assert.IsFalse(result);
         }
 
-        // Test Case 6: CustomersAccount is Not Added if Code is Invalid
         [Test]
         public async Task VerifyConfirmationCodeAsync_InvalidCode_CustomerNotAdded()
         {
             // Arrange
             var email = "test@example.com";
             var code = "invalidcode";
-            var CustomersAccount = new CustomersAccount { CustomerId = 1 };
             var confirmationCode = "validcode";
             var expiry = DateTime.UtcNow.AddMinutes(10);
-            _pendingRegistrations[email] = (CustomersAccount, confirmationCode, expiry);
-            _dbContextMock.Setup(x => x.CustomersAccounts.AddAsync(It.IsAny<CustomersAccount>(), default))
-              .ReturnsAsync((EntityEntry<CustomersAccount>)null!);
-            _dbContextMock.Setup(x => x.SaveChangesAsync(default)).ReturnsAsync(1);
+
+            var customerAccount = new CustomersAccount
+            {
+
+                Email = email,
+                ConfirmationCode = confirmationCode,
+                CodeExpiry = expiry,
+                Status = 0
+            };
+
+            _dbContext.CustomersAccounts.Add(customerAccount);
+            await _dbContext.SaveChangesAsync();
 
             // Act
             var result = await _service.VerifyConfirmationCodeAsync(email, code);
 
             // Assert
             Assert.IsFalse(result);
-            _dbContextMock.Verify(x => x.CustomersAccounts.AddAsync(It.IsAny<CustomersAccount>(), default), Times.Never);
+            var customer = await _dbContext.CustomersAccounts.FindAsync(customerAccount.CustomerId);
+            Assert.AreEqual(0, customer.Status);  // Ensure the status is not updated
         }
 
-
-
-        // Test Case 8: No Pending Registration for the Email
         [Test]
         public async Task VerifyConfirmationCodeAsync_NoPendingRegistration_NoAction()
         {
@@ -179,7 +228,6 @@ namespace TCViettelFCTest.UnitTest
             Assert.IsFalse(result);
         }
 
-        // Test Case 9: Multiple Valid Codes
         [Test]
         public async Task VerifyConfirmationCodeAsync_MultipleValidCodes_AllReturnTrue()
         {
@@ -188,16 +236,13 @@ namespace TCViettelFCTest.UnitTest
             var email2 = "test2@example.com";
             var code1 = "validcode1";
             var code2 = "validcode2";
-            var customer1 = new CustomersAccount { CustomerId = 1 };
-            var customer2 = new CustomersAccount { CustomerId = 2 };
             var expiry = DateTime.UtcNow.AddMinutes(10);
 
-            _pendingRegistrations[email1] = (customer1, "validcode1", expiry);
-            _pendingRegistrations[email2] = (customer2, "validcode2", expiry);
+            var customer1 = new CustomersAccount { Email = email1, ConfirmationCode = code1, CodeExpiry = expiry, Status = 0 };
+            var customer2 = new CustomersAccount { Email = email2, ConfirmationCode = code2, CodeExpiry = expiry, Status = 0 };
 
-            _dbContextMock.Setup(x => x.CustomersAccounts.AddAsync(It.IsAny<CustomersAccount>(), default))
-              .ReturnsAsync((EntityEntry<CustomersAccount>)null!);
-            _dbContextMock.Setup(x => x.SaveChangesAsync(default)).ReturnsAsync(1);
+            _dbContext.CustomersAccounts.AddRange(customer1, customer2);
+            await _dbContext.SaveChangesAsync();
 
             // Act
             var result1 = await _service.VerifyConfirmationCodeAsync(email1, code1);
@@ -208,7 +253,6 @@ namespace TCViettelFCTest.UnitTest
             Assert.IsTrue(result2);
         }
 
-        // Test Case 10: Multiple Invalid Codes
         [Test]
         public async Task VerifyConfirmationCodeAsync_MultipleInvalidCodes_AllReturnFalse()
         {
@@ -217,12 +261,13 @@ namespace TCViettelFCTest.UnitTest
             var email2 = "test2@example.com";
             var invalidCode1 = "invalidcode1";
             var invalidCode2 = "invalidcode2";
-            var customer1 = new CustomersAccount { CustomerId = 1 };
-            var customer2 = new CustomersAccount { CustomerId = 2 };
             var expiry = DateTime.UtcNow.AddMinutes(10);
 
-            _pendingRegistrations[email1] = (customer1, "validcode1", expiry);
-            _pendingRegistrations[email2] = (customer2, "validcode2", expiry);
+            var customer1 = new CustomersAccount { Email = email1, ConfirmationCode = "validcode1", CodeExpiry = expiry, Status = 0 };
+            var customer2 = new CustomersAccount { Email = email2, ConfirmationCode = "validcode2", CodeExpiry = expiry, Status = 0 };
+
+            _dbContext.CustomersAccounts.AddRange(customer1, customer2);
+            await _dbContext.SaveChangesAsync();
 
             // Act
             var result1 = await _service.VerifyConfirmationCodeAsync(email1, invalidCode1);
@@ -232,33 +277,35 @@ namespace TCViettelFCTest.UnitTest
             Assert.IsFalse(result1);
             Assert.IsFalse(result2);
         }
-        // Test Case 11: Valid Code Already Used
+
         [Test]
         public async Task VerifyConfirmationCodeAsync_ValidCodeAlreadyUsed_ReturnsFalse()
         {
             // Arrange
             var email = "test@example.com";
             var code = "validcode";
-            var customerAccount = new CustomersAccount { CustomerId = 1 };
-            var confirmationCode = "validcode";
-            var expiry = DateTime.UtcNow.AddMinutes(10);
+            var customerAccount = new CustomersAccount
+            {
 
-            // Adding an already consumed registration (simulated by not removing it after previous processing)
-            _pendingRegistrations[email] = (customerAccount, confirmationCode, expiry);
+                Email = email,
+                ConfirmationCode = code,
+                CodeExpiry = DateTime.UtcNow.AddMinutes(10),
+                Status = 1 // Assume it was already verified previously
+            };
 
-            // Simulate that the account has already been added previously and saved to the database
-            _dbContextMock.Setup(db => db.CustomersAccounts.AddAsync(It.IsAny<CustomersAccount>(), default))
-                .ReturnsAsync((EntityEntry<CustomersAccount>)null!); // Mock that no new entity is being added
-            _dbContextMock.Setup(db => db.SaveChangesAsync(default)).ReturnsAsync(1); // Simulate save to database
+            _dbContext.CustomersAccounts.Add(customerAccount);
+            await _dbContext.SaveChangesAsync();
 
             // Act
             var result = await _service.VerifyConfirmationCodeAsync(email, code);
 
             // Assert
             Assert.IsFalse(result, "The method should not process an already consumed valid code.");
-            _dbContextMock.Verify(db => db.CustomersAccounts.AddAsync(It.IsAny<CustomersAccount>(), default), Times.Never);
-            _dbContextMock.Verify(db => db.SaveChangesAsync(default), Times.Never);
         }
+
+
+
+
 
     }
 }

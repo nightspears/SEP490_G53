@@ -20,36 +20,35 @@ namespace TCViettelFCTest.UnitTest
     [TestFixture]
     public class UpdateNewAsyncUnitTest_QuanTB
     {
-
-
         private DbContextOptions<Sep490G53Context> _options;
         private Sep490G53Context _context;
         private NewRepository _newRepository;
         private Mock<ICloudinarySetting> _cloudinaryMock;
         private Mock<IHttpContextAccessor> _httpContextAccessorMock;
+
         [SetUp]
         public void SetUp()
         {
             _options = new DbContextOptionsBuilder<Sep490G53Context>()
                 .UseInMemoryDatabase(databaseName: "TestDatabase")
-                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning)) // Bỏ qua cảnh báo transaction
+                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .Options;
 
             _context = new Sep490G53Context(_options);
-
             _cloudinaryMock = new Mock<ICloudinarySetting>();
             _httpContextAccessorMock = new Mock<IHttpContextAccessor>();
-
             var configurationMock = new Mock<IConfiguration>();
 
             _newRepository = new NewRepository(_context, configurationMock.Object, _httpContextAccessorMock.Object, _cloudinaryMock.Object);
             Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
-
         }
+
         [TearDown]
         public void TearDown()
         {
-            _options = null; // Giải phóng tùy chọn
+            _context.Database.EnsureDeleted(); // Xóa sạch dữ liệu trong InMemoryDatabase
+            _context.Dispose();
+            _cloudinaryMock.Reset();
         }
         [Test]
         public async Task UpdateNewAsync_ShouldReturnTrue_WhenAllFieldsAreValid()
