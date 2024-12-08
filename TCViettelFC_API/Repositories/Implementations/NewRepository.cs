@@ -183,30 +183,40 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 try
                 {
-                    // Tìm bản ghi cần cập nhật
+                    
                     var news = await _context.News.FirstOrDefaultAsync(n => n.Id == id);
                     if (news == null)
                     {
                         return false;
                     }
 
-                    // Cập nhật các thông tin cơ bản
+                    
                     news.CreatorId = newDto.CreatorId ?? news.CreatorId;
                     news.NewsCategoryId = newDto.NewsCategoryId ?? news.NewsCategoryId;
                     news.Title = newDto.Title ?? news.Title;
                     news.Content = newDto.Content ?? news.Content;
 
-                    // Xử lý ảnh mới nếu có
+                    
                     if (newDto.Image != null && newDto.Image.Length > 0)
                     {
-                        var uploadResult = _cloudinary.CloudinaryUpload(newDto.Image);
-                        news.Image = uploadResult?.SecureUrl?.ToString() ?? news.Image; // Giữ nguyên ảnh cũ nếu upload thất bại
+                        try
+                        {
+                            // Kiểm tra và upload ảnh, nếu có lỗi thì trả về false
+                            var uploadResult = _cloudinary.CloudinaryUpload(newDto.Image);
+                            news.Image = uploadResult?.SecureUrl?.ToString() ?? news.Image;
+                        }
+                        catch (Exception)
+                        {
+                            // Nếu gặp lỗi trong quá trình upload, rollback và trả về false
+                            await dbContextTransaction.RollbackAsync();
+                            return false;
+                        }
                     }
 
-                    // Cập nhật thời gian chỉnh sửa
+                    
                     news.CreatedAt = DateTime.UtcNow;
 
-                    // Lưu thay đổi vào cơ sở dữ liệu
+                    
                     await _context.SaveChangesAsync();
                     await dbContextTransaction.CommitAsync();
 
