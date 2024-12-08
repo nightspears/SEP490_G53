@@ -36,7 +36,7 @@
                             <li>
                                 <a href=/public/giohang>
                                     <i class="fa fa-shopping-cart"></i> <span>
-                                        cart(<span class=cartitems>0</span>)
+                                        Giỏ hàng (<span class=cartitems id="cartSl">0</span>)
                                     </span>
                                 </a>
                             </li>
@@ -296,40 +296,37 @@
     <script src="~/home_assets/js/vendor/vendor.js"></script>
     <script src="~/home_assets/js/main.js"></script>
     <script src="~/home_assets/js/vendor/modernizr.js"></script>
+    <script>
+        function getCartFromLocalStorage() {
+            const cartJson = localStorage.getItem("cartProduct");
 
-    @*  <script>
-    function loadCategoryMenu() {
-    $.ajax({
-    url: "https://localhost:5000/api/Category/GetCategory",
-    method: "GET",
-    dataType: "json",
-    success: function (res) {
-    var menu_category = $("#menu_category").empty();
-    var textFirt = `<li class="category_product_menu" onclick="showProductByCate(0)" >
-    <a style="color:black" class="ProductCate">Tất cả</a>
-    </li>`;
-    menu_category.append(textFirt);
-    $.each(res, function (index, item) {
+            if (cartJson) {
+                const cartData = JSON.parse(cartJson);
+                const now = new Date().getTime();
 
-    var html = `<li class="category_product_menu" onclick="showProductByCate(${item.categoryId})" data-cid="${item.categoryId}">
-    <a style="color:black" class="ProductCate" data-cid="${item.categoryId}">${item.categoryName}</a>
-    </li>`;
-    menu_category.append(html);
-    });
+                // Kiểm tra thời gian hết hạn
+                if (now < cartData.expiration) {
+                    return cartData.items;
+                } else {
+                    localStorage.removeItem("cartProduct");
+                    return [];
+                }
+            }
+            return [];
+        }
+        $(document).ready(function () {
 
+            var cartItems = [];
+            cartItems = getCartFromLocalStorage();
 
-    },
-    error: function (res) {
-    console.error("Error loading data", res);
-    }
-    });
-    }
+            $("#cartSl").text(cartItems.length)
 
+        });
 
-    $(document).ready(function () {
-    loadCategoryMenu();
-    });
-    </script> *@
+       
+    </script>
+
+    
 </body>
 
 </html>
