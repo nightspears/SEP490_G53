@@ -56,6 +56,8 @@ namespace TCViettelFCTest.UnitTest
             // Mock upload file in DataFile
             _mockCloudinary.Setup(c => c.CloudinaryUpload(It.IsAny<IFormFile>()))
                 .Returns(new ImageUploadResult { SecureUrl = new Uri("http://example.com/file.jpg") });
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
         }
 
 
@@ -63,7 +65,6 @@ namespace TCViettelFCTest.UnitTest
         public async Task UpdateProductAsync_ShouldUpdateProduct()
         {
             // Set up in-memory database for testing
-            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                 .UseInMemoryDatabase("TestDatabase")
                 .Options;

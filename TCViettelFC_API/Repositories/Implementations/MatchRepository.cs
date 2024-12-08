@@ -15,16 +15,39 @@ namespace TCViettelFC_API.Repositories.Implementations
     public class MatchRepository : IMatchRepository
     {
         private readonly Sep490G53Context _context;
-        private readonly IConfiguration _configuration;
+        
         private readonly ICloudinarySetting cloudinary;
-        public MatchRepository(Sep490G53Context context, IConfiguration configuration, ICloudinarySetting _cloudinarySetting)
+        public MatchRepository(Sep490G53Context context, ICloudinarySetting _cloudinarySetting)
         {
             _context = context;
-            _configuration = configuration;
             cloudinary = _cloudinarySetting;
         }
         public async Task AddMatchesAsync(MatchesAddDto matchDto)
         {
+
+            if (matchDto.MatchDate < DateTime.Now)
+            {
+                throw new ArgumentException("match date must greater than today");
+            }
+           
+            if (string.IsNullOrEmpty(matchDto.OpponentName))
+            {
+                throw new ArgumentException("The system returns an error, no new match are added.");
+            }
+           
+            if (string.IsNullOrEmpty(matchDto.MatchDate.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new match are added.");
+            }
+            if (string.IsNullOrEmpty(matchDto.StadiumName))
+            {
+                throw new ArgumentException("The system returns an error, no new match are added.");
+            }
+            if (string.IsNullOrEmpty(matchDto.IsHome.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new match are added.");
+            }
+
 
             try
             {
@@ -32,7 +55,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 {
                     OpponentName = matchDto.OpponentName,
                     StadiumName = matchDto.StadiumName,
-                    Status = matchDto.Status,
+                    Status = matchDto.Status == null ? 2 : matchDto.Status,
 
                     IsHome = matchDto.IsHome,
                     MatchDate = matchDto.MatchDate,

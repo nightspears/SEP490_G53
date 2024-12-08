@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TCViettelFC_API.Dtos.Discount;
+using TCViettelFC_API.Dtos.Matches;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
 
@@ -17,18 +18,51 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task AddDiscountAsync(DiscountDto _discount)
         {
 
-            Discount discount = new Discount();
+            if (_discount.ValidUntil < DateTime.Now)
             {
-                discount.DiscountName = _discount.DiscountName;
-                discount.DiscountPercent = _discount.DiscountPercent;
-                discount.Status = _discount.Status;
-                discount.ValidFrom = _discount.ValidFrom;
-                discount.ValidUntil = _discount.ValidUntil;
+                throw new ArgumentException("valid_until must greater than today");
+            }
+            if (_discount.ValidFrom < DateTime.Now)
+            {
+                throw new ArgumentException("valid_from must greater than today");
+            }
 
-            };
+            if (_discount.ValidFrom > _discount.ValidUntil)
+            {
+                throw new ArgumentException("valid_from must less than valid_until");
+            }
+
+            if (string.IsNullOrEmpty(_discount.DiscountName))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
+
+            if (string.IsNullOrEmpty(_discount.DiscountPercent.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
+            if (string.IsNullOrEmpty(_discount.ValidUntil.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
+            if (string.IsNullOrEmpty(_discount.ValidFrom.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
+
+
 
             try
             {
+                Discount discount = new Discount();
+                {
+                    discount.DiscountName = _discount.DiscountName;
+                    discount.DiscountPercent = _discount.DiscountPercent;
+                    discount.Status = _discount.Status == null ? 2 : _discount.Status;
+                    discount.ValidFrom = _discount.ValidFrom;
+                    discount.ValidUntil = _discount.ValidUntil;
+
+                };
                 await _context.Discounts.AddAsync(discount);
                 await _context.SaveChangesAsync();
             }
@@ -87,8 +121,41 @@ namespace TCViettelFC_API.Repositories.Implementations
                 return discount;
             }
         }
-        public async Task UpdateDiscountAsync(int id, DiscountDto discountDto)
+        public async Task UpdateDiscountAsync(int id, DiscountDto _discount)
         {
+
+            if (_discount.ValidUntil < DateTime.Now)
+            {
+                throw new ArgumentException("valid_until must greater than today");
+            }
+            if (_discount.ValidFrom < DateTime.Now)
+            {
+                throw new ArgumentException("valid_from must greater than today");
+            }
+
+            if (_discount.ValidFrom > _discount.ValidUntil)
+            {
+                throw new ArgumentException("valid_from must less than valid_until");
+            }
+
+            if (string.IsNullOrEmpty(_discount.DiscountName))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
+
+            if (string.IsNullOrEmpty(_discount.DiscountPercent.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
+            if (string.IsNullOrEmpty(_discount.ValidUntil.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
+            if (string.IsNullOrEmpty(_discount.ValidFrom.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
+
             try
             {
                 var discount = await _context.Discounts.FindAsync(id);
@@ -98,11 +165,11 @@ namespace TCViettelFC_API.Repositories.Implementations
                 }
 
                 // Update Season properties
-                discount.DiscountName = discountDto.DiscountName ?? discount.DiscountName;
-                discount.Status = discountDto.Status ?? discount.Status;
-                discount.ValidFrom = discountDto.ValidFrom ?? discount.ValidFrom;
-                discount.ValidUntil = discountDto.ValidUntil ?? discount.ValidUntil;
-                discount.DiscountPercent = discountDto.DiscountPercent ?? discount.DiscountPercent;
+                discount.DiscountName = _discount.DiscountName ?? discount.DiscountName;
+                discount.Status = _discount.Status ?? discount.Status;
+                discount.ValidFrom = _discount.ValidFrom ?? discount.ValidFrom;
+                discount.ValidUntil = _discount.ValidUntil ?? discount.ValidUntil;
+                discount.DiscountPercent = _discount.DiscountPercent ?? discount.DiscountPercent;
 
                 await _context.SaveChangesAsync();
             }

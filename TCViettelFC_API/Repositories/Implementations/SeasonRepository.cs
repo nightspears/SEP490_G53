@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using TCViettelFC_API.Dtos.Matches;
 using TCViettelFC_API.Dtos.Season;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -25,16 +26,35 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task AddSeasonAsync(SeasonDto seasonDto)
         {
 
-            Season season = new Season();
+            if (seasonDto.StartYear > seasonDto.EndYear)
             {
-                season.SeasonName = seasonDto.SeasonName;
-                season.StartYear = seasonDto.StartYear;
-                season.EndYear = seasonDto.EndYear;
-                season.Status = seasonDto.Status;   
-            };
+                throw new ArgumentException("start_year must greater than end_year");
+            }
+
+            if (string.IsNullOrEmpty(seasonDto.SeasonName))
+            {
+                throw new ArgumentException("The system returns an error, no new season are added.");
+            }
+
+            if (string.IsNullOrEmpty(seasonDto.StartYear.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new season are added.");
+            }
+            if (string.IsNullOrEmpty(seasonDto.EndYear.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new season are added.");
+            }
+           
           
             try
             {
+                Season season = new Season();
+                {
+                    season.SeasonName = seasonDto.SeasonName;
+                    season.StartYear = seasonDto.StartYear;
+                    season.EndYear = seasonDto.EndYear;
+                    season.Status = seasonDto.Status;
+                };
                 await _context.Seasons.AddAsync(season);
                 await _context.SaveChangesAsync();
             }
