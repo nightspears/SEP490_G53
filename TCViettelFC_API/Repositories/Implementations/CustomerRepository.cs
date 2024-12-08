@@ -176,16 +176,17 @@ namespace TCViettelFC_API.Repositories.Implementations
         }
         public async Task<int> PostFeedback(FeedbackPostDto feedbackDto)
         {
-            var customerId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "CustomerId")?.Value;
-            Feedback feedback;
-            if (customerId == null)
+            if (feedbackDto == null) return 0;
+            var customerId = _contextAccessor.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "CustomerId")?.Value;
+            if (string.IsNullOrEmpty(customerId))
             {
                 return 0;
             }
 
-            var customer = new Customer() { AccountId = int.Parse(customerId) };
+            var customer = new Customer { AccountId = int.Parse(customerId) };
             await _context.Customers.AddAsync(customer);
-            feedback = new Feedback()
+
+            var feedback = new Feedback
             {
                 Content = feedbackDto.Content,
                 CreatedAt = DateTime.UtcNow,
@@ -196,16 +197,15 @@ namespace TCViettelFC_API.Repositories.Implementations
             try
             {
                 await _context.Feedbacks.AddAsync(feedback);
-                await _context.SaveChangesAsync();
-                return 1;
+                var saveResult = await _context.SaveChangesAsync();
+                return saveResult > 0 ? 1 : 0; // Check the result of SaveChangesAsync
             }
             catch
             {
                 return 0;
             }
-
-
         }
+
         private string GenerateConfirmationCode()
         {
             Random random = new Random();

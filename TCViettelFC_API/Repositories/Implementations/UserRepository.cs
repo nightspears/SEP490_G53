@@ -174,7 +174,9 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task<int> AdminChangePasswordAsync(ChangePassRequest ch)
         {
             if (ch == null) return 0;
+            if (_contextAccessor.HttpContext == null) return 0;
             var userId = _contextAccessor.HttpContext!.User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+            if (userId == null) return 0;
             var user = await _context.Users.FindAsync(int.Parse(userId));
             if (user == null) return 0;
             if (!VerifyPassword(ch.OldPass, user.Password)) return -1;

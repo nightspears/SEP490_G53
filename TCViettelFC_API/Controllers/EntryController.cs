@@ -19,6 +19,10 @@ namespace TCViettelFC_API.Controllers
         {
             var ticket = await _ticketUtilRepository.GetOrderedTicketByIdAsync(ticketId);
             if (ticket == null) return NotFound("Ticket not found");
+            if (ticket.Price == null || ticket.Price < 0)
+            {
+                return BadRequest("Ticket not valid");
+            }
             var result = await _ticketUtilRepository.VerifyTicketAsync(ticket);
             if (result == 1) return Ok("Ticket verified successfully");
             return BadRequest("Ticket not valid");
