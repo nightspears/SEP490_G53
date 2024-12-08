@@ -8,7 +8,7 @@ using TCViettelFC_API.Repositories.Interfaces;
 namespace TCViettelFCTest.UnitTest
 {
     [TestFixture]
-    public class thongnd_VerifyConfirmationCodeTest
+    public class VerifyConfirmationCodeTest_ThongND
     {
         private Mock<Sep490G53Context> _dbContextMock;
         private Mock<IHttpContextAccessor> _contextAccessorMock;

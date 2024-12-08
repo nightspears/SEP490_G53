@@ -7,7 +7,7 @@ using TCViettelFC_API.Repositories.Interfaces;
 namespace TCViettelFCTest.UnitTest
 {
     [TestFixture]
-    public class thongnd_VerifyTicketAsyncTest
+    public class VerifyTicketAsyncTest_ThongND
     {
         private Mock<ITicketUtilRepository> _ticketUtilRepositoryMock;
         private EntryController _controller;

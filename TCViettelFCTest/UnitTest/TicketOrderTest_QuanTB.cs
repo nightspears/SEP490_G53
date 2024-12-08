@@ -8,7 +8,7 @@ namespace TCViettelFCTest.UnitTest
 {
 
     [TestFixture]
-    public class quantb_TicketOrderTest
+    public class TicketOrderTest_QuanTB
     {
         private DbContextOptions<Sep490G53Context> _options;
         private Sep490G53Context _context;

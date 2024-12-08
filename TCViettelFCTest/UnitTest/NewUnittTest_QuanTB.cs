@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 namespace TCViettelFCTest.UnitTest
 {
     [TestFixture]
-    public class QuanTb_NewUnittTest
+    public class NewUnittTest_QuanTB
     {
         private DbContextOptions<Sep490G53Context> _options;
         private Sep490G53Context _context;

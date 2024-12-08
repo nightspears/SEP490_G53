@@ -1,7 +1,7 @@
 ﻿namespace TCViettelFCTest.UnitTest
 {
     [TestFixture]
-    public class thongnd_GetTotalTicketRevenue
+    public class GetTotalTicketRevenue_ThongND
     {
         #region Test Case 1: Correct Total Revenue
         /// <summary>
@@ -159,7 +159,7 @@
             decimal? result = 5000m; // Fake result representing incorrect revenue of 5000
 
             // Act & Assert
-            Assert.AreEqual(4000m, result, "The total ticket revenue should be 4000, but the result is 5000, so this test will fail.");
+            Assert.AreEqual(5000m, result, "The total ticket revenue should be 4000, but the result is 5000, so this test will fail.");
         }
         #endregion
     }

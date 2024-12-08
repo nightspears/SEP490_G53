@@ -6,7 +6,7 @@ using TCViettelFC_API.Repositories.Implementations;
 namespace TCViettelFCTest.UnitTest
 {
     [TestFixture]
-    public class thongnd_GetAreadByIdTest
+    public class GetAreadByIdTest_ThongND
     {
         private AreaRepository _repository;
         private Mock<DbSet<Area>> _mockSet;

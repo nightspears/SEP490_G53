@@ -49,7 +49,7 @@ namespace TCViettelFCTest.UnitTest
     }
 
     [TestFixture]
-    public class thongnd_OrderRepositoryTest
+    public class OrderRepositoryTest_ThongND
     {
         private Mock<Sep490G53Context> _contextMock;
         private IOrderRepository _repository;

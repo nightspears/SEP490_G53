@@ -1,7 +1,7 @@
 ﻿namespace TCViettelFCTest.UnitTest
 {
     [TestFixture]
-    public class thongnd_GetTotalCustomer
+    public class GetTotalCustomer_ThongND
     {
         [Test]
         public void GetTotalCustomer_ShouldReturnSumOfCustomerAccountsAndCustomers()

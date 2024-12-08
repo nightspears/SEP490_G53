@@ -10,7 +10,7 @@ using TCViettelFC_API.Repositories.Interfaces;
 namespace TCViettelFCTest.UnitTest
 {
     [TestFixture]
-    public class thongnd_PostFeedbackTest
+    public class PostFeedbackTest_ThongND
     {
         private Mock<IHttpContextAccessor> _contextAccessorMock;
         private Mock<Sep490G53Context> _dbContextMock;

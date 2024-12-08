@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TCViettelFCTest.UnitTest
 {
-    internal class CheckOutUnitTest
+    internal class CheckOutTicketUnitTest_AnSTH
     {
 
     }

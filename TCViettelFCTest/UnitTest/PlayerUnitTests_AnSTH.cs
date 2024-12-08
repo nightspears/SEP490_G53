@@ -17,7 +17,7 @@ using CloudinaryDotNet.Actions;
 namespace TCViettelFCTest.UnitTest
 {
     [TestFixture]
-    public class PlayerUnitTests
+    public class PlayerUnitTests_AnSTH
     {
         private DbContextOptions<Sep490G53Context> _dbContextOptions;
         private Mock<ICloudinarySetting> _mockCloudinary;

@@ -17,7 +17,7 @@ using TCViettelFC_API.Repositories.Interfaces;
 namespace TCViettelFCTest.UnitTest
 {
     [TestFixture]
-    public class quantb_UpdateNewAsyncUnitTest
+    public class UpdateNewAsyncUnitTest_QuanTB
     {
 
 
