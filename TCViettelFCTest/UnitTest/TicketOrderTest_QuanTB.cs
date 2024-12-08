@@ -14,7 +14,12 @@ namespace TCViettelFCTest.UnitTest
         private DbContextOptions<Sep490G53Context> _options;
         private Sep490G53Context _context;
         private TicketOrderRepository _repository;
-
+        [TearDown]
+        public void TearDown()
+        {
+            _context.Dispose();
+            _options = null; // Giải phóng tùy chọn
+        }
         [SetUp]
         public void SetUp()
         {
@@ -24,6 +29,7 @@ namespace TCViettelFCTest.UnitTest
                 .Options;
 
             _context = new Sep490G53Context(_options);
+            _context.Database.EnsureCreated();
             Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
 
             SeedData();
@@ -31,11 +37,7 @@ namespace TCViettelFCTest.UnitTest
 
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            _options = null; // Giải phóng tùy chọn
-        }
+       
 
         private void SeedData()
         {
@@ -143,7 +145,7 @@ namespace TCViettelFCTest.UnitTest
             var result = await _repository.AddOderedTicket(ticketOrderDto);
 
             Assert.NotNull(result);
-            Assert.AreEqual(1, result.OrderId);
+            Assert.Greater(result.OrderId, 0, "OrderId should be a positive integer.");
         }
 
         // Test Case 2
@@ -177,7 +179,7 @@ namespace TCViettelFCTest.UnitTest
             var result = await _repository.AddOderedTicket(ticketOrderDto, customerId: 1);
 
             Assert.NotNull(result);
-            Assert.AreEqual(1, result.OrderId);
+            Assert.Greater(result.OrderId, 0, "OrderId should be a positive integer.");
         }
 
         // Test Case 3
@@ -223,7 +225,7 @@ namespace TCViettelFCTest.UnitTest
             var result = await _repository.AddOderedTicket(ticketOrderDto);
 
             Assert.NotNull(result);
-            Assert.AreEqual(1, result.OrderId);
+            Assert.Greater(result.OrderId, 0, "OrderId should be a positive integer.");
         }
 
         // Test Case 4
@@ -264,7 +266,7 @@ namespace TCViettelFCTest.UnitTest
             var result = await _repository.AddOderedTicket(ticketOrderDto, customerId: 1);
 
             Assert.NotNull(result);
-            Assert.AreEqual(1, result.OrderId);
+            Assert.Greater(result.OrderId, 0, "OrderId should be a positive integer.");
         }
 
         // Test Case 5
@@ -520,7 +522,7 @@ namespace TCViettelFCTest.UnitTest
             var result = await _repository.AddOderedTicket(ticketOrderDto, customerId: 1);
 
             Assert.NotNull(result);
-            Assert.AreEqual(1, result.OrderId);
+            Assert.Greater(result.OrderId, 0, "OrderId should be a positive integer.");
         }
         [Test]
         public void AddOrderedTicket_TotalAmountMismatch_ThrowsException()

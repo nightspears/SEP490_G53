@@ -71,18 +71,15 @@ public partial class Sep490G53Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Test")
+        var config = new ConfigurationBuilder()
+                   .AddJsonFile("appsettings.json")
+                   .Build();
+
+        if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseInMemoryDatabase("TestDatabase")
-                          .ConfigureWarnings(warnings => warnings.Ignore(InMemoryEventId.TransactionIgnoredWarning));
-        }
-        else
-        {
-            var config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
             optionsBuilder.UseSqlServer(config.GetConnectionString("value"));
         }
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
