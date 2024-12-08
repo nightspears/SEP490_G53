@@ -10,6 +10,7 @@ using TCViettelFC_API.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace TCViettelFCTest.UnitTest
 {
@@ -33,8 +34,11 @@ namespace TCViettelFCTest.UnitTest
 
 			// Initialize the CheckoutController with the actual DbContext
 			_checkoutController = new CheckoutController(_context, _mockTicketUtilRepository.Object);
-		}
-		[Test]
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
+        }
+       
+        [Test]
 		public async Task CreateOrder_ShouldReturnOk_WhenOrderIsCreatedSuccessfully()
 		{
 			// Arrange: Prepare test data

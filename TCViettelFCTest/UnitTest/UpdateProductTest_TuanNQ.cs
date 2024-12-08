@@ -29,11 +29,12 @@ namespace TCViettelFCTest.UnitTest
         [SetUp]
         public void Setup()
         {
-         //   _dbContextOptions = new DbContextOptionsBuilder<Sep490G53Context>()
-         //.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
-         //.Options;
+            //   _dbContextOptions = new DbContextOptionsBuilder<Sep490G53Context>()
+            //.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            //.Options;
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
 
-        
+
         }
         [TearDown]
         public void TearDown()
@@ -62,6 +63,7 @@ namespace TCViettelFCTest.UnitTest
         public async Task UpdateProductAsync_ShouldUpdateProduct()
         {
             // Set up in-memory database for testing
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                 .UseInMemoryDatabase("TestDatabase")
                 .Options;
@@ -133,6 +135,7 @@ namespace TCViettelFCTest.UnitTest
         [Test]
         public async Task UpdateProductAsync_ShouldThrowException_WhenProductNameIsNull()
         {
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
             // Arrange: Tạo một ProductDto với ProductName là null
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
@@ -203,6 +206,7 @@ namespace TCViettelFCTest.UnitTest
         [Test]
         public async Task UpdateProductAsync_ShouldThrowException_WhenProductNameover255Character()
         {
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
             // Arrange: Tạo một ProductDto với ProductName là null
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
@@ -426,8 +430,11 @@ namespace TCViettelFCTest.UnitTest
 
         [Test]
         public async Task UpdateProductAsync_ShouldThrowException_WhenCategoryIDIsNull()
+
         {
             // Set up in-memory database for testing
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
                .Options;
@@ -496,6 +503,8 @@ namespace TCViettelFCTest.UnitTest
         public async Task UpdateProductAsync_ShouldThrowException_WhenPriceIsNull()
         {
             // Set up in-memory database for testing
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
                .Options;
@@ -564,6 +573,8 @@ namespace TCViettelFCTest.UnitTest
         {
             // Arrange: Tạo một ProductDto với ProductName là null
             // Set up in-memory database for testing
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
                .Options;
@@ -633,6 +644,8 @@ namespace TCViettelFCTest.UnitTest
         public async Task UpdateProductAsync_ShouldUpdate_WhenStatusIsNull()
         {
             // Set up in-memory database for testing
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
                .Options;
@@ -699,6 +712,8 @@ namespace TCViettelFCTest.UnitTest
         public async Task UpdateProductAsync_ShouldUpdate_WhenAvatarIsNull()
         {
             // Set up in-memory database for testing
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
                .Options;

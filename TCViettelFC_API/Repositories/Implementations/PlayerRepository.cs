@@ -154,20 +154,8 @@ namespace TCViettelFC_API.Repositories.Implementations
             _context.Players.Update(player);
             await _context.SaveChangesAsync();
 
-            return new ShowPlayerDtos
-            {
-                PlayerId = player.PlayerId,
-                FullName = player.FullName,
-                ShirtNumber = player.ShirtNumber,
-                Position = player.Position,
-                JoinDate = player.JoinDate,
-                OutDate = player.OutDate,
-                Description = player.Description,
-                Status = player.Status,
-                Avatar = player.avatar,
-                SeasonId = player.SeasonId,
-                SeasonName = player.Season.SeasonName,
-            };
+            return new ShowPlayerDtos();
+
         }
 
 

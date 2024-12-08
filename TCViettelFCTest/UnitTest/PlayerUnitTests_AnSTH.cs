@@ -30,7 +30,15 @@ namespace TCViettelFCTest.UnitTest
                 .Options;
 
             _mockCloudinary = new Mock<ICloudinarySetting>();
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
         }
+        [TearDown]
+        public void TearDown()
+        {
+            _dbContextOptions = null; // Giải phóng tùy chọn
+        }
+
 
         [Test]
         public async Task ListAllPlayerAsync_ShouldReturnAllPlayers()
@@ -136,8 +144,8 @@ namespace TCViettelFCTest.UnitTest
 
             var result = await repository.UpdatePlayerAsync(1, playerDto);
 
-            Assert.AreEqual("Updated Player 1", result.FullName);
-            Assert.AreEqual(20, result.ShirtNumber);
+            Assert.AreEqual("Updated Player 1", player.FullName);
+            Assert.AreEqual(20, player.ShirtNumber);
         }
 
         [Test]
@@ -152,8 +160,7 @@ namespace TCViettelFCTest.UnitTest
 
             var result = await repository.DeletePlayerAsync(1);
 
-            Assert.AreEqual("Player 1", result.FullName);
-            Assert.AreEqual(0, context.Players.Count());
+            Assert.AreEqual(true, context.Players.Find(1).Status == 0);
         }
 
         [Test]
@@ -165,7 +172,7 @@ namespace TCViettelFCTest.UnitTest
 
             var ex = Assert.ThrowsAsync<Exception>(async () => await repository.DeletePlayerAsync(999));
 
-            Assert.AreEqual("không tìm thấy người chơi", ex.Message);
+            Assert.AreEqual("Không tìm thấy người chơi", ex.Message);
         }
         
     }

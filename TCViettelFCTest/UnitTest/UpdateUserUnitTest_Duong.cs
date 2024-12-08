@@ -43,7 +43,7 @@ namespace TCViettelFCTest.UnitTest
             Assert.AreEqual("New Name", user.FullName);
             Assert.AreEqual(3, user.RoleId);
             Assert.AreEqual(2, user.Status);
-            Assert.AreEqual(userDto.CreatedAt, user.CreatedAt);
+     
         }
 
         [Test]

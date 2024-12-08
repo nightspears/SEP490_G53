@@ -32,6 +32,7 @@ namespace TCViettelFCTest.UnitTest
             _dbContextOptions = new DbContextOptionsBuilder<Sep490G53Context>()
          .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
          .Options;
+         Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
 
 
         }

@@ -39,6 +39,8 @@ namespace TCViettelFCTest.UnitTest
             var configurationMock = new Mock<IConfiguration>();
 
             _newRepository = new NewRepository(_context, configurationMock.Object, _httpContextAccessorMock.Object, _cloudinaryMock.Object);
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
         }
 
 

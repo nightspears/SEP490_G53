@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Moq;
 using System;
@@ -42,6 +43,13 @@ namespace TCViettelFCTest.UnitTest
             var configurationMock = new Mock<IConfiguration>();
 
             _newRepository = new NewRepository(_context, configurationMock.Object, _httpContextAccessorMock.Object, _cloudinaryMock.Object);
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
+        }
+        [TearDown]
+        public void TearDown()
+        {
+            _options = null; // Giải phóng tùy chọn
         }
         [Test]
         public async Task UpdateNewAsync_ShouldReturnTrue_WhenAllFieldsAreValid()
@@ -49,7 +57,19 @@ namespace TCViettelFCTest.UnitTest
             // Arrange
             var formFileMock = new Mock<IFormFile>();
             formFileMock.Setup(f => f.FileName).Returns("valid_image.jpg");
-            formFileMock.Setup(f => f.OpenReadStream()).Returns(new System.IO.MemoryStream()); 
+            formFileMock.Setup(f => f.OpenReadStream()).Returns(new System.IO.MemoryStream());
+            var AddDto = new CreateNewDto
+            {
+                CreatorId = 1,
+                NewsCategoryId = 1,
+                Title = "Thể Công-Viettel ",
+                Content = "Chiều 26/7, CLB Thể Công – Viettel ...",
+                Image = formFileMock.Object,
+                Status = 1 
+                
+            };
+            var add = await _newRepository.CreateNewsAsync(AddDto);
+
 
             var updateDto = new UpdateNewDto
             {
@@ -133,8 +153,18 @@ namespace TCViettelFCTest.UnitTest
             
             var formFileMock = new Mock<IFormFile>();
             formFileMock.Setup(f => f.FileName).Returns("valid_image.jpg");
-            formFileMock.Setup(f => f.OpenReadStream()).Returns(new System.IO.MemoryStream()); 
+            formFileMock.Setup(f => f.OpenReadStream()).Returns(new System.IO.MemoryStream());
+            var AddDto = new CreateNewDto
+            {
+                CreatorId = 1,
+                NewsCategoryId = 1,
+                Title = "Thể Công-Viettel ",
+                Content = "Chiều 26/7, CLB Thể Công – Viettel ...",
+                Image = formFileMock.Object,
+                Status = 1
 
+            };
+            var add = await _newRepository.CreateNewsAsync(AddDto);
             var updateDto = new UpdateNewDto
             {
                 CreatorId = 1,
@@ -162,7 +192,17 @@ namespace TCViettelFCTest.UnitTest
             var formFileMock = new Mock<IFormFile>();
             formFileMock.Setup(f => f.FileName).Returns("valid_image.jpg");
             formFileMock.Setup(f => f.OpenReadStream()).Returns(new System.IO.MemoryStream());
+            var AddDto = new CreateNewDto
+            {
+                CreatorId = 1,
+                NewsCategoryId = 1,
+                Title = "Thể Công-Viettel ",
+                Content = "Chiều 26/7, CLB Thể Công – Viettel ...",
+                Image = formFileMock.Object,
+                Status = 1
 
+            };
+            var add = await _newRepository.CreateNewsAsync(AddDto);
             var updateDto = new UpdateNewDto
             {
                 CreatorId = 1,
@@ -186,7 +226,20 @@ namespace TCViettelFCTest.UnitTest
         [Test]
         public async Task UpdateNewAsync_ShouldReturnTrue_WhenImageIsNull()
         {
-            
+            var formFileMock = new Mock<IFormFile>();
+            formFileMock.Setup(f => f.FileName).Returns("valid_image.jpg");
+            formFileMock.Setup(f => f.OpenReadStream()).Returns(new System.IO.MemoryStream());
+            var AddDto = new CreateNewDto
+            {
+                CreatorId = 1,
+                NewsCategoryId = 1,
+                Title = "Thể Công-Viettel ",
+                Content = "Chiều 26/7, CLB Thể Công – Viettel ...",
+                Image = formFileMock.Object,
+                Status = 1
+
+            };
+            var add = await _newRepository.CreateNewsAsync(AddDto);
             var updateDto = new UpdateNewDto
             {
                 CreatorId = 1,

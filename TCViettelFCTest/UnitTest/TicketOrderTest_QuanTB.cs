@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using TCViettelFC_API.Dtos.OrderTicket;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Implementations;
@@ -23,15 +24,17 @@ namespace TCViettelFCTest.UnitTest
                 .Options;
 
             _context = new Sep490G53Context(_options);
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Test");
+
             SeedData();
             _repository = new TicketOrderRepository(_context, null, null);
+
         }
 
         [TearDown]
         public void TearDown()
         {
-            _context.Database.EnsureDeleted();
-            _context.Dispose();
+            _options = null; // Giải phóng tùy chọn
         }
 
         private void SeedData()
