@@ -183,39 +183,31 @@ namespace TCViettelFC_API.Repositories.Implementations
             {
                 try
                 {
+                    
                     var news = await _context.News.FirstOrDefaultAsync(n => n.Id == id);
                     if (news == null)
                     {
-                        return false; 
+                        return false;
                     }
 
+                    
                     news.CreatorId = newDto.CreatorId ?? news.CreatorId;
                     news.NewsCategoryId = newDto.NewsCategoryId ?? news.NewsCategoryId;
                     news.Title = newDto.Title ?? news.Title;
                     news.Content = newDto.Content ?? news.Content;
 
+                    
                     if (newDto.Image != null && newDto.Image.Length > 0)
                     {
                         try
                         {
-                            
+                            // Kiểm tra và upload ảnh, nếu có lỗi thì trả về false
                             var uploadResult = _cloudinary.CloudinaryUpload(newDto.Image);
-
-                            
-                            if (uploadResult?.SecureUrl != null)
-                            {
-                                news.Image = uploadResult.SecureUrl.ToString();
-                            }
-                            else
-                            {
-                               
-                                await dbContextTransaction.RollbackAsync();
-                                return false;
-                            }
+                            news.Image = uploadResult?.SecureUrl?.ToString() ?? news.Image;
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-                            
+                            // Nếu gặp lỗi trong quá trình upload, rollback và trả về false
                             await dbContextTransaction.RollbackAsync();
                             return false;
                         }
@@ -230,15 +222,13 @@ namespace TCViettelFC_API.Repositories.Implementations
 
                     return true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    // If any other error occurs, rollback and rethrow the exception
                     await dbContextTransaction.RollbackAsync();
-                    throw; // Rethrow the original exception
+                    throw;
                 }
             }
         }
-
 
 
 
