@@ -129,7 +129,7 @@
                                             <td>@index</td> <!-- Hiển thị giá trị của biến đếm -->
                                             <td>@news.CreatorId</td>
                                             <td>@news.NewsCategory</td>
-                                            <td>
+                                            <td style="word-wrap: break-word; max-width: 200px; white-space: normal;">
                                                 @if (!string.IsNullOrEmpty(news.Title) && news.Title.Length > 20)
                                                 {
                                                     @(@news.Title)
@@ -385,6 +385,20 @@
 <script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
 <script src="~/admin_assets/js/script.js"></script>
 @* <script src="~/ckeditor5-43.3.1/ckeditor5/ckeditor5.js"></script> *@
+
+<script src="~/assets/js/jquery-3.6.0.min.js"></script>
+
+<script src="~/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="~/assets/js/feather.min.js"></script>
+
+<script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<script src="~/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/assets/plugins/datatables/datatables.min.js"></script>
+
+<script src="~/assets/js/script.js"></script>
+
 
 <script>
 
