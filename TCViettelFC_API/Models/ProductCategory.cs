@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TCViettelFC_API.Models;
 
@@ -10,6 +9,8 @@ public partial class ProductCategory
     public string? CategoryName { get; set; }
 
     public DateTime? CreatedAt { get; set; }
+    [NotMapped]
+    public string CreatedAtFormatted => CreatedAt?.ToString("dd/MM/yyyy");
 
     public int? Status { get; set; }
 
