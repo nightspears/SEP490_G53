@@ -25,6 +25,8 @@ public partial class Product
 
     public string? Material { get; set; }
 
+    public int? Weight { get; set; }
+
     public string? Description { get; set; }
 
     public DateTime? CreatedAt { get; set; }

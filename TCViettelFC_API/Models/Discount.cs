@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TCViettelFC_API.Models;
 
@@ -13,10 +14,6 @@ public partial class Discount
     public DateTime? ValidFrom { get; set; }
 
     public DateTime? ValidUntil { get; set; }
-    [NotMapped]
-    public string FromFormatted => ValidFrom?.ToString("dd/MM/yyyy");
-    [NotMapped]
-    public string UntilFormatted => ValidUntil?.ToString("dd/MM/yyyy");
 
     public int? Status { get; set; }
 

@@ -173,6 +173,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                         if (matchAreaTicket != null && matchAreaTicket.AvailableSeats > 0)
                         {
                             matchAreaTicket.AvailableSeats -= 1;
+                            matchAreaTicket.Count -= 1;
 
                             
                         }

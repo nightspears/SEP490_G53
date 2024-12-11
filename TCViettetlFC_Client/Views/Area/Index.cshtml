@@ -1229,99 +1229,112 @@
 
 
 
-           function addToCart(){
+        async function addToCart() {
+    const matchId = document.getElementById('matchId').value;
+    const areaId = document.getElementById('areaId').value;
+    const stands = document.getElementById('stands').value;
+    const floor = document.getElementById('floor').value;
+    const section = document.getElementById('section').value;
+    const price = parseFloat(document.getElementById('price').value);
+    const status = document.getElementById('status').value;
+    const quantity = parseInt(document.getElementById('quantity').value);
 
-               const matchId = document.getElementById('matchId').value;
-                const areaId = document.getElementById('areaId').value;
-                const stands = document.getElementById('stands').value;
-                const floor = document.getElementById('floor').value;
-                const section = document.getElementById('section').value;
-                const price = parseFloat(document.getElementById('price').value);
-                const status = document.getElementById('status').value;
-                const quantity = parseInt(document.getElementById('quantity').value);
+    // Check for existing tickets in the cart for the same match and area
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingTickets = cartItems.filter(ticket => ticket.matchId === matchId);
+    const existingTicketsForArea = cartItems.filter(ticket => ticket.matchId === matchId && ticket.areaId === areaId);
 
-                 // Kiểm tra số lượng vé cho trận đấu hiện tại trong giỏ hàng
-                const cartItem = JSON.parse(localStorage.getItem('cart')) || [];
-                const existingTickets = cartItem.filter(ticket => ticket.matchId === matchId);
-                const existingTickets2 = cartItem.filter(ticket => ticket.matchId === matchId && ticket.areaId === areaId);
+    // Calculate total quantity already in the cart for this match and area
+    const totalCartQuantity = existingTicketsForArea.reduce((sum, ticket) => sum + ticket.quantity, 0);
 
+    // Check the available seats in the area for the selected match
+    const availableTicket = matchAreaTickets.find(ticket => ticket.AreaId === parseInt(areaId) && ticket.MatchId === parseInt(matchId));
+    const availableQuantity = availableTicket ? availableTicket.AvailableSeats : 0;
 
-                const totalCartQuantity = existingTickets2.reduce((sum, ticket) => sum + ticket.quantity, 0);
-                debugger
+    // Validate the ticket quantity
+    if (totalCartQuantity + quantity > availableQuantity) {
+        alert(`Bạn đã đặt quá số lượng vé hiện có của khu này, hiện có ${availableQuantity} vé, bạn đã đặt ${totalCartQuantity}, số lượng vé còn lại ${availableQuantity - totalCartQuantity}.`);
+        return;
+    }
+    if (existingTickets.length >= 4) {
+        alert('Bạn chỉ có thể thêm tối đa 4 vé cho mỗi trận đấu.');
+        return;
+    }
 
-                const availableTicket = matchAreaTickets.find(ticket => ticket.AreaId === parseInt(areaId) && ticket.MatchId === parseInt(matchId));
-                const availableQuantity = availableTicket ? availableTicket.AvailableSeats : 0;
+    // Call the API to increase the count of available tickets
+    const response = await fetch(`https://localhost:5000/api/Area/increasecount/${matchId}/${areaId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
 
+    // If the response is not successful, show an alert and stop
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        alert(`Error: ${errorMessage}`); // Display error message from the API
+        return;
+    }
 
-                if (totalCartQuantity + quantity > availableQuantity) {
-                    alert(`Bạn đã đặt quá số lượng vé hiện có của khu này, hiện có ${availableQuantity} vé, bạn đã đặt ${totalCartQuantity}, số lượng vé còn lại ${availableQuantity - totalCartQuantity}.`);
-                    return;
-                }
-                if (existingTickets.length >= 4) {
-                    alert('Bạn chỉ có thể thêm tối đa 4 vé cho mỗi trận đấu.');
-                    return;
-                }
+    // Generate ticket expiration time (10 minutes from now)
+    const expirationTime = Date.now() + 1 * 60 * 1000;
 
-                const expirationTime = Date.now() + 10 * 60 * 1000; 
+    // Gather match details
+    const matchDetails = {
+        opponentName: document.getElementById('opponentName').textContent || 'Unknown Opponent',
+        logoUrl: document.querySelector('#opponentTeam img').src || 'default_logo.png',
+        matchDate: document.getElementById('matchDate').textContent || 'Unknown Date',
+        matchTime: document.getElementById('matchTime').textContent || 'Unknown Time',
+        stadiumName: document.getElementById('stadiumName').textContent || 'Unknown Stadium'
+    };
 
-                // Lấy thông tin matchDetails
-                const matchDetails = {
-                    opponentName: document.getElementById('opponentName').textContent || 'Unknown Opponent',
-                    logoUrl: document.querySelector('#opponentTeam img').src || 'default_logo.png',
-                    matchDate: document.getElementById('matchDate').textContent || 'Unknown Date',
-                    matchTime: document.getElementById('matchTime').textContent || 'Unknown Time',
-                    stadiumName: document.getElementById('stadiumName').textContent || 'Unknown Stadium'
-                };
+    // Gather supplementary items details
+    const supplementaryItems = [];
+    document.querySelectorAll('input[name="supplementary[]"]:checked').forEach(item => {
+        const itemId = parseInt(item.value);
+        const itemName = item.closest('.checkbox').querySelector('.text-container p').textContent.trim();
+        const itemImage = item.closest('.checkbox').querySelector('img').src;
+        const itemPrice = parseFloat(item.getAttribute('data-price'));
+        const itemQuantity = parseInt(document.querySelector(`input[name="quantity_${item.value}"]`).value);
 
-                // Lấy thông tin các đồ đính kèm
-                const supplementaryItems = [];
-                document.querySelectorAll('input[name="supplementary[]"]:checked').forEach(item => {
-                    const itemId = parseInt(item.value);
-                    const itemName = document.querySelector(`input[name="supplementary[]"][value="${item.value}"]`)
-                          .closest('.checkbox')
-                          .querySelector('.text-container p').textContent.trim(); 
-                    const itemImage = item.closest('.checkbox')
-                            .querySelector('img').src;
-                    const itemPrice = parseFloat(item.getAttribute('data-price'));
-                    const itemQuantity = parseInt(document.querySelector(`input[name="quantity_${item.value}"]`).value);
+        supplementaryItems.push({
+            itemId,
+            itemName,
+            itemImage,
+            itemPrice,
+            itemQuantity
+        });
+    });
 
-                    supplementaryItems.push({
-                        itemId,
-                        itemName,
-                        itemImage,
-                        itemPrice,
-                        itemQuantity
-                    });
-                });
+    // Create the ticket object
+    const ticket = {
+        matchId,
+        areaId,
+        stands,
+        floor,
+        section,
+        price,
+        status,
+        quantity,
+        expirationTime,
+        matchDetails,
+        supplementaryItems
+    };
 
-                // Tạo đối tượng vé với thời gian hết hạn, matchDetails và supplementaryItems
-                const ticket = {
-                    matchId,
-                    areaId,
-                    stands,
-                    floor,
-                    section,
-                    price,
-                    status,
-                    quantity,
-                    expirationTime,
-                    matchDetails, 
-                    supplementaryItems 
-                };
+    // Add the new ticket to the cart and update localStorage
+    cartItems.push(ticket);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
 
+    // Clear form data and show success popup
+    clearFormData();
+    document.getElementById('successPopup').style.display = 'flex';
+    setTimeout(() => document.getElementById('successPopup').style.display = 'none', 1500);
+    setTimeout(() => document.getElementById('formOverlay').style.display = 'none', 1500);
 
-                const cart = JSON.parse(localStorage.getItem('cart')) || [];
-                cart.push(ticket);
+    // Reload cart data (optional)
+    loadCart();
+}
 
-
-                localStorage.setItem('cart', JSON.stringify(cart));
-                clearFormData();
-                document.getElementById('successPopup').style.display = 'flex';
-                setTimeout(() => document.getElementById('successPopup').style.display = 'none', 1500);
-                setTimeout(() => document.getElementById('formOverlay').style.display = 'none', 1500);
-
-                loadCart();
-           }
             // Hàm hiển thị giỏ hàng
            let countdownInterval;
 
@@ -1454,28 +1467,82 @@
                 loadCart();
             });
 
-            // Hàm xóa một mục khỏi giỏ hàng
-            function removeTicketFromCart(index) {
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                cart.splice(index, 1); // Xóa mục tại vị trí index
-                localStorage.setItem('cart', JSON.stringify(cart));
-                loadCart(); // Cập nhật lại giỏ hàng hiển thị
-            }
+    let apiCallInProgress = false;
 
-            
+    async function removeTicketFromCart(index) {
+        if (apiCallInProgress) return; // Prevent overlapping calls
+        apiCallInProgress = true;
 
-                // Hàm để xóa giỏ hàng
-                function clearCart() {
-                    localStorage.removeItem('cart');
-                    localStorage.removeItem('countdownTimeLeft'); // Xóa thời gian đếm ngược khi giỏ hàng bị xóa
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const removedItem = cart[index];
+
+        if (removedItem) {
+            try {
+                const response = await fetch(`https://localhost:5000/api/Area/decreasecount/${removedItem.matchId}/${removedItem.areaId}/${removedItem.quantity}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    cart.splice(index, 1);
+                    localStorage.setItem('cart', JSON.stringify(cart));
                     loadCart();
-                    const continueButton = document.getElementById('continueButton');
-                    const countdownContainer = document.getElementById('countdownContainer');
-
-                    // Ẩn nút "Tiếp tục" và đồng hồ khi giỏ hàng bị xóa
-                    continueButton.style.display = 'none';
-                    countdownContainer.style.display = 'none';
+                } else {
+                    const errorData = await response.json();
+                    alert(`Lỗi khi cập nhật số lượng vé: ${errorData.message || 'Không xác định'}`);
                 }
+            } catch (error) {
+                console.error("Có lỗi xảy ra khi gọi API:", error);
+                alert("Không thể kết nối đến máy chủ. Vui lòng thử lại sau.");
+            } finally {
+                apiCallInProgress = false; // Reset the flag
+            }
+        } else {
+            apiCallInProgress = false; // Reset the flag if no item is found
+        }
+    }
+
+
+
+
+    async function clearCart() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Thực hiện gọi API để cập nhật số lượng vé trong cơ sở dữ liệu
+        for (const item of cart) {
+            try {
+                const response = await fetch(`https://localhost:5000/api/Area/decreasecount/${item.matchId}/${item.areaId}/${item.quantity}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error(`Lỗi khi giảm số lượng vé: ${errorData.message || 'Không xác định'}`);
+                }
+            } catch (error) {
+                console.error(`Có lỗi xảy ra khi gọi API cho matchId: ${item.matchId}, areaId: ${item.areaId}`, error);
+            }
+        }
+
+        // Xóa giỏ hàng khỏi localStorage
+        localStorage.removeItem('cart');
+        localStorage.removeItem('countdownTimeLeft'); // Xóa thời gian đếm ngược khi giỏ hàng bị xóa
+        loadCart();
+
+        // Ẩn nút "Tiếp tục" và đồng hồ khi giỏ hàng bị xóa
+        const continueButton = document.getElementById('continueButton');
+        const countdownContainer = document.getElementById('countdownContainer');
+
+        if (continueButton) continueButton.style.display = 'none';
+        if (countdownContainer) countdownContainer.style.display = 'none';
+
+      
+    }
 
                 function redirectToCheckout() {
                     window.location.href = '/CheckoutTicket/Checkout';

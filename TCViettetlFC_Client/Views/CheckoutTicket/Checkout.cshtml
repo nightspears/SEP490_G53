@@ -532,13 +532,43 @@
 
 
 
-    function removeTicket(index) {
+    let debounceTimeout;
+
+    async function removeTicket(index) {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.splice(index, 1);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        displayCart();
-        updateTotal();
-        startGlobalCountdown();
+        const removedItem = cart[index];
+
+        if (removedItem) {
+            // Clear the previous timeout if a new removal happens before the previous one finishes
+            clearTimeout(debounceTimeout);
+
+            debounceTimeout = setTimeout(async () => {
+                // Call the API to decrease the ticket count
+                try {
+                    const response = await fetch(`https://localhost:5000/api/Area/decreasecount/${removedItem.matchId}/${removedItem.areaId}/${removedItem.quantity}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // If the API call is successful, proceed to remove the ticket from the cart
+                        cart.splice(index, 1);
+                        localStorage.setItem('cart', JSON.stringify(cart));
+                        displayCart(); // Update the cart display
+                        updateTotal();  // Update the total price
+                        startGlobalCountdown(); // Restart the global countdown
+                    } else {
+                        const errorData = await response.json();
+                        alert(`Lỗi khi cập nhật số lượng vé: ${errorData.message || 'Không xác định'}`);
+                    }
+                } catch (error) {
+                    console.error("Có lỗi xảy ra khi gọi API:", error);
+                    alert("Không thể kết nối đến máy chủ. Vui lòng thử lại sau.");
+                }
+            }, 300); // Delay for 300 milliseconds before making the API call
+        }
     }
 
 </script>

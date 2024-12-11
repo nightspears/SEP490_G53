@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TCViettelFC_API.Models;
 
@@ -11,10 +12,7 @@ public partial class Season
     public DateTime? StartYear { get; set; }
 
     public DateTime? EndYear { get; set; }
-    [NotMapped]
-    public string StartFormatted => StartYear?.ToString("dd/MM/yyyy");
-    [NotMapped]
-    public string EndFormatted => EndYear?.ToString("dd/MM/yyyy");
+
     public int? Status { get; set; }
 
     public virtual ICollection<Player> Players { get; set; } = new List<Player>();

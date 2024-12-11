@@ -21,6 +21,8 @@ public partial class OrderProduct
 
     public string? Note { get; set; }
 
+    public int? Weight { get; set; }
+
     public int? StaffId { get; set; }
 
     public int? Status { get; set; }

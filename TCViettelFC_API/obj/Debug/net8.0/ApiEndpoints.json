@@ -240,6 +240,32 @@
   },
   {
     "ContainingType": "TCViettelFC_API.Controllers.AreaController",
+    "Method": "DecreaseCount",
+    "RelativePath": "api/Area/decreasecount/{matchId}/{areaId}/{decreaseAmount}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "matchId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "areaId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "decreaseAmount",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.AreaController",
     "Method": "GetAreaById",
     "RelativePath": "api/Area/getareabyid/{id}",
     "HttpMethod": "GET",
@@ -264,6 +290,27 @@
     "Parameters": [
       {
         "Name": "matchId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.AreaController",
+    "Method": "IncreaseCount",
+    "RelativePath": "api/Area/increasecount/{matchId}/{areaId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "matchId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "areaId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -2912,6 +2959,53 @@
         "Name": "ticketOrderDto",
         "Type": "TCViettelFC_API.Dtos.OrderTicket.TicketOrderDto",
         "IsRequired": true
+      },
+      {
+        "Name": "customerId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.TicketOrderController",
+    "Method": "CheckTicketLimit",
+    "RelativePath": "api/TicketOrder/check-ticket-limit",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "matchId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "customerId",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TCViettelFC_API.Controllers.TicketOrderController",
+    "Method": "CheckCustomerNoAccountBuyTicket",
+    "RelativePath": "api/TicketOrder/check-ticket-limit-customernoacc",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "matchId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
       },
       {
         "Name": "customerId",

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace TCViettelFC_API.Models;
 
@@ -70,17 +72,14 @@ public partial class Sep490G53Context : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var config = new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json")
-                    .Build();
+          .AddJsonFile("appsettings.json")
+          .Build();
 
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseSqlServer(config.GetConnectionString("value"));
         }
-
     }
-
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Address>(entity =>
@@ -256,6 +255,7 @@ public partial class Sep490G53Context : DbContext
             entity.Property(e => e.MatchId).HasColumnName("match_id");
             entity.Property(e => e.AreaId).HasColumnName("area_id");
             entity.Property(e => e.AvailableSeats).HasColumnName("available_seats");
+            entity.Property(e => e.Count).HasColumnName("count");
 
             entity.HasOne(d => d.Area).WithMany(p => p.MatchAreaTickets)
                 .HasForeignKey(d => d.AreaId)
@@ -344,6 +344,7 @@ public partial class Sep490G53Context : DbContext
             entity.Property(e => e.TotalPrice)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("total_price");
+            entity.Property(e => e.Weight).HasColumnName("weight");
 
             entity.HasOne(d => d.Address).WithMany(p => p.OrderProducts)
                 .HasForeignKey(d => d.AddressId)
@@ -571,6 +572,7 @@ public partial class Sep490G53Context : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("size");
             entity.Property(e => e.Status).HasColumnName("status");
+            entity.Property(e => e.Weight).HasColumnName("weight");
 
             entity.HasOne(d => d.Category).WithMany(p => p.Products)
                 .HasForeignKey(d => d.CategoryId)
