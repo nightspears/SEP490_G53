@@ -1,0 +1,56 @@
+﻿/* Default layout */
+.form-group .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-group .col-md-4, .form-group .col-md-6 {
+    padding: 0 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    /* Ensure columns still behave as col-md-4 and col-md-6 */
+    .form-group .col-md-4 {
+        flex: 0 0 33.33%; /* Keep 3 columns side by side, even on small screens */
+    }
+
+    .form-group .col-md-6 {
+        flex: 0 0 50%; /* Two columns side by side */
+    }
+
+    /* Reduce font size for smaller screens */
+    .form-control {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    /* Adjust label size */
+    label {
+        font-size: 14px;
+    }
+
+    /* Adjust buttons */
+    button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+
+/* Optional: Further reductions for very small screens */
+@media (max-width: 480px) {
+    /* Even smaller font sizes */
+    .form-control {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    label {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
