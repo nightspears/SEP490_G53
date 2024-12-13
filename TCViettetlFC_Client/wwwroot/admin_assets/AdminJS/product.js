@@ -6,7 +6,8 @@ $(document).ready(function () {
             "paging": true,
             "pageLength": 10,
             "ordering": true,
-            "info": true
+            "info": true,
+            "search":true ,
         });
     }
     fillDataModal();

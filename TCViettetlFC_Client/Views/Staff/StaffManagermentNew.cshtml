@@ -385,7 +385,21 @@
 <script src="~/admin_assets/plugins/datatables/datatables.min.js"></script>
 <script src="~/admin_assets/js/script.js"></script>
 @* <script src="~/ckeditor5-43.3.1/ckeditor5/ckeditor5.js"></script> *@
+<script>
+    $(document).ready(function () {
 
+        if (!$.fn.DataTable.isDataTable('.datatable')) {
+            $('.datatable').DataTable({
+                "paging": true,
+                "pageLength": 10,
+                "ordering": true,
+                "info": true,
+                "search": true,
+            });
+
+        };
+     });
+    </script>
 <script>
 
     class MyUploadAdapter {
