@@ -104,7 +104,8 @@ $(document).on("click", ".btnDeleteCart", function () {
     loadData();
     format();
     getLienQuan();
-
+    var cartItems = getCartFromLocalStorage();
+    $("#cartSl").text(cartItems.length)
 
 });
 
@@ -120,10 +121,11 @@ function removeProductByIdAndSize(id, size) {
         return;
     }
     products = products.filter(product => !(product.Item_id === id ));
-    saveCartToLocalStorage(products, 60 * 24 * 7)
+    saveCartToLocalStorage(products, 60 * 24 * 7);
+    debugger
+
 
 }
-
 
 function updateCart(itemID, quantity) {
 
