@@ -28,6 +28,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                                    join m in _context.Matches
                                    on mat.MatchId equals m.Id into matchGroup
                                    from m in matchGroup.DefaultIfEmpty() 
+                                   where m.Status == 1 && m.IsHome == true
                                    group new { mat, m } by new { mat.MatchId, m.MatchDate,m.OpponentName,m.StadiumName } into grouped
                                    select new MatchAreaDto
                                    {

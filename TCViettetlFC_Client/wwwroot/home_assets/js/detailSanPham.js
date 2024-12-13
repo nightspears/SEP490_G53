@@ -160,6 +160,11 @@ function AddToCart(id) {
             $("#successModal").fadeOut(800);
             //$("#successModal").hide();
         }, 1000);
+        debugger
+
+        cartItems = getCartFromLocalStorage();
+
+        $("#cartSl").text(cartItems.length)
        
     }
 }

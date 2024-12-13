@@ -143,9 +143,29 @@ namespace TCViettelFC_API.Repositories.Implementations
             matches.Status = matchDto.Status ?? matches.Status;
             matches.IsHome = matchDto.IsHome ?? matches.IsHome;
 
-
-            try
+            if (matchDto.IsHome == true)
             {
+                var lstArea = _context.Areas.ToList();
+                var matchAreaTickets = new List<MatchAreaTicket>();
+
+                if (_context.MatchAreaTickets.Where(x => x.MatchId == id).ToList().Count == 0)
+                {
+                    foreach (var area in lstArea)
+                    {
+                        matchAreaTickets.Add(new MatchAreaTicket
+                        {
+                            MatchId = matches.Id,
+                            AreaId = area.Id,
+                            AvailableSeats = 100
+                        });
+                    }
+
+                    await _context.MatchAreaTickets.AddRangeAsync(matchAreaTickets);
+                    await _context.SaveChangesAsync();
+                }
+            }
+                try
+                {
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
