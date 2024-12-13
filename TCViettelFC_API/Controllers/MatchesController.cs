@@ -39,6 +39,10 @@ namespace TCViettelFC_API.Controllers
             {
                 data = match,
             };
+            if(match == null)
+            {
+                return NotFound();
+            }
             return Ok(match);
 
         }

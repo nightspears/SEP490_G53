@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using CloudinaryDotNet;
 using static QRCoder.PayloadGenerator.SwissQrCode;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace TCViettelFCTest.UnitTest
 {
@@ -67,6 +68,7 @@ namespace TCViettelFCTest.UnitTest
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                 .UseInMemoryDatabase("TestDatabase")
+                .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                 .Options;
 
             using var context = new Sep490G53Context(options);
@@ -141,6 +143,7 @@ namespace TCViettelFCTest.UnitTest
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -212,6 +215,7 @@ namespace TCViettelFCTest.UnitTest
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -289,6 +293,7 @@ namespace TCViettelFCTest.UnitTest
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -364,6 +369,7 @@ namespace TCViettelFCTest.UnitTest
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -438,6 +444,7 @@ namespace TCViettelFCTest.UnitTest
 
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -508,6 +515,7 @@ namespace TCViettelFCTest.UnitTest
 
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -578,6 +586,7 @@ namespace TCViettelFCTest.UnitTest
 
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -649,6 +658,7 @@ namespace TCViettelFCTest.UnitTest
 
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -717,6 +727,7 @@ namespace TCViettelFCTest.UnitTest
 
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -786,6 +797,7 @@ namespace TCViettelFCTest.UnitTest
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -855,6 +867,7 @@ namespace TCViettelFCTest.UnitTest
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -923,6 +936,7 @@ namespace TCViettelFCTest.UnitTest
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -983,6 +997,7 @@ namespace TCViettelFCTest.UnitTest
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);
@@ -1050,6 +1065,7 @@ namespace TCViettelFCTest.UnitTest
             // Set up in-memory database for testing
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
                .UseInMemoryDatabase("TestDatabase")
+               .ConfigureWarnings(w => w.Ignore(InMemoryEventId.TransactionIgnoredWarning))
                .Options;
 
             using var context = new Sep490G53Context(options);

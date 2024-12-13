@@ -30,7 +30,7 @@ namespace TCViettelFCTest.UnitTest
             _context = new Sep490G53Context(_options);
 
             // Khởi tạo MatchRepository với context đã tạo
-            _matchService = new MatchRepository(_context, null, null);
+            _matchService = new MatchRepository(_context, null);
             // Xóa hết dữ liệu trong database trước mỗi test case
             _context.Matches.RemoveRange(_context.Matches);
             _context.SaveChanges();

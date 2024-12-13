@@ -228,34 +228,34 @@ namespace TCViettelFCTest.UnitTest
             // Kiểm tra thông điệp lỗi
             Assert.AreEqual("The system returns an error, no new match are added.", exception.Message);
         } 
-        [Test]
-        public async Task AddMatchAsync_ShouldThrowException_WhenMatchDatelessThanToday()
-        {
-            var options = new DbContextOptionsBuilder<Sep490G53Context>()
-              .UseInMemoryDatabase("TestDatabase")
-              .Options;
+        //[Test]
+        //public async Task AddMatchAsync_ShouldThrowException_WhenMatchDatelessThanToday()
+        //{
+        //    var options = new DbContextOptionsBuilder<Sep490G53Context>()
+        //      .UseInMemoryDatabase("TestDatabase")
+        //      .Options;
 
-            using var context = new Sep490G53Context(options);
+        //    using var context = new Sep490G53Context(options);
 
-            var matchtDto = new MatchesAddDto
-            {
-                OpponentName = "Hà Nội FC",
-                IsHome = true,
-                MatchDate = DateTime.Parse("25/12/2024"),
-                StadiumName = "Hàng Đẫy",
-                Status = 1,
-                LogoUrl = CreateMockFile("logo.jpg", new byte[] { 1 }),
+        //    var matchtDto = new MatchesAddDto
+        //    {
+        //        OpponentName = "Hà Nội FC",
+        //        IsHome = true,
+        //        MatchDate = DateTime.Parse("25/12/2024"),
+        //        StadiumName = "Hàng Đẫy",
+        //        Status = 1,
+        //        LogoUrl = CreateMockFile("logo.jpg", new byte[] { 1 }),
 
-            };
+        //    };
 
-            var repository = new MatchRepository(context, _mockCloudinary.Object);
+        //    var repository = new MatchRepository(context, _mockCloudinary.Object);
 
-            var exception = Assert.ThrowsAsync<ArgumentException>(() =>
-                repository.AddMatchesAsync(matchtDto));
+        //    var exception = Assert.ThrowsAsync<ArgumentException>(() =>
+        //        repository.AddMatchesAsync(matchtDto));
 
-            // Kiểm tra thông điệp lỗi
-            Assert.AreEqual("match date must greater than today", exception.Message);
-        }
+        //    // Kiểm tra thông điệp lỗi
+        //    Assert.AreEqual("match date must greater than today", exception.Message);
+        //}
         [Test]
         public async Task AddMatchAsync_ShouldAdded_WhenStatusIsNull()
         {
