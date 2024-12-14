@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text;
+using System.Text.Json;
 using TCViettetlFC_Client.Models;
 
 namespace TCViettetlFC_Client.Controllers
@@ -16,6 +16,28 @@ namespace TCViettetlFC_Client.Controllers
         }
         public async Task<IActionResult> Index(int matchId)
         {
+            List<int> Ids = new List<int>();
+            var result = await _httpClient.GetAsync("https://localhost:5000/api/Matches/GetMatchStartSell");
+            if (result.IsSuccessStatusCode)
+            {
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true // Enable case-insensitive deserialization
+                };
+                var matches =
+                    await System.Text
+                    .Json.JsonSerializer
+                    .DeserializeAsync<List<MatchViewModel>>(await result.Content.ReadAsStreamAsync(), options);
+                if (matches.Any())
+                {
+
+                    foreach (var match in matches)
+                    {
+                        Ids.Add(match.Id);
+                    }
+                }
+            }
+            if (!Ids.Contains(matchId)) return RedirectToAction("Index", "Match");
             string customerId = Request.Cookies["CustomerId"];
             string requestUri = "https://localhost:5000/api/SupplementaryItem";
             var response = await _httpClient.GetAsync(requestUri);

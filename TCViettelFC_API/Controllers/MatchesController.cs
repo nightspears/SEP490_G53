@@ -1,10 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using TCViettelFC_API.Dtos;
+﻿using Microsoft.AspNetCore.Mvc;
 using TCViettelFC_API.Dtos.Matches;
-using TCViettelFC_API.Models;
-using TCViettelFC_API.Repositories.Implementations;
 using TCViettelFC_API.Repositories.Interfaces;
 
 namespace TCViettelFC_API.Controllers
@@ -15,7 +10,7 @@ namespace TCViettelFC_API.Controllers
     {
         private readonly IMatchRepository _matchRepository;
 
-        public MatchesController(IMatchRepository matchRepository )
+        public MatchesController(IMatchRepository matchRepository)
         {
             _matchRepository = matchRepository;
 
@@ -39,7 +34,22 @@ namespace TCViettelFC_API.Controllers
             {
                 data = match,
             };
-            if(match == null)
+            if (match == null)
+            {
+                return NotFound();
+            }
+            return Ok(match);
+
+        }
+        [HttpGet("GetMatchStartSell")]
+        public async Task<ActionResult<IEnumerable<MatchDto>>> GetMatchStartSell()
+        {
+            var match = await _matchRepository.GetMatchesStartSellAsync();
+            var data = new
+            {
+                data = match,
+            };
+            if (match == null)
             {
                 return NotFound();
             }
@@ -50,7 +60,7 @@ namespace TCViettelFC_API.Controllers
         public async Task<ActionResult> GetMatchesById(int id)
         {
             var match = await _matchRepository.GetMatchesByIdAsync(id);
-            
+
             return Ok(match);
 
         }
@@ -66,7 +76,7 @@ namespace TCViettelFC_API.Controllers
         {
             try
             {
-              
+
                 await _matchRepository.UpdateMatchesAsync(id, matchDto);
                 return Ok("Cập nhật trận đấu thành công.");
             }
@@ -100,16 +110,16 @@ namespace TCViettelFC_API.Controllers
             var id = int.Parse(Request.Form["id"]);
             _matchRepository.UpdateStatus(status, id);
         }
-         [HttpPost("CheckExist")]
-        public  JsonResult CheckExist([FromBody] CheckMatch checkMatch)
+        [HttpPost("CheckExist")]
+        public JsonResult CheckExist([FromBody] CheckMatch checkMatch)
         {
-          
-            var data =  _matchRepository.CheckExist(checkMatch);
+
+            var data = _matchRepository.CheckExist(checkMatch);
             return data;
 
         }
 
 
-        
+
     }
 }

@@ -249,13 +249,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="fullName">Họ tên<span>*</span></label>
-                                <input id="fullName" type="text" name="fullName" class="form-control" placeholder="Nhập số điện thoại" required />
+                                <input id="fullName" type="text" name="fullName" class="form-control" placeholder="Nhập họ tên" required />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone">Số điện thoại<span>*</span></label>
-                                <input id="phone" type="tel" name="phone" class="form-control" placeholder="Nhập họ tên" required />
+                                <input id="phone" type="tel" name="phone" class="form-control" placeholder="Nhập số điện thoại" required />
                             </div>
                         </div>
                     </div>
@@ -421,7 +421,9 @@
                     <td>
                         <span class="font-weight-bold d-block">Viettel FC vs ${matchDetails.opponentName}</span>
                         <span class="d-block text-primary">${matchDetails.matchDate} - ${matchDetails.matchTime}</span>
-                        <span class="text-muted d-block">${stands} - Cửa ${floor} - Tầng ${section}</span>
+
+                            <span class="text-muted d-block">Khán đài ${stands} ${(stands === "C" || stands === "D") ? '' : `- Tầng ${floor}`
+                } - Cửa ${section}</span>
                     </td>
                     <td>${price.toLocaleString('vi-VN')} đ</td>
                     <td>${supplementaryItemsString}</td>
@@ -574,9 +576,52 @@
 </script>
 
 <script>
+    async function checkTicketLimits(checkedItems, email) {
+        // Extract unique matchIds from checkedItems
+        const matchIds = [...new Set(checkedItems.map(ticket => ticket.matchId))];
+        const ticketLimit = 4; // Define ticket limit
+
+        // Fetch ticket counts for each matchId concurrently
+        const results = await Promise.all(
+            matchIds.map(async (matchId) => {
+             
+                const apiUrl = `https://localhost:5000/api/TicketOrder/check-ticket-limit-customernoacc?matchId=${matchId}&email=${encodeURIComponent(email)}`;
+                const response = await fetch(apiUrl);
+                const result = await response.json();
+                const count = result.totalTickets;
+
+                // Count selected tickets for the current matchId
+                const selectedTicketsCount = checkedItems.filter(ticket => ticket.matchId === matchId).length;
+                const opponentName = checkedItems.find(ticket => ticket.matchId == matchId).matchDetails.opponentName;
+                // Calculate total tickets
+                const totalTickets = count + selectedTicketsCount;
+
+                // Check if the limit is exceeded
+                const isLimitReached = totalTickets > ticketLimit;
+
+                return { matchId, totalTickets, isLimitReached,opponentName };
+                
+                  
+    
+            })
+        );
+
+        // Check results for any limit breaches
+        const limitBreaches = results.filter(result => result.isLimitReached);
+
+        if (limitBreaches.length > 0) {
+            const opponentNames = limitBreaches.map(result => result.opponentName).join(', ');
+            alert(`Bạn đã đặt đủ 4 vé cho trận đấu Viettetl FC vs ${opponentNames}. Vui lòng kiểm tra lại.`);
+            
+            return true;
+        }
+
+        else{
+            return false;
+        }
+    }
     document.querySelector('.purchase-button').addEventListener('click', async () => {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        debugger;
         if (cart.length === 0) {
             alert('Bạn không có vé để thanh toán');
             return;
@@ -594,10 +639,11 @@
             const customerId = document.getElementById('customerId') ? document.getElementById('customerId').value : null;
             const isGuest = !customerId;
             if (isGuest) {
+                const notTrimmedFullName = document.getElementById('fullName').value;
                 const fullName = document.getElementById('fullName').value.trim();
                 const phone = document.getElementById('phone').value.trim();
                 const email = document.getElementById('email').value.trim();
-
+               
                 // Biểu thức chính quy để kiểm tra email hợp lệ
                 const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
                 // Biểu thức chính quy để kiểm tra số điện thoại (chỉ số, độ dài từ 8-15)
@@ -608,55 +654,37 @@
                     alert('Vui lòng nhập họ tên.');
                     return;
                 }
-
+                if(fullName!=notTrimmedFullName){
+                    alert('Tên không được chứa dấu cách ở đầu và cuối');
+                    return;
+                }
                 if (!phone) {
                     alert('Vui lòng nhập số điện thoại.');
                     return;
-                } else if (!phoneRegex.test(phone)) {
+                }
+                if (!phoneRegex.test(phone)) {
                     alert('Số điện thoại không đúng định dạng. Vui lòng chỉ nhập số (8-15 ký tự).');
                     return;
                 }
-
                 if (!email) {
                     alert('Vui lòng nhập email.');
                     return;
-                } else if (!emailRegex.test(email)) {
+                }
+                if (!emailRegex.test(email)) {
                     alert('Email không đúng định dạng. Vui lòng nhập email hợp lệ (ví dụ: example@gmail.com).');
                     return;
                 }
+                debugger;
+                const checkLimit= await checkTicketLimits(checkedItems, email);
+                if (checkLimit) return;
+
             }
+            
             
             const totalAmountText = document.querySelector('.total-amount').textContent;
             const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''), 10);
             
-            // // Lấy matchId từ các vé đã chọn
-            // const matchIds = checkedItems.map(ticket => ticket.matchId);
-
-            // // Kiểm tra xem email đã đặt đủ 4 vé cho trận đấu nào chưa
-            // const ticketCheckPromises = matchIds.map(async (matchId) => {
-            //     const apiUrl = `https://localhost:5000/api/TicketOrder/check-ticket-limit-customernoacc?matchId=${matchId}&email=${encodeURIComponent(email)}`;
-            //     const response = await fetch(apiUrl);
-            //     const result = await response.json();
-
-            //     // Giả sử API trả về số lượng vé đã đặt
-            //     const count = result.count;
-
-            //     // Kiểm tra nếu số vé đã đặt + số vé chọn mới vượt quá giới hạn (4 vé)
-            //     const selectedTicketsCount = checkedItems.filter(ticket => ticket.matchId === matchId).length;
-            //     const totalTickets = count + selectedTicketsCount;
-
-            //     return { matchId, totalTickets, isLimitReached: totalTickets > 4 }; // Giới hạn vé là 4
-            // });
-
-            // try {
-            //     const ticketCheckResults = await Promise.all(ticketCheckPromises);
-
-            //     // Kiểm tra nếu có trận đấu nào đã đạt giới hạn vé
-            //     const exceededLimit = ticketCheckResults.some(result => result.isLimitReached);
-            //     if (exceededLimit) {
-            //         alert('Bạn đã đặt đủ số vé cho một hoặc nhiều trận đấu. Vui lòng kiểm tra lại.');
-            //         return;
-            //     }
+            
 
             const requestData = {
                 addCustomerDto: {

@@ -15,6 +15,7 @@ namespace TCViettetlFC_Client.Controllers
 
         public async Task<IActionResult> Index()
         {
+
             List<MatchViewModel> matches = new List<MatchViewModel>(); // Default empty list
 
             try

@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using System.Text.RegularExpressions;
 using TCViettelFC_API.Dtos;
-using TCViettelFC_API.Dtos.CheckOut;
 using TCViettelFC_API.Dtos.OrderTicket;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -41,7 +39,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                     };
                     if (customerId == null)
                     {
-                       
+
                         if (ticketOrdersDto.AddCustomerDto == null ||
                             string.IsNullOrEmpty(ticketOrdersDto.AddCustomerDto.Email) ||
                             string.IsNullOrEmpty(ticketOrdersDto.AddCustomerDto.Phone) ||
@@ -74,9 +72,9 @@ namespace TCViettelFC_API.Repositories.Implementations
                         var cus = new Customer()
                         {
                             AccountId = customerId.Value,
-                            FullName= customer.FullName,
-                            Email= customer.Email
-                           
+                            FullName = customer.FullName,
+                            Email = customer.Email
+
                         };
                         ticketOrder.Customer = cus;
                     }
@@ -112,7 +110,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                             });
                         }
                     }
-                    
+
 
                     // Add ordered supplementary items if any
                     if (ticketOrdersDto.OrderedSuppItems != null)
@@ -133,7 +131,7 @@ namespace TCViettelFC_API.Repositories.Implementations
 
                     await _context.SaveChangesAsync();
 
-                    if(ticketOrdersDto.PaymentDto == null)
+                    if (ticketOrdersDto.PaymentDto == null)
                     {
                         throw new Exception("Payment là thông tin bắt buộc");
                     }
@@ -175,7 +173,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                             matchAreaTicket.AvailableSeats -= 1;
                             matchAreaTicket.Count -= 1;
 
-                            
+
                         }
                         else if (matchAreaTicket.AvailableSeats < 0)
                         {
@@ -222,17 +220,17 @@ namespace TCViettelFC_API.Repositories.Implementations
             return totalTickets;
         }
 
-        public async Task<int> CheckCustomerNoAccountBuyTicket(int matchId, string? email,int? customerId = null)
+        public async Task<int> CheckCustomerNoAccountBuyTicket(int matchId, string? email, int? customerId = null)
         {
             if (customerId.HasValue)
             {
                 return -1;
             }
-            var totalTicket = await(from t in _context.TicketOrders
-                                    join c in _context.Customers on t.CustomerId equals c.CustomerId
-                                    join ot in _context.OrderedTickets on t.Id equals ot.OrderId
-                                    where c.Email == email && ot.MatchId == matchId
-                                    select ot.Id) .CountAsync();
+            var totalTicket = await (from t in _context.TicketOrders
+                                     join c in _context.Customers on t.CustomerId equals c.CustomerId
+                                     join ot in _context.OrderedTickets on t.Id equals ot.OrderId
+                                     where c.Email == email && ot.MatchId == matchId
+                                     select ot.Id).CountAsync();
             return totalTicket;
         }
 

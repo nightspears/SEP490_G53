@@ -1,11 +1,6 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
+﻿using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using TCViettelFC_API.Dtos.Matches;
 using TCViettelFC_API.Models;
 using TCViettelFC_API.Repositories.Interfaces;
@@ -51,7 +46,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 await _context.Matches.AddAsync(Matches);
                 await _context.SaveChangesAsync();
 
-                if(Matches.IsHome == true)
+                if (Matches.IsHome == true)
                 {
                     var lstArea = _context.Areas.ToList();
                     var matchAreaTickets = new List<MatchAreaTicket>();
@@ -69,7 +64,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                     await _context.MatchAreaTickets.AddRangeAsync(matchAreaTickets);
                     await _context.SaveChangesAsync();
                 }
-               
+
             }
             catch (Exception ex)
             {
@@ -104,13 +99,43 @@ namespace TCViettelFC_API.Repositories.Implementations
         {
             List<Match> matches = new List<Match>();
             DateTime currentDate = DateTime.Now;
-            DateTime threeDaysLater = currentDate.AddDays(8); 
+            DateTime threeDaysLater = currentDate.AddDays(8);
 
             matches = await _context.Matches
-                                    .Where(x => x.Status == 1 && x.MatchDate > currentDate && x.MatchDate <= threeDaysLater )
+                                    .Where(x => x.Status == 1 && x.MatchDate > currentDate && x.MatchDate <= threeDaysLater)
                                     .ToListAsync();
 
             return matches;
+        }
+        public async Task<List<MatchDto>> GetMatchesStartSellAsync()
+        {
+            List<Match> matches = new List<Match>();
+            DateTime currentDate = DateTime.Now;
+            DateTime threeDaysLater = currentDate.AddDays(3);
+
+
+            List<MatchDto> results = new();
+            matches = await _context.Matches
+                                    .Where(x => x.Status == 1
+                                    && x.MatchDate > currentDate
+                                    && x.MatchDate <= threeDaysLater
+                                    && (EF.Functions.DateDiffMinute((DateTime?)currentDate, x.MatchDate) > 30))
+                                    .ToListAsync();
+            foreach (var match in matches)
+            {
+                results.Add(new MatchDto()
+                {
+                    Id = match.Id,
+                    IsHome = match.IsHome,
+                    LogoUrl = match.LogoUrl,
+                    MatchDate = match.MatchDate,
+                    OpponentName = match.OpponentName,
+                    StadiumName = match.StadiumName,
+                    Status = match.Status
+                });
+            }
+
+            return results;
         }
 
         public async Task<Match> GetMatchesByIdAsync(int id)
@@ -164,8 +189,8 @@ namespace TCViettelFC_API.Repositories.Implementations
                     await _context.SaveChangesAsync();
                 }
             }
-                try
-                {
+            try
+            {
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
