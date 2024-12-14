@@ -17,6 +17,8 @@ public partial class OrderedTicket
 
     public int? OrderId { get; set; }
 
+    public string? ImageUrl { get; set; }
+
     public virtual Area? Area { get; set; }
 
     public virtual Match? Match { get; set; }

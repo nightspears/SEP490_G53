@@ -222,6 +222,11 @@ namespace TCViettetlFC_Client.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(UserLoginViewModel userLoginViewModel)
         {
+            Response.Cookies.Delete("CustomerId");
+            Response.Cookies.Delete("CustomerEmail");
+            Response.Cookies.Delete("CustomerPhone");
+            Response.Cookies.Delete("AuthToken");
+            Response.Cookies.Delete("EmailForVerification");
             if (!ModelState.IsValid)
             {
                 return View(userLoginViewModel);

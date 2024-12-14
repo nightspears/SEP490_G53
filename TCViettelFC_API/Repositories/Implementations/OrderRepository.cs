@@ -69,16 +69,26 @@ namespace TCViettelFC_API.Repositories.Implementations
             var results = new List<OrderedTicketDto>();
             foreach (var order in orders)
             {
+                string vitri = "";
+                if (order.Area.Stands.Equals("A") || order.Area.Stands.Equals("B"))
+                {
+                    vitri = "Khán đài " + order.Area.Stands + " - Tầng " + order.Area.Floor + " - Cửa " + order.Area.Section;
+                }
+                else
+                {
+                    vitri = "Khán đài " + order.Area.Stands + " - Cửa " + order.Area.Section;
+                }
                 var dto = new OrderedTicketDto()
                 {
                     Id = order.Id,
-                    Vitri = "Khán đài " + order.Area.Stands + " - Tầng " + order.Area.Floor + " - Cửa " + order.Area.Section,
+                    Vitri = vitri,
                     Trandau = order.Match.StadiumName + " - Thể Công Viettel vs " + order.Match.OpponentName + " - " + order.Match.MatchDate,
                     AreaId = order.AreaId,
                     MatchId = order.MatchId,
                     OrderId = order.OrderId,
                     Price = order.Price,
-                    Status = order.Status
+                    Status = order.Status,
+                    ImageUrl = order.ImageUrl
                 };
                 results.Add(dto);
             }

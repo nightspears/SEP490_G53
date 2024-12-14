@@ -201,6 +201,10 @@ namespace TCViettetlFC_Client.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(CustomerLoginModel clm)
         {
+            Response.Cookies.Delete("AuthToken");
+            Response.Cookies.Delete("RoleId");
+            Response.Cookies.Delete("UserId");
+            Response.Cookies.Delete("SessionTimer");
             if (!ModelState.IsValid) return View();
             var result = await _httpClient.PostAsJsonAsync("customer/login", clm);
             if (result.IsSuccessStatusCode)
