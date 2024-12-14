@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace TCViettelFC_API.Models;
 
@@ -72,14 +70,15 @@ public partial class Sep490G53Context : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var config = new ConfigurationBuilder()
-          .AddJsonFile("appsettings.json")
-          .Build();
+                    .AddJsonFile("appsettings.json")
+                    .Build();
 
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseSqlServer(config.GetConnectionString("value"));
         }
     }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Address>(entity =>

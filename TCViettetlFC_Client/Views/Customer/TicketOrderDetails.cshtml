@@ -5,6 +5,17 @@
     var sups = Model.Sup;
     var tickets = Model.Ticket;
 }
+<style>
+    table th,td{
+        text-align:center;
+    }
+    @@media (max-width: 768px){
+        .row{
+            width:100%;
+
+        }
+    }
+</style>
 
 <div class="page-wrapper" style="margin-top: 8%;">
     <div class="content container-fluid">
@@ -15,7 +26,7 @@
         </div>
 
         <!-- Ticket Table -->
-        <div class="row">
+        <div class="row" style="width:80%; margin:0 auto;" >
             <div class="col-12">
                 <div class="card shadow-sm mb-4">
                     <div class="card-header bg-primary text-white">
@@ -26,10 +37,8 @@
                             <table class="table table-bordered table-hover">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Trận đấu</th>
-                                        <th>Vị trí</th>
-                                        <th>Giá tiền</th>
+                                        <th>Mã QR vé</th>
+                                        <th>Thông tin</th>
                                         <th>Trạng thái</th>
                                     </tr>
                                 </thead>
@@ -37,10 +46,15 @@
                                     @foreach (var ticket in tickets)
                                     {
                                         <tr>
-                                            <td>@ticket.Id</td>
-                                            <td>@ticket.Trandau</td>
-                                            <td>@ticket.Vitri</td>
-                                            <td>@ticket.Price.Value.ToString("#,0")</td>
+                                            <td style="width: 100px; padding: 0; text-align: center;">
+                                                <img class="img-thumbnail" style="max-width: 100px;" src="@ticket.ImageUrl" />
+                                            </td>
+                                            <td style="max-width:100px;">
+                                                <p style="word-wrap: break-word; overflow-wrap: break-word; white-space: normal;">@ticket.Trandau</p>
+                                                <p style="word-wrap: break-word; overflow-wrap: break-word; white-space: normal;">@ticket.Vitri</p>
+                                                <p style="word-wrap: break-word; overflow-wrap: break-word; white-space: normal;">@ticket.Price.Value.ToString("#,0")</p>
+                                                </td>
+                                        
                                             <td class="text-@((ticket.Status == 1) ? "success" : "danger")">
                                                 @(ticket.Status == 1 ? "Khả dụng" : "Không khả dụng")
                                             </td>
@@ -61,7 +75,7 @@
         </div>
 
         <!-- Supplementary Items Table -->
-        <div class="row">
+        <div class="row" style="width:80%; margin:0 auto;">
             <div class="col-12">
                 <div class="card shadow-sm">
                     <div class="card-header bg-secondary text-white">
