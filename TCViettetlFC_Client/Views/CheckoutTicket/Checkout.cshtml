@@ -576,7 +576,7 @@
 <script>
     document.querySelector('.purchase-button').addEventListener('click', async () => {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
+        debugger;
         if (cart.length === 0) {
             alert('Bạn không có vé để thanh toán');
             return;
@@ -625,8 +625,38 @@
                     return;
                 }
             }
+            
             const totalAmountText = document.querySelector('.total-amount').textContent;
             const totalAmount = parseInt(totalAmountText.replace(/[^\d]/g, ''), 10);
+            
+            // // Lấy matchId từ các vé đã chọn
+            // const matchIds = checkedItems.map(ticket => ticket.matchId);
+
+            // // Kiểm tra xem email đã đặt đủ 4 vé cho trận đấu nào chưa
+            // const ticketCheckPromises = matchIds.map(async (matchId) => {
+            //     const apiUrl = `https://localhost:5000/api/TicketOrder/check-ticket-limit-customernoacc?matchId=${matchId}&email=${encodeURIComponent(email)}`;
+            //     const response = await fetch(apiUrl);
+            //     const result = await response.json();
+
+            //     // Giả sử API trả về số lượng vé đã đặt
+            //     const count = result.count;
+
+            //     // Kiểm tra nếu số vé đã đặt + số vé chọn mới vượt quá giới hạn (4 vé)
+            //     const selectedTicketsCount = checkedItems.filter(ticket => ticket.matchId === matchId).length;
+            //     const totalTickets = count + selectedTicketsCount;
+
+            //     return { matchId, totalTickets, isLimitReached: totalTickets > 4 }; // Giới hạn vé là 4
+            // });
+
+            // try {
+            //     const ticketCheckResults = await Promise.all(ticketCheckPromises);
+
+            //     // Kiểm tra nếu có trận đấu nào đã đạt giới hạn vé
+            //     const exceededLimit = ticketCheckResults.some(result => result.isLimitReached);
+            //     if (exceededLimit) {
+            //         alert('Bạn đã đặt đủ số vé cho một hoặc nhiều trận đấu. Vui lòng kiểm tra lại.');
+            //         return;
+            //     }
 
             const requestData = {
                 addCustomerDto: {

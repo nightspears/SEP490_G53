@@ -53,43 +53,13 @@
         filter: drop-shadow(3px 5px 7px rgba(0, 0, 0, 0.25)); /* Shadow effect */
     }
 
-    .zeroseat {
+    .disabled {
         pointer-events: none;
         opacity: 0.6; /* Adds slight transparency */
         cursor: not-allowed;
         fill: #333333; /* Dark muted black for fill */
         stroke: #1a1a1a; /* Even darker border for a subtle contrast */
     }
-
-    .oneseat {
-        opacity: 0.6; /* Adds slight transparency */
-
-        fill: #3DB7E4; /* Dark muted black for fill */
-        stroke: #1a1a1a; /* Even darker border for a subtle contrast */
-    }
-
-    .twoseats {
-        opacity: 0.6; /* Adds slight transparency */
-
-        fill: #FF8849; /* Dark muted black for fill */
-        stroke: #1a1a1a; /* Even darker border for a subtle contrast */
-    }
-
-    .threeseats {
-        opacity: 0.6; /* Adds slight transparency */
-
-        fill: #FF0000; /* Dark muted black for fill */
-        stroke: #1a1a1a; /* Even darker border for a subtle contrast */
-    }
-
-    .fourandaboveseats {
-        opacity: 0.6; /* Adds slight transparency */
-
-        fill: #69BE28; /* Dark muted black for fill */
-        stroke: #1a1a1a; /* Even darker border for a subtle contrast */
-    }
-
-  
     
 
     .popup {
@@ -546,17 +516,13 @@
 
                         
                         <div class="mt-4 sanbong" style="background-color: white;border-radius: 20px;">
-                            <div style="margin-left: 40px;padding-top:20px" class="row">
-                                <div class="col-md-8">
+                            <div style="margin-left: 40px;padding-top:20px" >
+                                
                                     <h3>Tiến hành đặt vé</h3>
                                     <i>Số lượng vé mỗi người có thể mua: 4 vé</i>
                                     <h4>1. Chọn khán đài</h4>
                                     <p style=" color: crimson;font-weight: bold;">Nhấn vào khu vực khán đài trong hình dưới để chọn vị trí ngồi.</p>
-                                </div>
-                                <div class="col-md-4">
-                                    <label style="float: right;color: crimson;">Số ghế trên sân tương tự theo màu sắc, chú ý khi chọn khu vực để đặt vé</label>
-                                    <img style="height: 100px;" src="/Image/chuthichchongoi.png" alt="Seat availability legend" >
-                                </div>
+                                
                                 
                             </div> 
                             
@@ -915,35 +881,6 @@
 </script>
 <!-- CSS cho overlay -->
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".interactive-path").forEach(path => {
-        const id = path.id; // e.g., "path-28"
-        const areaId = parseInt(id.split('-')[1]); // Extract area ID
-
-        // Find ticket with matching AreaId
-        const ticket = matchAreaTickets.find(t => t.AreaId === areaId);
-        if (ticket) {
-            const seats = ticket.AvailableSeats;
-            // Remove existing classes related to seats
-            path.classList.remove("fourandaboveseats", "threeseats", "twoseats", "oneseat", "zeroseat");
-
-            // Add class based on seat availability
-            if (seats > 3) {
-                path.classList.add("fourandaboveseats");
-            } else if (seats > 2) {
-                path.classList.add("threeseats");
-            } else if (seats > 1) {
-                path.classList.add("twoseats");
-            } else if (seats > 0) {
-                path.classList.add("oneseat");
-            } else {
-                path.classList.add("zeroseat");
-            }
-        }
-    });
-});
-</script>
 <script>
     function getAreaById(id) {
         fetch(`https://localhost:5000/api/Area/getareabyid/${id}`)
@@ -1325,7 +1262,7 @@
         }
 
         // Generate ticket expiration time (10 minutes from now)
-        const expirationTime = Date.now() + 1 * 60 * 1000;
+        const expirationTime = Date.now() + 10 * 60 * 1000;
 
         // Gather match details
         const matchDetails = {
@@ -1593,6 +1530,7 @@
     }
 
     function redirectToCheckout() {
+        
         window.location.href = '/CheckoutTicket/Checkout';
     }
 
