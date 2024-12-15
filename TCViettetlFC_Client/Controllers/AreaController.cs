@@ -17,7 +17,7 @@ namespace TCViettetlFC_Client.Controllers
         public async Task<IActionResult> Index(int matchId)
         {
             List<int> Ids = new List<int>();
-            var result = await _httpClient.GetAsync("https://localhost:5000/api/Matches/GetMatchStartSell");
+            var result = await _httpClient.GetAsync("https://tcvtfcapi.azurewebsites.net/api/Matches/GetMatchStartSell");
             if (result.IsSuccessStatusCode)
             {
                 var options = new JsonSerializerOptions
@@ -39,7 +39,7 @@ namespace TCViettetlFC_Client.Controllers
             }
             if (!Ids.Contains(matchId)) return RedirectToAction("Index", "Match");
             string customerId = Request.Cookies["CustomerId"];
-            string requestUri = "https://localhost:5000/api/SupplementaryItem";
+            string requestUri = "https://tcvtfcapi.azurewebsites.net/api/SupplementaryItem";
             var response = await _httpClient.GetAsync(requestUri);
             List<SupplementaryIteamViewModel> newList = new List<SupplementaryIteamViewModel>();
             if (response.IsSuccessStatusCode)
@@ -49,7 +49,7 @@ namespace TCViettetlFC_Client.Controllers
             }
 
             // Fetch match area tickets by matchId
-            string matchAreaTicketsUri = $"https://localhost:5000/api/Area/getmatchareaticketsbymatchid/{matchId}";
+            string matchAreaTicketsUri = $"https://tcvtfcapi.azurewebsites.net/api/Area/getmatchareaticketsbymatchid/{matchId}";
             var matchAreaResponse = await _httpClient.GetAsync(matchAreaTicketsUri);
             List<MatchAreaTicketViewModel> matchAreaTickets = new List<MatchAreaTicketViewModel>();
             if (matchAreaResponse.IsSuccessStatusCode)

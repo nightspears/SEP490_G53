@@ -658,7 +658,7 @@
         // lấy trận đầu
         async function fetchMatchData() {
             try {
-                const response = await fetch("https://localhost:5000/api/Matches/GetMatches");
+                const response = await fetch("https://tcvtfcapi.azurewebsites.net/api/Matches/GetMatches");
                 const matches = await response.json();
 
                 //lấy trận đấu gần nhất
@@ -915,7 +915,7 @@
         //cái này làm giống TUẤNNQ
         function loadData() {
             $.ajax({
-                url: "https://localhost:5000/api/Product/GetSanPham?top=8",
+                url: "https://tcvtfcapi.azurewebsites.net/api/Product/GetSanPham?top=8",
                 method: "GET",
                 dataType: "json",
                 success: function (res) {

@@ -35,7 +35,7 @@ namespace TCViettetlFC_Client.Controllers.Common
         {
            
 
-            string requestUri = "https://localhost:5000/api/Product/GetSanPhamById?id=" + id;
+            string requestUri = "https://tcvtfcapi.azurewebsites.net/api/Product/GetSanPhamById?id=" + id;
             var response = await _httpClient.GetAsync(requestUri);
 
            ApiResponse ListData = new ApiResponse();

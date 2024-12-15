@@ -27,7 +27,7 @@ $(document).on("click", "#btnXoa", function () {
 
     var id = $("#idXoa").val();
     debugger
-    var url = "https://localhost:5000/api/Matches/DeleteMatches/" + id;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/Matches/DeleteMatches/" + id;
     $.ajax({
         url: url,
         method: "Delete",
@@ -47,7 +47,7 @@ $(document).on("click", "#btnXoa", function () {
 
 function loadData() {
     $.ajax({
-        url: "https://localhost:5000/api/Matches/GetMatches",
+        url: "https://tcvtfcapi.azurewebsites.net/api/Matches/GetMatches",
         method: "GET",
         dataType: "json",
         success: function (res) {
@@ -179,7 +179,7 @@ function modalEditOrCreate(id) {
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật trận đấu")
 
-        var url = "https://localhost:5000/api/Matches/GetMatchesById?id=" + id;
+        var url = "https://tcvtfcapi.azurewebsites.net/api/Matches/GetMatchesById?id=" + id;
         $.ajax({
             url: url,
             method: "get",
@@ -272,7 +272,7 @@ function EditOrCreate() {
 
 function checkExist(data , callback) {
     $.ajax({
-        url: 'https://localhost:5000/api/Matches/CheckExist',
+        url: 'https://tcvtfcapi.azurewebsites.net/api/Matches/CheckExist',
         type: 'post',
         data: JSON.stringify(data),
         contentType: 'application/json',
@@ -319,7 +319,7 @@ function AddMatches(formData) {
             $('#errorNgayDa').hide();
             $('#errorTenSan').hide();
             $.ajax({
-                url: 'https://localhost:5000/api/Matches/AddMatches',
+                url: 'https://tcvtfcapi.azurewebsites.net/api/Matches/AddMatches',
                 type: 'post',
                 data: formData,
                 contentType: false, // Không thiết lập Content-Type
@@ -370,7 +370,7 @@ function UpdateMatch(formData, id) {
             $('#errorNgayDa').hide();
 
             $.ajax({
-                url: 'https://localhost:5000/api/Matches/UpdateMatches/' + id,
+                url: 'https://tcvtfcapi.azurewebsites.net/api/Matches/UpdateMatches/' + id,
                 type: 'Put',
                 data: formData,
                 contentType: false, // Không thiết lập Content-Type
@@ -463,7 +463,7 @@ $(document).on("change", ".changeStatus", function () {
     formData.append('status', status);
     debugger
     $.ajax({
-        url: 'https://localhost:5000/api/Matches/updateStatus',
+        url: 'https://tcvtfcapi.azurewebsites.net/api/Matches/updateStatus',
         type: 'post',
         data: formData,
         contentType: false,

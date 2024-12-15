@@ -401,7 +401,7 @@
 
 	// Fetch customer information and order data
 	const customerId = '@ViewData["CustomerId"]';
-	const apiBase = 'https://localhost:5000/api';
+	const apiBase = 'https://tcvtfcapi.azurewebsites.net/api';
 
 	async function fetchData() {
 		try {
@@ -756,7 +756,7 @@ async function deleteAddress(addressId) {
 
 		try {
 			// Make POST request to add the new address
-			const response = await fetch('https://localhost:5000/api/Customer/add-address', {
+			const response = await fetch('https://tcvtfcapi.azurewebsites.net/api/Customer/add-address', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

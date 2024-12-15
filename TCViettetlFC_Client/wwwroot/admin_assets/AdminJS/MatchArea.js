@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 function loadData() {
     $.ajax({
-        url: "https://localhost:5000/api/MatchAreas/GetMatchArea",
+        url: "https://tcvtfcapi.azurewebsites.net/api/MatchAreas/GetMatchArea",
         method: "GET",
         dataType: "json",
         success: function (res) {
@@ -113,7 +113,7 @@ function modalEditOrCreate(id) {
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật trận đấu")
 
-        var url = "https://localhost:5000/api/Matches/GetMatchesById?id=" + id;
+        var url = "https://tcvtfcapi.azurewebsites.net/api/Matches/GetMatchesById?id=" + id;
         $.ajax({
             url: url,
             method: "get",
@@ -237,7 +237,7 @@ function UpdateMatch(formData, id) {
             $('#errorNgayDa').hide();
 
             $.ajax({
-                url: 'https://localhost:5000/api/Matches/UpdateMatches/' + id,
+                url: 'https://tcvtfcapi.azurewebsites.net/api/Matches/UpdateMatches/' + id,
                 type: 'Put',
                 data: formData,
                 contentType: false, // Không thiết lập Content-Type

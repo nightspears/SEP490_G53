@@ -85,8 +85,8 @@ namespace TCViettetlFC_Client.Controllers
                 {
                     // Prepare URL for API call to insert order in the database
                     string url = request.customerId.HasValue
-                        ? $"https://localhost:5000/api/TicketOrder?customerId={request.customerId}"
-                        : "https://localhost:5000/api/TicketOrder";
+                        ? $"https://tcvtfcapi.azurewebsites.net/api/TicketOrder?customerId={request.customerId}"
+                        : "https://tcvtfcapi.azurewebsites.net/api/TicketOrder";
 
                     // Update the request object with the payment transaction details
                     request.paymentDto.paymentGateway = VNPayresponse.TransactionId;

@@ -36,7 +36,7 @@ namespace TCViettetlFC_Client.Controllers
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                var response = await httpClient.GetAsync($"https://localhost:5000/api/entry/verifyticket/{ticketId}");
+                var response = await httpClient.GetAsync($"https://tcvtfcapi.azurewebsites.net/api/entry/verifyticket/{ticketId}");
                 if (response.IsSuccessStatusCode)
                 {
                     ViewBag.Result = "Valid";
@@ -62,7 +62,7 @@ namespace TCViettetlFC_Client.Controllers
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                var response = await httpClient.GetAsync($"https://localhost:5000/api/entry/verifysupitem/{orderId}");
+                var response = await httpClient.GetAsync($"https://tcvtfcapi.azurewebsites.net/api/entry/verifysupitem/{orderId}");
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await JsonSerializer.DeserializeAsync<List<VerifySupDto>>(await response.Content.ReadAsStreamAsync());

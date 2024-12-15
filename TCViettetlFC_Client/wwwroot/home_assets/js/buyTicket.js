@@ -11,7 +11,7 @@ document.getElementById("closeOverlay").addEventListener("click", function () {
 
 // Lấy chi tiết khu vực (area) theo ID và hiển thị trong form
 function getAreaById(id) {
-    fetch(`https://localhost:5000/api/Area/getareabyid/${id}`)
+    fetch(`https://tcvtfcapi.azurewebsites.net/api/Area/getareabyid/${id}`)
         .then(response => response.json())
         .then(data => {
             document.getElementById('areaId').value = data.id || '';
@@ -34,7 +34,7 @@ function loadMatchDetails() {
         return;
     }
 
-    fetch(`https://localhost:5000/api/Matches/GetMatchesById?id=${matchId}`)
+    fetch(`https://tcvtfcapi.azurewebsites.net/api/Matches/GetMatchesById?id=${matchId}`)
         .then(response => response.json())
         .then(data => {
             const opponentName = data.opponentName || 'Unknown Opponent';
@@ -143,8 +143,8 @@ document.querySelector('form#ticketForm').addEventListener('submit', async (even
     };
 
     const url = payload.customerId
-        ? `https://localhost:5000/api/TicketOrder?customerId=${payload.customerId}`
-        : `https://localhost:5000/api/TicketOrder`;
+        ? `https://tcvtfcapi.azurewebsites.net/api/TicketOrder?customerId=${payload.customerId}`
+        : `https://tcvtfcapi.azurewebsites.net/api/TicketOrder`;
 
     try {
         const response = await fetch(url, {

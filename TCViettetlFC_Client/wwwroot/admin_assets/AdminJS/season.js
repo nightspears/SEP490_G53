@@ -27,7 +27,7 @@ $(document).on("click", "#btnXoa", function () {
 
     var id = $("#idXoa").val();
     debugger
-    var url = "https://localhost:5000/api/Season/DeleteSeason/" + id;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/Season/DeleteSeason/" + id;
     $.ajax({
         url: url,
         method: "Delete",
@@ -49,7 +49,7 @@ function loadData() {
     debugger
 
     $.ajax({
-        url: "https://localhost:5000/api/Season/GetSeason",
+        url: "https://tcvtfcapi.azurewebsites.net/api/Season/GetSeason",
         method: "GET",
         dataType: "json",
         success: function (res) {
@@ -151,7 +151,7 @@ function modalEditOrCreate(id) {
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật mùa giải")
 
-        var url = "https://localhost:5000/api/Season/GetSeasonById?id=" + id;
+        var url = "https://tcvtfcapi.azurewebsites.net/api/Season/GetSeasonById?id=" + id;
         $.ajax({
             url: url,
             method: "get",
@@ -236,7 +236,7 @@ function EditOrCreate() {
 
                 } else {
                     $.ajax({
-                        url: 'https://localhost:5000/api/Season/UpdateSeason/' + id,
+                        url: 'https://tcvtfcapi.azurewebsites.net/api/Season/UpdateSeason/' + id,
                         type: 'Put',
                         data: formData,
                         contentType: false, // Không thiết lập Content-Type
@@ -260,7 +260,7 @@ function EditOrCreate() {
 
 
             $.ajax({
-                url: 'https://localhost:5000/api/Season/AddSeason',
+                url: 'https://tcvtfcapi.azurewebsites.net/api/Season/AddSeason',
                 type: 'post',
                 data: formData,
                 contentType: false, // Không thiết lập Content-Type
@@ -281,7 +281,7 @@ function EditOrCreate() {
 
 function checkExist(data, callback) {
     $.ajax({
-        url: 'https://localhost:5000/api/Matches/CheckExist',
+        url: 'https://tcvtfcapi.azurewebsites.net/api/Matches/CheckExist',
         type: 'post',
         data: JSON.stringify(data),
         contentType: 'application/json',

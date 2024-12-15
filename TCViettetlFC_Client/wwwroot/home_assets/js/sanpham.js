@@ -4,7 +4,7 @@ var totalItem = 0;
 function loadData(id, url) {
     var link = "";
     if (url.trim() == "" || url == null) {
-        link = "https://localhost:5000/api/Product/GetSanPham";
+        link = "https://tcvtfcapi.azurewebsites.net/api/Product/GetSanPham";
     } else {
         link = url;
     }
@@ -100,7 +100,7 @@ $(document).on("click", ".page-btn", function () {
         cateID = 0;
     }
 
-    var url = "https://localhost:5000/api/Product/GetSanPham?cid=" + cateID;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/Product/GetSanPham?cid=" + cateID;
     if (txtSearch) {
         url += "&$filter=contains(ProductName, '" + encodeURIComponent(txtSearch) + "')";
     }
@@ -158,7 +158,7 @@ function renderPagination(totalItems) {
 function loadCategory() {
     debugger
     $.ajax({
-        url: "https://localhost:5000/api/Category/GetCategory",
+        url: "https://tcvtfcapi.azurewebsites.net/api/Category/GetCategory",
         method: "GET",
         dataType: "json",
         success: function (res) {
@@ -283,7 +283,7 @@ function toggleFilter() {
         cateID = 0;
     }
 
-    var url = "https://localhost:5000/api/Product/GetSanPham?cid=" + cateID;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/Product/GetSanPham?cid=" + cateID;
     if (txtSearch) {
         url += "&$filter=contains(ProductName, '" + encodeURIComponent(txtSearch) + "')";
     }

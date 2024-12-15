@@ -883,7 +883,7 @@
 
 <script>
     function getAreaById(id) {
-        fetch(`https://localhost:5000/api/Area/getareabyid/${id}`)
+        fetch(`https://tcvtfcapi.azurewebsites.net/api/Area/getareabyid/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -977,7 +977,7 @@
             return;
         }
 
-        fetch(`https://localhost:5000/api/Matches/GetMatchesById?id=${matchId}`)
+        fetch(`https://tcvtfcapi.azurewebsites.net/api/Matches/GetMatchesById?id=${matchId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -1123,7 +1123,7 @@
         }
 
 
-        fetch(`https://localhost:5000/api/Matches/GetMatchesById?id=${matchId}`)
+        fetch(`https://tcvtfcapi.azurewebsites.net/api/Matches/GetMatchesById?id=${matchId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -1182,7 +1182,7 @@
         }
 
 
-        fetch(`https://localhost:5000/api/TicketOrder/check-ticket-limit?matchId=${matchId}&customerId=${customerId}`)
+        fetch(`https://tcvtfcapi.azurewebsites.net/api/TicketOrder/check-ticket-limit?matchId=${matchId}&customerId=${customerId}`)
             .then(response => response.json())
             .then(data => {
 
@@ -1247,7 +1247,7 @@
         }
 
         // Call the API to increase the count of available tickets
-        const response = await fetch(`https://localhost:5000/api/Area/increasecount/${matchId}/${areaId}`, {
+        const response = await fetch(`https://tcvtfcapi.azurewebsites.net/api/Area/increasecount/${matchId}/${areaId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -1463,7 +1463,7 @@
 
         if (removedItem) {
             try {
-                const response = await fetch(`https://localhost:5000/api/Area/decreasecount/${removedItem.matchId}/${removedItem.areaId}/${removedItem.quantity}`, {
+                const response = await fetch(`https://tcvtfcapi.azurewebsites.net/api/Area/decreasecount/${removedItem.matchId}/${removedItem.areaId}/${removedItem.quantity}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -1498,7 +1498,7 @@
         // Thực hiện gọi API để cập nhật số lượng vé trong cơ sở dữ liệu
         for (const item of cart) {
             try {
-                const response = await fetch(`https://localhost:5000/api/Area/decreasecount/${item.matchId}/${item.areaId}/${item.quantity}`, {
+                const response = await fetch(`https://tcvtfcapi.azurewebsites.net/api/Area/decreasecount/${item.matchId}/${item.areaId}/${item.quantity}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -1552,7 +1552,7 @@
         }
 
         // Gọi API để lấy thông tin trận đấu
-        fetch(`https://localhost:5000/api/Matches/GetMatchesById?id=${matchId}`)
+        fetch(`https://tcvtfcapi.azurewebsites.net/api/Matches/GetMatchesById?id=${matchId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

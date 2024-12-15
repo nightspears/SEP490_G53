@@ -370,8 +370,7 @@
               "RelativeToolTip": "Views\\Customer\\Verify.cshtml",
               "ViewState": "AgIAAA8AAAAAAAAAAAAAABkAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-15T07:36:38.012Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-15T07:36:38.012Z"
             },
             {
               "$type": "Document",
@@ -383,8 +382,7 @@
               "RelativeToolTip": "Models\\CustomerLoginResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-15T07:27:05.925Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-15T07:27:05.925Z"
             },
             {
               "$type": "Document",
@@ -394,7 +392,7 @@
               "RelativeDocumentMoniker": "Controllers\\CustomerController.cs",
               "ToolTip": "D:\\ResumeProjects\\SEP490_G53\\TCViettetlFC_Client\\Controllers\\CustomerController.cs",
               "RelativeToolTip": "Controllers\\CustomerController.cs",
-              "ViewState": "AgIAABsBAAAAAAAAAAAUwCcBAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAEBAAAAAAAAAAAkwA0BAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-15T07:26:09.143Z",
               "EditorCaption": ""
@@ -409,7 +407,8 @@
               "RelativeToolTip": "Views\\Area\\Index.cshtml",
               "ViewState": "AgIAAOcEAAAAAAAAAAAAAPAEAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-14T17:22:08.552Z"
+              "WhenOpened": "2024-12-14T17:22:08.552Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -433,7 +432,8 @@
               "RelativeToolTip": "Controllers\\AreaController.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAwwBEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T16:48:31.365Z"
+              "WhenOpened": "2024-12-14T16:48:31.365Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -445,7 +445,8 @@
               "RelativeToolTip": "Controllers\\MatchController.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAwwB0AAABbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T16:47:37.882Z"
+              "WhenOpened": "2024-12-14T16:47:37.882Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -597,6 +598,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:18:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
             }
           ]
         },

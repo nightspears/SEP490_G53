@@ -17,7 +17,7 @@ namespace TCViettetlFC_Client.Controllers
             {
                 return RedirectToAction("Index", "Forbidden");
             }
-            string requestUri = "https://localhost:5000/api/New/GetAllNews";
+            string requestUri = "https://tcvtfcapi.azurewebsites.net/api/New/GetAllNews";
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 requestUri += $"?$filter=contains(Title,'{searchTerm}')";
@@ -75,7 +75,7 @@ namespace TCViettetlFC_Client.Controllers
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
 
-            var response = await _httpClient.GetAsync($"https://localhost:5000/api/New/updatestatus/{newsId}?newStatus={newStatus}");
+            var response = await _httpClient.GetAsync($"https://tcvtfcapi.azurewebsites.net/api/New/updatestatus/{newsId}?newStatus={newStatus}");
 
             if (response.IsSuccessStatusCode)
             {

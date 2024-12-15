@@ -22,7 +22,7 @@ namespace TCViettetlFC_Client.Controllers
         public async Task<IActionResult> Index()
         {
 
-            string NewsUri = "https://localhost:5000/api/New/GetAllNews?top=8&$orderby= createdAt desc";
+            string NewsUri = "https://tcvtfcapi.azurewebsites.net/api/New/GetAllNews?top=8&$orderby= createdAt desc";
             var responseNews = await _httpClient.GetAsync(NewsUri);
             List<GetAllNewViewModel> lstNews = new List<GetAllNewViewModel>();
             if (responseNews.IsSuccessStatusCode)
@@ -32,7 +32,7 @@ namespace TCViettetlFC_Client.Controllers
             }
 
 
-            string PlayerUri = "https://localhost:5000/api/Players";
+            string PlayerUri = "https://tcvtfcapi.azurewebsites.net/api/Players";
             var responsePlayer = await _httpClient.GetAsync(PlayerUri);
             List<PlayerViewModel> lstPlayer = new List<PlayerViewModel>();
             if (responsePlayer.IsSuccessStatusCode)

@@ -27,7 +27,7 @@ $(document).on("click", "#btnXoa", function () {
 
     var id = $("#idXoa").val();
     debugger
-    var url = "https://localhost:5000/api/Discount/DeleteDiscount/" + id;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/Discount/DeleteDiscount/" + id;
     $.ajax({
         url: url,
         method: "Delete",
@@ -49,7 +49,7 @@ function loadData() {
     debugger
 
     $.ajax({
-        url: "https://localhost:5000/api/Discount/GetDiscount",
+        url: "https://tcvtfcapi.azurewebsites.net/api/Discount/GetDiscount",
         method: "GET",
         dataType: "json",
         success: function (res) {
@@ -141,7 +141,7 @@ function modalEditOrCreate(id) {
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật mã giảm giá")
 
-        var url = "https://localhost:5000/api/Discount/GetDiscountById?id=" + id;
+        var url = "https://tcvtfcapi.azurewebsites.net/api/Discount/GetDiscountById?id=" + id;
         $.ajax({
             url: url,
             method: "get",
@@ -220,7 +220,7 @@ function EditOrCreate() {
 
         if (id != 0 && id != undefined) {
             $.ajax({
-                url: 'https://localhost:5000/api/Discount/UpdateDiscount/' + id,
+                url: 'https://tcvtfcapi.azurewebsites.net/api/Discount/UpdateDiscount/' + id,
                 type: 'Put',
                 data: formData,
                 contentType: false, // Không thiết lập Content-Type
@@ -237,7 +237,7 @@ function EditOrCreate() {
 
         } else {
             $.ajax({
-                url: 'https://localhost:5000/api/Discount/AddDiscount',
+                url: 'https://tcvtfcapi.azurewebsites.net/api/Discount/AddDiscount',
                 type: 'post',
                 data: formData,
                 contentType: false, // Không thiết lập Content-Type

@@ -9,7 +9,7 @@ function updateSeat(AreaId, MatchId) {
         SeatQuantity: quantittySeat
     }
     $.ajax({
-        url: 'https://localhost:5000/api/MatchAreas/UpdateSeat',
+        url: 'https://tcvtfcapi.azurewebsites.net/api/MatchAreas/UpdateSeat',
         type: 'Put',
         contentType: 'application/json',
         data: JSON.stringify(data),
@@ -55,7 +55,7 @@ $("#khandai").on("change", function () {
         $("#divAB").hide();
     }
     var id = $("#matchID").val();
-    var url = "https://localhost:5000/api/MatchAreas/GetSanPhamById?id=" + id;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/MatchAreas/GetSanPhamById?id=" + id;
     if (khandai != 0 && khandai != undefined) {
 
         $.ajax({
@@ -103,7 +103,7 @@ $("#tang").on("change", function () {
         $("#cua10").val(0);
         $("#cua8").val(0);
     }
-    var url = "https://localhost:5000/api/MatchAreas/GetSanPhamById?id=" + id;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/MatchAreas/GetSanPhamById?id=" + id;
     if (tang != null && tang != 0) {
         debugger
         var khandai = $("#khandai").val();
@@ -140,7 +140,7 @@ $("#tang").on("change", function () {
 $(".sections").on("change", function () {
     var cua = $(this).val();
     var id = $("#matchID").val();
-    var url = "https://localhost:5000/api/MatchAreas/GetSanPhamById?id=" + id;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/MatchAreas/GetSanPhamById?id=" + id;
     var khandai = $("#khandai").val();
 
     if (cua != null && cua != 0) {

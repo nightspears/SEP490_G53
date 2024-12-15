@@ -27,7 +27,7 @@ $(document).on("click", "#btnXoa", function () {
 
     var id = $("#idXoa").val();
     debugger
-    var url = "https://localhost:5000/api/Category/DeleteCategory/" + id;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/Category/DeleteCategory/" + id;
     $.ajax({
         url: url,
         method: "Delete",
@@ -49,7 +49,7 @@ function loadData() {
     debugger
 
     $.ajax({
-        url: "https://localhost:5000/api/Category/GetCategory",
+        url: "https://tcvtfcapi.azurewebsites.net/api/Category/GetCategory",
         method: "GET",
         dataType: "json",
         success: function (res) {
@@ -136,7 +136,7 @@ function modalEditOrCreate(id) {
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật danh mục sản phẩm")
 
-        var url = "https://localhost:5000/api/Category/GetCateById?id=" + id;
+        var url = "https://tcvtfcapi.azurewebsites.net/api/Category/GetCateById?id=" + id;
         $.ajax({
             url: url,
             method: "get",
@@ -190,7 +190,7 @@ function EditOrCreate() {
         formData.append('Status', 2);
     }
     
-    var url = "https://localhost:5000/api/Category/UpdateCate/" + id;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/Category/UpdateCate/" + id;
     debugger
     if (id != 0 && id != undefined) {
         $.ajax({
@@ -212,7 +212,7 @@ function EditOrCreate() {
 
     } else {
         $.ajax({
-            url: 'https://localhost:5000/api/Category/AddCate',
+            url: 'https://tcvtfcapi.azurewebsites.net/api/Category/AddCate',
             type: 'post',
             data: formData,
             contentType: false, // Không thiết lập Content-Type

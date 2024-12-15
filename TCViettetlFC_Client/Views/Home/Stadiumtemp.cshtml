@@ -197,7 +197,7 @@
 </svg>
 <script>
     function getAreaById(id) {
-        fetch(`https://localhost:5000/api/Area/getareabyid/${id}`)
+        fetch(`https://tcvtfcapi.azurewebsites.net/api/Area/getareabyid/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);

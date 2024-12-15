@@ -1,5 +1,5 @@
 ﻿
-const API_URL = "https://localhost:5000/api";
+const API_URL = "https://tcvtfcapi.azurewebsites.net/api";
 
 // Load danh sách cầu thủ khi trang được tải
 async function loadPlayers() {

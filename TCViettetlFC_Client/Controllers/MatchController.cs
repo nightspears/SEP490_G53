@@ -21,7 +21,7 @@ namespace TCViettetlFC_Client.Controllers
             try
             {
                 // Attempt to call API to get matches
-                var response = await _httpClient.GetAsync("https://localhost:5000/api/Matches/GetMatchesNotStartYetAsync");
+                var response = await _httpClient.GetAsync("https://tcvtfcapi.azurewebsites.net/api/Matches/GetMatchesNotStartYetAsync");
 
                 // Check if the response is successful
                 if (response.IsSuccessStatusCode)

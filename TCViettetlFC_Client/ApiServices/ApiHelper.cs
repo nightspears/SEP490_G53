@@ -18,7 +18,7 @@ namespace TCViettelFC_Client.ApiServices
         }
         public async Task<T> GetApiResponseAsync<T>(string endpoint)
         {
-            var response = await _httpClient.GetAsync("https://localhost:5000/api/" + endpoint);
+            var response = await _httpClient.GetAsync("https://tcvtfcapi.azurewebsites.net/api/" + endpoint);
             if (response.IsSuccessStatusCode)
             {
                 var options = new JsonSerializerOptions
@@ -31,7 +31,7 @@ namespace TCViettelFC_Client.ApiServices
         }
         public async Task<string> CreateApiResponseAsync<T>(string endpoint, T data)
         {
-            var response = await _httpClient.PostAsJsonAsync("https://localhost:5000/api/" + endpoint, data);
+            var response = await _httpClient.PostAsJsonAsync("https://tcvtfcapi.azurewebsites.net/api/" + endpoint, data);
             if (response.IsSuccessStatusCode)
             {
                 var options = new JsonSerializerOptions
@@ -48,7 +48,7 @@ namespace TCViettelFC_Client.ApiServices
         }
         public async Task<string> DeleteApiResponseAsync(string endpoint)
         {
-            var response = await _httpClient.DeleteAsync("https://localhost:5000/api/" + endpoint);
+            var response = await _httpClient.DeleteAsync("https://tcvtfcapi.azurewebsites.net/api/" + endpoint);
             if (response.IsSuccessStatusCode)
             {
                 return "Delete successfully";
@@ -61,7 +61,7 @@ namespace TCViettelFC_Client.ApiServices
         }
         public async Task<string> UpdateApiResponseAsync<T>(string endpoint, T data)
         {
-            var response = await _httpClient.PutAsJsonAsync("https://localhost:5000/api/" + endpoint, data);
+            var response = await _httpClient.PutAsJsonAsync("https://tcvtfcapi.azurewebsites.net/api/" + endpoint, data);
             if (response.IsSuccessStatusCode)
             {
                 return "Update successfully" + await response.Content.ReadAsStringAsync();

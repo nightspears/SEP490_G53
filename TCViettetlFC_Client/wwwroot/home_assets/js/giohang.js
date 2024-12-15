@@ -267,7 +267,7 @@ function getLienQuan() {
     var cartItems = getCartFromLocalStorage();
     var lstID = [...new Map(cartItems.map(item => [item.productId, item])).keys()];
     $.ajax({
-        url: "https://localhost:5000/api/Product/SanPhamLienQuan",
+        url: "https://tcvtfcapi.azurewebsites.net/api/Product/SanPhamLienQuan",
         method: "post",
         contentType: "application/json",
         data: JSON.stringify(lstID),

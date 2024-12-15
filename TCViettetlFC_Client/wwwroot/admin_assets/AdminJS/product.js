@@ -110,7 +110,7 @@ function CheckAll(item) {
 function loadData() {
     debugger;
     $.ajax({
-        url: "https://localhost:5000/api/Product/GetProduct",
+        url: "https://tcvtfcapi.azurewebsites.net/api/Product/GetProduct",
         method: "GET",
         dataType: "json",
         success: function (res) {
@@ -210,7 +210,7 @@ $(document).on("click", "#confirmXoa", function () {
 $(document).on("click", "#btnXoa", function () {
 
     var id = $("#idXoa").val();
-    var url = "https://localhost:5000/api/Product/DeleteProduct/" + id;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/Product/DeleteProduct/" + id;
     $.ajax({
         url: url,
         method: "Delete",
@@ -259,7 +259,7 @@ function modalEditOrCreate(id) {
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật sản phẩm")
 
-        var url = "https://localhost:5000/api/Product/GetProductById?id=" + id;
+        var url = "https://tcvtfcapi.azurewebsites.net/api/Product/GetProductById?id=" + id;
         $.ajax({
             url: url,
             method: "GET",
@@ -481,7 +481,7 @@ function EditOrCreate() {
         if (id != 0 && id != undefined) {
 
             $.ajax({
-                url: 'https://localhost:5000/api/Product/UpdateProduct/' + id,
+                url: 'https://tcvtfcapi.azurewebsites.net/api/Product/UpdateProduct/' + id,
                 type: 'Put',
                 data: formData,
                 contentType: false,
@@ -506,7 +506,7 @@ function EditOrCreate() {
                 } else {
                     debugger
                     $.ajax({
-                        url: 'https://localhost:5000/api/Product/AddProduct',
+                        url: 'https://tcvtfcapi.azurewebsites.net/api/Product/AddProduct',
                         type: 'post',
                         data: formData,
                         contentType: false,
@@ -534,7 +534,7 @@ function EditOrCreate() {
 function checkExist(formData, callback) {
     debugger
     $.ajax({
-        url: 'https://localhost:5000/api/Product/CheckExist',
+        url: 'https://tcvtfcapi.azurewebsites.net/api/Product/CheckExist',
         type: 'post',
         data: formData,
         contentType: false,
@@ -553,7 +553,7 @@ function checkExist(formData, callback) {
 
 function fillDataModal() {
     $.ajax({
-        url: "https://localhost:5000/api/Product/GetJson",
+        url: "https://tcvtfcapi.azurewebsites.net/api/Product/GetJson",
         method: "GET",
         success: function (res) {
             $('#muaGiai').empty();
@@ -732,7 +732,7 @@ $(document).on("change", ".changeStatus", function () {
     formData.append('status', status);
     debugger
     $.ajax({
-        url: 'https://localhost:5000/api/Product/updateStatus',
+        url: 'https://tcvtfcapi.azurewebsites.net/api/Product/updateStatus',
         type: 'post',
         data: formData,
         contentType: false,

@@ -28,7 +28,7 @@ $(document).on("click", "#btnXoa", function () {
 
     var id = $("#idXoa").val();
     debugger
-    var url = "https://localhost:5000/api/SupplementaryItem/" + id;
+    var url = "https://tcvtfcapi.azurewebsites.net/api/SupplementaryItem/" + id;
     $.ajax({
         url: url,
         method: "Delete",
@@ -48,7 +48,7 @@ $(document).on("click", "#btnXoa", function () {
 
 function loadData() {
     $.ajax({
-        url: "https://localhost:5000/api/SupplementaryItem",
+        url: "https://tcvtfcapi.azurewebsites.net/api/SupplementaryItem",
         method: "GET",
         dataType: "json",
         success: function (res) {
@@ -166,7 +166,7 @@ function modalEditOrCreate(id) {
     if (id != 0 && id != undefined) {
         $("#titleModal").text("Cập nhật đồ đính kèm")
 
-        var url = "https://localhost:5000/api/SupplementaryItem/" + id;
+        var url = "https://tcvtfcapi.azurewebsites.net/api/SupplementaryItem/" + id;
         $.ajax({
             url: url,
             method: "get",
@@ -252,7 +252,7 @@ function EditOrCreate() {
 
 //function checkExist(data , callback) {
 //    $.ajax({
-//        url: 'https://localhost:5000/api/Matches/CheckExist',
+//        url: 'https://tcvtfcapi.azurewebsites.net/api/Matches/CheckExist',
 //        type: 'post',
 //        data: JSON.stringify(data),
 //        contentType: 'application/json',
@@ -272,7 +272,7 @@ function AddMatches(formData) {
     $('#errorTen').hide();
     $('#errorGia').hide();
     $.ajax({
-        url: 'https://localhost:5000/api/SupplementaryItem',
+        url: 'https://tcvtfcapi.azurewebsites.net/api/SupplementaryItem',
         type: 'post',
         data: formData,
         contentType: false, // Không thiết lập Content-Type
@@ -325,7 +325,7 @@ function AddMatches(formData) {
 function UpdateMatch(formData, id) {
 
     $.ajax({
-        url: 'https://localhost:5000/api/SupplementaryItem/' + id,
+        url: 'https://tcvtfcapi.azurewebsites.net/api/SupplementaryItem/' + id,
         type: 'Put',
         data: formData,
         contentType: false,
@@ -424,7 +424,7 @@ $(document).on("change", ".changeStatus", function () {
     formData.append('status', status);
     debugger
     $.ajax({
-        url: 'https://localhost:5000/api/SupplementaryItem/updateStatus',
+        url: 'https://tcvtfcapi.azurewebsites.net/api/SupplementaryItem/updateStatus',
         type: 'post',
         data: formData,
         contentType: false,

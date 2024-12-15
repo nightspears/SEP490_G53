@@ -84,7 +84,7 @@ namespace TCViettetlFC_Client.Controllers
             var status = 0;
             var createdAt = DateTime.Now;
 
-            string requestUri = "https://localhost:5000/api/New/GetAllNews";
+            string requestUri = "https://tcvtfcapi.azurewebsites.net/api/New/GetAllNews";
             var response = await _httpClient.GetAsync(requestUri);
             List<GetAllNewViewModel> newList = new List<GetAllNewViewModel>();
 
@@ -94,7 +94,7 @@ namespace TCViettetlFC_Client.Controllers
                 newList = JsonConvert.DeserializeObject<List<GetAllNewViewModel>>(jsonData);
             }
 
-            string categoryRequestUri = "https://localhost:5000/api/NewsCategory/GetAllCategoryNews";
+            string categoryRequestUri = "https://tcvtfcapi.azurewebsites.net/api/NewsCategory/GetAllCategoryNews";
             var categoryResponse = await _httpClient.GetAsync(categoryRequestUri);
             List<CategoryNewViewModel> categoryList = new List<CategoryNewViewModel>();
 
@@ -145,7 +145,7 @@ namespace TCViettetlFC_Client.Controllers
                     content.Add(fileContent, "Image", model.image.FileName);
                 }
 
-                string requestUri = "https://localhost:5000/api/New/create";
+                string requestUri = "https://tcvtfcapi.azurewebsites.net/api/New/create";
                 var response = await _httpClient.PostAsync(requestUri, content);
 
                 if (response.IsSuccessStatusCode)
@@ -197,7 +197,7 @@ namespace TCViettetlFC_Client.Controllers
                     multipartContent.Add(new StringContent(currentImage), "ImagePath");
                 }
 
-                string requestUri = $"https://localhost:5000/api/New/update/{NewId}";
+                string requestUri = $"https://tcvtfcapi.azurewebsites.net/api/New/update/{NewId}";
                 var response = await _httpClient.PostAsync(requestUri, multipartContent);
 
                 if (response.IsSuccessStatusCode)
@@ -229,7 +229,7 @@ namespace TCViettetlFC_Client.Controllers
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             // Call the API to delete the news item
-            string requestUri = $"https://localhost:5000/api/New/delete/{id}";
+            string requestUri = $"https://tcvtfcapi.azurewebsites.net/api/New/delete/{id}";
             var response = await _httpClient.DeleteAsync(requestUri);
 
             if (response.IsSuccessStatusCode)
@@ -386,7 +386,7 @@ namespace TCViettetlFC_Client.Controllers
         {
             ViewBag.Id = id;
 
-            string requestUri = "https://localhost:5000/api/MatchAreas/GetSanPhamById?id=" + id;
+            string requestUri = "https://tcvtfcapi.azurewebsites.net/api/MatchAreas/GetSanPhamById?id=" + id;
             var response = await _httpClient.GetAsync(requestUri);
 
             List<MatchArea> ListData = new List<MatchArea>();

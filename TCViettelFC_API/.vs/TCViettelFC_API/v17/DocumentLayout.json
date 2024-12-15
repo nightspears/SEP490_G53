@@ -434,7 +434,8 @@
               "RelativeToolTip": "Controllers\\MatchesController.cs",
               "ViewState": "AgIAACcAAAAAAAAAAADwvzUAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T16:51:06.494Z"
+              "WhenOpened": "2024-12-14T16:51:06.494Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -458,7 +459,8 @@
               "RelativeToolTip": "Repositories\\Implementations\\OrderRepository.cs",
               "ViewState": "AgIAACgAAAAAAAAAAAAwwD0AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T12:01:03.138Z"
+              "WhenOpened": "2024-12-14T12:01:03.138Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -482,8 +484,7 @@
               "RelativeToolTip": "Controllers\\TicketOrderController.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAqwBIAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T09:31:28.654Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-11T09:31:28.654Z"
             },
             {
               "$type": "Document",
@@ -495,7 +496,8 @@
               "RelativeToolTip": "Repositories\\Implementations\\TicketOrderRepository.cs",
               "ViewState": "AgIAAAcBAAAAAAAAAAAAABoBAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T09:31:51.688Z"
+              "WhenOpened": "2024-12-11T09:31:51.688Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -545,7 +547,8 @@
               "RelativeToolTip": "Controllers\\SupplementaryItemController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T17:28:13.762Z"
+              "WhenOpened": "2024-12-14T17:28:13.762Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -557,7 +560,8 @@
               "RelativeToolTip": "Repositories\\Implementations\\MatchRepository.cs",
               "ViewState": "AgIAAGYAAAAAAAAAAAAYwG0AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T16:51:16.717Z"
+              "WhenOpened": "2024-12-14T16:51:16.717Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -593,7 +597,8 @@
               "RelativeToolTip": "Repositories\\Implementations\\TicketUtilRepository.cs",
               "ViewState": "AgIAANsBAAAAAAAAAAAmwOoBAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T11:53:40.112Z"
+              "WhenOpened": "2024-12-14T11:53:40.112Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -605,7 +610,8 @@
               "RelativeToolTip": "Dtos\\Matches\\MatchDto.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T17:14:49.166Z"
+              "WhenOpened": "2024-12-14T17:14:49.166Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -617,7 +623,8 @@
               "RelativeToolTip": "Repositories\\Implementations\\PlayerRepository.cs",
               "ViewState": "AgIAABUAAAAAAAAAAADgvyMAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T11:52:09.183Z"
+              "WhenOpened": "2024-12-14T11:52:09.183Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -653,7 +660,8 @@
               "RelativeToolTip": "Models\\Discount.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T11:50:36.521Z"
+              "WhenOpened": "2024-12-14T11:50:36.521Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -665,7 +673,8 @@
               "RelativeToolTip": "Models\\ProductCategory.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAkwA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T11:50:12.769Z"
+              "WhenOpened": "2024-12-14T11:50:12.769Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -689,7 +698,8 @@
               "RelativeToolTip": "Models\\Season.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAkwBAAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-14T11:49:12.595Z"
+              "WhenOpened": "2024-12-14T11:49:12.595Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
