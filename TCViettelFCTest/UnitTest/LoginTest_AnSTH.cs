@@ -126,7 +126,7 @@ namespace TCViettelFCTest.UnitTest
             var loginDto = new LoginDto
             {
                 Email = "",
-                Password = "1234567890"
+                Password = "password123"
             };
 
             var repository = new UserRepository(_mockEmailService.Object, context, _mockConfiguration.Object, _mockContextAccessor.Object);

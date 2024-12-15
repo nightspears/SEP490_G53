@@ -58,22 +58,23 @@ namespace TCViettelFCTest.UnitTest
         public void TearDown()
         {
             _dbContextOptions = null; // Giải phóng tùy chọn
+            GC.Collect();
         }
         [Test]
         public async Task AddDiscountAsync_ShouldAddDiscount()
         {
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
-                .UseInMemoryDatabase("TestDatabase")
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
             using var context = new Sep490G53Context(options);
 
             var discounttDto = new DiscountDto
             {
-                DiscountName = "Mã giảm giá 20% - Sale 12/12",
+                DiscountName = "Mã giảm giá 20% - Sale 16/12",
                 DiscountPercent = 20,
-                ValidFrom = DateTime.Parse("12/12/2024"),
-                ValidUntil = DateTime.Parse("13/12/2024"),
+                ValidFrom = DateTime.Parse("16/12/2024"),
+                ValidUntil = DateTime.Parse("20/12/2024"),
                 Status = 1,
               
             };
@@ -85,7 +86,7 @@ namespace TCViettelFCTest.UnitTest
 
             var savedDiscount = await context.Discounts.FirstOrDefaultAsync(p => p.DiscountId == 1 );
             Assert.IsNotNull(savedDiscount);
-            Assert.AreEqual("Mã giảm giá 20% - Sale 12/12", savedDiscount.DiscountName);
+            Assert.AreEqual("Mã giảm giá 20% - Sale 16/12", savedDiscount.DiscountName);
 
         }
 
@@ -103,8 +104,8 @@ namespace TCViettelFCTest.UnitTest
             {
                 DiscountName = null,
                 DiscountPercent = 20,
-                ValidFrom = DateTime.Parse("12/12/2024"),
-                ValidUntil = DateTime.Parse("13/12/2024"),
+                ValidFrom = DateTime.Parse("16/12/2024"),
+                ValidUntil = DateTime.Parse("20/12/2024"),
                 Status = 1,
 
             };
@@ -129,10 +130,10 @@ namespace TCViettelFCTest.UnitTest
 
             var discounttDto = new DiscountDto
             {
-                DiscountName = "Mã giảm giá 20% - Sale 12/12",
+                DiscountName = "Mã giảm giá 20% - Sale 16/12",
                 DiscountPercent = null,
-                ValidFrom = DateTime.Parse("12/12/2024"),
-                ValidUntil = DateTime.Parse("13/12/2024"),
+                ValidFrom = DateTime.Parse("16/12/2024"),
+                ValidUntil = DateTime.Parse("20/12/2024"),
                 Status = 1,
 
             };
@@ -155,10 +156,10 @@ namespace TCViettelFCTest.UnitTest
 
             var discounttDto = new DiscountDto
             {
-                DiscountName = "Mã giảm giá 20% - Sale 12/12",
+                DiscountName = "Mã giảm giá 20% - Sale 16/12",
                 DiscountPercent = 20,
                 ValidFrom = null,
-                ValidUntil = DateTime.Parse("13/12/2024"),
+                ValidUntil = DateTime.Parse("16/12/2024"),
                 Status = 1,
 
             };
@@ -208,9 +209,9 @@ namespace TCViettelFCTest.UnitTest
 
             var discounttDto = new DiscountDto
             {
-                DiscountName = "Mã giảm giá 20% - Sale 12/12",
+                DiscountName = "Mã giảm giá 20% - Sale 16/12",
                 DiscountPercent = 20,
-                ValidFrom = DateTime.Parse("12/12/2024"),
+                ValidFrom = DateTime.Parse("16/12/2024"),
                 ValidUntil = null ,
                 Status = 1,
 
@@ -236,10 +237,10 @@ namespace TCViettelFCTest.UnitTest
 
             var discounttDto = new DiscountDto
             {
-                DiscountName = "Mã giảm giá 20% - Sale 12/12",
+                DiscountName = "Mã giảm giá 20% - Sale 16/12",
                 DiscountPercent = 20,
-                ValidFrom = DateTime.Parse("7/12/2024"),
-                ValidUntil = DateTime.Parse("13/12/2024"),
+                ValidFrom = DateTime.Parse("10/12/2024"),
+                ValidUntil = DateTime.Parse("16/12/2024"),
                 Status = 1,
 
             };
@@ -290,10 +291,10 @@ namespace TCViettelFCTest.UnitTest
 
             var discounttDto = new DiscountDto
             {
-                DiscountName = "Mã giảm giá 20% - Sale 12/12",
+                DiscountName = "Mã giảm giá 20% - Sale 16/12",
                 DiscountPercent = 20,
-                ValidFrom = DateTime.Parse("14/12/2024"),
-                ValidUntil = DateTime.Parse("13/12/2024"),
+                ValidFrom = DateTime.Parse("20/12/2024"),
+                ValidUntil = DateTime.Parse("16/12/2024"),
                 Status = 1,
 
             };
@@ -339,17 +340,17 @@ namespace TCViettelFCTest.UnitTest
         public async Task AddDiscountAsync_ShouldAdded_WhenStatusIsNull()
         {
             var options = new DbContextOptionsBuilder<Sep490G53Context>()
-                .UseInMemoryDatabase("TestDatabase")
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
             using var context = new Sep490G53Context(options);
 
             var discounttDto = new DiscountDto
             {
-                DiscountName = "Mã giảm giá 20% - Sale 12/12",
+                DiscountName = "Mã giảm giá 20% - Sale 16/12",
                 DiscountPercent = 20,
-                ValidFrom = DateTime.Parse("12/12/2024"),
-                ValidUntil = DateTime.Parse("13/12/2024"),
+                ValidFrom = DateTime.Parse("16/12/2024"),
+                ValidUntil = DateTime.Parse("20/12/2024"),
                 Status = null,
 
             };
@@ -361,7 +362,7 @@ namespace TCViettelFCTest.UnitTest
 
             var savedDiscount = await context.Discounts.FirstOrDefaultAsync(p => p.DiscountId == 1);
             Assert.IsNotNull(savedDiscount);
-            Assert.AreEqual("Mã giảm giá 20% - Sale 12/12", savedDiscount.DiscountName);
+            Assert.AreEqual("Mã giảm giá 20% - Sale 16/12", savedDiscount.DiscountName);
         }
 
 

@@ -71,7 +71,7 @@ namespace TCViettelFCTest.UnitTest
             {
                 OpponentName = "Hà Nội FC",
                 IsHome = true,
-                MatchDate = DateTime.Parse("10/12/2024"),
+                MatchDate = DateTime.Parse("16/12/2024"),
                 StadiumName = "Hàng Đẫy",
                 Status = 1,
                 LogoUrl = CreateMockFile("logo.jpg", new byte[] { 1 }),

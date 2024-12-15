@@ -18,37 +18,37 @@ namespace TCViettelFC_API.Repositories.Implementations
         public async Task AddDiscountAsync(DiscountDto _discount)
         {
 
-            //if (_discount.ValidUntil < DateTime.Now)
-            //{
-            //    throw new ArgumentException("valid_until must greater than today");
-            //}
-            //if (_discount.ValidFrom < DateTime.Now)
-            //{
-            //    throw new ArgumentException("valid_from must greater than today");
-            //}
+            if (_discount.ValidUntil < DateTime.Now)
+            {
+                throw new ArgumentException("valid_until must greater than today");
+            }
+            if (_discount.ValidFrom < DateTime.Now)
+            {
+                throw new ArgumentException("valid_from must greater than today");
+            }
 
-            //if (_discount.ValidFrom > _discount.ValidUntil)
-            //{
-            //    throw new ArgumentException("valid_from must less than valid_until");
-            //}
+            if (_discount.ValidFrom > _discount.ValidUntil)
+            {
+                throw new ArgumentException("valid_from must less than valid_until");
+            }
 
-            //if (string.IsNullOrEmpty(_discount.DiscountName))
-            //{
-            //    throw new ArgumentException("The system returns an error, no new Discount are added.");
-            //}
+            if (string.IsNullOrEmpty(_discount.DiscountName))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
 
-            //if (string.IsNullOrEmpty(_discount.DiscountPercent.ToString()))
-            //{
-            //    throw new ArgumentException("The system returns an error, no new Discount are added.");
-            //}
-            //if (string.IsNullOrEmpty(_discount.ValidUntil.ToString()))
-            //{
-            //    throw new ArgumentException("The system returns an error, no new Discount are added.");
-            //}
-            //if (string.IsNullOrEmpty(_discount.ValidFrom.ToString()))
-            //{
-            //    throw new ArgumentException("The system returns an error, no new Discount are added.");
-            //}
+            if (string.IsNullOrEmpty(_discount.DiscountPercent.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
+            if (string.IsNullOrEmpty(_discount.ValidUntil.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
+            if (string.IsNullOrEmpty(_discount.ValidFrom.ToString()))
+            {
+                throw new ArgumentException("The system returns an error, no new Discount are added.");
+            }
 
 
 
