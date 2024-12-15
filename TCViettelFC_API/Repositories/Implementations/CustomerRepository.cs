@@ -295,6 +295,7 @@ namespace TCViettelFC_API.Repositories.Implementations
                 customerId = customer.CustomerId,
                 email = customer.Email,
                 phone = customer.Phone,
+                status = (int)customer.Status
             };
             return response;
         }

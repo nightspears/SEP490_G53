@@ -205,18 +205,28 @@ namespace TCViettetlFC_Client.Controllers
             Response.Cookies.Delete("RoleId");
             Response.Cookies.Delete("UserId");
             Response.Cookies.Delete("SessionTimer");
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Lax,
+                Expires = DateTime.UtcNow.AddHours(1)
+            };
             if (!ModelState.IsValid) return View();
             var result = await _httpClient.PostAsJsonAsync("customer/login", clm);
             if (result.IsSuccessStatusCode)
             {
                 var response = await JsonSerializer.DeserializeAsync<CustomerLoginResponse>(await result.Content.ReadAsStreamAsync());
-                var cookieOptions = new CookieOptions
+                if (response.status == 0)
                 {
-                    HttpOnly = true,
-                    Secure = true,
-                    SameSite = SameSiteMode.None,
-                    Expires = DateTime.UtcNow.AddHours(1)
-                };
+                    var result1 = await _httpClient.GetAsync($"customer/sendcode/{clm.Email}");
+                    if (result1.IsSuccessStatusCode)
+                    {
+
+                        Response.Cookies.Append("NotApproveEmail", clm.Email, cookieOptions);
+                        return RedirectToAction("Verify");
+                    }
+                }
 
                 Response.Cookies.Append("AuthToken", response.token, cookieOptions);
                 Response.Cookies.Append("CustomerId", response.customerId.ToString(), cookieOptions);
@@ -317,7 +327,25 @@ namespace TCViettetlFC_Client.Controllers
                 }
                 else
                 {
-                    return View();
+                    var email2 = Request.Cookies["NotApproveEmail"];
+                    if (email2 != null)
+                    {
+                        var result = await _httpClient.PostAsJsonAsync("customer/verify", new { Email = email2, evd.Code });
+                        if (result.IsSuccessStatusCode)
+                        {
+                            return RedirectToAction("Login");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("Code", "Mã xác nhận không chính xác, vui lòng thử lại");
+                            return View();
+                        }
+                    }
+                    else
+                    {
+                        return View();
+                    }
+
                 }
 
             }
