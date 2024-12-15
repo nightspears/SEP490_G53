@@ -23,7 +23,7 @@
                     {
                         <tr>
                             <td style="border-bottom: 1px solid #ddd; padding: 8px;">@item.id</td>
-                            <td style="border-bottom: 1px solid #ddd; padding: 8px;">@(item.orderDate?.ToString("dd/MM/yyyy") ?? "N/A")</td>
+                            <td style="border-bottom: 1px solid #ddd; padding: 8px;">@(item.orderDate?.ToString("dd/MM/yyyy hh:mm") ?? "N/A")</td>
                             <td style="border-bottom: 1px solid #ddd; padding: 8px;">@(item.totalAmount?.ToString("#,0") + " đ" ?? "N/A")</td>
                             <td style="border-bottom: 1px solid #ddd; padding: 8px;"><a href="/customer/ticketorderdetails/@item.id">Chi tiết</a></td>
                         </tr>

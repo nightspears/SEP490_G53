@@ -435,8 +435,8 @@ width:300px;
          <p>V.LEAGUE 1 - 2024</p>
      </div>
      <div class='match-details'>
-         <p class='date'>21-10-2024 | 19:00</p>
-         <p class='teams'>Thể Công–Viettel FC - SLNA FC</p>
+           <p class='date'>{ticket.Match.MatchDate.Value.ToString("dd-MM-yyyy")} | {ticket.Match.MatchDate.Value.ToString("hh:mm")}</p>
+         <p class='teams'>Thể Công–Viettel FC - {ticket.Match.OpponentName}</p>
          <p>{ticket.Match.StadiumName}</p>
      </div>
     <table class=""ticket-info"" width=""300px"" cellpadding=""0"" cellspacing=""0"" border=""0"" style=""width: 100%; border-collapse: collapse; text-align: center; table-layout: fixed;"">
@@ -472,8 +472,8 @@ width:300px;
          <p>V.LEAGUE 1 - 2024</p>
      </div>
      <div class='match-details'>
-         <p class='date'>21-10-2024 | 19:00</p>
-         <p class='teams'>Thể Công–Viettel FC - SLNA FC</p>
+         <p class='date'>{ticket.Match.MatchDate.Value.ToString("dd-MM-yyyy")} | {ticket.Match.MatchDate.Value.ToString("hh:mm")}</p>
+         <p class='teams'>Thể Công–Viettel FC - {ticket.Match.OpponentName}</p>
          <p>{ticket.Match.StadiumName}</p>
      </div>
     <table class=""ticket-info"" width=""300px"" cellpadding=""0"" cellspacing=""0"" border=""0"" style=""width: 100%; border-collapse: collapse; text-align: center; table-layout: fixed;"">
